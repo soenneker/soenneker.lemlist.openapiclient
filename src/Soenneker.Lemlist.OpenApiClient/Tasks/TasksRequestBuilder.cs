@@ -45,6 +45,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Tasks.GetTasks200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Tasks.GetTasks200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Tasks.TasksRequestBuilder.TasksRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,7 +57,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Tasks.GetTasks200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Tasks.GetTasks200Response401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update task details such as assignment, due date, title, message, priority, or completion status.
@@ -64,6 +71,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Tasks.Task400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Tasks.Task401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchTasksRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -75,7 +84,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Tasks.Task400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Tasks.Task401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Create a manual task (opportunity) associated with a contact/company or lead.
@@ -84,6 +98,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Tasks.Task400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Tasks.Task401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -95,7 +111,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Tasks.Task400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Tasks.Task401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieve tasks with optional filtering and pagination. Tasks marked as `done` are excluded from results.
@@ -175,7 +196,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Tasks
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class TasksRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;JSON array of filter objects. Each filter has a `filterId` and specific parameters.**Available Filters:**- `fullName`: Filter by contact&apos;s full name.  - Parameters: `value` (string) or `regex` (string)  - Example: `{\&quot;filterId\&quot;:\&quot;fullName\&quot;,\&quot;value\&quot;:\&quot;John Doe\&quot;}`- `email`: Filter by contact&apos;s email address.  - Parameters: `value` (string) or `regex` (string)  - Example: `{\&quot;filterId\&quot;:\&quot;email\&quot;,\&quot;value\&quot;:\&quot;john@example.com\&quot;}`- `phone`: Filter by contact&apos;s phone number.  - Parameters: `value` (string) or `regex` (string)  - Example: `{\&quot;filterId\&quot;:\&quot;phone\&quot;,\&quot;value\&quot;:\&quot;+1234567890\&quot;}`- `linkedin`: Filter by LinkedIn profile URL.  - Parameters: `value` (string) or `regex` (string)  - Example: `{\&quot;filterId\&quot;:\&quot;linkedin\&quot;,\&quot;value\&quot;:\&quot;linkedin.com/in/johndoe\&quot;}`- `campaignId`: Filter by campaign IDs (inclusion/exclusion).  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Example: `{\&quot;filterId\&quot;:\&quot;campaignId\&quot;,\&quot;in\&quot;:[\&quot;cam_123\&quot;],\&quot;out\&quot;:[\&quot;cam_456\&quot;]}`- `campaignState`: Filter by campaign states.  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Allowed values: `draft`, `running`, `ended`, `paused`, `errors`, `archived`  - Example: `{\&quot;filterId\&quot;:\&quot;campaignState\&quot;,\&quot;in\&quot;:[\&quot;running\&quot;,\&quot;paused\&quot;]}`- `type`: Filter by task type.  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Allowed values: `manual`, `phone`, `linkedinInvite`, `linkedinSend`, `linkedinVoiceNote`, `emailsReplied`, `opportunityReplied`, `linkedinReplied`, `opportunityClicked`, `email`, `whatsappMessage`  - Example: `{\&quot;filterId\&quot;:\&quot;type\&quot;,\&quot;in\&quot;:[\&quot;phone\&quot;,\&quot;email\&quot;]}`- `assignedTo`: Filter by assigned user IDs.  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Example: `{\&quot;filterId\&quot;:\&quot;assignedTo\&quot;,\&quot;in\&quot;:[\&quot;usr_123\&quot;,\&quot;usr_456\&quot;]}`- `dueDate`: Filter by due date range.  - Parameters: `from` (string, YYYY-MM-DD) and/or `to` (string, YYYY-MM-DD)  - Example: `{\&quot;filterId\&quot;:\&quot;dueDate\&quot;,\&quot;from\&quot;:\&quot;2025-01-01\&quot;,\&quot;to\&quot;:\&quot;2025-12-31\&quot;}`Multiple filters can be combined in an array.&quot;</summary>
+            /// <summary>JSON array of filter objects. Each filter has a `filterId` and specific parameters.**Available Filters:**- `fullName`: Filter by contact&apos;s full name.  - Parameters: `value` (string) or `regex` (string)  - Example: `{&quot;filterId&quot;:&quot;fullName&quot;,&quot;value&quot;:&quot;John Doe&quot;}`- `email`: Filter by contact&apos;s email address.  - Parameters: `value` (string) or `regex` (string)  - Example: `{&quot;filterId&quot;:&quot;email&quot;,&quot;value&quot;:&quot;john@example.com&quot;}`- `phone`: Filter by contact&apos;s phone number.  - Parameters: `value` (string) or `regex` (string)  - Example: `{&quot;filterId&quot;:&quot;phone&quot;,&quot;value&quot;:&quot;+1234567890&quot;}`- `linkedin`: Filter by LinkedIn profile URL.  - Parameters: `value` (string) or `regex` (string)  - Example: `{&quot;filterId&quot;:&quot;linkedin&quot;,&quot;value&quot;:&quot;linkedin.com/in/johndoe&quot;}`- `campaignId`: Filter by campaign IDs (inclusion/exclusion).  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Example: `{&quot;filterId&quot;:&quot;campaignId&quot;,&quot;in&quot;:[&quot;cam_123&quot;],&quot;out&quot;:[&quot;cam_456&quot;]}`- `campaignState`: Filter by campaign states.  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Allowed values: `draft`, `running`, `ended`, `paused`, `errors`, `archived`  - Example: `{&quot;filterId&quot;:&quot;campaignState&quot;,&quot;in&quot;:[&quot;running&quot;,&quot;paused&quot;]}`- `type`: Filter by task type.  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Allowed values: `manual`, `phone`, `linkedinInvite`, `linkedinSend`, `linkedinVoiceNote`, `emailsReplied`, `opportunityReplied`, `linkedinReplied`, `opportunityClicked`, `email`, `whatsappMessage`  - Example: `{&quot;filterId&quot;:&quot;type&quot;,&quot;in&quot;:[&quot;phone&quot;,&quot;email&quot;]}`- `assignedTo`: Filter by assigned user IDs.  - Parameters: `in` (array of strings) and/or `out` (array of strings)  - Example: `{&quot;filterId&quot;:&quot;assignedTo&quot;,&quot;in&quot;:[&quot;usr_123&quot;,&quot;usr_456&quot;]}`- `dueDate`: Filter by due date range.  - Parameters: `from` (string, YYYY-MM-DD) and/or `to` (string, YYYY-MM-DD)  - Example: `{&quot;filterId&quot;:&quot;dueDate&quot;,&quot;from&quot;:&quot;2025-01-01&quot;,&quot;to&quot;:&quot;2025-12-31&quot;}`Multiple filters can be combined in an array.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("filters")]

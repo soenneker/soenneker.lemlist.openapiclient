@@ -24,7 +24,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The due date in ISO 8601 format (e.g., 2025-02-12T00:00:00.000Z).</summary>
         public DateTimeOffset? DueDate { get; set; }
-        /// <summary>&quot;Public HTTPS URLs of images to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. Ignored when `type` is not `linkedin`. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.&quot;</summary>
+        /// <summary>Public HTTPS URLs of images to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. Ignored when `type` is not `linkedin`. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Images { get; set; }
@@ -60,7 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The type of task.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestType? Type { get; set; }
-        /// <summary>&quot;Public HTTPS URLs of videos to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. Ignored when `type` is not `linkedin`. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.&quot;</summary>
+        /// <summary>Public HTTPS URLs of videos to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. Ignored when `type` is not `linkedin`. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Videos { get; set; }

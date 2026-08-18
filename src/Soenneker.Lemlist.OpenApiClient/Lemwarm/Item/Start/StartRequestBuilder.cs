@@ -39,6 +39,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLemwarmByUserMailboxIdStart200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start.PostLemwarmByUserMailboxIdStart200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start.PostLemwarmByUserMailboxIdStart200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLemwarmByUserMailboxIdStart200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +51,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLemwarmByUserMailboxIdStart200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLemwarmByUserMailboxIdStart200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start.PostLemwarmByUserMailboxIdStart200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start.PostLemwarmByUserMailboxIdStart200Response401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLemwarmByUserMailboxIdStart200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLemwarmByUserMailboxIdStart200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Start lemwarm

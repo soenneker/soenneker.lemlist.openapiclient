@@ -39,6 +39,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.GetCrmFilters200ResponseSchema400Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +50,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.GetCrmFilters200ResponseSchema400Error.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
@@ -96,7 +101,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
             [QueryParameter("crm")]
             public string Crm { get; set; }
 #endif
-            /// <summary>&quot;Filter type for Salesforce. Can be: lead, contact, or report.&quot;</summary>
+            /// <summary>Filter type for Salesforce. Can be: lead, contact, or report.</summary>
             [QueryParameter("type")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFiltersTypeParameter? Type { get; set; }
             /// <summary>Connected user ID</summary>

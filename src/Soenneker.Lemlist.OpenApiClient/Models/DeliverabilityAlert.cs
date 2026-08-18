@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public DateTimeOffset? LastCheckedAt { get; set; }
         /// <summary>Last time the alert fired.</summary>
         public DateTimeOffset? LastTriggeredAt { get; set; }
-        /// <summary>&quot;Metric being monitored. Valid combinations depend on `widget`: `warmup` supports `inboxRate`, `spamRate`, `score`; `outreach` supports `deliveryRate`, `bounceRate`.&quot;</summary>
+        /// <summary>Metric being monitored. Valid combinations depend on `widget`: `warmup` supports `inboxRate`, `spamRate`, `score`; `outreach` supports `deliveryRate`, `bounceRate`.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertMetric? Metric { get; set; }
         /// <summary>Length of the evaluation window, in days (1–30).</summary>
         public int? PeriodDays { get; set; }

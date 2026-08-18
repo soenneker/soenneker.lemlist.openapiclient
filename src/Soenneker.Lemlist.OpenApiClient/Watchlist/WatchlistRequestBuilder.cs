@@ -82,6 +82,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiDeleteWatchListResponse400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiDeleteWatchListResponse401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiDeleteWatchListResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchlistRequestBuilder.WatchlistRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -92,7 +95,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiDeleteWatchListResponse400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiDeleteWatchListResponse401Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiDeleteWatchListResponse500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List Signal Agents
@@ -100,6 +109,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiListWatchListsResponse400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiListWatchListsResponse401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiListWatchListsResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchlistRequestBuilder.WatchlistRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -110,7 +122,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiListWatchListsResponse400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiListWatchListsResponse401Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiListWatchListsResponse500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update Signal Agent
@@ -119,6 +137,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse409Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchWatchlistRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -130,7 +153,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse404Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse409Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Create Signal Agent
@@ -139,6 +170,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse402Error">When receiving a 402 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse429Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -150,7 +186,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse401Error.CreateFromDiscriminatorValue },
+                { "402", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse402Error.CreateFromDiscriminatorValue },
+                { "429", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse429Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Delete Signal Agent
@@ -266,7 +310,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WatchlistRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Number of records to retrieve. Maximum value: 100&quot;</summary>
+            /// <summary>Number of records to retrieve. Maximum value: 100</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Page number to retrieve</summary>

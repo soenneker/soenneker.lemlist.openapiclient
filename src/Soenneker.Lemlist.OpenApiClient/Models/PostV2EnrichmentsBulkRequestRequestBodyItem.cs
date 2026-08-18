@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>&quot;Array of enrichment types to perform. Must contain at least one of: find_email, find_phone, verify, linkedin_enrichment&quot;</summary>
+        /// <summary>Array of enrichment types to perform. Must contain at least one of: find_email, find_phone, verify, linkedin_enrichment</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?>? EnrichmentRequests { get; set; }

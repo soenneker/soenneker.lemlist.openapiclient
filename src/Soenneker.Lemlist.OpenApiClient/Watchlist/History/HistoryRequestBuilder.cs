@@ -39,6 +39,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.History
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiHistoryResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiHistoryResponse?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.HistoryRequestBuilder.HistoryRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +53,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.History
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiHistoryResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiHistoryResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse404Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.History.WatchListApiHistoryResponse500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiHistoryResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiHistoryResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Signal Agent configuration history
@@ -85,7 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.History
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class HistoryRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Number of records to retrieve. Maximum value: 100&quot;</summary>
+            /// <summary>Number of records to retrieve. Maximum value: 100</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Page number to retrieve</summary>

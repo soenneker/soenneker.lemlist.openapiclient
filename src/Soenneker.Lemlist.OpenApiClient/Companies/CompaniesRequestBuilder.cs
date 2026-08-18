@@ -52,6 +52,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -62,7 +64,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it will be updated with the provided non-empty fields. Null or empty values are ignored during updates to preserve existing data. You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
@@ -72,6 +79,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.PostCompanies200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -86,6 +94,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.PostCompanies200Response401Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -145,10 +154,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class CompaniesRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Filter companies by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Common values:- `synced` — the company has a CRM record and no sync errors.- `not_synced` — the company has no CRM record yet.- `error` — at least one sync error is currently raised.- A specific error reason (lowercase form), to filter by root cause: `unique_index_error_company`, `property_doesnt_exist`, `required_field_missing`, `company_already_exists_with_name`, `company_already_exists_with_linkedin_url`.For each returned company, see `crmSync.errors[].metadata.alreadyExistingCompanyId` to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).&quot;</summary>
+            /// <summary>Filter companies by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Common values:- `synced` — the company has a CRM record and no sync errors.- `not_synced` — the company has no CRM record yet.- `error` — at least one sync error is currently raised.- A specific error reason (lowercase form), to filter by root cause: `unique_index_error_company`, `property_doesnt_exist`, `required_field_missing`, `company_already_exists_with_name`, `company_already_exists_with_linkedin_url`.For each returned company, see `crmSync.errors[].metadata.alreadyExistingCompanyId` to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).</summary>
             [QueryParameter("crmSyncStatus")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesCrmSyncStatusParameter? CrmSyncStatus { get; set; }
-            /// <summary>&quot;Filter companies to those carrying a field rejection with this reason — a value lemlist refused to write, raised during CRM sync (`crm_sync_*`). Returns an empty list (`total: 0`) when no company matches. Each returned company exposes the full detail under `fieldRejections[]` (which field, why, and `conflictingRecordId` for duplicates). Independent of `crmSyncStatus` (which keys off the live provider errors); this filter reads the stored field rejections. Only applies to the paginated list — ignored when `idsOrDomains` is provided (that path returns the exact companies requested, unfiltered).&quot;</summary>
+            /// <summary>Filter companies to those carrying a field rejection with this reason — a value lemlist refused to write, raised during CRM sync (`crm_sync_*`). Returns an empty list (`total: 0`) when no company matches. Each returned company exposes the full detail under `fieldRejections[]` (which field, why, and `conflictingRecordId` for duplicates). Independent of `crmSyncStatus` (which keys off the live provider errors); this filter reads the stored field rejections. Only applies to the paginated list — ignored when `idsOrDomains` is provided (that path returns the exact companies requested, unfiltered).</summary>
             [QueryParameter("fieldRejectionReason")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesFieldRejectionReasonParameter? FieldRejectionReason { get; set; }
             /// <summary>Returns selected fields. Returns all fields if empty. Each field is separated by a comma (e.g., &apos;_id,fields.name,domain&apos;)</summary>
@@ -171,7 +180,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             [QueryParameter("idsOrDomains")]
             public string IdsOrDomains { get; set; }
 #endif
-            /// <summary>&quot;Number of companies to retrieve. Default: 100. Maximum: 500&quot;</summary>
+            /// <summary>Number of companies to retrieve. Default: 100. Maximum: 500</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Number of companies to skip for pagination. Defaults to 0. Ignored when `idsOrDomains` is provided.</summary>
@@ -189,7 +198,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
 #endif
             /// <summary>The field by which to sort. Currently, only &apos;createdAt&apos; is supported.</summary>
             [QueryParameter("sortBy")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesSortByParameter? SortBy { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.CreatedAtSortBy? SortBy { get; set; }
             /// <summary>The sort direction. Use &apos;desc&apos; for descending order; any other value (or omission) will sort in ascending order.</summary>
             [QueryParameter("sortOrder")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesSortOrderParameter? SortOrder { get; set; }

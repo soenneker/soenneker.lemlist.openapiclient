@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// &quot;Same shape as the 201 response, with `created: false` and `updated: true`.&quot;
+    /// Same shape as the 201 response, with `created: false` and `updated: true`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PostCompanies200ResponseData : IAdditionalDataHolder, IParsable

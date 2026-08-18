@@ -39,6 +39,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +51,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema404Error.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
@@ -86,10 +93,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class LeadsRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Output format: &apos;json&apos; or &apos;csv&apos;. Default is CSV.&quot;</summary>
+            /// <summary>Output format: &apos;json&apos; or &apos;csv&apos;. Default is CSV.</summary>
             [QueryParameter("format")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeadsFormatParameter? Format { get; set; }
-            /// <summary>&quot;Filter to export only the specified lead&apos;s last states. Use &apos;all&apos; to export all states. Can be a comma-separated list of states. **Global states**: imported, scanned, skipped, reviewed, contacted, hooked, attracted, warmed, interested, notInterested, emailsBounced, emailsUnsubscribed, failed, meetingBooked, paused. **Detailed states**: emailsSent, emailsOpened, emailsClicked, emailsReplied, emailsInterested, emailsNotInterested, emailsFailed, opportunitiesDone, aircallDone, aircallInterested, aircallNotInterested, apiDone, apiInterested, apiNotInterested, linkedinVisitDone, linkedinVisitFailed, linkedinInviteDone, linkedinInviteAccepted, linkedinInviteFailed, linkedinSent, linkedinOpened, linkedinReplied, linkedinInterested, linkedinNotInterested, linkedinSendFailed, manualInterested, manualNotInterested&quot;</summary>
+            /// <summary>Filter to export only the specified lead&apos;s last states. Use &apos;all&apos; to export all states. Can be a comma-separated list of states. **Global states**: imported, scanned, skipped, reviewed, contacted, hooked, attracted, warmed, interested, notInterested, emailsBounced, emailsUnsubscribed, failed, meetingBooked, paused. **Detailed states**: emailsSent, emailsOpened, emailsClicked, emailsReplied, emailsInterested, emailsNotInterested, emailsFailed, opportunitiesDone, aircallDone, aircallInterested, aircallNotInterested, apiDone, apiInterested, apiNotInterested, linkedinVisitDone, linkedinVisitFailed, linkedinInviteDone, linkedinInviteAccepted, linkedinInviteFailed, linkedinSent, linkedinOpened, linkedinReplied, linkedinInterested, linkedinNotInterested, linkedinSendFailed, manualInterested, manualNotInterested</summary>
             [QueryParameter("state")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeadsStateParameter? State { get; set; }
         }

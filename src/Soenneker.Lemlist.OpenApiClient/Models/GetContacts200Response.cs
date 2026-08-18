@@ -37,11 +37,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response();
-            if("GetContacts200Response_1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("GetContacts200ResponseBranch1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.GetContacts200ResponseBranch1 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1();
+            }
+            else if("GetContacts200ResponseOneOf2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.GetContacts200ResponseOneOf2 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2();
             }
             return result;
         }

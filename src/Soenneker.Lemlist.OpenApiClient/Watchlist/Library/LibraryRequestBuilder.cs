@@ -39,6 +39,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.Library
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiLibraryResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.Library.WatchListApiLibraryResponse401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.Library.WatchListApiLibraryResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiLibraryResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +51,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.Library
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiLibraryResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiLibraryResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.Library.WatchListApiLibraryResponse401Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.Library.WatchListApiLibraryResponse500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiLibraryResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiLibraryResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List available signal types

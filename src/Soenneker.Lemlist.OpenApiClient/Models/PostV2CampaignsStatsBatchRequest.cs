@@ -40,7 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string EndDate { get; set; }
 #endif
-        /// <summary>&quot;Filter stats by send user. Format: `sendUserId|sendUserEmail`. The sendUserId should begin with &apos;usr_&apos; and the sendUserEmail should be a valid sender email. If the param is specified, both sendUserId and sendUserEmail are mandatory.&quot;</summary>
+        /// <summary>Filter stats by send user. Format: `sendUserId|sendUserEmail`. The sendUserId should begin with &apos;usr_&apos; and the sendUserEmail should be a valid sender email. If the param is specified, both sendUserId and sendUserEmail are mandatory.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SendUser { get; set; }

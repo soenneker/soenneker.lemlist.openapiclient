@@ -39,6 +39,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotes200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.GetCompaniesByCompanyIdNotes200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.GetCompaniesByCompanyIdNotes200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.GetCompaniesByCompanyIdNotes200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotes200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.NotesRequestBuilder.NotesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +52,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotes200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotes200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.GetCompaniesByCompanyIdNotes200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.GetCompaniesByCompanyIdNotes200Response401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.GetCompaniesByCompanyIdNotes200Response404Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotes200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotes200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Create Company Note
@@ -58,6 +67,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyNote?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesByCompanyIdNotesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -69,7 +81,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyNote>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.CompanyNote.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote404Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyNote>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.CompanyNote.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Company Notes
@@ -127,7 +145,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class NotesRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Number of notes to retrieve. Default: 100. Maximum: 100&quot;</summary>
+            /// <summary>Number of notes to retrieve. Default: 100. Maximum: 100</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Page number to retrieve</summary>
@@ -135,7 +153,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
             public int? Page { get; set; }
             /// <summary>The field by which to sort. Currently, only &apos;createdAt&apos; is supported.</summary>
             [QueryParameter("sortBy")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotesSortByParameter? SortBy { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.CreatedAtSortBy? SortBy { get; set; }
             /// <summary>The sort direction. Use &apos;desc&apos; for descending order; any other value (or omission) will sort in ascending order.</summary>
             [QueryParameter("sortOrder")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyIdNotesSortOrderParameter? SortOrder { get; set; }

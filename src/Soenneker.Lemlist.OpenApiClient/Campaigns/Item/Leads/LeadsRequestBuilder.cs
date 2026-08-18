@@ -58,6 +58,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeads200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.DeleteCampaignsByCampaignIdLeads200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.DeleteCampaignsByCampaignIdLeads200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeads200Response?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -68,7 +70,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeads200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.DeleteCampaignsByCampaignIdLeads200Response400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.DeleteCampaignsByCampaignIdLeads200Response404Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeads200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Campaign Leads
@@ -96,6 +103,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response403Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.LeadsRequestBuilder.LeadsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -107,7 +118,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response401Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response403Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response404Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Unsubscribe Lead from Campaign
@@ -184,7 +202,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class LeadsRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Maximum number of leads to return. Default: 100, Max: 500&quot;</summary>
+            /// <summary>Maximum number of leads to return. Default: 100, Max: 500</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Filter leads by state (e.g., scanned, contacted, interested, notInterested, etc.)</summary>
@@ -204,19 +222,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class LeadsRequestBuilderPostQueryParameters 
         {
-            /// <summary>&quot;Search email address in other campaigns. Will not insert the lead if email address already exists. Default: false&quot;</summary>
+            /// <summary>Search email address in other campaigns. Will not insert the lead if email address already exists. Default: false</summary>
             [QueryParameter("deduplicate")]
             public bool? Deduplicate { get; set; }
-            /// <summary>&quot;Find verified email. Default: false&quot;</summary>
+            /// <summary>Find verified email. Default: false</summary>
             [QueryParameter("findEmail")]
             public bool? FindEmail { get; set; }
-            /// <summary>&quot;Find phone number. Default: false&quot;</summary>
+            /// <summary>Find phone number. Default: false</summary>
             [QueryParameter("findPhone")]
             public bool? FindPhone { get; set; }
-            /// <summary>&quot;Run the LinkedIn enrichment. Default: false&quot;</summary>
+            /// <summary>Run the LinkedIn enrichment. Default: false</summary>
             [QueryParameter("linkedinEnrichment")]
             public bool? LinkedinEnrichment { get; set; }
-            /// <summary>&quot;Verify existing email (debounce). Default: false&quot;</summary>
+            /// <summary>Verify existing email (debounce). Default: false</summary>
             [QueryParameter("verifyEmail")]
             public bool? VerifyEmail { get; set; }
         }

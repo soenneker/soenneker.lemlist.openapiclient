@@ -39,6 +39,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsPauseByLeadId200ResponseSchemaItem&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item.PostLeadsPauseByLeadId200ResponseSchema404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsPauseByLeadId200ResponseSchemaItem>?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item.WithLeadItemRequestBuilder.WithLeadItemRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +50,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsPauseByLeadId200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsPauseByLeadId200ResponseSchemaItem.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item.PostLeadsPauseByLeadId200ResponseSchema404Error.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsPauseByLeadId200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsPauseByLeadId200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>

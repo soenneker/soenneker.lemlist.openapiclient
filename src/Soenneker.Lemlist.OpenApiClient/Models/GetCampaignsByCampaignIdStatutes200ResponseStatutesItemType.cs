@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>&quot;Statute type: &apos;issue&apos; for problems, &apos;information&apos; for non-blocking info&quot;</summary>
+    /// <summary>Statute type: &apos;issue&apos; for problems, &apos;information&apos; for non-blocking info</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum GetCampaignsByCampaignIdStatutes200ResponseStatutesItemType
     {

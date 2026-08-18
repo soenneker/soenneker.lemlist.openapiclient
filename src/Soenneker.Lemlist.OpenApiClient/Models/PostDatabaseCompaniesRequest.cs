@@ -22,9 +22,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem> Filters { get; set; }
 #endif
-        /// <summary>&quot;Page number for pagination (default: 1)&quot;</summary>
+        /// <summary>Page number for pagination (default: 1)</summary>
         public int? Page { get; set; }
-        /// <summary>&quot;Number of results per page (default: 100, max: 500)&quot;</summary>
+        /// <summary>Number of results per page (default: 100, max: 500)</summary>
         public int? Size { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequest"/> and sets the default values.

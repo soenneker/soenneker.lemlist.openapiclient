@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Review.Item
         {
         }
         /// <summary>
-        /// &quot;Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.&quot;
+        /// Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Review.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.&quot;
+        /// Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

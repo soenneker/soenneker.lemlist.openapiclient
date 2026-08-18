@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Category { get; set; }
 #endif
-        /// <summary>&quot;Severity: 3 = error (blocks launch), 2 = warning (actionable), 1 = info&quot;</summary>
+        /// <summary>Severity: 3 = error (blocks launch), 2 = warning (actionable), 1 = info</summary>
         public int? Level { get; set; }
         /// <summary>Human-readable description of the issue (may contain HTML)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -32,7 +32,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Message { get; set; }
 #endif
-        /// <summary>&quot;Statute type: &apos;issue&apos; for problems, &apos;information&apos; for non-blocking info&quot;</summary>
+        /// <summary>Statute type: &apos;issue&apos; for problems, &apos;information&apos; for non-blocking info</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200ResponseStatutesItemType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200ResponseStatutesItem"/> and sets the default values.

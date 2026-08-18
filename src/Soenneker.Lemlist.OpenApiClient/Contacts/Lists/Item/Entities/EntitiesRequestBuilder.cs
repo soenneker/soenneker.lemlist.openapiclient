@@ -34,12 +34,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities
         {
         }
         /// <summary>
-        /// &quot;Adds existing CRM contacts to a static contact list, or removes them when `?action=remove` is set.- **Add** (default): send a `POST` with a `contactIds` body. Contacts already in the list are silently skipped (no duplicates) and reported in `alreadyInList`.- **Remove**: send a `POST` with `?action=remove` and a `contactIds` body. Contacts that are not in the list are silently skipped; `removedCount` reflects the associations actually removed. This only affects list membership, the contacts are not deleted from your CRM.The list must be a **static** contact list (`clt_xxx`). Dynamic lists (auto-populated by filter rules) and company lists are rejected.**Removal uses `POST ?action=remove` on purpose:** a `DELETE` request body is dropped by our stack, so `DELETE` on this path is **not supported** and returns `405 Method Not Allowed`.&quot;
+        /// Adds existing CRM contacts to a static contact list, or removes them when `?action=remove` is set.- **Add** (default): send a `POST` with a `contactIds` body. Contacts already in the list are silently skipped (no duplicates) and reported in `alreadyInList`.- **Remove**: send a `POST` with `?action=remove` and a `contactIds` body. Contacts that are not in the list are silently skipped; `removedCount` reflects the associations actually removed. This only affects list membership, the contacts are not deleted from your CRM.The list must be a **static** contact list (`clt_xxx`). Dynamic lists (auto-populated by filter rules) and company lists are rejected.**Removal uses `POST ?action=remove` on purpose:** a `DELETE` request body is dropped by our stack, so `DELETE` on this path is **not supported** and returns `405 Method Not Allowed`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntities200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response405Error">When receiving a 405 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntities200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntitiesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.EntitiesRequestBuilder.EntitiesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -51,10 +56,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntities200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntities200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response404Error.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response405Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.PostContactsListsByListIdEntities200Response500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntities200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntities200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Adds existing CRM contacts to a static contact list, or removes them when `?action=remove` is set.- **Add** (default): send a `POST` with a `contactIds` body. Contacts already in the list are silently skipped (no duplicates) and reported in `alreadyInList`.- **Remove**: send a `POST` with `?action=remove` and a `contactIds` body. Contacts that are not in the list are silently skipped; `removedCount` reflects the associations actually removed. This only affects list membership, the contacts are not deleted from your CRM.The list must be a **static** contact list (`clt_xxx`). Dynamic lists (auto-populated by filter rules) and company lists are rejected.**Removal uses `POST ?action=remove` on purpose:** a `DELETE` request body is dropped by our stack, so `DELETE` on this path is **not supported** and returns `405 Method Not Allowed`.&quot;
+        /// Adds existing CRM contacts to a static contact list, or removes them when `?action=remove` is set.- **Add** (default): send a `POST` with a `contactIds` body. Contacts already in the list are silently skipped (no duplicates) and reported in `alreadyInList`.- **Remove**: send a `POST` with `?action=remove` and a `contactIds` body. Contacts that are not in the list are silently skipped; `removedCount` reflects the associations actually removed. This only affects list membership, the contacts are not deleted from your CRM.The list must be a **static** contact list (`clt_xxx`). Dynamic lists (auto-populated by filter rules) and company lists are rejected.**Removal uses `POST ?action=remove` on purpose:** a `DELETE` request body is dropped by our stack, so `DELETE` on this path is **not supported** and returns `405 Method Not Allowed`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -85,14 +98,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities
             return new global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.Item.Entities.EntitiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;Adds existing CRM contacts to a static contact list, or removes them when `?action=remove` is set.- **Add** (default): send a `POST` with a `contactIds` body. Contacts already in the list are silently skipped (no duplicates) and reported in `alreadyInList`.- **Remove**: send a `POST` with `?action=remove` and a `contactIds` body. Contacts that are not in the list are silently skipped; `removedCount` reflects the associations actually removed. This only affects list membership, the contacts are not deleted from your CRM.The list must be a **static** contact list (`clt_xxx`). Dynamic lists (auto-populated by filter rules) and company lists are rejected.**Removal uses `POST ?action=remove` on purpose:** a `DELETE` request body is dropped by our stack, so `DELETE` on this path is **not supported** and returns `405 Method Not Allowed`.&quot;
+        /// Adds existing CRM contacts to a static contact list, or removes them when `?action=remove` is set.- **Add** (default): send a `POST` with a `contactIds` body. Contacts already in the list are silently skipped (no duplicates) and reported in `alreadyInList`.- **Remove**: send a `POST` with `?action=remove` and a `contactIds` body. Contacts that are not in the list are silently skipped; `removedCount` reflects the associations actually removed. This only affects list membership, the contacts are not deleted from your CRM.The list must be a **static** contact list (`clt_xxx`). Dynamic lists (auto-populated by filter rules) and company lists are rejected.**Removal uses `POST ?action=remove` on purpose:** a `DELETE` request body is dropped by our stack, so `DELETE` on this path is **not supported** and returns `405 Method Not Allowed`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class EntitiesRequestBuilderPostQueryParameters 
         {
             /// <summary>Omit to **add** the contacts to the list. Set to `remove` to **remove** them from the list.</summary>
             [QueryParameter("action")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsListsByListIdEntitiesActionParameter? Action { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.RemoveAction? Action { get; set; }
         }
     }
 }

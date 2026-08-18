@@ -23,6 +23,8 @@ using Soenneker.Lemlist.OpenApiClient.Schedules;
 using Soenneker.Lemlist.OpenApiClient.Sequences;
 using Soenneker.Lemlist.OpenApiClient.Tasks;
 using Soenneker.Lemlist.OpenApiClient.Team;
+using Soenneker.Lemlist.OpenApiClient.Unsubs;
+using Soenneker.Lemlist.OpenApiClient.Unsubscribes;
 using Soenneker.Lemlist.OpenApiClient.User;
 using Soenneker.Lemlist.OpenApiClient.Users;
 using Soenneker.Lemlist.OpenApiClient.V2;
@@ -123,6 +125,16 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.Team.TeamRequestBuilder Team
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Team.TeamRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The unsubs property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Unsubs.UnsubsRequestBuilder Unsubs
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Unsubs.UnsubsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The unsubscribes property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.UnsubscribesRequestBuilder Unsubscribes
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.UnsubscribesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The user property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.User.UserRequestBuilder User

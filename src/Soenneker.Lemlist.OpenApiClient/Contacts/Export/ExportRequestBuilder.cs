@@ -34,25 +34,30 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
         {
         }
         /// <summary>
-        /// &quot;Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.&quot;
+        /// Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsExport200Response"/></returns>
+        /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.Export400Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsExport200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsExport200Response> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsExport200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsExport200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.Export400Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.&quot;
+        /// Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -67,7 +72,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.Headers.TryAdd("Accept", "text/csv, text/plain;q=0.9");
             return requestInfo;
         }
         /// <summary>
@@ -80,7 +85,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
             return new global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.&quot;
+        /// Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ExportRequestBuilderGetQueryParameters 

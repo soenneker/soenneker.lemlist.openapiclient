@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// &quot;A People Database persona: a named, reusable set of People Database filters saved by your team. A persona id can be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.&quot;
+    /// A People Database persona: a named, reusable set of People Database filters saved by your team. A persona id can be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Persona : IAdditionalDataHolder, IParsable

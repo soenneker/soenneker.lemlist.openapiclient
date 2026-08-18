@@ -39,6 +39,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes.GetCampaignsByCampaignIdStatutes200Response400Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200Response?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +50,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes.GetCampaignsByCampaignIdStatutes200Response400Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdStatutes200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves validation statutes for a campaign, including errors that block launching and warnings about daily limits, DNS issues, etc. Uses the same validation engine as the lemlist UI.

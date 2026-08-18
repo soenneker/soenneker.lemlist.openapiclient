@@ -52,6 +52,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.Activity&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Activities.GetActivities200ResponseSchema400Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.Activity>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Activities.ActivitiesRequestBuilder.ActivitiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -62,7 +63,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Activity>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Activity.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Activities.GetActivities200ResponseSchema400Error.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Activity>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Activity.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
@@ -132,7 +137,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
             [QueryParameter("leadId")]
             public string LeadId { get; set; }
 #endif
-            /// <summary>&quot;Number of activities to retrieve. Default: 100. Maximum: 100&quot;</summary>
+            /// <summary>Number of activities to retrieve. Default: 100. Maximum: 100</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Filter activities by `createdAt &lt;= maxDate`. Accepts either a Unix timestamp in seconds (e.g. `1715385600`) or an ISO 8601 datetime (e.g. `2026-05-11T00:00:00Z`). Must be strictly greater than `minDate` when both are provided. `maxDate` is the primary name; `endDate` is accepted as an alias and `maxDate` takes precedence when both are provided.</summary>
@@ -155,7 +160,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
             [QueryParameter("minDate")]
             public string MinDate { get; set; }
 #endif
-            /// <summary>&quot;Number of records to skip. Note: This is not traditional cursor-based pagination. To retrieve all activities, increment offset by the limit value on each request (e.g., offset=0, then offset=100, then offset=200, etc.).&quot;</summary>
+            /// <summary>Number of records to skip. Note: This is not traditional cursor-based pagination. To retrieve all activities, increment offset by the limit value on each request (e.g., offset=0, then offset=100, then offset=200, etc.).</summary>
             [QueryParameter("offset")]
             public int? Offset { get; set; }
             /// <summary>Alias for `minDate`, provided for consistency with sibling endpoints (e.g. `/campaigns/{campaignId}/stats`). Accepts either a Unix timestamp in seconds or an ISO 8601 datetime. Ignored when `minDate` is also provided.</summary>
@@ -180,7 +185,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
 #endif
             /// <summary>API version. v2 is mandatory</summary>
             [QueryParameter("version")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.GetActivitiesVersionParameter? Version { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.V2Version? Version { get; set; }
         }
     }
 }

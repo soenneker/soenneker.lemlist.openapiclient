@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>&quot;Public HTTPS URLs of images to attach to a LinkedIn task. Replaces the task&apos;s current images — pass an empty array to clear them. Returns `400` (`LINKEDIN_MEDIA_INVALID_TYPE`) when the target task is not a LinkedIn task. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.&quot;</summary>
+        /// <summary>Public HTTPS URLs of images to attach to a LinkedIn task. Replaces the task&apos;s current images — pass an empty array to clear them. Returns `400` (`LINKEDIN_MEDIA_INVALID_TYPE`) when the target task is not a LinkedIn task. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Images { get; set; }
@@ -60,7 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Title { get; set; }
 #endif
-        /// <summary>&quot;Public HTTPS URLs of videos to attach to a LinkedIn task. Replaces the task&apos;s current videos — pass an empty array to clear them. Returns `400` (`LINKEDIN_MEDIA_INVALID_TYPE`) when the target task is not a LinkedIn task. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.&quot;</summary>
+        /// <summary>Public HTTPS URLs of videos to attach to a LinkedIn task. Replaces the task&apos;s current videos — pass an empty array to clear them. Returns `400` (`LINKEDIN_MEDIA_INVALID_TYPE`) when the target task is not a LinkedIn task. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Videos { get; set; }

@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas.Item
         {
         }
         /// <summary>
-        /// &quot;Permanently deletes one of your team&apos;s personas. There is no undo.An unknown id, a persona belonging to another team, and the persona lemlist auto-generates from your AI business context all answer the same `404`: they are indistinguishable by design.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.&quot;
+        /// Permanently deletes one of your team&apos;s personas. There is no undo.An unknown id, a persona belonging to another team, and the persona lemlist auto-generates from your AI business context all answer the same `404`: they are indistinguishable by design.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaDeleteResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PersonaDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Permanently deletes one of your team&apos;s personas. There is no undo.An unknown id, a persona belonging to another team, and the persona lemlist auto-generates from your AI business context all answer the same `404`: they are indistinguishable by design.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.&quot;
+        /// Permanently deletes one of your team&apos;s personas. There is no undo.An unknown id, a persona belonging to another team, and the persona lemlist auto-generates from your AI business context all answer the same `404`: they are indistinguishable by design.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

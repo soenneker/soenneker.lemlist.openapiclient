@@ -41,7 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>Entity sourcing. Only `all` is supported via the API. Required together with signalProcessingType when activate is true.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSegmentType? SegmentType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType? SegmentType { get; set; }
         /// <summary>Task/opportunity template applied to each signal when signalProcessingType is create_opportunity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -83,7 +83,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>(global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "segmentType", n => { SegmentType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSegmentType>(); } },
+                { "segmentType", n => { SegmentType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType>(); } },
                 { "signalOpportunityTemplate", n => { SignalOpportunityTemplate = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalOpportunityTemplate>(global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalOpportunityTemplate.CreateFromDiscriminatorValue); } },
                 { "signalProcessingType", n => { SignalProcessingType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalProcessingType>(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestType>(); } },
@@ -100,7 +100,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("emoji", Emoji);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>("filters", Filters);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSegmentType>("segmentType", SegmentType);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType>("segmentType", SegmentType);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalOpportunityTemplate>("signalOpportunityTemplate", SignalOpportunityTemplate);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalProcessingType>("signalProcessingType", SignalProcessingType);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestType>("type", Type);

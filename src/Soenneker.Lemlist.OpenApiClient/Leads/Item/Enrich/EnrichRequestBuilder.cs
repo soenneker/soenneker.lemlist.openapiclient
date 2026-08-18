@@ -39,6 +39,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response409Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +53,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response404Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response409Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Enrich Lead
@@ -91,7 +102,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
             /// <summary>Find phone number</summary>
             [QueryParameter("findPhone")]
             public bool? FindPhone { get; set; }
-            /// <summary>&quot;Re-run an enrichment that would otherwise be skipped. Bypasses skips caused by data already present on the contact: existing email, existing phone, LinkedIn enrichment already done for the same `linkedinUrl` / `linkedinUrlSalesNav`, or email already having a deliverability status.Does **not** bypass:- **Enrichment currently in progress** — if another enrichment is already running for this contact, the request is still skipped (no parallel enrichments, no double billing).- **Previously returned not-found** — for `findEmail` and `findPhone`, if a prior enrichment with the same inputs (`linkedinUrl`, `linkedinUrlSalesNav`, first / last name, company name / domain / LinkedIn URL) already returned not-found, the request is still skipped. Changing any of those inputs on the lead lifts the block without needing `force`.&quot;</summary>
+            /// <summary>Re-run an enrichment that would otherwise be skipped. Bypasses skips caused by data already present on the contact: existing email, existing phone, LinkedIn enrichment already done for the same `linkedinUrl` / `linkedinUrlSalesNav`, or email already having a deliverability status.Does **not** bypass:- **Enrichment currently in progress** — if another enrichment is already running for this contact, the request is still skipped (no parallel enrichments, no double billing).- **Previously returned not-found** — for `findEmail` and `findPhone`, if a prior enrichment with the same inputs (`linkedinUrl`, `linkedinUrlSalesNav`, first / last name, company name / domain / LinkedIn URL) already returned not-found, the request is still skipped. Changing any of those inputs on the lead lifts the block without needing `force`.</summary>
             [QueryParameter("force")]
             public bool? Force { get; set; }
             /// <summary>Run LinkedIn enrichment</summary>

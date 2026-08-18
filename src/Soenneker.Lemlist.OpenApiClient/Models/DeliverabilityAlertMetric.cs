@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>&quot;Metric being monitored. Valid combinations depend on `widget`: `warmup` supports `inboxRate`, `spamRate`, `score`; `outreach` supports `deliveryRate`, `bounceRate`.&quot;</summary>
+    /// <summary>Metric being monitored. Valid combinations depend on `widget`: `warmup` supports `inboxRate`, `spamRate`, `score`; `outreach` supports `deliveryRate`, `bounceRate`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum DeliverabilityAlertMetric
     {

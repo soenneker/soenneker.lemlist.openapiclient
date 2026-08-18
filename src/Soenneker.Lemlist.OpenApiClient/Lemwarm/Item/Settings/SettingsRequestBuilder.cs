@@ -39,6 +39,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.LemwarmSettings400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.LemwarmSettings401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +51,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.LemwarmSettings400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.LemwarmSettings401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update lemwarm Settings
@@ -58,6 +65,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.PatchLemwarmByUserMailboxIdSettings200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.PatchLemwarmByUserMailboxIdSettings200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettings200Response?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettingsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -69,7 +78,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettings200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettings200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.PatchLemwarmByUserMailboxIdSettings200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.PatchLemwarmByUserMailboxIdSettings200Response401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettings200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettings200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get lemwarm Settings

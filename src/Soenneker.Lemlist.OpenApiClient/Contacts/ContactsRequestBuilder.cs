@@ -59,11 +59,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         {
         }
         /// <summary>
-        /// &quot;Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.&quot;
+        /// Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.GetContacts200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.GetContacts200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder.ContactsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -74,7 +76,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Contacts.GetContacts200Response400Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.GetContacts200Response401Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it will be updated with the provided non-empty fields. Null or empty values are ignored during updates to preserve existing data. You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.
@@ -84,6 +91,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.PostContacts200Response401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -98,11 +106,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.PostContacts200Response401Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.&quot;
+        /// Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -152,12 +161,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             return new global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.&quot;
+        /// Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ContactsRequestBuilderGetQueryParameters 
         {
-            /// <summary>&quot;Filter contacts by their company&apos;s website domain. Resolved to a `companyId` against the Companies collection. If no company matches, the endpoint returns an empty list (`total: 0`). Mutually exclusive with the other `company*` filters.&quot;</summary>
+            /// <summary>Filter contacts by their company&apos;s website domain. Resolved to a `companyId` against the Companies collection. If no company matches, the endpoint returns an empty list (`total: 0`). Mutually exclusive with the other `company*` filters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("companyDomain")]
@@ -177,7 +186,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             [QueryParameter("companyId")]
             public string CompanyId { get; set; }
 #endif
-            /// <summary>&quot;Filter contacts by their company&apos;s LinkedIn URL. Resolved to a `companyId` against the Companies collection. If no company matches, the endpoint returns an empty list (`total: 0`). Mutually exclusive with the other `company*` filters.&quot;</summary>
+            /// <summary>Filter contacts by their company&apos;s LinkedIn URL. Resolved to a `companyId` against the Companies collection. If no company matches, the endpoint returns an empty list (`total: 0`). Mutually exclusive with the other `company*` filters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("companyLinkedinUrl")]
@@ -187,7 +196,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             [QueryParameter("companyLinkedinUrl")]
             public string CompanyLinkedinUrl { get; set; }
 #endif
-            /// <summary>&quot;Filter contacts by their company&apos;s LinkedIn Sales Navigator URL. Resolved to a `companyId` against the Companies collection. If no company matches, the endpoint returns an empty list (`total: 0`). Mutually exclusive with the other `company*` filters.&quot;</summary>
+            /// <summary>Filter contacts by their company&apos;s LinkedIn Sales Navigator URL. Resolved to a `companyId` against the Companies collection. If no company matches, the endpoint returns an empty list (`total: 0`). Mutually exclusive with the other `company*` filters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("companySalesnavUrl")]
@@ -207,7 +216,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             [QueryParameter("email")]
             public string Email { get; set; }
 #endif
-            /// <summary>&quot;Filter contacts to those carrying a field rejection with this reason — a value lemlist refused to write, prefixed by its origin (`enrichment_*` while enriching, `crm_sync_*` during CRM sync). Returns an empty list (`total: 0`) when no contact matches. Each returned contact exposes the full detail under `fieldRejections[]` (which field, why, and `conflictingRecordId` for duplicates). Only applies to the paginated list — ignored when `idsOrEmails` is provided (that path returns the exact contacts requested, unfiltered).&quot;</summary>
+            /// <summary>Filter contacts to those carrying a field rejection with this reason — a value lemlist refused to write, prefixed by its origin (`enrichment_*` while enriching, `crm_sync_*` during CRM sync). Returns an empty list (`total: 0`) when no contact matches. Each returned contact exposes the full detail under `fieldRejections[]` (which field, why, and `conflictingRecordId` for duplicates). Only applies to the paginated list — ignored when `idsOrEmails` is provided (that path returns the exact contacts requested, unfiltered).</summary>
             [QueryParameter("fieldRejectionReason")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsFieldRejectionReasonParameter? FieldRejectionReason { get; set; }
             /// <summary>A comma separated string of either valid contact IDs (MongoDB ObjectId) or valid email addresses. Optional — when omitted, returns the paginated list of all contacts of the team. Maximum 100 values.</summary>

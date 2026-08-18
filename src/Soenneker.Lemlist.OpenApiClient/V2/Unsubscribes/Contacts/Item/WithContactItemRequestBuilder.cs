@@ -36,19 +36,27 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item
         /// <summary>
         /// Removes the unsubscribed (do-not-contact) flag from a contact.
         /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactDeleteResponse?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactDeleteResponse> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            await RequestAdapter.SendNoContentAsync(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact400Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactDeleteResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Checks whether a contact is unsubscribed (do-not-contact).
@@ -56,6 +64,8 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactSubscriptionStatus"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.ContactSubscriptionStatus400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.ContactSubscriptionStatus500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.ContactSubscriptionStatus?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -66,25 +76,37 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ContactSubscriptionStatus>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ContactSubscriptionStatus.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.ContactSubscriptionStatus400Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.ContactSubscriptionStatus500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ContactSubscriptionStatus>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ContactSubscriptionStatus.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Marks a contact as unsubscribed (do-not-contact).
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesContactsByContactId201Response"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactPostResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesContactsByContactId201Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactPostResponse?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesContactsByContactId201Response> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactPostResponse> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesContactsByContactId201Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesContactsByContactId201Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact400Error.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContact500Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactPostResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Contacts.Item.WithContactPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Removes the unsubscribed (do-not-contact) flag from a contact.

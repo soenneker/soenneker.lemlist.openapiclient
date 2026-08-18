@@ -88,6 +88,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -98,7 +100,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response404Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieve a lead using either their email address or lead ID
@@ -156,7 +163,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads
 #endif
             /// <summary>API version. v2 is the only option</summary>
             [QueryParameter("version")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsVersionParameter? Version { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.V2Version? Version { get; set; }
         }
     }
 }

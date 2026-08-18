@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>&quot;Error code: `MISSING_REQUIRED_FIELD`, `INVALID_COMPANY_ID`, `COMPANY_NOT_FOUND_BY_ID`, `INVALID_DOMAIN`, `INVALID_LINKEDIN_URL`, or `INVALID_FIELD`.&quot;</summary>
+        /// <summary>Error code: `MISSING_REQUIRED_FIELD`, `INVALID_COMPANY_ID`, `COMPANY_NOT_FOUND_BY_ID`, `INVALID_DOMAIN`, `INVALID_LINKEDIN_URL`, or `INVALID_FIELD`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }
