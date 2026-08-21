@@ -24982,6 +24982,7 @@
           "maDealTypes",
           "maMinAmount",
           "persona",
+          "customPersonaTitles",
           "externalSignalFieldMapping",
           "externalSignalCustomFieldMapping",
           "seniority",
@@ -25119,6 +25120,10 @@
             {
               "value": "persona",
               "name": "Persona"
+            },
+            {
+              "value": "customPersonaTitles",
+              "name": "CustomPersonaTitles"
             },
             {
               "value": "externalSignalFieldMapping",
@@ -29286,6 +29291,7 @@
           "maDealTypes",
           "maMinAmount",
           "persona",
+          "customPersonaTitles",
           "externalSignalFieldMapping",
           "externalSignalCustomFieldMapping",
           "seniority",
@@ -29422,6 +29428,10 @@
             {
               "value": "persona",
               "name": "Persona"
+            },
+            {
+              "value": "customPersonaTitles",
+              "name": "CustomPersonaTitles"
             },
             {
               "value": "externalSignalFieldMapping",

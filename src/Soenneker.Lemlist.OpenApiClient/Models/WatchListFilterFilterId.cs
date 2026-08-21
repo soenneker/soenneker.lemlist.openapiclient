@@ -131,6 +131,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Persona,
         #pragma warning restore CS1591
+        [EnumMember(Value = "customPersonaTitles")]
+        #pragma warning disable CS1591
+        CustomPersonaTitles,
+        #pragma warning restore CS1591
         [EnumMember(Value = "externalSignalFieldMapping")]
         #pragma warning disable CS1591
         ExternalSignalFieldMapping,
