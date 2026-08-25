@@ -24112,6 +24112,8 @@
           "emailsInterested",
           "emailsNotInterested",
           "emailsUnsubscribed",
+          "entityUnsubscribed",
+          "variableUnsubscribed",
           "linkedinSent",
           "linkedinOpened",
           "linkedinReplied",
@@ -24239,6 +24241,14 @@
             {
               "value": "emailsUnsubscribed",
               "name": "EmailsUnsubscribed"
+            },
+            {
+              "value": "entityUnsubscribed",
+              "name": "EntityUnsubscribed"
+            },
+            {
+              "value": "variableUnsubscribed",
+              "name": "VariableUnsubscribed"
             },
             {
               "value": "linkedinSent",
@@ -26710,6 +26720,8 @@
           "emailsInterested",
           "emailsNotInterested",
           "emailsUnsubscribed",
+          "entityUnsubscribed",
+          "variableUnsubscribed",
           "linkedinSent",
           "linkedinOpened",
           "linkedinReplied",
@@ -26837,6 +26849,14 @@
             {
               "value": "emailsUnsubscribed",
               "name": "EmailsUnsubscribed"
+            },
+            {
+              "value": "entityUnsubscribed",
+              "name": "EntityUnsubscribed"
+            },
+            {
+              "value": "variableUnsubscribed",
+              "name": "VariableUnsubscribed"
             },
             {
               "value": "linkedinSent",

@@ -67,6 +67,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         EmailsUnsubscribed,
         #pragma warning restore CS1591
+        [EnumMember(Value = "entityUnsubscribed")]
+        #pragma warning disable CS1591
+        EntityUnsubscribed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "variableUnsubscribed")]
+        #pragma warning disable CS1591
+        VariableUnsubscribed,
+        #pragma warning restore CS1591
         [EnumMember(Value = "linkedinSent")]
         #pragma warning disable CS1591
         LinkedinSent,
