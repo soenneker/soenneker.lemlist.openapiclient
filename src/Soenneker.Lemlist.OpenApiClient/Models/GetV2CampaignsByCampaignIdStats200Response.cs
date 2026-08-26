@@ -50,6 +50,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public int? NbLeadsUnsubscribed { get; set; }
         /// <summary>Number of messages opened</summary>
         public int? Opened { get; set; }
+        /// <summary>Campaign counters split by channel. Only the channels requested through the `channels` parameter are returned; when `channels` is omitted, all five are present.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats? PerChannel { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats PerChannel { get; set; }
+#endif
         /// <summary>Number of messages that received replies</summary>
         public int? Replied { get; set; }
         /// <summary>Detailed metrics for each step in the campaign</summary>
@@ -103,6 +111,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "nbLeadsReached", n => { NbLeadsReached = n.GetIntValue(); } },
                 { "nbLeadsUnsubscribed", n => { NbLeadsUnsubscribed = n.GetIntValue(); } },
                 { "opened", n => { Opened = n.GetIntValue(); } },
+                { "perChannel", n => { PerChannel = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats.CreateFromDiscriminatorValue); } },
                 { "replied", n => { Replied = n.GetIntValue(); } },
                 { "steps", n => { Steps = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200ResponseStepsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200ResponseStepsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
@@ -132,6 +141,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("nbLeadsReached", NbLeadsReached);
             writer.WriteIntValue("nbLeadsUnsubscribed", NbLeadsUnsubscribed);
             writer.WriteIntValue("opened", Opened);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats>("perChannel", PerChannel);
             writer.WriteIntValue("replied", Replied);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200ResponseStepsItem>("steps", Steps);
             writer.WriteAdditionalData(AdditionalData);
