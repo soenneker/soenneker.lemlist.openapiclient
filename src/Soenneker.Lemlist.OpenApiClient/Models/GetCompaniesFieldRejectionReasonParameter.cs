@@ -16,14 +16,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmSyncInvalidDomain,
         #pragma warning restore CS1591
-        [EnumMember(Value = "crm_sync_company_not_found")]
-        #pragma warning disable CS1591
-        CrmSyncCompanyNotFound,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "crm_sync_update_failed")]
-        #pragma warning disable CS1591
-        CrmSyncUpdateFailed,
-        #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_duplicate_linkedin_url")]
         #pragma warning disable CS1591
         CrmSyncDuplicateLinkedinUrl,
@@ -31,6 +23,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "crm_sync_invalid_linkedin_url")]
         #pragma warning disable CS1591
         CrmSyncInvalidLinkedinUrl,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_linkedin_url_not_company")]
+        #pragma warning disable CS1591
+        CrmSyncLinkedinUrlNotCompany,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_invalid_url")]
+        #pragma warning disable CS1591
+        CrmSyncInvalidUrl,
         #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_value_oscillating")]
         #pragma warning disable CS1591

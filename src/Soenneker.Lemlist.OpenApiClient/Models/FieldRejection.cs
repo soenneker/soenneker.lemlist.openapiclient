@@ -15,7 +15,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>For duplicate reasons, the id of the record that already holds the value — use it to merge or remap before resolving the duplicate. Omitted for non-duplicate reasons.</summary>
+        /// <summary>The lemlist record that already holds the value, when the rejection identifies one — use it to merge or remap before resolving the duplicate. Always a lemlist id (`ctc_…` for a contact, `cpn_…` for a company), never a CRM record id. Omitted otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ConflictingRecordId { get; set; }

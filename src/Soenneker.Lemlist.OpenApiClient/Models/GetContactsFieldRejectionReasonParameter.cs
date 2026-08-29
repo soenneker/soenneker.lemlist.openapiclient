@@ -24,9 +24,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmSyncInvalidLinkedinUrl,
         #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_invalid_url")]
+        #pragma warning disable CS1591
+        CrmSyncInvalidUrl,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_invalid_email")]
+        #pragma warning disable CS1591
+        CrmSyncInvalidEmail,
+        #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_invalid_phone")]
         #pragma warning disable CS1591
         CrmSyncInvalidPhone,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_linkedin_url_not_contact")]
+        #pragma warning disable CS1591
+        CrmSyncLinkedinUrlNotContact,
         #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_duplicate_contact_blocked")]
         #pragma warning disable CS1591
@@ -43,6 +55,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "crm_sync_custom_field_creation_failed")]
         #pragma warning disable CS1591
         CrmSyncCustomFieldCreationFailed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_unsub_state_protected")]
+        #pragma warning disable CS1591
+        CrmSyncUnsubStateProtected,
         #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_value_oscillating")]
         #pragma warning disable CS1591

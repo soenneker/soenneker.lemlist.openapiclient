@@ -14905,7 +14905,7 @@
           },
           "conflictingRecordId": {
             "type": "string",
-            "description": "For duplicate reasons, the id of the record that already holds the value \u2014 use it to merge or remap before resolving the duplicate. Omitted for non-duplicate reasons."
+            "description": "The lemlist record that already holds the value, when the rejection identifies one \u2014 use it to merge or remap before resolving the duplicate. Always a lemlist id (\u0060ctc_\u2026\u0060 for a contact, \u0060cpn_\u2026\u0060 for a company), never a CRM record id. Omitted otherwise."
           },
           "rejectedValue": {
             "type": "string",
@@ -29086,11 +29086,15 @@
           "enrichment_duplicate_email",
           "crm_sync_duplicate_linkedin_url",
           "crm_sync_invalid_linkedin_url",
+          "crm_sync_invalid_url",
+          "crm_sync_invalid_email",
           "crm_sync_invalid_phone",
+          "crm_sync_linkedin_url_not_contact",
           "crm_sync_duplicate_contact_blocked",
           "crm_sync_duplicate_company_blocked",
           "crm_sync_company_not_in_lemlist",
           "crm_sync_custom_field_creation_failed",
+          "crm_sync_unsub_state_protected",
           "crm_sync_value_oscillating",
           "crm_sync_owner_sync_loop",
           "crm_sync_unmapped_user",
@@ -29120,8 +29124,20 @@
               "name": "CrmSyncInvalidLinkedinUrl"
             },
             {
+              "value": "crm_sync_invalid_url",
+              "name": "CrmSyncInvalidUrl"
+            },
+            {
+              "value": "crm_sync_invalid_email",
+              "name": "CrmSyncInvalidEmail"
+            },
+            {
               "value": "crm_sync_invalid_phone",
               "name": "CrmSyncInvalidPhone"
+            },
+            {
+              "value": "crm_sync_linkedin_url_not_contact",
+              "name": "CrmSyncLinkedinUrlNotContact"
             },
             {
               "value": "crm_sync_duplicate_contact_blocked",
@@ -29138,6 +29154,10 @@
             {
               "value": "crm_sync_custom_field_creation_failed",
               "name": "CrmSyncCustomFieldCreationFailed"
+            },
+            {
+              "value": "crm_sync_unsub_state_protected",
+              "name": "CrmSyncUnsubStateProtected"
             },
             {
               "value": "crm_sync_value_oscillating",
@@ -29279,10 +29299,10 @@
         "enum": [
           "crm_sync_duplicate_company",
           "crm_sync_invalid_domain",
-          "crm_sync_company_not_found",
-          "crm_sync_update_failed",
           "crm_sync_duplicate_linkedin_url",
           "crm_sync_invalid_linkedin_url",
+          "crm_sync_linkedin_url_not_company",
+          "crm_sync_invalid_url",
           "crm_sync_value_oscillating",
           "crm_sync_owner_sync_loop",
           "crm_sync_unmapped_user",
@@ -29304,20 +29324,20 @@
               "name": "CrmSyncInvalidDomain"
             },
             {
-              "value": "crm_sync_company_not_found",
-              "name": "CrmSyncCompanyNotFound"
-            },
-            {
-              "value": "crm_sync_update_failed",
-              "name": "CrmSyncUpdateFailed"
-            },
-            {
               "value": "crm_sync_duplicate_linkedin_url",
               "name": "CrmSyncDuplicateLinkedinUrl"
             },
             {
               "value": "crm_sync_invalid_linkedin_url",
               "name": "CrmSyncInvalidLinkedinUrl"
+            },
+            {
+              "value": "crm_sync_linkedin_url_not_company",
+              "name": "CrmSyncLinkedinUrlNotCompany"
+            },
+            {
+              "value": "crm_sync_invalid_url",
+              "name": "CrmSyncInvalidUrl"
             },
             {
               "value": "crm_sync_value_oscillating",
