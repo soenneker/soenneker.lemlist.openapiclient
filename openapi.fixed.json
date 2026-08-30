@@ -11965,7 +11965,6 @@
             "in": "query",
             "description": "Filter by signal type(s). Can be a single value or array using type[] notation. Valid values from WATCH_LIST_SIGNAL_CONFIGURATIONS_TYPES_STANDARD_KEYS",
             "schema": {
-              "type": "object",
               "oneOf": [
                 {
                   "type": "string"
@@ -11985,7 +11984,6 @@
             "in": "query",
             "description": "Filter by signal status(es). Can be a single value or array using status[] notation. Valid values from WATCH_LIST_SIGNAL_COMPUTED_STATUSES",
             "schema": {
-              "type": "object",
               "oneOf": [
                 {
                   "type": "string"
