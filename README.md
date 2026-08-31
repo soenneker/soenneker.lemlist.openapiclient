@@ -45,4 +45,4 @@ Lemlist uses HTTP Basic authentication with an empty username and the API key as
 
 API failures are exposed as the generated endpoint-specific error types listed on each request method. Because this package is regenerated from Lemlist's OpenAPI document, generated names and models can change when the upstream specification changes.
 
-For dependency-injection setup and managed client reuse, use `Soenneker.Lemlist.OpenApiClientUtil` with `Soenneker.Lemlist.HttpClients`.
+For application registration and managed client reuse, use `Soenneker.Lemlist.OpenApiClientUtil` with `Soenneker.Lemlist.HttpClients`.
