@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Campaigns
             get => new global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Stats.StatsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.v2.campaigns.item collection</summary>
-        /// <param name="position">Unique campaign ID</param>
+        /// <param name="position">The unique identifier of the campaign</param>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.WithCampaignItemRequestBuilder"/></returns>
         public global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.WithCampaignItemRequestBuilder this[string position]
         {

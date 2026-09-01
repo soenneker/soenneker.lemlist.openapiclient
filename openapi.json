@@ -23,6 +23,125 @@
       }
     },
     "schemas": {
+      "ActivityType": {
+        "type": "string",
+        "description": "A lemlist activity type. These are the exact values accepted by the `type` filter on GET /activities and returned as an activity's `type`. Mind the spelling: email types are plural (emailsSent), invites are linkedinInvite*.",
+        "enum": [
+          "emailsSent",
+          "emailsOpened",
+          "emailsClicked",
+          "emailsReplied",
+          "emailsExternalSent",
+          "emailsExternalReceived",
+          "emailsDone",
+          "emailsIgnored",
+          "emailsBounced",
+          "emailsFailed",
+          "emailsUnsubscribed",
+          "emailsInterested",
+          "emailsNotInterested",
+          "snoozed",
+          "annotated",
+          "aircallDone",
+          "aircallIgnored",
+          "aircallCreated",
+          "aircallEnded",
+          "aircallInterested",
+          "aircallNotInterested",
+          "apiDone",
+          "apiIgnored",
+          "apiInterested",
+          "apiNotInterested",
+          "apiFailed",
+          "apiUnsubscribed",
+          "enrichmentDone",
+          "enrichmentFailed",
+          "enrichmentSkipped",
+          "linkedinVisitDone",
+          "linkedinVisitFailed",
+          "linkedinVisitSkipped",
+          "linkedinCommentLastPostDone",
+          "linkedinCommentLastPostFailed",
+          "linkedinCommentLastPostSkipped",
+          "linkedinFollowDone",
+          "linkedinFollowFailed",
+          "linkedinFollowSkipped",
+          "linkedinLikeLastPostDone",
+          "linkedinLikeLastPostNoPost",
+          "linkedinLikeLastPostFailed",
+          "linkedinLikeLastPostSkipped",
+          "linkedinInviteDone",
+          "linkedinEndorseDone",
+          "linkedinEndorseFailed",
+          "linkedinEndorseSkipped",
+          "linkedinSent",
+          "linkedinInMailSent",
+          "linkedinOpened",
+          "linkedinInviteAccepted",
+          "linkedinInviteFailed",
+          "linkedinSendFailed",
+          "linkedinInMailFailed",
+          "linkedinInMailSkipped",
+          "linkedinVoiceNoteDone",
+          "linkedinVoiceNoteFailed",
+          "linkedinWithdrawInvitationDone",
+          "linkedinWithdrawInvitationFailed",
+          "linkedinVoiceNoteReplied",
+          "whatsappMessageSent",
+          "whatsappMessageDelivered",
+          "whatsappMessageOpened",
+          "whatsappReplied",
+          "whatsappMessageFailed",
+          "whatsappDone",
+          "whatsappIgnored",
+          "whatsappVoiceNoteSent",
+          "whatsappVoiceNoteDelivered",
+          "whatsappVoiceNoteOpened",
+          "whatsappVoiceNoteReplied",
+          "whatsappVoiceNoteFailed",
+          "whatsappVoiceNoteIgnored",
+          "smsSent",
+          "smsDone",
+          "smsDelivered",
+          "smsReplied",
+          "smsIgnored",
+          "smsFailed",
+          "aiVariableDone",
+          "aiVariableFailed",
+          "linkedinReplied",
+          "linkedinInterested",
+          "linkedinNotInterested",
+          "linkedinDone",
+          "linkedinIgnored",
+          "manualDone",
+          "manualIgnored",
+          "manualInterested",
+          "manualNotInterested",
+          "manualUnsubscribed",
+          "scheduleCancelled",
+          "paused",
+          "stopped",
+          "resumed",
+          "skipped",
+          "meetingBooked",
+          "conditionChosen",
+          "conditionalFailed",
+          "sendToAnotherCampaign",
+          "manualEmailQueued",
+          "manualLinkedinSendQueued",
+          "manualLinkedinVoiceNoteQueued",
+          "manualLinkedinInviteQueued",
+          "manualLinkedinCommentLastPostQueued",
+          "manualWhatsappMessageQueued",
+          "manualWhatsappVoiceNoteQueued",
+          "outOfOffice",
+          "mailinblackDetected",
+          "entityUnsubscribed",
+          "variableUnsubscribed",
+          "entitySubscribed",
+          "variableSubscribed"
+        ]
+      },
       "LinkedinSubTypeCounts": {
         "type": "object",
         "description": "A LinkedIn counter split by message sub-type. The three values sum to the aggregated counter of the same name on `perChannel.linkedin`. All three keys are always present, `0` when there is no matching activity.",
@@ -588,8 +707,7 @@
             "description": "Unique activity identifier"
           },
           "type": {
-            "type": "string",
-            "description": "Activity type (emailOpened, emailClicked, emailReplied, etc.)"
+            "$ref": "#/components/schemas/ActivityType"
           },
           "leadId": {
             "type": "string",
@@ -1340,7 +1458,9 @@
               "callTranscriptDone",
               "inboxLabelUpdated",
               "signalRegistered",
-              "deliverabilityAlertTriggered"
+              "deliverabilityAlertTriggered",
+              "contactSourcingDone",
+              "contactSourcingFailed"
             ]
           },
           "campaignId": {
@@ -3525,6 +3645,88 @@
           "recheckDelayHours": {
             "type": "integer",
             "description": "Cool-down between re-evaluations after the alert has triggered, in hours. Defaults to 12."
+          }
+        }
+      },
+      "ContactSourcingRun": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "running",
+              "completed",
+              "failed"
+            ]
+          },
+          "ranAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "The AI's read-out of the account — why it picked these people, or found nobody."
+          },
+          "error": {
+            "type": "string",
+            "description": "Only on a failed run."
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactSourcingContact"
+            }
+          }
+        }
+      },
+      "ContactSourcingContact": {
+        "type": "object",
+        "properties": {
+          "leadId": {
+            "type": "string",
+            "description": "People-Database id. Pass it to `POST /contact-sourcing/contacts` to add this person as a contact."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "decision_maker",
+              "user",
+              "influencer"
+            ]
+          },
+          "fitScore": {
+            "type": "number",
+            "description": "How well the person matches the team's ICP, 0-100."
+          },
+          "reasoning": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "linkedinUrl": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "The person's CURRENT employer, which is not always the account classified."
           }
         }
       }
@@ -5764,7 +5966,7 @@
         }
       }
     },
-    "/campaigns/{campaignId}/export/leads": {
+    "/v2/campaigns/{campaignId}/export/leads": {
       "parameters": [
         {
           "name": "campaignId",
@@ -5860,7 +6062,197 @@
             "description": "Leads exported successfully",
             "content": {
               "text/csv": {
-                "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,Original event page,url extension,event_link_to_send,testFieldToDelete,naissance,lastState,status,_id\n,jeremy@example.com,Jeremy,Smith,,,https://www.linkedin.com/in/jeremysmith,,example.com,,,https://www.example.com/event-registration,?name=Jeremy&email=jeremy@example.com,https://www.example.com/event-registration?name=Jeremy&email=jeremy@example.com,,,linkedinReplied,done,lea_s2cXajAHahdDKmDw8\n,frankie@example.org,Frankie,Johnson,,,https://www.linkedin.com/in/frankiejohnson,,example.org,,,https://www.example.com/event-registration,?name=Frankie&email=frankie@example.org,https://www.example.com/event-registration?name=Frankie&email=frankie@example.org,,,linkedinReplied,done,lea_E8hdds5NryDRXpGJa\n,louiza@example.io,Louiza,Brown,,,https://www.linkedin.com/in/louizabrown,,example.io,,,https://www.example.com/event-registration,?name=Louiza&email=louiza@example.io,https://www.example.com/event-registration?name=Louiza&email=louiza@example.io,,,emailsInterested,interested,lea_tLAI7Fr2gR5hVxAIc\n,benjamin@example.co,Benjamin,Williams,,,https://www.linkedin.com/in/benjaminwilliams,,example.co,,,https://www.example.com/event-registration,?name=Benjamin&email=benjamin@example.co,https://www.example.com/event-registration?name=Benjamin&email=benjamin@example.co,,,emailsUnsubscribed,unsubscribed,lea_oznzWQKKZGXrBdqXb\n,roxanne@example.net,Roxanne,Davis,,,https://www.linkedin.com/in/roxannedavis,,example.net,,,https://www.example.com/event-registration,?name=Roxanne&email=roxanne@example.net,https://www.example.com/event-registration?name=Roxanne&email=roxanne@example.net,,,emailsClicked,done,lea_M22nl3gUwvAiNl6Ks\n,thomas@example.fr,Thomas,Miller,,,https://www.linkedin.com/in/thomasmiller,,example.fr,,,https://www.example.com/event-registration,?name=Thomas&email=thomas@example.fr,https://www.example.com/event-registration?name=Thomas&email=thomas@example.fr,,,emailsSent,done,lea_z3DydraGgNBnLdV7o"
+                "schema": {
+                  "type": "string",
+                  "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "emailStatus": {
+                        "type": "string",
+                        "enum": [
+                          "deliverable",
+                          "risky",
+                          "undeliverable"
+                        ]
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "picture": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "linkedinUrl": {
+                        "type": "string"
+                      },
+                      "timezone": {
+                        "type": "string"
+                      },
+                      "companyName": {
+                        "type": "string"
+                      },
+                      "companyDomain": {
+                        "type": "string"
+                      },
+                      "icebreaker": {
+                        "type": "string"
+                      },
+                      "jobTitle": {
+                        "type": "string"
+                      },
+                      "lastState": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad team",
+            "content": {
+              "text/plain": {
+                "example": "Bad team"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "text/plain": {
+                "example": "Campaign not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/campaigns/{campaignId}/export/leads": {
+      "parameters": [
+        {
+          "name": "campaignId",
+          "in": "path",
+          "required": true,
+          "description": "The unique identifier of the campaign",
+          "example": "cam_A1B2C3D4E5F6G7H8I9",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Export Campaign Leads (legacy)",
+        "deprecated": true,
+        "description": "Export leads from a campaign with filtering options. Returns leads in CSV or JSON format based on their state (e.g., contacted, interested, replied, etc.).",
+        "tags": [
+          "Campaigns"
+        ],
+        "parameters": [
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "description": "Filter to export only the specified lead's last states. Use 'all' to export all states. Can be a comma-separated list of states. **Global states**: imported, scanned, skipped, reviewed, contacted, hooked, attracted, warmed, interested, notInterested, emailsBounced, emailsUnsubscribed, failed, meetingBooked, paused. **Detailed states**: emailsSent, emailsOpened, emailsClicked, emailsReplied, emailsInterested, emailsNotInterested, emailsFailed, opportunitiesDone, aircallDone, aircallInterested, aircallNotInterested, apiDone, apiInterested, apiNotInterested, linkedinVisitDone, linkedinVisitFailed, linkedinInviteDone, linkedinInviteAccepted, linkedinInviteFailed, linkedinSent, linkedinOpened, linkedinReplied, linkedinInterested, linkedinNotInterested, linkedinSendFailed, manualInterested, manualNotInterested",
+            "example": "all",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "imported",
+                "scanned",
+                "skipped",
+                "reviewed",
+                "contacted",
+                "hooked",
+                "attracted",
+                "warmed",
+                "interested",
+                "notInterested",
+                "emailsBounced",
+                "emailsUnsubscribed",
+                "failed",
+                "meetingBooked",
+                "paused",
+                "emailsSent",
+                "emailsOpened",
+                "emailsClicked",
+                "emailsReplied",
+                "emailsInterested",
+                "emailsNotInterested",
+                "emailsFailed",
+                "opportunitiesDone",
+                "aircallDone",
+                "aircallInterested",
+                "aircallNotInterested",
+                "apiDone",
+                "apiInterested",
+                "apiNotInterested",
+                "linkedinVisitDone",
+                "linkedinVisitFailed",
+                "linkedinInviteDone",
+                "linkedinInviteAccepted",
+                "linkedinInviteFailed",
+                "linkedinSent",
+                "linkedinOpened",
+                "linkedinReplied",
+                "linkedinInterested",
+                "linkedinNotInterested",
+                "linkedinSendFailed",
+                "manualInterested",
+                "manualNotInterested"
+              ],
+              "default": "all"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "Output format: 'json' or 'csv'. Default is CSV.",
+            "example": "json",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leads exported successfully",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,Original event page,url extension,event_link_to_send,testFieldToDelete,naissance,lastState,status,_id\n,jeremy@example.com,Jeremy,Smith,,,https://www.linkedin.com/in/jeremysmith,,example.com,,,https://www.example.com/event-registration,?name=Jeremy&email=jeremy@example.com,https://www.example.com/event-registration?name=Jeremy&email=jeremy@example.com,,,linkedinReplied,done,lea_s2cXajAHahdDKmDw8\n,frankie@example.org,Frankie,Johnson,,,https://www.linkedin.com/in/frankiejohnson,,example.org,,,https://www.example.com/event-registration,?name=Frankie&email=frankie@example.org,https://www.example.com/event-registration?name=Frankie&email=frankie@example.org,,,linkedinReplied,done,lea_E8hdds5NryDRXpGJa\n,louiza@example.io,Louiza,Brown,,,https://www.linkedin.com/in/louizabrown,,example.io,,,https://www.example.com/event-registration,?name=Louiza&email=louiza@example.io,https://www.example.com/event-registration?name=Louiza&email=louiza@example.io,,,emailsInterested,interested,lea_tLAI7Fr2gR5hVxAIc\n,benjamin@example.co,Benjamin,Williams,,,https://www.linkedin.com/in/benjaminwilliams,,example.co,,,https://www.example.com/event-registration,?name=Benjamin&email=benjamin@example.co,https://www.example.com/event-registration?name=Benjamin&email=benjamin@example.co,,,emailsUnsubscribed,unsubscribed,lea_oznzWQKKZGXrBdqXb\n,roxanne@example.net,Roxanne,Davis,,,https://www.linkedin.com/in/roxannedavis,,example.net,,,https://www.example.com/event-registration,?name=Roxanne&email=roxanne@example.net,https://www.example.com/event-registration?name=Roxanne&email=roxanne@example.net,,,emailsClicked,done,lea_M22nl3gUwvAiNl6Ks\n,thomas@example.fr,Thomas,Miller,,,https://www.linkedin.com/in/thomasmiller,,example.fr,,,https://www.example.com/event-registration,?name=Thomas&email=thomas@example.fr,https://www.example.com/event-registration?name=Thomas&email=thomas@example.fr,,,emailsSent,done,lea_z3DydraGgNBnLdV7o"
+                }
               },
               "application/json": {
                 "schema": {
@@ -12365,6 +12757,131 @@
         "parameters": []
       }
     },
+    "/inbox/sms": {
+      "post": {
+        "summary": "Send SMS Message",
+        "description": "Sends an SMS to a contact through the lemlist inbox. The message is sent to the contact's phone number (`phone` field, or the first entry of `phones`). Sending consumes SMS credits, one per message segment.",
+        "tags": [
+          "Inbox"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sendUserId": {
+                    "type": "string",
+                    "description": "Sender user ID. Must belong to the team owning the API key."
+                  },
+                  "from": {
+                    "type": "string",
+                    "description": "Sender phone number, in E.164 format. Must be a phone number provisioned on your team; an unknown, pending or deleted number fails with `Failed to send SMS`."
+                  },
+                  "contactId": {
+                    "type": "string",
+                    "description": "Contact ID. Provide either contactId or leadId (not both required). Returned in the response."
+                  },
+                  "leadId": {
+                    "type": "string",
+                    "description": "Lead ID. Provide either contactId or leadId; when only leadId is sent, its contact is resolved and returned as contactId in the response."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "SMS body. lemlist variables such as {{firstName}} are resolved against the contact before sending, and the resolved message must not be empty."
+                  }
+                },
+                "required": [
+                  "sendUserId",
+                  "from",
+                  "message"
+                ]
+              },
+              "example": {
+                "sendUserId": "usr_Example123UserAbc",
+                "from": "+33612345678",
+                "contactId": "ctc_Example123Contact",
+                "message": "Hi {{firstName}}, following up on our conversation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "description": "True when the SMS was sent."
+                    },
+                    "contactId": {
+                      "type": "string",
+                      "description": "The contact the SMS was sent to (resolved from leadId when only a lead was provided)."
+                    }
+                  }
+                },
+                "example": {
+                  "ok": true,
+                  "contactId": "ctc_Example123Contact"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / Invalid sendUserId / contactId or leadId is required / Invalid leadId / Lead not found / Invalid contactId / Invalid message / Invalid from / Sender not found / The sender is not in the current team / Contact or lead not found (or has no valid email address) / Contact is unsubscribed / Variable is unsubscribed / SMS message body is empty / Failed to send SMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Bad team"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "Not enough SMS credits to send the message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not enough credit to send the sms"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        },
+        "parameters": []
+      }
+    },
     "/inbox/labels": {
       "get": {
         "summary": "Get Many Labels",
@@ -15869,10 +16386,10 @@
             "name": "type",
             "in": "query",
             "required": false,
-            "description": "Filter by activity type (e.g., paused)",
-            "example": "paused",
+            "description": "Filter by activity type. Accepts any value from the `ActivityType` enum — mind the exact spelling (email types are plural `emails*`, invites are `linkedinInvite*`). An unknown type returns 400.",
+            "example": "emailsReplied",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/ActivityType"
             }
           },
           {
@@ -18290,7 +18807,9 @@
                       "callTranscriptDone",
                       "inboxLabelUpdated",
                       "signalRegistered",
-                      "deliverabilityAlertTriggered"
+                      "deliverabilityAlertTriggered",
+                      "contactSourcingDone",
+                      "contactSourcingFailed"
                     ]
                   },
                   "secret": {
@@ -22567,6 +23086,217 @@
           },
           "405": {
             "description": "Method not allowed"
+          }
+        }
+      }
+    },
+    "/contact-sourcing": {
+      "post": {
+        "summary": "Run Contact Sourcing",
+        "description": "Starts an AI contact-sourcing run for one or more accounts: sources each company's employees from the People Database and classifies them into a buying committee (decision maker / user / influencer) with an ICP fit score.\n\nOne account or two hundred, same call — pass a list of one.\n\nRuns are asynchronous: the response carries a `runId` per account. Poll `GET /contact-sourcing` or subscribe to the `contactSourcingDone` webhook for the result.\n\nThe call answers `200` even when some accounts could not be started — one unrunnable account among 200 is not a reason to fail the rest. Read both `results` and `errors`.\n\nBy default an account that already has a committee is not re-run: its previous run comes back with `status: \"reused\"` and nothing is charged. `overwrite: true` forces a fresh run, but never stacks a second one on a run still going — that one is returned as `reused` instead, so retrying a timed-out request cannot charge you twice.\n\nTakes lemlist company ids only. To start from a domain or LinkedIn URL, resolve it first with `GET /companies?idsOrDomains=`.",
+        "tags": [
+          "Contact sourcing"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "companyIds"
+                ],
+                "properties": {
+                  "companyIds": {
+                    "type": "array",
+                    "maxItems": 200,
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Accounts to source contacts for (`cpn_xxx` format).",
+                    "example": [
+                      "cpn_K4tRm2Qw9Yb7Xz1Ns"
+                    ]
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "One entry per account, in the order they were given.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "companyId": {
+                            "type": "string"
+                          },
+                          "runId": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "started",
+                              "reused"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "companyId": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string",
+                            "example": "ABS_CONTACT_SOURCING_TEAM_DAILY_CAP_REACHED"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The body is not a non-empty list of company IDs, contains something other than a `cpn_` id, asks for more than 200 accounts, or `overwrite` is not a boolean."
+          },
+          "403": {
+            "description": "The workspace does not have contact sourcing enabled."
+          },
+          "422": {
+            "description": "The team has no AI Context set up, so there is nothing to judge fit against. In the lemlist app, open Settings > AI Context Center. Per-account problems — no website or LinkedIn URL, no credits, daily limit reached — are not this: they come back inside `errors`."
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Contact Sourcing Run",
+        "description": "Reads one contact-sourcing run — by its own id, or the latest run of an account.\n\nThe HTTP status carries the run state: `200` the run completed and `contacts` is filled, `202` the run is still queued or going (poll again), `400` the run failed and `error` says why, `404` no such run.\n\nExactly one of `runId` or `companyId` is required.",
+        "tags": [
+          "Contact sourcing"
+        ],
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "query",
+            "required": false,
+            "description": "The run to read, as returned by `POST /contact-sourcing`.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "air_H2nQv7Bs4Jm1Ty8Wk"
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "required": false,
+            "description": "Read the LATEST run of this account instead (`cpn_xxx` format).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The run completed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactSourcingRun"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "The run is queued or still going; `contacts` is empty."
+          },
+          "400": {
+            "description": "The run failed; `error` says why."
+          },
+          "404": {
+            "description": "No such run, or the account has never been sourced."
+          }
+        }
+      }
+    },
+
+
+    
+    "/contact-sourcing/contacts": {
+      "post": {
+        "summary": "Add a Sourced Contact",
+        "description": "Turns one contact-sourcing recommendation into a lemlist contact.\n\n`leadId` comes from a run's `contacts[].leadId` — a People-Database id, not a contact id. `companyId` is required and verified: if the person's profile now puts them at a different company, the contact is not filed under the account asked for and the call answers 409.",
+        "tags": [
+          "Contact sourcing"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "leadId",
+                  "companyId"
+                ],
+                "properties": {
+                  "leadId": {
+                    "type": "string",
+                    "description": "People-Database id, from a run's `contacts[].leadId`.",
+                    "example": "123456789"
+                  },
+                  "companyId": {
+                    "type": "string",
+                    "example": "cpn_K4tRm2Qw9Yb7Xz1Ns"
+                  },
+                  "listId": {
+                    "type": "string",
+                    "description": "File the new contact into this contact list (`clt_xxx`). Omit to leave it in all contacts.",
+                    "example": "clt_P3vDh8Lk5Tq2Wm6Rj"
+                  },
+                  "findEmail": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Also run email enrichment on the new contact. Spends enrichment credits."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contact created."
+          },
+          "402": {
+            "description": "`findEmail` was asked for without the credits for it."
+          },
+          "404": {
+            "description": "The lead is no longer in the People Database. Re-run the sourcing to refresh the recommendations."
+          },
+          "409": {
+            "description": "The lead's profile lists a different current employer, so they were not filed under this account."
           }
         }
       }

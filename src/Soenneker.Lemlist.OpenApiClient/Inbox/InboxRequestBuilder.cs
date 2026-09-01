@@ -8,6 +8,7 @@ using Soenneker.Lemlist.OpenApiClient.Inbox.Email;
 using Soenneker.Lemlist.OpenApiClient.Inbox.Item;
 using Soenneker.Lemlist.OpenApiClient.Inbox.Labels;
 using Soenneker.Lemlist.OpenApiClient.Inbox.Linkedin;
+using Soenneker.Lemlist.OpenApiClient.Inbox.Sms;
 using Soenneker.Lemlist.OpenApiClient.Inbox.Whatsapp;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
@@ -42,6 +43,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox
         public global::Soenneker.Lemlist.OpenApiClient.Inbox.Linkedin.LinkedinRequestBuilder Linkedin
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Inbox.Linkedin.LinkedinRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The sms property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Inbox.Sms.SmsRequestBuilder Sms
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Inbox.Sms.SmsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The whatsapp property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Inbox.Whatsapp.WhatsappRequestBuilder Whatsapp

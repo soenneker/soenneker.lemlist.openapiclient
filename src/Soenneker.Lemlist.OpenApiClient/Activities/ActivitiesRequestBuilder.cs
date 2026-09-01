@@ -173,16 +173,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
             [QueryParameter("startDate")]
             public string StartDate { get; set; }
 #endif
-            /// <summary>Filter by activity type (e.g., paused)</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
+            /// <summary>Filter by activity type. Accepts any value from the `ActivityType` enum — mind the exact spelling (email types are plural `emails*`, invites are `linkedinInvite*`). An unknown type returns 400.</summary>
             [QueryParameter("type")]
-            public string? Type { get; set; }
-#nullable restore
-#else
-            [QueryParameter("type")]
-            public string Type { get; set; }
-#endif
+            public global::Soenneker.Lemlist.OpenApiClient.Models.ActivityType? Type { get; set; }
             /// <summary>API version. v2 is mandatory</summary>
             [QueryParameter("version")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.V2Version? Version { get; set; }

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export;
 using Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,11 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithCampaignItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The export property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.ExportRequestBuilder Export
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.ExportRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The stats property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.StatsRequestBuilder Stats
         {

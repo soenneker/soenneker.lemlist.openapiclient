@@ -61,14 +61,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>0-based count of the sequence steps already delivered to this lead.</summary>
         public double? TotalSequenceStep { get; set; }
-        /// <summary>Activity type (emailOpened, emailClicked, emailReplied, etc.)</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
-#endif
+        /// <summary>A lemlist activity type. These are the exact values accepted by the `type` filter on GET /activities and returned as an activity&apos;s `type`. Mind the spelling: email types are plural (emailsSent), invites are linkedinInvite*.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ActivityType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Activity"/> and sets the default values.
         /// </summary>
@@ -102,7 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "sequenceStep", n => { SequenceStep = n.GetDoubleValue(); } },
                 { "stepId", n => { StepId = n.GetStringValue(); } },
                 { "totalSequenceStep", n => { TotalSequenceStep = n.GetDoubleValue(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ActivityType>(); } },
             };
         }
         /// <summary>
@@ -120,7 +114,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteDoubleValue("sequenceStep", SequenceStep);
             writer.WriteStringValue("stepId", StepId);
             writer.WriteDoubleValue("totalSequenceStep", TotalSequenceStep);
-            writer.WriteStringValue("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ActivityType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

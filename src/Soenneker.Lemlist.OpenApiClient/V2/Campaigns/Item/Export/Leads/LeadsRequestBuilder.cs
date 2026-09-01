@@ -9,55 +9,54 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
-namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
+namespace Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads
 {
     /// <summary>
-    /// Builds and executes requests for operations under \campaigns\{campaignId}\export\leads
+    /// Builds and executes requests for operations under \v2\campaigns\{campaignId}\export\leads
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class LeadsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/export/leads{?format*,state*}", pathParameters)
+        public LeadsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/campaigns/{campaignId}/export/leads{?format*,state*}", pathParameters)
         {
         }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/export/leads{?format*,state*}", rawUrl)
+        public LeadsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/campaigns/{campaignId}/export/leads{?format*,state*}", rawUrl)
         {
         }
         /// <summary>
         /// Export leads from a campaign with filtering options. Returns leads in CSV or JSON format based on their state (e.g., contacted, interested, replied, etc.).
         /// </summary>
-        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem&gt;</returns>
+        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseSchemaItem&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema404Error">When receiving a 404 status code</exception>
-        [Obsolete("")]
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.GetV2CampaignsByCampaignIdExportLeads200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.GetV2CampaignsByCampaignIdExportLeads200ResponseSchema404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseSchemaItem>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseSchemaItem>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.GetCampaignsByCampaignIdExportLeads200ResponseSchema404Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.GetV2CampaignsByCampaignIdExportLeads200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.GetV2CampaignsByCampaignIdExportLeads200ResponseSchema404Error.CreateFromDiscriminatorValue },
             };
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
@@ -65,14 +64,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -83,12 +81,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
-        [Obsolete("")]
-        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder WithUrl(string rawUrl)
+        public global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder WithUrl(string rawUrl)
         {
-            return new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder(rawUrl, RequestAdapter);
+            return new global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Export.Leads.LeadsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
         /// Export leads from a campaign with filtering options. Returns leads in CSV or JSON format based on their state (e.g., contacted, interested, replied, etc.).
@@ -98,10 +95,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         {
             /// <summary>Output format: &apos;json&apos; or &apos;csv&apos;. Default is CSV.</summary>
             [QueryParameter("format")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeadsFormatParameter? Format { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeadsFormatParameter? Format { get; set; }
             /// <summary>Filter to export only the specified lead&apos;s last states. Use &apos;all&apos; to export all states. Can be a comma-separated list of states. **Global states**: imported, scanned, skipped, reviewed, contacted, hooked, attracted, warmed, interested, notInterested, emailsBounced, emailsUnsubscribed, failed, meetingBooked, paused. **Detailed states**: emailsSent, emailsOpened, emailsClicked, emailsReplied, emailsInterested, emailsNotInterested, emailsFailed, opportunitiesDone, aircallDone, aircallInterested, aircallNotInterested, apiDone, apiInterested, apiNotInterested, linkedinVisitDone, linkedinVisitFailed, linkedinInviteDone, linkedinInviteAccepted, linkedinInviteFailed, linkedinSent, linkedinOpened, linkedinReplied, linkedinInterested, linkedinNotInterested, linkedinSendFailed, manualInterested, manualNotInterested</summary>
             [QueryParameter("state")]
-            public global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeadsStateParameter? State { get; set; }
+            public global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeadsStateParameter? State { get; set; }
         }
     }
 }

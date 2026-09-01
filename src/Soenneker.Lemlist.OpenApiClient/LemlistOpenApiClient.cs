@@ -9,6 +9,7 @@ using Microsoft.Kiota.Serialization.Text;
 using Soenneker.Lemlist.OpenApiClient.Activities;
 using Soenneker.Lemlist.OpenApiClient.Campaigns;
 using Soenneker.Lemlist.OpenApiClient.Companies;
+using Soenneker.Lemlist.OpenApiClient.ContactSourcing;
 using Soenneker.Lemlist.OpenApiClient.Contacts;
 using Soenneker.Lemlist.OpenApiClient.Crm;
 using Soenneker.Lemlist.OpenApiClient.Database;
@@ -60,6 +61,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder Contacts
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The contactSourcing property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.ContactSourcing.ContactSourcingRequestBuilder ContactSourcing
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.ContactSourcing.ContactSourcingRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The crm property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Crm.CrmRequestBuilder Crm

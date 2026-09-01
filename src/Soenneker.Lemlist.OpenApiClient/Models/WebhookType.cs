@@ -315,5 +315,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         DeliverabilityAlertTriggered,
         #pragma warning restore CS1591
+        [EnumMember(Value = "contactSourcingDone")]
+        #pragma warning disable CS1591
+        ContactSourcingDone,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "contactSourcingFailed")]
+        #pragma warning disable CS1591
+        ContactSourcingFailed,
+        #pragma warning restore CS1591
     }
 }
