@@ -6,34 +6,34 @@ using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner
+namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item
 {
     /// <summary>
     /// Fallback media schema
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response404Error : ApiException, IAdditionalDataHolder, IParsable
+    public partial class DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response409Error : ApiException, IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The primary error message.</summary>
         public override string Message { get => base.Message; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response404Error"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response409Error"/> and sets the default values.
         /// </summary>
-        public PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response404Error()
+        public DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response409Error()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response404Error"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response409Error"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response404Error CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response409Error CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response404Error();
+            return new global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response409Error();
         }
         /// <summary>
         /// The deserialization information for the current model

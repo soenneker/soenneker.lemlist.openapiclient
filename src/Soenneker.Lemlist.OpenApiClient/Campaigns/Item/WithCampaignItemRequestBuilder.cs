@@ -11,6 +11,7 @@ using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Schedules;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Sequences;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Start;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -64,6 +65,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes.StatutesRequestBuilder Statutes
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes.StatutesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The steps property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.StepsRequestBuilder Steps
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.StepsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.WithCampaignItemRequestBuilder"/> and sets the default values.

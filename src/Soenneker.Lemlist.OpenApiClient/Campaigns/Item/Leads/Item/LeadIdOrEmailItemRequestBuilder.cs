@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Interested;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Notinterested;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +29,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Notinterested.NotinterestedRequestBuilder Notinterested
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Notinterested.NotinterestedRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The steps property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.StepsRequestBuilder Steps
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.StepsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.LeadIdOrEmailItemRequestBuilder"/> and sets the default values.

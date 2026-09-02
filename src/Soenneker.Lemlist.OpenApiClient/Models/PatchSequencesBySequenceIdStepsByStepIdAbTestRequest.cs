@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The altMessage property</summary>
+        /// <summary>Alternate message. On LinkedIn invite steps, the premium invitation note — maximum 300 characters</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AltMessage { get; set; }
@@ -30,7 +30,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Cc { get; set; }
 #endif
-        /// <summary>Variant B email body (HTML)</summary>
+        /// <summary>Variant B body (HTML). An empty string is rejected, except on LinkedIn invite steps where it means &quot;invite without a note&quot;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }
@@ -40,7 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The plainText property</summary>
         public bool? PlainText { get; set; }
-        /// <summary>Variant B email subject. Maximum 400 characters</summary>
+        /// <summary>Variant B subject</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subject { get; set; }

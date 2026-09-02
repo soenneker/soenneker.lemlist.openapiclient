@@ -19,6 +19,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         HasPhoneNumber,
         #pragma warning restore CS1591
+        [EnumMember(Value = "customLeadInfo")]
+        #pragma warning disable CS1591
+        CustomLeadInfo,
+        #pragma warning restore CS1591
         [EnumMember(Value = "hasScore")]
         #pragma warning disable CS1591
         HasScore,

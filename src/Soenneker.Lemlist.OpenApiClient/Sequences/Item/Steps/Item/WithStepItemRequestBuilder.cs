@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest;
+using Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item
         public global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.AbTestRequestBuilder AbTest
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.AbTestRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The branches property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.BranchesRequestBuilder Branches
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.BranchesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.WithStepItemRequestBuilder"/> and sets the default values.

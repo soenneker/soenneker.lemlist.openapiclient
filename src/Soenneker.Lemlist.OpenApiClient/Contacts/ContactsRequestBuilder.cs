@@ -47,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*}", pathParameters)
+        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*,withPrimaryCompany*}", pathParameters)
         {
         }
         /// <summary>
@@ -55,7 +55,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*}", rawUrl)
+        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*,withPrimaryCompany*}", rawUrl)
         {
         }
         /// <summary>
@@ -258,6 +258,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             [QueryParameter("search")]
             public string Search { get; set; }
 #endif
+            /// <summary>When set to `true`, only returns contacts linked to a company; when set to `false`, only returns contacts without a company. Omit for no filter. Mutually exclusive with the `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`).</summary>
+            [QueryParameter("withPrimaryCompany")]
+            public bool? WithPrimaryCompany { get; set; }
         }
     }
 }

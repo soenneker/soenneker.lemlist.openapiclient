@@ -32,6 +32,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>Condition key for conditional steps</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey? ConditionKey { get; set; }
+        /// <summary>For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CustomField { get; set; }
+#nullable restore
+#else
+        public string CustomField { get; set; }
+#endif
+        /// <summary>For conditional steps keyed `customLeadInfo` only. How the field is compared.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator? CustomOperator { get; set; }
+        /// <summary>For conditional steps keyed `customLeadInfo` only. The value the field is compared to. Required for `equal` and `contains`, and refused for `empty` and `notEmpty`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CustomValue { get; set; }
+#nullable restore
+#else
+        public string CustomValue { get; set; }
+#endif
         /// <summary>Delay in days before executing this step. Defaults to 0 for the first step and 1 for subsequent steps</summary>
         public int? Delay { get; set; }
         /// <summary>Delay type for conditional steps</summary>
@@ -130,6 +148,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "altMessage", n => { AltMessage = n.GetStringValue(); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "conditionKey", n => { ConditionKey = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey>(); } },
+                { "customField", n => { CustomField = n.GetStringValue(); } },
+                { "customOperator", n => { CustomOperator = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator>(); } },
+                { "customValue", n => { CustomValue = n.GetStringValue(); } },
                 { "delay", n => { Delay = n.GetIntValue(); } },
                 { "delayType", n => { DelayType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestDelayType>(); } },
                 { "endorseAnyFallback", n => { EndorseAnyFallback = n.GetBoolValue(); } },
@@ -156,6 +177,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("altMessage", AltMessage);
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey>("conditionKey", ConditionKey);
+            writer.WriteStringValue("customField", CustomField);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator>("customOperator", CustomOperator);
+            writer.WriteStringValue("customValue", CustomValue);
             writer.WriteIntValue("delay", Delay);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestDelayType>("delayType", DelayType);
             writer.WriteBoolValue("endorseAnyFallback", EndorseAnyFallback);

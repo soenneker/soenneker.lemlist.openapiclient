@@ -45,10 +45,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response405Error">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.AbTestRequestBuilder.AbTestRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -61,22 +62,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response402Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response404Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest404Response.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response405Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns variant B (subject, message, config) of the A/B test on an email step. Requires the Email Pro plan.
+        /// Returns variant B (subject, message, config) of the A/B test on a step. Requires the Email Pro plan.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response405Error">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200Response?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -91,21 +94,23 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             {
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response402Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response404Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest404Response.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.GetSequencesBySequenceIdStepsByStepIdAbTest200Response405Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Edits variant B content/config of the A/B test on an email step. Only the provided fields are updated. Requires the Email Pro plan.
+        /// Edits variant B content/config of the A/B test on a step. Only the provided fields are updated; unknown fields are rejected. Allowed while the campaign is running. Requires the Email Pro plan.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response405Error">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTestRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -119,23 +124,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response402Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response404Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest404Response.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response405Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdAbTest200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Creates variant B of an A/B test on an email step, prefilled from variant A, and starts the test (leads are split between A and B). Requires the Email Pro plan.
+        /// Creates variant B of an A/B test on a step, prefilled from variant A, and starts the test (leads are split between A and B). Supported on `email`, `whatsappMessage`, `sms`, `linkedinInvite`, and `linkedinSend` steps. Requires the Email Pro plan.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response405Error">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -148,10 +155,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response402Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response404Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest404Response.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.PostSequencesBySequenceIdStepsByStepIdAbTest200Response405Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTest200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -175,7 +183,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             return requestInfo;
         }
         /// <summary>
-        /// Returns variant B (subject, message, config) of the A/B test on an email step. Requires the Email Pro plan.
+        /// Returns variant B (subject, message, config) of the A/B test on a step. Requires the Email Pro plan.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -194,7 +202,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             return requestInfo;
         }
         /// <summary>
-        /// Edits variant B content/config of the A/B test on an email step. Only the provided fields are updated. Requires the Email Pro plan.
+        /// Edits variant B content/config of the A/B test on a step. Only the provided fields are updated; unknown fields are rejected. Allowed while the campaign is running. Requires the Email Pro plan.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -216,7 +224,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest
             return requestInfo;
         }
         /// <summary>
-        /// Creates variant B of an A/B test on an email step, prefilled from variant A, and starts the test (leads are split between A and B). Requires the Email Pro plan.
+        /// Creates variant B of an A/B test on a step, prefilled from variant A, and starts the test (leads are split between A and B). Supported on `email`, `whatsappMessage`, `sms`, `linkedinInvite`, and `linkedinSend` steps. Requires the Email Pro plan.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

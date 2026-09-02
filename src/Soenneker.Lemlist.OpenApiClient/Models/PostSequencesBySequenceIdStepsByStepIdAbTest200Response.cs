@@ -46,7 +46,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string EmailTemplateBId { get; set; }
 #endif
-        /// <summary>Variant B email body (HTML)</summary>
+        /// <summary>Variant B body (HTML)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }
@@ -64,7 +64,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string StepId { get; set; }
 #endif
-        /// <summary>Variant B email subject</summary>
+        /// <summary>Variant B subject</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subject { get; set; }
