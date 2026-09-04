@@ -33,10 +33,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The metadata provided in the request</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata? Metadata { get; set; }
 #nullable restore
 #else
-        public string Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata Metadata { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem"/> and sets the default values.
@@ -65,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "error", n => { Error = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "metadata", n => { Metadata = n.GetStringValue(); } },
+                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -77,7 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("error", Error);
             writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("metadata", Metadata);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata>("metadata", Metadata);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

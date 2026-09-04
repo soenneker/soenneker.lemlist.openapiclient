@@ -25,6 +25,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>Creation timestamp</summary>
         public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>`true` when the webhook no longer fires. lemlist sets it automatically after a failed delivery, and it can also be toggled from the app. A disabled webhook still occupies one slot of the 200-webhook cap — delete it to free the slot.</summary>
+        public bool? Disabled { get; set; }
+        /// <summary>When the webhook was disabled</summary>
+        public DateTimeOffset? DisabledAt { get; set; }
+        /// <summary>Why the webhook was disabled. `deliveryError` means lemlist disabled it after a failed delivery. Absent when a user disabled it from the app.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliveryErrorDisabledReason? DisabledReason { get; set; }
         /// <summary>Unique webhook identifier</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -32,6 +38,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>What the delivery that caused the deactivation ran into: the HTTP status your endpoint answered (`404`, `410`) or the network error raised while reaching it (`ENOTFOUND`, `ECONNREFUSED`)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus? LastErrorStatus { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus LastErrorStatus { get; set; }
 #endif
         /// <summary>Destination URL for event notifications</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -72,7 +86,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "disabled", n => { Disabled = n.GetBoolValue(); } },
+                { "disabledAt", n => { DisabledAt = n.GetDateTimeOffsetValue(); } },
+                { "disabledReason", n => { DisabledReason = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeliveryErrorDisabledReason>(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
+                { "lastErrorStatus", n => { LastErrorStatus = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus>(global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus.CreateFromDiscriminatorValue); } },
                 { "targetUrl", n => { TargetUrl = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WebhookType>(); } },
                 { "zapId", n => { ZapId = n.GetIntValue(); } },
@@ -87,11 +105,76 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteBoolValue("disabled", Disabled);
+            writer.WriteDateTimeOffsetValue("disabledAt", DisabledAt);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeliveryErrorDisabledReason>("disabledReason", DisabledReason);
             writer.WriteStringValue("_id", Id);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus>("lastErrorStatus", LastErrorStatus);
             writer.WriteStringValue("targetUrl", TargetUrl);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WebhookType>("type", Type);
             writer.WriteIntValue("zapId", ZapId);
             writer.WriteAdditionalData(AdditionalData);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class Webhook_lastErrorStatus : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="int"/></summary>
+            public int? Integer { get; set; }
+            /// <summary>Composed type representation for type <see cref="string"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string? String { get; set; }
+#nullable restore
+#else
+            public string String { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Soenneker.Lemlist.OpenApiClient.Models.Webhook.Webhook_lastErrorStatus();
+                if(parseNode.GetIntValue() is int integerValue)
+                {
+                    result.Integer = integerValue;
+                }
+                else if(parseNode.GetStringValue() is string stringValue)
+                {
+                    result.String = stringValue;
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(Integer != null)
+                {
+                    writer.WriteIntValue(null, Integer);
+                }
+                else if(String != null)
+                {
+                    writer.WriteStringValue(null, String);
+                }
+            }
         }
     }
 }

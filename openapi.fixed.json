@@ -12356,6 +12356,31 @@
                 "example": "Webhook not found"
               }
             }
+          },
+          "409": {
+            "description": "The webhook was not created. Two distinct cases, told apart by the \u0060error\u0060 message: the workspace is at its webhook cap, or the \u0060targetUrl\u0060 is already registered.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "examples": {
+                  "tooManyWebhooks": {
+                    "summary": "The workspace reached the 200-webhook cap \u2014 delete unused webhooks, including disabled ones, before retrying",
+                    "value": {
+                      "error": "Too many webhooks (max 200 per team, disabled webhooks included)"
+                    }
+                  },
+                  "duplicateTargetUrl": {
+                    "summary": "A webhook already points to this targetUrl \u2014 uniqueness is on the URL alone, regardless of \u0060type\u0060 or \u0060campaignId\u0060",
+                    "value": {
+                      "error": "A webhook with this targetUrl already exists"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -17342,6 +17367,29 @@
           "zapId": {
             "type": "integer",
             "description": "Zapier integration ID (if the destination is a Zapier webhook)"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the webhook no longer fires. lemlist sets it automatically after a failed delivery, and it can also be toggled from the app. A disabled webhook still occupies one slot of the 200-webhook cap \u2014 delete it to free the slot."
+          },
+          "disabledReason": {
+            "$ref": "#/components/schemas/DeliveryErrorDisabledReason"
+          },
+          "disabledAt": {
+            "type": "string",
+            "description": "When the webhook was disabled",
+            "format": "date-time"
+          },
+          "lastErrorStatus": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "What the delivery that caused the deactivation ran into: the HTTP status your endpoint answered (\u0060404\u0060, \u0060410\u0060) or the network error raised while reaching it (\u0060ENOTFOUND\u0060, \u0060ECONNREFUSED\u0060)"
           }
         },
         "description": "Webhooks send real-time HTTP notifications upon campaign events (opens, clicks, replies, etc.)."
@@ -27703,6 +27751,24 @@
             {
               "value": "contactSourcingFailed",
               "name": "ContactSourcingFailed"
+            }
+          ]
+        }
+      },
+      "DeliveryErrorDisabledReason": {
+        "enum": [
+          "deliveryError"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Why the webhook was disabled. \u0060deliveryError\u0060 means lemlist disabled it after a failed delivery. Absent when a user disabled it from the app.",
+        "x-ms-enum": {
+          "name": "DeliveryErrorDisabledReason",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "deliveryError",
+              "name": "DeliveryError"
             }
           ]
         }
