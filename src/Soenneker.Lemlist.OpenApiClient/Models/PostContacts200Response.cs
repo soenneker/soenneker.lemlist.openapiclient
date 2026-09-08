@@ -24,6 +24,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The success property</summary>
         public bool? Success { get; set; }
+        /// <summary>Optional warnings (e.g. owner or company resolution issues).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseWarningsItem>? Warnings { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseWarningsItem> Warnings { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response"/> and sets the default values.
         /// </summary>
@@ -51,6 +59,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "data", n => { Data = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseData>(global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseData.CreateFromDiscriminatorValue); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
+                { "warnings", n => { Warnings = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseWarningsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseWarningsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -62,6 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseData>("data", Data);
             writer.WriteBoolValue("success", Success);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200ResponseWarningsItem>("warnings", Warnings);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

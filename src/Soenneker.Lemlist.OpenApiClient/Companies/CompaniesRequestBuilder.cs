@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Companies.Item;
+using Soenneker.Lemlist.OpenApiClient.Companies.Merge;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompaniesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The merge property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Companies.Merge.MergeRequestBuilder Merge
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Companies.Merge.MergeRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.companies.item collection</summary>
         /// <param name="position">The lemlist company ID to delete.</param>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.WithCompanyItemRequestBuilder"/></returns>
@@ -80,6 +86,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.PostCompanies200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -95,6 +103,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.PostCompanies200Response401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

@@ -9,43 +9,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PostCompanies400ResponseError : IAdditionalDataHolder, IParsable
+    public partial class PatchLeadsByLeadIdVariables200Response : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Error code: `MISSING_REQUIRED_FIELD`, `INVALID_COMPANY_ID`, `INVALID_DOMAIN`, `INVALID_LINKEDIN_URL`, `INVALID_FIELD`, `INVALID_USER_FIELD_FORMAT`, `USER_FIELD_NOT_FOUND`, or `COMPANY_VALIDATION_FAILED`.</summary>
+        /// <summary>The ok property</summary>
+        public bool? Ok { get; set; }
+        /// <summary>Optional warnings (e.g. company resolution issues).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseWarningsItem>? Warnings { get; set; }
 #nullable restore
 #else
-        public string Code { get; set; }
-#endif
-        /// <summary>The message property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Message { get; set; }
-#nullable restore
-#else
-        public string Message { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseWarningsItem> Warnings { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400ResponseError"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response"/> and sets the default values.
         /// </summary>
-        public PostCompanies400ResponseError()
+        public PatchLeadsByLeadIdVariables200Response()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400ResponseError"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400ResponseError CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies400ResponseError();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -55,8 +49,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "code", n => { Code = n.GetStringValue(); } },
-                { "message", n => { Message = n.GetStringValue(); } },
+                { "ok", n => { Ok = n.GetBoolValue(); } },
+                { "warnings", n => { Warnings = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseWarningsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseWarningsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -66,8 +60,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("code", Code);
-            writer.WriteStringValue("message", Message);
+            writer.WriteBoolValue("ok", Ok);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseWarningsItem>("warnings", Warnings);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -36,77 +36,83 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <summary>
         /// Erases the values of custom variables on a lead.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200ResponseSchema"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200ResponseSchema400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200ResponseSchema404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response409Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200ResponseSchema?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200ResponseSchema> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200ResponseSchema400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200ResponseSchema404Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response404Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response409Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200ResponseSchema>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200ResponseSchema.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update values of custom variables for a lead.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseSchema"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200ResponseSchema400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200ResponseSchema404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response409Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseSchema?> PatchAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPatchQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response?> PatchAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPatchQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseSchema> PatchAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPatchQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response> PatchAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPatchQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPatchRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200ResponseSchema400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200ResponseSchema404Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response404Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response409Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseSchema>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200ResponseSchema.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Add custom variables to a lead and sets values for that specific lead.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseSchema"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200ResponseSchema400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200ResponseSchema404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response409Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseSchema?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200Response?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseSchema> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200Response> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200ResponseSchema400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200ResponseSchema404Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response400Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response404Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response409Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseSchema>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseSchema.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Erases the values of custom variables on a lead.

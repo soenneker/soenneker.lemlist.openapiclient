@@ -120,6 +120,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string PreferredContactMethod { get; set; }
 #endif
+        /// <summary>Optional warnings (e.g. company resolution issues).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem>? Warnings { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem> Warnings { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response"/> and sets the default values.
         /// </summary>
@@ -159,6 +167,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "lastName", n => { LastName = n.GetStringValue(); } },
                 { "leadUrl", n => { LeadUrl = n.GetStringValue(); } },
                 { "preferredContactMethod", n => { PreferredContactMethod = n.GetStringValue(); } },
+                { "warnings", n => { Warnings = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -182,6 +191,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("lastName", LastName);
             writer.WriteStringValue("leadUrl", LeadUrl);
             writer.WriteStringValue("preferredContactMethod", PreferredContactMethod);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem>("warnings", Warnings);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

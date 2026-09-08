@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Error code: `MISSING_IDENTIFIER`, `INVALID_CONTACT_ID`, `CONTACT_NOT_FOUND_BY_ID`, `INVALID_EMAIL`, `INVALID_ADDITIONAL_EMAILS`, `INVALID_LINKEDIN_URL`, `INVALID_FIELD`, or `CONTACT_VALIDATION_FAILED`.</summary>
+        /// <summary>Error code: `MISSING_IDENTIFIER`, `INVALID_CONTACT_ID`, `INVALID_EMAIL`, `INVALID_ADDITIONAL_EMAILS`, `INVALID_LINKEDIN_URL`, `INVALID_FIELD`, `INVALID_USER_FIELD_FORMAT`, `USER_FIELD_NOT_FOUND`, or `CONTACT_VALIDATION_FAILED`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }

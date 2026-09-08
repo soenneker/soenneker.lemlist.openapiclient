@@ -96,6 +96,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string LastName { get; set; }
 #endif
+        /// <summary>Optional warnings (e.g. company resolution issues).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>? Warnings { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem> Warnings { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response"/> and sets the default values.
         /// </summary>
@@ -132,6 +140,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "isPaused", n => { IsPaused = n.GetBoolValue(); } },
                 { "jobTitle", n => { JobTitle = n.GetStringValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
+                { "warnings", n => { Warnings = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -152,6 +161,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("isPaused", IsPaused);
             writer.WriteStringValue("jobTitle", JobTitle);
             writer.WriteStringValue("lastName", LastName);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>("warnings", Warnings);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

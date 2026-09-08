@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string CompanyId { get; set; }
 #endif
-        /// <summary>Owner of the company. Can be a user ID (e.g. `usr_...`) or a team member&apos;s email address. If the provided value does not match a team member, the owner defaults to the API key owner.</summary>
+        /// <summary>Owner of the company. Can be a user ID (e.g. `usr_...`) or a team member&apos;s email address. If the provided value does not match a team member, the company is still written with an `OWNER_NOT_FOUND` or `INVALID_OWNER_FORMAT` entry in `warnings`: the owner defaults to the API key owner on creation and is unchanged on update.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CompanyOwner { get; set; }

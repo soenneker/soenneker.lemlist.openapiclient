@@ -107,6 +107,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response403Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response405Error">When receiving a 405 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response409Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.LeadsRequestBuilder.LeadsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -124,6 +126,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response401Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response403Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response404Error.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response405Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.PostCampaignsByCampaignIdLeads200Response409Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

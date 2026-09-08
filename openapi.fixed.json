@@ -4425,7 +4425,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: No API key provided / Bad team",
+            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign / No valid fields to add",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4445,6 +4445,32 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "409": {
+            "description": "Possible errors: Lead already in other campaign / An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Lead already in other campaign"
+              }
+            }
+          },
+          "405": {
+            "description": "Malformed path segment. Possible errors: Invalid email address / Invalid lead identifier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Invalid email address"
+                }
               }
             }
           },
@@ -4588,7 +4614,7 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Possible errors: Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Lead could not be updated",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4603,7 +4629,7 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Lead not found",
+            "description": "Possible errors: Lead not found / Campaign not found / Campaign deleted / Contact owner not found: neither a valid email nor a valid user id.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4614,8 +4640,17 @@
               }
             }
           },
-          "500": {
-            "description": "Lead in graveyard"
+          "409": {
+            "description": "Possible errors: An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact / Lead already in the campaign",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact"
+              }
+            }
           }
         }
       },
@@ -5399,7 +5434,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200ResponseSchema"
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200Response"
                 },
                 "example": {
                   "ok": true
@@ -5408,14 +5443,17 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Possible errors: Invalid leadId / Variables not found / Invalid variables: \u003Cnames\u003E / Variables \u003Cnames\u003E already exist / Invalid email address [invalid-email] / Invalid LinkedIn URL [invalid-linkedin-url] / LinkedIn URL is not a personal profile [linkedin-url-not-contact] / Lead could not be updated [no-valid-leads]",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "description": "Fallback media schema"
                 },
-                "example": "Variable not found"
+                "example": {
+                  "ok": false,
+                  "status": "Variables not found"
+                }
               }
             }
           },
@@ -5423,7 +5461,7 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Lead not found",
+            "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5431,6 +5469,20 @@
                   "description": "Fallback media schema"
                 },
                 "example": "Lead not found"
+              }
+            }
+          },
+          "409": {
+            "description": "Possible errors: An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden] / Lead already in the campaign [already-in]",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden]"
+                }
               }
             }
           }
@@ -5478,7 +5530,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200ResponseSchema"
+                  "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200Response"
                 },
                 "example": {
                   "ok": true
@@ -5487,14 +5539,17 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Possible errors: Invalid leadId / Variables not found / Invalid variables: \u003Cnames\u003E / Variables \u003Cnames\u003E not found / Invalid email address [invalid-email] / Invalid LinkedIn URL [invalid-linkedin-url] / LinkedIn URL is not a personal profile [linkedin-url-not-contact] / Lead could not be updated [no-valid-leads]",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "description": "Fallback media schema"
                 },
-                "example": "Bad team"
+                "example": {
+                  "ok": false,
+                  "status": "Variables not found"
+                }
               }
             }
           },
@@ -5502,7 +5557,7 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Lead not found",
+            "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5510,6 +5565,20 @@
                   "description": "Fallback media schema"
                 },
                 "example": "Lead not found"
+              }
+            }
+          },
+          "409": {
+            "description": "Possible errors: An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden] / Lead already in the campaign [already-in]",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden]"
+                }
               }
             }
           }
@@ -5554,7 +5623,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseSchema"
+                  "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200Response"
                 },
                 "example": {
                   "ok": true
@@ -5563,14 +5632,17 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Possible errors: Invalid leadId / Variables not found / Variables \u003Cnames\u003E not found / Following variables can\u0027t be removed: \u003Cnames\u003E / Invalid email address [invalid-email] / Invalid LinkedIn URL [invalid-linkedin-url] / LinkedIn URL is not a personal profile [linkedin-url-not-contact] / Lead could not be updated [no-valid-leads]",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "description": "Fallback media schema"
                 },
-                "example": "Bad team"
+                "example": {
+                  "ok": false,
+                  "status": "Variables not found"
+                }
               }
             }
           },
@@ -5578,7 +5650,7 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Lead not found",
+            "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5586,6 +5658,20 @@
                   "description": "Fallback media schema"
                 },
                 "example": "Lead not found"
+              }
+            }
+          },
+          "409": {
+            "description": "Possible errors: An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden] / Lead already in the campaign [already-in]",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden]"
+                }
               }
             }
           }
@@ -8802,6 +8888,41 @@
           "required": true
         },
         "responses": {
+          "200": {
+            "description": "Existing contact updated (upsert matched by email or LinkedIn URL)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContacts200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "_id": "ctc_xW8Ou6C03Csv8vatp",
+                    "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                    "emails": [
+                      {
+                        "value": "jane.smith@example.com"
+                      }
+                    ],
+                    "fields": {
+                      "firstName": "Jane",
+                      "lastName": "Smith",
+                      "jobTitle": "Product Manager"
+                    },
+                    "ownerId": "usr_ahfFktBBHUIxbVG5P",
+                    "source": "api",
+                    "createdAt": "2025-10-28T00:40:37.917Z",
+                    "createdBy": "usr_ahfFktBBHUIxbVG5P",
+                    "unsubscribed": false,
+                    "created": false,
+                    "updated": true,
+                    "companyLinked": false
+                  }
+                }
+              }
+            }
+          },
           "201": {
             "description": "Contact created successfully",
             "content": {
@@ -8838,41 +8959,6 @@
               }
             }
           },
-          "200": {
-            "description": "Existing contact updated (upsert matched by email or LinkedIn URL)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostContacts200Response"
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "_id": "ctc_xW8Ou6C03Csv8vatp",
-                    "teamId": "tea_8QvkOiBfPdb2ZRhHi",
-                    "emails": [
-                      {
-                        "value": "jane.smith@example.com"
-                      }
-                    ],
-                    "fields": {
-                      "firstName": "Jane",
-                      "lastName": "Smith",
-                      "jobTitle": "Product Manager"
-                    },
-                    "ownerId": "usr_ahfFktBBHUIxbVG5P",
-                    "source": "api",
-                    "createdAt": "2025-10-28T00:40:37.917Z",
-                    "createdBy": "usr_ahfFktBBHUIxbVG5P",
-                    "unsubscribed": false,
-                    "created": false,
-                    "updated": true,
-                    "companyLinked": false
-                  }
-                }
-              }
-            }
-          },
           "400": {
             "description": "Validation error",
             "content": {
@@ -8899,6 +8985,173 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No contact of the team matches \u0060contactId\u0060 (\u0060CONTACT_NOT_FOUND_BY_ID\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "not-found": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CONTACT_NOT_FOUND_BY_ID",
+                        "message": "No contact found with the provided contactId"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An email, LinkedIn or Sales Navigator URL already belongs to another contact (\u0060CONTACT_IDENTIFIER_CONFLICT\u0060); retrying as is fails again.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "conflict": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CONTACT_IDENTIFIER_CONFLICT",
+                        "message": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/merge": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Merge Contacts",
+        "description": "Merges up to 10 lemlist contacts into one. The survivor (\u0060primaryId\u0060) keeps its id and every value it holds; its empty fields are filled from the other contacts, which are then deleted. Everything attached to a deleted contact (leads in campaigns, activities, tasks, list memberships, inbox conversations) is moved to the survivor. When a CRM is connected, the survivor keeps its CRM link (or adopts the first linked record\u0027s when it has none) and receives the merged values there; lemlist never merges or deletes anything in the CRM itself, so the other records\u0027 CRM entries stay in the CRM, unlinked from lemlist \u2014 merge them CRM-side too, or a CRM import may recreate the duplicate.\n\nThe contacts are folded into the survivor one at a time and the run **stops at the first failure**: \u0060mergedIds\u0060 lists what went through, \u0060remainingIds\u0060 what still exists. A first-fold failure returns an error instead \u2014 nothing was written.\n\n**Email addresses:** the survivor keeps its own; a loser\u0027s addresses are dropped, unless the survivor has none (then it takes the first loser\u0027s).\n\n**No undo:** deleted contacts are gone.",
+        "operationId": "PostContactsMerge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostContactsMergeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Merge run \u2014 **\u0060success: true\u0060 does not mean complete.** The contacts fold one at a time and the run stops at the first failure, so ALWAYS check \u0060remainingIds\u0060: the contacts listed there were NOT merged and still exist. Fix the cause (typically an enrichment in progress) and call again with the survivor and the remaining ids.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsMerge200Response"
+                },
+                "examples": {
+                  "everything merged": {
+                    "value": {
+                      "success": true,
+                      "primaryId": "ctc_xW8Ou6C03Csv8vatp",
+                      "merged": true,
+                      "mergedIds": [
+                        "ctc_bT4Ktq6kbXwWKv2rM",
+                        "john.doe@acme.com"
+                      ],
+                      "remainingIds": []
+                    }
+                  },
+                  "stopped at the second fold": {
+                    "value": {
+                      "success": true,
+                      "primaryId": "ctc_xW8Ou6C03Csv8vatp",
+                      "merged": true,
+                      "mergedIds": [
+                        "ctc_bT4Ktq6kbXwWKv2rM"
+                      ],
+                      "remainingIds": [
+                        "john.doe@acme.com"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Possible error codes: \u0060ENTITY_MERGE_INVALID_PAYLOAD\u0060 (missing \u0060primaryId\u0060 or empty \u0060secondaryIds\u0060), \u0060ENTITY_MERGE_SAME_ENTITY\u0060 (\u0060primaryId\u0060 among \u0060secondaryIds\u0060, or a contact listed twice), \u0060ENTITY_MERGE_TOO_MANY_ENTITIES\u0060 (more than 9 \u0060secondaryIds\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "ENTITY_MERGE_SAME_ENTITY",
+                    "message": "A record cannot be merged with itself, and each record is listed once"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "One of the contacts was not found (\u0060ENTITY_MERGE_ENTITY_NOT_FOUND\u0060) \u2014 an unknown email counts as a missing contact.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "ENTITY_MERGE_ENTITY_NOT_FOUND",
+                    "message": "One of the records was not found"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A contact is being enriched and cannot be merged yet (\u0060ENTITY_MERGE_ENRICHMENT_IN_PROGRESS\u0060); retry once it finishes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "ENTITY_MERGE_ENRICHMENT_IN_PROGRESS",
+                    "message": "A record is being enriched, retry once it finishes"
+                  }
+                }
               }
             }
           }
@@ -9899,35 +10152,6 @@
           "required": true
         },
         "responses": {
-          "201": {
-            "description": "Company created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostCompanies201Response"
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "_id": "cpn_gG7PsmZFpEAnpMCHO",
-                    "teamId": "tea_8QvkOiBfPdb2ZRhHi",
-                    "domain": "acme.com",
-                    "linkedinUrl": "https://www.linkedin.com/company/acme",
-                    "fields": {
-                      "name": "Acme Corp",
-                      "industry": "Technology",
-                      "location": "San Francisco, CA"
-                    },
-                    "ownerId": "usr_ahfFktBBHUIxbVG5P",
-                    "source": "api",
-                    "createdAt": "2025-10-28T00:40:37.917Z",
-                    "createdBy": "usr_ahfFktBBHUIxbVG5P",
-                    "created": true
-                  }
-                }
-              }
-            }
-          },
           "200": {
             "description": "Existing company updated (upsert matched by domain or LinkedIn URL)",
             "content": {
@@ -9957,6 +10181,35 @@
               }
             }
           },
+          "201": {
+            "description": "Company created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompanies201Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "_id": "cpn_gG7PsmZFpEAnpMCHO",
+                    "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                    "domain": "acme.com",
+                    "linkedinUrl": "https://www.linkedin.com/company/acme",
+                    "fields": {
+                      "name": "Acme Corp",
+                      "industry": "Technology",
+                      "location": "San Francisco, CA"
+                    },
+                    "ownerId": "usr_ahfFktBBHUIxbVG5P",
+                    "source": "api",
+                    "createdAt": "2025-10-28T00:40:37.917Z",
+                    "createdBy": "usr_ahfFktBBHUIxbVG5P",
+                    "created": true
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "Validation error",
             "content": {
@@ -9968,7 +10221,7 @@
                   "success": false,
                   "error": {
                     "code": "MISSING_REQUIRED_FIELD",
-                    "message": "Missing required field: name"
+                    "message": "A required field is missing: name"
                   }
                 }
               }
@@ -9983,6 +10236,173 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No company of the team matches \u0060companyId\u0060 (\u0060COMPANY_NOT_FOUND_BY_ID\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "not-found": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "COMPANY_NOT_FOUND_BY_ID",
+                        "message": "No company found with id"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A domain, LinkedIn or Sales Navigator URL already belongs to another company (\u0060COMPANY_IDENTIFIER_CONFLICT\u0060); retrying as is fails again.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "conflict": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "COMPANY_IDENTIFIER_CONFLICT",
+                        "message": "An identifier (domain, linkedinUrl or salesnavUrl) already belongs to another company"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/merge": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Merge Companies",
+        "description": "Merges up to 10 lemlist companies into one. The survivor (\u0060primaryId\u0060) keeps its id and every value it holds; its empty fields are filled from the other companies, which are then deleted. Everything attached to a deleted company (contacts, activities, tasks, list memberships) is moved to the survivor. When a CRM is connected, the survivor keeps its CRM link (or adopts the first linked record\u0027s when it has none) and receives the merged values there; lemlist never merges or deletes anything in the CRM itself, so the other records\u0027 CRM entries stay in the CRM, unlinked from lemlist \u2014 merge them CRM-side too, or a CRM import may recreate the duplicate.\n\nThe companies are folded into the survivor one at a time and the run **stops at the first failure**: \u0060mergedIds\u0060 lists what went through, \u0060remainingIds\u0060 what still exists. A first-fold failure returns an error instead \u2014 nothing was written.\n\n**No undo:** deleted companies are gone.",
+        "operationId": "PostCompaniesMerge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCompaniesMergeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Merge run \u2014 **\u0060success: true\u0060 does not mean complete.** The companies fold one at a time and the run stops at the first failure, so ALWAYS check \u0060remainingIds\u0060: the companies listed there were NOT merged and still exist. Fix the cause and call again with the survivor and the remaining ids.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesMerge200Response"
+                },
+                "examples": {
+                  "everything merged": {
+                    "value": {
+                      "success": true,
+                      "primaryId": "cpn_A1B2C3D4E5F6G7H8I",
+                      "merged": true,
+                      "mergedIds": [
+                        "cpn_J9K8L7M6N5O4P3Q2R",
+                        "cpn_S1T2U3V4W5X6Y7Z8A"
+                      ],
+                      "remainingIds": []
+                    }
+                  },
+                  "stopped at the second fold": {
+                    "value": {
+                      "success": true,
+                      "primaryId": "cpn_A1B2C3D4E5F6G7H8I",
+                      "merged": true,
+                      "mergedIds": [
+                        "cpn_J9K8L7M6N5O4P3Q2R"
+                      ],
+                      "remainingIds": [
+                        "cpn_S1T2U3V4W5X6Y7Z8A"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Possible error codes: \u0060ENTITY_MERGE_INVALID_PAYLOAD\u0060 (missing \u0060primaryId\u0060 or empty \u0060secondaryIds\u0060), \u0060ENTITY_MERGE_SAME_ENTITY\u0060 (\u0060primaryId\u0060 among \u0060secondaryIds\u0060, or a company listed twice), \u0060ENTITY_MERGE_TOO_MANY_ENTITIES\u0060 (more than 9 \u0060secondaryIds\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "ENTITY_MERGE_SAME_ENTITY",
+                    "message": "A record cannot be merged with itself, and each record is listed once"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "One of the companies was not found (\u0060ENTITY_MERGE_ENTITY_NOT_FOUND\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "ENTITY_MERGE_ENTITY_NOT_FOUND",
+                    "message": "One of the records was not found"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A company is being enriched and cannot be merged yet (\u0060ENTITY_MERGE_ENRICHMENT_IN_PROGRESS\u0060); retry once it finishes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "ENTITY_MERGE_ENRICHMENT_IN_PROGRESS",
+                    "message": "A record is being enriched, retry once it finishes"
+                  }
+                }
               }
             }
           }
@@ -15846,6 +16266,23 @@
   },
   "components": {
     "schemas": {
+      "ApiErrorEnvelope": {
+        "required": [
+          "success",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "$ref": "#/components/schemas/ApiErrorEnvelopeError"
+          }
+        },
+        "description": "Error envelope of the contact and company endpoints."
+      },
       "ActivityType": {
         "enum": [
           "emailsSent",
@@ -18539,6 +18976,23 @@
         ],
         "description": "A/B test state for this step. \u0060true\u0060 while the test runs (leads are split between variant A and B); \u0060\u0022A\u0022\u0060 or \u0060\u0022B\u0022\u0060 once a winner is selected (all remaining leads receive the winning template); absent/false when there is no A/B test."
       },
+      "ApiErrorEnvelopeError": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation."
+          }
+        }
+      },
       "CampaignPerChannelStatsEmail": {
         "type": "object",
         "properties": {
@@ -20986,6 +21440,13 @@
           "contactId": {
             "type": "string",
             "description": "Associated contact ID"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. company resolution issues)."
           }
         }
       },
@@ -21082,6 +21543,13 @@
           "emailStatus": {
             "type": "string",
             "description": "Email verification status"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. company resolution issues)."
           }
         }
       },
@@ -21301,13 +21769,52 @@
         }
       },
       "PostLeadsByLeadIdVariables200Response": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. company resolution issues)."
+          }
+        }
       },
       "PatchLeadsByLeadIdVariables200Response": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. company resolution issues)."
+          }
+        }
       },
       "DeleteLeadsByLeadIdVariables200Response": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. company resolution issues)."
+          }
+        }
       },
       "PostLeadsAudioFormDataRequest": {
         "type": "object",
@@ -22095,7 +22602,7 @@
           },
           "contactOwner": {
             "type": "string",
-            "description": "Owner of the contact. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the owner defaults to the API key owner."
+            "description": "Owner of the contact. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the contact is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update."
           },
           "source": {
             "type": "string",
@@ -22119,6 +22626,24 @@
           "$ref": "#/components/schemas/PostContactsRequestAdditionalProperties"
         }
       },
+      "PostContacts200Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostContacts200ResponseData"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostContacts200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. owner or company resolution issues)."
+          }
+        }
+      },
       "PostContacts201Response": {
         "type": "object",
         "properties": {
@@ -22133,18 +22658,7 @@
             "items": {
               "$ref": "#/components/schemas/PostContacts201ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. company resolution issues)."
-          }
-        }
-      },
-      "PostContacts200Response": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "data": {
-            "$ref": "#/components/schemas/PostContacts200ResponseData"
+            "description": "Optional warnings (e.g. owner or company resolution issues)."
           }
         }
       },
@@ -22156,6 +22670,73 @@
           },
           "error": {
             "$ref": "#/components/schemas/PostContacts400ResponseError"
+          }
+        }
+      },
+      "PostContactsMergeRequest": {
+        "required": [
+          "primaryId",
+          "secondaryIds"
+        ],
+        "type": "object",
+        "properties": {
+          "primaryId": {
+            "type": "string",
+            "description": "The surviving contact. A lemlist contact id (\u0060ctc_xxx\u0060) or one of the contact\u0027s email addresses.",
+            "example": "ctc_xW8Ou6C03Csv8vatp"
+          },
+          "secondaryIds": {
+            "maxItems": 9,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The contacts folded into the survivor then deleted, 9 at most. A lemlist contact id (\u0060ctc_xxx\u0060) or one of the contact\u0027s email addresses. Must not contain \u0060primaryId\u0060, and each contact is listed once."
+          }
+        }
+      },
+      "PostContactsMerge200Response": {
+        "required": [
+          "success",
+          "primaryId",
+          "merged",
+          "mergedIds",
+          "remainingIds"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "primaryId": {
+            "type": "string",
+            "description": "ID of the surviving lemlist contact \u2014 resolved from the email when one was given."
+          },
+          "merged": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 once at least one contact was folded into the survivor."
+          },
+          "mergedIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of the contacts folded into the survivor and deleted, in fold order."
+          },
+          "remainingIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of the contacts NOT merged because an earlier fold failed. Empty when everything went through."
+          },
+          "rejectedFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Fields whose adopted value was refused by a uniqueness rule (kept survivor-side). Only present when it happened."
           }
         }
       },
@@ -22322,7 +22903,7 @@
           },
           "companyOwner": {
             "type": "string",
-            "description": "Owner of the company. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the owner defaults to the API key owner."
+            "description": "Owner of the company. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the company is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update."
           },
           "industry": {
             "type": "string",
@@ -22374,6 +22955,24 @@
           "$ref": "#/components/schemas/PostCompaniesRequestAdditionalProperties"
         }
       },
+      "PostCompanies200Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostCompanies200ResponseData"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostCompanies200ResponseWarningsItem"
+            },
+            "description": "Optional warnings (e.g. owner resolution issues)."
+          }
+        }
+      },
       "PostCompanies201Response": {
         "type": "object",
         "properties": {
@@ -22392,17 +22991,6 @@
           }
         }
       },
-      "PostCompanies200Response": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "data": {
-            "$ref": "#/components/schemas/PostCompanies200ResponseData"
-          }
-        }
-      },
       "PostCompanies400Response": {
         "type": "object",
         "properties": {
@@ -22411,6 +22999,73 @@
           },
           "error": {
             "$ref": "#/components/schemas/PostCompanies400ResponseError"
+          }
+        }
+      },
+      "PostCompaniesMergeRequest": {
+        "required": [
+          "primaryId",
+          "secondaryIds"
+        ],
+        "type": "object",
+        "properties": {
+          "primaryId": {
+            "type": "string",
+            "description": "The surviving company. A lemlist company id (\u0060cpn_xxx\u0060).",
+            "example": "cpn_A1B2C3D4E5F6G7H8I"
+          },
+          "secondaryIds": {
+            "maxItems": 9,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The companies folded into the survivor then deleted, 9 at most. A lemlist company id (\u0060cpn_xxx\u0060). Must not contain \u0060primaryId\u0060, and each company is listed once."
+          }
+        }
+      },
+      "PostCompaniesMerge200Response": {
+        "required": [
+          "success",
+          "primaryId",
+          "merged",
+          "mergedIds",
+          "remainingIds"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "primaryId": {
+            "type": "string",
+            "description": "ID of the surviving lemlist company."
+          },
+          "merged": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 once at least one company was folded into the survivor."
+          },
+          "mergedIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of the companies folded into the survivor and deleted, in fold order."
+          },
+          "remainingIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of the companies NOT merged because an earlier fold failed. Empty when everything went through."
+          },
+          "rejectedFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Fields whose adopted value was refused by a uniqueness rule (kept survivor-side). Only present when it happened."
           }
         }
       },
@@ -23733,15 +24388,6 @@
           "$ref": "#/components/schemas/PostLeadsNotinterestedByLeadIdOrEmail200ResponseSchemaItem"
         }
       },
-      "PostLeadsByLeadIdVariables200ResponseSchema": {
-        "type": "object"
-      },
-      "PatchLeadsByLeadIdVariables200ResponseSchema": {
-        "type": "object"
-      },
-      "DeleteLeadsByLeadIdVariables200ResponseSchema": {
-        "type": "object"
-      },
       "GetCrmFilters200ResponseSchema": {
         "type": "array",
         "items": {
@@ -24775,6 +25421,28 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdLeads200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "PostLeadsStartByLeadId200ResponseItem": {
         "type": "object",
         "properties": {
@@ -24977,6 +25645,39 @@
         },
         "additionalProperties": {
           "type": "string"
+        }
+      },
+      "PostLeadsByLeadIdVariables200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchLeadsByLeadIdVariables200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteLeadsByLeadIdVariables200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
         }
       },
       "PostLeadsAudio200ResponseStatus": {
@@ -25272,6 +25973,25 @@
         "type": "object",
         "description": "Any additional key is treated as a custom field. Custom fields must be registered in the team\u0027s CRM field registry beforehand."
       },
+      "PostContacts200ResponseData": {
+        "type": "object",
+        "description": "Same shape as the 201 response, with \u0060created: false\u0060 and \u0060updated: true\u0060."
+      },
+      "PostContacts200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked)."
+          },
+          "message": {
+            "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PostContacts200ResponseWarningsItemParams"
+          }
+        }
+      },
       "PostContacts201ResponseData": {
         "type": "object",
         "properties": {
@@ -25344,23 +26064,23 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked)."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PostContacts201ResponseWarningsItemParams"
           }
         }
-      },
-      "PostContacts200ResponseData": {
-        "type": "object",
-        "description": "Same shape as the 201 response, with \u0060created: false\u0060 and \u0060updated: true\u0060."
       },
       "PostContacts400ResponseError": {
         "type": "object",
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060MISSING_IDENTIFIER\u0060, \u0060INVALID_CONTACT_ID\u0060, \u0060CONTACT_NOT_FOUND_BY_ID\u0060, \u0060INVALID_EMAIL\u0060, \u0060INVALID_ADDITIONAL_EMAILS\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, or \u0060CONTACT_VALIDATION_FAILED\u0060."
+            "description": "Error code: \u0060MISSING_IDENTIFIER\u0060, \u0060INVALID_CONTACT_ID\u0060, \u0060INVALID_EMAIL\u0060, \u0060INVALID_ADDITIONAL_EMAILS\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, or \u0060CONTACT_VALIDATION_FAILED\u0060."
           },
           "message": {
             "type": "string"
@@ -25400,6 +26120,25 @@
       "PostCompaniesRequestAdditionalProperties": {
         "type": "object",
         "description": "Any additional key is treated as a custom field. Custom fields must be registered in the team\u0027s CRM field registry beforehand."
+      },
+      "PostCompanies200ResponseData": {
+        "type": "object",
+        "description": "Same shape as the 201 response, with \u0060created: false\u0060 and \u0060updated: true\u0060."
+      },
+      "PostCompanies200ResponseWarningsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060companyOwner\u0060 matches no team member)."
+          },
+          "message": {
+            "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PostCompanies200ResponseWarningsItemParams"
+          }
+        }
       },
       "PostCompanies201ResponseData": {
         "type": "object",
@@ -25454,23 +26193,23 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060companyOwner\u0060 matches no team member)."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PostCompanies201ResponseWarningsItemParams"
           }
         }
-      },
-      "PostCompanies200ResponseData": {
-        "type": "object",
-        "description": "Same shape as the 201 response, with \u0060created: false\u0060 and \u0060updated: true\u0060."
       },
       "PostCompanies400ResponseError": {
         "type": "object",
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060MISSING_REQUIRED_FIELD\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060INVALID_DOMAIN\u0060, \u0060INVALID_LINKEDIN_URL\u0060, or \u0060INVALID_FIELD\u0060."
+            "description": "Error code: \u0060MISSING_REQUIRED_FIELD\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_DOMAIN\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, or \u0060COMPANY_VALIDATION_FAILED\u0060."
           },
           "message": {
             "type": "string"
@@ -26729,6 +27468,13 @@
           }
         }
       },
+      "PostContacts200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "The offending input, echoed back (e.g. \u0060{\u0022contactOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+      },
       "PostContacts201ResponseDataEmailsItem": {
         "type": "object",
         "properties": {
@@ -26741,9 +27487,30 @@
         "type": "object",
         "description": "Key/value fields (firstName, lastName, phone, jobTitle, custom fields, etc.)"
       },
+      "PostContacts201ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "The offending input, echoed back (e.g. \u0060{\u0022contactOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+      },
+      "PostCompanies200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "The offending input, echoed back (e.g. \u0060{\u0022companyOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+      },
       "PostCompanies201ResponseDataFields": {
         "type": "object",
         "description": "Key/value fields (name, picture, industry, location, custom fields, etc.)"
+      },
+      "PostCompanies201ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "The offending input, echoed back (e.g. \u0060{\u0022companyOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
       },
       "PostV2CampaignsStatsBatch200ResponseResultsItemStepsItem": {
         "type": "object",

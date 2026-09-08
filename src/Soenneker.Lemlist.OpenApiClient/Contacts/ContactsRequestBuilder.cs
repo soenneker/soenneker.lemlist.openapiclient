@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Contacts.Export;
 using Soenneker.Lemlist.OpenApiClient.Contacts.Item;
 using Soenneker.Lemlist.OpenApiClient.Contacts.Lists;
+using Soenneker.Lemlist.OpenApiClient.Contacts.Merge;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         public global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.ListsRequestBuilder Lists
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Contacts.Lists.ListsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The merge property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Contacts.Merge.MergeRequestBuilder Merge
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Contacts.Merge.MergeRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.contacts.item collection</summary>
         /// <param name="position">The unique identifier or email of the contact</param>
@@ -92,6 +98,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.PostContacts200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -107,6 +115,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.PostContacts200Response401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
