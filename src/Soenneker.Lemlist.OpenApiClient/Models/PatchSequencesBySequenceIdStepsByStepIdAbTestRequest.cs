@@ -14,13 +14,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Alternate message. On LinkedIn invite steps, the premium invitation note — maximum 300 characters</summary>
+        /// <summary>Variant B&apos;s LinkedIn note, same meaning as the step-level `altMessage`: the premium invitation note on a `linkedinInvite` step, the out-of-network note on a `linkedinSend` one. On a `linkedinInvite` step, over 300 characters is rejected with `400`</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AltMessage { get; set; }
 #nullable restore
 #else
         public string AltMessage { get; set; }
+#endif
+        /// <summary>Variant B&apos;s premium variant of the out-of-network note, on `linkedinSend` steps only: any other step type is rejected with `400`. Over 300 characters is rejected with `400` too</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AltMessagePremium { get; set; }
+#nullable restore
+#else
+        public string AltMessagePremium { get; set; }
 #endif
         /// <summary>The cc property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -74,6 +82,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "altMessage", n => { AltMessage = n.GetStringValue(); } },
+                { "altMessagePremium", n => { AltMessagePremium = n.GetStringValue(); } },
                 { "cc", n => { Cc = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "plainText", n => { PlainText = n.GetBoolValue(); } },
@@ -88,6 +97,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("altMessage", AltMessage);
+            writer.WriteStringValue("altMessagePremium", AltMessagePremium);
             writer.WriteCollectionOfPrimitiveValues<string>("cc", Cc);
             writer.WriteStringValue("message", Message);
             writer.WriteBoolValue("plainText", PlainText);

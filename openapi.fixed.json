@@ -2403,7 +2403,8 @@
                   "value": {
                     "type": "linkedinSend",
                     "message": "Thanks for accepting my invite, {{firstName}}! I wanted to reach out about...",
-                    "altMessage": "Alternative message if the main one fails",
+                    "altMessage": "Hi {{firstName}}, we are not connected yet, happy to change that!",
+                    "altMessagePremium": "Hi {{firstName}}, we are not connected yet. I work with teams like {{companyName}} on the same problem and would love to swap notes.",
                     "delay": 3
                   }
                 },
@@ -15618,7 +15619,7 @@
           "Sequences"
         ],
         "summary": "Create A/B Test Variant",
-        "description": "Creates variant B of an A/B test on a step, prefilled from variant A, and starts the test (leads are split between A and B). Supported on \u0060email\u0060, \u0060whatsappMessage\u0060, \u0060sms\u0060, \u0060linkedinInvite\u0060, and \u0060linkedinSend\u0060 steps. Requires the Email Pro plan.",
+        "description": "Creates variant B of an A/B test on a step, prefilled from variant A, and starts the test (leads are split between A and B). Supported on \u0060email\u0060, \u0060linkedinInvite\u0060, and \u0060linkedinSend\u0060 steps. Requires the Email Pro plan.",
         "operationId": "PostSequencesBySequenceIdStepsByStepIdAbTest",
         "responses": {
           "200": {
@@ -15824,7 +15825,7 @@
             }
           },
           "400": {
-            "description": "Bad request: invalid or unknown body field, empty message on a step other than a LinkedIn invite, or invitation note over 300 characters",
+            "description": "Bad request: invalid or unknown body field, empty message on a step other than a LinkedIn invite, an \u0060altMessage\u0060 over 300 characters on a LinkedIn invite step, an \u0060altMessagePremium\u0060 on a step other than a LinkedIn message, or an \u0060altMessagePremium\u0060 over 300 characters",
             "content": {
               "application/json": {
                 "schema": {
@@ -20766,11 +20767,15 @@
           },
           "message": {
             "type": "string",
-            "description": "Content of the email or message (used for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps). Required for linkedinSend, whatsappMessage, and sms"
+            "description": "Content of the email or message (used for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in \u0060ai\u0060 record mode). Required for linkedinSend, whatsappMessage, and sms"
           },
           "altMessage": {
             "type": "string",
-            "description": "Alternate message for linkedinSend steps"
+            "description": "The LinkedIn note sent instead of \u0060message\u0060 in specific cases, with a meaning that depends on the step type. On \u0060linkedinInvite\u0060: the premium invitation note attached to the connection request, used when the sending account has LinkedIn Premium. On \u0060linkedinSend\u0060 and \u0060linkedinVoiceNote\u0060: the out-of-network note, sent as a connection request when the lead is not a 1st-degree connection. Rejected with \u0060400\u0060 on any other step type. LinkedIn caps a connection-request note at 200 characters on a free account and 300 on Premium or Sales Navigator. This endpoint does not enforce those caps, but an over-long note is a blocking step error: the campaign refuses to launch until it is shortened"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "For \u0060linkedinSend\u0060 steps only. The premium variant of the out-of-network note, sent instead of \u0060altMessage\u0060 when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Rejected with \u0060400\u0060 on any other step type"
           },
           "title": {
             "type": "string",
@@ -20872,11 +20877,15 @@
           },
           "message": {
             "type": "string",
-            "description": "Content of the email or message (for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps)"
+            "description": "Content of the email or message (for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in \u0060ai\u0060 record mode)"
           },
           "altMessage": {
             "type": "string",
-            "description": "Alternate message for linkedinSend steps"
+            "description": "The LinkedIn note sent instead of \u0060message\u0060 in specific cases, with a meaning that depends on the step type. On \u0060linkedinInvite\u0060: the premium invitation note attached to the connection request, used when the sending account has LinkedIn Premium. On \u0060linkedinSend\u0060 and \u0060linkedinVoiceNote\u0060: the out-of-network note, sent as a connection request when the lead is not a 1st-degree connection. Pass an empty string to clear it. LinkedIn caps a connection-request note at 200 characters on a free account and 300 on Premium or Sales Navigator. This endpoint does not enforce those caps, but an over-long note is a blocking step error: the campaign refuses to launch until it is shortened"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "For \u0060linkedinSend\u0060 steps only. The premium variant of the out-of-network note, sent instead of \u0060altMessage\u0060 when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Pass an empty string to clear it. Rejected with \u0060400\u0060 on any other step type"
           },
           "title": {
             "type": "string",
@@ -23910,7 +23919,12 @@
             "description": "Variant B body (HTML)"
           },
           "altMessage": {
-            "type": "string"
+            "type": "string",
+            "description": "Variant B\u0027s LinkedIn note, same meaning as the step-level \u0060altMessage\u0060: the premium invitation note on a \u0060linkedinInvite\u0060 step, the out-of-network note on a \u0060linkedinSend\u0060 one"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "Variant B\u0027s premium variant of the out-of-network note, on \u0060linkedinSend\u0060 steps only"
           },
           "cc": {
             "type": "array",
@@ -23971,7 +23985,12 @@
             "description": "Variant B body (HTML)"
           },
           "altMessage": {
-            "type": "string"
+            "type": "string",
+            "description": "Variant B\u0027s LinkedIn note, same meaning as the step-level \u0060altMessage\u0060: the premium invitation note on a \u0060linkedinInvite\u0060 step, the out-of-network note on a \u0060linkedinSend\u0060 one"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "Variant B\u0027s premium variant of the out-of-network note, on \u0060linkedinSend\u0060 steps only"
           },
           "cc": {
             "type": "array",
@@ -24010,7 +24029,11 @@
           },
           "altMessage": {
             "type": "string",
-            "description": "Alternate message. On LinkedIn invite steps, the premium invitation note \u2014 maximum 300 characters"
+            "description": "Variant B\u0027s LinkedIn note, same meaning as the step-level \u0060altMessage\u0060: the premium invitation note on a \u0060linkedinInvite\u0060 step, the out-of-network note on a \u0060linkedinSend\u0060 one. On a \u0060linkedinInvite\u0060 step, over 300 characters is rejected with \u0060400\u0060"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "Variant B\u0027s premium variant of the out-of-network note, on \u0060linkedinSend\u0060 steps only: any other step type is rejected with \u0060400\u0060. Over 300 characters is rejected with \u0060400\u0060 too"
           },
           "cc": {
             "type": "array",
@@ -24045,7 +24068,12 @@
             "description": "Variant B body (HTML)"
           },
           "altMessage": {
-            "type": "string"
+            "type": "string",
+            "description": "Variant B\u0027s LinkedIn note, same meaning as the step-level \u0060altMessage\u0060: the premium invitation note on a \u0060linkedinInvite\u0060 step, the out-of-network note on a \u0060linkedinSend\u0060 one"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "Variant B\u0027s premium variant of the out-of-network note, on \u0060linkedinSend\u0060 steps only"
           },
           "cc": {
             "type": "array",
@@ -27381,6 +27409,14 @@
           "subject": {
             "type": "string",
             "description": "The email subject line (only for email steps)"
+          },
+          "altMessage": {
+            "type": "string",
+            "description": "The LinkedIn note sent instead of \u0060message\u0060 in specific cases. On a \u0060linkedinInvite\u0060 step it is the premium invitation note, used when the sending account has LinkedIn Premium. On a \u0060linkedinSend\u0060 or \u0060linkedinVoiceNote\u0060 step it is the out-of-network note, sent as a connection request when the lead is not a 1st-degree connection. Returned only when the step carries one and it is not empty"
+          },
+          "altMessagePremium": {
+            "type": "string",
+            "description": "The premium variant of the out-of-network note, sent instead of \u0060altMessage\u0060 when the sending LinkedIn account is Premium or Sales Navigator. Only on \u0060linkedinSend\u0060 steps, and returned only when it is not empty"
           },
           "abTest": {
             "$ref": "#/components/schemas/GetCampaignsByCampaignIdSequences200ResponseAdditionalPropertiesStepsItemAbTest"
@@ -33541,7 +33577,6 @@
           "crm_sync_linkedin_url_not_contact",
           "crm_sync_duplicate_contact_blocked",
           "crm_sync_duplicate_company_blocked",
-          "crm_sync_company_not_in_lemlist",
           "crm_sync_custom_field_creation_failed",
           "crm_sync_unsub_state_protected",
           "crm_sync_value_oscillating",
@@ -33595,10 +33630,6 @@
             {
               "value": "crm_sync_duplicate_company_blocked",
               "name": "CrmSyncDuplicateCompanyBlocked"
-            },
-            {
-              "value": "crm_sync_company_not_in_lemlist",
-              "name": "CrmSyncCompanyNotInLemlist"
             },
             {
               "value": "crm_sync_custom_field_creation_failed",

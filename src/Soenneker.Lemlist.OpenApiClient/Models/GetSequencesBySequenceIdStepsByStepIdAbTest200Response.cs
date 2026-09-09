@@ -22,13 +22,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The altMessage property</summary>
+        /// <summary>Variant B&apos;s LinkedIn note, same meaning as the step-level `altMessage`: the premium invitation note on a `linkedinInvite` step, the out-of-network note on a `linkedinSend` one</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AltMessage { get; set; }
 #nullable restore
 #else
         public string AltMessage { get; set; }
+#endif
+        /// <summary>Variant B&apos;s premium variant of the out-of-network note, on `linkedinSend` steps only</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AltMessagePremium { get; set; }
+#nullable restore
+#else
+        public string AltMessagePremium { get; set; }
 #endif
         /// <summary>The cc property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -99,6 +107,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "abTest", n => { AbTest = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTest>(global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTest.CreateFromDiscriminatorValue); } },
                 { "altMessage", n => { AltMessage = n.GetStringValue(); } },
+                { "altMessagePremium", n => { AltMessagePremium = n.GetStringValue(); } },
                 { "cc", n => { Cc = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "emailTemplateBId", n => { EmailTemplateBId = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
@@ -116,6 +125,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTest>("abTest", AbTest);
             writer.WriteStringValue("altMessage", AltMessage);
+            writer.WriteStringValue("altMessagePremium", AltMessagePremium);
             writer.WriteCollectionOfPrimitiveValues<string>("cc", Cc);
             writer.WriteStringValue("emailTemplateBId", EmailTemplateBId);
             writer.WriteStringValue("message", Message);

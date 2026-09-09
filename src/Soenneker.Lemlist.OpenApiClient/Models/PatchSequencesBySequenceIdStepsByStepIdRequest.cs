@@ -14,13 +14,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Alternate message for linkedinSend steps</summary>
+        /// <summary>The LinkedIn note sent instead of `message` in specific cases, with a meaning that depends on the step type. On `linkedinInvite`: the premium invitation note attached to the connection request, used when the sending account has LinkedIn Premium. On `linkedinSend` and `linkedinVoiceNote`: the out-of-network note, sent as a connection request when the lead is not a 1st-degree connection. Pass an empty string to clear it. LinkedIn caps a connection-request note at 200 characters on a free account and 300 on Premium or Sales Navigator. This endpoint does not enforce those caps, but an over-long note is a blocking step error: the campaign refuses to launch until it is shortened</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AltMessage { get; set; }
 #nullable restore
 #else
         public string AltMessage { get; set; }
+#endif
+        /// <summary>For `linkedinSend` steps only. The premium variant of the out-of-network note, sent instead of `altMessage` when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Pass an empty string to clear it. Rejected with `400` on any other step type</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AltMessagePremium { get; set; }
+#nullable restore
+#else
+        public string AltMessagePremium { get; set; }
 #endif
         /// <summary>Target campaign ID for sendToAnotherCampaign steps. The campaign must exist and not be archived</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -64,7 +72,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Images { get; set; }
 #endif
-        /// <summary>Content of the email or message (for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps)</summary>
+        /// <summary>Content of the email or message (for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in `ai` record mode)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }
@@ -144,6 +152,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "altMessage", n => { AltMessage = n.GetStringValue(); } },
+                { "altMessagePremium", n => { AltMessagePremium = n.GetStringValue(); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "conditionKey", n => { ConditionKey = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey>(); } },
                 { "customField", n => { CustomField = n.GetStringValue(); } },
@@ -172,6 +181,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("altMessage", AltMessage);
+            writer.WriteStringValue("altMessagePremium", AltMessagePremium);
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey>("conditionKey", ConditionKey);
             writer.WriteStringValue("customField", CustomField);
