@@ -41,7 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,offset*,search*,sortBy*,sortOrder*}", pathParameters)
+        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,offset*,search*,sortBy*,sortOrder*}", rawUrl)
+        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", rawUrl)
         {
         }
         /// <summary>
@@ -78,7 +78,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it will be updated with the provided non-empty fields. Null or empty values are ignored during updates to preserve existing data. You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
+        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -90,11 +90,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -128,18 +128,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             return requestInfo;
         }
         /// <summary>
-        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it will be updated with the provided non-empty fields. Null or empty values are ignored during updates to preserve existing data. You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
+        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -212,6 +212,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             /// <summary>The sort direction. Use &apos;desc&apos; for descending order; any other value (or omission) will sort in ascending order.</summary>
             [QueryParameter("sortOrder")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesSortOrderParameter? SortOrder { get; set; }
+        }
+        /// <summary>
+        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class CompaniesRequestBuilderPostQueryParameters 
+        {
+            /// <summary>What an existing record keeps. `overwriteIgnoreEmpty` (default): sent values replace stored ones, empty values are ignored. `overwrite`: an empty string clears the field. `fillEmptyOnly`: only empty fields are filled, identifiers, links, owner and status kept. A new record receives every value sent. Other values: `400 INVALID_UPDATE_STRATEGY`.</summary>
+            [QueryParameter("updateStrategy")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesUpdateStrategyParameter? UpdateStrategy { get; set; }
         }
     }
 }

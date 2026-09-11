@@ -40,7 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadIdOrEmailItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}{?action*}", pathParameters)
+        public LeadIdOrEmailItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}{?action*,updateStrategy*}", pathParameters)
         {
         }
         /// <summary>
@@ -48,7 +48,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadIdOrEmailItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}{?action*}", rawUrl)
+        public LeadIdOrEmailItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}{?action*,updateStrategy*}", rawUrl)
         {
         }
         /// <summary>
@@ -77,7 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update Lead in a Campaign
+        /// Updates an existing lead and, through it, the contact and the company the lead is linked to: contact fields such as `firstName` or `jobTitle` are written on the contact, company fields such as `companyName` on the company. Only the fields in the body change. `companyName` alone renames the company the lead is linked to. When the lead has no company yet, it gets linked to a company with that name, created when needed.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -88,11 +88,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.PatchCampaignsByCampaignIdLeadsByLeadId200Response409Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.LeadIdOrEmailItemRequestBuilder.LeadIdOrEmailItemRequestBuilderPatchQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.LeadIdOrEmailItemRequestBuilder.LeadIdOrEmailItemRequestBuilderPatchQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -125,18 +125,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
             return requestInfo;
         }
         /// <summary>
-        /// Update Lead in a Campaign
+        /// Updates an existing lead and, through it, the contact and the company the lead is linked to: contact fields such as `firstName` or `jobTitle` are written on the contact, company fields such as `companyName` on the company. Only the fields in the body change. `companyName` alone renames the company the lead is linked to. When the lead has no company yet, it gets linked to a company with that name, created when needed.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPatchRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPatchRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.LeadIdOrEmailItemRequestBuilder.LeadIdOrEmailItemRequestBuilderPatchQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPatchRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPatchRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.LeadIdOrEmailItemRequestBuilder.LeadIdOrEmailItemRequestBuilderPatchQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -171,6 +171,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
             [QueryParameter("action")]
             public string Action { get; set; }
 #endif
+        }
+        /// <summary>
+        /// Updates an existing lead and, through it, the contact and the company the lead is linked to: contact fields such as `firstName` or `jobTitle` are written on the contact, company fields such as `companyName` on the company. Only the fields in the body change. `companyName` alone renames the company the lead is linked to. When the lead has no company yet, it gets linked to a company with that name, created when needed.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class LeadIdOrEmailItemRequestBuilderPatchQueryParameters 
+        {
+            /// <summary>What the lead, its contact and its company keep. `overwrite` (default): sent values replace stored ones, an empty string clears. `overwriteIgnoreEmpty`: empty values ignored. `fillEmptyOnly`: only empty fields filled, identifiers, links, owner and status kept. Other values: 400.</summary>
+            [QueryParameter("updateStrategy")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdUpdateStrategyParameter? UpdateStrategy { get; set; }
         }
     }
 }

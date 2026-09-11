@@ -41,7 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,state*,verifyEmail*}", pathParameters)
+        public LeadsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,state*,updateStrategy*,verifyEmail*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,state*,verifyEmail*}", rawUrl)
+        public LeadsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,state*,updateStrategy*,verifyEmail*}", rawUrl)
         {
         }
         /// <summary>
@@ -97,7 +97,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Create Lead in Campaign
+        /// Creates a new lead in the campaign, never updates one: a contact that already has a lead in this campaign is refused with `400 LEAD_ALREADY_IN_CAMPAIGN` and nothing is written, on the lead, the contact or the company. Use `PATCH /campaigns/{campaignId}/leads/{leadId}` to change an existing lead. The contact and the company the new lead belongs to may already exist: `updateStrategy` decides how their stored values are updated, and under `fillEmptyOnly` the created lead takes the values the contact kept.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -170,7 +170,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
             return requestInfo;
         }
         /// <summary>
-        /// Create Lead in Campaign
+        /// Creates a new lead in the campaign, never updates one: a contact that already has a lead in this campaign is refused with `400 LEAD_ALREADY_IN_CAMPAIGN` and nothing is written, on the lead, the contact or the company. Use `PATCH /campaigns/{campaignId}/leads/{leadId}` to change an existing lead. The contact and the company the new lead belongs to may already exist: `updateStrategy` decides how their stored values are updated, and under `fillEmptyOnly` the created lead takes the values the contact kept.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -221,12 +221,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
 #endif
         }
         /// <summary>
-        /// Create Lead in Campaign
+        /// Creates a new lead in the campaign, never updates one: a contact that already has a lead in this campaign is refused with `400 LEAD_ALREADY_IN_CAMPAIGN` and nothing is written, on the lead, the contact or the company. Use `PATCH /campaigns/{campaignId}/leads/{leadId}` to change an existing lead. The contact and the company the new lead belongs to may already exist: `updateStrategy` decides how their stored values are updated, and under `fillEmptyOnly` the created lead takes the values the contact kept.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class LeadsRequestBuilderPostQueryParameters 
         {
-            /// <summary>Search email address in other campaigns. Will not insert the lead if email address already exists. Default: false</summary>
+            /// <summary>Refuse the lead with `409 LEAD_ALREADY_IN_OTHER_CAMPAIGN` when the contact already has one in another campaign. Default: false. The campaign&apos;s own &quot;remove duplicates&quot; setting does not apply here.</summary>
             [QueryParameter("deduplicate")]
             public bool? Deduplicate { get; set; }
             /// <summary>Find verified email. Default: false</summary>
@@ -238,6 +238,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
             /// <summary>Run the LinkedIn enrichment. Default: false</summary>
             [QueryParameter("linkedinEnrichment")]
             public bool? LinkedinEnrichment { get; set; }
+            /// <summary>What the matched contact and company keep (the lead is always created). `overwrite` (default): sent values replace stored ones, an empty string clears. `overwriteIgnoreEmpty`: empty values ignored. `fillEmptyOnly`: only empty fields filled, identifiers, links, owner and status kept. Other values: 400.</summary>
+            [QueryParameter("updateStrategy")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsUpdateStrategyParameter? UpdateStrategy { get; set; }
             /// <summary>Verify existing email (debounce). Default: false</summary>
             [QueryParameter("verifyEmail")]
             public bool? VerifyEmail { get; set; }

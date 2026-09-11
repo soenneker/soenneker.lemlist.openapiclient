@@ -24,7 +24,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The success property</summary>
         public bool? Success { get; set; }
-        /// <summary>Optional warnings (e.g. owner resolution issues).</summary>
+        /// <summary>Non-blocking notices: owner or company not resolved, or `FIELDS_KEPT` when the update strategy kept values you sent (`params.fields` names them).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200ResponseWarningsItem>? Warnings { get; set; }

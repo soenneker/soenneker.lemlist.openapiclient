@@ -16,7 +16,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The ok property</summary>
         public bool? Ok { get; set; }
-        /// <summary>Optional warnings (e.g. company resolution issues).</summary>
+        /// <summary>Optional warnings, never a failure: the company part of the update was skipped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItem>? Warnings { get; set; }

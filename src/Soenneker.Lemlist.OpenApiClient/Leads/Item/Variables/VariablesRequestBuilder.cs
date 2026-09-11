@@ -61,7 +61,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update values of custom variables for a lead.
+        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -134,7 +134,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             return requestInfo;
         }
         /// <summary>
-        /// Update values of custom variables for a lead.
+        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -218,7 +218,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
 #endif
         }
         /// <summary>
-        /// Update values of custom variables for a lead.
+        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VariablesRequestBuilderPatchQueryParameters 

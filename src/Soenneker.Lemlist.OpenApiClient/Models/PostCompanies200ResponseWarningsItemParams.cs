@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// The offending input, echoed back (e.g. `{&quot;companyOwner&quot;: &quot;nobody@example.com&quot;}`).
+    /// Details: the input echoed back, or `fields` for `FIELDS_KEPT`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PostCompanies200ResponseWarningsItemParams : IAdditionalDataHolder, IParsable

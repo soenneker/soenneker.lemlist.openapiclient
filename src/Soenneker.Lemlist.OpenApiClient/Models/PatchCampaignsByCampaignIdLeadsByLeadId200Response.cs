@@ -120,7 +120,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string PreferredContactMethod { get; set; }
 #endif
-        /// <summary>Optional warnings (e.g. company resolution issues).</summary>
+        /// <summary>Non-blocking notices: the company part was skipped, or `FIELDS_KEPT` when the update strategy kept values you sent (`params.fields` names them, company fields prefixed with `company`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem>? Warnings { get; set; }

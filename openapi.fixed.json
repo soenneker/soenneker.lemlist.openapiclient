@@ -4331,12 +4331,13 @@
           "Leads"
         ],
         "summary": "Create Lead in Campaign",
+        "description": "Creates a new lead in the campaign, never updates one: a contact that already has a lead in this campaign is refused with \u0060400 LEAD_ALREADY_IN_CAMPAIGN\u0060 and nothing is written, on the lead, the contact or the company. Use \u0060PATCH /campaigns/{campaignId}/leads/{leadId}\u0060 to change an existing lead. The contact and the company the new lead belongs to may already exist: \u0060updateStrategy\u0060 decides how their stored values are updated, and under \u0060fillEmptyOnly\u0060 the created lead takes the values the contact kept.",
         "operationId": "PostCampaignsByCampaignIdLeads",
         "parameters": [
           {
             "name": "deduplicate",
             "in": "query",
-            "description": "Search email address in other campaigns. Will not insert the lead if email address already exists. Default: false",
+            "description": "Refuse the lead with \u0060409 LEAD_ALREADY_IN_OTHER_CAMPAIGN\u0060 when the contact already has one in another campaign. Default: false. The campaign\u0027s own \u0022remove duplicates\u0022 setting does not apply here.",
             "schema": {
               "type": "boolean"
             },
@@ -4377,6 +4378,15 @@
               "type": "boolean"
             },
             "example": "true"
+          },
+          {
+            "name": "updateStrategy",
+            "in": "query",
+            "description": "What the matched contact and company keep (the lead is always created). \u0060overwrite\u0060 (default): sent values replace stored ones, an empty string clears. \u0060overwriteIgnoreEmpty\u0060: empty values ignored. \u0060fillEmptyOnly\u0060: only empty fields filled, identifiers, links, owner and status kept. Other values: 400.",
+            "schema": {
+              "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsUpdateStrategyParameter"
+            },
+            "example": "fillEmptyOnly"
           }
         ],
         "requestBody": {
@@ -4426,7 +4436,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign / No valid fields to add",
+            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign / No valid fields to add / Invalid updateStrategy value",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4574,7 +4584,19 @@
           "Leads"
         ],
         "summary": "Update Lead in a Campaign",
+        "description": "Updates an existing lead and, through it, the contact and the company the lead is linked to: contact fields such as \u0060firstName\u0060 or \u0060jobTitle\u0060 are written on the contact, company fields such as \u0060companyName\u0060 on the company. Only the fields in the body change. \u0060companyName\u0060 alone renames the company the lead is linked to. When the lead has no company yet, it gets linked to a company with that name, created when needed.",
         "operationId": "PatchCampaignsByCampaignIdLeadsByLeadId",
+        "parameters": [
+          {
+            "name": "updateStrategy",
+            "in": "query",
+            "description": "What the lead, its contact and its company keep. \u0060overwrite\u0060 (default): sent values replace stored ones, an empty string clears. \u0060overwriteIgnoreEmpty\u0060: empty values ignored. \u0060fillEmptyOnly\u0060: only empty fields filled, identifiers, links, owner and status kept. Other values: 400.",
+            "schema": {
+              "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadIdUpdateStrategyParameter"
+            },
+            "example": "fillEmptyOnly"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4615,7 +4637,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Lead could not be updated",
+            "description": "Possible errors: Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Lead could not be updated / Invalid updateStrategy value",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5494,7 +5516,7 @@
           "Leads"
         ],
         "summary": "Update Values of Custom Variables of a Lead",
-        "description": "Update values of custom variables for a lead.",
+        "description": "Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead\u0027s contact and company as well, and \u0060companyName\u0060 alone renames the company the lead is linked to.",
         "operationId": "PatchLeadsByLeadIdVariables",
         "parameters": [
           {
@@ -8868,8 +8890,19 @@
           "Contacts"
         ],
         "summary": "Add and update contact",
-        "description": "Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it will be updated with the provided non-empty fields. Null or empty values are ignored during updates to preserve existing data. You can target an existing contact directly by providing \u0060contactId\u0060, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing \u0060companyId\u0060, \u0060companyDomain\u0060, or \u0060companyLinkedinUrl\u0060.",
+        "description": "Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing \u0060contactId\u0060, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing \u0060companyId\u0060, \u0060companyDomain\u0060, or \u0060companyLinkedinUrl\u0060.",
         "operationId": "PostContacts",
+        "parameters": [
+          {
+            "name": "updateStrategy",
+            "in": "query",
+            "description": "What an existing record keeps. \u0060overwriteIgnoreEmpty\u0060 (default): sent values replace stored ones, empty values are ignored. \u0060overwrite\u0060: an empty string clears the field. \u0060fillEmptyOnly\u0060: only empty fields are filled, identifiers, links, owner and status kept. A new record receives every value sent. Other values: \u0060400 INVALID_UPDATE_STRATEGY\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/PostContactsUpdateStrategyParameter"
+            },
+            "example": "fillEmptyOnly"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -10133,8 +10166,19 @@
           "Companies"
         ],
         "summary": "Add and update company",
-        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it will be updated with the provided non-empty fields. Null or empty values are ignored during updates to preserve existing data. You can target an existing company directly by providing \u0060companyId\u0060, bypassing domain/LinkedIn matching \u2014 in that case \u0060name\u0060 and \u0060domain\u0060 become optional.",
+        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing \u0060companyId\u0060, bypassing domain/LinkedIn matching \u2014 in that case \u0060name\u0060 and \u0060domain\u0060 become optional.",
         "operationId": "PostCompanies",
+        "parameters": [
+          {
+            "name": "updateStrategy",
+            "in": "query",
+            "description": "What an existing record keeps. \u0060overwriteIgnoreEmpty\u0060 (default): sent values replace stored ones, empty values are ignored. \u0060overwrite\u0060: an empty string clears the field. \u0060fillEmptyOnly\u0060: only empty fields are filled, identifiers, links, owner and status kept. A new record receives every value sent. Other values: \u0060400 INVALID_UPDATE_STRATEGY\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/PostCompaniesUpdateStrategyParameter"
+            },
+            "example": "fillEmptyOnly"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -21455,7 +21499,7 @@
             "items": {
               "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. company resolution issues)."
+            "description": "Non-blocking notices: the company part was skipped, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them, company fields prefixed with \u0060company\u0060)."
           }
         }
       },
@@ -21492,7 +21536,8 @@
             "type": "string"
           },
           "companyName": {
-            "type": "string"
+            "type": "string",
+            "description": "New name of the company the lead is linked to, renamed in place. When the lead has no company yet, it gets linked to a company with that name, created when needed."
           },
           "jobTitle": {
             "type": "string"
@@ -21558,7 +21603,7 @@
             "items": {
               "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. company resolution issues)."
+            "description": "Non-blocking notices: the company part was skipped, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them, company fields prefixed with \u0060company\u0060)."
           }
         }
       },
@@ -21789,7 +21834,7 @@
             "items": {
               "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. company resolution issues)."
+            "description": "Optional warnings, never a failure: the company part of the update was skipped."
           }
         }
       },
@@ -21805,7 +21850,7 @@
             "items": {
               "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. company resolution issues)."
+            "description": "Optional warnings, never a failure: the company part of the update was skipped."
           }
         }
       },
@@ -21821,7 +21866,7 @@
             "items": {
               "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. company resolution issues)."
+            "description": "Optional warnings, never a failure: the company part of the update was skipped."
           }
         }
       },
@@ -22611,7 +22656,7 @@
           },
           "contactOwner": {
             "type": "string",
-            "description": "Owner of the contact. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the contact is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update."
+            "description": "Owner of the contact. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the contact is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update. On update it replaces the current owner, except under \u0060fillEmptyOnly\u0060 where it is only set when the contact has none."
           },
           "source": {
             "type": "string",
@@ -22649,7 +22694,7 @@
             "items": {
               "$ref": "#/components/schemas/PostContacts200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. owner or company resolution issues)."
+            "description": "Non-blocking notices: owner or company not resolved, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them)."
           }
         }
       },
@@ -22667,7 +22712,7 @@
             "items": {
               "$ref": "#/components/schemas/PostContacts201ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. owner or company resolution issues)."
+            "description": "Non-blocking notices: owner or company not resolved, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them)."
           }
         }
       },
@@ -22912,7 +22957,7 @@
           },
           "companyOwner": {
             "type": "string",
-            "description": "Owner of the company. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the company is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update."
+            "description": "Owner of the company. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the company is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update. On update it replaces the current owner, except under \u0060fillEmptyOnly\u0060 where it is only set when the company has none."
           },
           "industry": {
             "type": "string",
@@ -22978,7 +23023,7 @@
             "items": {
               "$ref": "#/components/schemas/PostCompanies200ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. owner resolution issues)."
+            "description": "Non-blocking notices: owner or company not resolved, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them)."
           }
         }
       },
@@ -22996,7 +23041,7 @@
             "items": {
               "$ref": "#/components/schemas/PostCompanies201ResponseWarningsItem"
             },
-            "description": "Optional warnings (e.g. owner resolution issues)."
+            "description": "Non-blocking notices: owner or company not resolved, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them)."
           }
         }
       },
@@ -24755,6 +24800,34 @@
         ],
         "description": "A/B test state for this step. \u0060true\u0060 while the test runs (leads are split between variant A and B); \u0060\u0022A\u0022\u0060 or \u0060\u0022B\u0022\u0060 once a winner is selected; absent or \u0060false\u0060 when there is no A/B test. \u0060subject\u0060 and \u0060message\u0060 are always variant A\u0027s \u2014 read variant B via Get A/B Test Variant"
       },
+      "PostCampaignsByCampaignIdLeads200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
       "GetContacts200ResponseOneOf2": {
         "required": [
           "data",
@@ -24780,6 +24853,62 @@
             "type": "integer"
           }
         }
+      },
+      "PostContacts200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "PostContacts201ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "PostCompanies200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "PostCompanies201ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
       },
       "PostSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTest": {
         "type": "object",
@@ -25453,10 +25582,14 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed); \u0060FIELDS_KEPT\u0060 (values the update strategy kept, see \u0060params.fields\u0060)."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItemParams"
           }
         }
       },
@@ -25464,10 +25597,14 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed); \u0060FIELDS_KEPT\u0060 (values the update strategy kept, see \u0060params.fields\u0060)."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParams"
           }
         }
       },
@@ -25679,7 +25816,8 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed)."
           },
           "message": {
             "type": "string"
@@ -25690,7 +25828,8 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed)."
           },
           "message": {
             "type": "string"
@@ -25701,7 +25840,8 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed)."
           },
           "message": {
             "type": "string"
@@ -26010,7 +26150,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked)."
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked); \u0060FIELDS_KEPT\u0060 (values the update strategy kept)."
           },
           "message": {
             "type": "string"
@@ -26093,7 +26233,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked)."
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked); \u0060FIELDS_KEPT\u0060 (values the update strategy kept)."
           },
           "message": {
             "type": "string"
@@ -26108,7 +26248,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060MISSING_IDENTIFIER\u0060, \u0060INVALID_CONTACT_ID\u0060, \u0060INVALID_EMAIL\u0060, \u0060INVALID_ADDITIONAL_EMAILS\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, or \u0060CONTACT_VALIDATION_FAILED\u0060."
+            "description": "Error code: \u0060MISSING_IDENTIFIER\u0060, \u0060INVALID_CONTACT_ID\u0060, \u0060INVALID_EMAIL\u0060, \u0060INVALID_ADDITIONAL_EMAILS\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, \u0060CONTACT_VALIDATION_FAILED\u0060, or \u0060INVALID_UPDATE_STRATEGY\u0060."
           },
           "message": {
             "type": "string"
@@ -26158,7 +26298,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060companyOwner\u0060 matches no team member)."
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060companyOwner\u0060 matches no team member); \u0060FIELDS_KEPT\u0060 (values the update strategy kept)."
           },
           "message": {
             "type": "string"
@@ -26222,7 +26362,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060companyOwner\u0060 matches no team member)."
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060companyOwner\u0060 matches no team member); \u0060FIELDS_KEPT\u0060 (values the update strategy kept)."
           },
           "message": {
             "type": "string"
@@ -26237,7 +26377,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060MISSING_REQUIRED_FIELD\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_DOMAIN\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, or \u0060COMPANY_VALIDATION_FAILED\u0060."
+            "description": "Error code: \u0060MISSING_REQUIRED_FIELD\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_DOMAIN\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, \u0060COMPANY_VALIDATION_FAILED\u0060, or \u0060INVALID_UPDATE_STRATEGY\u0060."
           },
           "message": {
             "type": "string"
@@ -27470,6 +27610,20 @@
         "type": "object",
         "description": "Sending user information"
       },
+      "PostCampaignsByCampaignIdLeads200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItemParamsAdditionalProperties"
+        },
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
+      },
+      "PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParamsAdditionalProperties"
+        },
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
+      },
       "GetInboxByContactIdDraftsByDraftId200ResponseDraftAttachmentsItem": {
         "type": "object",
         "properties": {
@@ -27507,9 +27661,9 @@
       "PostContacts200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/PostContacts200ResponseWarningsItemParamsAdditionalProperties"
         },
-        "description": "The offending input, echoed back (e.g. \u0060{\u0022contactOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
       "PostContacts201ResponseDataEmailsItem": {
         "type": "object",
@@ -27526,16 +27680,16 @@
       "PostContacts201ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/PostContacts201ResponseWarningsItemParamsAdditionalProperties"
         },
-        "description": "The offending input, echoed back (e.g. \u0060{\u0022contactOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
       "PostCompanies200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/PostCompanies200ResponseWarningsItemParamsAdditionalProperties"
         },
-        "description": "The offending input, echoed back (e.g. \u0060{\u0022companyOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
       "PostCompanies201ResponseDataFields": {
         "type": "object",
@@ -27544,9 +27698,9 @@
       "PostCompanies201ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/PostCompanies201ResponseWarningsItemParamsAdditionalProperties"
         },
-        "description": "The offending input, echoed back (e.g. \u0060{\u0022companyOwner\u0022: \u0022nobody@example.com\u0022}\u0060)."
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
       "PostV2CampaignsStatsBatch200ResponseResultsItemStepsItem": {
         "type": "object",
@@ -33516,6 +33670,60 @@
           ]
         }
       },
+      "PostCampaignsByCampaignIdLeadsUpdateStrategyParameter": {
+        "enum": [
+          "overwrite",
+          "overwriteIgnoreEmpty",
+          "fillEmptyOnly"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostCampaignsByCampaignIdLeadsUpdateStrategyParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "overwrite",
+              "name": "Overwrite"
+            },
+            {
+              "value": "overwriteIgnoreEmpty",
+              "name": "OverwriteIgnoreEmpty"
+            },
+            {
+              "value": "fillEmptyOnly",
+              "name": "FillEmptyOnly"
+            }
+          ]
+        }
+      },
+      "PatchCampaignsByCampaignIdLeadsByLeadIdUpdateStrategyParameter": {
+        "enum": [
+          "overwrite",
+          "overwriteIgnoreEmpty",
+          "fillEmptyOnly"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PatchCampaignsByCampaignIdLeadsByLeadIdUpdateStrategyParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "overwrite",
+              "name": "Overwrite"
+            },
+            {
+              "value": "overwriteIgnoreEmpty",
+              "name": "OverwriteIgnoreEmpty"
+            },
+            {
+              "value": "fillEmptyOnly",
+              "name": "FillEmptyOnly"
+            }
+          ]
+        }
+      },
       "GetCrmFiltersTypeParameter": {
         "enum": [
           "lead",
@@ -33658,6 +33866,33 @@
             {
               "value": "crm_sync_unknown_error",
               "name": "CrmSyncUnknownError"
+            }
+          ]
+        }
+      },
+      "PostContactsUpdateStrategyParameter": {
+        "enum": [
+          "overwrite",
+          "overwriteIgnoreEmpty",
+          "fillEmptyOnly"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostContactsUpdateStrategyParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "overwrite",
+              "name": "Overwrite"
+            },
+            {
+              "value": "overwriteIgnoreEmpty",
+              "name": "OverwriteIgnoreEmpty"
+            },
+            {
+              "value": "fillEmptyOnly",
+              "name": "FillEmptyOnly"
             }
           ]
         }
@@ -33838,6 +34073,33 @@
             {
               "value": "crm_sync_unknown_error",
               "name": "CrmSyncUnknownError"
+            }
+          ]
+        }
+      },
+      "PostCompaniesUpdateStrategyParameter": {
+        "enum": [
+          "overwrite",
+          "overwriteIgnoreEmpty",
+          "fillEmptyOnly"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostCompaniesUpdateStrategyParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "overwrite",
+              "name": "Overwrite"
+            },
+            {
+              "value": "overwriteIgnoreEmpty",
+              "name": "OverwriteIgnoreEmpty"
+            },
+            {
+              "value": "fillEmptyOnly",
+              "name": "FillEmptyOnly"
             }
           ]
         }
