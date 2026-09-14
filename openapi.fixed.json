@@ -11,6 +11,641 @@
     }
   ],
   "paths": {
+    "/message-templates": {
+      "get": {
+        "tags": [
+          "Message templates"
+        ],
+        "summary": "List Message Templates",
+        "description": "Lists the team\u0027s library message templates (the templates of the Templates page), newest first, with the page\u0027s own filters: a name search, tags and creators. Campaign step bodies are not templates: read them from GET /campaigns/{campaignId}/sequences.",
+        "operationId": "GetMessageTemplates",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Substring of the name, case-insensitive. Accented a, c, e, i, n, o, u, y match their plain letters (\u0060relance\u0060 finds \u0060R\u00E9lance\u0060). Names only: bodies and subjects are not searched. Maximum 100 characters; a blank value is no filter.",
+            "schema": {
+              "maxLength": 100,
+              "type": "string"
+            },
+            "example": "follow-up"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Keep the templates carrying any of these tags. Comma-separated; the parameter may also be repeated (\u0060?tags=a\u0026tags=b\u0060), which keeps a comma inside a tag reachable. Tags are matched trimmed and lowercased, as the library stores them. Maximum 20.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "follow-up,pricing"
+          },
+          {
+            "name": "userIds",
+            "in": "query",
+            "description": "Keep the items created by any of these users (\u0060usr_\u0060 ids, see GET /team/members). Comma-separated; the parameter may also be repeated. Maximum 100. Omit for every creator.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "usr_A1B2C3D4E5F6G7H8I"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number to retrieve, starting at 1",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 1
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page. Maximum value: 100",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 50
+            },
+            "example": "50"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One page of results, with the pagination block. An empty result is page 1 of 1.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageTemplateListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "etp_A1B2C3D4E5F6G7H8I",
+                      "name": "Follow-up after demo",
+                      "subject": "Next steps",
+                      "message": "\u003Cp\u003EHi {{firstName}},\u003C/p\u003E\u003Cp\u003EThanks for your time yesterday.\u003C/p\u003E",
+                      "cc": [],
+                      "tags": [
+                        "follow-up"
+                      ],
+                      "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+                      "createdAt": "2026-09-01T10:00:00.000Z"
+                    }
+                  ],
+                  "meta": {
+                    "pagination": {
+                      "page": 1,
+                      "limit": 50,
+                      "totalRecords": 1,
+                      "totalPages": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060VALIDATION_ERROR\u0060 - a filter cap or a bad \u0060page\u0060 / \u0060limit\u0060 (JSON body), or no API key was supplied (plain text).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key (plain text), or an API key with no linked user (JSON body carrying \u0060ROUTE_UNAUTHORIZED\u0060).",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - this endpoint only accepts GET"
+          },
+          "429": {
+            "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      }
+    },
+    "/message-templates/tags": {
+      "get": {
+        "tags": [
+          "Message templates"
+        ],
+        "summary": "List Message Template Tags",
+        "description": "Lists the distinct tags used on the team\u0027s library message templates, alphabetically. \u0060search\u0060 matches inside the tag; \u0060userIds\u0060 keeps the tags of those creators\u0027 templates only.",
+        "operationId": "GetMessageTemplatesTags",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Substring of the name, case-insensitive. Accented a, c, e, i, n, o, u, y match their plain letters (\u0060relance\u0060 finds \u0060R\u00E9lance\u0060). Names only: bodies and subjects are not searched. Maximum 100 characters; a blank value is no filter.",
+            "schema": {
+              "maxLength": 100,
+              "type": "string"
+            },
+            "example": "follow-up"
+          },
+          {
+            "name": "userIds",
+            "in": "query",
+            "description": "Keep the items created by any of these users (\u0060usr_\u0060 ids, see GET /team/members). Comma-separated; the parameter may also be repeated. Maximum 100. Omit for every creator.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "usr_A1B2C3D4E5F6G7H8I"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number to retrieve, starting at 1",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 1
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page. Maximum value: 100",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 50
+            },
+            "example": "50"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One page of results, with the pagination block. An empty result is page 1 of 1.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageTemplateTagListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "name": "follow-up"
+                    },
+                    {
+                      "name": "pricing"
+                    }
+                  ],
+                  "meta": {
+                    "pagination": {
+                      "page": 1,
+                      "limit": 50,
+                      "totalRecords": 1,
+                      "totalPages": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060VALIDATION_ERROR\u0060 - a filter cap or a bad \u0060page\u0060 / \u0060limit\u0060 (JSON body), or no API key was supplied (plain text).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key (plain text), or an API key with no linked user (JSON body carrying \u0060ROUTE_UNAUTHORIZED\u0060).",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - this endpoint only accepts GET"
+          },
+          "429": {
+            "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      }
+    },
+    "/message-templates/{templateId}": {
+      "get": {
+        "tags": [
+          "Message templates"
+        ],
+        "summary": "Get Message Template",
+        "description": "Returns one library message template with its body.",
+        "operationId": "GetMessageTemplatesByTemplateId",
+        "responses": {
+          "200": {
+            "description": "The message template",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageTemplate"
+                },
+                "example": {
+                  "_id": "etp_A1B2C3D4E5F6G7H8I",
+                  "name": "Follow-up after demo",
+                  "subject": "Next steps",
+                  "message": "\u003Cp\u003EHi {{firstName}},\u003C/p\u003E\u003Cp\u003EThanks for your time yesterday.\u003C/p\u003E",
+                  "cc": [],
+                  "tags": [
+                    "follow-up"
+                  ],
+                  "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+                  "createdAt": "2026-09-01T10:00:00.000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060VALIDATION_ERROR\u0060 - a filter cap or a bad \u0060page\u0060 / \u0060limit\u0060 or a malformed \u0060templateId\u0060 (\u0060WRONG_PARAM_ID\u0060) (JSON body), or no API key was supplied (plain text).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key (plain text), or an API key with no linked user (JSON body carrying \u0060ROUTE_UNAUTHORIZED\u0060).",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "\u0060EMAIL_TEMPLATE_NOT_FOUND\u0060 - the template does not exist in this workspace\u0027s library. A deleted template, another workspace\u0027s template and a campaign step body all answer this.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Message template not found",
+                  "code": "EMAIL_TEMPLATE_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - this endpoint only accepts GET"
+          },
+          "429": {
+            "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "templateId",
+          "in": "path",
+          "description": "The unique identifier of the message template, from GET /message-templates",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "etp_A1B2C3D4E5F6G7H8I"
+        }
+      ]
+    },
+    "/snippets": {
+      "get": {
+        "tags": [
+          "Snippets"
+        ],
+        "summary": "List Snippets",
+        "description": "Lists the team\u0027s snippets (the fragments of the Templates page \u003E Snippets), by name, with a name search and a creator filter.",
+        "operationId": "GetSnippets",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Substring of the name, case-insensitive. Accented a, c, e, i, n, o, u, y match their plain letters (\u0060relance\u0060 finds \u0060R\u00E9lance\u0060). Names only: bodies and subjects are not searched. Maximum 100 characters; a blank value is no filter.",
+            "schema": {
+              "maxLength": 100,
+              "type": "string"
+            },
+            "example": "follow-up"
+          },
+          {
+            "name": "userIds",
+            "in": "query",
+            "description": "Keep the items created by any of these users (\u0060usr_\u0060 ids, see GET /team/members). Comma-separated; the parameter may also be repeated. Maximum 100. Omit for every creator.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "usr_A1B2C3D4E5F6G7H8I"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number to retrieve, starting at 1",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 1
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page. Maximum value: 100",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 50
+            },
+            "example": "50"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One page of results, with the pagination block. An empty result is page 1 of 1.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnippetListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "snt_A1B2C3D4E5F6G7H8I",
+                      "name": "Signature",
+                      "content": "\u003Cp\u003EBest regards,\u003Cbr/\u003E{{senderName}}\u003C/p\u003E",
+                      "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+                      "createdAt": "2026-09-01T10:00:00.000Z"
+                    }
+                  ],
+                  "meta": {
+                    "pagination": {
+                      "page": 1,
+                      "limit": 50,
+                      "totalRecords": 1,
+                      "totalPages": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060VALIDATION_ERROR\u0060 - a filter cap or a bad \u0060page\u0060 / \u0060limit\u0060 (JSON body), or no API key was supplied (plain text).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key (plain text), or an API key with no linked user (JSON body carrying \u0060ROUTE_UNAUTHORIZED\u0060).",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - this endpoint only accepts GET"
+          },
+          "429": {
+            "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      }
+    },
+    "/snippets/{snippetId}": {
+      "get": {
+        "tags": [
+          "Snippets"
+        ],
+        "summary": "Get Snippet",
+        "description": "Returns one snippet with its content.",
+        "operationId": "GetSnippetsBySnippetId",
+        "responses": {
+          "200": {
+            "description": "The snippet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snippet"
+                },
+                "example": {
+                  "_id": "snt_A1B2C3D4E5F6G7H8I",
+                  "name": "Signature",
+                  "content": "\u003Cp\u003EBest regards,\u003Cbr/\u003E{{senderName}}\u003C/p\u003E",
+                  "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+                  "createdAt": "2026-09-01T10:00:00.000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060VALIDATION_ERROR\u0060 - a filter cap or a bad \u0060page\u0060 / \u0060limit\u0060 or a malformed \u0060snippetId\u0060 (\u0060WRONG_PARAM_ID\u0060) (JSON body), or no API key was supplied (plain text).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key (plain text), or an API key with no linked user (JSON body carrying \u0060ROUTE_UNAUTHORIZED\u0060).",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "\u0060SNIPPET_NOT_FOUND\u0060 - the snippet does not exist in this workspace. A deleted snippet and another workspace\u0027s snippet both answer this.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": {
+                  "error": "Snippet not found",
+                  "code": "SNIPPET_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - this endpoint only accepts GET"
+          },
+          "429": {
+            "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "snippetId",
+          "in": "path",
+          "description": "The unique identifier of the snippet, from GET /snippets",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "snt_A1B2C3D4E5F6G7H8I"
+        }
+      ]
+    },
     "/team": {
       "get": {
         "tags": [
@@ -18649,6 +19284,161 @@
           }
         }
       },
+      "PageMeta": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/PageMetaPagination"
+          }
+        },
+        "description": "Pagination block of a list response. \u0060totalPages\u0060 is at least 1: an empty result is page 1 of 1."
+      },
+      "MessageTemplate": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Template identifier (\u0060etp_\u0060)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name shown on the Templates page"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line; \u0060\u0022\u0022\u0060 when none was set"
+          },
+          "message": {
+            "type": "string",
+            "description": "HTML body, variables left as \u0060{{variable}}\u0060"
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "CC addresses; \u0060[]\u0060 when none was set"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags, trimmed and lowercased; \u0060[]\u0060 when none was set"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Creator user id (\u0060usr_\u0060), see GET /team/members"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation date",
+            "format": "date-time"
+          }
+        },
+        "description": "A library message template: a whole reusable message a user saved from the Templates page or an editor, usable as a step on any channel. Bodies are HTML as stored, with \u0060{{variables}}\u0060 left raw.",
+        "example": {
+          "_id": "etp_A1B2C3D4E5F6G7H8I",
+          "name": "Follow-up after demo",
+          "subject": "Next steps",
+          "message": "\u003Cp\u003EHi {{firstName}},\u003C/p\u003E\u003Cp\u003EThanks for your time yesterday.\u003C/p\u003E",
+          "cc": [],
+          "tags": [
+            "follow-up"
+          ],
+          "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+          "createdAt": "2026-09-01T10:00:00.000Z"
+        }
+      },
+      "MessageTemplateListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageTemplate"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        }
+      },
+      "MessageTemplateTag": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The tag, trimmed and lowercased"
+          }
+        },
+        "description": "One distinct tag of the library. An object, so a per-tag count can be added later without changing the contract.",
+        "example": {
+          "name": "follow-up"
+        }
+      },
+      "MessageTemplateTagListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageTemplateTag"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        }
+      },
+      "Snippet": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Snippet identifier (\u0060snt_\u0060)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name shown on the Templates page"
+          },
+          "content": {
+            "type": "string",
+            "description": "HTML content as authored, variables left as \u0060{{variable}}\u0060"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Creator user id (\u0060usr_\u0060), see GET /team/members"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation date",
+            "format": "date-time"
+          }
+        },
+        "description": "A snippet: an HTML fragment (a signature, a paragraph, a call-to-action) inserted inside a message. The content is HTML as authored: sanitize it before rendering.",
+        "example": {
+          "_id": "snt_A1B2C3D4E5F6G7H8I",
+          "name": "Signature",
+          "content": "\u003Cp\u003EBest regards,\u003Cbr/\u003E{{senderName}}\u003C/p\u003E",
+          "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+          "createdAt": "2026-09-01T10:00:00.000Z"
+        }
+      },
+      "SnippetListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snippet"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        }
+      },
       "WatchListConfigHistoryEntry": {
         "type": "object",
         "properties": {
@@ -20097,6 +20887,27 @@
           "totalPages": {
             "type": "integer",
             "description": "Total number of pages"
+          }
+        }
+      },
+      "PageMetaPagination": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Current page number"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of records per page"
+          },
+          "totalRecords": {
+            "type": "integer",
+            "description": "Total records matching the filters"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Total number of pages, at least 1"
           }
         }
       },

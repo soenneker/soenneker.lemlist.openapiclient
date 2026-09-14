@@ -20,8 +20,10 @@ using Soenneker.Lemlist.OpenApiClient.Hooks;
 using Soenneker.Lemlist.OpenApiClient.Inbox;
 using Soenneker.Lemlist.OpenApiClient.Leads;
 using Soenneker.Lemlist.OpenApiClient.Lemwarm;
+using Soenneker.Lemlist.OpenApiClient.MessageTemplates;
 using Soenneker.Lemlist.OpenApiClient.Schedules;
 using Soenneker.Lemlist.OpenApiClient.Sequences;
+using Soenneker.Lemlist.OpenApiClient.Snippets;
 using Soenneker.Lemlist.OpenApiClient.Tasks;
 using Soenneker.Lemlist.OpenApiClient.Team;
 using Soenneker.Lemlist.OpenApiClient.Unsubs;
@@ -112,6 +114,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Lemwarm.LemwarmRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The messageTemplates property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.MessageTemplates.MessageTemplatesRequestBuilder MessageTemplates
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.MessageTemplates.MessageTemplatesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The schedules property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Schedules.SchedulesRequestBuilder Schedules
         {
@@ -121,6 +128,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.Sequences.SequencesRequestBuilder Sequences
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Sequences.SequencesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The snippets property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Snippets.SnippetsRequestBuilder Snippets
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Snippets.SnippetsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The tasks property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Tasks.TasksRequestBuilder Tasks
