@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Personalization;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithStepItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The personalization property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Personalization.PersonalizationRequestBuilder Personalization
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Personalization.PersonalizationRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The skip property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip.SkipRequestBuilder Skip
         {
