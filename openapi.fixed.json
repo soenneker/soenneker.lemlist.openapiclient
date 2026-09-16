@@ -34978,8 +34978,10 @@
       "GetContactsFieldRejectionReasonParameter": {
         "enum": [
           "enrichment_duplicate_linkedin_url",
+          "enrichment_duplicate_linkedin_url_sales_nav",
           "enrichment_duplicate_email",
           "crm_sync_duplicate_linkedin_url",
+          "crm_sync_duplicate_linkedin_url_sales_nav",
           "crm_sync_invalid_linkedin_url",
           "crm_sync_invalid_url",
           "crm_sync_invalid_email",
@@ -35006,12 +35008,20 @@
               "name": "EnrichmentDuplicateLinkedinUrl"
             },
             {
+              "value": "enrichment_duplicate_linkedin_url_sales_nav",
+              "name": "EnrichmentDuplicateLinkedinUrlSalesNav"
+            },
+            {
               "value": "enrichment_duplicate_email",
               "name": "EnrichmentDuplicateEmail"
             },
             {
               "value": "crm_sync_duplicate_linkedin_url",
               "name": "CrmSyncDuplicateLinkedinUrl"
+            },
+            {
+              "value": "crm_sync_duplicate_linkedin_url_sales_nav",
+              "name": "CrmSyncDuplicateLinkedinUrlSalesNav"
             },
             {
               "value": "crm_sync_invalid_linkedin_url",
@@ -35215,8 +35225,11 @@
       "GetCompaniesFieldRejectionReasonParameter": {
         "enum": [
           "crm_sync_duplicate_company",
+          "crm_sync_duplicate_company_domain",
+          "crm_sync_duplicate_company_name",
           "crm_sync_invalid_domain",
           "crm_sync_duplicate_linkedin_url",
+          "crm_sync_duplicate_linkedin_url_sales_nav",
           "crm_sync_invalid_linkedin_url",
           "crm_sync_linkedin_url_not_company",
           "crm_sync_invalid_url",
@@ -35237,12 +35250,24 @@
               "name": "CrmSyncDuplicateCompany"
             },
             {
+              "value": "crm_sync_duplicate_company_domain",
+              "name": "CrmSyncDuplicateCompanyDomain"
+            },
+            {
+              "value": "crm_sync_duplicate_company_name",
+              "name": "CrmSyncDuplicateCompanyName"
+            },
+            {
               "value": "crm_sync_invalid_domain",
               "name": "CrmSyncInvalidDomain"
             },
             {
               "value": "crm_sync_duplicate_linkedin_url",
               "name": "CrmSyncDuplicateLinkedinUrl"
+            },
+            {
+              "value": "crm_sync_duplicate_linkedin_url_sales_nav",
+              "name": "CrmSyncDuplicateLinkedinUrlSalesNav"
             },
             {
               "value": "crm_sync_invalid_linkedin_url",

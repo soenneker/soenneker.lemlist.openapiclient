@@ -12,6 +12,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         EnrichmentDuplicateLinkedinUrl,
         #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment_duplicate_linkedin_url_sales_nav")]
+        #pragma warning disable CS1591
+        EnrichmentDuplicateLinkedinUrlSalesNav,
+        #pragma warning restore CS1591
         [EnumMember(Value = "enrichment_duplicate_email")]
         #pragma warning disable CS1591
         EnrichmentDuplicateEmail,
@@ -19,6 +23,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "crm_sync_duplicate_linkedin_url")]
         #pragma warning disable CS1591
         CrmSyncDuplicateLinkedinUrl,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_duplicate_linkedin_url_sales_nav")]
+        #pragma warning disable CS1591
+        CrmSyncDuplicateLinkedinUrlSalesNav,
         #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_invalid_linkedin_url")]
         #pragma warning disable CS1591
