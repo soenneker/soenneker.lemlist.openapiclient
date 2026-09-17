@@ -48,6 +48,26 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmSyncValueOscillating,
         #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment_company_duplicate_core_signal_id")]
+        #pragma warning disable CS1591
+        EnrichmentCompanyDuplicateCoreSignalId,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment_company_duplicate_domain")]
+        #pragma warning disable CS1591
+        EnrichmentCompanyDuplicateDomain,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment_company_duplicate_linkedin_url")]
+        #pragma warning disable CS1591
+        EnrichmentCompanyDuplicateLinkedinUrl,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment_company_duplicate_linkedin_url_sales_nav")]
+        #pragma warning disable CS1591
+        EnrichmentCompanyDuplicateLinkedinUrlSalesNav,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment_company_duplicate_name")]
+        #pragma warning disable CS1591
+        EnrichmentCompanyDuplicateName,
+        #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_owner_sync_loop")]
         #pragma warning disable CS1591
         CrmSyncOwnerSyncLoop,

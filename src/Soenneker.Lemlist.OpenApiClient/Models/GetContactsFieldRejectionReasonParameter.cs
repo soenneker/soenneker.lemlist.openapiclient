@@ -56,6 +56,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmSyncDuplicateCompanyBlocked,
         #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_company_data_rejected")]
+        #pragma warning disable CS1591
+        CrmSyncCompanyDataRejected,
+        #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_custom_field_creation_failed")]
         #pragma warning disable CS1591
         CrmSyncCustomFieldCreationFailed,
