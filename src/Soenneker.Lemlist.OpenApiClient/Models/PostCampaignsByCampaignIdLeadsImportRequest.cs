@@ -14,33 +14,33 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>CRM name</summary>
+        /// <summary>`all` (or `true`) skips contacts already in another campaign, `activeOnly` skips only contacts still active in another campaign, `off` (or `false`, the default) imports everyone.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Crm { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate? Deduplicate { get; set; }
 #nullable restore
 #else
-        public string Crm { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate Deduplicate { get; set; }
 #endif
-        /// <summary>Whether to deduplicate leads</summary>
-        public bool? Deduplicate { get; set; }
-        /// <summary>Filter ID from the CRM</summary>
+        /// <summary>Enrichments to run on every imported lead, as an array or a `|`-separated string (e.g. `find_email|verify`). Consumes credits for each lead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FilterId { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature? EnrichFeature { get; set; }
 #nullable restore
 #else
-        public string FilterId { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature EnrichFeature { get; set; }
 #endif
-        /// <summary>Type of filter (for Salesforce)</summary>
+        /// <summary>Filter ID returned by [Get CRM Filters](/api-reference/endpoints/crm/get-crm-filters)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FilterType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId? FilterId { get; set; }
 #nullable restore
 #else
-        public string FilterType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId FilterId { get; set; }
 #endif
-        /// <summary>User ID with CRM connection</summary>
+        /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot and Pipedrive. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType? FilterType { get; set; }
+        /// <summary>Salesforce only, for a list view scoped to its owner (&quot;My leads&quot;, &quot;My contacts&quot;…): the team member the view is read as. They must have their own Salesforce account connected in lemlist. Leave it out in every other case (reports, views not scoped to an owner); it is ignored for HubSpot and Pipedrive, where your team&apos;s CRM connection is used.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? UserId { get; set; }
@@ -73,10 +73,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "crm", n => { Crm = n.GetStringValue(); } },
-                { "deduplicate", n => { Deduplicate = n.GetBoolValue(); } },
-                { "filterId", n => { FilterId = n.GetStringValue(); } },
-                { "filterType", n => { FilterType = n.GetStringValue(); } },
+                { "deduplicate", n => { Deduplicate = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate.CreateFromDiscriminatorValue); } },
+                { "enrichFeature", n => { EnrichFeature = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature.CreateFromDiscriminatorValue); } },
+                { "filterId", n => { FilterId = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId.CreateFromDiscriminatorValue); } },
+                { "filterType", n => { FilterType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType>(); } },
                 { "userId", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -87,12 +87,73 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("crm", Crm);
-            writer.WriteBoolValue("deduplicate", Deduplicate);
-            writer.WriteStringValue("filterId", FilterId);
-            writer.WriteStringValue("filterType", FilterType);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate>("deduplicate", Deduplicate);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature>("enrichFeature", EnrichFeature);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId>("filterId", FilterId);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType>("filterType", FilterType);
             writer.WriteStringValue("userId", UserId);
             writer.WriteAdditionalData(AdditionalData);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="double"/>, <see cref="string"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PostCampaignsByCampaignIdLeadsImportRequest_filterId : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="double"/></summary>
+            public double? Double { get; set; }
+            /// <summary>Composed type representation for type <see cref="string"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string? String { get; set; }
+#nullable restore
+#else
+            public string String { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId();
+                if(parseNode.GetDoubleValue() is double doubleValue)
+                {
+                    result.Double = doubleValue;
+                }
+                else if(parseNode.GetStringValue() is string stringValue)
+                {
+                    result.String = stringValue;
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(Double != null)
+                {
+                    writer.WriteDoubleValue(null, Double);
+                }
+                else if(String != null)
+                {
+                    writer.WriteStringValue(null, String);
+                }
+            }
         }
     }
 }

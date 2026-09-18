@@ -74,6 +74,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The position within the sequence to insert the new step (≥ -1). If omitted or greater than the number of steps, the new step is added to the end</summary>
         public int? Index { get; set; }
+        /// <summary>Applies to `sendToAnotherCampaign` steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. `continue` keeps it running the remaining steps, `pause` pauses it, `stop` ends the source campaign for it. Omitted leaves the step without a value, which behaves as `continue`; a step added from the lemlist UI defaults to `stop`. A transfer that fails always pauses the lead, whatever this says.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction? LeadAction { get; set; }
         /// <summary>Content of the email or message (used for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in `ai` record mode). Required for linkedinSend, whatsappMessage, and sms</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -165,6 +167,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "endorseAnyFallback", n => { EndorseAnyFallback = n.GetBoolValue(); } },
                 { "images", n => { Images = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "index", n => { Index = n.GetIntValue(); } },
+                { "leadAction", n => { LeadAction = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction>(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "method", n => { Method = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestMethod>(); } },
                 { "recordMode", n => { RecordMode = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestRecordMode>(); } },
@@ -195,6 +198,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("endorseAnyFallback", EndorseAnyFallback);
             writer.WriteCollectionOfPrimitiveValues<string>("images", Images);
             writer.WriteIntValue("index", Index);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction>("leadAction", LeadAction);
             writer.WriteStringValue("message", Message);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestMethod>("method", Method);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestRecordMode>("recordMode", RecordMode);

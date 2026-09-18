@@ -1082,18 +1082,11 @@
           "Team"
         ],
         "summary": "Get Team CRM Users",
+        "description": "Lists the team members whose CRM account is connected to lemlist.",
         "operationId": "GetTeamCrmUsers",
         "responses": {
           "200": {
             "description": "Success",
-            "headers": {
-              "Content-Type": {
-                "schema": {
-                  "type": "string"
-                },
-                "example": "application/json"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1101,30 +1094,23 @@
                 },
                 "example": [
                   {
-                    "userId": "usr_FU6yAd3UdBFel0UDy",
-                    "crm": "salesforce"
-                  },
-                  {
-                    "userId": "usr_FU6yAd3UdBFel0UDy",
+                    "userId": "usr_M0hO7nYLNsInJ6ar6",
                     "crm": "hubspot"
-                  },
-                  {
-                    "userId": "usr_FU6yAd3UdBFel0UDy",
-                    "crm": "pipedrive"
                   }
                 ]
               }
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / Endpoint not available",
+            "description": "Bad team",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetTeamCrmUsers400Response"
                 },
-                "example": "Bad team"
+                "example": {
+                  "error": "Bad team"
+                }
               }
             }
           },
@@ -6690,32 +6676,13 @@
           "Leads"
         ],
         "summary": "Get CRM Filters",
+        "description": "Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned \u0060id\u0060 to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).",
         "operationId": "GetCrmFilters",
         "parameters": [
           {
-            "name": "crm",
-            "in": "query",
-            "description": "CRM name (e.g., hubspot, salesforce, pipedrive)",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "hubspot"
-          },
-          {
-            "name": "userId",
-            "in": "query",
-            "description": "Connected user ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "usr_FU6yAd3UdBFel0UDy"
-          },
-          {
             "name": "type",
             "in": "query",
-            "description": "Filter type for Salesforce. Can be: lead, contact, or report.",
+            "description": "Salesforce only: \u0060lead\u0060 or \u0060contact\u0060 list views, or \u0060report\u0060. Ignored by HubSpot and Pipedrive. Defaults to \u0060lead\u0060 when your Salesforce connection allows Leads, \u0060contact\u0060 otherwise.",
             "schema": {
               "$ref": "#/components/schemas/GetCrmFiltersTypeParameter"
             },
@@ -6744,19 +6711,29 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "The request was refused; \u0060error\u0060 explains why (e.g. \u0060CRM not connected: ...\u0060, \u0060Filter type can be only lead, contact or report\u0060, \u0060Upgrade your plan to use this feature\u0060, or a refusal from the CRM).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCrmFilters400Response"
+                },
+                "example": {
+                  "error": "CRM not connected: the team must connect its CRM in lemlist settings before importing"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "object",
                   "description": "Fallback media schema"
                 },
-                "example": "Bad team"
+                "example": "The authentication you supplied is incorrect"
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
@@ -6767,6 +6744,7 @@
           "Leads"
         ],
         "summary": "Import Leads from CRM",
+        "description": "Links a campaign to a filter of your connected CRM and imports its records as leads.\n\n**Recurring:** the campaign stays linked to the filter, and the records the filter picks up later are imported automatically.\n\n**New link only:** the campaign must not be linked to a CRM filter yet. Changing or unlinking a campaign\u0027s CRM filter is done in the lemlist app.\n\nThe filter is checked in your CRM before anything is saved. The import runs in the background: leads appear over the next minutes, not in the response.\n\n**Credits:** the enrichments requested in \u0060enrichFeature\u0060 run on every imported lead, now and later, and are charged to the user of the API key.",
         "operationId": "PostCampaignsByCampaignIdLeadsImport",
         "requestBody": {
           "content": {
@@ -6775,21 +6753,22 @@
                 "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImportRequest"
               },
               "example": {
-                "crm": "hubspot",
-                "userId": "usr_FU6yAd3UdBFel0UDy",
                 "filterId": "16",
-                "deduplicate": true
+                "deduplicate": "all",
+                "enrichFeature": [
+                  "find_email"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The campaign is linked to the filter; the import runs in the background.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImport200ResponseSchema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImport200Response"
                 },
                 "example": {
                   "ok": true
@@ -6798,19 +6777,42 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "The request was refused; \u0060error\u0060 explains why (e.g. \u0060This campaign already imports from a CRM filter: ...\u0060, \u0060CRM filter not found: ...\u0060, \u0060CRM not connected: ...\u0060, \u0060User not in team\u0060, \u0060Bad params\u0060, \u0060Unsupported enrichment features\u0060, \u0060Upgrade your plan to use this feature\u0060, or a credit refusal for the requested enrichments).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImport400Response"
+                },
+                "example": {
+                  "error": "This campaign already imports from a CRM filter: change or unlink it in lemlist"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "object",
                   "description": "Fallback media schema"
                 },
-                "example": "Bad team"
+                "example": "The authentication you supplied is incorrect"
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImport404Response"
+                },
+                "example": {
+                  "error": "Campaign not found"
+                }
+              }
+            }
           }
         }
       },
@@ -17174,7 +17176,7 @@
           "Contact sourcing"
         ],
         "summary": "Add a Sourced Contact",
-        "description": "Turns one contact-sourcing recommendation into a lemlist contact.\n\n\u0060leadId\u0060 comes from a run\u0027s \u0060contacts[].leadId\u0060 \u2014 a People-Database id, not a contact id. \u0060companyId\u0060 is required and verified: if the person\u0027s profile now puts them at a different company, the contact is not filed under the account asked for and the call answers 409.",
+        "description": "Turns one contact-sourcing recommendation into a lemlist contact.\n\n\u0060leadId\u0060 comes from a run\u0027s \u0060contacts[].leadId\u0060 \u2014 a People-Database id, not a contact id. \u0060companyId\u0060 is required and verified: the new contact is filed under that account, whatever the person\u0027s profile lists as their current employer. Someone your workspace already has as a contact is left where they are \u2014 an Add never moves a contact from one account to another \u2014 and the call answers 409 rather than reporting a creation that did not happen.",
         "operationId": "PostContactSourcingContacts",
         "requestBody": {
           "content": {
@@ -17194,10 +17196,10 @@
             "description": "\u0060findEmail\u0060 was asked for without the credits for it."
           },
           "404": {
-            "description": "The lead is no longer in the People Database. Re-run the sourcing to refresh the recommendations."
+            "description": "The person is already one of your contacts, or no longer in the People Database. Re-run the sourcing to refresh the recommendations."
           },
           "409": {
-            "description": "The lead\u0027s profile lists a different current employer, so they were not filed under this account."
+            "description": "The person is already one of your contacts, filed under another account. They were left there."
           }
         }
       }
@@ -18573,6 +18575,13 @@
           "emailTemplateBId": {
             "type": "string",
             "description": "Email template ID of variant B (present when an A/B test exists on the step)"
+          },
+          "sendToAnotherCampaignId": {
+            "type": "string",
+            "description": "Applies to \u0060sendToAnotherCampaign\u0060 steps only. Target campaign the lead is moved to."
+          },
+          "leadAction": {
+            "$ref": "#/components/schemas/StepLeadAction"
           }
         },
         "description": "A single action in a sequence (email, LinkedIn message, delay, task, etc.)."
@@ -21482,6 +21491,14 @@
           "$ref": "#/components/schemas/GetTeamCrmUsers200ResponseItem"
         }
       },
+      "GetTeamCrmUsers400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "GetCampaigns200Response": {
         "type": "array",
         "items": {
@@ -21990,6 +22007,9 @@
             "type": "string",
             "description": "Target campaign ID for sendToAnotherCampaign steps. The campaign must exist and not be archived"
           },
+          "leadAction": {
+            "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsRequestLeadAction"
+          },
           "images": {
             "type": "array",
             "items": {
@@ -22099,6 +22119,9 @@
           "campaignId": {
             "type": "string",
             "description": "Target campaign ID for sendToAnotherCampaign steps. The campaign must exist and not be archived"
+          },
+          "leadAction": {
+            "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction"
           },
           "images": {
             "type": "array",
@@ -23078,41 +23101,72 @@
       "GetCrmFilters200Response": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/CrmFilter"
+          "$ref": "#/components/schemas/GetCrmFilters200ResponseItem"
+        }
+      },
+      "GetCrmFilters400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
         }
       },
       "PostCampaignsByCampaignIdLeadsImportRequest": {
         "required": [
-          "crm",
-          "userId",
           "filterId"
         ],
         "type": "object",
         "properties": {
-          "crm": {
-            "type": "string",
-            "description": "CRM name"
+          "filterId": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Filter ID returned by [Get CRM Filters](/api-reference/endpoints/crm/get-crm-filters)"
+          },
+          "filterType": {
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImportRequestFilterType"
           },
           "userId": {
             "type": "string",
-            "description": "User ID with CRM connection"
-          },
-          "filterId": {
-            "type": "string",
-            "description": "Filter ID from the CRM"
-          },
-          "filterType": {
-            "type": "string",
-            "description": "Type of filter (for Salesforce)"
+            "description": "Salesforce only, for a list view scoped to its owner (\u0022My leads\u0022, \u0022My contacts\u0022\u2026): the team member the view is read as. They must have their own Salesforce account connected in lemlist. Leave it out in every other case (reports, views not scoped to an owner); it is ignored for HubSpot and Pipedrive, where your team\u0027s CRM connection is used."
           },
           "deduplicate": {
-            "type": "boolean",
-            "description": "Whether to deduplicate leads"
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImportRequestDeduplicate"
+          },
+          "enrichFeature": {
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature"
           }
         }
       },
       "PostCampaignsByCampaignIdLeadsImport200Response": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdLeadsImport400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdLeadsImport404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
       },
       "GetDatabaseFilters200Response": {
         "type": "array",
@@ -25648,11 +25702,8 @@
       "GetCrmFilters200ResponseSchema": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/CrmFilter"
+          "$ref": "#/components/schemas/GetCrmFilters200ResponseSchemaItem"
         }
-      },
-      "PostCampaignsByCampaignIdLeadsImport200ResponseSchema": {
-        "type": "object"
       },
       "GetDatabaseFilters200ResponseSchema": {
         "type": "array",
@@ -26012,6 +26063,33 @@
           }
         ]
       },
+      "PostCampaignsByCampaignIdLeadsImportRequestDeduplicate": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImportRequestDeduplicateOneOf2"
+          }
+        ],
+        "description": "\u0060all\u0060 (or \u0060true\u0060) skips contacts already in another campaign, \u0060activeOnly\u0060 skips only contacts still active in another campaign, \u0060off\u0060 (or \u0060false\u0060, the default) imports everyone."
+      },
+      "PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item"
+            }
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "Enrichments to run on every imported lead, as an array or a \u0060|\u0060-separated string (e.g. \u0060find_email|verify\u0060). Consumes credits for each lead."
+      },
       "GetContacts200ResponseOneOf2": {
         "required": [
           "data",
@@ -26192,7 +26270,7 @@
           },
           "crm": {
             "type": "string",
-            "description": "The CRM integrated with lemlist (e.g., salesforce, hubspot, pipedrive)"
+            "description": "The CRM integrated with lemlist (hubspot, salesforce or pipedrive)"
           }
         }
       },
@@ -27049,6 +27127,26 @@
           },
           "fileName": {
             "type": "string"
+          }
+        }
+      },
+      "GetCrmFilters200ResponseItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Filter ID in the CRM"
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter name in the CRM"
           }
         }
       },
@@ -27989,7 +28087,7 @@
           },
           "crm": {
             "type": "string",
-            "description": "The CRM integrated with lemlist (e.g., salesforce, hubspot, pipedrive)"
+            "description": "The CRM integrated with lemlist (hubspot, salesforce or pipedrive)"
           }
         }
       },
@@ -28498,6 +28596,26 @@
         },
         "additionalProperties": {
           "type": "string"
+        }
+      },
+      "GetCrmFilters200ResponseSchemaItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Filter ID in the CRM"
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter name in the CRM"
+          }
         }
       },
       "GetContactsLists200ResponseSchemaItem": {
@@ -29373,6 +29491,34 @@
             {
               "value": "api",
               "name": "Api"
+            }
+          ]
+        }
+      },
+      "StepLeadAction": {
+        "enum": [
+          "continue",
+          "pause",
+          "stop"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Applies to \u0060sendToAnotherCampaign\u0060 steps only. What happens to the lead in the source campaign once it has been moved. Absent when the step carries no value, which behaves as \u0060continue\u0060.",
+        "x-ms-enum": {
+          "name": "StepLeadAction",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "continue",
+              "name": "ContinueValue"
+            },
+            {
+              "value": "pause",
+              "name": "Pause"
+            },
+            {
+              "value": "stop",
+              "name": "Stop"
             }
           ]
         }
@@ -31687,6 +31833,34 @@
           ]
         }
       },
+      "PostSequencesBySequenceIdStepsRequestLeadAction": {
+        "enum": [
+          "continue",
+          "pause",
+          "stop"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Applies to \u0060sendToAnotherCampaign\u0060 steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. \u0060continue\u0060 keeps it running the remaining steps, \u0060pause\u0060 pauses it, \u0060stop\u0060 ends the source campaign for it. Omitted leaves the step without a value, which behaves as \u0060continue\u0060; a step added from the lemlist UI defaults to \u0060stop\u0060. A transfer that fails always pauses the lead, whatever this says.",
+        "x-ms-enum": {
+          "name": "PostSequencesBySequenceIdStepsRequestLeadAction",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "continue",
+              "name": "ContinueValue"
+            },
+            {
+              "value": "pause",
+              "name": "Pause"
+            },
+            {
+              "value": "stop",
+              "name": "Stop"
+            }
+          ]
+        }
+      },
       "PostSequencesBySequenceIdStepsRequestRecordMode": {
         "enum": [
           "manual",
@@ -31985,6 +32159,34 @@
           ]
         }
       },
+      "PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction": {
+        "enum": [
+          "continue",
+          "pause",
+          "stop"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Applies to \u0060sendToAnotherCampaign\u0060 steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. \u0060continue\u0060 keeps it running the remaining steps, \u0060pause\u0060 pauses it, \u0060stop\u0060 ends the source campaign for it. Omitted leaves the step without a value, which behaves as \u0060continue\u0060; a step added from the lemlist UI defaults to \u0060stop\u0060. A transfer that fails always pauses the lead, whatever this says.",
+        "x-ms-enum": {
+          "name": "PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "continue",
+              "name": "ContinueValue"
+            },
+            {
+              "value": "pause",
+              "name": "Pause"
+            },
+            {
+              "value": "stop",
+              "name": "Stop"
+            }
+          ]
+        }
+      },
       "PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode": {
         "enum": [
           "manual",
@@ -32238,6 +32440,34 @@
         "type": "string",
         "additionalProperties": false,
         "description": "A/B variant to write on. Defaults to the variant the lead is already on: the winner once one is picked, else the variant already personalized, else the variant of the lead\u0027s scheduled task, else A."
+      },
+      "PostCampaignsByCampaignIdLeadsImportRequestFilterType": {
+        "enum": [
+          "lead",
+          "contact",
+          "report"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Salesforce only: \u0060lead\u0060 or \u0060contact\u0060 list views, or \u0060report\u0060. Ignored by HubSpot and Pipedrive. Defaults to \u0060lead\u0060 when your Salesforce connection allows Leads, \u0060contact\u0060 otherwise.",
+        "x-ms-enum": {
+          "name": "PostCampaignsByCampaignIdLeadsImportRequestFilterType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "lead",
+              "name": "Lead"
+            },
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "report",
+              "name": "Report"
+            }
+          ]
+        }
       },
       "CreatePersonaRequestMode": {
         "enum": [
@@ -33379,6 +33609,65 @@
         ],
         "type": "string",
         "additionalProperties": false
+      },
+      "PostCampaignsByCampaignIdLeadsImportRequestDeduplicateOneOf2": {
+        "enum": [
+          "off",
+          "all",
+          "activeOnly"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostCampaignsByCampaignIdLeadsImportRequestDeduplicateOneOf2",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "off",
+              "name": "Off"
+            },
+            {
+              "value": "all",
+              "name": "All"
+            },
+            {
+              "value": "activeOnly",
+              "name": "ActiveOnly"
+            }
+          ]
+        }
+      },
+      "PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item": {
+        "enum": [
+          "find_email",
+          "find_phone",
+          "verify",
+          "linkedin_enrichment"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "find_email",
+              "name": "FindEmail"
+            },
+            {
+              "value": "find_phone",
+              "name": "FindPhone"
+            },
+            {
+              "value": "verify",
+              "name": "Verify"
+            },
+            {
+              "value": "linkedin_enrichment",
+              "name": "LinkedinEnrichment"
+            }
+          ]
+        }
       },
       "PostSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTestOneOf2": {
         "enum": [

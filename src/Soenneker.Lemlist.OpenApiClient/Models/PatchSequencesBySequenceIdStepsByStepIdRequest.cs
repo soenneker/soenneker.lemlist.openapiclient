@@ -72,6 +72,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Images { get; set; }
 #endif
+        /// <summary>Applies to `sendToAnotherCampaign` steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. `continue` keeps it running the remaining steps, `pause` pauses it, `stop` ends the source campaign for it. Omitted leaves the step without a value, which behaves as `continue`; a step added from the lemlist UI defaults to `stop`. A transfer that fails always pauses the lead, whatever this says.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction? LeadAction { get; set; }
         /// <summary>Content of the email or message (for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in `ai` record mode)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -162,6 +164,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "delayType", n => { DelayType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType>(); } },
                 { "endorseAnyFallback", n => { EndorseAnyFallback = n.GetBoolValue(); } },
                 { "images", n => { Images = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "leadAction", n => { LeadAction = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "method", n => { Method = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod>(); } },
                 { "recordMode", n => { RecordMode = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode>(); } },
@@ -191,6 +194,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType>("delayType", DelayType);
             writer.WriteBoolValue("endorseAnyFallback", EndorseAnyFallback);
             writer.WriteCollectionOfPrimitiveValues<string>("images", Images);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>("leadAction", LeadAction);
             writer.WriteStringValue("message", Message);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod>("method", Method);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode>("recordMode", RecordMode);

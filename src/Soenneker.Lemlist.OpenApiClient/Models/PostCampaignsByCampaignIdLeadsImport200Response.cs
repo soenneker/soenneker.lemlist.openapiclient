@@ -2,38 +2,36 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
-using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import
+namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// Fallback media schema
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error : ApiException, IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class PostCampaignsByCampaignIdLeadsImport200Response : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The primary error message.</summary>
-        public override string Message { get => base.Message; }
+        /// <summary>The ok property</summary>
+        public bool? Ok { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response"/> and sets the default values.
         /// </summary>
-        public PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error()
+        public PostCampaignsByCampaignIdLeadsImport200Response()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -43,6 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "ok", n => { Ok = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -52,6 +51,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("ok", Ok);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

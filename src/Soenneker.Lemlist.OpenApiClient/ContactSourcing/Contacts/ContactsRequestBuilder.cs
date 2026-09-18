@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.ContactSourcing.Contacts
         {
         }
         /// <summary>
-        /// Turns one contact-sourcing recommendation into a lemlist contact.`leadId` comes from a run&apos;s `contacts[].leadId` — a People-Database id, not a contact id. `companyId` is required and verified: if the person&apos;s profile now puts them at a different company, the contact is not filed under the account asked for and the call answers 409.
+        /// Turns one contact-sourcing recommendation into a lemlist contact.`leadId` comes from a run&apos;s `contacts[].leadId` — a People-Database id, not a contact id. `companyId` is required and verified: the new contact is filed under that account, whatever the person&apos;s profile lists as their current employer. Someone your workspace already has as a contact is left where they are — an Add never moves a contact from one account to another — and the call answers 409 rather than reporting a creation that did not happen.
         /// </summary>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -53,7 +53,7 @@ namespace Soenneker.Lemlist.OpenApiClient.ContactSourcing.Contacts
             await RequestAdapter.SendNoContentAsync(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Turns one contact-sourcing recommendation into a lemlist contact.`leadId` comes from a run&apos;s `contacts[].leadId` — a People-Database id, not a contact id. `companyId` is required and verified: if the person&apos;s profile now puts them at a different company, the contact is not filed under the account asked for and the call answers 409.
+        /// Turns one contact-sourcing recommendation into a lemlist contact.`leadId` comes from a run&apos;s `contacts[].leadId` — a People-Database id, not a contact id. `companyId` is required and verified: the new contact is filed under that account, whatever the person&apos;s profile lists as their current employer. Someone your workspace already has as a contact is left where they are — an Add never moves a contact from one account to another — and the call answers 409 rather than reporting a creation that did not happen.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

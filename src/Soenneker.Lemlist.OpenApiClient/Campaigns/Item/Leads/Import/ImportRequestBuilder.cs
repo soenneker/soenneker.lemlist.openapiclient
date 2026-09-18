@@ -34,32 +34,36 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import
         {
         }
         /// <summary>
-        /// Import Leads from CRM
+        /// Links a campaign to a filter of your connected CRM and imports its records as leads.**Recurring:** the campaign stays linked to the filter, and the records the filter picks up later are imported automatically.**New link only:** the campaign must not be linked to a CRM filter yet. Changing or unlinking a campaign&apos;s CRM filter is done in the lemlist app.The filter is checked in your CRM before anything is saved. The import runs in the background: leads appear over the next minutes, not in the response.**Credits:** the enrichments requested in `enrichFeature` run on every imported lead, now and later, and are charged to the user of the API key.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseSchema"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseSchema?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseSchema> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200Response401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport404Response.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseSchema>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseSchema.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Import Leads from CRM
+        /// Links a campaign to a filter of your connected CRM and imports its records as leads.**Recurring:** the campaign stays linked to the filter, and the records the filter picks up later are imported automatically.**New link only:** the campaign must not be linked to a CRM filter yet. Changing or unlinking a campaign&apos;s CRM filter is done in the lemlist app.The filter is checked in your CRM before anything is saved. The import runs in the background: leads appear over the next minutes, not in the response.**Credits:** the enrichments requested in `enrichFeature` run on every imported lead, now and later, and are charged to the user of the API key.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

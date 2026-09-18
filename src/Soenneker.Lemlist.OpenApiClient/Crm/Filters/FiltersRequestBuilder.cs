@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public FiltersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/crm/filters?crm={crm}&userId={userId}{&type*}", pathParameters)
+        public FiltersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/crm/filters{?type*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,35 +30,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public FiltersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/crm/filters?crm={crm}&userId={userId}{&type*}", rawUrl)
+        public FiltersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/crm/filters{?type*}", rawUrl)
         {
         }
         /// <summary>
-        /// Get CRM Filters
+        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
         /// </summary>
-        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter&gt;</returns>
+        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters200ResponseSchemaItem&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.GetCrmFilters200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.GetCrmFilters200ResponseSchema401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters200ResponseSchemaItem>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters200ResponseSchemaItem>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.GetCrmFilters200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.GetCrmFilters200ResponseSchema401Error.CreateFromDiscriminatorValue },
             };
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.CrmFilter.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Get CRM Filters
+        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -86,34 +88,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
             return new global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Get CRM Filters
+        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class FiltersRequestBuilderGetQueryParameters 
         {
-            /// <summary>CRM name (e.g., hubspot, salesforce, pipedrive)</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("crm")]
-            public string? Crm { get; set; }
-#nullable restore
-#else
-            [QueryParameter("crm")]
-            public string Crm { get; set; }
-#endif
-            /// <summary>Filter type for Salesforce. Can be: lead, contact, or report.</summary>
+            /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot and Pipedrive. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
             [QueryParameter("type")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFiltersTypeParameter? Type { get; set; }
-            /// <summary>Connected user ID</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("userId")]
-            public string? UserId { get; set; }
-#nullable restore
-#else
-            [QueryParameter("userId")]
-            public string UserId { get; set; }
-#endif
         }
     }
 }
