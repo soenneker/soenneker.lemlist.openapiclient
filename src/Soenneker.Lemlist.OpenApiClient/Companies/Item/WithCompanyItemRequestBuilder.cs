@@ -47,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.DeleteCompaniesByCompanyId200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.DeleteCompaniesByCompanyId200Response404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.Item.WithCompanyItemRequestBuilder.WithCompanyItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.DeleteCompaniesByCompanyId200Response401Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.DeleteCompaniesByCompanyId200Response404Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

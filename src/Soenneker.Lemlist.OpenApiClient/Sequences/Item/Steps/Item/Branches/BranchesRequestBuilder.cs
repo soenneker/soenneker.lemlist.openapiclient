@@ -52,10 +52,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdBranches400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema404Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdBranches404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -68,10 +68,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdBranches400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema402Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.GetSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema404Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdBranches404Response.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
@@ -83,12 +83,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema403Error">When receiving a 403 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema404Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema409Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch>?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -102,12 +102,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema402Error.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema403Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema404Error.CreateFromDiscriminatorValue },
-                { "409", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.PatchSequencesBySequenceIdStepsByStepIdBranches200ResponseSchema409Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches403Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches404Response.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranches409Response.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
@@ -119,12 +119,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch402Error">When receiving a 402 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch403Error">When receiving a 403 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch404Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch409Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranchesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -138,12 +138,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch402Error.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch403Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch404Error.CreateFromDiscriminatorValue },
-                { "409", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.ConditionBranch409Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches403Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches404Response.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdBranches409Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ConditionBranch.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

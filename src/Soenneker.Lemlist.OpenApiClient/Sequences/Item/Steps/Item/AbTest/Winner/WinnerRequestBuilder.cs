@@ -44,7 +44,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winne
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response402Error">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner404Response">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response405Error">When receiving a 405 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner405Response">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinnerRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winne
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response402Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner404Response.CreateFromDiscriminatorValue },
-                { "405", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.AbTest.Winner.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response405Error.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner405Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

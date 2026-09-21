@@ -39,10 +39,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response404Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response422Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip422Response">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,10 +55,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response401Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response404Error.CreateFromDiscriminatorValue },
-                { "422", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.PostCampaignsByCampaignIdStepsByStepIdSkip200Response422Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip404Response.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip422Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

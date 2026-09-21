@@ -112,13 +112,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplates400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -141,13 +141,13 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplates401Response"
                 },
                 "example": {
                   "error": "Route unauthorized",
                   "code": "ROUTE_UNAUTHORIZED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -246,13 +246,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplatesTags400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -275,13 +275,13 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplatesTags401Response"
                 },
                 "example": {
                   "error": "Route unauthorized",
                   "code": "ROUTE_UNAUTHORIZED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -330,13 +330,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplatesByTemplateId400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -359,13 +359,13 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplatesByTemplateId401Response"
                 },
                 "example": {
                   "error": "Route unauthorized",
                   "code": "ROUTE_UNAUTHORIZED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -374,13 +374,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetMessageTemplatesByTemplateId404Response"
                 },
                 "example": {
                   "error": "Message template not found",
                   "code": "EMAIL_TEMPLATE_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -492,13 +492,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSnippets400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -521,13 +521,13 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSnippets401Response"
                 },
                 "example": {
                   "error": "Route unauthorized",
                   "code": "ROUTE_UNAUTHORIZED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -571,13 +571,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSnippetsBySnippetId400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -600,13 +600,13 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSnippetsBySnippetId401Response"
                 },
                 "example": {
                   "error": "Route unauthorized",
                   "code": "ROUTE_UNAUTHORIZED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -615,13 +615,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSnippetsBySnippetId404Response"
                 },
                 "example": {
                   "error": "Snippet not found",
                   "code": "SNIPPET_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -1888,13 +1888,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdStepsByStepIdSkip400Response"
                 },
                 "example": {
                   "error": "Route bad request",
                   "code": "ROUTE_BAD_REQUEST"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -1922,13 +1922,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdStepsByStepIdSkip404Response"
                 },
                 "example": {
                   "error": "Step not found in this campaign",
                   "code": "STEP_SKIP_STEP_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -1940,13 +1940,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdStepsByStepIdSkip422Response"
                 },
                 "example": {
                   "error": "A condition step cannot be skipped",
                   "code": "STEP_SKIP_STEP_IS_CONDITION"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3298,13 +3298,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdBranches400Response"
                 },
                 "example": {
                   "error": "This step is not a condition step",
                   "code": "SEQUENCE_BRANCH_STEP_NOT_CONDITIONAL"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3337,13 +3337,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdBranches404Response"
                 },
                 "example": {
                   "error": "Step not found",
                   "code": "SEQUENCE_STEP_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3424,13 +3424,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdBranches400Response"
                 },
                 "example": {
                   "error": "emailStatusFilter is required to add a branch on condition \u0022hasEmailAddress\u0022",
                   "code": "SEQUENCE_BRANCH_VALUE_REQUIRED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3463,13 +3463,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdBranches403Response"
                 },
                 "example": {
                   "error": "Condition branches are not enabled for this team",
                   "code": "SEQUENCE_BRANCH_BETA_REQUIRED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3478,13 +3478,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdBranches404Response"
                 },
                 "example": {
                   "error": "Step not found",
                   "code": "SEQUENCE_STEP_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3496,13 +3496,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdBranches409Response"
                 },
                 "example": {
                   "error": "You cannot add, remove or reorder branches once leads have entered the campaign",
                   "code": "SEQUENCE_BRANCH_CAMPAIGN_RUNNING"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3577,13 +3577,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranches400Response"
                 },
                 "example": {
                   "error": "order must list every branch of this step exactly once, excluding the Else branch",
                   "code": "SEQUENCE_BRANCH_ORDER_INVALID"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3616,13 +3616,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranches403Response"
                 },
                 "example": {
                   "error": "Condition branches are not enabled for this team",
                   "code": "SEQUENCE_BRANCH_BETA_REQUIRED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3631,13 +3631,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranches404Response"
                 },
                 "example": {
                   "error": "Step not found",
                   "code": "SEQUENCE_STEP_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3649,13 +3649,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranches409Response"
                 },
                 "example": {
                   "error": "You cannot add, remove or reorder branches once leads have entered the campaign",
                   "code": "SEQUENCE_BRANCH_CAMPAIGN_RUNNING"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3756,13 +3756,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response"
                 },
                 "example": {
                   "error": "Nothing to update",
                   "code": "SEQUENCE_BRANCH_NO_UPDATE"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3795,13 +3795,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response"
                 },
                 "example": {
                   "error": "Condition branches are not enabled for this team",
                   "code": "SEQUENCE_BRANCH_BETA_REQUIRED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3810,13 +3810,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response"
                 },
                 "example": {
                   "error": "No branch with this sequenceId on this step",
                   "code": "SEQUENCE_BRANCH_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3828,13 +3828,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response"
                 },
                 "example": {
                   "error": "You cannot add, remove or reorder branches once leads have entered the campaign",
                   "code": "SEQUENCE_BRANCH_CAMPAIGN_RUNNING"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3872,13 +3872,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response"
                 },
                 "example": {
                   "error": "A condition step must keep at least one branch",
                   "code": "SEQUENCE_BRANCH_LAST_NOT_REMOVABLE"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3911,13 +3911,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response"
                 },
                 "example": {
                   "error": "Condition branches are not enabled for this team",
                   "code": "SEQUENCE_BRANCH_BETA_REQUIRED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3926,13 +3926,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response"
                 },
                 "example": {
                   "error": "No branch with this sequenceId on this step",
                   "code": "SEQUENCE_BRANCH_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -3944,13 +3944,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response"
                 },
                 "example": {
                   "error": "You cannot add, remove or reorder branches once leads have entered the campaign",
                   "code": "SEQUENCE_BRANCH_CAMPAIGN_RUNNING"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -5097,12 +5097,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads405Response"
                 },
                 "example": {
                   "error": "Invalid email address"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -5935,13 +5935,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip400Response"
                 },
                 "example": {
                   "error": "Route bad request",
                   "code": "ROUTE_BAD_REQUEST"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -5969,13 +5969,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip404Response"
                 },
                 "example": {
                   "error": "Lead not found in this campaign",
                   "code": "STEP_SKIP_LEAD_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -5987,13 +5987,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip422Response"
                 },
                 "example": {
                   "error": "A condition step cannot be skipped",
                   "code": "STEP_SKIP_STEP_IS_CONDITION"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6071,13 +6071,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -6105,13 +6105,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization404Response"
                 },
                 "example": {
                   "error": "Lead not found in this campaign",
                   "code": "REVIEW_DRAFT_LEAD_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6123,13 +6123,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization409Response"
                 },
                 "example": {
                   "error": "The lead already reached this step: its message can no longer be personalized",
                   "code": "REVIEW_DRAFT_STEP_ALREADY_REACHED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6141,13 +6141,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization422Response"
                 },
                 "example": {
                   "error": "This A/B variant is not available on the step (no variant B, or the other variant won)",
                   "code": "REVIEW_DRAFT_VARIANT_UNAVAILABLE"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -6179,13 +6179,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization400Response"
                 },
                 "example": {
                   "error": "Validation error",
                   "code": "VALIDATION_ERROR"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               },
               "text/plain": {
                 "schema": {
@@ -6213,13 +6213,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization404Response"
                 },
                 "example": {
                   "error": "Lead not found in this campaign",
                   "code": "REVIEW_DRAFT_LEAD_NOT_FOUND"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6231,13 +6231,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization409Response"
                 },
                 "example": {
                   "error": "The lead already reached this step: its message can no longer be personalized",
                   "code": "REVIEW_DRAFT_STEP_ALREADY_REACHED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6249,13 +6249,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization422Response"
                 },
                 "example": {
                   "error": "This step type cannot be personalized for a lead",
                   "code": "REVIEW_DRAFT_STEP_UNSUPPORTED"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -6350,13 +6350,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdVariables400Response"
                 },
                 "example": {
                   "ok": false,
                   "status": "Variables not found"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6380,12 +6380,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdVariables409Response"
                 },
                 "example": {
                   "error": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden]"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -6446,13 +6446,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables400Response"
                 },
                 "example": {
                   "ok": false,
                   "status": "Variables not found"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6476,12 +6476,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables409Response"
                 },
                 "example": {
                   "error": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden]"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -6539,13 +6539,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables400Response"
                 },
                 "example": {
                   "ok": false,
                   "status": "Variables not found"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -6569,12 +6569,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables409Response"
                 },
                 "example": {
                   "error": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact [duplicate-forbidden]"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -10024,8 +10024,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostContactsMerge400Response"
                 },
                 "example": {
                   "success": false,
@@ -10033,7 +10032,8 @@
                     "code": "ENTITY_MERGE_SAME_ENTITY",
                     "message": "A record cannot be merged with itself, and each record is listed once"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -10054,8 +10054,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostContactsMerge404Response"
                 },
                 "example": {
                   "success": false,
@@ -10063,7 +10062,8 @@
                     "code": "ENTITY_MERGE_ENTITY_NOT_FOUND",
                     "message": "One of the records was not found"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -10072,8 +10072,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostContactsMerge409Response"
                 },
                 "example": {
                   "success": false,
@@ -10081,7 +10080,8 @@
                     "code": "ENTITY_MERGE_ENRICHMENT_IN_PROGRESS",
                     "message": "A record is being enriched, retry once it finishes"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -10128,8 +10128,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteContactsByIdOrEmail404Response"
                 },
                 "example": {
                   "success": false,
@@ -10137,7 +10136,8 @@
                     "code": "CONTACT_NOT_FOUND",
                     "message": "No contact found with the provided id or email"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -10146,8 +10146,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteContactsByIdOrEmail409Response"
                 },
                 "example": {
                   "success": false,
@@ -10155,7 +10154,8 @@
                     "code": "CONTACT_DELETE_BLOCKED",
                     "message": "Contact cannot be removed if an enrichment is in progress"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -11286,8 +11286,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCompaniesMerge400Response"
                 },
                 "example": {
                   "success": false,
@@ -11295,7 +11294,8 @@
                     "code": "ENTITY_MERGE_SAME_ENTITY",
                     "message": "A record cannot be merged with itself, and each record is listed once"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -11316,8 +11316,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCompaniesMerge404Response"
                 },
                 "example": {
                   "success": false,
@@ -11325,7 +11324,8 @@
                     "code": "ENTITY_MERGE_ENTITY_NOT_FOUND",
                     "message": "One of the records was not found"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -11334,8 +11334,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostCompaniesMerge409Response"
                 },
                 "example": {
                   "success": false,
@@ -11343,7 +11342,8 @@
                     "code": "ENTITY_MERGE_ENRICHMENT_IN_PROGRESS",
                     "message": "A record is being enriched, retry once it finishes"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -11442,8 +11442,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteCompaniesByCompanyId404Response"
                 },
                 "example": {
                   "success": false,
@@ -11451,7 +11450,8 @@
                     "code": "COMPANY_NOT_FOUND_BY_ID",
                     "message": "Company not found by ID"
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -12799,10 +12799,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostV2UnsubscribesVariables200ResponseSchema"
                 },
-                "example": "Variables unsubscribed"
+                "example": "Variables unsubscribed",
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -12980,10 +12980,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteV2UnsubscribesVariablesByValue200ResponseSchema"
                 },
-                "example": "Variable subscribed"
+                "example": "Variable subscribed",
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -13106,10 +13106,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostV2UnsubscribesContactsByContactId200ResponseSchema"
                 },
-                "example": "Contact subscription updated"
+                "example": "Contact subscription updated",
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -13167,10 +13167,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteV2UnsubscribesContactsByContactId200ResponseSchema"
                 },
-                "example": "Contact subscription updated"
+                "example": "Contact subscription updated",
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -13723,8 +13723,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostHooks409Response"
                 },
                 "examples": {
                   "tooManyWebhooks": {
@@ -13739,7 +13738,8 @@
                       "error": "A webhook with this targetUrl already exists"
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -14459,8 +14459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdEnrich404Response"
                 },
                 "examples": {
                   "leadNotFound": {
@@ -14477,7 +14476,8 @@
                       "code": "CONTACT_NOT_FOUND"
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -14489,8 +14489,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdEnrich409Response"
                 },
                 "examples": {
                   "alreadyEnriched": {
@@ -14506,7 +14505,8 @@
                       "error": "lead is already being enriched"
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -14515,12 +14515,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdEnrich500Response"
                 },
                 "example": {
                   "error": "Failed to enrich lead"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -16636,12 +16636,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdAbTest405Response"
                 },
                 "example": {
                   "error": "Bad method"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -16715,12 +16715,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdAbTest405Response"
                 },
                 "example": {
                   "error": "Bad method"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -16821,12 +16821,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdAbTest405Response"
                 },
                 "example": {
                   "error": "Bad method"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -16920,12 +16920,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdAbTest405Response"
                 },
                 "example": {
                   "error": "Bad method"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -17047,12 +17047,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdAbTestWinner405Response"
                 },
                 "example": {
                   "error": "Bad method"
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           }
@@ -21479,6 +21479,138 @@
         "type": "object",
         "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
       },
+      "GetMessageTemplates400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMessageTemplates401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMessageTemplatesTags400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMessageTemplatesTags401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMessageTemplatesByTemplateId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMessageTemplatesByTemplateId401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMessageTemplatesByTemplateId404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSnippets400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSnippets401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSnippetsBySnippetId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSnippetsBySnippetId401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSnippetsBySnippetId404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "GetTeamSenders200Response": {
         "type": "array",
         "items": {
@@ -21800,6 +21932,39 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdStepsByStepIdSkip400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdStepsByStepIdSkip404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdStepsByStepIdSkip422Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PostCampaignsByCampaignIdStart200Response": {
         "type": "object",
         "properties": {
@@ -21848,7 +22013,8 @@
           },
           "progressTime": {
             "type": "integer",
-            "description": "Timestamp of progress"
+            "description": "Timestamp of progress",
+            "format": "int64"
           },
           "progressLastStepDuration": {
             "type": "integer",
@@ -22186,6 +22352,28 @@
           "$ref": "#/components/schemas/ConditionBranch"
         }
       },
+      "GetSequencesBySequenceIdStepsByStepIdBranches400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSequencesBySequenceIdStepsByStepIdBranches404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PostSequencesBySequenceIdStepsByStepIdBranchesRequest": {
         "type": "object",
         "properties": {
@@ -22238,6 +22426,50 @@
           }
         }
       },
+      "PostSequencesBySequenceIdStepsByStepIdBranches400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostSequencesBySequenceIdStepsByStepIdBranches403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostSequencesBySequenceIdStepsByStepIdBranches404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostSequencesBySequenceIdStepsByStepIdBranches409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PatchSequencesBySequenceIdStepsByStepIdBranchesRequest": {
         "required": [
           "order"
@@ -22257,6 +22489,50 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/ConditionBranch"
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranches400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranches403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranches404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranches409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
         }
       },
       "PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequest": {
@@ -22311,6 +22587,50 @@
           }
         }
       },
+      "PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response": {
         "type": "object",
         "properties": {
@@ -22323,6 +22643,50 @@
               "type": "string"
             },
             "description": "The sub-tree sequences deleted with the branch. Empty when the branch held no steps of its own."
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
           }
         }
       },
@@ -22663,6 +23027,14 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdLeads405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteCampaignsByCampaignIdLeads200Response": {
         "type": "object",
         "properties": {
@@ -22982,6 +23354,39 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip422Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalizationRequest": {
         "type": "object",
         "properties": {
@@ -23021,11 +23426,99 @@
         },
         "additionalProperties": false
       },
+      "PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization422Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization200Response": {
         "type": "object",
         "properties": {
           "reset": {
             "type": "boolean"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdPersonalization422Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
           }
         }
       },
@@ -23045,6 +23538,25 @@
           }
         }
       },
+      "PostLeadsByLeadIdVariables400Response": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "PostLeadsByLeadIdVariables409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PatchLeadsByLeadIdVariables200Response": {
         "type": "object",
         "properties": {
@@ -23061,6 +23573,25 @@
           }
         }
       },
+      "PatchLeadsByLeadIdVariables400Response": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchLeadsByLeadIdVariables409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteLeadsByLeadIdVariables200Response": {
         "type": "object",
         "properties": {
@@ -23074,6 +23605,25 @@
               "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseWarningsItem"
             },
             "description": "Optional warnings, never a failure: the company part of the update was skipped."
+          }
+        }
+      },
+      "DeleteLeadsByLeadIdVariables400Response": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteLeadsByLeadIdVariables409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -24032,6 +24582,39 @@
           }
         }
       },
+      "PostContactsMerge400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsMerge400ResponseError"
+          }
+        }
+      },
+      "PostContactsMerge404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsMerge404ResponseError"
+          }
+        }
+      },
+      "PostContactsMerge409Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsMerge409ResponseError"
+          }
+        }
+      },
       "DeleteContactsByIdOrEmail200Response": {
         "required": [
           "success",
@@ -24045,6 +24628,28 @@
           "deletedContactId": {
             "type": "string",
             "description": "ID of the deleted lemlist contact."
+          }
+        }
+      },
+      "DeleteContactsByIdOrEmail404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteContactsByIdOrEmail404ResponseError"
+          }
+        }
+      },
+      "DeleteContactsByIdOrEmail409Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteContactsByIdOrEmail409ResponseError"
           }
         }
       },
@@ -24361,6 +24966,39 @@
           }
         }
       },
+      "PostCompaniesMerge400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesMerge400ResponseError"
+          }
+        }
+      },
+      "PostCompaniesMerge404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesMerge404ResponseError"
+          }
+        }
+      },
+      "PostCompaniesMerge409Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesMerge409ResponseError"
+          }
+        }
+      },
       "DeleteCompaniesByCompanyId200Response": {
         "required": [
           "success",
@@ -24389,6 +25027,17 @@
           },
           "error": {
             "$ref": "#/components/schemas/DeleteCompaniesByCompanyId400ResponseError"
+          }
+        }
+      },
+      "DeleteCompaniesByCompanyId404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteCompaniesByCompanyId404ResponseError"
           }
         }
       },
@@ -24510,6 +25159,9 @@
           }
         }
       },
+      "PostV2UnsubscribesVariables200Response": {
+        "type": "string"
+      },
       "GetV2UnsubscribesVariablesByValue200Response": {
         "type": "object",
         "properties": {
@@ -24549,6 +25201,15 @@
             "$ref": "#/components/schemas/PostV2UnsubscribesVariablesByValue200ResponseSource"
           }
         }
+      },
+      "DeleteV2UnsubscribesVariablesByValue200Response": {
+        "type": "string"
+      },
+      "PostV2UnsubscribesContactsByContactId200Response": {
+        "type": "string"
+      },
+      "DeleteV2UnsubscribesContactsByContactId200Response": {
+        "type": "string"
       },
       "GetUnsubscribesByEmail200Response": {
         "type": "object",
@@ -24661,6 +25322,14 @@
           }
         }
       },
+      "PostHooks409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteHooksByHookId200Response": {
         "type": "object",
         "properties": {
@@ -24720,6 +25389,36 @@
           "id": {
             "type": "string",
             "description": "Enrichment ID"
+          }
+        }
+      },
+      "PostLeadsByLeadIdEnrich404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostLeadsByLeadIdEnrich409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostLeadsByLeadIdEnrich500Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -25246,6 +25945,14 @@
           }
         }
       },
+      "PostSequencesBySequenceIdStepsByStepIdAbTest405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "GetSequencesBySequenceIdStepsByStepIdAbTest200Response": {
         "type": "object",
         "properties": {
@@ -25296,6 +26003,14 @@
           "code": {
             "type": "string",
             "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetSequencesBySequenceIdStepsByStepIdAbTest405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -25395,6 +26110,14 @@
           }
         }
       },
+      "PatchSequencesBySequenceIdStepsByStepIdAbTest405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteSequencesBySequenceIdStepsByStepIdAbTest200Response": {
         "type": "object",
         "properties": {
@@ -25426,6 +26149,14 @@
           "code": {
             "type": "string",
             "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdAbTest405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -25474,6 +26205,14 @@
           "code": {
             "type": "string",
             "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PostSequencesBySequenceIdStepsByStepIdAbTestWinner405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -25972,6 +26711,18 @@
           "$ref": "#/components/schemas/UnsubscribedVariable"
         }
       },
+      "PostV2UnsubscribesVariables200ResponseSchema": {
+        "type": "string"
+      },
+      "DeleteV2UnsubscribesVariablesByValue200ResponseSchema": {
+        "type": "string"
+      },
+      "PostV2UnsubscribesContactsByContactId200ResponseSchema": {
+        "type": "string"
+      },
+      "DeleteV2UnsubscribesContactsByContactId200ResponseSchema": {
+        "type": "string"
+      },
       "GetHooks200ResponseSchema": {
         "type": "array",
         "items": {
@@ -26447,7 +27198,8 @@
           },
           "progressTime": {
             "type": "integer",
-            "description": "Timestamp of progress"
+            "description": "Timestamp of progress",
+            "format": "int64"
           },
           "progressLastStepDuration": {
             "type": "integer",
@@ -26504,7 +27256,8 @@
             "type": "integer"
           },
           "progressTime": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "progressLastStepDuration": {
             "type": "integer"
@@ -27537,6 +28290,61 @@
           }
         }
       },
+      "PostContactsMerge400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostContactsMerge404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostContactsMerge409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteContactsByIdOrEmail404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteContactsByIdOrEmail409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "GetContactsLists200ResponseItem": {
         "type": "object",
         "properties": {
@@ -27666,6 +28474,39 @@
           }
         }
       },
+      "PostCompaniesMerge400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesMerge404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesMerge409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteCompaniesByCompanyId400ResponseError": {
         "type": "object",
         "properties": {
@@ -27678,6 +28519,17 @@
           "contactCount": {
             "type": "integer",
             "description": "Only on \u0060COMPANY_HAS_CONTACTS\u0060 \u2014 how many contacts are still attached."
+          }
+        }
+      },
+      "DeleteCompaniesByCompanyId404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
           }
         }
       },

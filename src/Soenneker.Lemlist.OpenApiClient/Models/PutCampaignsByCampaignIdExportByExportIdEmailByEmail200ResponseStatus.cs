@@ -57,7 +57,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The progressLastStepDuration property</summary>
         public int? ProgressLastStepDuration { get; set; }
         /// <summary>The progressTime property</summary>
-        public int? ProgressTime { get; set; }
+        public long? ProgressTime { get; set; }
         /// <summary>The progressType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -130,7 +130,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "progress", n => { Progress = n.GetIntValue(); } },
                 { "progressIndex", n => { ProgressIndex = n.GetIntValue(); } },
                 { "progressLastStepDuration", n => { ProgressLastStepDuration = n.GetIntValue(); } },
-                { "progressTime", n => { ProgressTime = n.GetIntValue(); } },
+                { "progressTime", n => { ProgressTime = n.GetLongValue(); } },
                 { "progressType", n => { ProgressType = n.GetStringValue(); } },
                 { "id", n => { PutCampaignsByCampaignIdExportByExportIdEmailByEmail200ResponseStatusId = n.GetStringValue(); } },
                 { "startedAt", n => { StartedAt = n.GetDateTimeOffsetValue(); } },
@@ -156,7 +156,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("progress", Progress);
             writer.WriteIntValue("progressIndex", ProgressIndex);
             writer.WriteIntValue("progressLastStepDuration", ProgressLastStepDuration);
-            writer.WriteIntValue("progressTime", ProgressTime);
+            writer.WriteLongValue("progressTime", ProgressTime);
             writer.WriteStringValue("progressType", ProgressType);
             writer.WriteStringValue("id", PutCampaignsByCampaignIdExportByExportIdEmailByEmail200ResponseStatusId);
             writer.WriteDateTimeOffsetValue("startedAt", StartedAt);
