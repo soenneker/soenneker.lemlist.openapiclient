@@ -41,7 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", pathParameters)
+        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,listId*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", rawUrl)
+        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,listId*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", rawUrl)
         {
         }
         /// <summary>
@@ -60,6 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response400Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -74,6 +75,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response400Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.GetCompanies200Response401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -193,6 +195,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             /// <summary>Number of companies to retrieve. Default: 100. Maximum: 500</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>Filter companies to the members of a static CRM company list (`clt_xxx` format). Combines with every other filter. Ignored when `idsOrDomains` is provided.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("listId")]
+            public string? ListId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("listId")]
+            public string ListId { get; set; }
+#endif
             /// <summary>Number of companies to skip for pagination. Defaults to 0. Ignored when `idsOrDomains` is provided.</summary>
             [QueryParameter("offset")]
             public int? Offset { get; set; }

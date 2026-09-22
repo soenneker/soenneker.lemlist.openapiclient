@@ -768,6 +768,26 @@
             "type": "string",
             "format": "date-time",
             "description": "When the activity occurred"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact the activity relates to. Present on every activity, campaign or not."
+          },
+          "leadEmail": {
+            "type": "string",
+            "description": "Lead email as it was when the activity happened. Campaign activities only (absent when the activity has no `leadId`)."
+          },
+          "leadFirstName": {
+            "type": "string",
+            "description": "Lead first name as it was when the activity happened. Campaign activities only, and only if the lead had the variable at that moment. For a name on every activity, read the current lead (`lead.variables.firstName` in v2) or the contact instead."
+          },
+          "leadLastName": {
+            "type": "string",
+            "description": "Lead last name as it was when the activity happened. Same scope as `leadFirstName`."
+          },
+          "leadCompanyName": {
+            "type": "string",
+            "description": "Lead company name as it was when the activity happened. Same scope as `leadFirstName`."
           }
         }
       },
@@ -18578,6 +18598,17 @@
             }
           },
           {
+            "name": "listId",
+            "in": "query",
+            "required": false,
+            "description": "Filter companies to the members of a static CRM company list (`clt_xxx` format). Combines with every other filter. Ignored when `idsOrDomains` is provided.",
+            "example": "clt_abc123def456ghi78",
+            "schema": {
+              "type": "string",
+              "pattern": "^clt_[a-zA-Z0-9]+$"
+            }
+          },
+          {
             "name": "crmSyncStatus",
             "in": "query",
             "required": false,
@@ -18741,10 +18772,35 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Either a plain `Bad team`, or a validation envelope. Possible error codes: `CRM_LIST_ENTITY_MISMATCH` (the `listId` points at a contact list), `CRM_LIST_DYNAMIC` (the list is filter-driven, so it has no stored membership to filter on).",
             "content": {
               "text/plain": {
                 "example": "Bad team"
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "entity-mismatch": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_LIST_ENTITY_MISMATCH",
+                        "message": "This list holds contacts, not companies"
+                      }
+                    }
+                  },
+                  "dynamic-list": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_LIST_DYNAMIC",
+                        "message": "This list is dynamic (filter-driven) and cannot be searched by membership"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -18753,6 +18809,23 @@
             "content": {
               "text/plain": {
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No list on this team matches `listId` (`CRM_LIST_NOT_FOUND`). A list of another team and a deleted list both answer this.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "CRM_LIST_NOT_FOUND",
+                    "message": "No list found with this id"
+                  }
+                }
               }
             }
           },

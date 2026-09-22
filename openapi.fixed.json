@@ -10922,6 +10922,16 @@
             "example": "10"
           },
           {
+            "name": "listId",
+            "in": "query",
+            "description": "Filter companies to the members of a static CRM company list (\u0060clt_xxx\u0060 format). Combines with every other filter. Ignored when \u0060idsOrDomains\u0060 is provided.",
+            "schema": {
+              "pattern": "^clt_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "example": "clt_abc123def456ghi78"
+          },
+          {
             "name": "crmSyncStatus",
             "in": "query",
             "description": "Filter companies by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Common values:\n- \u0060synced\u0060 \u2014 the company has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the company has no CRM record yet.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised.\n- A specific error reason (lowercase form), to filter by root cause: \u0060unique_index_error_company\u0060, \u0060property_doesnt_exist\u0060, \u0060required_field_missing\u0060, \u0060company_already_exists_with_name\u0060, \u0060company_already_exists_with_linkedin_url\u0060.\n\nFor each returned company, see \u0060crmSync.errors[].metadata.alreadyExistingCompanyId\u0060 to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).",
@@ -11029,7 +11039,7 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Either a plain \u0060Bad team\u0060, or a validation envelope. Possible error codes: \u0060CRM_LIST_ENTITY_MISMATCH\u0060 (the \u0060listId\u0060 points at a contact list), \u0060CRM_LIST_DYNAMIC\u0060 (the list is filter-driven, so it has no stored membership to filter on).",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11037,6 +11047,31 @@
                   "description": "Fallback media schema"
                 },
                 "example": "Bad team"
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "entity-mismatch": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_LIST_ENTITY_MISMATCH",
+                        "message": "This list holds contacts, not companies"
+                      }
+                    }
+                  },
+                  "dynamic-list": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_LIST_DYNAMIC",
+                        "message": "This list is dynamic (filter-driven) and cannot be searched by membership"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -11049,6 +11084,23 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No list on this team matches \u0060listId\u0060 (\u0060CRM_LIST_NOT_FOUND\u0060). A list of another team and a deleted list both answer this.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "CRM_LIST_NOT_FOUND",
+                    "message": "No list found with this id"
+                  }
+                }
               }
             }
           },
@@ -18132,6 +18184,26 @@
             "type": "string",
             "description": "When the activity occurred",
             "format": "date-time"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact the activity relates to. Present on every activity, campaign or not."
+          },
+          "leadEmail": {
+            "type": "string",
+            "description": "Lead email as it was when the activity happened. Campaign activities only (absent when the activity has no \u0060leadId\u0060)."
+          },
+          "leadFirstName": {
+            "type": "string",
+            "description": "Lead first name as it was when the activity happened. Campaign activities only, and only if the lead had the variable at that moment. For a name on every activity, read the current lead (\u0060lead.variables.firstName\u0060 in v2) or the contact instead."
+          },
+          "leadLastName": {
+            "type": "string",
+            "description": "Lead last name as it was when the activity happened. Same scope as \u0060leadFirstName\u0060."
+          },
+          "leadCompanyName": {
+            "type": "string",
+            "description": "Lead company name as it was when the activity happened. Same scope as \u0060leadFirstName\u0060."
           }
         },
         "description": "A recorded action or event in a campaign sequence (email sent, opened, clicked, etc.)."

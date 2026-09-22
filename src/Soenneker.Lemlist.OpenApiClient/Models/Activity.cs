@@ -23,6 +23,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string CampaignId { get; set; }
 #endif
+        /// <summary>Contact the activity relates to. Present on every activity, campaign or not.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ContactId { get; set; }
+#nullable restore
+#else
+        public string ContactId { get; set; }
+#endif
         /// <summary>When the activity occurred</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Unique activity identifier</summary>
@@ -33,6 +41,30 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>Lead company name as it was when the activity happened. Same scope as `leadFirstName`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LeadCompanyName { get; set; }
+#nullable restore
+#else
+        public string LeadCompanyName { get; set; }
+#endif
+        /// <summary>Lead email as it was when the activity happened. Campaign activities only (absent when the activity has no `leadId`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LeadEmail { get; set; }
+#nullable restore
+#else
+        public string LeadEmail { get; set; }
+#endif
+        /// <summary>Lead first name as it was when the activity happened. Campaign activities only, and only if the lead had the variable at that moment. For a name on every activity, read the current lead (`lead.variables.firstName` in v2) or the contact instead.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LeadFirstName { get; set; }
+#nullable restore
+#else
+        public string LeadFirstName { get; set; }
+#endif
         /// <summary>Associated lead ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -40,6 +72,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #nullable restore
 #else
         public string LeadId { get; set; }
+#endif
+        /// <summary>Lead last name as it was when the activity happened. Same scope as `leadFirstName`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LeadLastName { get; set; }
+#nullable restore
+#else
+        public string LeadLastName { get; set; }
 #endif
         /// <summary>Sequence ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -89,9 +129,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
+                { "contactId", n => { ContactId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
+                { "leadCompanyName", n => { LeadCompanyName = n.GetStringValue(); } },
+                { "leadEmail", n => { LeadEmail = n.GetStringValue(); } },
+                { "leadFirstName", n => { LeadFirstName = n.GetStringValue(); } },
                 { "leadId", n => { LeadId = n.GetStringValue(); } },
+                { "leadLastName", n => { LeadLastName = n.GetStringValue(); } },
                 { "sequenceId", n => { SequenceId = n.GetStringValue(); } },
                 { "sequenceStep", n => { SequenceStep = n.GetDoubleValue(); } },
                 { "stepId", n => { StepId = n.GetStringValue(); } },
@@ -107,9 +152,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("campaignId", CampaignId);
+            writer.WriteStringValue("contactId", ContactId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("_id", Id);
+            writer.WriteStringValue("leadCompanyName", LeadCompanyName);
+            writer.WriteStringValue("leadEmail", LeadEmail);
+            writer.WriteStringValue("leadFirstName", LeadFirstName);
             writer.WriteStringValue("leadId", LeadId);
+            writer.WriteStringValue("leadLastName", LeadLastName);
             writer.WriteStringValue("sequenceId", SequenceId);
             writer.WriteDoubleValue("sequenceStep", SequenceStep);
             writer.WriteStringValue("stepId", StepId);
