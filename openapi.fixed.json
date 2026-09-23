@@ -11114,7 +11114,7 @@
           "Companies"
         ],
         "summary": "Add and update company",
-        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing \u0060companyId\u0060, bypassing domain/LinkedIn matching \u2014 in that case \u0060name\u0060 and \u0060domain\u0060 become optional.",
+        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing \u0060companyId\u0060, bypassing domain/LinkedIn matching, in which case \u0060name\u0060 and the identifiers become optional. Without \u0060companyId\u0060, \u0060name\u0060 is required together with at least one identifier: \u0060domain\u0060, \u0060linkedinUrl\u0060 or \u0060linkedinUrlSalesNav\u0060.",
         "operationId": "PostCompanies",
         "parameters": [
           {
@@ -24852,7 +24852,7 @@
         "properties": {
           "companyId": {
             "type": "string",
-            "description": "Existing company ID. Updates a specific company by ID, bypassing domain/LinkedIn matching. Can only be used to update an existing company, not to create a new one. When provided, \u0060name\u0060 and \u0060domain\u0060 become optional."
+            "description": "Existing company ID. Updates a specific company by ID, bypassing domain/LinkedIn matching. Can only be used to update an existing company, not to create a new one. When provided, \u0060name\u0060 and the identifiers become optional."
           },
           "name": {
             "type": "string",
@@ -24860,15 +24860,15 @@
           },
           "domain": {
             "type": "string",
-            "description": "Company website domain (e.g. \u0060lemlist.com\u0060). Used as a unique key for upsert matching. Required unless \u0060companyId\u0060 is provided."
+            "description": "Company website domain (e.g. \u0060lemlist.com\u0060). Used as a unique key for upsert matching. Without \u0060companyId\u0060, at least one identifier is required among \u0060domain\u0060, \u0060linkedinUrl\u0060 and \u0060linkedinUrlSalesNav\u0060."
           },
           "linkedinUrl": {
             "type": "string",
-            "description": "LinkedIn company page URL. Used as an alternative unique key for upsert matching."
+            "description": "LinkedIn company page URL. Used as an alternative unique key for upsert matching, and accepted as the sole identifier of a new company."
           },
           "linkedinUrlSalesNav": {
             "type": "string",
-            "description": "LinkedIn Sales Navigator company URL. Used as an alternative unique key for upsert matching."
+            "description": "LinkedIn Sales Navigator company URL. Used as an alternative unique key for upsert matching, and accepted as the sole identifier of a new company."
           },
           "companyOwner": {
             "type": "string",

@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Existing company ID. Updates a specific company by ID, bypassing domain/LinkedIn matching. Can only be used to update an existing company, not to create a new one. When provided, `name` and `domain` become optional.</summary>
+        /// <summary>Existing company ID. Updates a specific company by ID, bypassing domain/LinkedIn matching. Can only be used to update an existing company, not to create a new one. When provided, `name` and the identifiers become optional.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CompanyId { get; set; }
@@ -38,7 +38,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
-        /// <summary>Company website domain (e.g. `lemlist.com`). Used as a unique key for upsert matching. Required unless `companyId` is provided.</summary>
+        /// <summary>Company website domain (e.g. `lemlist.com`). Used as a unique key for upsert matching. Without `companyId`, at least one identifier is required among `domain`, `linkedinUrl` and `linkedinUrlSalesNav`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Domain { get; set; }
@@ -70,7 +70,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Industry { get; set; }
 #endif
-        /// <summary>LinkedIn company page URL. Used as an alternative unique key for upsert matching.</summary>
+        /// <summary>LinkedIn company page URL. Used as an alternative unique key for upsert matching, and accepted as the sole identifier of a new company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? LinkedinUrl { get; set; }
@@ -78,7 +78,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string LinkedinUrl { get; set; }
 #endif
-        /// <summary>LinkedIn Sales Navigator company URL. Used as an alternative unique key for upsert matching.</summary>
+        /// <summary>LinkedIn Sales Navigator company URL. Used as an alternative unique key for upsert matching, and accepted as the sole identifier of a new company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? LinkedinUrlSalesNav { get; set; }

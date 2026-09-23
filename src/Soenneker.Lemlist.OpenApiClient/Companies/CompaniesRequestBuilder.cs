@@ -80,7 +80,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
+        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching, in which case `name` and the identifiers become optional. Without `companyId`, `name` is required together with at least one identifier: `domain`, `linkedinUrl` or `linkedinUrlSalesNav`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -130,7 +130,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             return requestInfo;
         }
         /// <summary>
-        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
+        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching, in which case `name` and the identifiers become optional. Without `companyId`, `name` is required together with at least one identifier: `domain`, `linkedinUrl` or `linkedinUrlSalesNav`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -226,7 +226,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesSortOrderParameter? SortOrder { get; set; }
         }
         /// <summary>
-        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching — in that case `name` and `domain` become optional.
+        /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching, in which case `name` and the identifiers become optional. Without `companyId`, `name` is required together with at least one identifier: `domain`, `linkedinUrl` or `linkedinUrlSalesNav`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class CompaniesRequestBuilderPostQueryParameters 
