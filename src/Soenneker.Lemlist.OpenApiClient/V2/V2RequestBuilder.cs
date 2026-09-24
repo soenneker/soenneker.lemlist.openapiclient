@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.V2.Campaigns;
 using Soenneker.Lemlist.OpenApiClient.V2.Enrichments;
+using Soenneker.Lemlist.OpenApiClient.V2.Tasks;
 using Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,11 @@ namespace Soenneker.Lemlist.OpenApiClient.V2
         public global::Soenneker.Lemlist.OpenApiClient.V2.Enrichments.EnrichmentsRequestBuilder Enrichments
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.V2.Enrichments.EnrichmentsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The tasks property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.V2.Tasks.TasksRequestBuilder Tasks
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.V2.Tasks.TasksRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The unsubscribes property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.UnsubscribesRequestBuilder Unsubscribes

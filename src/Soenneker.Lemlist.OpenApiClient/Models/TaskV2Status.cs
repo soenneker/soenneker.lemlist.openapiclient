@@ -3,29 +3,29 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>The type of task.</summary>
+    /// <summary>Task status</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public enum PostTasksRequestType
+    public enum TaskV2Status
     {
-        [EnumMember(Value = "email")]
+        [EnumMember(Value = "due")]
         #pragma warning disable CS1591
-        Email,
+        Due,
         #pragma warning restore CS1591
-        [EnumMember(Value = "manual")]
+        [EnumMember(Value = "upcoming")]
         #pragma warning disable CS1591
-        Manual,
+        Upcoming,
         #pragma warning restore CS1591
-        [EnumMember(Value = "phone")]
+        [EnumMember(Value = "paused")]
         #pragma warning disable CS1591
-        Phone,
+        Paused,
         #pragma warning restore CS1591
-        [EnumMember(Value = "linkedin")]
+        [EnumMember(Value = "done")]
         #pragma warning disable CS1591
-        Linkedin,
+        Done,
         #pragma warning restore CS1591
-        [EnumMember(Value = "whatsapp")]
+        [EnumMember(Value = "ignored")]
         #pragma warning disable CS1591
-        Whatsapp,
+        Ignored,
         #pragma warning restore CS1591
     }
 }

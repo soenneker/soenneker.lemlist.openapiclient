@@ -22,9 +22,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string AssignedTo { get; set; }
 #endif
-        /// <summary>The due date in ISO 8601 format (e.g., 2025-02-12T00:00:00.000Z).</summary>
+        /// <summary>The due date in ISO 8601 format (e.g., 2025-02-12T00:00:00.000Z). A date in the past is accepted: the task is created already due.</summary>
         public DateTimeOffset? DueDate { get; set; }
-        /// <summary>Public HTTPS URLs of images to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. Ignored when `type` is not `linkedin`. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.</summary>
+        /// <summary>Public HTTPS URLs of images to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. On other types they are not downloaded, but still count toward the limit of 6. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Images { get; set; }
@@ -32,7 +32,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Images { get; set; }
 #endif
-        /// <summary>Optional message/description of the task. Defaults to an empty string if omitted.</summary>
+        /// <summary>Legacy name of `recordId`, still accepted for backward compatibility. Use `recordId` instead. When both are sent, `leadId` is used.</summary>
+        [Obsolete("")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LeadId { get; set; }
+#nullable restore
+#else
+        public string LeadId { get; set; }
+#endif
+        /// <summary>Optional instruction of the task, returned as `content` in the response. Defaults to an empty string if omitted. On a `linkedin` task for a lead (`lea_` ID), it also pre-fills the draft when `taskData.content` is omitted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }
@@ -42,13 +51,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>Priority level of the task.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestPriority? Priority { get; set; }
-        /// <summary>The ID of the contact company or lead associated with the task.</summary>
+        /// <summary>ID of the record the task is about: a contact (`ctc_`), a company (`cpn_`) or a lead (`lea_`). Required unless the legacy `leadId` is sent. A company task can only be of type `manual`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RecordId { get; set; }
 #nullable restore
 #else
         public string RecordId { get; set; }
+#endif
+        /// <summary>Draft of the message to send on `email`, `linkedin` and `whatsapp` tasks, and fallback number on `phone` tasks.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestTaskData? TaskData { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestTaskData TaskData { get; set; }
 #endif
         /// <summary>Optional title of the task. Defaults to an empty string if omitted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -60,7 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The type of task.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestType? Type { get; set; }
-        /// <summary>Public HTTPS URLs of videos to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. Ignored when `type` is not `linkedin`. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.</summary>
+        /// <summary>Public HTTPS URLs of videos to attach to a `linkedin` task. lemlist downloads each file and re-hosts it. On other types they are not downloaded, but still count toward the limit of 6. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Videos { get; set; }
@@ -96,9 +113,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "assignedTo", n => { AssignedTo = n.GetStringValue(); } },
                 { "dueDate", n => { DueDate = n.GetDateTimeOffsetValue(); } },
                 { "images", n => { Images = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "leadId", n => { LeadId = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestPriority>(); } },
                 { "recordId", n => { RecordId = n.GetStringValue(); } },
+                { "taskData", n => { TaskData = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestTaskData>(global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestTaskData.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestType>(); } },
                 { "videos", n => { Videos = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
@@ -114,9 +133,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("assignedTo", AssignedTo);
             writer.WriteDateTimeOffsetValue("dueDate", DueDate);
             writer.WriteCollectionOfPrimitiveValues<string>("images", Images);
+            writer.WriteStringValue("leadId", LeadId);
             writer.WriteStringValue("message", Message);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestPriority>("priority", Priority);
             writer.WriteStringValue("recordId", RecordId);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestTaskData>("taskData", TaskData);
             writer.WriteStringValue("title", Title);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostTasksRequestType>("type", Type);
             writer.WriteCollectionOfPrimitiveValues<string>("videos", Videos);

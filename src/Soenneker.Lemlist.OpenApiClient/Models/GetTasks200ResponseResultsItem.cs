@@ -7,14 +7,21 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// A manual action assigned to a user to complete. Only the fields set on the task are returned.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class TaskObject : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class GetTasks200ResponseResultsItem : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Campaign of the task, or `null` when the task has none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItemCampaign? Campaign { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItemCampaign Campaign { get; set; }
+#endif
         /// <summary>Campaign ID. A task on a lead carries the campaign of that lead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -83,6 +90,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>`true` on tasks created by hand in lemlist or through the API, on campaign tasks whose step has its manual option on, and on out-of-office tasks. Absent otherwise, never `false`.</summary>
         public bool? Manual { get; set; }
+        /// <summary>First and last name of the assigned user, or `null` when unknown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OwnerName { get; set; }
+#nullable restore
+#else
+        public string OwnerName { get; set; }
+#endif
         /// <summary>`0` low, `1` medium, `2` high. Absent when the task has no priority.</summary>
         public int? Priority { get; set; }
         /// <summary>Sequence ID</summary>
@@ -126,21 +141,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string UserId { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem"/> and sets the default values.
         /// </summary>
-        public TaskObject()
+        public GetTasks200ResponseResultsItem()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -150,6 +165,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "campaign", n => { Campaign = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItemCampaign>(global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItemCampaign.CreateFromDiscriminatorValue); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "contactId", n => { ContactId = n.GetStringValue(); } },
                 { "content", n => { Content = n.GetStringValue(); } },
@@ -160,6 +176,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "leadId", n => { LeadId = n.GetStringValue(); } },
                 { "leadLastName", n => { LeadLastName = n.GetStringValue(); } },
                 { "manual", n => { Manual = n.GetBoolValue(); } },
+                { "ownerName", n => { OwnerName = n.GetStringValue(); } },
                 { "priority", n => { Priority = n.GetIntValue(); } },
                 { "sequenceId", n => { SequenceId = n.GetStringValue(); } },
                 { "text", n => { Text = n.GetStringValue(); } },
@@ -175,6 +192,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItemCampaign>("campaign", Campaign);
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteStringValue("contactId", ContactId);
             writer.WriteStringValue("content", Content);
@@ -185,6 +203,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("leadId", LeadId);
             writer.WriteStringValue("leadLastName", LeadLastName);
             writer.WriteBoolValue("manual", Manual);
+            writer.WriteStringValue("ownerName", OwnerName);
             writer.WriteIntValue("priority", Priority);
             writer.WriteStringValue("sequenceId", SequenceId);
             writer.WriteStringValue("text", Text);

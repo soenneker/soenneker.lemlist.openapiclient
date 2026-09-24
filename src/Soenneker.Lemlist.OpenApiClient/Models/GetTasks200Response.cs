@@ -14,21 +14,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The page property</summary>
+        /// <summary>Value of the `page` query parameter, as sent (a string). The number `0` when the parameter is omitted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Page { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page? Page { get; set; }
 #nullable restore
 #else
-        public string Page { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page Page { get; set; }
 #endif
         /// <summary>The results property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>? Results { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem>? Results { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject> Results { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem> Results { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response"/> and sets the default values.
@@ -55,8 +55,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "page", n => { Page = n.GetStringValue(); } },
-                { "results", n => { Results = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>(global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "page", n => { Page = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page>(global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page.CreateFromDiscriminatorValue); } },
+                { "results", n => { Results = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -66,9 +66,70 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("page", Page);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.TaskObject>("results", Results);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page>("page", Page);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200ResponseResultsItem>("results", Results);
             writer.WriteAdditionalData(AdditionalData);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class GetTasks200Response_page : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="int"/></summary>
+            public int? Integer { get; set; }
+            /// <summary>Composed type representation for type <see cref="string"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string? String { get; set; }
+#nullable restore
+#else
+            public string String { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetTasks200Response.GetTasks200Response_page();
+                if(parseNode.GetIntValue() is int integerValue)
+                {
+                    result.Integer = integerValue;
+                }
+                else if(parseNode.GetStringValue() is string stringValue)
+                {
+                    result.String = stringValue;
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(Integer != null)
+                {
+                    writer.WriteIntValue(null, Integer);
+                }
+                else if(String != null)
+                {
+                    writer.WriteStringValue(null, String);
+                }
+            }
         }
     }
 }

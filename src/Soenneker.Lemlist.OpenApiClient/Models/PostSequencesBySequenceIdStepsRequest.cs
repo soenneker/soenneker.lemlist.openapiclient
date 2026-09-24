@@ -72,7 +72,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Images { get; set; }
 #endif
-        /// <summary>The position within the sequence to insert the new step (≥ -1). If omitted or greater than the number of steps, the new step is added to the end</summary>
+        /// <summary>The position within the sequence to insert the new step (≥ -1). If omitted or greater than the number of steps, the new step is added to the end. On a campaign leads have entered, a step inserted before an existing one moves the leads waiting on that step onto the new one; leads already past that position never receive it. Teams without live campaign editing can only append once leads have entered, and a non-tail `index` is refused with `409 SEQUENCE_STEP_INSERT_ON_SEQUENCE_IN_USE`</summary>
         public int? Index { get; set; }
         /// <summary>Applies to `sendToAnotherCampaign` steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. `continue` keeps it running the remaining steps, `pause` pauses it, `stop` ends the source campaign for it. Omitted leaves the step without a value, which behaves as `continue`; a step added from the lemlist UI defaults to `stop`. A transfer that fails always pauses the lead, whatever this says.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction? LeadAction { get; set; }

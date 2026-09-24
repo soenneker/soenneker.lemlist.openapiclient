@@ -3,21 +3,17 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>The type of task.</summary>
+    /// <summary>Channel of the task</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public enum PostTasksRequestType
+    public enum TaskV2Channel
     {
+        [EnumMember(Value = "aircall")]
+        #pragma warning disable CS1591
+        Aircall,
+        #pragma warning restore CS1591
         [EnumMember(Value = "email")]
         #pragma warning disable CS1591
         Email,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "manual")]
-        #pragma warning disable CS1591
-        Manual,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "phone")]
-        #pragma warning disable CS1591
-        Phone,
         #pragma warning restore CS1591
         [EnumMember(Value = "linkedin")]
         #pragma warning disable CS1591
@@ -26,6 +22,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "whatsapp")]
         #pragma warning disable CS1591
         Whatsapp,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "sms")]
+        #pragma warning disable CS1591
+        Sms,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "manual")]
+        #pragma warning disable CS1591
+        Manual,
         #pragma warning restore CS1591
     }
 }

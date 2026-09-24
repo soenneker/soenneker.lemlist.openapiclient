@@ -3,21 +3,17 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>Task status</summary>
+    /// <summary>Which record the task hangs off, derived from the ids</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public enum TaskStatus
+    public enum TaskV2ObjectType
     {
-        [EnumMember(Value = "pending")]
+        [EnumMember(Value = "contact")]
         #pragma warning disable CS1591
-        Pending,
+        Contact,
         #pragma warning restore CS1591
-        [EnumMember(Value = "completed")]
+        [EnumMember(Value = "company")]
         #pragma warning disable CS1591
-        Completed,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "ignored")]
-        #pragma warning disable CS1591
-        Ignored,
+        Company,
         #pragma warning restore CS1591
     }
 }
