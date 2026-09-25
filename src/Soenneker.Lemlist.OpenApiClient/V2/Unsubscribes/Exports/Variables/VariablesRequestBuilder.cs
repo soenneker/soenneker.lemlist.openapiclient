@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public VariablesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/unsubscribes/exports/variables", pathParameters)
+        public VariablesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/unsubscribes/exports/variables{?format*}", pathParameters)
         {
         }
         /// <summary>
@@ -29,49 +30,50 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public VariablesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/unsubscribes/exports/variables", rawUrl)
+        public VariablesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/unsubscribes/exports/variables{?format*}", rawUrl)
         {
         }
         /// <summary>
-        /// Exports all unsubscribed variables to a CSV file.
+        /// Exports all unsubscribed variables. The response is a CSV file by default. Set `format=json` to get a JSON array.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.Variables400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesExportsVariables400Response">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.Variables400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesExportsVariables400Response.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return collectionResult?.AsList();
         }
         /// <summary>
-        /// Exports all unsubscribed variables to a CSV file.
+        /// Exports all unsubscribed variables. The response is a CSV file by default. Set `format=json` to get a JSON array.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "text/csv, text/plain;q=0.9");
+            requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
         }
         /// <summary>
@@ -82,6 +84,16 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables
         public global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Exports all unsubscribed variables. The response is a CSV file by default. Set `format=json` to get a JSON array.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class VariablesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Output format: &apos;json&apos; or &apos;csv&apos;. Default is CSV.</summary>
+            [QueryParameter("format")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesExportsVariablesFormatParameter? Format { get; set; }
         }
     }
 }

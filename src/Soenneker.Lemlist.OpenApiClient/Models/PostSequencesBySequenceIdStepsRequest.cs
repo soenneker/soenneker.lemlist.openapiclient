@@ -96,7 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string SkillName { get; set; }
 #endif
-        /// <summary>Email subject line (required for email steps)</summary>
+        /// <summary>Email subject line (for email steps). Optional: omit it or send an empty string on a follow-up so the email replies in the thread of the previous one. If no email has been sent to the lead in this campaign yet, it goes out with an empty subject.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subject { get; set; }

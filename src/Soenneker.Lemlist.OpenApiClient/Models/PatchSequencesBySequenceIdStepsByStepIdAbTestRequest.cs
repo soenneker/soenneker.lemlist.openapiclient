@@ -48,7 +48,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>The plainText property</summary>
         public bool? PlainText { get; set; }
-        /// <summary>Variant B subject</summary>
+        /// <summary>Variant B subject. An empty string removes it: variant B then replies in the thread of the previous email sent to the lead in this campaign, like variant A would.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subject { get; set; }
