@@ -159,5 +159,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Timeframe,
         #pragma warning restore CS1591
+        [EnumMember(Value = "githubRepoUrls")]
+        #pragma warning disable CS1591
+        GithubRepoUrls,
+        #pragma warning restore CS1591
     }
 }

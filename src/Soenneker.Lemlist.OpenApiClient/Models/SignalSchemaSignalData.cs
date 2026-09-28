@@ -567,7 +567,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string RecruiterTitle { get; set; }
 #endif
-        /// <summary>[jobChange/newHire/competitorConnections/companyFollowers] Start date at the tracked company</summary>
+        /// <summary>[jobChange/newHire/competitorConnections] Start date at the tracked company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? StartDate { get; set; }
@@ -623,7 +623,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string TechnologyChangeSourceType { get; set; }
 #endif
-        /// <summary>Tracked company LinkedIn URL (competitorConnections, companyFollowers, ...)</summary>
+        /// <summary>Tracked company LinkedIn URL (competitorConnections, ...)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TrackedCompanyUrl { get; set; }

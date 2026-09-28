@@ -20,10 +20,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         RecruitmentCampaign,
         #pragma warning restore CS1591
-        [EnumMember(Value = "jobChange")]
-        #pragma warning disable CS1591
-        JobChange,
-        #pragma warning restore CS1591
         [EnumMember(Value = "newHire")]
         #pragma warning disable CS1591
         NewHire,
@@ -43,10 +39,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "competitorReactions")]
         #pragma warning disable CS1591
         CompetitorReactions,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "companyFollowers")]
-        #pragma warning disable CS1591
-        CompanyFollowers,
         #pragma warning restore CS1591
         [EnumMember(Value = "technologyChange")]
         #pragma warning disable CS1591
@@ -72,17 +64,49 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         LinkedinKeywords,
         #pragma warning restore CS1591
-        [EnumMember(Value = "externalSignalContact")]
+        [EnumMember(Value = "republishedJobOffers")]
         #pragma warning disable CS1591
-        ExternalSignalContact,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "externalSignalCompany")]
-        #pragma warning disable CS1591
-        ExternalSignalCompany,
+        RepublishedJobOffers,
         #pragma warning restore CS1591
         [EnumMember(Value = "buyingIntent")]
         #pragma warning disable CS1591
         BuyingIntent,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "newProductLaunch")]
+        #pragma warning disable CS1591
+        NewProductLaunch,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "companyAward")]
+        #pragma warning disable CS1591
+        CompanyAward,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "newPartnership")]
+        #pragma warning disable CS1591
+        NewPartnership,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "newOffice")]
+        #pragma warning disable CS1591
+        NewOffice,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "closingOffice")]
+        #pragma warning disable CS1591
+        ClosingOffice,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "costCutting")]
+        #pragma warning disable CS1591
+        CostCutting,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outagesAndSecurityBreaches")]
+        #pragma warning disable CS1591
+        OutagesAndSecurityBreaches,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "lawsuitsAndLegalIssues")]
+        #pragma warning disable CS1591
+        LawsuitsAndLegalIssues,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "githubStargazer")]
+        #pragma warning disable CS1591
+        GithubStargazer,
         #pragma warning restore CS1591
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Companies.Item;
+using Soenneker.Lemlist.OpenApiClient.Companies.Lists;
 using Soenneker.Lemlist.OpenApiClient.Companies.Merge;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
@@ -19,6 +20,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompaniesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The lists property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Companies.Lists.ListsRequestBuilder Lists
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Companies.Lists.ListsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The merge property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Companies.Merge.MergeRequestBuilder Merge
         {

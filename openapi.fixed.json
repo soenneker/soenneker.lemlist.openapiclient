@@ -10899,12 +10899,14 @@
                   {
                     "_id": "clt_abc123def456ghi78",
                     "name": "Nurturing",
-                    "dynamic": false
+                    "dynamic": false,
+                    "createdAt": "2026-09-23T10:15:00.000Z"
                   },
                   {
                     "_id": "clt_xyz789uvw012rst34",
                     "name": "Enterprise Prospects",
-                    "dynamic": true
+                    "dynamic": true,
+                    "createdAt": "2026-09-20T08:00:00.000Z"
                   }
                 ]
               }
@@ -11894,6 +11896,285 @@
           }
         }
       }
+    },
+    "/companies/lists": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get Company Lists",
+        "description": "Retrieves all static and dynamic company lists for the team. Optionally filter by name.",
+        "operationId": "GetCompaniesLists",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Filter lists by name (case-insensitive partial match).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCompaniesLists200ResponseSchema"
+                },
+                "example": [
+                  {
+                    "_id": "clt_abc123def456ghi78",
+                    "name": "Target accounts",
+                    "dynamic": false,
+                    "createdAt": "2026-09-23T10:15:00.000Z"
+                  },
+                  {
+                    "_id": "clt_xyz789uvw012rst34",
+                    "name": "Churn risk",
+                    "dynamic": true,
+                    "createdAt": "2026-09-20T08:00:00.000Z"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad team",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Bad team"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Create Company List",
+        "description": "Creates a new static company list. After creating the list, use \u0060POST /companies/lists/{listId}/entities\u0060 to add companies to it.",
+        "operationId": "PostCompaniesLists",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCompaniesListsRequest"
+              },
+              "example": {
+                "name": "Target accounts"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Company list created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesLists201Response"
+                },
+                "example": {
+                  "message": "Company list created successfully",
+                  "list": {
+                    "id": "clt_abc123def456ghi78",
+                    "name": "Target accounts"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / name is required / name too long / name must not contain \u0022\u003C\u0022 or \u0022\u003E\u0022 characters",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "name is required and must be a non-empty string"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      }
+    },
+    "/companies/lists/{listId}/entities": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Add or Remove Companies in a List",
+        "description": "Adds existing CRM companies to a static company list, or removes them when \u0060?action=remove\u0060 is set.\n\n- **Add** (default): send a \u0060POST\u0060 with a \u0060companyIds\u0060 body. Companies already in the list are silently skipped (no duplicates) and reported in \u0060alreadyInList\u0060.\n- **Remove**: send a \u0060POST\u0060 with \u0060?action=remove\u0060 and a \u0060companyIds\u0060 body. Companies that are not in the list are silently skipped; \u0060removedCount\u0060 reflects the associations actually removed. This only affects list membership, the companies are not deleted from your CRM.\n\nThe list must be a **static** company list (\u0060clt_xxx\u0060). Dynamic lists (auto-populated by filter rules) and contact lists are rejected.\n\n**Removal uses \u0060POST ?action=remove\u0060 on purpose:** a \u0060DELETE\u0060 request body is dropped by our stack, so \u0060DELETE\u0060 on this path is **not supported** and returns \u0060405 Method Not Allowed\u0060.",
+        "operationId": "PostCompaniesListsByListIdEntities",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "description": "Omit to **add** the companies to the list. Set to \u0060remove\u0060 to **remove** them from the list.",
+            "schema": {
+              "$ref": "#/components/schemas/RemoveAction"
+            },
+            "example": "remove"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCompaniesListsByListIdEntitiesRequest"
+              },
+              "example": {
+                "companyIds": [
+                  "cpn_xxxxxxxxxxxxxxxxx",
+                  "cpn_yyyyyyyyyyyyyyyyy"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Companies added to or removed from the list successfully. The response body depends on \u0060action\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesListsByListIdEntities200Response"
+                },
+                "examples": {
+                  "add": {
+                    "summary": "Add companies (no action)",
+                    "value": {
+                      "message": "Companies added to list successfully",
+                      "addedCount": 2,
+                      "alreadyInList": 0
+                    }
+                  },
+                  "remove": {
+                    "summary": "Remove companies (action=remove)",
+                    "value": {
+                      "message": "Companies removed from list successfully",
+                      "removedCount": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / Invalid listId format (expected clt_xxx) / companyIds is required and must be a non-empty array / Maximum 1,000 companies per request / All companyIds must be in cpn_xxx format / List is not a company list / Cannot manually add companies to a dynamic list / Cannot manually remove companies from a dynamic list.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "companyIds is required and must be a non-empty array"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "Company list not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Company list not found"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed. \u0060DELETE\u0060 on this path is not supported because the request body is dropped by our stack. Use \u0060POST ?action=remove\u0060 to remove companies.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Method not allowed"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error while updating the list",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Failed to add companies to list"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "listId",
+          "in": "path",
+          "description": "The unique identifier of the company list (\u0060clt_xxx\u0060 format). Must be a **static** company list.",
+          "required": true,
+          "schema": {
+            "pattern": "^clt_[a-zA-Z0-9]\u002B$",
+            "type": "string"
+          },
+          "example": "clt_xxxxxxxxxxxxxxxxx"
+        }
+      ]
     },
     "/companies/merge": {
       "post": {
@@ -15467,6 +15748,80 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Signal Agents"
+        ],
+        "summary": "Mark signals handled or ignored",
+        "description": "Bulk-set the status of one or several signals to handled or ignored.",
+        "operationId": "PutWatchlistSignals",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutWatchlistSignalsRequest"
+              },
+              "example": {
+                "signalIds": [
+                  "wsi_Example000000001",
+                  "wsi_Example000000002"
+                ],
+                "status": "ignored",
+                "reason": "Not a fit"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListApiUpdateSignalStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - invalid signalIds, invalid status, or more than 1000 ids",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "signalIds must contain between 1 and 1000 ids"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Unauthorized"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Internal server error"
+              }
+            }
+          }
+        }
       }
     },
     "/user/email-accounts": {
@@ -16410,7 +16765,7 @@
               },
               "example": {
                 "watchListId": "wl_Example000000001",
-                "name": "Renamed agent"
+                "activate": false
               }
             }
           },
@@ -16451,6 +16806,18 @@
               }
             }
           },
+          "402": {
+            "description": "Insufficient credits to reactivate the agent (activate: true)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Insufficient credits"
+              }
+            }
+          },
           "404": {
             "description": "Signal Agent not found",
             "content": {
@@ -16472,6 +16839,18 @@
                   "description": "Fallback media schema"
                 },
                 "example": "Watch list type cannot be changed after creation"
+              }
+            }
+          },
+          "429": {
+            "description": "Monitored-entity limit exceeded when reactivating (activate: true)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Monitoring limit exceeded"
               }
             }
           },
@@ -17933,6 +18312,651 @@
           }
         }
       }
+    },
+    "/v2/enrichments/providers": {
+      "get": {
+        "tags": [
+          "Enrichment Providers"
+        ],
+        "summary": "List Enrichment Providers",
+        "description": "Lists the providers your team can place in a waterfall, for one enrichment type.\n\nThis is the catalog of legal \u0060providers[].id\u0060 values for the waterfall endpoints: read it before creating or updating a waterfall. It includes lemlist internal providers and the external providers lemlist supports through your own API key. An external provider has \u0060connected: false\u0060 until you connect it with your own API key; a waterfall cannot enable a provider that is not connected.",
+        "operationId": "ListEnrichmentProviders",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Enrichment type of the providers to list.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallType"
+            },
+            "example": "email"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentProviderListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": "prospeo",
+                      "displayName": "Prospeo",
+                      "types": [
+                        "email",
+                        "phone"
+                      ],
+                      "source": "internal"
+                    },
+                    {
+                      "id": "findymail",
+                      "displayName": "Findymail",
+                      "types": [
+                        "email"
+                      ],
+                      "source": "internal"
+                    },
+                    {
+                      "id": "lusha",
+                      "displayName": "Lusha",
+                      "types": [
+                        "email",
+                        "phone"
+                      ],
+                      "source": "external",
+                      "connected": true
+                    },
+                    {
+                      "id": "apollo",
+                      "displayName": "Apollo",
+                      "types": [
+                        "email"
+                      ],
+                      "source": "external",
+                      "connected": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - invalid or missing \u0060type\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallError"
+                },
+                "example": {
+                  "error": "Parameter \u0022type\u0022 must be \u0022email\u0022 or \u0022phone\u0022",
+                  "code": "ENRICHMENT_WATERFALL_INVALID_TYPE"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      }
+    },
+    "/v2/enrichments/providers/{providerId}/connection": {
+      "put": {
+        "tags": [
+          "Enrichment Providers"
+        ],
+        "summary": "Connect Provider",
+        "description": "Saves your own API key for an external provider. The key is stored as-is and is NOT validated against the provider; calling it again replaces the key. The provider is connected for every enrichment type it supports.\n\nOnce connected, the provider is added, disabled, to your existing custom waterfalls.",
+        "operationId": "ConnectEnrichmentProvider",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrichmentProviderConnectRequest"
+              },
+              "example": {
+                "apiKey": "lsh_live_0123456789abcdef9f3a"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentProviderResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "lusha",
+                    "displayName": "Lusha",
+                    "types": [
+                      "email",
+                      "phone"
+                    ],
+                    "source": "external",
+                    "connected": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provider is internal or unknown (\u0060ENRICHMENT_PROVIDER_NOT_EXTERNAL\u0060), or the request body is missing \u0060apiKey\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallError"
+                },
+                "example": {
+                  "error": "This provider cannot be connected: only external providers hold your own API key",
+                  "code": "ENRICHMENT_PROVIDER_NOT_EXTERNAL"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Enrichment Providers"
+        ],
+        "summary": "Disconnect Provider",
+        "description": "Removes your API key for an external provider. lemlist stops calling it on your account and removes it from your custom waterfalls.",
+        "operationId": "DisconnectEnrichmentProvider",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentProviderResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "lusha",
+                    "displayName": "Lusha",
+                    "types": [
+                      "email",
+                      "phone"
+                    ],
+                    "source": "external",
+                    "connected": false
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provider is internal or not connected. \u0060code\u0060 is one of \u0060ENRICHMENT_PROVIDER_NOT_EXTERNAL\u0060, \u0060ENRICHMENT_PROVIDER_NOT_CONNECTED\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallError"
+                },
+                "example": {
+                  "error": "Provider \u0022apollo\u0022 is not connected",
+                  "code": "ENRICHMENT_PROVIDER_NOT_CONNECTED"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "providerId",
+          "in": "path",
+          "description": "Id of an external provider, as listed by \u0060GET /enrichments/providers\u0060.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "lusha"
+        }
+      ]
+    },
+    "/v2/enrichments/waterfalls": {
+      "get": {
+        "tags": [
+          "Enrichment Waterfalls"
+        ],
+        "summary": "List Enrichment Waterfalls",
+        "description": "Lists the waterfalls of your team: the default waterfall of each type, plus every custom waterfall. Default waterfalls come first, then custom waterfalls by creation date, most recent first.\n\nWaterfalls are team-shared: every member sees the same list.",
+        "operationId": "ListEnrichmentWaterfalls",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Restrict the list to one enrichment type. Omit to return both.",
+            "schema": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallType"
+            },
+            "example": "email"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": "default_email",
+                      "type": "email",
+                      "name": "Default email waterfall",
+                      "isDefault": true,
+                      "editor": "lemlist",
+                      "providers": [
+                        {
+                          "id": "lusha",
+                          "order": 1,
+                          "enabled": true
+                        },
+                        {
+                          "id": "prospeo",
+                          "order": 2,
+                          "enabled": true
+                        },
+                        {
+                          "id": "findymail",
+                          "order": 3,
+                          "enabled": true
+                        },
+                        {
+                          "id": "datagma",
+                          "order": 4,
+                          "enabled": true
+                        }
+                      ],
+                      "createdAt": null,
+                      "updatedAt": null
+                    },
+                    {
+                      "id": "ecw_ExAmPlE1234567890a",
+                      "type": "email",
+                      "name": "Europe email waterfall",
+                      "isDefault": false,
+                      "editor": "usr_ExAmPlE1234567890a",
+                      "conditions": {
+                        "country": {
+                          "in": [
+                            "FR",
+                            "DE",
+                            "ES",
+                            "IT",
+                            "GB"
+                          ]
+                        }
+                      },
+                      "providers": [
+                        {
+                          "id": "prospeo",
+                          "order": 1,
+                          "enabled": true
+                        },
+                        {
+                          "id": "lusha",
+                          "order": 2,
+                          "enabled": true
+                        },
+                        {
+                          "id": "findymail",
+                          "order": 3,
+                          "enabled": true
+                        },
+                        {
+                          "id": "datagma",
+                          "order": 4,
+                          "enabled": false
+                        }
+                      ],
+                      "createdAt": "2026-09-10T14:03:00.000Z",
+                      "updatedAt": "2026-09-10T14:03:00.000Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - invalid \u0060type\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallError"
+                },
+                "example": {
+                  "error": "Parameter \u0022type\u0022 must be \u0022email\u0022 or \u0022phone\u0022",
+                  "code": "ENRICHMENT_WATERFALL_INVALID_TYPE"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      }
+    },
+    "/v2/enrichments/waterfalls/{waterfallId}": {
+      "get": {
+        "tags": [
+          "Enrichment Waterfalls"
+        ],
+        "summary": "Get Enrichment Waterfall",
+        "description": "Returns one waterfall of your team, default or custom.",
+        "operationId": "GetEnrichmentWaterfall",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ecw_ExAmPlE1234567890a",
+                    "type": "email",
+                    "name": "Europe email waterfall",
+                    "isDefault": false,
+                    "editor": "usr_ExAmPlE1234567890a",
+                    "conditions": {
+                      "country": {
+                        "in": [
+                          "FR",
+                          "DE",
+                          "ES",
+                          "IT",
+                          "GB"
+                        ]
+                      }
+                    },
+                    "providers": [
+                      {
+                        "id": "prospeo",
+                        "order": 1,
+                        "enabled": true
+                      },
+                      {
+                        "id": "lusha",
+                        "order": 2,
+                        "enabled": true
+                      },
+                      {
+                        "id": "findymail",
+                        "order": 3,
+                        "enabled": true
+                      },
+                      {
+                        "id": "datagma",
+                        "order": 4,
+                        "enabled": false
+                      }
+                    ],
+                    "createdAt": "2026-09-10T14:03:00.000Z",
+                    "updatedAt": "2026-09-10T14:03:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/EnrichmentWaterfallNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Enrichment Waterfalls"
+        ],
+        "summary": "Update Enrichment Waterfall",
+        "description": "Updates the \u0060name\u0060 or \u0060providers\u0060 of a waterfall. Only the fields present in the body change; \u0060type\u0060 and \u0060isDefault\u0060 cannot change, and \u0060conditions\u0060 is rejected with a \u0060400\u0060.\n\nWhen \u0060providers\u0060 is sent it replaces the whole order; providers you leave out are appended, disabled. On a default waterfall this takes over from the lemlist order: \u0060editor\u0060 becomes your user id and the list is followed as is; use the reset endpoint to hand it back to lemlist.\n\nThe full stored waterfall is returned.",
+        "operationId": "UpdateEnrichmentWaterfall",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrichmentWaterfallUpdateRequest"
+              },
+              "example": {
+                "providers": [
+                  {
+                    "id": "findymail",
+                    "enabled": true
+                  },
+                  {
+                    "id": "prospeo",
+                    "enabled": true
+                  },
+                  {
+                    "id": "lusha",
+                    "enabled": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ecw_ExAmPlE1234567890a",
+                    "type": "email",
+                    "name": "Europe email waterfall",
+                    "isDefault": false,
+                    "editor": "usr_ExAmPlE1234567890a",
+                    "conditions": {
+                      "country": {
+                        "in": [
+                          "FR",
+                          "DE",
+                          "ES",
+                          "IT",
+                          "GB"
+                        ]
+                      }
+                    },
+                    "providers": [
+                      {
+                        "id": "findymail",
+                        "order": 1,
+                        "enabled": true
+                      },
+                      {
+                        "id": "prospeo",
+                        "order": 2,
+                        "enabled": true
+                      },
+                      {
+                        "id": "lusha",
+                        "order": 3,
+                        "enabled": false
+                      },
+                      {
+                        "id": "datagma",
+                        "order": 4,
+                        "enabled": false
+                      }
+                    ],
+                    "createdAt": "2026-09-10T14:03:00.000Z",
+                    "updatedAt": "2026-09-11T08:20:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. \u0060code\u0060 is one of \u0060ENRICHMENT_WATERFALL_INVALID_NAME\u0060, \u0060ENRICHMENT_WATERFALL_UNKNOWN_PROVIDER\u0060, \u0060ENRICHMENT_WATERFALL_DUPLICATE_PROVIDER\u0060, \u0060ENRICHMENT_WATERFALL_PROVIDER_NOT_CONNECTED\u0060, \u0060ENRICHMENT_WATERFALL_EMPTY_UPDATE\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallError"
+                },
+                "example": {
+                  "error": "Unknown provider \u0022hunter\u0022 for type \u0022email\u0022",
+                  "code": "ENRICHMENT_WATERFALL_UNKNOWN_PROVIDER"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/EnrichmentWaterfallNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "waterfallId",
+          "in": "path",
+          "description": "Id of the waterfall, as returned by the list endpoint: \u0060default_email\u0060 or \u0060default_phone\u0060 for a default waterfall, an \u0060ecw_\u0060 id for a custom one.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "ecw_ExAmPlE1234567890a"
+        }
+      ]
+    },
+    "/v2/enrichments/waterfalls/{waterfallId}/reset": {
+      "put": {
+        "tags": [
+          "Enrichment Waterfalls"
+        ],
+        "summary": "Reset Enrichment Waterfall",
+        "description": "Hands a default waterfall back to lemlist: \u0060editor\u0060 becomes \u0060lemlist\u0060 and the provider order is random again, as if nobody had ever edited it.\n\nThe reset waterfall is returned.",
+        "operationId": "ResetEnrichmentWaterfall",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "default_email",
+                    "type": "email",
+                    "name": "Default email waterfall",
+                    "isDefault": true,
+                    "editor": "lemlist",
+                    "providers": [
+                      {
+                        "id": "lusha",
+                        "order": 1,
+                        "enabled": true
+                      },
+                      {
+                        "id": "prospeo",
+                        "order": 2,
+                        "enabled": true
+                      },
+                      {
+                        "id": "findymail",
+                        "order": 3,
+                        "enabled": true
+                      },
+                      {
+                        "id": "datagma",
+                        "order": 4,
+                        "enabled": true
+                      }
+                    ],
+                    "createdAt": null,
+                    "updatedAt": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The waterfall is a custom one",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichmentWaterfallError"
+                },
+                "example": {
+                  "error": "Only default waterfalls can be reset",
+                  "code": "ENRICHMENT_WATERFALL_NOT_DEFAULT"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/EnrichmentWaterfallUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/EnrichmentWaterfallNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/EnrichmentWaterfallInternalError"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "waterfallId",
+          "in": "path",
+          "description": "\u0060default_email\u0060 or \u0060default_phone\u0060.",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/V2EnrichmentsWaterfallsWaterfallIdResetWaterfallId"
+          },
+          "example": "default_email"
+        }
+      ]
     }
   },
   "components": {
@@ -20863,6 +21887,14 @@
           }
         }
       },
+      "WatchListApiUpdateSignalStatusResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WatchListApiUpdateSignalStatusResponseData"
+          }
+        }
+      },
       "WatchListApiHistoryResponse": {
         "type": "object",
         "properties": {
@@ -21098,6 +22130,264 @@
           }
         }
       },
+      "EnrichmentWaterfallType": {
+        "enum": [
+          "email",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Kind of data the waterfall looks for.",
+        "x-ms-enum": {
+          "name": "EnrichmentWaterfallType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "EnrichmentProvider": {
+        "required": [
+          "id",
+          "displayName",
+          "types",
+          "source"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable identifier, to use as \u0060providers[].id\u0060 in the waterfall endpoints.",
+            "example": "prospeo"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Name shown in the lemlist app.",
+            "example": "Prospeo"
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallType"
+            },
+            "description": "Enrichment types this provider supports."
+          },
+          "source": {
+            "$ref": "#/components/schemas/EnrichmentProviderSource"
+          },
+          "connected": {
+            "type": "boolean",
+            "description": "Only on external providers: \u0060true\u0060 once its API key is saved in lemlist. A waterfall can only enable a connected provider."
+          }
+        },
+        "description": "A data provider your team can place in a waterfall."
+      },
+      "EnrichmentProviderListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichmentProvider"
+            },
+            "description": "Providers available for the requested type, in the lemlist default order"
+          }
+        }
+      },
+      "EnrichmentProviderResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnrichmentProvider"
+          }
+        }
+      },
+      "EnrichmentProviderConnectRequest": {
+        "required": [
+          "apiKey"
+        ],
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "minLength": 1,
+            "type": "string",
+            "description": "API key issued by the provider to your account.",
+            "writeOnly": true
+          }
+        }
+      },
+      "EnrichmentWaterfallConditions": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/EnrichmentWaterfallConditionsCountry"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Conditions on the contact being enriched, keyed by contact property. Every key present must match for the waterfall to run. New keys will be added over time; unknown keys are rejected."
+      },
+      "EnrichmentWaterfallProvider": {
+        "required": [
+          "id",
+          "enabled"
+        ],
+        "type": "object",
+        "properties": {
+          "order": {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Execution rank, starting at 1, matching the position in the array. Returned only."
+          },
+          "id": {
+            "type": "string",
+            "description": "Provider id, from \u0060GET /enrichments/providers\u0060.",
+            "example": "prospeo"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Disabled providers keep their position but are skipped at enrichment time."
+          },
+          "image": {
+            "type": "string",
+            "description": "Path of the provider logo shown in the lemlist app, relative to the app origin. Read-only.",
+            "example": "/lemrich/prospeo.svg"
+          },
+          "source": {
+            "$ref": "#/components/schemas/EnrichmentWaterfallProviderSource"
+          },
+          "shuffled": {
+            "type": "boolean",
+            "description": "Only on a default waterfall while its \u0060editor\u0060 is \u0060lemlist\u0060. \u0060true\u0060: tried in a random position among the other shuffled providers; \u0060false\u0060: always tried first, at its position (providers you connected with your own API key). Read-only."
+          },
+          "tier": {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Only on the default phone waterfall while its \u0060editor\u0060 is \u0060lemlist\u0060. Phone providers are tried tier by tier, in a random order inside each tier. Read-only."
+          }
+        },
+        "description": "One step of a waterfall. In requests, the position in the \u0060providers\u0060 array is the execution order and \u0060order\u0060 is ignored. In responses, \u0060order\u0060 is always present."
+      },
+      "EnrichmentWaterfall": {
+        "required": [
+          "id",
+          "type",
+          "name",
+          "isDefault",
+          "editor",
+          "providers",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Waterfall id. Always \u0060default_email\u0060 or \u0060default_phone\u0060 for a default waterfall, even after it was edited; custom waterfalls get an id prefixed with \u0060ecw_\u0060.",
+            "example": "ecw_ExAmPlE1234567890a"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EnrichmentWaterfallType"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name, 1 to 100 characters.",
+            "example": "Europe email waterfall"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 for the team\u0027s default waterfall of this type (one per type, cannot be created or deleted). \u0060false\u0060 for a custom waterfall."
+          },
+          "editor": {
+            "type": "string",
+            "description": "Who defined the provider order. \u0060lemlist\u0060 on a default waterfall nobody edited: connected external providers first, then internal providers in a random order (tier by tier for phone, see \u0060providers[].tier\u0060); \u0060providers\u0060 then shows a reference order. Otherwise the id of the team member who last edited the waterfall (\u0060usr_\u0060 prefix): \u0060providers\u0060 is then followed as is. Custom waterfalls always have a user editor.",
+            "example": "lemlist"
+          },
+          "conditions": {
+            "$ref": "#/components/schemas/EnrichmentWaterfallConditionsComposed"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallProvider"
+            },
+            "description": "Execution order. Always contains every provider of the catalog for this \u0060type\u0060 exactly once, disabled ones included. External providers appear only while connected; a newly connected one is appended disabled on custom waterfalls."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "\u0060null\u0060 on a default waterfall that was never edited.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "\u0060null\u0060 on a default waterfall that was never edited.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "description": "An ordered list of providers for one enrichment type."
+      },
+      "EnrichmentWaterfallUpdateRequest": {
+        "minProperties": 1,
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "providers": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallProvider"
+            },
+            "description": "Replaces the whole order, may be partial; left-out providers are appended, disabled."
+          }
+        },
+        "description": "At least one property is required."
+      },
+      "EnrichmentWaterfallResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnrichmentWaterfall"
+          }
+        }
+      },
+      "EnrichmentWaterfallListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichmentWaterfall"
+            },
+            "description": "Default waterfalls first, then custom waterfalls most recently created first"
+          }
+        }
+      },
+      "EnrichmentWaterfallError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable explanation of the failure"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases"
+          }
+        },
+        "description": "Error envelope returned by the enrichment waterfall endpoints."
+      },
       "StepAbTest": {
         "type": "object",
         "oneOf": [
@@ -21109,6 +22399,15 @@
           }
         ],
         "description": "A/B test state for this step. \u0060true\u0060 while the test runs (leads are split between variant A and B); \u0060\u0022A\u0022\u0060 or \u0060\u0022B\u0022\u0060 once a winner is selected (all remaining leads receive the winning template); absent/false when there is no A/B test."
+      },
+      "EnrichmentWaterfallConditionsComposed": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/EnrichmentWaterfallConditionsCountry"
+          }
+        },
+        "description": "Only on custom waterfalls; a default waterfall applies to every contact not matched by a custom one."
       },
       "ApiErrorEnvelopeError": {
         "required": [
@@ -21901,7 +23200,7 @@
           },
           "startDate": {
             "type": "string",
-            "description": "[jobChange/newHire/competitorConnections/companyFollowers] Start date at the tracked company"
+            "description": "[jobChange/newHire/competitorConnections] Start date at the tracked company"
           },
           "previousCompany": {
             "type": "string",
@@ -21913,7 +23212,7 @@
           },
           "trackedCompanyUrl": {
             "type": "string",
-            "description": "Tracked company LinkedIn URL (competitorConnections, companyFollowers, ...)"
+            "description": "Tracked company LinkedIn URL (competitorConnections, ...)"
           },
           "linkedinPeopleProfilePostUrl": {
             "type": "string",
@@ -22301,6 +23600,19 @@
           }
         }
       },
+      "WatchListApiUpdateSignalStatusResponseData": {
+        "type": "object",
+        "properties": {
+          "updatedCount": {
+            "type": "integer",
+            "description": "Number of signals whose status was updated. Can be lower than requestedCount: the write is team-scoped, so ids that were deleted or belong to another team are skipped."
+          },
+          "requestedCount": {
+            "type": "integer",
+            "description": "Number of signal ids sent in the request"
+          }
+        }
+      },
       "WatchListApiFiltersResponseData": {
         "type": "object",
         "additionalProperties": {
@@ -22375,6 +23687,28 @@
           }
         },
         "description": "The full personalized content. Only the fields of the step type are present."
+      },
+      "EnrichmentWaterfallConditionsCountry": {
+        "type": "object",
+        "properties": {
+          "in": {
+            "type": "array",
+            "items": {
+              "pattern": "^[A-Z]{2}$",
+              "type": "string"
+            },
+            "description": "Countries that match. Unique."
+          },
+          "out": {
+            "type": "array",
+            "items": {
+              "pattern": "^[A-Z]{2}$",
+              "type": "string"
+            },
+            "description": "Countries that exclude the contact. Unique, disjoint from \u0060in\u0060. At least one of \u0060in\u0060 or \u0060out\u0060 must be non-empty."
+          }
+        },
+        "description": "The contact\u0027s resolved country (from its \u0060location\u0060, \u0060country\u0060 or company data), as ISO 3166-1 alpha-2 codes."
       },
       "CampaignPerChannelStatsLinkedinBreakdown": {
         "type": "object",
@@ -25805,7 +27139,7 @@
           "name": {
             "maxLength": 200,
             "type": "string",
-            "description": "Name of the contact list to create (max 200 characters)."
+            "description": "Name of the contact list to create (max 200 characters). Cannot contain \u0060\u003C\u0060 or \u0060\u003E\u0060."
           }
         }
       },
@@ -26033,6 +27367,74 @@
           },
           "error": {
             "$ref": "#/components/schemas/PostCompanies400ResponseError"
+          }
+        }
+      },
+      "GetCompaniesLists200Response": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/GetCompaniesLists200ResponseItem"
+        }
+      },
+      "PostCompaniesListsRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of the company list to create (max 200 characters). Cannot contain \u0060\u003C\u0060 or \u0060\u003E\u0060."
+          }
+        }
+      },
+      "PostCompaniesLists201Response": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "list": {
+            "$ref": "#/components/schemas/PostCompaniesLists201ResponseList"
+          }
+        }
+      },
+      "PostCompaniesListsByListIdEntitiesRequest": {
+        "required": [
+          "companyIds"
+        ],
+        "type": "object",
+        "properties": {
+          "companyIds": {
+            "maxItems": 1000,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "pattern": "^cpn_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "description": "Array of company IDs (\u0060cpn_xxx\u0060 format) to add to or remove from the list. Required, non-empty, maximum 1,000 per request."
+          }
+        }
+      },
+      "PostCompaniesListsByListIdEntities200Response": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "addedCount": {
+            "type": "integer",
+            "description": "Number of companies added to the list (add only)."
+          },
+          "alreadyInList": {
+            "type": "integer",
+            "description": "Number of companies that were already in the list and therefore skipped (add only)."
+          },
+          "removedCount": {
+            "type": "integer",
+            "description": "Number of list associations actually removed (remove only). Companies that were not in the list are not counted."
           }
         }
       },
@@ -26587,6 +27989,31 @@
           }
         }
       },
+      "PutWatchlistSignalsRequest": {
+        "required": [
+          "signalIds",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "signalIds": {
+            "maxItems": 1000,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Signal ids (wsi_xxx) to update, from List signals. Between 1 and 1000 per call."
+          },
+          "status": {
+            "$ref": "#/components/schemas/PutWatchlistSignalsRequestStatus"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Optional note explaining the decision. Only meaningful when status is \u0022ignored\u0022."
+          }
+        }
+      },
       "PostUserEmailAccountsRequest": {
         "required": [
           "sender_name",
@@ -26908,6 +28335,10 @@
           "signalOpportunityTemplate": {
             "$ref": "#/components/schemas/PostWatchlistRequestSignalOpportunityTemplate"
           },
+          "personaId": {
+            "type": "string",
+            "description": "Persona (pdp_xxx) used to source contacts from the People Database. Only for a company Signal Agent with signalProcessingType = push_to_campaign whose signal type does not already ship its own contact (those company signals carry no contact, so the persona is the only way to know who to reach). Optional; rejected on any other configuration."
+          },
           "activate": {
             "type": "boolean",
             "description": "Fully set up and activate the agent. Requires segmentType and signalProcessingType."
@@ -26941,6 +28372,14 @@
           },
           "signalProcessingType": {
             "$ref": "#/components/schemas/PatchWatchlistRequestSignalProcessingType"
+          },
+          "personaId": {
+            "type": "string",
+            "description": "Persona (pdp_xxx) used to source contacts from the People Database. Only for a company Signal Agent with signalProcessingType = push_to_campaign whose signal type does not already ship its own contact. Optional; rejected on any other configuration."
+          },
+          "activate": {
+            "type": "boolean",
+            "description": "Toggle the agent status. false deactivates (pauses) it immediately. true reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be toggled this way. Omit to leave the status unchanged."
           }
         }
       },
@@ -27733,6 +29172,12 @@
           "offset": {
             "type": "integer"
           }
+        }
+      },
+      "GetCompaniesLists200ResponseSchema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/GetCompaniesLists200ResponseSchemaItem"
         }
       },
       "GetCompaniesByCompanyIdNotes200Response": {
@@ -29626,6 +31071,11 @@
           "dynamic": {
             "type": "boolean",
             "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the list was created. Lists are returned newest first.",
+            "format": "date-time"
           }
         }
       },
@@ -29738,6 +31188,41 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "GetCompaniesLists200ResponseItem": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique list ID (\u0060clt_xxx\u0060 format)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the company list"
+          },
+          "dynamic": {
+            "type": "boolean",
+            "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the list was created. Lists are returned newest first.",
+            "format": "date-time"
+          }
+        }
+      },
+      "PostCompaniesLists201ResponseList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique list ID (\u0060clt_xxx\u0060 format)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the created list"
           }
         }
       },
@@ -30751,6 +32236,33 @@
           "dynamic": {
             "type": "boolean",
             "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the list was created. Lists are returned newest first.",
+            "format": "date-time"
+          }
+        }
+      },
+      "GetCompaniesLists200ResponseSchemaItem": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique list ID (\u0060clt_xxx\u0060 format)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the company list"
+          },
+          "dynamic": {
+            "type": "boolean",
+            "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the list was created. Lists are returned newest first.",
+            "format": "date-time"
           }
         }
       },
@@ -32524,16 +34036,25 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
-          "companyFollowers",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
           "mergersAcquisitions",
           "promotion",
           "linkedinKeywords",
+          "republishedJobOffers",
           "externalSignalContact",
           "externalSignalCompany",
-          "buyingIntent"
+          "buyingIntent",
+          "newProductLaunch",
+          "companyAward",
+          "newPartnership",
+          "newOffice",
+          "closingOffice",
+          "costCutting",
+          "outagesAndSecurityBreaches",
+          "lawsuitsAndLegalIssues",
+          "githubStargazer"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -32579,10 +34100,6 @@
               "name": "CompetitorReactions"
             },
             {
-              "value": "companyFollowers",
-              "name": "CompanyFollowers"
-            },
-            {
               "value": "technologyChange",
               "name": "TechnologyChange"
             },
@@ -32607,6 +34124,10 @@
               "name": "LinkedinKeywords"
             },
             {
+              "value": "republishedJobOffers",
+              "name": "RepublishedJobOffers"
+            },
+            {
               "value": "externalSignalContact",
               "name": "ExternalSignalContact"
             },
@@ -32617,6 +34138,42 @@
             {
               "value": "buyingIntent",
               "name": "BuyingIntent"
+            },
+            {
+              "value": "newProductLaunch",
+              "name": "NewProductLaunch"
+            },
+            {
+              "value": "companyAward",
+              "name": "CompanyAward"
+            },
+            {
+              "value": "newPartnership",
+              "name": "NewPartnership"
+            },
+            {
+              "value": "newOffice",
+              "name": "NewOffice"
+            },
+            {
+              "value": "closingOffice",
+              "name": "ClosingOffice"
+            },
+            {
+              "value": "costCutting",
+              "name": "CostCutting"
+            },
+            {
+              "value": "outagesAndSecurityBreaches",
+              "name": "OutagesAndSecurityBreaches"
+            },
+            {
+              "value": "lawsuitsAndLegalIssues",
+              "name": "LawsuitsAndLegalIssues"
+            },
+            {
+              "value": "githubStargazer",
+              "name": "GithubStargazer"
             }
           ]
         }
@@ -32665,16 +34222,25 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
-          "companyFollowers",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
           "mergersAcquisitions",
           "promotion",
           "linkedinKeywords",
+          "republishedJobOffers",
           "externalSignalContact",
           "externalSignalCompany",
-          "buyingIntent"
+          "buyingIntent",
+          "newProductLaunch",
+          "companyAward",
+          "newPartnership",
+          "newOffice",
+          "closingOffice",
+          "costCutting",
+          "outagesAndSecurityBreaches",
+          "lawsuitsAndLegalIssues",
+          "githubStargazer"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -32720,10 +34286,6 @@
               "name": "CompetitorReactions"
             },
             {
-              "value": "companyFollowers",
-              "name": "CompanyFollowers"
-            },
-            {
               "value": "technologyChange",
               "name": "TechnologyChange"
             },
@@ -32748,6 +34310,10 @@
               "name": "LinkedinKeywords"
             },
             {
+              "value": "republishedJobOffers",
+              "name": "RepublishedJobOffers"
+            },
+            {
               "value": "externalSignalContact",
               "name": "ExternalSignalContact"
             },
@@ -32758,6 +34324,42 @@
             {
               "value": "buyingIntent",
               "name": "BuyingIntent"
+            },
+            {
+              "value": "newProductLaunch",
+              "name": "NewProductLaunch"
+            },
+            {
+              "value": "companyAward",
+              "name": "CompanyAward"
+            },
+            {
+              "value": "newPartnership",
+              "name": "NewPartnership"
+            },
+            {
+              "value": "newOffice",
+              "name": "NewOffice"
+            },
+            {
+              "value": "closingOffice",
+              "name": "ClosingOffice"
+            },
+            {
+              "value": "costCutting",
+              "name": "CostCutting"
+            },
+            {
+              "value": "outagesAndSecurityBreaches",
+              "name": "OutagesAndSecurityBreaches"
+            },
+            {
+              "value": "lawsuitsAndLegalIssues",
+              "name": "LawsuitsAndLegalIssues"
+            },
+            {
+              "value": "githubStargazer",
+              "name": "GithubStargazer"
             }
           ]
         }
@@ -32928,7 +34530,8 @@
           "seniority",
           "crmListIds",
           "minJobCount",
-          "timeframe"
+          "timeframe",
+          "githubRepoUrls"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -33088,6 +34691,10 @@
             {
               "value": "timeframe",
               "name": "Timeframe"
+            },
+            {
+              "value": "githubRepoUrls",
+              "name": "GithubRepoUrls"
             }
           ]
         }
@@ -33103,16 +34710,25 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
-          "companyFollowers",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
           "mergersAcquisitions",
           "promotion",
           "linkedinKeywords",
+          "republishedJobOffers",
           "externalSignalContact",
           "externalSignalCompany",
-          "buyingIntent"
+          "buyingIntent",
+          "newProductLaunch",
+          "companyAward",
+          "newPartnership",
+          "newOffice",
+          "closingOffice",
+          "costCutting",
+          "outagesAndSecurityBreaches",
+          "lawsuitsAndLegalIssues",
+          "githubStargazer"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -33158,10 +34774,6 @@
               "name": "CompetitorReactions"
             },
             {
-              "value": "companyFollowers",
-              "name": "CompanyFollowers"
-            },
-            {
               "value": "technologyChange",
               "name": "TechnologyChange"
             },
@@ -33186,6 +34798,10 @@
               "name": "LinkedinKeywords"
             },
             {
+              "value": "republishedJobOffers",
+              "name": "RepublishedJobOffers"
+            },
+            {
               "value": "externalSignalContact",
               "name": "ExternalSignalContact"
             },
@@ -33196,6 +34812,42 @@
             {
               "value": "buyingIntent",
               "name": "BuyingIntent"
+            },
+            {
+              "value": "newProductLaunch",
+              "name": "NewProductLaunch"
+            },
+            {
+              "value": "companyAward",
+              "name": "CompanyAward"
+            },
+            {
+              "value": "newPartnership",
+              "name": "NewPartnership"
+            },
+            {
+              "value": "newOffice",
+              "name": "NewOffice"
+            },
+            {
+              "value": "closingOffice",
+              "name": "ClosingOffice"
+            },
+            {
+              "value": "costCutting",
+              "name": "CostCutting"
+            },
+            {
+              "value": "outagesAndSecurityBreaches",
+              "name": "OutagesAndSecurityBreaches"
+            },
+            {
+              "value": "lawsuitsAndLegalIssues",
+              "name": "LawsuitsAndLegalIssues"
+            },
+            {
+              "value": "githubStargazer",
+              "name": "GithubStargazer"
             }
           ]
         }
@@ -33328,22 +34980,28 @@
           "companyIsHiring",
           "companyRaisedFunds",
           "recruitmentCampaign",
-          "jobChange",
           "newHire",
           "companyEmployeeVisitedMyWebsite",
           "customSignals",
           "competitorConnections",
           "competitorReactions",
-          "companyFollowers",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
           "mergersAcquisitions",
           "promotion",
           "linkedinKeywords",
-          "externalSignalContact",
-          "externalSignalCompany",
-          "buyingIntent"
+          "republishedJobOffers",
+          "buyingIntent",
+          "newProductLaunch",
+          "companyAward",
+          "newPartnership",
+          "newOffice",
+          "closingOffice",
+          "costCutting",
+          "outagesAndSecurityBreaches",
+          "lawsuitsAndLegalIssues",
+          "githubStargazer"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -33365,10 +35023,6 @@
               "name": "RecruitmentCampaign"
             },
             {
-              "value": "jobChange",
-              "name": "JobChange"
-            },
-            {
               "value": "newHire",
               "name": "NewHire"
             },
@@ -33387,10 +35041,6 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
-            },
-            {
-              "value": "companyFollowers",
-              "name": "CompanyFollowers"
             },
             {
               "value": "technologyChange",
@@ -33417,16 +35067,48 @@
               "name": "LinkedinKeywords"
             },
             {
-              "value": "externalSignalContact",
-              "name": "ExternalSignalContact"
-            },
-            {
-              "value": "externalSignalCompany",
-              "name": "ExternalSignalCompany"
+              "value": "republishedJobOffers",
+              "name": "RepublishedJobOffers"
             },
             {
               "value": "buyingIntent",
               "name": "BuyingIntent"
+            },
+            {
+              "value": "newProductLaunch",
+              "name": "NewProductLaunch"
+            },
+            {
+              "value": "companyAward",
+              "name": "CompanyAward"
+            },
+            {
+              "value": "newPartnership",
+              "name": "NewPartnership"
+            },
+            {
+              "value": "newOffice",
+              "name": "NewOffice"
+            },
+            {
+              "value": "closingOffice",
+              "name": "ClosingOffice"
+            },
+            {
+              "value": "costCutting",
+              "name": "CostCutting"
+            },
+            {
+              "value": "outagesAndSecurityBreaches",
+              "name": "OutagesAndSecurityBreaches"
+            },
+            {
+              "value": "lawsuitsAndLegalIssues",
+              "name": "LawsuitsAndLegalIssues"
+            },
+            {
+              "value": "githubStargazer",
+              "name": "GithubStargazer"
             }
           ]
         }
@@ -33707,6 +35389,52 @@
         "type": "string",
         "additionalProperties": false,
         "description": "The A/B variant the lead is pinned to"
+      },
+      "EnrichmentProviderSource": {
+        "enum": [
+          "internal",
+          "external"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060internal\u0060: paid with lemlist credits, always available. \u0060external\u0060: called with your own API key, saved through the connection endpoint.",
+        "x-ms-enum": {
+          "name": "EnrichmentProviderSource",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "internal",
+              "name": "InternalValue"
+            },
+            {
+              "value": "external",
+              "name": "External"
+            }
+          ]
+        }
+      },
+      "EnrichmentWaterfallProviderSource": {
+        "enum": [
+          "internal",
+          "external"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060internal\u0060: paid with lemlist credits. \u0060external\u0060: called with your own API key. Read-only.",
+        "x-ms-enum": {
+          "name": "EnrichmentWaterfallProviderSource",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "internal",
+              "name": "InternalValue"
+            },
+            {
+              "value": "external",
+              "name": "External"
+            }
+          ]
+        }
       },
       "CompanyCrmSyncProvider": {
         "enum": [
@@ -35625,27 +37353,56 @@
           ]
         }
       },
+      "PutWatchlistSignalsRequestStatus": {
+        "enum": [
+          "handled",
+          "ignored"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Target status to set on every signal.",
+        "x-ms-enum": {
+          "name": "PutWatchlistSignalsRequestStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "handled",
+              "name": "Handled"
+            },
+            {
+              "value": "ignored",
+              "name": "Ignored"
+            }
+          ]
+        }
+      },
       "PostWatchlistRequestType": {
         "enum": [
           "companyIsHiring",
           "companyRaisedFunds",
           "recruitmentCampaign",
-          "jobChange",
           "newHire",
           "companyEmployeeVisitedMyWebsite",
           "customSignals",
           "competitorConnections",
           "competitorReactions",
-          "companyFollowers",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
           "mergersAcquisitions",
           "promotion",
           "linkedinKeywords",
-          "externalSignalContact",
-          "externalSignalCompany",
-          "buyingIntent"
+          "republishedJobOffers",
+          "buyingIntent",
+          "newProductLaunch",
+          "companyAward",
+          "newPartnership",
+          "newOffice",
+          "closingOffice",
+          "costCutting",
+          "outagesAndSecurityBreaches",
+          "lawsuitsAndLegalIssues",
+          "githubStargazer"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -35667,10 +37424,6 @@
               "name": "RecruitmentCampaign"
             },
             {
-              "value": "jobChange",
-              "name": "JobChange"
-            },
-            {
               "value": "newHire",
               "name": "NewHire"
             },
@@ -35689,10 +37442,6 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
-            },
-            {
-              "value": "companyFollowers",
-              "name": "CompanyFollowers"
             },
             {
               "value": "technologyChange",
@@ -35719,16 +37468,48 @@
               "name": "LinkedinKeywords"
             },
             {
-              "value": "externalSignalContact",
-              "name": "ExternalSignalContact"
-            },
-            {
-              "value": "externalSignalCompany",
-              "name": "ExternalSignalCompany"
+              "value": "republishedJobOffers",
+              "name": "RepublishedJobOffers"
             },
             {
               "value": "buyingIntent",
               "name": "BuyingIntent"
+            },
+            {
+              "value": "newProductLaunch",
+              "name": "NewProductLaunch"
+            },
+            {
+              "value": "companyAward",
+              "name": "CompanyAward"
+            },
+            {
+              "value": "newPartnership",
+              "name": "NewPartnership"
+            },
+            {
+              "value": "newOffice",
+              "name": "NewOffice"
+            },
+            {
+              "value": "closingOffice",
+              "name": "ClosingOffice"
+            },
+            {
+              "value": "costCutting",
+              "name": "CostCutting"
+            },
+            {
+              "value": "outagesAndSecurityBreaches",
+              "name": "OutagesAndSecurityBreaches"
+            },
+            {
+              "value": "lawsuitsAndLegalIssues",
+              "name": "LawsuitsAndLegalIssues"
+            },
+            {
+              "value": "githubStargazer",
+              "name": "GithubStargazer"
             }
           ]
         }
@@ -38492,22 +40273,28 @@
           "companyIsHiring",
           "companyRaisedFunds",
           "recruitmentCampaign",
-          "jobChange",
           "newHire",
           "companyEmployeeVisitedMyWebsite",
           "customSignals",
           "competitorConnections",
           "competitorReactions",
-          "companyFollowers",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
           "mergersAcquisitions",
           "promotion",
           "linkedinKeywords",
-          "externalSignalContact",
-          "externalSignalCompany",
-          "buyingIntent"
+          "republishedJobOffers",
+          "buyingIntent",
+          "newProductLaunch",
+          "companyAward",
+          "newPartnership",
+          "newOffice",
+          "closingOffice",
+          "costCutting",
+          "outagesAndSecurityBreaches",
+          "lawsuitsAndLegalIssues",
+          "githubStargazer"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -38528,10 +40315,6 @@
               "name": "RecruitmentCampaign"
             },
             {
-              "value": "jobChange",
-              "name": "JobChange"
-            },
-            {
               "value": "newHire",
               "name": "NewHire"
             },
@@ -38550,10 +40333,6 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
-            },
-            {
-              "value": "companyFollowers",
-              "name": "CompanyFollowers"
             },
             {
               "value": "technologyChange",
@@ -38580,16 +40359,48 @@
               "name": "LinkedinKeywords"
             },
             {
-              "value": "externalSignalContact",
-              "name": "ExternalSignalContact"
-            },
-            {
-              "value": "externalSignalCompany",
-              "name": "ExternalSignalCompany"
+              "value": "republishedJobOffers",
+              "name": "RepublishedJobOffers"
             },
             {
               "value": "buyingIntent",
               "name": "BuyingIntent"
+            },
+            {
+              "value": "newProductLaunch",
+              "name": "NewProductLaunch"
+            },
+            {
+              "value": "companyAward",
+              "name": "CompanyAward"
+            },
+            {
+              "value": "newPartnership",
+              "name": "NewPartnership"
+            },
+            {
+              "value": "newOffice",
+              "name": "NewOffice"
+            },
+            {
+              "value": "closingOffice",
+              "name": "ClosingOffice"
+            },
+            {
+              "value": "costCutting",
+              "name": "CostCutting"
+            },
+            {
+              "value": "outagesAndSecurityBreaches",
+              "name": "OutagesAndSecurityBreaches"
+            },
+            {
+              "value": "lawsuitsAndLegalIssues",
+              "name": "LawsuitsAndLegalIssues"
+            },
+            {
+              "value": "githubStargazer",
+              "name": "GithubStargazer"
             }
           ]
         }
@@ -38803,6 +40614,72 @@
         ],
         "type": "string",
         "additionalProperties": false
+      },
+      "V2EnrichmentsWaterfallsWaterfallIdResetWaterfallId": {
+        "enum": [
+          "default_email",
+          "default_phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "V2EnrichmentsWaterfallsWaterfallIdResetWaterfallId",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "default_email",
+              "name": "DefaultEmail"
+            },
+            {
+              "value": "default_phone",
+              "name": "DefaultPhone"
+            }
+          ]
+        }
+      }
+    },
+    "responses": {
+      "EnrichmentWaterfallUnauthorized": {
+        "description": "Unauthorized - invalid or missing API key",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallError"
+            },
+            "example": {
+              "error": "Route unauthorized",
+              "code": "ROUTE_UNAUTHORIZED"
+            }
+          }
+        }
+      },
+      "EnrichmentWaterfallNotFound": {
+        "description": "No waterfall with this id in your team",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallError"
+            },
+            "example": {
+              "error": "Waterfall not found",
+              "code": "ENRICHMENT_WATERFALL_NOT_FOUND"
+            }
+          }
+        }
+      },
+      "EnrichmentWaterfallInternalError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/EnrichmentWaterfallError"
+            },
+            "example": {
+              "error": "Internal error",
+              "code": "INTERNAL_ERROR"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -38815,6 +40692,16 @@
   "security": [
     {
       "basicAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Enrichment Providers",
+      "description": "The data providers lemlist can call to find an email or a phone.\n\nInternal providers are paid with lemlist credits and always available. External providers run on your own account: connect one by saving its API key, and it becomes available to your waterfalls. \u0060GET /enrichments/providers\u0060 is the catalog of provider ids accepted by the waterfall endpoints."
+    },
+    {
+      "name": "Enrichment Waterfalls",
+      "description": "Control which data providers lemlist calls when enriching a contact, and in which order.\n\nA waterfall is an ordered list of providers for one enrichment \u0060type\u0060 (\u0060email\u0060 or \u0060phone\u0060). Providers are tried one after the other until one returns a result.\n\nEvery team has exactly one default waterfall per type (\u0060isDefault: true\u0060). While its \u0060editor\u0060 is \u0060lemlist\u0060 it follows the lemlist behaviour: providers you connected with your own API key are tried first, then internal providers in a random order. Once a team member edits its provider list, \u0060editor\u0060 becomes that user\u0027s id and the list is followed as is; resetting it hands it back to \u0060lemlist\u0060.\n\nCustom waterfalls (\u0060isDefault: false\u0060) carry \u0060conditions\u0060 on the contact being enriched, keyed by contact property; every key present must match. When a contact is enriched, lemlist runs a single waterfall: the custom waterfall of the requested type whose conditions match the contact, or the default waterfall when none does. If several match, the one with the most condition keys wins, then the most recently updated. Only that waterfall runs; when it finds nothing, the enrichment ends without falling back to another one."
     }
   ]
 }

@@ -14,6 +14,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>When the list was created. Lists are returned newest first.</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Whether the list is dynamic (auto-populated by filters) or static (manually managed)</summary>
         public bool? Dynamic { get; set; }
         /// <summary>Unique list ID (`clt_xxx` format)</summary>
@@ -57,6 +59,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "dynamic", n => { Dynamic = n.GetBoolValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -69,6 +72,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteBoolValue("dynamic", Dynamic);
             writer.WriteStringValue("_id", Id);
             writer.WriteStringValue("name", Name);

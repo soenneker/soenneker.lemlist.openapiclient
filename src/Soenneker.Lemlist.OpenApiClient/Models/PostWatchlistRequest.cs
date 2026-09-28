@@ -40,6 +40,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>Persona (pdp_xxx) used to source contacts from the People Database. Only for a company Signal Agent with signalProcessingType = push_to_campaign whose signal type does not already ship its own contact (those company signals carry no contact, so the persona is the only way to know who to reach). Optional; rejected on any other configuration.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PersonaId { get; set; }
+#nullable restore
+#else
+        public string PersonaId { get; set; }
+#endif
         /// <summary>Entity sourcing. Only `all` is supported via the API. Required together with signalProcessingType when activate is true.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType? SegmentType { get; set; }
         /// <summary>Task/opportunity template applied to each signal when signalProcessingType is create_opportunity.</summary>
@@ -83,6 +91,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>(global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "personaId", n => { PersonaId = n.GetStringValue(); } },
                 { "segmentType", n => { SegmentType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType>(); } },
                 { "signalOpportunityTemplate", n => { SignalOpportunityTemplate = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalOpportunityTemplate>(global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalOpportunityTemplate.CreateFromDiscriminatorValue); } },
                 { "signalProcessingType", n => { SignalProcessingType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalProcessingType>(); } },
@@ -100,6 +109,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("emoji", Emoji);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>("filters", Filters);
             writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("personaId", PersonaId);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType>("segmentType", SegmentType);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalOpportunityTemplate>("signalOpportunityTemplate", SignalOpportunityTemplate);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistRequestSignalProcessingType>("signalProcessingType", SignalProcessingType);
