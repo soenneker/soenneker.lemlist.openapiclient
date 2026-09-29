@@ -96,7 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string LastName { get; set; }
 #endif
-        /// <summary>Non-blocking notices: the company part was skipped, or `FIELDS_KEPT` when the update strategy kept values you sent (`params.fields` names them, company fields prefixed with `company`).</summary>
+        /// <summary>Non-blocking notices, never a failure — the request went through. They tell you why the company part was skipped, when it was, and which values the update strategy kept. See `code`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>? Warnings { get; set; }

@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>`invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (the company part was skipped: malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the company write failed).</summary>
+        /// <summary>**The company WAS written** — `company-fields-write-company-record`: the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.**The company was NOT written** — `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }
@@ -29,6 +29,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #nullable restore
 #else
         public string Message { get; set; }
+#endif
+        /// <summary>Details: `fields` for `company-fields-write-company-record`, the keys that went to the company record.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItemParams? Params { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItemParams Params { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItem"/> and sets the default values.
@@ -57,6 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "code", n => { Code = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
+                { "params", n => { Params = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItemParams>(global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItemParams.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -68,6 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("code", Code);
             writer.WriteStringValue("message", Message);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables200ResponseWarningsItemParams>("params", Params);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

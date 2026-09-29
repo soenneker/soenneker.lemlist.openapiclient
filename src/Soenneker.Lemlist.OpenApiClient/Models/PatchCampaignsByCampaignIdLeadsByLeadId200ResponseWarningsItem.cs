@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>`invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (the company part was skipped: malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the company write failed); `FIELDS_KEPT` (values the update strategy kept, see `params.fields`).</summary>
+        /// <summary>**The company WAS written** — `company-fields-write-company-record`: the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.**The company was NOT written** — `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.**Values left unchanged** — `FIELDS_KEPT`: what the update strategy kept, named in `params.fields` (company fields prefixed with `company`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }
@@ -30,7 +30,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Message { get; set; }
 #endif
-        /// <summary>Details: the input echoed back, or `fields` for `FIELDS_KEPT`.</summary>
+        /// <summary>Details: the input echoed back, or `fields` for `company-fields-write-company-record` and `FIELDS_KEPT`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParams? Params { get; set; }

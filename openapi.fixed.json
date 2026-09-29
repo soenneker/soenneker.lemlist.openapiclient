@@ -5283,21 +5283,57 @@
                 "schema": {
                   "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200Response"
                 },
-                "example": {
-                  "campaignId": "cam_bSn8EORHQxbWPjHvu",
-                  "campaignName": "NEW TO DELETE",
-                  "leadUrl": "https://api.lemlist.com/api/leads/alex.doe%40example.com",
-                  "firstName": "John",
-                  "lastName": "Doe",
-                  "companyName": "Acme Inc",
-                  "jobTitle": "Growth Engineer",
-                  "companyDomain": "example.com",
-                  "email": "support@lemlist.com",
-                  "preferredContactMethod": "email",
-                  "_id": "lea_fiDpiGV585wy3Oii2",
-                  "isPaused": false,
-                  "contactId": "ctc_xW8Ou6C03Csv8vatp",
-                  "emailStatus": "deliverable"
+                "examples": {
+                  "written": {
+                    "summary": "Lead updated, no company key sent",
+                    "value": {
+                      "campaignId": "cam_A1B2C3D4E5F6G7H8I9",
+                      "campaignName": "Example campaign",
+                      "leadUrl": "https://api.lemlist.com/api/leads/alex.doe%40example.com",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "companyName": "Acme Inc",
+                      "jobTitle": "Growth Engineer",
+                      "companyDomain": "example.com",
+                      "email": "support@lemlist.com",
+                      "preferredContactMethod": "email",
+                      "_id": "lea_A1B2C3D4E5F6G7H8I9",
+                      "isPaused": false,
+                      "contactId": "ctc_A1B2C3D4E5F6G7H8I9",
+                      "emailStatus": "deliverable"
+                    }
+                  },
+                  "companyKeys": {
+                    "summary": "Company keys sent: the company record was written",
+                    "value": {
+                      "campaignId": "cam_A1B2C3D4E5F6G7H8I9",
+                      "campaignName": "Example campaign",
+                      "leadUrl": "https://api.lemlist.com/api/leads/john%40example.com",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "companyName": "Acme Inc",
+                      "jobTitle": "Growth Engineer",
+                      "companyDomain": "acme.com",
+                      "email": "john@example.com",
+                      "preferredContactMethod": "email",
+                      "_id": "lea_A1B2C3D4E5F6G7H8I9",
+                      "isPaused": false,
+                      "contactId": "ctc_A1B2C3D4E5F6G7H8I9",
+                      "emailStatus": "deliverable",
+                      "warnings": [
+                        {
+                          "code": "company-fields-write-company-record",
+                          "message": "These keys update the company record shared by every lead pointing at it, not the lead. Use POST /api/companies to edit a company.",
+                          "params": {
+                            "fields": [
+                              "companyDomain",
+                              "companyName"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -6480,8 +6516,30 @@
                 "schema": {
                   "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200Response"
                 },
-                "example": {
-                  "ok": true
+                "examples": {
+                  "written": {
+                    "summary": "Variables updated, no company key sent",
+                    "value": {
+                      "ok": true
+                    }
+                  },
+                  "companyKeys": {
+                    "summary": "Company keys sent: the company record was written",
+                    "value": {
+                      "ok": true,
+                      "warnings": [
+                        {
+                          "code": "company-fields-write-company-record",
+                          "message": "These keys update the company record shared by every lead pointing at it, not the lead. Use POST /api/companies to edit a company.",
+                          "params": {
+                            "fields": [
+                              "companyName"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -10899,7 +10957,6 @@
                   {
                     "_id": "clt_abc123def456ghi78",
                     "name": "Nurturing",
-                    "dynamic": false,
                     "createdAt": "2026-09-23T10:15:00.000Z"
                   },
                   {
@@ -11927,7 +11984,6 @@
                   {
                     "_id": "clt_abc123def456ghi78",
                     "name": "Target accounts",
-                    "dynamic": false,
                     "createdAt": "2026-09-23T10:15:00.000Z"
                   },
                   {
@@ -25423,7 +25479,7 @@
             "items": {
               "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItem"
             },
-            "description": "Non-blocking notices: the company part was skipped, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them, company fields prefixed with \u0060company\u0060)."
+            "description": "Non-blocking notices, never a failure \u2014 the request went through. They tell you why the company part was skipped, when it was, and which values the update strategy kept. See \u0060code\u0060."
           }
         }
       },
@@ -25535,7 +25591,7 @@
             "items": {
               "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItem"
             },
-            "description": "Non-blocking notices: the company part was skipped, or \u0060FIELDS_KEPT\u0060 when the update strategy kept values you sent (\u0060params.fields\u0060 names them, company fields prefixed with \u0060company\u0060)."
+            "description": "Non-blocking notices, never a failure \u2014 the request went through. They tell you what happened to the company part (written, or skipped and why) and which values the update strategy kept. See \u0060code\u0060."
           }
         }
       },
@@ -25934,7 +25990,7 @@
             "items": {
               "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200ResponseWarningsItem"
             },
-            "description": "Optional warnings, never a failure: the company part of the update was skipped."
+            "description": "Optional warnings, never a failure \u2014 the request went through. They tell you what happened to the company part: written, or skipped and why. See \u0060code\u0060."
           }
         }
       },
@@ -25969,7 +26025,7 @@
             "items": {
               "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200ResponseWarningsItem"
             },
-            "description": "Optional warnings, never a failure: the company part of the update was skipped."
+            "description": "Optional warnings, never a failure \u2014 the request went through. They tell you what happened to the company part: written, or skipped and why. See \u0060code\u0060."
           }
         }
       },
@@ -26004,7 +26060,7 @@
             "items": {
               "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseWarningsItem"
             },
-            "description": "Optional warnings, never a failure: the company part of the update was skipped."
+            "description": "Optional warnings, never a failure \u2014 the request went through. They tell you what happened to the company part: written, or skipped and why. See \u0060code\u0060."
           }
         }
       },
@@ -29422,6 +29478,48 @@
           }
         ]
       },
+      "PostLeadsByLeadIdVariables200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "PatchLeadsByLeadIdVariables200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "DeleteLeadsByLeadIdVariables200ResponseWarningsItemParamsAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      },
       "PostCampaignsByCampaignIdLeadsImportRequestDeduplicate": {
         "type": "object",
         "oneOf": [
@@ -30214,7 +30312,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed); \u0060FIELDS_KEPT\u0060 (values the update strategy kept, see \u0060params.fields\u0060)."
+            "description": "**The company was NOT written** \u2014 \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case.\n\n**Values left unchanged** \u2014 \u0060FIELDS_KEPT\u0060: what the update strategy kept, named in \u0060params.fields\u0060 (company fields prefixed with \u0060company\u0060)."
           },
           "message": {
             "type": "string"
@@ -30229,7 +30327,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed); \u0060FIELDS_KEPT\u0060 (values the update strategy kept, see \u0060params.fields\u0060)."
+            "description": "**The company WAS written** \u2014 \u0060company-fields-write-company-record\u0060: the \u0060company\u0060-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. \u0060params.fields\u0060 names them.\n\n**The company was NOT written** \u2014 \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case.\n\n**Values left unchanged** \u2014 \u0060FIELDS_KEPT\u0060: what the update strategy kept, named in \u0060params.fields\u0060 (company fields prefixed with \u0060company\u0060)."
           },
           "message": {
             "type": "string"
@@ -30448,10 +30546,13 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed)."
+            "description": "**The company WAS written** \u2014 \u0060company-fields-write-company-record\u0060: the \u0060company\u0060-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. \u0060params.fields\u0060 names them.\n\n**The company was NOT written** \u2014 \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200ResponseWarningsItemParams"
           }
         }
       },
@@ -30460,10 +30561,13 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed)."
+            "description": "**The company WAS written** \u2014 \u0060company-fields-write-company-record\u0060: the \u0060company\u0060-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. \u0060params.fields\u0060 names them.\n\n**The company was NOT written** \u2014 \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200ResponseWarningsItemParams"
           }
         }
       },
@@ -30472,10 +30576,13 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (the company part was skipped: malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the company write failed)."
+            "description": "**The company WAS written** \u2014 \u0060company-fields-write-company-record\u0060: the \u0060company\u0060-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. \u0060params.fields\u0060 names them.\n\n**The company was NOT written** \u2014 \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case."
           },
           "message": {
             "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseWarningsItemParams"
           }
         }
       },
@@ -31070,7 +31177,7 @@
           },
           "dynamic": {
             "type": "boolean",
-            "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+            "description": "\u0060true\u0060 on a dynamic list (auto-populated by filters). Absent on a static list (manually managed): treat a missing key as \u0060false\u0060."
           },
           "createdAt": {
             "type": "string",
@@ -31204,7 +31311,7 @@
           },
           "dynamic": {
             "type": "boolean",
-            "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+            "description": "\u0060true\u0060 on a dynamic list (auto-populated by filters). Absent on a static list (manually managed): treat a missing key as \u0060false\u0060."
           },
           "createdAt": {
             "type": "string",
@@ -32235,7 +32342,7 @@
           },
           "dynamic": {
             "type": "boolean",
-            "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+            "description": "\u0060true\u0060 on a dynamic list (auto-populated by filters). Absent on a static list (manually managed): treat a missing key as \u0060false\u0060."
           },
           "createdAt": {
             "type": "string",
@@ -32257,7 +32364,7 @@
           },
           "dynamic": {
             "type": "boolean",
-            "description": "Whether the list is dynamic (auto-populated by filters) or static (manually managed)"
+            "description": "\u0060true\u0060 on a dynamic list (auto-populated by filters). Absent on a static list (manually managed): treat a missing key as \u0060false\u0060."
           },
           "createdAt": {
             "type": "string",
@@ -32555,7 +32662,28 @@
         "additionalProperties": {
           "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParamsAdditionalProperties"
         },
-        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
+        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060 and \u0060FIELDS_KEPT\u0060."
+      },
+      "PostLeadsByLeadIdVariables200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/PostLeadsByLeadIdVariables200ResponseWarningsItemParamsAdditionalProperties"
+        },
+        "description": "Details: \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060, the keys that went to the company record."
+      },
+      "PatchLeadsByLeadIdVariables200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables200ResponseWarningsItemParamsAdditionalProperties"
+        },
+        "description": "Details: \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060, the keys that went to the company record."
+      },
+      "DeleteLeadsByLeadIdVariables200ResponseWarningsItemParams": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables200ResponseWarningsItemParamsAdditionalProperties"
+        },
+        "description": "Details: \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060, the keys that went to the company record."
       },
       "GetTasks200ResponseResultsItemCampaign": {
         "type": "object",

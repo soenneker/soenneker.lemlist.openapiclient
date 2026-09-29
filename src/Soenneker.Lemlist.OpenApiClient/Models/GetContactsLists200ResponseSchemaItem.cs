@@ -16,7 +16,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>When the list was created. Lists are returned newest first.</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>Whether the list is dynamic (auto-populated by filters) or static (manually managed)</summary>
+        /// <summary>`true` on a dynamic list (auto-populated by filters). Absent on a static list (manually managed): treat a missing key as `false`.</summary>
         public bool? Dynamic { get; set; }
         /// <summary>Unique list ID (`clt_xxx` format)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
