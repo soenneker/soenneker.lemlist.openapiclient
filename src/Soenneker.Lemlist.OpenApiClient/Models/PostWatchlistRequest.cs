@@ -16,6 +16,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public bool? Activate { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Campaign (cam_xxx) to link as this Signal Agent&apos;s signal trigger, in the same call: every new signal pushes its contact into that campaign as a lead. Only with signalProcessingType = push_to_campaign. A campaign set up as manual in the lemlist app is refused (409). Requires the campaignSignalTrigger beta. Optional; on any refusal no agent is created.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CampaignId { get; set; }
+#nullable restore
+#else
+        public string CampaignId { get; set; }
+#endif
         /// <summary>Emoji shown next to the agent name (defaults to a random emoji)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,6 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "activate", n => { Activate = n.GetBoolValue(); } },
+                { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>(global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -106,6 +115,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("activate", Activate);
+            writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteStringValue("emoji", Emoji);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>("filters", Filters);
             writer.WriteStringValue("name", Name);

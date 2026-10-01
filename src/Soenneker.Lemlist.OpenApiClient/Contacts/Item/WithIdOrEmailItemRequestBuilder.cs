@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithIdOrEmailItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The notes property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes.NotesRequestBuilder Notes
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes.NotesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.WithIdOrEmailItemRequestBuilder"/> and sets the default values.
         /// </summary>
@@ -61,13 +67,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Contact
+        /// Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Contact"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Contact400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Contact401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.Contact?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -80,8 +87,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Contact400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Contact401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -105,7 +113,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             return requestInfo;
         }
         /// <summary>
-        /// Get Contact
+        /// Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

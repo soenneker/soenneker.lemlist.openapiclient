@@ -177,6 +177,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse400Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse402Error">When receiving a 402 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist409Response">When receiving a 409 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse429Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -195,6 +198,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse400Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse401Error.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse402Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist403Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist404Response.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist409Response.CreateFromDiscriminatorValue },
                 { "429", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse429Error.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchListApiWatchListResponse500Error.CreateFromDiscriminatorValue },
             };

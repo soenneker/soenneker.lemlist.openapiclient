@@ -22,9 +22,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.Company> Data { get; set; }
 #endif
-        /// <summary>The limit property</summary>
+        /// <summary>Only on the paginated list.</summary>
         public int? Limit { get; set; }
-        /// <summary>The offset property</summary>
+        /// <summary>Only on the paginated list.</summary>
         public int? Offset { get; set; }
         /// <summary>The total property</summary>
         public int? Total { get; set; }

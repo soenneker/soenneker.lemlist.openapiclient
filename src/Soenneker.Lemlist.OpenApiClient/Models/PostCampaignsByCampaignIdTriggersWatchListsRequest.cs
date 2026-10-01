@@ -7,30 +7,37 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// Contact fields, standard (`firstName`, `lastName`, `phone`, `jobTitle`...) and custom
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ContactFieldsProperty : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class PostCampaignsByCampaignIdTriggersWatchListsRequest : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Id of the Signal Agent (wat_xxx) to link to the campaign.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WatchListId { get; set; }
+#nullable restore
+#else
+        public string WatchListId { get; set; }
+#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchListsRequest"/> and sets the default values.
         /// </summary>
-        public ContactFieldsProperty()
+        public PostCampaignsByCampaignIdTriggersWatchListsRequest()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchListsRequest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchListsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchListsRequest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "watchListId", n => { WatchListId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +57,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("watchListId", WatchListId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

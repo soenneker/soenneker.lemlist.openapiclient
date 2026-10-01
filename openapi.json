@@ -64,6 +64,19 @@
           "error"
         ]
       },
+      "ApiErrorMessage": {
+        "type": "object",
+        "description": "Error answered as a plain message by the contact and company endpoints.",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable explanation."
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
       "ActivityType": {
         "type": "string",
         "description": "A lemlist activity type. These are the exact values accepted by the `type` filter on GET /activities and returned as an activity's `type`. Mind the spelling: email types are plural (emailsSent), invites are linkedinInvite*.",
@@ -1040,7 +1053,7 @@
       },
       "Contact": {
         "type": "object",
-        "description": "A contact record in your CRM. Not to be confused with a lead which is a contact specifically added to a campaign.",
+        "description": "A contact record in your CRM, as the lookups (`GET /contacts?idsOrEmails=`, `GET /contacts?crmIds=`, `GET /contacts/{idOrEmail}`) return it. Not to be confused with a lead which is a contact specifically added to a campaign.",
         "properties": {
           "_id": {
             "type": "string",
@@ -1061,7 +1074,7 @@
           },
           "fields": {
             "type": "object",
-            "description": "Custom fields associated with the contact",
+            "description": "Contact fields, standard (`firstName`, `lastName`, `phone`, `jobTitle`...) and custom",
             "additionalProperties": true
           },
           "campaigns": {
@@ -1085,6 +1098,14 @@
               }
             }
           },
+          "linkedinUrl": {
+            "type": "string",
+            "description": "Contact's LinkedIn profile URL"
+          },
+          "linkedinUrlSalesNav": {
+            "type": "string",
+            "description": "Contact's LinkedIn Sales Navigator URL"
+          },
           "ownerId": {
             "type": "string",
             "description": "ID of the user who owns this contact"
@@ -1101,6 +1122,156 @@
           "unsubscribed": {
             "type": "boolean",
             "description": "Whether the contact is globally unsubscribed. When true, no outreach will be sent to this contact."
+          },
+          "phonesStatuses": {
+            "type": "array",
+            "description": "Verification status of each verified phone number.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "phone": {
+                  "type": "string",
+                  "description": "The phone number, as stored in `fields`"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "valid",
+                    "invalid"
+                  ]
+                }
+              }
+            }
+          },
+          "crmSync": {
+            "type": "object",
+            "description": "CRM sync status for the contact, resolved against the team's active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected and the contact has a record in it. `crmRecordId` maps a `crmIds` lookup back to the ids sent.",
+            "properties": {
+              "provider": {
+                "type": "string",
+                "enum": [
+                  "hubspot",
+                  "salesforce",
+                  "pipedrive"
+                ],
+                "description": "Active CRM provider for the team."
+              },
+              "crmRecordId": {
+                "type": "string",
+                "nullable": true,
+                "description": "Identifier of the contact record on the CRM side. `null` when the lemlist contact has not been synced yet."
+              },
+              "syncDisabled": {
+                "type": "boolean",
+                "description": "When `true`, automatic sync is paused for this contact."
+              },
+              "errors": {
+                "type": "array",
+                "description": "List of recent sync errors. Empty when the contact is synced cleanly.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "Coarse error category (e.g. `CONNECT_FAILED`, `CREATE_FAILED`, `UPDATE_FAILED`)."
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "Specific error reason (e.g. `UNIQUE_INDEX_ERROR_CONTACT`, `INVALID_EMAIL`, `PROPERTY_DOESNT_EXIST`)."
+                    },
+                    "raisedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Timestamp when the error was last raised."
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "Extra context. For `UNIQUE_INDEX_ERROR_COMPANY`, contains `alreadyExistingCompanyId` — the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "fieldRejections": {
+            "type": "array",
+            "description": "Values lemlist refused to write on this contact, each with its reason. Empty when none. Filter the list endpoint to only flagged contacts via `GET /contacts?fieldRejectionReason=...`.",
+            "items": {
+              "$ref": "#/components/schemas/FieldRejection"
+            }
+          }
+        }
+      },
+      "ContactListItem": {
+        "type": "object",
+        "description": "A contact as the list (`GET /contacts` with filters or no parameter) returns it, with the main fields flattened. Properties with no value are omitted.",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique contact identifier"
+          },
+          "teamId": {
+            "type": "string",
+            "description": "Team identifier the contact belongs to"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "Contact's calculated full name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact's primary email address"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Contact's first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Contact's last name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Contact's phone number"
+          },
+          "jobTitle": {
+            "type": "string",
+            "description": "Contact's job title"
+          },
+          "linkedinUrl": {
+            "type": "string",
+            "description": "Contact's LinkedIn profile URL"
+          },
+          "linkedinUrlSalesNav": {
+            "type": "string",
+            "description": "Contact's LinkedIn Sales Navigator URL"
+          },
+          "ownerId": {
+            "type": "string",
+            "description": "ID of the user who owns this contact"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "ID of the company the contact is attached to (`cpn_xxx`)"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Contact creation timestamp"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "ID of the user who created the contact"
+          },
+          "unsubscribed": {
+            "type": "boolean",
+            "description": "Whether the contact is globally unsubscribed. When true, no outreach will be sent to this contact."
+          },
+          "campaignCount": {
+            "type": "integer",
+            "description": "Number of campaigns the contact is in"
           },
           "fieldRejections": {
             "type": "array",
@@ -1285,6 +1456,37 @@
             "type": "string",
             "format": "date-time",
             "description": "Last update timestamp"
+          }
+        }
+      },
+      "ContactNote": {
+        "type": "object",
+        "description": "A text note attached to a contact record, as returned by `GET` and `POST /contacts/{idOrEmail}/notes`.",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique note identifier (`act_xxx`)"
+          },
+          "teamId": {
+            "type": "string",
+            "description": "Team ID that owns the contact"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Parent contact ID (`ctc_xxx`)"
+          },
+          "note": {
+            "type": "string",
+            "description": "Note text content"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who wrote the note"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
           }
         }
       },
@@ -7147,6 +7349,485 @@
           },
           "429": {
             "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      }
+    },
+    "/campaigns/{campaignId}/triggers/watch-lists": {
+      "post": {
+        "summary": "Add Signal Agent Trigger",
+        "tags": [
+          "Signal Agents"
+        ],
+        "description": "Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead. Requires the `campaignSignalTrigger` beta.",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the campaign",
+            "example": "cam_ExAmPlE4k8Qz2Wn7R",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "watchListId"
+                ],
+                "properties": {
+                  "watchListId": {
+                    "type": "string",
+                    "description": "Id of the Signal Agent (wat_xxx) to link to the campaign.",
+                    "example": "wat_ExAmPlE9Hd3Vx6Tp1"
+                  }
+                }
+              },
+              "example": {
+                "watchListId": "wat_ExAmPlE9Hd3Vx6Tp1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Signal Agent is linked. `data` is the campaign's signal-trigger configuration, with every linked agent in `watchListIds`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "watchListIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Every Signal Agent linked to the campaign as a signal trigger."
+                        },
+                        "importFromExistingSignals": {
+                          "type": "boolean",
+                          "description": "Whether signals detected before the link are backfilled into the campaign. `false` on a link made through the API; change it in the campaign editor."
+                        },
+                        "deduplicate": {
+                          "type": "boolean",
+                          "description": "Whether a contact already in the campaign is skipped instead of being added again."
+                        },
+                        "duplicateProcessingType": {
+                          "type": "string",
+                          "enum": [
+                            "manual",
+                            "create_opportunity"
+                          ],
+                          "description": "How a duplicate contact is handled."
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "watchListIds": [
+                      "wat_ExAmPlE9Hd3Vx6Tp1"
+                    ],
+                    "importFromExistingSignals": false,
+                    "deduplicate": true,
+                    "duplicateProcessingType": "manual"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`ROUTE_BAD_REQUEST` - `campaignId` is malformed, or `watchListId` is missing, not a string, or malformed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "badRequest": {
+                    "value": {
+                      "error": "Route bad request",
+                      "code": "ROUTE_BAD_REQUEST"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`ROUTE_UNAUTHORIZED` - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "Route unauthorized",
+                      "code": "ROUTE_UNAUTHORIZED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`BETA_NOT_ENABLED` - the `campaignSignalTrigger` beta is not enabled for this team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "betaNotEnabled": {
+                    "value": {
+                      "error": "Beta is not enabled",
+                      "code": "BETA_NOT_ENABLED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND` or `WATCH_LIST_NOT_FOUND` - the campaign or the Signal Agent does not exist in this workspace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "campaignNotFound": {
+                    "value": {
+                      "error": "Campaign not found",
+                      "code": "WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND"
+                    }
+                  },
+                  "watchListNotFound": {
+                    "value": {
+                      "error": "Watch list not found",
+                      "code": "WATCH_LIST_NOT_FOUND"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "`ROUTE_BAD_METHOD` - method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "badMethod": {
+                    "value": {
+                      "error": "Route bad method",
+                      "code": "ROUTE_BAD_METHOD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "`WATCH_LIST_CAMPAIGN_IS_MANUAL` - the campaign was set up as a manual campaign in the lemlist app and cannot take a signal trigger.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "campaignIsManual": {
+                    "value": {
+                      "error": "This campaign was set up as a manual campaign and cannot take a signal trigger; create a signal-based campaign instead",
+                      "code": "WATCH_LIST_CAMPAIGN_IS_MANUAL"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/campaigns/{campaignId}/triggers/watch-lists/{watchListId}": {
+      "parameters": [
+        {
+          "name": "campaignId",
+          "in": "path",
+          "required": true,
+          "description": "The unique identifier of the campaign",
+          "example": "cam_ExAmPlE4k8Qz2Wn7R",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "watchListId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the Signal Agent (wat_xxx) to detach",
+          "example": "wat_ExAmPlE9Hd3Vx6Tp1",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "summary": "Remove Signal Agent Trigger",
+        "tags": [
+          "Signal Agents"
+        ],
+        "description": "Detaches a Signal Agent from a campaign's signal triggers. Leads already pushed stay in the campaign. Requires the `campaignSignalTrigger` beta.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Signal Agent is detached. `data` is the campaign's signal-trigger configuration without that agent in `watchListIds`. When the campaign never had a signal trigger, the body is `{}`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "watchListIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Every Signal Agent linked to the campaign as a signal trigger."
+                        },
+                        "importFromExistingSignals": {
+                          "type": "boolean",
+                          "description": "Whether signals detected before the link are backfilled into the campaign. `false` on a link made through the API; change it in the campaign editor."
+                        },
+                        "deduplicate": {
+                          "type": "boolean",
+                          "description": "Whether a contact already in the campaign is skipped instead of being added again."
+                        },
+                        "duplicateProcessingType": {
+                          "type": "string",
+                          "enum": [
+                            "manual",
+                            "create_opportunity"
+                          ],
+                          "description": "How a duplicate contact is handled."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "detached": {
+                    "value": {
+                      "data": {
+                        "watchListIds": [
+                          "wat_ExAmPlE2Gc5Nb8Ys4"
+                        ],
+                        "importFromExistingSignals": false,
+                        "deduplicate": true,
+                        "duplicateProcessingType": "manual"
+                      }
+                    }
+                  },
+                  "noTrigger": {
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`ROUTE_BAD_REQUEST` - `campaignId` or `watchListId` is malformed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "badRequest": {
+                    "value": {
+                      "error": "Route bad request",
+                      "code": "ROUTE_BAD_REQUEST"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`ROUTE_UNAUTHORIZED` - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "Route unauthorized",
+                      "code": "ROUTE_UNAUTHORIZED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`BETA_NOT_ENABLED` - the `campaignSignalTrigger` beta is not enabled for this team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "betaNotEnabled": {
+                    "value": {
+                      "error": "Beta is not enabled",
+                      "code": "BETA_NOT_ENABLED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND` - the campaign does not exist in this workspace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "campaignNotFound": {
+                    "value": {
+                      "error": "Campaign not found",
+                      "code": "WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "`ROUTE_BAD_METHOD` - method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "badMethod": {
+                    "value": {
+                      "error": "Route bad method",
+                      "code": "ROUTE_BAD_METHOD"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -18368,7 +19049,7 @@
     "/contacts": {
       "get": {
         "summary": "Get Many Contacts",
-        "description": "Retrieves contacts by IDs/emails, or searches/lists contacts by name, email, contact list, campaign membership, or company link.\n\nWhen using `idsOrEmails`, returns an array of matching contacts directly.\n\nWhen using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.\n\nThe `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive — use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.",
+        "description": "Retrieves contacts by IDs/emails or by CRM record ids, or searches/lists contacts by name, email, contact list, campaign membership, or company link.\n\nWhen using `idsOrEmails`, returns an array of matching contacts directly.\n\nWhen using `crmIds`, looks the contacts up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns an array of the contacts found, each with the matched id under `crmSync.crmRecordId`. `idsOrEmails` takes precedence over `crmIds`; a lookup ignores the search filters and the pagination.\n\nWhen using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.\n\nA lookup returns full contacts (`Contact`); the list returns `ContactListItem` objects.\n\nThe `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive: use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.",
         "tags": [
           "Contacts"
         ],
@@ -18379,6 +19060,18 @@
             "required": false,
             "description": "A comma separated string of either valid contact IDs (MongoDB ObjectId) or valid email addresses. Optional — when omitted, returns the paginated list of all contacts of the team. Maximum 100 values.",
             "example": "ctc_xW8Ou6C03Csv8vatp,riley@example.com",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "crmIds",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated record ids of contacts in the CRM connected to the team (HubSpot, Salesforce, or Pipedrive); for Salesforce, the 18-character Contact or Lead id. Returns an array of the contacts found, each with the matched id under `crmSync.crmRecordId`; ids that match nothing are skipped, and the array is empty when no CRM is connected. Duplicates are removed; an empty value is ignored. Maximum 100 values (`TOO_MANY_CRM_IDS`); a value over 25 characters answers `INVALID_CRM_ID`. Ignored when `idsOrEmails` is provided.",
+            "example": "123456789,987654321",
             "schema": {
               "type": "string"
             },
@@ -18497,7 +19190,6 @@
                 "crm_sync_duplicate_contact_blocked",
                 "crm_sync_duplicate_company_blocked",
                 "crm_sync_company_data_rejected",
-                "crm_sync_custom_field_creation_failed",
                 "crm_sync_unsub_state_protected",
                 "crm_sync_value_oscillating",
                 "crm_sync_owner_sync_loop",
@@ -18533,24 +19225,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. When using `idsOrEmails`, returns an array of contacts. Otherwise, returns a paginated object with `data`, `total`, `limit`, and `offset`.",
+            "description": "Success. When using `idsOrEmails` or `crmIds`, returns an array of contacts (empty when no `crmIds` value matches). Otherwise, returns a paginated object with `data` (`ContactListItem` items), `total`, `limit`, and `offset`.",
             "content": {
               "application/json": {
                 "schema": {
                   "oneOf": [
                     {
+                      "title": "Lookup by idsOrEmails or crmIds",
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Contact"
                       }
                     },
                     {
+                      "title": "List",
                       "type": "object",
                       "properties": {
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/Contact"
+                            "$ref": "#/components/schemas/ContactListItem"
                           }
                         },
                         "total": {
@@ -18572,84 +19266,160 @@
                     }
                   ]
                 },
-                "example": [
-                  {
-                    "_id": "ctc_xW8Ou6C03Csv8vatp",
-                    "teamId": "tea_8QvkOiBfPdb2ZRhHi",
-                    "fullName": "John Doe",
-                    "email": "support@lemlist.com",
-                    "fields": {
-                      "firstName": "John",
-                      "jobTitle": "Growth Engineer",
-                      "lastName": "Doe",
-                      "industry": "Technology",
-                      "isActiveInCampaigns": false,
-                      "lastCampaign": "NEW TO DELETE",
-                      "lastLeadMarkedAsInterestedDate": "2025-10-28T02:12:31.971Z",
-                      "leadStatus": "Marked as not Interested by api"
-                    },
-                    "campaigns": [
+                "examples": {
+                  "lookup": {
+                    "summary": "idsOrEmails or crmIds",
+                    "value": [
                       {
-                        "campaignId": "cam_bSn8EORHQxbWPjHvu",
-                        "campaignState": "running",
-                        "leadState": "review",
-                        "leadId": "lea_fiDpiGV585wy3Oii2"
+                        "_id": "ctc_xW8Ou6C03Csv8vatp",
+                        "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                        "fullName": "John Doe",
+                        "email": "support@lemlist.com",
+                        "fields": {
+                          "firstName": "John",
+                          "jobTitle": "Growth Engineer",
+                          "lastName": "Doe",
+                          "industry": "Technology",
+                          "isActiveInCampaigns": false,
+                          "lastCampaign": "NEW TO DELETE",
+                          "lastLeadMarkedAsInterestedDate": "2025-10-28T02:12:31.971Z",
+                          "leadStatus": "Marked as not Interested by api"
+                        },
+                        "campaigns": [
+                          {
+                            "campaignId": "cam_bSn8EORHQxbWPjHvu",
+                            "campaignState": "running",
+                            "leadState": "review",
+                            "leadId": "lea_fiDpiGV585wy3Oii2"
+                          }
+                        ],
+                        "ownerId": "usr_ahfFktBBHUIxbVG5P",
+                        "createdAt": "2025-10-28T00:40:37.917Z",
+                        "createdBy": "usr_ahfFktBBHUIxbVG5P",
+                        "unsubscribed": false,
+                        "crmSync": {
+                          "provider": "hubspot",
+                          "crmRecordId": "123456789",
+                          "syncDisabled": false,
+                          "errors": []
+                        }
+                      },
+                      {
+                        "_id": "ctc_a9RxJNa7pmMd85H9b",
+                        "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                        "fullName": "Casey",
+                        "email": "riley@example.com",
+                        "fields": {
+                          "firstName": "Casey",
+                          "isActiveInCampaigns": false
+                        },
+                        "campaigns": [
+                          {
+                            "campaignId": "cam_jwm7THjgGFE3ylR85",
+                            "campaignState": "running",
+                            "leadState": "done",
+                            "leadId": "lea_XKjAytuJhBKZhxhWh"
+                          },
+                          {
+                            "campaignId": "cam_eF4DlNERV0CW1TwRd",
+                            "campaignState": "running",
+                            "leadState": "done",
+                            "leadId": "lea_fJcS9D3UtEqZcDcAG"
+                          },
+                          {
+                            "campaignId": "cam_UBbMt30jHq0vNJKJr",
+                            "campaignState": "running",
+                            "leadState": "done",
+                            "leadId": "lea_GlaMfjxlUYuwEDL0w"
+                          },
+                          {
+                            "campaignId": "cam_pijDVnytN5S7frriD",
+                            "campaignState": "running",
+                            "leadState": "review",
+                            "leadId": "lea_Bs9aMGCcjdzTDvixY"
+                          }
+                        ],
+                        "ownerId": "usr_Emu1g29BMtBixhMSP",
+                        "createdAt": "2024-10-01T09:00:13.831Z",
+                        "createdBy": "usr_Emu1g29BMtBixhMSP",
+                        "unsubscribed": true
                       }
-                    ],
-                    "ownerId": "usr_ahfFktBBHUIxbVG5P",
-                    "createdAt": "2025-10-28T00:40:37.917Z",
-                    "createdBy": "usr_ahfFktBBHUIxbVG5P",
-                    "unsubscribed": false
+                    ]
                   },
-                  {
-                    "_id": "ctc_a9RxJNa7pmMd85H9b",
-                    "teamId": "tea_8QvkOiBfPdb2ZRhHi",
-                    "fullName": "Casey",
-                    "email": "riley@example.com",
-                    "fields": {
-                      "firstName": "Casey",
-                      "isActiveInCampaigns": false
-                    },
-                    "campaigns": [
-                      {
-                        "campaignId": "cam_jwm7THjgGFE3ylR85",
-                        "campaignState": "running",
-                        "leadState": "done",
-                        "leadId": "lea_XKjAytuJhBKZhxhWh"
-                      },
-                      {
-                        "campaignId": "cam_eF4DlNERV0CW1TwRd",
-                        "campaignState": "running",
-                        "leadState": "done",
-                        "leadId": "lea_fJcS9D3UtEqZcDcAG"
-                      },
-                      {
-                        "campaignId": "cam_UBbMt30jHq0vNJKJr",
-                        "campaignState": "running",
-                        "leadState": "done",
-                        "leadId": "lea_GlaMfjxlUYuwEDL0w"
-                      },
-                      {
-                        "campaignId": "cam_pijDVnytN5S7frriD",
-                        "campaignState": "running",
-                        "leadState": "review",
-                        "leadId": "lea_Bs9aMGCcjdzTDvixY"
-                      }
-                    ],
-                    "ownerId": "usr_Emu1g29BMtBixhMSP",
-                    "createdAt": "2024-10-01T09:00:13.831Z",
-                    "createdBy": "usr_Emu1g29BMtBixhMSP",
-                    "unsubscribed": true
+                  "list": {
+                    "summary": "List",
+                    "value": {
+                      "data": [
+                        {
+                          "_id": "ctc_xW8Ou6C03Csv8vatp",
+                          "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                          "fullName": "John Doe",
+                          "email": "support@lemlist.com",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "jobTitle": "Growth Engineer",
+                          "ownerId": "usr_ahfFktBBHUIxbVG5P",
+                          "companyId": "cpn_Hk2Wd9LmQx7RtB4sN",
+                          "createdAt": "2025-10-28T00:40:37.917Z",
+                          "createdBy": "usr_ahfFktBBHUIxbVG5P",
+                          "unsubscribed": false,
+                          "campaignCount": 1,
+                          "fieldRejections": []
+                        }
+                      ],
+                      "total": 1,
+                      "limit": 100,
+                      "offset": 0
+                    }
                   }
-                ]
+                }
               }
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / search query too short / invalid listId format",
+            "description": "Either a plain `{ \"error\": \"...\" }` (`Bad team`, search query too short, invalid `listId` format, invalid `withPrimaryCompany`, `limit` below 1, more than 100 `idsOrEmails` values), or a validation envelope. Possible error codes: `INVALID_CRM_ID` (a `crmIds` list with no usable value, or a value longer than 25 characters), `TOO_MANY_CRM_IDS` (more than 100 `crmIds` values), `MULTIPLE_COMPANY_FILTERS`, `INVALID_COMPANY_ID`, `INVALID_FIELD_REJECTION_REASON`.",
             "content": {
-              "text/plain": {
-                "example": "Search query must be at least 2 characters"
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorMessage"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ApiErrorEnvelope"
+                    }
+                  ]
+                },
+                "examples": {
+                  "search-too-short": {
+                    "value": {
+                      "error": "Search query must be at least 2 characters"
+                    }
+                  },
+                  "too-many-ids-or-emails": {
+                    "value": {
+                      "error": "Too many ids or emails (max 100)"
+                    }
+                  },
+                  "invalid-crm-id": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_CRM_ID",
+                        "message": "Invalid crmId value"
+                      }
+                    }
+                  },
+                  "too-many-crm-ids": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "TOO_MANY_CRM_IDS",
+                        "message": "crmIds exceeds the maximum of 100 values"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -18658,6 +19428,19 @@
             "content": {
               "text/plain": {
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No contact matches the `idsOrEmails` values.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Contact not found"
+                }
               }
             }
           },
@@ -19386,6 +20169,7 @@
       },
       "get": {
         "summary": "Get Contact",
+        "description": "Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.",
         "tags": [
           "Contacts"
         ],
@@ -19429,10 +20213,15 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "`Bad team`, or a path value that is neither a contact id nor an email address.",
             "content": {
-              "text/plain": {
-                "example": "Bad team"
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Match error: Failed Match.Where validation in field [0]"
+                }
               }
             }
           },
@@ -19444,11 +20233,289 @@
               }
             }
           },
+          "404": {
+            "description": "No contact matches this id or email.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Contact not found"
+                }
+              }
+            }
+          },
           "405": {
             "description": "Method not allowed"
           }
         },
         "parameters": []
+      }
+    },
+    "/contacts/{idOrEmail}/notes": {
+      "parameters": [
+        {
+          "name": "idOrEmail",
+          "in": "path",
+          "required": true,
+          "description": "The unique identifier (`ctc_xxx`) or email of the contact",
+          "example": "ctc_XXBXpAxmxwg24IzBI",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Get Contact Notes",
+        "description": "Retrieves the notes attached to a contact, newest first by default. The contact is resolved by its id (`ctc_xxx`) or email within your team. Only notes are returned, not the contact's other activities. Use `page` and `limit` to paginate: the response carries the page in `data` and the number of notes in `total`; a contact without notes answers `200` with an empty `data`.",
+        "tags": [
+          "Contacts"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of notes per page. Default: 100. Maximum: 100. A missing, invalid or non-positive value falls back to 100.",
+            "example": "2",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Page number to retrieve, starting at 1. Default: 1. An invalid value falls back to 1; a page beyond the last one answers an empty `data`.",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "description": "The field to sort by. Only `createdAt` is supported; any other value is ignored.",
+            "example": "createdAt",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "createdAt"
+              ]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "description": "The sort direction. Default: `desc` (newest first). Any other value sorts ascending.",
+            "example": "desc",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ContactNote"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Number of notes attached to the contact, across all pages"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "total"
+                  ]
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "act_j0NrG6rYEPP9TMmWC",
+                      "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                      "contactId": "ctc_XXBXpAxmxwg24IzBI",
+                      "createdAt": "2026-09-28T09:12:00.653Z",
+                      "note": "Asked for a demo next week",
+                      "userId": "usr_ahfFktBBHUIxbVG5P"
+                    },
+                    {
+                      "_id": "act_BYF2j06u0wgeLncub",
+                      "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                      "contactId": "ctc_XXBXpAxmxwg24IzBI",
+                      "createdAt": "2026-09-21T15:40:10.605Z",
+                      "note": "Met at SaaStock",
+                      "userId": "usr_ahfFktBBHUIxbVG5P"
+                    }
+                  ],
+                  "total": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A request without an API key answers `400` with the plain-text message `no api key provided`. Query parameters never answer `400`: a value outside the contract falls back to its default, as on `GET /companies/{companyId}/notes`.",
+            "content": {
+              "text/plain": {
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No contact with this id or email in your team (a path that is not valid percent-encoding matches no contact)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Contact not found"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Contact Note",
+        "description": "Writes a note on a contact resolved by its id (`ctc_xxx`) or email, exactly as a note written in the lemlist app: it is stored as a note of the contact, **pushed to your connected CRM** (HubSpot, Salesforce, Pipedrive) like an in-app note, and logged in the team activity feed. The author is the user of the API key. The note is plain text, stored as sent, at most 10000 characters, and cannot contain a `<` followed by a `>` (the app's guard against markup). A lone `<` is stored HTML-escaped as `&lt;`, as in the app. A missing, empty or non-text `note` creates an empty note, as on `POST /companies/{companyId}/notes`.",
+        "tags": [
+          "Contacts"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "note": {
+                    "type": "string",
+                    "maxLength": 10000,
+                    "description": "The note content. Plain text, at most 10000 characters; a `<` followed by a `>` is refused, a lone `<` is stored as `&lt;`."
+                  }
+                }
+              },
+              "example": {
+                "note": "Asked for a demo next week"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Note created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactNote"
+                },
+                "example": {
+                  "_id": "act_j0NrG6rYEPP9TMmWC",
+                  "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                  "contactId": "ctc_XXBXpAxmxwg24IzBI",
+                  "createdAt": "2026-09-28T09:12:00.653Z",
+                  "note": "Asked for a demo next week",
+                  "userId": "usr_ahfFktBBHUIxbVG5P"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The note is refused. The body is `{ error }`, with one message per case: the note exceeds 10000 characters; the note contains a `<` followed by a `>` (the app's guard against markup). A request without an API key answers `400` with the plain-text message `no api key provided`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "One of the two note messages below"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                },
+                "examples": {
+                  "note-too-long": {
+                    "summary": "note over 10000 characters",
+                    "value": {
+                      "error": "note exceeds the maximum of 10000 characters"
+                    }
+                  },
+                  "note-invalid": {
+                    "summary": "note contains a < followed by a >",
+                    "value": {
+                      "error": "note cannot contain the characters < or >"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No contact with this id or email in your team (a path that is not valid percent-encoding matches no contact)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Contact not found"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
       }
     },
     "/contacts/lists": {
@@ -20105,6 +21172,7 @@
     "/companies": {
       "get": {
         "summary": "Get Many Companies",
+        "description": "Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.\n\nWhen using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.\n\nWhen using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.\n\nOtherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.\n\n`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.",
         "tags": [
           "Companies"
         ],
@@ -20118,6 +21186,18 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "crmIds",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated record ids of companies in the CRM connected to the team (HubSpot, Salesforce, or Pipedrive); for Salesforce, the 18-character Account id. Returns the companies found in `data`, with `total` and no pagination, each with the matched id under `crmSync.crmRecordId`; ids that match nothing are skipped, and `data` is empty when no CRM is connected. Duplicates are removed; an empty value is ignored. Maximum 100 values (`TOO_MANY_CRM_IDS`); a value over 25 characters answers `INVALID_CRM_ID`. Ignored when `idsOrDomains` is provided.",
+            "example": "123456789,987654321",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
           },
           {
             "name": "offset",
@@ -20255,7 +21335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Success. Returns an object with `data` and `total`; `limit` and `offset` are only present on the paginated list, not with `idsOrDomains` or `crmIds`.",
             "content": {
               "application/json": {
                 "schema": {
@@ -20271,17 +21351,17 @@
                       "type": "integer"
                     },
                     "limit": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "Only on the paginated list."
                     },
                     "offset": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "Only on the paginated list."
                     }
                   },
                   "required": [
                     "data",
-                    "total",
-                    "limit",
-                    "offset"
+                    "total"
                   ]
                 },
                 "example": {
@@ -20365,16 +21445,57 @@
             }
           },
           "400": {
-            "description": "Either a plain `Bad team`, or a validation envelope. Possible error codes: `CRM_LIST_ENTITY_MISMATCH` (the `listId` points at a contact list), `CRM_LIST_DYNAMIC` (the list is filter-driven, so it has no stored membership to filter on).",
+            "description": "Either a plain `{ \"error\": \"...\" }` (`Bad team`, `limit` below 1), or a validation envelope. Possible error codes: `INVALID_CRM_ID` (a `crmIds` list with no usable value, or a value longer than 25 characters), `TOO_MANY_CRM_IDS` (more than 100 `crmIds` values), `INVALID_IDS_OR_DOMAINS` (no valid id or domain in `idsOrDomains`), `TOO_MANY_IDS_OR_DOMAINS` (more than 100 `idsOrDomains` values), `CRM_LIST_ENTITY_MISMATCH` (the `listId` points at a contact list), `CRM_LIST_DYNAMIC` (the list is filter-driven, so it has no stored membership to filter on), `INVALID_CRM_SYNC_STATUS`, `NO_CRM_CONNECTED` (`crmSyncStatus` without a connected CRM), `INVALID_FIELD_REJECTION_REASON`.",
             "content": {
-              "text/plain": {
-                "example": "Bad team"
-              },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorMessage"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ApiErrorEnvelope"
+                    }
+                  ]
                 },
                 "examples": {
+                  "bad-team": {
+                    "value": {
+                      "error": "Bad team"
+                    }
+                  },
+                  "limit-below-1": {
+                    "value": {
+                      "error": "limit must be >= 1"
+                    }
+                  },
+                  "invalid-crm-id": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_CRM_ID",
+                        "message": "Invalid crmId value"
+                      }
+                    }
+                  },
+                  "too-many-crm-ids": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "TOO_MANY_CRM_IDS",
+                        "message": "crmIds exceeds the maximum of 100 values"
+                      }
+                    }
+                  },
+                  "no-crm-connected": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "NO_CRM_CONNECTED",
+                        "message": "No CRM connected for this team"
+                      }
+                    }
+                  },
                   "entity-mismatch": {
                     "value": {
                       "success": false,
@@ -21614,7 +22735,8 @@
                 "properties": {
                   "note": {
                     "type": "string",
-                    "description": "The note content"
+                    "maxLength": 10000,
+                    "description": "The note content. Plain text, at most 10000 characters; a `<` followed by a `>` is refused."
                   }
                 },
                 "required": [
@@ -21649,10 +22771,35 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "The note is refused. The body is `{ error }`, with one message per case: the note exceeds 10000 characters; the note contains a `<` followed by a `>` (markup is refused, as when writing a note in the lemlist app; a lone `<` or `>` is accepted). A request without an API key answers `400` with the plain-text message `no api key provided`.",
             "content": {
-              "text/plain": {
-                "example": "Bad team"
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "One of the two note messages below"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                },
+                "examples": {
+                  "note-too-long": {
+                    "summary": "note over 10000 characters",
+                    "value": {
+                      "error": "note exceeds the maximum of 10000 characters"
+                    }
+                  },
+                  "note-invalid": {
+                    "summary": "note contains a < followed by a >",
+                    "value": {
+                      "error": "note cannot contain the characters < or >"
+                    }
+                  }
+                }
               }
             }
           },
@@ -26933,6 +28080,11 @@
                     "type": "string",
                     "description": "Persona (pdp_xxx) used to source contacts from the People Database. Only for a company Signal Agent with signalProcessingType = push_to_campaign whose signal type does not already ship its own contact (those company signals carry no contact, so the persona is the only way to know who to reach). Optional; rejected on any other configuration."
                   },
+                  "campaignId": {
+                    "type": "string",
+                    "description": "Campaign (cam_xxx) to link as this Signal Agent's signal trigger, in the same call: every new signal pushes its contact into that campaign as a lead. Only with signalProcessingType = push_to_campaign. A campaign set up as manual in the lemlist app is refused (409). Requires the campaignSignalTrigger beta. Optional; on any refusal no agent is created.",
+                    "example": "cam_ExAmPlE4k8Qz2Wn7R"
+                  },
                   "activate": {
                     "type": "boolean",
                     "description": "Fully set up and activate the agent. Requires segmentType and signalProcessingType."
@@ -26967,10 +28119,16 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body, filters, or activate prerequisites",
+            "description": "Validation error - invalid body, filters, or activate prerequisites. `WATCH_LIST_API_INVALID_CAMPAIGN_ID` when `campaignId` is malformed or sent without signalProcessingType = push_to_campaign.",
             "content": {
               "text/plain": {
                 "example": "activate requires both segmentType and signalProcessingType"
+              },
+              "application/json": {
+                "example": {
+                  "error": "campaignId must be a campaign id (cam_xxx) and requires signalProcessingType = \"push_to_campaign\"",
+                  "code": "WATCH_LIST_API_INVALID_CAMPAIGN_ID"
+                }
               }
             }
           },
@@ -26987,6 +28145,39 @@
             "content": {
               "text/plain": {
                 "example": "Insufficient credits"
+              }
+            }
+          },
+          "403": {
+            "description": "`BETA_NOT_ENABLED` - `campaignId` was sent but the `campaignSignalTrigger` beta is not enabled for this team. No agent is created.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Beta is not enabled",
+                  "code": "BETA_NOT_ENABLED"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND` - the `campaignId` campaign does not exist in this workspace. No agent is created.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "`WATCH_LIST_CAMPAIGN_IS_MANUAL` - the `campaignId` campaign was set up as a manual campaign and cannot take a signal trigger. No agent is created.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "This campaign was set up as a manual campaign and cannot take a signal trigger; create a signal-based campaign instead",
+                  "code": "WATCH_LIST_CAMPAIGN_IS_MANUAL"
+                }
               }
             }
           },

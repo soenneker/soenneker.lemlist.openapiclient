@@ -67,7 +67,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesByCompanyIdNotes400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -83,7 +83,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesByCompanyIdNotes400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Notes.CompanyNote404Error.CreateFromDiscriminatorValue },
             };

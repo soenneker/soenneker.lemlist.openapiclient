@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class GetContacts200Response : IComposedTypeWrapper, IParsable
@@ -21,13 +21,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1 GetContacts200ResponseBranch1 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2? GetContacts200ResponseOneOf2 { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList? GetContacts200ResponseList { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2 GetContacts200ResponseOneOf2 { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList GetContacts200ResponseList { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -43,9 +43,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 result.GetContacts200ResponseBranch1 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1();
             }
-            else if("GetContacts200ResponseOneOf2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("GetContacts200ResponseList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.GetContacts200ResponseOneOf2 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2();
+                result.GetContacts200ResponseList = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList();
             }
             return result;
         }
@@ -59,9 +59,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 return GetContacts200ResponseBranch1.GetFieldDeserializers();
             }
-            else if(GetContacts200ResponseOneOf2 != null)
+            else if(GetContacts200ResponseList != null)
             {
-                return GetContacts200ResponseOneOf2.GetFieldDeserializers();
+                return GetContacts200ResponseList.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -76,9 +76,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1>(null, GetContacts200ResponseBranch1);
             }
-            else if(GetContacts200ResponseOneOf2 != null)
+            else if(GetContacts200ResponseList != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2>(null, GetContacts200ResponseOneOf2);
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList>(null, GetContacts200ResponseList);
             }
         }
     }

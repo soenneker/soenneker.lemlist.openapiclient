@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,41 +10,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class GetContacts200ResponseOneOf2 : IAdditionalDataHolder, IParsable
+    public partial class PostContactsByIdOrEmailNotes404Response : ApiException, IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The data property</summary>
+        /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>? Data { get; set; }
+        public string? Error { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact> Data { get; set; }
+        public string Error { get; set; }
 #endif
-        /// <summary>The limit property</summary>
-        public int? Limit { get; set; }
-        /// <summary>The offset property</summary>
-        public int? Offset { get; set; }
-        /// <summary>The total property</summary>
-        public int? Total { get; set; }
+        /// <summary>The primary error message.</summary>
+        public override string Message { get => base.Message; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsByIdOrEmailNotes404Response"/> and sets the default values.
         /// </summary>
-        public GetContacts200ResponseOneOf2()
+        public PostContactsByIdOrEmailNotes404Response()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsByIdOrEmailNotes404Response"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2 CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsByIdOrEmailNotes404Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseOneOf2();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsByIdOrEmailNotes404Response();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -53,10 +50,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(global::Soenneker.Lemlist.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "limit", n => { Limit = n.GetIntValue(); } },
-                { "offset", n => { Offset = n.GetIntValue(); } },
-                { "total", n => { Total = n.GetIntValue(); } },
+                { "error", n => { Error = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -66,10 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>("data", Data);
-            writer.WriteIntValue("limit", Limit);
-            writer.WriteIntValue("offset", Offset);
-            writer.WriteIntValue("total", Total);
+            writer.WriteStringValue("error", Error);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

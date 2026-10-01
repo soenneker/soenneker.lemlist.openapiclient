@@ -7,30 +7,39 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// Contact fields, standard (`firstName`, `lastName`, `phone`, `jobTitle`...) and custom
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ContactFieldsProperty : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class ContactPhonesStatusesItem : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The phone number, as stored in `fields`</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Phone { get; set; }
+#nullable restore
+#else
+        public string Phone { get; set; }
+#endif
+        /// <summary>The status property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItemStatus? Status { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem"/> and sets the default values.
         /// </summary>
-        public ContactFieldsProperty()
+        public ContactPhonesStatusesItem()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +49,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "phone", n => { Phone = n.GetStringValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItemStatus>(); } },
             };
         }
         /// <summary>
@@ -49,6 +60,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("phone", Phone);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItemStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
