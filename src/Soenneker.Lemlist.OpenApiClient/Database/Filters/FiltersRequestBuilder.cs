@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Filters
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public FiltersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/database/filters", pathParameters)
+        public FiltersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/database/filters{?mode*,usage*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Filters
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public FiltersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/database/filters", rawUrl)
+        public FiltersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/database/filters{?mode*,usage*}", rawUrl)
         {
         }
         /// <summary>
@@ -39,22 +39,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Filters
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Database.Filters.GetDatabaseFilters200ResponseSchema400Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Database.Filters.GetDatabaseFilters200ResponseSchema401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Database.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Database.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Database.Filters.GetDatabaseFilters200ResponseSchema400Error.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Database.Filters.GetDatabaseFilters200ResponseSchema401Error.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
@@ -66,11 +68,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Filters
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Database.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Database.Filters.FiltersRequestBuilder.FiltersRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -86,6 +88,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Filters
         public global::Soenneker.Lemlist.OpenApiClient.Database.Filters.FiltersRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Lemlist.OpenApiClient.Database.Filters.FiltersRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Get Database Filters
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class FiltersRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Restrict the list to the filters of one search mode</summary>
+            [QueryParameter("mode")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.GetDatabaseFiltersModeParameter? Mode { get; set; }
+            /// <summary>Context the filters will be used in. `api` (default) lists the filters accepted by the search endpoints. `ui` lists the filters usable in the People Database UI: use it to pick the filters of a [saved search](/api-reference/objects-definitions/saved-search), which refuses the others.</summary>
+            [QueryParameter("usage")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.GetDatabaseFiltersUsageParameter? Usage { get; set; }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection> FieldRejections { get; set; }
 #endif
-        /// <summary>Flexible key/value fields of the company (e.g., name, picture, industry, location, size, foundedOn)</summary>
+        /// <summary>Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under `fields`, never at the top level of the object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty? Fields { get; set; }
@@ -65,29 +65,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>Industry sector</summary>
+        /// <summary>LinkedIn company page URL. Returned by `GET /companies/{companyId}` and the `idsOrDomains` and `crmIds` lookups; the paginated list returns it only when requested with `fields`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Industry { get; set; }
+        public string? LinkedinUrl { get; set; }
 #nullable restore
 #else
-        public string Industry { get; set; }
+        public string LinkedinUrl { get; set; }
 #endif
-        /// <summary>Geographic location</summary>
+        /// <summary>Sales Navigator company URL. Returned by `GET /companies/{companyId}` and the `idsOrDomains` and `crmIds` lookups; the paginated list returns it only when requested with `fields`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Location { get; set; }
+        public string? LinkedinUrlSalesNav { get; set; }
 #nullable restore
 #else
-        public string Location { get; set; }
-#endif
-        /// <summary>Company name (may also be present under fields.name)</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Name { get; set; }
-#nullable restore
-#else
-        public string Name { get; set; }
+        public string LinkedinUrlSalesNav { get; set; }
 #endif
         /// <summary>User ID of the owner of the company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,13 +89,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string OwnerId { get; set; }
 #endif
-        /// <summary>Company size</summary>
+        /// <summary>Origin of the company record, e.g. `api` when it was created through this API. Returned by `GET /companies/{companyId}` and the `idsOrDomains` and `crmIds` lookups, not by the paginated list.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Size { get; set; }
+        public string? Source { get; set; }
 #nullable restore
 #else
-        public string Size { get; set; }
+        public string Source { get; set; }
+#endif
+        /// <summary>Team the company belongs to. Returned by `GET /companies/{companyId}` and the `idsOrDomains` and `crmIds` lookups; the paginated list returns it only when requested with `fields`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TeamId { get; set; }
+#nullable restore
+#else
+        public string TeamId { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Company"/> and sets the default values.
@@ -137,11 +137,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "fieldRejections", n => { FieldRejections = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>(global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "fields", n => { Fields = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty.CreateFromDiscriminatorValue); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
-                { "industry", n => { Industry = n.GetStringValue(); } },
-                { "location", n => { Location = n.GetStringValue(); } },
-                { "name", n => { Name = n.GetStringValue(); } },
+                { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
+                { "linkedinUrlSalesNav", n => { LinkedinUrlSalesNav = n.GetStringValue(); } },
                 { "ownerId", n => { OwnerId = n.GetStringValue(); } },
-                { "size", n => { Size = n.GetStringValue(); } },
+                { "source", n => { Source = n.GetStringValue(); } },
+                { "teamId", n => { TeamId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -158,11 +158,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>("fieldRejections", FieldRejections);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty>("fields", Fields);
             writer.WriteStringValue("_id", Id);
-            writer.WriteStringValue("industry", Industry);
-            writer.WriteStringValue("location", Location);
-            writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("linkedinUrl", LinkedinUrl);
+            writer.WriteStringValue("linkedinUrlSalesNav", LinkedinUrlSalesNav);
             writer.WriteStringValue("ownerId", OwnerId);
-            writer.WriteStringValue("size", Size);
+            writer.WriteStringValue("source", Source);
+            writer.WriteStringValue("teamId", TeamId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

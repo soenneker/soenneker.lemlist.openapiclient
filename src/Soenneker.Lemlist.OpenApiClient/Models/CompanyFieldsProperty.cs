@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Flexible key/value fields of the company (e.g., name, picture, industry, location, size, foundedOn)
+    /// Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under `fields`, never at the top level of the object.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompanyFieldsProperty : IAdditionalDataHolder, IParsable

@@ -1161,7 +1161,8 @@
                     "status": true,
                     "inviteLimit": 25,
                     "sendLimit": 33,
-                    "visitLimit": 36
+                    "visitLimit": 36,
+                    "inMailLimit": 5
                   },
                   "mailboxes": [
                     {
@@ -7261,6 +7262,26 @@
         ],
         "summary": "Get Database Filters",
         "operationId": "GetDatabaseFilters",
+        "parameters": [
+          {
+            "name": "usage",
+            "in": "query",
+            "description": "Context the filters will be used in. \u0060api\u0060 (default) lists the filters accepted by the search endpoints. \u0060ui\u0060 lists the filters usable in the People Database UI: use it to pick the filters of a [saved search](/api-reference/objects-definitions/saved-search), which refuses the others.",
+            "schema": {
+              "$ref": "#/components/schemas/GetDatabaseFiltersUsageParameter"
+            },
+            "example": "ui"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Restrict the list to the filters of one search mode",
+            "schema": {
+              "$ref": "#/components/schemas/GetDatabaseFiltersModeParameter"
+            },
+            "example": "leads"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -7272,36 +7293,55 @@
                 "example": [
                   {
                     "filterId": "country",
-                    "description": "Filter by country",
+                    "description": "Country: Filter by the lead\u0027s country of residence (e.g. \u0027United States\u0027, \u0027France\u0027). Targets where the person lives, not where their employer is headquartered.",
                     "mode": [
-                      "leads",
-                      "companies"
+                      "leads"
                     ],
-                    "type": "text",
-                    "helper": "Use free text search"
+                    "type": "autocomplete"
                   },
                   {
                     "filterId": "department",
-                    "description": "Filter by department",
+                    "description": "Department: Filter by the lead\u0027s department (e.g. \u0027Sales\u0027, \u0027Marketing\u0027, \u0027Engineering\u0027, \u0027Finance / Legal / Admin\u0027, \u0027Human Resources\u0027). Use to target a functional buyer persona regardless of the exact job title.",
                     "mode": [
                       "leads"
                     ],
                     "type": "select",
-                    "helper": "Allowed values: Sales, Customer service, Engineering, Marketing, Operations, Human Resources, Finance / Legal / Admin, Other"
+                    "values": [
+                      "Sales",
+                      "Customer service",
+                      "Engineering",
+                      "Marketing",
+                      "Operations",
+                      "Human Resources",
+                      "Finance / Legal / Admin",
+                      "Other"
+                    ]
                   }
                 ]
               }
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Validation error - invalid query parameters",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PersonaError"
                 },
-                "example": "Bad team"
+                "examples": {
+                  "invalidUsage": {
+                    "value": {
+                      "error": "Parameter usage is invalid",
+                      "code": "API_INVALID_USAGE"
+                    }
+                  },
+                  "invalidMode": {
+                    "value": {
+                      "error": "Parameter mode is invalid",
+                      "code": "API_INVALID_MODE"
+                    }
+                  }
+                }
               }
             }
           },
@@ -7318,7 +7358,18 @@
             }
           },
           "405": {
-            "description": "Method not allowed"
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
           }
         }
       }
@@ -7825,16 +7876,14 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing API key",
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PersonaError"
+                  "type": "object",
+                  "description": "Fallback media schema"
                 },
-                "example": {
-                  "error": "Route unauthorized",
-                  "code": "ROUTE_UNAUTHORIZED"
-                }
+                "example": "The authentication you supplied is incorrect"
               }
             }
           },
@@ -7958,16 +8007,14 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing API key",
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PersonaError"
+                  "type": "object",
+                  "description": "Fallback media schema"
                 },
-                "example": {
-                  "error": "Route unauthorized",
-                  "code": "ROUTE_UNAUTHORIZED"
-                }
+                "example": "The authentication you supplied is incorrect"
               }
             }
           },
@@ -8069,16 +8116,14 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing API key",
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PersonaError"
+                  "type": "object",
+                  "description": "Fallback media schema"
                 },
-                "example": {
-                  "error": "Route unauthorized",
-                  "code": "ROUTE_UNAUTHORIZED"
-                }
+                "example": "The authentication you supplied is incorrect"
               }
             }
           },
@@ -8120,6 +8165,686 @@
                 "example": {
                   "error": "Internal error",
                   "code": "INTERNAL_ERROR"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/database/saved-searches": {
+      "get": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "List Saved Searches",
+        "description": "Lists the People Database saved searches of your team, sorted by name. Saved searches are team-shared: every member sees the same list.",
+        "operationId": "ListSavedSearches",
+        "parameters": [
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Restrict the list to saved searches of one search mode. Saved searches created before modes existed are returned for both modes. Omit to return every saved search of the team.",
+            "schema": {
+              "$ref": "#/components/schemas/ListSavedSearchesModeParameter"
+            },
+            "example": "leads"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "lss_ExAmPlE4f7Kq2Wz9x",
+                      "name": "Paris SaaS founders",
+                      "mode": "leads",
+                      "filters": [
+                        {
+                          "filterId": "currentTitle",
+                          "in": [
+                            "Founder"
+                          ],
+                          "out": []
+                        },
+                        {
+                          "filterId": "country",
+                          "in": [
+                            "France"
+                          ],
+                          "out": []
+                        }
+                      ],
+                      "createdAt": "2026-09-14T08:30:00.000Z",
+                      "lastResultsCount": 1240,
+                      "lastResultsCountUpdatedAt": "2026-09-14T08:30:00.000Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - invalid query parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Parameter mode is invalid",
+                  "code": "API_INVALID_MODE"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Create Saved Search",
+        "description": "Creates a People Database saved search for your team. It shows up in the \u0022Saved searches\u0022 menu of the People Database.\n\nFilters come from [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) called with \u0060usage=ui\u0060: a filter not usable in the People Database UI is refused with \u0060FILTER_UNAVAILABLE_FOR_USAGE\u0060, and the error message names the refused filters, comma-separated. Filters incompatible with the \u0060mode\u0060 or with your team\u0027s plan are dropped silently; if none remain, the request answers \u0060400\u0060.\n\nOnly the created id is returned. The stored \u0060name\u0060 and \u0060filters\u0060 are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [Get Saved Search](/api-reference/endpoints/people-database/get-saved-search) to read the stored saved search.",
+        "operationId": "CreateSavedSearch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSavedSearchRequest"
+              },
+              "example": {
+                "name": "Paris SaaS founders",
+                "mode": "leads",
+                "filters": [
+                  {
+                    "filterId": "currentTitle",
+                    "in": [
+                      "Founder"
+                    ],
+                    "out": []
+                  },
+                  {
+                    "filterId": "country",
+                    "in": [
+                      "France"
+                    ],
+                    "out": []
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Saved search created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchCreateResponse"
+                },
+                "example": {
+                  "data": {
+                    "_id": "lss_ExAmPlE4f7Kq2Wz9x"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. Possible codes: \u0060API_INVALID_PARAMS\u0060, \u0060API_INVALID_NAME\u0060, \u0060API_INVALID_FILTERS\u0060, \u0060API_INVALID_MODE\u0060, \u0060SEARCH_FILTERS_MISSING\u0060, \u0060SEARCH_FILTERS_EMPTY\u0060, \u0060SEARCH_FILTERS_INVALID\u0060, \u0060SEARCH_FILTERS_INPUT_TOO_LONG\u0060, \u0060SEARCH_FILTERS_INPUT_TOO_MANY_VALUES\u0060, \u0060FILTER_UNAVAILABLE_FOR_USAGE\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "examples": {
+                  "invalidName": {
+                    "value": {
+                      "error": "Parameter name is invalid",
+                      "code": "API_INVALID_NAME"
+                    }
+                  },
+                  "invalidFilters": {
+                    "value": {
+                      "error": "Parameter filters is invalid",
+                      "code": "API_INVALID_FILTERS"
+                    }
+                  },
+                  "invalidMode": {
+                    "value": {
+                      "error": "Parameter mode is invalid",
+                      "code": "API_INVALID_MODE"
+                    }
+                  },
+                  "emptyFilter": {
+                    "value": {
+                      "error": "One of your filter is empty",
+                      "code": "SEARCH_FILTERS_EMPTY"
+                    }
+                  },
+                  "tooManyValues": {
+                    "value": {
+                      "error": "One of your filter has too many values",
+                      "code": "SEARCH_FILTERS_INPUT_TOO_MANY_VALUES"
+                    }
+                  },
+                  "noValidFilter": {
+                    "value": {
+                      "error": "You have no valid filters with the current search mode",
+                      "code": "SEARCH_FILTERS_INVALID"
+                    }
+                  },
+                  "filterUnavailable": {
+                    "value": {
+                      "error": "The \u0022companiesByIds\u0022 filter is not available for this type of search",
+                      "code": "FILTER_UNAVAILABLE_FOR_USAGE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A saved search with this name already exists for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "A search with this name already exists",
+                  "code": "SEARCH_NAME_ALREADY_EXISTS"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The saved search could not be stored",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "We could not save your search",
+                  "code": "SEARCH_INSERT_FAILED"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/database/saved-searches/{savedSearchId}": {
+      "get": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Get Saved Search",
+        "description": "Retrieves one of your team\u0027s saved searches.\n\nAn unknown id and a saved search belonging to another team answer the same \u0060404\u0060.",
+        "operationId": "GetSavedSearch",
+        "parameters": [
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "description": "Id of the saved search",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "example": "lss_ExAmPlE4f7Kq2Wz9x"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponse"
+                },
+                "example": {
+                  "data": {
+                    "_id": "lss_ExAmPlE4f7Kq2Wz9x",
+                    "name": "Paris SaaS founders",
+                    "mode": "leads",
+                    "filters": [
+                      {
+                        "filterId": "currentTitle",
+                        "in": [
+                          "Founder"
+                        ],
+                        "out": []
+                      },
+                      {
+                        "filterId": "country",
+                        "in": [
+                          "France"
+                        ],
+                        "out": []
+                      }
+                    ],
+                    "createdAt": "2026-09-14T08:30:00.000Z",
+                    "lastResultsCount": 1240,
+                    "lastResultsCountUpdatedAt": "2026-09-14T08:30:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - malformed savedSearchId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Wrong param lemleads saved search id",
+                  "code": "WRONG_PARAM_LEMLEADS_SAVED_SEARCH_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No such saved search for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "No saved search found for this id",
+                  "code": "SAVED_SEARCH_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Update Saved Search",
+        "description": "Renames a saved search and/or replaces its filters. At least one of \u0060name\u0060 and \u0060filters\u0060 is required.\n\n\u0060filters\u0060 replace the saved filters entirely: they are not merged. \u0060mode\u0060 is only read together with \u0060filters\u0060 and defaults to the current mode of the saved search. Filters come from [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) called with \u0060usage=ui\u0060: a filter not usable in the People Database UI is refused with \u0060FILTER_UNAVAILABLE_FOR_USAGE\u0060, and the error message names the refused filters, comma-separated. Filters incompatible with the \u0060mode\u0060 or with your team\u0027s plan are dropped silently; if none remain, the request answers \u0060400\u0060.\n\nThe filters and the name are applied as two separate writes: if the rename is refused because the name is already taken (\u0060409\u0060), the new filters are already saved.",
+        "operationId": "UpdateSavedSearch",
+        "parameters": [
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "description": "Id of the saved search",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "example": "lss_ExAmPlE4f7Kq2Wz9x"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSavedSearchRequest"
+              },
+              "example": {
+                "name": "Lyon SaaS founders",
+                "filters": [
+                  {
+                    "filterId": "currentTitle",
+                    "in": [
+                      "Founder"
+                    ],
+                    "out": []
+                  },
+                  {
+                    "filterId": "country",
+                    "in": [
+                      "France"
+                    ],
+                    "out": []
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Saved search updated, in its new state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponse"
+                },
+                "example": {
+                  "data": {
+                    "_id": "lss_ExAmPlE4f7Kq2Wz9x",
+                    "name": "Lyon SaaS founders",
+                    "mode": "leads",
+                    "filters": [
+                      {
+                        "filterId": "currentTitle",
+                        "in": [
+                          "Founder"
+                        ],
+                        "out": []
+                      },
+                      {
+                        "filterId": "country",
+                        "in": [
+                          "France"
+                        ],
+                        "out": []
+                      }
+                    ],
+                    "createdAt": "2026-09-14T08:30:00.000Z",
+                    "lastResultsCount": 1240,
+                    "lastResultsCountUpdatedAt": "2026-09-14T08:30:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. Possible codes: \u0060API_INVALID_SAVED_SEARCH_UPDATE\u0060 (neither \u0060name\u0060 nor \u0060filters\u0060), \u0060WRONG_PARAM_LEMLEADS_SAVED_SEARCH_ID\u0060, \u0060API_INVALID_PARAMS\u0060, \u0060API_INVALID_NAME\u0060, \u0060API_INVALID_FILTERS\u0060, \u0060API_INVALID_MODE\u0060, \u0060SEARCH_FILTERS_MISSING\u0060, \u0060SEARCH_FILTERS_EMPTY\u0060, \u0060SEARCH_FILTERS_INVALID\u0060, \u0060SEARCH_FILTERS_INPUT_TOO_LONG\u0060, \u0060SEARCH_FILTERS_INPUT_TOO_MANY_VALUES\u0060, \u0060FILTER_UNAVAILABLE_FOR_USAGE\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "examples": {
+                  "emptyUpdate": {
+                    "value": {
+                      "error": "Provide a name or filters to update the saved search",
+                      "code": "API_INVALID_SAVED_SEARCH_UPDATE"
+                    }
+                  },
+                  "malformedId": {
+                    "value": {
+                      "error": "Wrong param lemleads saved search id",
+                      "code": "WRONG_PARAM_LEMLEADS_SAVED_SEARCH_ID"
+                    }
+                  },
+                  "invalidName": {
+                    "value": {
+                      "error": "Parameter name is invalid",
+                      "code": "API_INVALID_NAME"
+                    }
+                  },
+                  "invalidFilters": {
+                    "value": {
+                      "error": "Parameter filters is invalid",
+                      "code": "API_INVALID_FILTERS"
+                    }
+                  },
+                  "invalidMode": {
+                    "value": {
+                      "error": "Parameter mode is invalid",
+                      "code": "API_INVALID_MODE"
+                    }
+                  },
+                  "emptyFilter": {
+                    "value": {
+                      "error": "One of your filter is empty",
+                      "code": "SEARCH_FILTERS_EMPTY"
+                    }
+                  },
+                  "tooManyValues": {
+                    "value": {
+                      "error": "One of your filter has too many values",
+                      "code": "SEARCH_FILTERS_INPUT_TOO_MANY_VALUES"
+                    }
+                  },
+                  "noValidFilter": {
+                    "value": {
+                      "error": "You have no valid filters with the current search mode",
+                      "code": "SEARCH_FILTERS_INVALID"
+                    }
+                  },
+                  "filterUnavailable": {
+                    "value": {
+                      "error": "The \u0022companiesByIds\u0022 filter is not available for this type of search",
+                      "code": "FILTER_UNAVAILABLE_FOR_USAGE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No such saved search for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "No saved search found for this id",
+                  "code": "SAVED_SEARCH_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A saved search with this name already exists for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "A search with this name already exists",
+                  "code": "SEARCH_NAME_ALREADY_EXISTS"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Delete Saved Search",
+        "description": "Permanently deletes one of your team\u0027s saved searches. There is no undo.\n\nAn unknown id and a saved search belonging to another team answer the same \u0060404\u0060.",
+        "operationId": "DeleteSavedSearch",
+        "parameters": [
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "description": "Id of the saved search",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "example": "lss_ExAmPlE4f7Kq2Wz9x"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Saved search deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchDeleteResponse"
+                },
+                "example": {
+                  "data": {
+                    "_id": "lss_ExAmPlE4f7Kq2Wz9x",
+                    "deleted": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - malformed savedSearchId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Wrong param lemleads saved search id",
+                  "code": "WRONG_PARAM_LEMLEADS_SAVED_SEARCH_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No such saved search for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "No saved search found for this id",
+                  "code": "SAVED_SEARCH_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
                 }
               }
             }
@@ -13050,6 +13775,112 @@
       }
     },
     "/companies/{companyId}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get Company",
+        "description": "Retrieves one lemlist company by its id (\u0060cpn_xxx\u0060) and returns the company object itself, unwrapped. Answers \u0060404 COMPANY_NOT_FOUND_BY_ID\u0060 when no company of your team carries this id, where \u0060GET /companies?idsOrDomains=\u0060 answers \u0060200\u0060 with an empty \u0060data\u0060 array. Lookups by domain stay on \u0060GET /companies?idsOrDomains=\u0060: a domain is not guaranteed to designate a single company, so this endpoint takes ids only.\n\nWhen a CRM is connected the company carries the \u0060crmSync\u0060 block; \u0060fieldRejections\u0060 lists the values lemlist refused to write on it.",
+        "operationId": "GetCompaniesByCompanyId",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The lemlist company ID.",
+            "required": true,
+            "schema": {
+              "pattern": "^cpn_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "example": "cpn_A1B2C3D4E5F6G7H8I"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The company.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Company"
+                },
+                "example": {
+                  "_id": "cpn_A1B2C3D4E5F6G7H8I",
+                  "teamId": "tea_8QvkOiBfPdb2ZRhHi",
+                  "domain": "acme.com",
+                  "linkedinUrl": "https://www.linkedin.com/company/acme",
+                  "fields": {
+                    "name": "Acme Corp",
+                    "industry": "Technology",
+                    "location": "San Francisco, CA"
+                  },
+                  "ownerId": "usr_ahfFktBBHUIxbVG5P",
+                  "source": "api",
+                  "createdAt": "2025-10-28T00:40:37.917Z",
+                  "createdBy": "usr_ahfFktBBHUIxbVG5P",
+                  "fieldRejections": [],
+                  "crmSync": {
+                    "provider": "hubspot",
+                    "crmRecordId": "12345678901",
+                    "syncDisabled": false,
+                    "errors": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request: \u0060INVALID_COMPANY_ID\u0060 (the id is not a \u0060cpn_xxx\u0060 id).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCompaniesByCompanyId400Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "INVALID_COMPANY_ID",
+                    "message": "Invalid companyId format"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No company of your team carries this id (\u0060COMPANY_NOT_FOUND_BY_ID\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCompaniesByCompanyId404Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "COMPANY_NOT_FOUND_BY_ID",
+                    "message": "No company found with id"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed."
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Companies"
@@ -13147,7 +13978,7 @@
                   "success": false,
                   "error": {
                     "code": "COMPANY_NOT_FOUND_BY_ID",
-                    "message": "Company not found by ID"
+                    "message": "No company found with id"
                   }
                 },
                 "x-schema-inferred-from-examples": true
@@ -21110,25 +21941,21 @@
             "type": "string",
             "description": "Unique company identifier"
           },
-          "name": {
+          "teamId": {
             "type": "string",
-            "description": "Company name (may also be present under fields.name)"
+            "description": "Team the company belongs to. Returned by \u0060GET /companies/{companyId}\u0060 and the \u0060idsOrDomains\u0060 and \u0060crmIds\u0060 lookups; the paginated list returns it only when requested with \u0060fields\u0060."
           },
           "domain": {
             "type": "string",
             "description": "Website domain"
           },
-          "industry": {
+          "linkedinUrl": {
             "type": "string",
-            "description": "Industry sector"
+            "description": "LinkedIn company page URL. Returned by \u0060GET /companies/{companyId}\u0060 and the \u0060idsOrDomains\u0060 and \u0060crmIds\u0060 lookups; the paginated list returns it only when requested with \u0060fields\u0060."
           },
-          "size": {
+          "linkedinUrlSalesNav": {
             "type": "string",
-            "description": "Company size"
-          },
-          "location": {
-            "type": "string",
-            "description": "Geographic location"
+            "description": "Sales Navigator company URL. Returned by \u0060GET /companies/{companyId}\u0060 and the \u0060idsOrDomains\u0060 and \u0060crmIds\u0060 lookups; the paginated list returns it only when requested with \u0060fields\u0060."
           },
           "fields": {
             "$ref": "#/components/schemas/CompanyFieldsProperty"
@@ -21145,6 +21972,10 @@
             "type": "string",
             "description": "Creation timestamp",
             "format": "date-time"
+          },
+          "source": {
+            "type": "string",
+            "description": "Origin of the company record, e.g. \u0060api\u0060 when it was created through this API. Returned by \u0060GET /companies/{companyId}\u0060 and the \u0060idsOrDomains\u0060 and \u0060crmIds\u0060 lookups, not by the paginated list."
           },
           "fieldRejections": {
             "type": "array",
@@ -21984,19 +22815,45 @@
         "description": "Error envelope of the v2 task routes."
       },
       "DatabaseFilter": {
+        "required": [
+          "filterId",
+          "description",
+          "type"
+        ],
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string"
+          "filterId": {
+            "type": "string",
+            "description": "Filter identifier, to send as \u0060filterId\u0060 in the search filters",
+            "example": "department"
           },
-          "name": {
-            "type": "string"
+          "description": {
+            "type": "string",
+            "description": "Human-readable filter name, followed by a description of what the filter matches when one exists",
+            "example": "Department: Filter by the lead\u0027s department (e.g. \u0027Sales\u0027, \u0027Marketing\u0027, \u0027Engineering\u0027, \u0027Finance / Legal / Admin\u0027, \u0027Human Resources\u0027). Use to target a functional buyer persona regardless of the exact job title."
           },
-          "criteria": {
-            "$ref": "#/components/schemas/DatabaseFilterCriteriaProperty"
+          "mode": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatabaseFilterModeItem"
+            },
+            "description": "Search modes the filter can be used in: \u0060leads\u0060 for Search People Database, \u0060companies\u0060 for Search Companies Database. Omitted when the request is scoped to a single \u0060mode\u0060."
+          },
+          "type": {
+            "$ref": "#/components/schemas/DatabaseFilterType"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed values, for the filters that have a fixed list"
+          },
+          "range": {
+            "$ref": "#/components/schemas/DatabaseFilterRange"
           }
         },
-        "description": "Saved search criteria for querying the People database."
+        "description": "A filter usable in the People and Companies database searches, as listed by Get Database Filters."
       },
       "PeopleSchema": {
         "type": "object",
@@ -22310,7 +23167,7 @@
             "description": "Exact-match toggle, for the text filters that support it"
           }
         },
-        "description": "One People Database filter of a persona. \u0060in\u0060 includes matching values, \u0060out\u0060 excludes them. There is no \u0060type\u0060 property: it is derived from \u0060filterId\u0060 server-side."
+        "description": "One People Database filter, as stored in a persona or a saved search. \u0060in\u0060 includes matching values, \u0060out\u0060 excludes them. There is no \u0060type\u0060 property: it is derived from \u0060filterId\u0060 server-side."
       },
       "PersonaListResponse": {
         "type": "object",
@@ -22352,7 +23209,86 @@
             "description": "Machine-readable error code, stable across releases"
           }
         },
-        "description": "Error envelope returned by the persona endpoints."
+        "description": "Error envelope returned by the persona, saved-search and Get Database Filters endpoints."
+      },
+      "SavedSearch": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique saved search identifier",
+            "example": "lss_ExAmPlE4f7Kq2Wz9x"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name. Unique within your team.",
+            "example": "Paris SaaS founders"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SavedSearchMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonaFilter"
+            },
+            "description": "People Database filters of the saved search. Same shape as the search endpoints accept, so they can be sent back as is to [Search People Database](/api-reference/endpoints/people-database/search-people-database) or [Search Companies Database](/api-reference/endpoints/people-database/search-companies-database)."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date the saved search was created",
+            "format": "date-time",
+            "example": "2026-09-14T08:30:00.000Z"
+          },
+          "lastResultsCount": {
+            "type": "number",
+            "description": "Number of results the saved search returned the last time it was saved or run",
+            "example": 1240
+          },
+          "lastResultsCountUpdatedAt": {
+            "type": "string",
+            "description": "Date \u0060lastResultsCount\u0060 was last computed",
+            "format": "date-time",
+            "example": "2026-09-14T08:30:00.000Z"
+          }
+        },
+        "description": "A People Database saved search: a named set of People Database filters saved by your team. It appears in the \u0022Saved searches\u0022 menu of the People Database."
+      },
+      "SavedSearchListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SavedSearch"
+            },
+            "description": "The team\u0027s saved searches, sorted by name"
+          }
+        }
+      },
+      "SavedSearchResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SavedSearch"
+          }
+        }
+      },
+      "SavedSearchCreateResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SavedSearchCreateResponseData"
+          }
+        }
+      },
+      "SavedSearchDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SavedSearchDeleteResponseData"
+          }
+        }
       },
       "LemwarmSettings": {
         "type": "object",
@@ -23605,6 +24541,10 @@
           "visitLimit": {
             "type": "integer",
             "description": "Daily limit for LinkedIn profile visits"
+          },
+          "inMailLimit": {
+            "type": "integer",
+            "description": "Daily limit for LinkedIn InMails (defaults to 5). The monthly InMail credits of the LinkedIn plan remain the hard cap"
           }
         },
         "description": "LinkedIn integration settings"
@@ -23702,7 +24642,7 @@
       },
       "CompanyFields": {
         "type": "object",
-        "description": "Flexible key/value fields of the company (e.g., name, picture, industry, location, size, foundedOn)"
+        "description": "Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under \u0060fields\u0060, never at the top level of the object."
       },
       "CompanyCrmSync": {
         "type": "object",
@@ -23842,8 +24782,31 @@
           }
         }
       },
-      "DatabaseFilterCriteria": {
-        "type": "object"
+      "DatabaseFilterRange": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number",
+            "description": "Lowest accepted value",
+            "example": 0
+          },
+          "max": {
+            "type": "number",
+            "description": "Highest accepted value",
+            "example": 10000
+          },
+          "default": {
+            "type": "string",
+            "description": "Default range, formatted \u0060min|max\u0060",
+            "example": "1|10000"
+          },
+          "percentage": {
+            "type": "boolean",
+            "description": "Whether the values are percentages",
+            "example": false
+          }
+        },
+        "description": "Slider configuration, for the \u0060slider\u0060 filters"
       },
       "PeopleSchemaEducationItem": {
         "type": "object",
@@ -24051,6 +25014,31 @@
           "deleted": {
             "type": "boolean",
             "description": "Always \u0060true\u0060 when the persona was removed",
+            "example": true
+          }
+        }
+      },
+      "SavedSearchCreateResponseData": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Id of the created saved search",
+            "example": "lss_ExAmPlE4f7Kq2Wz9x"
+          }
+        }
+      },
+      "SavedSearchDeleteResponseData": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Id of the deleted saved search",
+            "example": "lss_ExAmPlE4f7Kq2Wz9x"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Always \u0060true\u0060 when the saved search was removed",
             "example": true
           }
         }
@@ -27372,6 +28360,59 @@
           }
         }
       },
+      "CreateSavedSearchRequest": {
+        "required": [
+          "name",
+          "filters",
+          "mode"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+            "description": "Display name, 1 to 200 characters after trimming. Unique within your team.",
+            "example": "Paris SaaS founders"
+          },
+          "filters": {
+            "maxItems": 10,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonaFilter"
+            },
+            "description": "People Database filters of the saved search. 1 to 10 filters of shape \u0060{ filterId, in?, out?, exactMatch? }\u0060 (no other key: an unknown key such as \u0060type\u0060 answers \u0060API_INVALID_FILTERS\u0060), at most 1000 values per \u0060in\u0060 / \u0060out\u0060 and 1000 characters per value."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/CreateSavedSearchRequestMode"
+          }
+        }
+      },
+      "UpdateSavedSearchRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+            "description": "Display name, 1 to 200 characters after trimming. Unique within your team.",
+            "example": "Lyon SaaS founders"
+          },
+          "filters": {
+            "maxItems": 10,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonaFilter"
+            },
+            "description": "New filters, replacing the saved ones entirely. 1 to 10 filters of shape \u0060{ filterId, in?, out?, exactMatch? }\u0060 (no other key: an unknown key such as \u0060type\u0060 answers \u0060API_INVALID_FILTERS\u0060), at most 1000 values per \u0060in\u0060 / \u0060out\u0060 and 1000 characters per value."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/UpdateSavedSearchRequestMode"
+          }
+        }
+      },
       "GetV2Tasks405Response": {
         "type": "object",
         "properties": {
@@ -28776,6 +29817,28 @@
           },
           "error": {
             "$ref": "#/components/schemas/PostCompaniesMerge409ResponseError"
+          }
+        }
+      },
+      "GetCompaniesByCompanyId400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/GetCompaniesByCompanyId400ResponseError"
+          }
+        }
+      },
+      "GetCompaniesByCompanyId404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/GetCompaniesByCompanyId404ResponseError"
           }
         }
       },
@@ -30936,7 +31999,7 @@
       },
       "CompanyFieldsProperty": {
         "type": "object",
-        "description": "Flexible key/value fields of the company (e.g., name, picture, industry, location, size, foundedOn)"
+        "description": "Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under \u0060fields\u0060, never at the top level of the object."
       },
       "CrmFilterCriteriaProperty": {
         "type": "object"
@@ -30948,9 +32011,6 @@
       "TaskV2CompanyProperty": {
         "type": "object",
         "description": "Denormalized company \u2014 only with \u0060include=company\u0060"
-      },
-      "DatabaseFilterCriteriaProperty": {
-        "type": "object"
       },
       "WatchListFilterDescriptorDefault": {
         "type": "object",
@@ -32674,6 +33734,28 @@
         }
       },
       "PostCompaniesMerge409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCompaniesByCompanyId400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCompaniesByCompanyId404ResponseError": {
         "type": "object",
         "properties": {
           "code": {
@@ -35437,6 +36519,77 @@
           ]
         }
       },
+      "DatabaseFilterModeItem": {
+        "enum": [
+          "leads",
+          "companies"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "DatabaseFilterModeItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "leads",
+              "name": "Leads"
+            },
+            {
+              "value": "companies",
+              "name": "Companies"
+            }
+          ]
+        }
+      },
+      "DatabaseFilterType": {
+        "enum": [
+          "text",
+          "select",
+          "autocomplete",
+          "static",
+          "slider",
+          "level",
+          "elasticId"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Kind of input the filter expects. \u0060level\u0060 is a two-level dropdown of the People Database UI; it is reported as \u0060select\u0060 by default.",
+        "example": "select",
+        "x-ms-enum": {
+          "name": "DatabaseFilterType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "select",
+              "name": "Select"
+            },
+            {
+              "value": "autocomplete",
+              "name": "Autocomplete"
+            },
+            {
+              "value": "static",
+              "name": "StaticValue"
+            },
+            {
+              "value": "slider",
+              "name": "Slider"
+            },
+            {
+              "value": "level",
+              "name": "Level"
+            },
+            {
+              "value": "elasticId",
+              "name": "ElasticId"
+            }
+          ]
+        }
+      },
       "CompaniesSchemaBusinessBusinessCustomer": {
         "enum": [
           "B2B",
@@ -35458,6 +36611,30 @@
         "example": "leads",
         "x-ms-enum": {
           "name": "PersonaMode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "leads",
+              "name": "Leads"
+            },
+            {
+              "value": "companies",
+              "name": "Companies"
+            }
+          ]
+        }
+      },
+      "SavedSearchMode": {
+        "enum": [
+          "leads",
+          "companies"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Search mode the filters target. Always set: saved searches created before modes existed read as \u0060leads\u0060.",
+        "example": "leads",
+        "x-ms-enum": {
+          "name": "SavedSearchMode",
           "modelAsString": false,
           "values": [
             {
@@ -38135,6 +39312,54 @@
         "example": "leads",
         "x-ms-enum": {
           "name": "CreatePersonaRequestMode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "leads",
+              "name": "Leads"
+            },
+            {
+              "value": "companies",
+              "name": "Companies"
+            }
+          ]
+        }
+      },
+      "CreateSavedSearchRequestMode": {
+        "enum": [
+          "leads",
+          "companies"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Search mode the filters target",
+        "example": "leads",
+        "x-ms-enum": {
+          "name": "CreateSavedSearchRequestMode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "leads",
+              "name": "Leads"
+            },
+            {
+              "value": "companies",
+              "name": "Companies"
+            }
+          ]
+        }
+      },
+      "UpdateSavedSearchRequestMode": {
+        "enum": [
+          "leads",
+          "companies"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Search mode of the new \u0060filters\u0060. Only read with \u0060filters\u0060; defaults to the current mode of the saved search.",
+        "example": "leads",
+        "x-ms-enum": {
+          "name": "UpdateSavedSearchRequestMode",
           "modelAsString": false,
           "values": [
             {
@@ -41001,6 +42226,50 @@
           ]
         }
       },
+      "GetDatabaseFiltersUsageParameter": {
+        "enum": [
+          "api",
+          "ui"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "GetDatabaseFiltersUsageParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "api",
+              "name": "Api"
+            },
+            {
+              "value": "ui",
+              "name": "Ui"
+            }
+          ]
+        }
+      },
+      "GetDatabaseFiltersModeParameter": {
+        "enum": [
+          "leads",
+          "companies"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "GetDatabaseFiltersModeParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "leads",
+              "name": "Leads"
+            },
+            {
+              "value": "companies",
+              "name": "Companies"
+            }
+          ]
+        }
+      },
       "ListPersonasModeParameter": {
         "enum": [
           "leads",
@@ -41010,6 +42279,28 @@
         "additionalProperties": false,
         "x-ms-enum": {
           "name": "ListPersonasModeParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "leads",
+              "name": "Leads"
+            },
+            {
+              "value": "companies",
+              "name": "Companies"
+            }
+          ]
+        }
+      },
+      "ListSavedSearchesModeParameter": {
+        "enum": [
+          "leads",
+          "companies"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "ListSavedSearchesModeParameter",
           "modelAsString": false,
           "values": [
             {

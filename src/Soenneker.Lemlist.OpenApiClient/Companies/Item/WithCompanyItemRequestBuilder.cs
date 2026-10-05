@@ -67,6 +67,33 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Retrieves one lemlist company by its id (`cpn_xxx`) and returns the company object itself, unwrapped. Answers `404 COMPANY_NOT_FOUND_BY_ID` when no company of your team carries this id, where `GET /companies?idsOrDomains=` answers `200` with an empty `data` array. Lookups by domain stay on `GET /companies?idsOrDomains=`: a domain is not guaranteed to designate a single company, so this endpoint takes ids only.When a CRM is connected the company carries the `crmSync` block; `fieldRejections` lists the values lemlist refused to write on it.
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Company"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Company401Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response">When receiving a 404 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.Company?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.Company> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Company401Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -81,6 +108,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
         {
 #endif
             var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Retrieves one lemlist company by its id (`cpn_xxx`) and returns the company object itself, unwrapped. Answers `404 COMPANY_NOT_FOUND_BY_ID` when no company of your team carries this id, where `GET /companies?idsOrDomains=` answers `200` with an empty `data` array. Lookups by domain stay on `GET /companies?idsOrDomains=`: a domain is not guaranteed to designate a single company, so this endpoint takes ids only.When a CRM is connected the company carries the `crmSync` block; `fieldRejections` lists the values lemlist refused to write on it.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;

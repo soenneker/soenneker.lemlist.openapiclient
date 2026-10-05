@@ -6,6 +6,7 @@ using Soenneker.Lemlist.OpenApiClient.Database.Companies;
 using Soenneker.Lemlist.OpenApiClient.Database.Filters;
 using Soenneker.Lemlist.OpenApiClient.Database.People;
 using Soenneker.Lemlist.OpenApiClient.Database.Personas;
+using Soenneker.Lemlist.OpenApiClient.Database.SavedSearches;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -37,6 +38,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Database
         public global::Soenneker.Lemlist.OpenApiClient.Database.Personas.PersonasRequestBuilder Personas
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Database.Personas.PersonasRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The savedSearches property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.SavedSearchesRequestBuilder SavedSearches
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.SavedSearchesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Database.DatabaseRequestBuilder"/> and sets the default values.

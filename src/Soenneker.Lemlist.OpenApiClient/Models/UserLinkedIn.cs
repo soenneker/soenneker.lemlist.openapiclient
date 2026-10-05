@@ -15,6 +15,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Daily limit for LinkedIn InMails (defaults to 5). The monthly InMail credits of the LinkedIn plan remain the hard cap</summary>
+        public int? InMailLimit { get; set; }
         /// <summary>Daily limit for LinkedIn connection invites</summary>
         public int? InviteLimit { get; set; }
         /// <summary>The LinkedIn URL of the person</summary>
@@ -56,6 +58,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "inMailLimit", n => { InMailLimit = n.GetIntValue(); } },
                 { "inviteLimit", n => { InviteLimit = n.GetIntValue(); } },
                 { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
                 { "sendLimit", n => { SendLimit = n.GetIntValue(); } },
@@ -70,6 +73,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("inMailLimit", InMailLimit);
             writer.WriteIntValue("inviteLimit", InviteLimit);
             writer.WriteStringValue("linkedinUrl", LinkedinUrl);
             writer.WriteIntValue("sendLimit", SendLimit);

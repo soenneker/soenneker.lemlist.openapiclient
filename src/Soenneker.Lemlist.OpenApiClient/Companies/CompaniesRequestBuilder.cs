@@ -31,7 +31,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             get => new global::Soenneker.Lemlist.OpenApiClient.Companies.Merge.MergeRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.companies.item collection</summary>
-        /// <param name="position">The lemlist company ID to delete.</param>
+        /// <param name="position">The lemlist company ID.</param>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.WithCompanyItemRequestBuilder"/></returns>
         public global::Soenneker.Lemlist.OpenApiClient.Companies.Item.WithCompanyItemRequestBuilder this[string position]
         {

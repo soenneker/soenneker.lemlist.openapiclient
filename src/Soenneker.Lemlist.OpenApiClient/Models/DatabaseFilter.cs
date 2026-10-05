@@ -8,36 +8,54 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Saved search criteria for querying the People database.
+    /// A filter usable in the People and Companies database searches, as listed by Get Database Filters.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DatabaseFilter : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The criteria property</summary>
+        /// <summary>Human-readable filter name, followed by a description of what the filter matches when one exists</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterCriteriaProperty? Criteria { get; set; }
+        public string? Description { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterCriteriaProperty Criteria { get; set; }
+        public string Description { get; set; }
 #endif
-        /// <summary>The id property</summary>
+        /// <summary>Filter identifier, to send as `filterId` in the search filters</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? FilterId { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string FilterId { get; set; }
 #endif
-        /// <summary>The name property</summary>
+        /// <summary>Search modes the filter can be used in: `leads` for Search People Database, `companies` for Search Companies Database. Omitted when the request is scoped to a single `mode`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterModeItem?>? Mode { get; set; }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterModeItem?> Mode { get; set; }
+#endif
+        /// <summary>Slider configuration, for the `slider` filters</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange? Range { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange Range { get; set; }
+#endif
+        /// <summary>Kind of input the filter expects. `level` is a two-level dropdown of the People Database UI; it is reported as `select` by default.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterType? Type { get; set; }
+        /// <summary>Allowed values, for the filters that have a fixed list</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Values { get; set; }
+#nullable restore
+#else
+        public List<string> Values { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter"/> and sets the default values.
@@ -64,9 +82,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "criteria", n => { Criteria = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterCriteriaProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterCriteriaProperty.CreateFromDiscriminatorValue); } },
-                { "_id", n => { Id = n.GetStringValue(); } },
-                { "name", n => { Name = n.GetStringValue(); } },
+                { "description", n => { Description = n.GetStringValue(); } },
+                { "filterId", n => { FilterId = n.GetStringValue(); } },
+                { "mode", n => { Mode = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterModeItem>()?.AsList(); } },
+                { "range", n => { Range = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange>(global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange.CreateFromDiscriminatorValue); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterType>(); } },
+                { "values", n => { Values = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
         /// <summary>
@@ -76,9 +97,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterCriteriaProperty>("criteria", Criteria);
-            writer.WriteStringValue("_id", Id);
-            writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("description", Description);
+            writer.WriteStringValue("filterId", FilterId);
+            writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterModeItem>("mode", Mode);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange>("range", Range);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterType>("type", Type);
+            writer.WriteCollectionOfPrimitiveValues<string>("values", Values);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

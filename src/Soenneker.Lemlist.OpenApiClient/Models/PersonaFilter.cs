@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// One People Database filter of a persona. `in` includes matching values, `out` excludes them. There is no `type` property: it is derived from `filterId` server-side.
+    /// One People Database filter, as stored in a persona or a saved search. `in` includes matching values, `out` excludes them. There is no `type` property: it is derived from `filterId` server-side.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PersonaFilter : IAdditionalDataHolder, IParsable
