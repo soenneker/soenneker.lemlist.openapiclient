@@ -555,6 +555,10 @@
                 "type": "boolean",
                 "description": "Whether LinkedIn is connected"
               },
+              "followLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn follows"
+              },
               "inviteLimit": {
                 "type": "integer",
                 "description": "Daily limit for LinkedIn connection invites"
@@ -570,6 +574,35 @@
               "inMailLimit": {
                 "type": "integer",
                 "description": "Daily limit for LinkedIn InMails (defaults to 5). The monthly InMail credits of the LinkedIn plan remain the hard cap"
+              },
+              "networkCheckLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn network checks"
+              },
+              "withdrawInvitationLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn invitation withdrawals"
+              },
+              "likeLastPostLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn last-post likes"
+              },
+              "endorseLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn endorsements"
+              },
+              "commentLastPostRetrieveLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn last-post retrievals"
+              },
+              "commentLastPostSendLimit": {
+                "type": "integer",
+                "description": "Daily limit for LinkedIn last-post comments"
+              },
+              "inviteRampUp": {
+                "type": "integer",
+                "nullable": true,
+                "description": "How much the daily invitation limit grows each day until it reaches inviteLimit; null when the ramp-up is off"
               }
             }
           },
@@ -6336,20 +6369,28 @@
                   "$ref": "#/components/schemas/User"
                 },
                 "example": {
-                  "_id": "usr_eSrHPSoL9QVPUOsho",
-                  "email": "example@lemlist.co",
+                  "_id": "usr_Hv3pXc8RtW2nLq6Ya",
+                  "email": "john@example.com",
                   "role": "admin",
                   "linkedIn": {
                     "linkedinUrl": "https://www.linkedin.com/in/john-doe",
                     "status": true,
+                    "followLimit": 20,
                     "inviteLimit": 25,
                     "sendLimit": 33,
                     "visitLimit": 36,
-                    "inMailLimit": 5
+                    "inMailLimit": 5,
+                    "networkCheckLimit": 30,
+                    "withdrawInvitationLimit": 30,
+                    "likeLastPostLimit": 30,
+                    "endorseLimit": 20,
+                    "commentLastPostRetrieveLimit": 20,
+                    "commentLastPostSendLimit": 20,
+                    "inviteRampUp": 5
                   },
                   "mailboxes": [
                     {
-                      "_id": "usm_2mkqJNUjnJQiyVBht",
+                      "_id": "usm_Bk7mQz4FsN9dTr2Wx",
                       "email": "example@gmail.com",
                       "provider": "google",
                       "status": "ERROR",
@@ -6361,7 +6402,7 @@
                       }
                     },
                     {
-                      "_id": "usm_gqlN3jKWoGo1Je8El",
+                      "_id": "usm_Jy5LcR8hVp3eKs6Nm",
                       "email": "example@outlook.com",
                       "status": "ERROR",
                       "lemlist": {
@@ -7504,6 +7545,195 @@
           },
           "404": {
             "description": "`STEP_SKIP_CAMPAIGN_NOT_FOUND` or `STEP_SKIP_STEP_NOT_FOUND` - the campaign or the step does not exist in this workspace.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Step not found in this campaign",
+                  "code": "STEP_SKIP_STEP_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - this endpoint only accepts POST"
+          },
+          "422": {
+            "description": "`STEP_SKIP_STEP_IS_CONDITION` - a condition step can never be skipped.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "A condition step cannot be skipped",
+                  "code": "STEP_SKIP_STEP_IS_CONDITION"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          }
+        }
+      }
+    },
+    "/campaigns/{campaignId}/steps/{stepId}/skip-for-leads": {
+      "parameters": [
+        {
+          "name": "campaignId",
+          "in": "path",
+          "required": true,
+          "description": "The unique identifier of the campaign",
+          "example": "cam_A1B2C3D4E5F6G7H8I9",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "stepId",
+          "in": "path",
+          "required": true,
+          "description": "The unique identifier of the step, from GET /campaigns/{campaignId}/sequences",
+          "example": "stp_A1B2C3D4E5F6G7H8I9",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Skip Step for Leads",
+        "tags": [
+          "Campaigns"
+        ],
+        "description": "Skip one step of a running campaign for a list of leads, at most 100 per call. Each item is a lead id or an email. Cannot be undone.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "leads"
+                ],
+                "properties": {
+                  "leads": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 100,
+                    "description": "The leads to skip the step for: 1 to 100 items. An email is matched inside the campaign, case-insensitively. A repeated item is read once. An email is not URL-decoded: send it as it is stored.",
+                    "items": {
+                      "type": "string",
+                      "description": "A lead id (lea_...) or the lead's email"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "leads": [
+                  "lea_A1B2C3D4E5F6G7H8I",
+                  "jane@example.com",
+                  "ghost@example.com"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "One `results` row per distinct item sent, echoing it as sent. Per-item outcomes never fail the call: `skipped`, `already_skipped` (an idempotent no-op) or `not_found` (no lead of this campaign matches). Counts are per lead: two items naming the same lead both echo its status, and the lead counts once.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer",
+                      "description": "skipped + alreadySkipped + the items in notFound"
+                    },
+                    "skipped": {
+                      "type": "integer",
+                      "description": "Leads skipped by this call"
+                    },
+                    "alreadySkipped": {
+                      "type": "integer",
+                      "description": "Leads that already had the step skipped: nothing changed for them"
+                    },
+                    "notFound": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The items that matched no lead of the campaign, as sent"
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "lead": {
+                            "type": "string",
+                            "description": "The item as sent: a lead id or an email"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "skipped",
+                              "already_skipped",
+                              "not_found"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "total": 3,
+                  "skipped": 2,
+                  "alreadySkipped": 0,
+                  "notFound": [
+                    "ghost@example.com"
+                  ],
+                  "results": [
+                    {
+                      "lead": "lea_A1B2C3D4E5F6G7H8I",
+                      "status": "skipped"
+                    },
+                    {
+                      "lead": "jane@example.com",
+                      "status": "skipped"
+                    },
+                    {
+                      "lead": "ghost@example.com",
+                      "status": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request must be fixed as a whole: a malformed path identifier, a body that is not JSON, `leads` missing, empty, not an array of strings or with an item over the length limit (`ROUTE_BAD_REQUEST`); more than 100 items (`STEP_SKIP_TOO_MANY_LEADS`, never truncated); or no API key supplied (plain text).",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "At most 100 leads per call",
+                  "code": "STEP_SKIP_TOO_MANY_LEADS"
+                }
+              },
+              "text/plain": {
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "text/plain": {
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "`STEP_SKIP_CAMPAIGN_NOT_FOUND` or `STEP_SKIP_STEP_NOT_FOUND` - the campaign or the step does not exist in this workspace. A lead that is not in the campaign is a `not_found` item, never a 404.",
             "content": {
               "application/json": {
                 "example": {
@@ -12498,7 +12728,7 @@
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "**The company was NOT written** — `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**Values left unchanged** — `FIELDS_KEPT`: what the update strategy kept, named in `params.fields` (company fields prefixed with `company`)."
+                            "description": "**The company was NOT written**: `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: `COMPANY_DOMAIN_IGNORED`, `companyDomain` is a personal email provider or a platform host shared by many companies (`gmail.com`, a `facebook.com` page, a bare `wordpress.com`). The lead and its company went through without it; `params.companyDomain` names it.\n\n**Values left unchanged**: `FIELDS_KEPT`, what the update strategy kept, named in `params.fields` (company fields prefixed with `company`)."
                           },
                           "message": {
                             "type": "string"
@@ -12783,7 +13013,7 @@
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "**The company WAS written** — `company-fields-write-company-record`: the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.\n\n**The company was NOT written** — `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**Values left unchanged** — `FIELDS_KEPT`: what the update strategy kept, named in `params.fields` (company fields prefixed with `company`)."
+                            "description": "**The company WAS written**: `company-fields-write-company-record`, the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.\n\n**The company was NOT written**: `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: `COMPANY_DOMAIN_IGNORED`, `companyDomain` is a personal email provider or a platform host shared by many companies (`gmail.com`, a `facebook.com` page, a bare `wordpress.com`). The lead and its company went through without it; `params.companyDomain` names it.\n\n**Values left unchanged**: `FIELDS_KEPT`, what the update strategy kept, named in `params.fields` (company fields prefixed with `company`)."
                           },
                           "message": {
                             "type": "string"
@@ -13956,9 +14186,10 @@
         }
       ],
       "post": {
+        "deprecated": true,
         "summary": "Skip Step for Lead",
         "tags": ["Leads"],
-        "description": "Skip one step of a running campaign for a single lead. Cannot be undone.",
+        "description": "Skip one step of a running campaign for a single lead. Cannot be undone. Deprecated, still working: use POST /campaigns/{campaignId}/steps/{stepId}/skip-for-leads, which takes 1 to 100 leads per call.",
         "parameters": [],
         "responses": {
           "200": {
@@ -14361,7 +14592,7 @@
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "**The company WAS written** — `company-fields-write-company-record`: the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.\n\n**The company was NOT written** — `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case."
+                            "description": "**The company WAS written**: `company-fields-write-company-record`, the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.\n\n**The company was NOT written**: `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: `COMPANY_DOMAIN_IGNORED`, `companyDomain` is a personal email provider or a platform host shared by many companies (`gmail.com`, a `facebook.com` page, a bare `wordpress.com`). The lead and its company went through without it; `params.companyDomain` names it."
                           },
                           "message": {
                             "type": "string"
@@ -14486,7 +14717,7 @@
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "**The company WAS written** — `company-fields-write-company-record`: the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.\n\n**The company was NOT written** — `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case."
+                            "description": "**The company WAS written**: `company-fields-write-company-record`, the `company`-prefixed keys you sent went to the company record the lead is linked to, shared by every lead linked to it, not to the lead alone. `params.fields` names them.\n\n**The company was NOT written**: `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: `COMPANY_DOMAIN_IGNORED`, `companyDomain` is a personal email provider or a platform host shared by many companies (`gmail.com`, a `facebook.com` page, a bare `wordpress.com`). The lead and its company went through without it; `params.companyDomain` names it."
                           },
                           "message": {
                             "type": "string"
@@ -22521,7 +22752,7 @@
                   },
                   "domain": {
                     "type": "string",
-                    "description": "Company website domain (e.g. `lemlist.com`). Used as a unique key for upsert matching. Without `companyId`, at least one identifier is required among `domain`, `linkedinUrl` and `linkedinUrlSalesNav`."
+                    "description": "Company website domain (e.g. `lemlist.com`). Used as a unique key for upsert matching. Without `companyId`, at least one identifier is required among `domain`, `linkedinUrl` and `linkedinUrlSalesNav`. A personal email provider or a platform host (`gmail.com`, `facebook.com`, `linkedin.com`, a bare `wordpress.com`) is not stored: the company is written without it and `warnings` reports `COMPANY_DOMAIN_IGNORED`."
                   },
                   "linkedinUrl": {
                     "type": "string",
@@ -22618,7 +22849,7 @@
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "`OWNER_NOT_FOUND` or `INVALID_OWNER_FORMAT` (`companyOwner` matches no team member); `FIELDS_KEPT` (values the update strategy kept)."
+                            "description": "`OWNER_NOT_FOUND` or `INVALID_OWNER_FORMAT` (`companyOwner` matches no team member); `FIELDS_KEPT` (values the update strategy kept); `COMPANY_DOMAIN_IGNORED` (`domain` is a personal email provider or a platform host such as `gmail.com` or a `facebook.com` page: the company is written without it, `params.companyDomain` names it)."
                           },
                           "message": {
                             "type": "string"
@@ -22736,7 +22967,7 @@
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "`OWNER_NOT_FOUND` or `INVALID_OWNER_FORMAT` (`companyOwner` matches no team member); `FIELDS_KEPT` (values the update strategy kept)."
+                            "description": "`OWNER_NOT_FOUND` or `INVALID_OWNER_FORMAT` (`companyOwner` matches no team member); `FIELDS_KEPT` (values the update strategy kept); `COMPANY_DOMAIN_IGNORED` (`domain` is a personal email provider or a platform host such as `gmail.com` or a `facebook.com` page: the company is written without it, `params.companyDomain` names it)."
                           },
                           "message": {
                             "type": "string"
@@ -28186,6 +28417,260 @@
             "content": {
               "text/plain": {
                 "example": "Bad method"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/linkedin-limits": {
+      "patch": {
+        "summary": "Update User LinkedIn Limits",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the team member whose LinkedIn limits to update (usr_xxx)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The team member's daily LinkedIn limits to change, named like the `linkedIn` limits of GET /users/{userId}. Provide only the fields you want to change; omitted ones keep their current value. At least one is required, and unknown fields are refused: an invalid body fails the whole update and nothing is written. Same limits as Settings > Sending limits: a value above the recommended maximum is stored and the response carries a warning.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "additionalProperties": false,
+                "properties": {
+                  "followLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn follows per day"
+                  },
+                  "inviteLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn invitations per day"
+                  },
+                  "sendLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn direct messages per day"
+                  },
+                  "visitLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn profile visits per day"
+                  },
+                  "inMailLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn InMails per day: a daily throttle, the monthly InMail credits of the LinkedIn plan stay the hard cap"
+                  },
+                  "networkCheckLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn network checks per day"
+                  },
+                  "withdrawInvitationLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn invitation withdrawals per day"
+                  },
+                  "likeLastPostLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn last-post likes per day"
+                  },
+                  "endorseLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn endorsements per day"
+                  },
+                  "commentLastPostRetrieveLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn last-post retrievals per day"
+                  },
+                  "commentLastPostSendLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Max LinkedIn last-post comments per day"
+                  },
+                  "inviteRampUp": {
+                    "type": "integer",
+                    "nullable": true,
+                    "minimum": 1,
+                    "description": "Invite ramp-up: how much the daily invitation limit grows each day until it reaches inviteLimit. null turns the ramp-up off; omit it to keep it as is"
+                  }
+                }
+              },
+              "example": {
+                "inviteLimit": 35,
+                "inMailLimit": 8,
+                "inviteRampUp": 3
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Every daily LinkedIn limit and the invite ramp-up of the team member after the update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "string",
+                          "description": "ID of the team member (usr_xxx)"
+                        },
+                        "followLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn follows per day"
+                        },
+                        "inviteLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn invitations per day"
+                        },
+                        "sendLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn direct messages per day"
+                        },
+                        "visitLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn profile visits per day"
+                        },
+                        "inMailLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn InMails per day: a daily throttle, the monthly InMail credits of the LinkedIn plan stay the hard cap"
+                        },
+                        "networkCheckLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn network checks per day"
+                        },
+                        "withdrawInvitationLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn invitation withdrawals per day"
+                        },
+                        "likeLastPostLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn last-post likes per day"
+                        },
+                        "endorseLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn endorsements per day"
+                        },
+                        "commentLastPostRetrieveLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn last-post retrievals per day"
+                        },
+                        "commentLastPostSendLimit": {
+                          "type": "integer",
+                          "description": "Max LinkedIn last-post comments per day"
+                        },
+                        "inviteRampUp": {
+                          "type": "integer",
+                          "nullable": true,
+                          "description": "Invite ramp-up: how much the daily invitation limit grows each day until it reaches inviteLimit; null when the ramp-up is off"
+                        },
+                        "warning": {
+                          "type": "string",
+                          "description": "Present when a value written is above its recommended daily maximum; names each such field with its maximum. The value is stored anyway, LinkedIn may restrict the account"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "userId": "usr_Q7mT2vLx9KpR4nWbZ",
+                    "followLimit": 20,
+                    "inviteLimit": 35,
+                    "sendLimit": 30,
+                    "visitLimit": 30,
+                    "inMailLimit": 8,
+                    "networkCheckLimit": 30,
+                    "withdrawInvitationLimit": 30,
+                    "likeLastPostLimit": 30,
+                    "endorseLimit": 20,
+                    "commentLastPostRetrieveLimit": 20,
+                    "commentLastPostSendLimit": 20,
+                    "inviteRampUp": 3,
+                    "warning": "Above the recommended daily maximum: inviteLimit (30); LinkedIn may restrict the account"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed userId, invalid body (unknown field, non-positive or non-integer value), or nothing to update (`LINKEDIN_LIMITS_NOTHING_TO_UPDATE`)",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Send only LinkedIn limits named like GET /api/users/:userId (e.g. inviteLimit, inMailLimit), as positive integers",
+                  "code": "LINKEDIN_LIMITS_INVALID_INPUT"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The API key does not resolve a user"
+          },
+          "402": {
+            "description": "The team is on a free trial or has no lemlist plan",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "You cannot change the LinkedIn limits during free trial.",
+                  "code": "LINKEDIN_LIMITS_NO_PAID_PLAN"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The user lacks the permission to edit sending limits",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "You cannot edit sending limits for this team",
+                  "code": "LINKEDIN_LIMITS_PERMISSION_DENIED"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user is not a member of the team",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "This user is not a member of your team",
+                  "code": "LINKEDIN_LIMITS_USER_NOT_IN_TEAM"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method other than PATCH"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal error",
+                  "code": "INTERNAL_ERROR"
+                }
               }
             }
           }

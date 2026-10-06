@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.SkipForLeads;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.SkipRequestBuilder Skip
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip.SkipRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The skipForLeads property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.SkipForLeads.SkipForLeadsRequestBuilder SkipForLeads
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.SkipForLeads.SkipForLeadsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.WithStepItemRequestBuilder"/> and sets the default values.

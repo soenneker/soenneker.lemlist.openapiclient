@@ -7,64 +7,44 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// LinkedIn integration settings
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class UserLinkedIn : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class PatchUsersByUserIdLinkedinLimitsRequest : IParsable
+    #pragma warning restore CS1591
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Daily limit for LinkedIn last-post retrievals</summary>
+        /// <summary>Max LinkedIn last-post retrievals per day</summary>
         public int? CommentLastPostRetrieveLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn last-post comments</summary>
+        /// <summary>Max LinkedIn last-post comments per day</summary>
         public int? CommentLastPostSendLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn endorsements</summary>
+        /// <summary>Max LinkedIn endorsements per day</summary>
         public int? EndorseLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn follows</summary>
+        /// <summary>Max LinkedIn follows per day</summary>
         public int? FollowLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn InMails (defaults to 5). The monthly InMail credits of the LinkedIn plan remain the hard cap</summary>
+        /// <summary>Max LinkedIn InMails per day: a daily throttle, the monthly InMail credits of the LinkedIn plan stay the hard cap</summary>
         public int? InMailLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn connection invites</summary>
+        /// <summary>Max LinkedIn invitations per day</summary>
         public int? InviteLimit { get; set; }
-        /// <summary>How much the daily invitation limit grows each day until it reaches inviteLimit; null when the ramp-up is off</summary>
+        /// <summary>Invite ramp-up: how much the daily invitation limit grows each day until it reaches inviteLimit. null turns the ramp-up off; omit it to keep it as is</summary>
         public int? InviteRampUp { get; set; }
-        /// <summary>Daily limit for LinkedIn last-post likes</summary>
+        /// <summary>Max LinkedIn last-post likes per day</summary>
         public int? LikeLastPostLimit { get; set; }
-        /// <summary>The LinkedIn URL of the person</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LinkedinUrl { get; set; }
-#nullable restore
-#else
-        public string LinkedinUrl { get; set; }
-#endif
-        /// <summary>Daily limit for LinkedIn network checks</summary>
+        /// <summary>Max LinkedIn network checks per day</summary>
         public int? NetworkCheckLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn messages</summary>
+        /// <summary>Max LinkedIn direct messages per day</summary>
         public int? SendLimit { get; set; }
-        /// <summary>Whether LinkedIn is connected</summary>
-        public bool? Status { get; set; }
-        /// <summary>Daily limit for LinkedIn profile visits</summary>
+        /// <summary>Max LinkedIn profile visits per day</summary>
         public int? VisitLimit { get; set; }
-        /// <summary>Daily limit for LinkedIn invitation withdrawals</summary>
+        /// <summary>Max LinkedIn invitation withdrawals per day</summary>
         public int? WithdrawInvitationLimit { get; set; }
-        /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserLinkedIn"/> and sets the default values.
-        /// </summary>
-        public UserLinkedIn()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserLinkedIn"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchUsersByUserIdLinkedinLimitsRequest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.UserLinkedIn CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchUsersByUserIdLinkedinLimitsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.UserLinkedIn();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchUsersByUserIdLinkedinLimitsRequest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -82,10 +62,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "inviteLimit", n => { InviteLimit = n.GetIntValue(); } },
                 { "inviteRampUp", n => { InviteRampUp = n.GetIntValue(); } },
                 { "likeLastPostLimit", n => { LikeLastPostLimit = n.GetIntValue(); } },
-                { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
                 { "networkCheckLimit", n => { NetworkCheckLimit = n.GetIntValue(); } },
                 { "sendLimit", n => { SendLimit = n.GetIntValue(); } },
-                { "status", n => { Status = n.GetBoolValue(); } },
                 { "visitLimit", n => { VisitLimit = n.GetIntValue(); } },
                 { "withdrawInvitationLimit", n => { WithdrawInvitationLimit = n.GetIntValue(); } },
             };
@@ -105,13 +83,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("inviteLimit", InviteLimit);
             writer.WriteIntValue("inviteRampUp", InviteRampUp);
             writer.WriteIntValue("likeLastPostLimit", LikeLastPostLimit);
-            writer.WriteStringValue("linkedinUrl", LinkedinUrl);
             writer.WriteIntValue("networkCheckLimit", NetworkCheckLimit);
             writer.WriteIntValue("sendLimit", SendLimit);
-            writer.WriteBoolValue("status", Status);
             writer.WriteIntValue("visitLimit", VisitLimit);
             writer.WriteIntValue("withdrawInvitationLimit", WithdrawInvitationLimit);
-            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
-        /// <summary>Company website domain (e.g. `lemlist.com`). Used as a unique key for upsert matching. Without `companyId`, at least one identifier is required among `domain`, `linkedinUrl` and `linkedinUrlSalesNav`.</summary>
+        /// <summary>Company website domain (e.g. `lemlist.com`). Used as a unique key for upsert matching. Without `companyId`, at least one identifier is required among `domain`, `linkedinUrl` and `linkedinUrlSalesNav`. A personal email provider or a platform host (`gmail.com`, `facebook.com`, `linkedin.com`, a bare `wordpress.com`) is not stored: the company is written without it and `warnings` reports `COMPANY_DOMAIN_IGNORED`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Domain { get; set; }

@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Models;
+using Soenneker.Lemlist.OpenApiClient.Users.Item.LinkedinLimits;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Users.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithUserItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The linkedinLimits property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Users.Item.LinkedinLimits.LinkedinLimitsRequestBuilder LinkedinLimits
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Users.Item.LinkedinLimits.LinkedinLimitsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Users.Item.WithUserItemRequestBuilder"/> and sets the default values.
         /// </summary>
