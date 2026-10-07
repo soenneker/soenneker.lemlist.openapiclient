@@ -3341,6 +3341,14 @@
                     "delay": 2
                   }
                 },
+                "LinkedIn InMail": {
+                  "value": {
+                    "type": "linkedinInMail",
+                    "subject": "Quick question, {{firstName}}",
+                    "message": "Hi {{firstName}}, I saw your invite is still pending, so I am reaching out here instead...",
+                    "delay": 2
+                  }
+                },
                 "Manual Task": {
                   "value": {
                     "type": "manual",
@@ -3461,7 +3469,7 @@
             "description": "Method not allowed"
           },
           "409": {
-            "description": "\u0060campaign-reroute-in-progress\u0060 - a previous step change on this campaign is still being applied to its leads; nothing was written, retry in a minute. \u0060SEQUENCE_STEP_INSERT_ON_SEQUENCE_IN_USE\u0060 / \u0060SEQUENCE_STEP_ADD_ON_LOCKED_SEQUENCE\u0060 - leads have entered the campaign and the team does not have live campaign editing, so the step can only be appended to a sequence leads still reach.",
+            "description": "\u0060campaign-reroute-in-progress\u0060 - a previous step change on this campaign is still being applied to its leads; nothing was written, retry in a minute. \u0060SEQUENCE_STEP_INSERT_ON_SEQUENCE_IN_USE\u0060 / \u0060SEQUENCE_STEP_ADD_ON_LOCKED_SEQUENCE\u0060 - the campaign holds lead tasks while none of its leads is launched: the step can only be appended to a sequence leads still reach.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3535,6 +3543,13 @@
                       "https://example.com/assets/overview.png"
                     ],
                     "videos": []
+                  }
+                },
+                "Update LinkedIn InMail": {
+                  "value": {
+                    "type": "linkedinInMail",
+                    "subject": "Following up, {{firstName}}",
+                    "message": "Hi {{firstName}}, circling back on my previous InMail..."
                   }
                 },
                 "Update Manual Task": {
@@ -27064,7 +27079,7 @@
           },
           "index": {
             "type": "integer",
-            "description": "The position within the sequence to insert the new step (\u2265 -1). If omitted or greater than the number of steps, the new step is added to the end. On a campaign leads have entered, a step inserted before an existing one moves the leads waiting on that step onto the new one; leads already past that position never receive it. Teams without live campaign editing can only append once leads have entered, and a non-tail \u0060index\u0060 is refused with \u0060409 SEQUENCE_STEP_INSERT_ON_SEQUENCE_IN_USE\u0060"
+            "description": "The position within the sequence to insert the new step (\u2265 -1). If omitted or greater than the number of steps, the new step is added to the end. On a campaign leads have entered, a step inserted before an existing one moves the leads waiting on that step onto the new one; leads already past that position never receive it."
           },
           "delay": {
             "type": "integer",
@@ -27072,11 +27087,11 @@
           },
           "subject": {
             "type": "string",
-            "description": "Email subject line (for email steps). Optional: omit it or send an empty string on a follow-up so the email replies in the thread of the previous one. If no email has been sent to the lead in this campaign yet, it goes out with an empty subject."
+            "description": "Email subject line (for email steps). Optional: omit it or send an empty string on a follow-up so the email replies in the thread of the previous one. If no email has been sent to the lead in this campaign yet, it goes out with an empty subject. Required on \u0060linkedinInMail\u0060 steps, where it is the InMail subject: a blank one is saved but blocks the campaign launch"
           },
           "message": {
             "type": "string",
-            "description": "Content of the email or message (used for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in \u0060ai\u0060 record mode). Required for linkedinSend, whatsappMessage, and sms"
+            "description": "Content of the email or message (used for email, linkedinInvite, linkedinSend, linkedinInMail, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in \u0060ai\u0060 record mode). Required for linkedinSend, linkedinInMail, whatsappMessage, and sms. On a linkedinInMail step it is sent as plain text (LinkedIn does not render HTML), and a blank one is saved but blocks the campaign launch"
           },
           "altMessage": {
             "type": "string",
@@ -27196,11 +27211,11 @@
           },
           "subject": {
             "type": "string",
-            "description": "Email subject line (for email steps). Pass an empty string to remove it: the email then replies in the thread of the previous email sent to the lead in this campaign."
+            "description": "Email subject line (for email steps). Pass an empty string to remove it: the email then replies in the thread of the previous email sent to the lead in this campaign. On \u0060linkedinInMail\u0060 steps it is the InMail subject: a blank one is saved but blocks the campaign launch"
           },
           "message": {
             "type": "string",
-            "description": "Content of the email or message (for email, linkedinInvite, linkedinSend, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in \u0060ai\u0060 record mode)"
+            "description": "Content of the email or message (for email, linkedinInvite, linkedinSend, linkedinInMail, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in \u0060ai\u0060 record mode). Pass an empty string to clear it (ignored on manual and phone steps). On a linkedinInMail step it is sent as plain text (LinkedIn does not render HTML), and a blank one is saved but blocks the campaign launch"
           },
           "altMessage": {
             "type": "string",
@@ -35595,7 +35610,7 @@
           },
           "type": {
             "type": "string",
-            "description": "The type of step (e.g., email, linkedinSend, linkedinInvite, conditional)"
+            "description": "The type of step (e.g., email, linkedinSend, linkedinInMail, linkedinInvite, conditional)"
           },
           "index": {
             "type": "integer",
@@ -39026,6 +39041,7 @@
           "linkedinVisit",
           "linkedinInvite",
           "linkedinSend",
+          "linkedinInMail",
           "linkedinVoiceNote",
           "linkedinFollow",
           "linkedinLikeLastPost",
@@ -39071,6 +39087,10 @@
             {
               "value": "linkedinSend",
               "name": "LinkedinSend"
+            },
+            {
+              "value": "linkedinInMail",
+              "name": "LinkedinInMail"
             },
             {
               "value": "linkedinVoiceNote",
@@ -39352,6 +39372,7 @@
           "linkedinVisit",
           "linkedinInvite",
           "linkedinSend",
+          "linkedinInMail",
           "linkedinVoiceNote",
           "linkedinFollow",
           "linkedinLikeLastPost",
@@ -39397,6 +39418,10 @@
             {
               "value": "linkedinSend",
               "name": "LinkedinSend"
+            },
+            {
+              "value": "linkedinInMail",
+              "name": "LinkedinInMail"
             },
             {
               "value": "linkedinVoiceNote",

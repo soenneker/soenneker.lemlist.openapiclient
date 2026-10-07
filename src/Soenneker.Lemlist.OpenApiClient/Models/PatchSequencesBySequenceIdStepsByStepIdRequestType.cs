@@ -35,6 +35,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         LinkedinSend,
         #pragma warning restore CS1591
+        [EnumMember(Value = "linkedinInMail")]
+        #pragma warning disable CS1591
+        LinkedinInMail,
+        #pragma warning restore CS1591
         [EnumMember(Value = "linkedinVoiceNote")]
         #pragma warning disable CS1591
         LinkedinVoiceNote,
