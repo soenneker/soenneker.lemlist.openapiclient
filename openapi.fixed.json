@@ -14063,7 +14063,7 @@
           "Companies"
         ],
         "summary": "Delete Company",
-        "description": "Deletes a lemlist company. Refuses by default when contacts are still attached \u2014 pass \u0060force=true\u0060 to detach them (the \u0060companyId\u0060 field is unset on each contact) before deleting the company.\n\n**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via \u0060POST /contacts/{idOrEmail}\u0060), call this endpoint to drop the now-empty duplicate.",
+        "description": "Deletes a lemlist company. Refuses by default when contacts are still attached \u2014 pass \u0060force=true\u0060 to detach them (the \u0060companyId\u0060 field is unset on each contact) before deleting the company.\n\n**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via \u0060POST /contacts/{idOrEmail}\u0060), call this endpoint to drop the now-empty duplicate.\n\n**Permission:** the API key\u0027s user must have the \u0022Delete companies\u0022 permission, otherwise the request fails with \u0060403 COMPANY_DELETE_NOT_ALLOWED\u0060.",
         "operationId": "DeleteCompaniesByCompanyId",
         "parameters": [
           {
@@ -14141,6 +14141,23 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key\u0027s user does not have the \u0022Delete companies\u0022 permission (\u0060COMPANY_DELETE_NOT_ALLOWED\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCompaniesByCompanyId403Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "COMPANY_DELETE_NOT_ALLOWED",
+                    "message": "You do not have the permission to delete companies"
+                  }
+                }
               }
             }
           },
@@ -30310,6 +30327,17 @@
           }
         }
       },
+      "DeleteCompaniesByCompanyId403Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteCompaniesByCompanyId403ResponseError"
+          }
+        }
+      },
       "DeleteCompaniesByCompanyId404Response": {
         "type": "object",
         "properties": {
@@ -34358,6 +34386,17 @@
           "contactCount": {
             "type": "integer",
             "description": "Only on \u0060COMPANY_HAS_CONTACTS\u0060 \u2014 how many contacts are still attached."
+          }
+        }
+      },
+      "DeleteCompaniesByCompanyId403ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
           }
         }
       },
