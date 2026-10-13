@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>Entity sourcing. Only `all` is supported via the API. Required together with signalProcessingType when activate is true.</summary>
+    /// <summary>Entity sourcing. Only `all` is accepted here; to monitor CRM lists or a CSV, create a draft (`activate: false`) and call `POST /watchlist/crm-lists`. Required together with signalProcessingType when activate is true.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum AllSegmentType
     {

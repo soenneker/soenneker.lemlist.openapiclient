@@ -11560,6 +11560,15 @@
             "example": "enrichment_duplicate_linkedin_url"
           },
           {
+            "name": "crmSyncStatus",
+            "in": "query",
+            "description": "Filter contacts by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Values:\n- \u0060synced\u0060 \u2014 the contact has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the contact has no CRM record yet.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised, whatever its reason.\n- A specific error reason (lowercase form), to filter by root cause:\n  - \u0060invalid_email\u0060 \u2014 the CRM refused the contact\u0027s email.\n  - \u0060property_doesnt_exist\u0060 \u2014 a mapped property does not exist in the CRM.\n  - \u0060required_field_missing\u0060 \u2014 a field the CRM requires is missing.\n  - \u0060unique_index_error_contact\u0060 \u2014 the CRM record is already synced with another lemlist contact.\n  - \u0060contact_already_exists_with_name\u0060, \u0060contact_already_exists_with_linkedin_url\u0060, \u0060contact_already_exists_with_email\u0060 \u2014 a CRM contact already exists with the same first and last name, LinkedIn URL or email.\n  - \u0060contact_blocked_by_company\u0060 \u2014 contact not created: its company already exists in the CRM.\n  - \u0060contact_blocked_by_company_search\u0060 \u2014 contact not created: the company search is incomplete, retried later.\n  - \u0060contact_blocked_by_company_without_name\u0060 \u2014 contact not created: its company needs a name to be found in the CRM.\n  - \u0060contact_blocked_by_company_without_key\u0060 \u2014 contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.\n\nOnly applies to the paginated list \u2014 ignored when \u0060idsOrEmails\u0060 or \u0060crmIds\u0060 is provided.",
+            "schema": {
+              "$ref": "#/components/schemas/GetContactsCrmSyncStatusParameter"
+            },
+            "example": "error"
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "Maximum number of contacts to return (1\u2013500). Defaults to 100.",
@@ -11700,7 +11709,7 @@
             }
           },
           "400": {
-            "description": "Either a plain \u0060{ \u0022error\u0022: \u0022...\u0022 }\u0060 (\u0060Bad team\u0060, search query too short, invalid \u0060listId\u0060 format, invalid \u0060withPrimaryCompany\u0060, \u0060limit\u0060 below 1, more than 100 \u0060idsOrEmails\u0060 values), or a validation envelope. Possible error codes: \u0060INVALID_CRM_ID\u0060 (a \u0060crmIds\u0060 list with no usable value, or a value longer than 25 characters), \u0060TOO_MANY_CRM_IDS\u0060 (more than 100 \u0060crmIds\u0060 values), \u0060MULTIPLE_COMPANY_FILTERS\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_FIELD_REJECTION_REASON\u0060.",
+            "description": "Either a plain \u0060{ \u0022error\u0022: \u0022...\u0022 }\u0060 (\u0060Bad team\u0060, search query too short, invalid \u0060listId\u0060 format, invalid \u0060withPrimaryCompany\u0060, \u0060limit\u0060 below 1, more than 100 \u0060idsOrEmails\u0060 values), or a validation envelope. Possible error codes: \u0060INVALID_CRM_ID\u0060 (a \u0060crmIds\u0060 list with no usable value, or a value longer than 25 characters), \u0060TOO_MANY_CRM_IDS\u0060 (more than 100 \u0060crmIds\u0060 values), \u0060MULTIPLE_COMPANY_FILTERS\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_FIELD_REJECTION_REASON\u0060, \u0060INVALID_CRM_SYNC_STATUS\u0060, \u0060NO_CRM_CONNECTED\u0060 (\u0060crmSyncStatus\u0060 without a connected CRM).",
             "content": {
               "application/json": {
                 "schema": {
@@ -18923,6 +18932,131 @@
         }
       }
     },
+    "/watchlist/crm-lists": {
+      "post": {
+        "tags": [
+          "Signal Agents"
+        ],
+        "summary": "Monitor CRM Lists with a Signal Agent",
+        "description": "Switches a Signal Agent to the CRM list source and monitors every company (or contact) of the given CRM lists. The lists replace the ones it monitored: entities left out stop being monitored. Only companies with a domain and contacts with a LinkedIn URL are monitored.\n\nTo monitor a CSV: import it into a company or contact list, create a draft with \u0060POST /watchlist\u0060 (\u0060activate: false\u0060), call this endpoint, then activate the draft with \u0060PATCH /watchlist\u0060 (\u0060activate: true\u0060). An active agent monitors the new entities right away; a paused one stays paused.",
+        "operationId": "PostWatchlistCrmLists",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostWatchlistCrmListsRequest"
+              },
+              "example": {
+                "watchListId": "wl_Example000000001",
+                "crmListIds": [
+                  "clt_Example000000001"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListApiWatchListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. \u0060WATCH_INTENT_INVALID_SEGMENT_TYPE\u0060 when the signal type only monitors the whole market (\u0060details.allowedTypes\u0060 lists the types that accept CRM lists); \u0060WATCH_LIST_API_NO_MONITORABLE_ENTITIES\u0060 when no entity of the lists can be monitored.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWatchlistCrmLists400Response"
+                },
+                "example": {
+                  "error": "No entity of these CRM lists can be monitored: the lists must be your team\u0027s and hold the signal\u0027s entity, with a domain on each company or a LinkedIn URL on each contact",
+                  "code": "WATCH_LIST_API_NO_MONITORABLE_ENTITIES"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Unauthorized"
+              }
+            }
+          },
+          "404": {
+            "description": "Signal Agent not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWatchlistCrmLists404Response"
+                },
+                "example": {
+                  "error": "Watch list not found",
+                  "code": "WATCH_LIST_NOT_FOUND"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "409": {
+            "description": "The Signal Agent already monitors exactly these CRM lists: changes to their content are picked up automatically",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWatchlistCrmLists409Response"
+                },
+                "example": {
+                  "error": "This watch list already monitors exactly these CRM lists; changes to their content are picked up automatically",
+                  "code": "WATCH_LIST_API_CRM_LISTS_ALREADY_MONITORED"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "429": {
+            "description": "The lists hold more entities than the team can monitor; \u0060details.monitorMax\u0060 is the cap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWatchlistCrmLists429Response"
+                },
+                "example": {
+                  "error": "This agent has reached its monitoring limit. Stop monitoring some entities before adding more.",
+                  "code": "WATCH_LIST_MONITOR_MAX_EXCEEDED",
+                  "details": {
+                    "monitorMax": 10000
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Internal server error"
+              }
+            }
+          }
+        }
+      }
+    },
     "/watchlist/history": {
       "get": {
         "tags": [
@@ -19644,6 +19778,300 @@
           },
           "404": {
             "description": "Alert not found"
+          }
+        }
+      }
+    },
+    "/sender-picture/mailboxes": {
+      "get": {
+        "tags": [
+          "Sender picture"
+        ],
+        "summary": "Get Sender Picture Status",
+        "description": "Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.\n\nOnly active mailboxes assigned to the user are returned. Omit \u0060userId\u0060 to read your own mailboxes; a teammate\u0027s \u0060userId\u0060 must belong to your team.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "operationId": "GetSenderPictureStatus",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "A teammate whose mailboxes to read. Omit to read the mailboxes of the API key owner.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "usr_Tn8Bv2Mc4Xz6Lq1Pw"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureStatusResponse"
+                },
+                "example": {
+                  "data": {
+                    "userId": "usr_Tn8Bv2Mc4Xz6Lq1Pw",
+                    "hasPicture": true,
+                    "mailboxes": [
+                      {
+                        "mailboxId": "dem_Xq7Lm2Pz9Rt4Vb8Nc",
+                        "email": "john@example.com",
+                        "provider": "google",
+                        "status": "synced",
+                        "syncedAt": "2026-09-28T14:05:00.000Z",
+                        "lastError": null,
+                        "hasOverride": false
+                      },
+                      {
+                        "mailboxId": "dem_Hw3Jk6Ds1Fy5Gu0Ea",
+                        "email": "john@acme.com",
+                        "provider": "m365",
+                        "status": "not-synced",
+                        "syncedAt": null,
+                        "lastError": null,
+                        "hasOverride": false
+                      }
+                    ],
+                    "counts": {
+                      "total": 2,
+                      "synced": 1,
+                      "notSynced": 1,
+                      "queued": 0,
+                      "syncing": 0,
+                      "failed": 0,
+                      "notSupported": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - \u0060userId\u0060 is not a valid user id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "Invalid sender picture request.",
+                  "code": "SENDER_PICTURE_INVALID_INPUT"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The beta is not enabled for your team, or \u0060userId\u0060 is not a member of your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "examples": {
+                  "betaNotEnabled": {
+                    "value": {
+                      "error": "Beta is not enabled",
+                      "code": "BETA_NOT_ENABLED"
+                    }
+                  },
+                  "userNotInTeam": {
+                    "value": {
+                      "error": "This user is not a member of your team.",
+                      "code": "SENDER_PICTURE_USER_NOT_IN_TEAM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "Internal error",
+                  "code": "INTERNAL_ERROR"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sender-picture/sync": {
+      "post": {
+        "tags": [
+          "Sender picture"
+        ],
+        "summary": "Sync Sender Picture",
+        "description": "Queues a push of a user\u0027s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.\n\nThe push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).\n\nThere is no confirmation step: the mailboxes are queued as soon as the call succeeds.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "operationId": "SyncSenderPicture",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncSenderPictureRequest"
+              },
+              "examples": {
+                "notSynced": {
+                  "summary": "Push every mailbox not up to date",
+                  "value": {}
+                },
+                "oneMailbox": {
+                  "summary": "Push one mailbox again",
+                  "value": {
+                    "scope": "mailbox",
+                    "mailboxId": "dem_Xq7Lm2Pz9Rt4Vb8Nc"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mailboxes queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureSyncResponse"
+                },
+                "example": {
+                  "data": {
+                    "enqueued": 1,
+                    "mailboxes": [
+                      {
+                        "mailboxId": "dem_Hw3Jk6Ds1Fy5Gu0Ea",
+                        "email": "john@acme.com",
+                        "provider": "m365"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - unknown field, invalid \u0060scope\u0060, or \u0060scope=mailbox\u0060 without \u0060mailboxId\u0060 or \u0060email\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "Invalid sender picture request.",
+                  "code": "SENDER_PICTURE_INVALID_INPUT"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The beta is not enabled for your team, or \u0060userId\u0060 is not a member of your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "examples": {
+                  "betaNotEnabled": {
+                    "value": {
+                      "error": "Beta is not enabled",
+                      "code": "BETA_NOT_ENABLED"
+                    }
+                  },
+                  "userNotInTeam": {
+                    "value": {
+                      "error": "This user is not a member of your team.",
+                      "code": "SENDER_PICTURE_USER_NOT_IN_TEAM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "\u0060scope=mailbox\u0060: your team has no active mailbox with this \u0060mailboxId\u0060 or \u0060email\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "This mailbox no longer exists.",
+                  "code": "SENDER_PICTURE_MAILBOX_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Nothing can be pushed: no mailbox in scope was bought through lemlist on Google Workspace or Microsoft 365, or the user has no lemlist profile picture",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "examples": {
+                  "notSupported": {
+                    "value": {
+                      "error": "Only Google Workspace and Microsoft 365 mailboxes bought through lemlist can have their picture synced.",
+                      "code": "SENDER_PICTURE_NOT_SUPPORTED"
+                    }
+                  },
+                  "noSource": {
+                    "value": {
+                      "error": "Upload a profile picture before syncing it to your mailboxes.",
+                      "code": "SENDER_PICTURE_NO_SOURCE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderPictureError"
+                },
+                "example": {
+                  "error": "Internal error",
+                  "code": "INTERNAL_ERROR"
+                }
+              }
+            }
           }
         }
       }
@@ -24254,6 +24682,72 @@
         },
         "description": "A deliverability alert configuration. The alert is evaluated periodically against your warm-up or outreach metrics and triggers notifications through the configured channels (in-app, email, webhook, Slack) when the threshold is breached."
       },
+      "SenderPictureMailbox": {
+        "type": "object",
+        "properties": {
+          "mailboxId": {
+            "type": "string",
+            "description": "Unique identifier of the purchased mailbox (\u0060dem_...\u0060). Pass it as \u0060mailboxId\u0060 to [Sync Sender Picture](/api-reference/endpoints/sender-picture/sync-sender-picture)."
+          },
+          "email": {
+            "type": "string",
+            "description": "Address of the mailbox",
+            "format": "email"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/SenderPictureMailboxProvider"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SenderPictureMailboxStatus"
+          },
+          "syncedAt": {
+            "type": "string",
+            "description": "When the picture was last pushed, \u0060null\u0060 if never",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastError": {
+            "type": "string",
+            "description": "Why the last push failed, \u0060null\u0060 otherwise",
+            "nullable": true
+          },
+          "hasOverride": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when this mailbox uses its own picture instead of its owner\u0027s lemlist profile picture"
+          }
+        },
+        "description": "The sender picture sync state of one mailbox bought through lemlist."
+      },
+      "SenderPictureStatusResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPictureStatusResponseData"
+          }
+        }
+      },
+      "SenderPictureSyncResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPictureSyncResponseData"
+          }
+        }
+      },
+      "SenderPictureError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable explanation of the failure"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases"
+          }
+        },
+        "description": "Error envelope returned by the sender picture endpoints."
+      },
       "ContactSourcingRun": {
         "type": "object",
         "properties": {
@@ -26012,6 +26506,44 @@
         },
         "description": "Notification channels triggered when the alert fires. At least one channel must be enabled. If omitted on creation, defaults to \u0060inapp\u0060 only."
       },
+      "SenderPictureStatusResponseData": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The user whose mailboxes are listed"
+          },
+          "hasPicture": {
+            "type": "boolean",
+            "description": "Whether the user has a lemlist profile picture. When \u0060false\u0060, every sync is refused until they upload one in Settings \u003E Account."
+          },
+          "mailboxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderPictureMailbox"
+            }
+          },
+          "counts": {
+            "$ref": "#/components/schemas/SenderPictureStatusResponseDataCounts"
+          }
+        }
+      },
+      "SenderPictureSyncResponseData": {
+        "type": "object",
+        "properties": {
+          "enqueued": {
+            "type": "integer",
+            "description": "How many mailboxes were queued. \u00600\u0060 when every mailbox in scope is already synced or already being pushed."
+          },
+          "mailboxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderPictureSyncResponseDataMailboxesItem"
+            },
+            "description": "The mailboxes targeted by the sync"
+          }
+        }
+      },
       "StepPersonalizationContent": {
         "type": "object",
         "properties": {
@@ -26214,6 +26746,48 @@
           "enabled": {
             "type": "boolean",
             "description": "Send a Slack message. Requires a Slack integration to be connected on the team."
+          }
+        }
+      },
+      "SenderPictureStatusResponseDataCounts": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "synced": {
+            "type": "integer"
+          },
+          "notSynced": {
+            "type": "integer"
+          },
+          "queued": {
+            "type": "integer"
+          },
+          "syncing": {
+            "type": "integer"
+          },
+          "failed": {
+            "type": "integer"
+          },
+          "notSupported": {
+            "type": "integer"
+          }
+        },
+        "description": "How many mailboxes sit in each status"
+      },
+      "SenderPictureSyncResponseDataMailboxesItem": {
+        "type": "object",
+        "properties": {
+          "mailboxId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/SenderPictureSyncResponseDataMailboxesItemProvider"
           }
         }
       },
@@ -31341,7 +31915,76 @@
           },
           "activate": {
             "type": "boolean",
-            "description": "Toggle the agent status. false deactivates (pauses) it immediately. true reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be toggled this way. Omit to leave the status unchanged."
+            "description": "Toggle the agent status. false deactivates (pauses) it immediately. true activates a draft or reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be paused. Omit to leave the status unchanged."
+          }
+        }
+      },
+      "PostWatchlistCrmListsRequest": {
+        "required": [
+          "watchListId",
+          "crmListIds"
+        ],
+        "type": "object",
+        "properties": {
+          "watchListId": {
+            "type": "string",
+            "description": "Signal Agent id (a draft, or an existing agent whose monitored lists are replaced)"
+          },
+          "crmListIds": {
+            "maxItems": 500,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "CRM list ids (clt_xxx). Company lists for a company signal, contact lists for a contact signal."
+          }
+        }
+      },
+      "PostWatchlistCrmLists400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostWatchlistCrmLists404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostWatchlistCrmLists409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostWatchlistCrmLists429Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "details": {
+            "$ref": "#/components/schemas/PostWatchlistCrmLists429ResponseDetails"
           }
         }
       },
@@ -31444,6 +32087,31 @@
             "type": "boolean"
           }
         }
+      },
+      "SyncSenderPictureRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/SyncSenderPictureRequestScope"
+          },
+          "mailboxId": {
+            "type": "string",
+            "description": "\u0060scope=mailbox\u0060 only: the mailbox to push, as returned by Get Sender Picture Status. Either \u0060mailboxId\u0060 or \u0060email\u0060 is required with \u0060scope=mailbox\u0060.",
+            "example": "dem_Xq7Lm2Pz9Rt4Vb8Nc"
+          },
+          "email": {
+            "type": "string",
+            "description": "\u0060scope=mailbox\u0060 only: the address of the mailbox to push, instead of \u0060mailboxId\u0060.",
+            "format": "email",
+            "example": "john@example.com"
+          },
+          "userId": {
+            "type": "string",
+            "description": "\u0060scope=not_synced\u0060 or \u0060scope=all\u0060 only: a teammate whose mailboxes to push. Omit to push the API key owner\u0027s. Ignored with \u0060scope=mailbox\u0060, which always pushes the picture of the mailbox\u0027s own owner.",
+            "example": "usr_Tn8Bv2Mc4Xz6Lq1Pw"
+          }
+        },
+        "additionalProperties": false
       },
       "PostSequencesBySequenceIdStepsByStepIdAbTest200Response": {
         "type": "object",
@@ -34826,6 +35494,15 @@
           }
         },
         "description": "Task/opportunity template applied to each signal when signalProcessingType is create_opportunity."
+      },
+      "PostWatchlistCrmLists429ResponseDetails": {
+        "type": "object",
+        "properties": {
+          "monitorMax": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
       },
       "PostContactSourcing200ResponseResultsItem": {
         "type": "object",
@@ -38626,6 +39303,74 @@
           ]
         }
       },
+      "SenderPictureMailboxProvider": {
+        "enum": [
+          "google",
+          "m365",
+          null
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Where the picture is pushed. \u0060null\u0060 when the mailbox cannot take a picture (see \u0060not-supported\u0060).",
+        "nullable": true,
+        "x-ms-enum": {
+          "name": "SenderPictureMailboxProvider",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "m365",
+              "name": "M365"
+            }
+          ]
+        }
+      },
+      "SenderPictureMailboxStatus": {
+        "enum": [
+          "synced",
+          "not-synced",
+          "queued",
+          "syncing",
+          "failed",
+          "not-supported"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060synced\u0060: the current picture is on the mailbox. \u0060not-synced\u0060: never pushed, or the picture changed since. \u0060queued\u0060 / \u0060syncing\u0060: a push is in progress. \u0060failed\u0060: the last push failed, \u0060lastError\u0060 says why. \u0060not-supported\u0060: not a Google Workspace or Microsoft 365 mailbox bought through lemlist, nothing can be pushed.",
+        "x-ms-enum": {
+          "name": "SenderPictureMailboxStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "synced",
+              "name": "Synced"
+            },
+            {
+              "value": "not-synced",
+              "name": "NotSynced"
+            },
+            {
+              "value": "queued",
+              "name": "Queued"
+            },
+            {
+              "value": "syncing",
+              "name": "Syncing"
+            },
+            {
+              "value": "failed",
+              "name": "Failed"
+            },
+            {
+              "value": "not-supported",
+              "name": "NotSupported"
+            }
+          ]
+        }
+      },
       "ContactSourcingRunStatus": {
         "enum": [
           "pending",
@@ -38975,6 +39720,28 @@
             {
               "value": "company",
               "name": "Company"
+            }
+          ]
+        }
+      },
+      "SenderPictureSyncResponseDataMailboxesItemProvider": {
+        "enum": [
+          "google",
+          "m365"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderPictureSyncResponseDataMailboxesItemProvider",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "m365",
+              "name": "M365"
             }
           ]
         }
@@ -40932,7 +41699,7 @@
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "Entity sourcing. Only \u0060all\u0060 is supported via the API. Required together with signalProcessingType when activate is true.",
+        "description": "Entity sourcing. Only \u0060all\u0060 is accepted here; to monitor CRM lists or a CSV, create a draft (\u0060activate: false\u0060) and call \u0060POST /watchlist/crm-lists\u0060. Required together with signalProcessingType when activate is true.",
         "x-ms-enum": {
           "name": "AllSegmentType",
           "modelAsString": false,
@@ -41202,6 +41969,34 @@
             {
               "value": "consecutive",
               "name": "Consecutive"
+            }
+          ]
+        }
+      },
+      "SyncSenderPictureRequestScope": {
+        "enum": [
+          "not_synced",
+          "all",
+          "mailbox"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060not_synced\u0060: every mailbox of the user that is not up to date; synced ones are left alone. \u0060all\u0060: every mailbox of the user, synced ones pushed again. \u0060mailbox\u0060: one mailbox, pushed again even when already synced.",
+        "x-ms-enum": {
+          "name": "SyncSenderPictureRequestScope",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "not_synced",
+              "name": "NotSynced"
+            },
+            {
+              "value": "all",
+              "name": "All"
+            },
+            {
+              "value": "mailbox",
+              "name": "Mailbox"
             }
           ]
         }
@@ -43369,6 +44164,88 @@
             {
               "value": "crm_sync_unknown_error",
               "name": "CrmSyncUnknownError"
+            }
+          ]
+        }
+      },
+      "GetContactsCrmSyncStatusParameter": {
+        "enum": [
+          "synced",
+          "not_synced",
+          "error",
+          "invalid_email",
+          "property_doesnt_exist",
+          "required_field_missing",
+          "unique_index_error_contact",
+          "contact_already_exists_with_name",
+          "contact_already_exists_with_linkedin_url",
+          "contact_already_exists_with_email",
+          "contact_blocked_by_company",
+          "contact_blocked_by_company_search",
+          "contact_blocked_by_company_without_name",
+          "contact_blocked_by_company_without_key"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "GetContactsCrmSyncStatusParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "synced",
+              "name": "Synced"
+            },
+            {
+              "value": "not_synced",
+              "name": "NotSynced"
+            },
+            {
+              "value": "error",
+              "name": "Error"
+            },
+            {
+              "value": "invalid_email",
+              "name": "InvalidEmail"
+            },
+            {
+              "value": "property_doesnt_exist",
+              "name": "PropertyDoesntExist"
+            },
+            {
+              "value": "required_field_missing",
+              "name": "RequiredFieldMissing"
+            },
+            {
+              "value": "unique_index_error_contact",
+              "name": "UniqueIndexErrorContact"
+            },
+            {
+              "value": "contact_already_exists_with_name",
+              "name": "ContactAlreadyExistsWithName"
+            },
+            {
+              "value": "contact_already_exists_with_linkedin_url",
+              "name": "ContactAlreadyExistsWithLinkedinUrl"
+            },
+            {
+              "value": "contact_already_exists_with_email",
+              "name": "ContactAlreadyExistsWithEmail"
+            },
+            {
+              "value": "contact_blocked_by_company",
+              "name": "ContactBlockedByCompany"
+            },
+            {
+              "value": "contact_blocked_by_company_search",
+              "name": "ContactBlockedByCompanySearch"
+            },
+            {
+              "value": "contact_blocked_by_company_without_name",
+              "name": "ContactBlockedByCompanyWithoutName"
+            },
+            {
+              "value": "contact_blocked_by_company_without_key",
+              "name": "ContactBlockedByCompanyWithoutKey"
             }
           ]
         }

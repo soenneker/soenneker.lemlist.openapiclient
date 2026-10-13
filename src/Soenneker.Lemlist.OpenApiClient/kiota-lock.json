@@ -1,8 +1,8 @@
 {
-  "descriptionHash": "D146B1C04A21303DAD6D23D75E6EB2CE802A61C9CF1E3E0F6CD92926DE7A85B49E78D77C987D86FFC353C83CE2D15899EC5B9E7E36812C1527C06F9B8005F6EF",
+  "descriptionHash": "466307E3D38DF98D0686F227038E6D0DE412FC5A9A6040DB725A64914B22391F8587437142D6AFDDC18DECD5F6E1C01D734501756D603EB29FC9B2BE47437530",
   "descriptionLocation": "../../openapi.fixed.json",
   "lockFileVersion": "1.0.0",
-  "kiotaVersion": "1.36.0",
+  "kiotaVersion": "1.36.1",
   "clientClassName": "LemlistOpenApiClient",
   "typeAccessModifier": "Public",
   "clientNamespaceName": "Soenneker.Lemlist.OpenApiClient",

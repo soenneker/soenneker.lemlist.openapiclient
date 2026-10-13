@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Models;
+using Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.Filters;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.History;
@@ -23,6 +24,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WatchlistRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The crmLists property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists.CrmListsRequestBuilder CrmLists
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists.CrmListsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The filters property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Watchlist.Filters.FiltersRequestBuilder Filters
         {

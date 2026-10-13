@@ -12,7 +12,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     public partial class PatchWatchlistRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>Toggle the agent status. false deactivates (pauses) it immediately. true reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be toggled this way. Omit to leave the status unchanged.</summary>
+        /// <summary>Toggle the agent status. false deactivates (pauses) it immediately. true activates a draft or reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be paused. Omit to leave the status unchanged.</summary>
         public bool? Activate { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }

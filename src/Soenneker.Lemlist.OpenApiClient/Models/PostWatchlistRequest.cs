@@ -56,7 +56,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string PersonaId { get; set; }
 #endif
-        /// <summary>Entity sourcing. Only `all` is supported via the API. Required together with signalProcessingType when activate is true.</summary>
+        /// <summary>Entity sourcing. Only `all` is accepted here; to monitor CRM lists or a CSV, create a draft (`activate: false`) and call `POST /watchlist/crm-lists`. Required together with signalProcessingType when activate is true.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.AllSegmentType? SegmentType { get; set; }
         /// <summary>Task/opportunity template applied to each signal when signalProcessingType is create_opportunity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

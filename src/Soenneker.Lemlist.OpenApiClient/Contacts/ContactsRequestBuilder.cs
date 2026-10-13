@@ -53,7 +53,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*,updateStrategy*,withPrimaryCompany*}", pathParameters)
+        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,crmSyncStatus*,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*,updateStrategy*,withPrimaryCompany*}", pathParameters)
         {
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*,updateStrategy*,withPrimaryCompany*}", rawUrl)
+        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,crmSyncStatus*,email*,fieldRejectionReason*,idsOrEmails,limit*,listId*,notInAnyCampaign*,offset*,search*,updateStrategy*,withPrimaryCompany*}", rawUrl)
         {
         }
         /// <summary>
@@ -226,6 +226,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             [QueryParameter("crmIds")]
             public string CrmIds { get; set; }
 #endif
+            /// <summary>Filter contacts by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Values:- `synced` — the contact has a CRM record and no sync errors.- `not_synced` — the contact has no CRM record yet.- `error` — at least one sync error is currently raised, whatever its reason.- A specific error reason (lowercase form), to filter by root cause:  - `invalid_email` — the CRM refused the contact&apos;s email.  - `property_doesnt_exist` — a mapped property does not exist in the CRM.  - `required_field_missing` — a field the CRM requires is missing.  - `unique_index_error_contact` — the CRM record is already synced with another lemlist contact.  - `contact_already_exists_with_name`, `contact_already_exists_with_linkedin_url`, `contact_already_exists_with_email` — a CRM contact already exists with the same first and last name, LinkedIn URL or email.  - `contact_blocked_by_company` — contact not created: its company already exists in the CRM.  - `contact_blocked_by_company_search` — contact not created: the company search is incomplete, retried later.  - `contact_blocked_by_company_without_name` — contact not created: its company needs a name to be found in the CRM.  - `contact_blocked_by_company_without_key` — contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.Only applies to the paginated list — ignored when `idsOrEmails` or `crmIds` is provided.</summary>
+            [QueryParameter("crmSyncStatus")]
+            public global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsCrmSyncStatusParameter? CrmSyncStatus { get; set; }
             /// <summary>Search contacts by exact email address.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
