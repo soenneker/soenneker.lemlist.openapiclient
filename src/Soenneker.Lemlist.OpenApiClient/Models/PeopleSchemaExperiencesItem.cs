@@ -12,6 +12,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     public partial class PeopleSchemaExperiencesItem : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Job postings the company currently publishes, on current experiences only. Counts are integers sent as strings</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPost? ActiveJobPost { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPost ActiveJobPost { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The business_business_customer property</summary>
@@ -228,6 +236,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string RevenueBucket { get; set; }
 #endif
+        /// <summary>Technologies used by the company, on current experiences only (no `date_to`). Capped at the 100 most recently detected; `technologies_total` gives the full count</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItem>? Technologies { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItem> Technologies { get; set; }
+#endif
+        /// <summary>Number of technologies the company uses, before the cap on `technologies`. Current experiences only</summary>
+        public int? TechnologiesTotal { get; set; }
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -269,6 +287,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "active_job_post", n => { ActiveJobPost = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPost>(global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPost.CreateFromDiscriminatorValue); } },
                 { "business_business_customer", n => { BusinessBusinessCustomer = n.GetStringValue(); } },
                 { "company_description", n => { CompanyDescription = n.GetStringValue(); } },
                 { "company_domain", n => { CompanyDomain = n.GetStringValue(); } },
@@ -301,6 +320,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "member_id", n => { MemberId = n.GetStringValue(); } },
                 { "order_in_profile", n => { OrderInProfile = n.GetIntValue(); } },
                 { "revenue_bucket", n => { RevenueBucket = n.GetStringValue(); } },
+                { "technologies", n => { Technologies = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "technologies_total", n => { TechnologiesTotal = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "title_normalized", n => { TitleNormalized = n.GetStringValue(); } },
             };
@@ -312,6 +333,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPost>("active_job_post", ActiveJobPost);
             writer.WriteStringValue("business_business_customer", BusinessBusinessCustomer);
             writer.WriteStringValue("company_description", CompanyDescription);
             writer.WriteStringValue("company_domain", CompanyDomain);
@@ -344,6 +366,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("member_id", MemberId);
             writer.WriteIntValue("order_in_profile", OrderInProfile);
             writer.WriteStringValue("revenue_bucket", RevenueBucket);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItem>("technologies", Technologies);
+            writer.WriteIntValue("technologies_total", TechnologiesTotal);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("title_normalized", TitleNormalized);
             writer.WriteAdditionalData(AdditionalData);

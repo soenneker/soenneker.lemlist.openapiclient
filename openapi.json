@@ -2816,6 +2816,59 @@
                 },
                 "main_in_profile": {
                   "type": "boolean"
+                },
+                "technologies": {
+                  "type": "array",
+                  "description": "Technologies used by the company, on current experiences only (no `date_to`). Capped at the 100 most recently detected; `technologies_total` gives the full count",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "first_seen_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the technology was first detected at the company"
+                      },
+                      "first_seen_at_anniversary": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Next anniversary of `first_seen_at`"
+                      }
+                    }
+                  }
+                },
+                "technologies_total": {
+                  "type": "integer",
+                  "description": "Number of technologies the company uses, before the cap on `technologies`. Current experiences only"
+                },
+                "active_job_post": {
+                  "type": "object",
+                  "description": "Job postings the company currently publishes, on current experiences only. Counts are integers sent as strings",
+                  "properties": {
+                    "total": {
+                      "type": "string",
+                      "example": "3"
+                    },
+                    "count_by_department": {
+                      "type": "object",
+                      "description": "Count per department (`customer_service`, `engineering`, `finance_legal_admin`, `human_resources`, `marketing`, `operations`, `other`, `sales`)",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "example": {
+                        "customer_service": "0",
+                        "engineering": "2",
+                        "finance_legal_admin": "0",
+                        "human_resources": "0",
+                        "marketing": "0",
+                        "operations": "0",
+                        "other": "0",
+                        "sales": "1"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4055,9 +4108,16 @@
           },
           "in": {
             "type": "array",
-            "description": "Values to include",
+            "description": "Values to include. For `externalSignalFieldMapping` and `externalSignalCustomFieldMapping`, an array of mapping objects (see `WatchListExternalSignalMapping`); the JSON-serialized form returned when reading an agent is also accepted.",
             "items": {
-              "type": "string"
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "$ref": "#/components/schemas/WatchListExternalSignalMapping"
+                }
+              ]
             }
           },
           "out": {
@@ -4066,6 +4126,31 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "WatchListExternalSignalMapping": {
+        "type": "object",
+        "description": "Maps a key of the flat JSON body your tool pushes to an external-signal agent. In `externalSignalFieldMapping` it targets a lemlist field; in `externalSignalCustomFieldMapping` it names a custom field kept on each signal.",
+        "required": [
+          "sourceKey",
+          "targetKey"
+        ],
+        "properties": {
+          "sourceKey": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "Key of the flat JSON body your tool pushes. Each key at most once.",
+            "example": "linkedin_profile"
+          },
+          "targetKey": {
+            "type": "string",
+            "description": "`externalSignalFieldMapping`: the lemlist field, one of `contact.linkedinUrl` (required for `externalSignalContact`), `contact.email`, `contact.firstName`, `contact.lastName`, `company.domain` and `company.name` (both required for `externalSignalCompany`), `company.linkedinUrl`, each field at most once. `externalSignalCustomFieldMapping`: the custom field name (letters, numbers, `_` and `-`), each name at most once.",
+            "example": "contact.linkedinUrl"
+          },
+          "displayInSignalPanel": {
+            "type": "boolean",
+            "description": "`externalSignalCustomFieldMapping` only: show the custom field in the signal panel."
           }
         }
       },
@@ -4452,6 +4537,8 @@
               "promotion",
               "linkedinKeywords",
               "republishedJobOffers",
+              "externalSignalContact",
+              "externalSignalCompany",
               "buyingIntent",
               "newProductLaunch",
               "companyAward",
@@ -16155,6 +16242,112 @@
         "parameters": []
       }
     },
+    "/database/people/export": {
+      "get": {
+        "summary": "Export People database search",
+        "description": "Exports the People Database leads matching a search as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.\n\nThe export is defined by the search itself — there is no hand-picked selection: rows come back in the team's stable search order, capped by `limit`.\n\n**Billing** — charged on the team's existing 24h search quota, one unit per 100 exported rows (an export of 1000 rows costs 10). Nothing is charged if the export fails.\n\n**Caps** — 1000 rows maximum; a higher `limit` is rejected with a 400. Free-trial and freemium teams are capped lower, at one page (100 rows), matching the search window their plan allows.",
+        "tags": ["People Database"],
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "required": true,
+            "description": "The search to export, URL-encoded JSON array — the same `filters` array `POST /database/people` takes. Each entry needs a `filterId` and at least one `in`/`out` value.\n\nFilter ids and their allowed values come from `GET /database/filters`. That endpoint returns `values` only for filters with a closed list; filters of type `autocomplete` (job titles, companies, countries, skills, technologies…) have no enumerable list, so their values are discovered by running a search rather than read upfront.",
+            "example": "[{\"filterId\":\"currentTitle\",\"in\":[\"CTO\"],\"out\":[]}]",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "How many rows to export. Defaults to 1000, which is also the maximum.",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 1000, "default": 1000 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CSV file download",
+            "content": {
+              "text/csv": {
+                "example": "Full name,Email,Phone,LinkedIn URL,Company name,Job title,Country\nJohn Doe,john@example.com,+33100000000,https://www.linkedin.com/in/example-profile,Acme Inc,CTO,France"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid `filters` JSON, a filter unavailable for API usage, or a `limit` above the cap",
+            "content": {
+              "application/json": {
+                "example": { "error": "A CSV export holds at most 1000 rows" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The team's 24h search quota does not cover this export",
+            "content": {
+              "application/json": {
+                "example": { "error": "This export needs 10 searches from your 24h quota, and you have 3 left." }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/database/companies/export": {
+      "get": {
+        "summary": "Export Companies database search",
+        "description": "Exports the companies matching a search as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.\n\nThe export is defined by the search itself — there is no hand-picked selection: rows come back in the team's stable search order, capped by `limit`.\n\n**Billing** — charged on the team's existing 24h search quota, one unit per 100 exported rows (an export of 1000 rows costs 10). Nothing is charged if the export fails.\n\n**Caps** — 1000 rows maximum; a higher `limit` is rejected with a 400. Free-trial and freemium teams are capped lower, at one page (100 rows), matching the search window their plan allows.",
+        "tags": ["People Database"],
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "required": true,
+            "description": "The search to export, URL-encoded JSON array — the same `filters` array `POST /database/companies` takes. Each entry needs a `filterId` and at least one `in`/`out` value.\n\nFilter ids and their allowed values come from `GET /database/filters?mode=companies`. That endpoint returns `values` only for filters with a closed list; filters of type `autocomplete` (companies, countries, technologies…) have no enumerable list, so their values are discovered by running a search rather than read upfront.",
+            "example": "[{\"filterId\":\"currentCompanyCountry\",\"in\":[\"France\"],\"out\":[]}]",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "How many rows to export. Defaults to 1000, which is also the maximum.",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 1000, "default": 1000 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CSV file download",
+            "content": {
+              "text/csv": {
+                "example": "Company name,LinkedIn URL,Industry,Website,Size,Employee count,City,Country\nAcme Inc,https://www.linkedin.com/company/example-company,Software Development,https://acme.com,11-50,42,Paris,France"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid `filters` JSON, a filter unavailable for API usage, or a `limit` above the cap",
+            "content": {
+              "application/json": {
+                "example": { "error": "A CSV export holds at most 1000 rows" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The team's 24h search quota does not cover this export",
+            "content": {
+              "application/json": {
+                "example": { "error": "This export needs 10 searches from your 24h quota, and you have 3 left." }
+              }
+            }
+          }
+        }
+      }
+    },
     "/database/personas": {
       "get": {
         "summary": "List Personas",
@@ -21458,7 +21651,7 @@
       ],
       "delete": {
         "summary": "Delete Contact",
-        "description": "Deletes a lemlist contact resolved by its id (`ctc_xxx`) or email. Cascades to the contact's leads, opportunities, list associations, inbox conversations and activities. **No CRM-side propagation** — only the lemlist record is removed. Fails with `409 CONTACT_DELETE_BLOCKED` when the contact cannot be deleted right now — for example while an enrichment is still running (retry once it finishes); the response `error.message` states the specific reason.",
+        "description": "Deletes a lemlist contact resolved by its id (`ctc_xxx`) or email. Cascades to the contact's leads, opportunities, list associations, inbox conversations and activities. **No CRM-side propagation** — only the lemlist record is removed. Fails with `409 CONTACT_DELETE_BLOCKED` when the contact cannot be deleted right now — for example while an enrichment is still running (retry once it finishes); the response `error.message` states the specific reason.\n\n**Permission:** the API key's user must have the \"Delete contacts\" permission, otherwise the request fails with `403 CONTACT_DELETE_NOT_ALLOWED`.",
         "tags": [
           "Contacts"
         ],
@@ -21495,6 +21688,39 @@
             "content": {
               "text/plain": {
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key's user does not have the \"Delete contacts\" permission (`CONTACT_DELETE_NOT_ALLOWED`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "CONTACT_DELETE_NOT_ALLOWED",
+                    "message": "You do not have the permission to delete contacts"
+                  }
+                }
               }
             }
           },
@@ -29435,6 +29661,7 @@
           }
         ],
         "requestBody": {
+          "description": "When the agent has a field mapping (`externalSignalFieldMapping`, always set for agents created in the app or through the API), send one flat JSON object keyed by the mapped source keys, e.g. `{ \"linkedin_profile\": \"https://www.linkedin.com/in/john-doe\", \"plan\": \"enterprise\" }`; the `contact` / `company` / `customFields` format below is then ignored. That format only applies to agents without a field mapping.",
           "required": true,
           "content": {
             "application/json": {
@@ -29722,6 +29949,8 @@
                       "promotion",
                       "linkedinKeywords",
                       "republishedJobOffers",
+                      "externalSignalContact",
+                      "externalSignalCompany",
                       "buyingIntent",
                       "newProductLaunch",
                       "companyAward",
@@ -30401,6 +30630,8 @@
                 "promotion",
                 "linkedinKeywords",
                 "republishedJobOffers",
+                "externalSignalContact",
+                "externalSignalCompany",
                 "buyingIntent",
                 "newProductLaunch",
                 "companyAward",

@@ -68,6 +68,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         RepublishedJobOffers,
         #pragma warning restore CS1591
+        [EnumMember(Value = "externalSignalContact")]
+        #pragma warning disable CS1591
+        ExternalSignalContact,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "externalSignalCompany")]
+        #pragma warning disable CS1591
+        ExternalSignalCompany,
+        #pragma warning restore CS1591
         [EnumMember(Value = "buyingIntent")]
         #pragma warning disable CS1591
         BuyingIntent,

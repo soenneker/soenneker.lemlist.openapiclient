@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Database.Companies.Export;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Companies
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompaniesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The export property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Database.Companies.Export.ExportRequestBuilder Export
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Database.Companies.Export.ExportRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Database.Companies.CompaniesRequestBuilder"/> and sets the default values.
         /// </summary>

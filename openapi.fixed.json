@@ -7981,6 +7981,162 @@
         }
       }
     },
+    "/database/people/export": {
+      "get": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Export People database search",
+        "description": "Exports the People Database leads matching a search as a CSV file. The response is streamed as \u0060text/csv\u0060 with a \u0060Content-Disposition: attachment\u0060 header.\n\nThe export is defined by the search itself \u2014 there is no hand-picked selection: rows come back in the team\u0027s stable search order, capped by \u0060limit\u0060.\n\n**Billing** \u2014 charged on the team\u0027s existing 24h search quota, one unit per 100 exported rows (an export of 1000 rows costs 10). Nothing is charged if the export fails.\n\n**Caps** \u2014 1000 rows maximum; a higher \u0060limit\u0060 is rejected with a 400. Free-trial and freemium teams are capped lower, at one page (100 rows), matching the search window their plan allows.",
+        "operationId": "GetDatabasePeopleExport",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "The search to export, URL-encoded JSON array \u2014 the same \u0060filters\u0060 array \u0060POST /database/people\u0060 takes. Each entry needs a \u0060filterId\u0060 and at least one \u0060in\u0060/\u0060out\u0060 value.\n\nFilter ids and their allowed values come from \u0060GET /database/filters\u0060. That endpoint returns \u0060values\u0060 only for filters with a closed list; filters of type \u0060autocomplete\u0060 (job titles, companies, countries, skills, technologies\u2026) have no enumerable list, so their values are discovered by running a search rather than read upfront.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "[{\u0022filterId\u0022:\u0022currentTitle\u0022,\u0022in\u0022:[\u0022CTO\u0022],\u0022out\u0022:[]}]"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many rows to export. Defaults to 1000, which is also the maximum.",
+            "schema": {
+              "maximum": 1000,
+              "minimum": 1,
+              "type": "integer",
+              "default": 1000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CSV file download",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Full name,Email,Phone,LinkedIn URL,Company name,Job title,Country\nJohn Doe,john@example.com,\u002B33100000000,https://www.linkedin.com/in/example-profile,Acme Inc,CTO,France"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid \u0060filters\u0060 JSON, a filter unavailable for API usage, or a \u0060limit\u0060 above the cap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDatabasePeopleExport400Response"
+                },
+                "example": {
+                  "error": "A CSV export holds at most 1000 rows"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The team\u0027s 24h search quota does not cover this export",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDatabasePeopleExport403Response"
+                },
+                "example": {
+                  "error": "This export needs 10 searches from your 24h quota, and you have 3 left."
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/database/companies/export": {
+      "get": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Export Companies database search",
+        "description": "Exports the companies matching a search as a CSV file. The response is streamed as \u0060text/csv\u0060 with a \u0060Content-Disposition: attachment\u0060 header.\n\nThe export is defined by the search itself \u2014 there is no hand-picked selection: rows come back in the team\u0027s stable search order, capped by \u0060limit\u0060.\n\n**Billing** \u2014 charged on the team\u0027s existing 24h search quota, one unit per 100 exported rows (an export of 1000 rows costs 10). Nothing is charged if the export fails.\n\n**Caps** \u2014 1000 rows maximum; a higher \u0060limit\u0060 is rejected with a 400. Free-trial and freemium teams are capped lower, at one page (100 rows), matching the search window their plan allows.",
+        "operationId": "GetDatabaseCompaniesExport",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "The search to export, URL-encoded JSON array \u2014 the same \u0060filters\u0060 array \u0060POST /database/companies\u0060 takes. Each entry needs a \u0060filterId\u0060 and at least one \u0060in\u0060/\u0060out\u0060 value.\n\nFilter ids and their allowed values come from \u0060GET /database/filters?mode=companies\u0060. That endpoint returns \u0060values\u0060 only for filters with a closed list; filters of type \u0060autocomplete\u0060 (companies, countries, technologies\u2026) have no enumerable list, so their values are discovered by running a search rather than read upfront.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "[{\u0022filterId\u0022:\u0022currentCompanyCountry\u0022,\u0022in\u0022:[\u0022France\u0022],\u0022out\u0022:[]}]"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many rows to export. Defaults to 1000, which is also the maximum.",
+            "schema": {
+              "maximum": 1000,
+              "minimum": 1,
+              "type": "integer",
+              "default": 1000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CSV file download",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "Company name,LinkedIn URL,Industry,Website,Size,Employee count,City,Country\nAcme Inc,https://www.linkedin.com/company/example-company,Software Development,https://acme.com,11-50,42,Paris,France"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid \u0060filters\u0060 JSON, a filter unavailable for API usage, or a \u0060limit\u0060 above the cap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDatabaseCompaniesExport400Response"
+                },
+                "example": {
+                  "error": "A CSV export holds at most 1000 rows"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The team\u0027s 24h search quota does not cover this export",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDatabaseCompaniesExport403Response"
+                },
+                "example": {
+                  "error": "This export needs 10 searches from your 24h quota, and you have 3 left."
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
     "/database/personas": {
       "get": {
         "tags": [
@@ -12091,7 +12247,7 @@
           "Contacts"
         ],
         "summary": "Delete Contact",
-        "description": "Deletes a lemlist contact resolved by its id (\u0060ctc_xxx\u0060) or email. Cascades to the contact\u0027s leads, opportunities, list associations, inbox conversations and activities. **No CRM-side propagation** \u2014 only the lemlist record is removed. Fails with \u0060409 CONTACT_DELETE_BLOCKED\u0060 when the contact cannot be deleted right now \u2014 for example while an enrichment is still running (retry once it finishes); the response \u0060error.message\u0060 states the specific reason.",
+        "description": "Deletes a lemlist contact resolved by its id (\u0060ctc_xxx\u0060) or email. Cascades to the contact\u0027s leads, opportunities, list associations, inbox conversations and activities. **No CRM-side propagation** \u2014 only the lemlist record is removed. Fails with \u0060409 CONTACT_DELETE_BLOCKED\u0060 when the contact cannot be deleted right now \u2014 for example while an enrichment is still running (retry once it finishes); the response \u0060error.message\u0060 states the specific reason.\n\n**Permission:** the API key\u0027s user must have the \u0022Delete contacts\u0022 permission, otherwise the request fails with \u0060403 CONTACT_DELETE_NOT_ALLOWED\u0060.",
         "operationId": "DeleteContactsByIdOrEmail",
         "responses": {
           "200": {
@@ -12117,6 +12273,23 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key\u0027s user does not have the \u0022Delete contacts\u0022 permission (\u0060CONTACT_DELETE_NOT_ALLOWED\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteContactsByIdOrEmail403Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "CONTACT_DELETE_NOT_ALLOWED",
+                    "message": "You do not have the permission to delete contacts"
+                  }
+                }
               }
             }
           },
@@ -18383,6 +18556,7 @@
           }
         ],
         "requestBody": {
+          "description": "When the agent has a field mapping (\u0060externalSignalFieldMapping\u0060, always set for agents created in the app or through the API), send one flat JSON object keyed by the mapped source keys, e.g. \u0060{ \u0022linkedin_profile\u0022: \u0022https://www.linkedin.com/in/john-doe\u0022, \u0022plan\u0022: \u0022enterprise\u0022 }\u0060; the \u0060contact\u0060 / \u0060company\u0060 / \u0060customFields\u0060 format below is then ignored. That format only applies to agents without a field mapping.",
           "content": {
             "application/json": {
               "schema": {
@@ -24208,9 +24382,9 @@
           "in": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/WatchListFilterInItem"
             },
-            "description": "Values to include"
+            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted."
           },
           "out": {
             "type": "array",
@@ -24221,6 +24395,31 @@
           }
         },
         "description": "A filter narrowing which entities or events a Signal Agent tracks. \u0060in\u0060 includes matching values, \u0060out\u0060 excludes them."
+      },
+      "WatchListExternalSignalMapping": {
+        "required": [
+          "sourceKey",
+          "targetKey"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceKey": {
+            "pattern": "^[a-zA-Z0-9_-]\u002B$",
+            "type": "string",
+            "description": "Key of the flat JSON body your tool pushes. Each key at most once.",
+            "example": "linkedin_profile"
+          },
+          "targetKey": {
+            "type": "string",
+            "description": "\u0060externalSignalFieldMapping\u0060: the lemlist field, one of \u0060contact.linkedinUrl\u0060 (required for \u0060externalSignalContact\u0060), \u0060contact.email\u0060, \u0060contact.firstName\u0060, \u0060contact.lastName\u0060, \u0060company.domain\u0060 and \u0060company.name\u0060 (both required for \u0060externalSignalCompany\u0060), \u0060company.linkedinUrl\u0060, each field at most once. \u0060externalSignalCustomFieldMapping\u0060: the custom field name (letters, numbers, \u0060_\u0060 and \u0060-\u0060), each name at most once.",
+            "example": "contact.linkedinUrl"
+          },
+          "displayInSignalPanel": {
+            "type": "boolean",
+            "description": "\u0060externalSignalCustomFieldMapping\u0060 only: show the custom field in the signal panel."
+          }
+        },
+        "description": "Maps a key of the flat JSON body your tool pushes to an external-signal agent. In \u0060externalSignalFieldMapping\u0060 it targets a lemlist field; in \u0060externalSignalCustomFieldMapping\u0060 it names a custom field kept on each signal."
       },
       "WatchListListMeta": {
         "type": "object",
@@ -25126,6 +25325,37 @@
         ],
         "description": "A/B test state for this step. \u0060true\u0060 while the test runs (leads are split between variant A and B); \u0060\u0022A\u0022\u0060 or \u0060\u0022B\u0022\u0060 once a winner is selected (all remaining leads receive the winning template); absent/false when there is no A/B test."
       },
+      "WatchListFilterInItem": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WatchListFilterInItemBranch1"
+          },
+          {
+            "$ref": "#/components/schemas/WatchListExternalSignalMapping"
+          }
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "sourceKey": {
+            "pattern": "^[a-zA-Z0-9_-]\u002B$",
+            "type": "string",
+            "description": "Key of the flat JSON body your tool pushes. Each key at most once.",
+            "example": "linkedin_profile"
+          },
+          "targetKey": {
+            "type": "string",
+            "description": "\u0060externalSignalFieldMapping\u0060: the lemlist field, one of \u0060contact.linkedinUrl\u0060 (required for \u0060externalSignalContact\u0060), \u0060contact.email\u0060, \u0060contact.firstName\u0060, \u0060contact.lastName\u0060, \u0060company.domain\u0060 and \u0060company.name\u0060 (both required for \u0060externalSignalCompany\u0060), \u0060company.linkedinUrl\u0060, each field at most once. \u0060externalSignalCustomFieldMapping\u0060: the custom field name (letters, numbers, \u0060_\u0060 and \u0060-\u0060), each name at most once.",
+            "example": "contact.linkedinUrl"
+          },
+          "displayInSignalPanel": {
+            "type": "boolean",
+            "description": "\u0060externalSignalCustomFieldMapping\u0060 only: show the custom field in the signal panel."
+          }
+        }
+      },
       "EnrichmentWaterfallConditionsComposed": {
         "type": "object",
         "properties": {
@@ -25824,6 +26054,20 @@
           },
           "main_in_profile": {
             "type": "boolean"
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleSchemaExperiencesItemTechnologiesItem"
+            },
+            "description": "Technologies used by the company, on current experiences only (no \u0060date_to\u0060). Capped at the 100 most recently detected; \u0060technologies_total\u0060 gives the full count"
+          },
+          "technologies_total": {
+            "type": "integer",
+            "description": "Number of technologies the company uses, before the cap on \u0060technologies\u0060. Current experiences only"
+          },
+          "active_job_post": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemActiveJobPost"
           }
         }
       },
@@ -26675,6 +26919,37 @@
           }
         }
       },
+      "PeopleSchemaExperiencesItemTechnologiesItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "first_seen_at": {
+            "type": "string",
+            "description": "When the technology was first detected at the company",
+            "format": "date-time"
+          },
+          "first_seen_at_anniversary": {
+            "type": "string",
+            "description": "Next anniversary of \u0060first_seen_at\u0060",
+            "format": "date-time"
+          }
+        }
+      },
+      "PeopleSchemaExperiencesItemActiveJobPost": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "3"
+          },
+          "count_by_department": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty"
+          }
+        },
+        "description": "Job postings the company currently publishes, on current experiences only. Counts are integers sent as strings"
+      },
       "SignalSchemaSignalDataExternalSignalCustomFields": {
         "type": "object",
         "additionalProperties": {
@@ -26798,6 +27073,23 @@
       "CompanyCrmSyncErrorsItemMetadata": {
         "type": "object",
         "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
+      },
+      "PeopleSchemaExperiencesItemActiveJobPostCountByDepartment": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "0",
+          "engineering": "2",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "0",
+          "operations": "0",
+          "other": "0",
+          "sales": "1"
+        }
       },
       "GetMessageTemplates400Response": {
         "type": "object",
@@ -29362,6 +29654,38 @@
           }
         }
       },
+      "GetDatabasePeopleExport400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "GetDatabasePeopleExport403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "GetDatabaseCompaniesExport400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "GetDatabaseCompaniesExport403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "CreatePersonaRequest": {
         "required": [
           "name",
@@ -30354,6 +30678,17 @@
           "deletedContactId": {
             "type": "string",
             "description": "ID of the deleted lemlist contact."
+          }
+        }
+      },
+      "DeleteContactsByIdOrEmail403Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteContactsByIdOrEmail403ResponseError"
           }
         }
       },
@@ -32541,6 +32876,17 @@
           }
         }
       },
+      "WatchListFilterInItemBranch1": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
       "GetCampaignsByCampaignIdExportByExportIdStatus404ResponseBranch2": {
         "required": [
           "value"
@@ -33307,6 +33653,13 @@
       "CompanyCrmSyncErrorsItemMetadataProperty": {
         "type": "object",
         "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
+      },
+      "PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)"
       },
       "GetTeamSenders200ResponseItem": {
         "type": "object",
@@ -34786,6 +35139,17 @@
         }
       },
       "PostContactsMerge409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteContactsByIdOrEmail403ResponseError": {
         "type": "object",
         "properties": {
           "code": {
@@ -38973,6 +39337,8 @@
           "promotion",
           "linkedinKeywords",
           "republishedJobOffers",
+          "externalSignalContact",
+          "externalSignalCompany",
           "buyingIntent",
           "newProductLaunch",
           "companyAward",
@@ -39050,6 +39416,14 @@
             {
               "value": "republishedJobOffers",
               "name": "RepublishedJobOffers"
+            },
+            {
+              "value": "externalSignalContact",
+              "name": "ExternalSignalContact"
+            },
+            {
+              "value": "externalSignalCompany",
+              "name": "ExternalSignalCompany"
             },
             {
               "value": "buyingIntent",
@@ -41572,6 +41946,8 @@
           "promotion",
           "linkedinKeywords",
           "republishedJobOffers",
+          "externalSignalContact",
+          "externalSignalCompany",
           "buyingIntent",
           "newProductLaunch",
           "companyAward",
@@ -41649,6 +42025,14 @@
             {
               "value": "republishedJobOffers",
               "name": "RepublishedJobOffers"
+            },
+            {
+              "value": "externalSignalContact",
+              "name": "ExternalSignalContact"
+            },
+            {
+              "value": "externalSignalCompany",
+              "name": "ExternalSignalCompany"
             },
             {
               "value": "buyingIntent",
@@ -44730,6 +45114,8 @@
           "promotion",
           "linkedinKeywords",
           "republishedJobOffers",
+          "externalSignalContact",
+          "externalSignalCompany",
           "buyingIntent",
           "newProductLaunch",
           "companyAward",
@@ -44806,6 +45192,14 @@
             {
               "value": "republishedJobOffers",
               "name": "RepublishedJobOffers"
+            },
+            {
+              "value": "externalSignalContact",
+              "name": "ExternalSignalContact"
+            },
+            {
+              "value": "externalSignalCompany",
+              "name": "ExternalSignalCompany"
             },
             {
               "value": "buyingIntent",
