@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Lemwarm.Errors;
 using Soenneker.Lemlist.OpenApiClient.Lemwarm.Item;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class LemwarmRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The errors property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Errors.ErrorsRequestBuilder Errors
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Errors.ErrorsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.lemwarm.item collection</summary>
         /// <param name="position">The unique identifier of the user mailbox</param>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.WithUserMailboxItemRequestBuilder"/></returns>

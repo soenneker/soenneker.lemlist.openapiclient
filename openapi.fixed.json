@@ -12999,6 +12999,81 @@
         }
       }
     },
+    "/lemwarm/errors": {
+      "get": {
+        "tags": [
+          "lemwarm"
+        ],
+        "summary": "Get warmup errors",
+        "description": "Lists the mailboxes of your team that lemwarm keeps out of warmup, with the cause and the fix for each one. Paused mailboxes come first, then warnings (temporary locks), newest first. Healthy or manually paused mailboxes are not returned.",
+        "operationId": "GetLemwarmErrors",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLemwarmErrors200Response"
+                },
+                "example": {
+                  "data": {
+                    "errors": [
+                      {
+                        "mailboxId": "usm_ssaV1cwVs8iEW9IYO",
+                        "userId": "usr_P0w2DKRAQZitHjkdV",
+                        "email": "john@example.com",
+                        "state": "paused",
+                        "since": "2025-04-09T13:34:43.998Z",
+                        "key": "ERR_REP_10001",
+                        "code": "ERR_REP_10001",
+                        "family": "reputation",
+                        "action": "resume",
+                        "title": "Low sender reputation on john@example.com",
+                        "whatHappened": "Several warmup emails bounced because recipient email providers rated the reputation of this mailbox too low. lemwarm paused warmup to protect your domain.",
+                        "whatToCheck": "Your recent sending volume, bounce rate and content on this mailbox. Lower the warmup volume before resuming."
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "\u0060BETA_NOT_ENABLED\u0060 - the warmup error guidance beta is not enabled for this team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLemwarmErrors403Response"
+                },
+                "examples": {
+                  "betaNotEnabled": {
+                    "value": {
+                      "error": "Beta is not enabled",
+                      "code": "BETA_NOT_ENABLED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "\u0060ROUTE_BAD_METHOD\u0060 - only GET is allowed"
+          }
+        }
+      }
+    },
     "/lemwarm/{userMailboxId}/start": {
       "post": {
         "tags": [
@@ -24232,6 +24307,86 @@
           }
         }
       },
+      "WarmupErrorsResponse": {
+        "required": [
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WarmupError"
+            }
+          }
+        },
+        "description": "Warmup errors of the team."
+      },
+      "WarmupError": {
+        "required": [
+          "mailboxId",
+          "userId",
+          "email",
+          "state",
+          "code",
+          "family",
+          "title",
+          "whatHappened",
+          "whatToCheck"
+        ],
+        "type": "object",
+        "properties": {
+          "mailboxId": {
+            "type": "string",
+            "description": "The user mailbox id. Use it as \u0060userMailboxId\u0060 to resume warmup with [Start lemwarm](/api-reference/endpoints/lemwarm/start-lemwarm).",
+            "example": "usm_ssaV1cwVs8iEW9IYO"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The owner of the mailbox.",
+            "example": "usr_P0w2DKRAQZitHjkdV"
+          },
+          "email": {
+            "type": "string",
+            "description": "The sending address of the mailbox.",
+            "example": "john@example.com"
+          },
+          "state": {
+            "$ref": "#/components/schemas/WarmupErrorState"
+          },
+          "since": {
+            "type": "string",
+            "description": "When the cause was recorded. Absent when the state carries no date (DNS lock).",
+            "format": "date-time"
+          },
+          "key": {
+            "$ref": "#/components/schemas/WarmupErrorKey"
+          },
+          "code": {
+            "type": "string",
+            "description": "The raw code shown in the lemlist notification, for support."
+          },
+          "family": {
+            "$ref": "#/components/schemas/WarmupErrorFamily"
+          },
+          "action": {
+            "$ref": "#/components/schemas/WarmupErrorAction"
+          },
+          "title": {
+            "type": "string",
+            "description": "Short description of the cause."
+          },
+          "whatHappened": {
+            "type": "string",
+            "description": "What lemwarm observed."
+          },
+          "whatToCheck": {
+            "type": "string",
+            "description": "What to verify before resuming warmup."
+          }
+        },
+        "description": "A mailbox kept out of warmup, with the cause and the fix."
+      },
       "LemwarmSettings": {
         "type": "object",
         "properties": {
@@ -30820,6 +30975,17 @@
           }
         }
       },
+      "GetLemwarmErrors403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PostLemwarmByUserMailboxIdStart200Response": {
         "type": "object",
         "properties": {
@@ -33142,6 +33308,14 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/GetContactsLists200ResponseSchemaItem"
+        }
+      },
+      "GetLemwarmErrors200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WarmupErrorsResponse"
+          }
         }
       },
       "GetCompanies200Response": {
@@ -38366,6 +38540,318 @@
             {
               "value": "companies",
               "name": "Companies"
+            }
+          ]
+        }
+      },
+      "WarmupErrorState": {
+        "enum": [
+          "paused",
+          "warning"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060paused\u0060: warmup is stopped until the cause is fixed. \u0060warning\u0060: temporary lock, warmup resumes on its own.",
+        "x-ms-enum": {
+          "name": "WarmupErrorState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "paused",
+              "name": "Paused"
+            },
+            {
+              "value": "warning",
+              "name": "Warning"
+            }
+          ]
+        }
+      },
+      "WarmupErrorKey": {
+        "enum": [
+          "ERR_REP_10001",
+          "ERR_REP_10002",
+          "ERR_REP_10003",
+          "ERR_REP_10004",
+          "ERR_REP_10005",
+          "ERR_REP_10006",
+          "ERR_REP_10008",
+          "ERR_REP_10009",
+          "ERR_REP_10010",
+          "ERR_SETUP_10001",
+          "ERR_SETUP_10002",
+          "ERR_SETUP_10003",
+          "ERR_SETUP_10004",
+          "ERR_SETUP_10005",
+          "ERR_SETUP_10006",
+          "ERR_SETUP_10007",
+          "ERR_SETUP_10008",
+          "ERR_SETUP_10009",
+          "ERR_SETUP_10010",
+          "ERR_SETUP_10011",
+          "ERR_SETUP_10012",
+          "ERR_SETUP_10013",
+          "ERR_SETUP_10014",
+          "ERR_SETUP_10015",
+          "ERR_SETUP_10016",
+          "ERR_SETUP_10017",
+          "ERR_SETUP_10018",
+          "ERR_SETUP_10019",
+          "ERR_SETUP_10020",
+          "ERR_PROV_10002",
+          "ERR_PROV_10003",
+          "ERR_PROV_10004",
+          "ERR_PROV_10005",
+          "ERR_PROV_10006",
+          "ERR_PROV_10007",
+          "ERR_PROV_10008",
+          "ERR_PROV_10009",
+          "ERR_PROV_10010",
+          "MAILBOX_DISCONNECTED",
+          "DNS_LOCKED",
+          "EMAIL_FAILED",
+          "HIGH_SPAM_LOCK"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The catalogued cause. Absent when the stored code is not catalogued yet; \u0060code\u0060 then holds the raw value.",
+        "x-ms-enum": {
+          "name": "WarmupErrorKey",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ERR_REP_10001",
+              "name": "ErrRep10001"
+            },
+            {
+              "value": "ERR_REP_10002",
+              "name": "ErrRep10002"
+            },
+            {
+              "value": "ERR_REP_10003",
+              "name": "ErrRep10003"
+            },
+            {
+              "value": "ERR_REP_10004",
+              "name": "ErrRep10004"
+            },
+            {
+              "value": "ERR_REP_10005",
+              "name": "ErrRep10005"
+            },
+            {
+              "value": "ERR_REP_10006",
+              "name": "ErrRep10006"
+            },
+            {
+              "value": "ERR_REP_10008",
+              "name": "ErrRep10008"
+            },
+            {
+              "value": "ERR_REP_10009",
+              "name": "ErrRep10009"
+            },
+            {
+              "value": "ERR_REP_10010",
+              "name": "ErrRep10010"
+            },
+            {
+              "value": "ERR_SETUP_10001",
+              "name": "ErrSetup10001"
+            },
+            {
+              "value": "ERR_SETUP_10002",
+              "name": "ErrSetup10002"
+            },
+            {
+              "value": "ERR_SETUP_10003",
+              "name": "ErrSetup10003"
+            },
+            {
+              "value": "ERR_SETUP_10004",
+              "name": "ErrSetup10004"
+            },
+            {
+              "value": "ERR_SETUP_10005",
+              "name": "ErrSetup10005"
+            },
+            {
+              "value": "ERR_SETUP_10006",
+              "name": "ErrSetup10006"
+            },
+            {
+              "value": "ERR_SETUP_10007",
+              "name": "ErrSetup10007"
+            },
+            {
+              "value": "ERR_SETUP_10008",
+              "name": "ErrSetup10008"
+            },
+            {
+              "value": "ERR_SETUP_10009",
+              "name": "ErrSetup10009"
+            },
+            {
+              "value": "ERR_SETUP_10010",
+              "name": "ErrSetup10010"
+            },
+            {
+              "value": "ERR_SETUP_10011",
+              "name": "ErrSetup10011"
+            },
+            {
+              "value": "ERR_SETUP_10012",
+              "name": "ErrSetup10012"
+            },
+            {
+              "value": "ERR_SETUP_10013",
+              "name": "ErrSetup10013"
+            },
+            {
+              "value": "ERR_SETUP_10014",
+              "name": "ErrSetup10014"
+            },
+            {
+              "value": "ERR_SETUP_10015",
+              "name": "ErrSetup10015"
+            },
+            {
+              "value": "ERR_SETUP_10016",
+              "name": "ErrSetup10016"
+            },
+            {
+              "value": "ERR_SETUP_10017",
+              "name": "ErrSetup10017"
+            },
+            {
+              "value": "ERR_SETUP_10018",
+              "name": "ErrSetup10018"
+            },
+            {
+              "value": "ERR_SETUP_10019",
+              "name": "ErrSetup10019"
+            },
+            {
+              "value": "ERR_SETUP_10020",
+              "name": "ErrSetup10020"
+            },
+            {
+              "value": "ERR_PROV_10002",
+              "name": "ErrProv10002"
+            },
+            {
+              "value": "ERR_PROV_10003",
+              "name": "ErrProv10003"
+            },
+            {
+              "value": "ERR_PROV_10004",
+              "name": "ErrProv10004"
+            },
+            {
+              "value": "ERR_PROV_10005",
+              "name": "ErrProv10005"
+            },
+            {
+              "value": "ERR_PROV_10006",
+              "name": "ErrProv10006"
+            },
+            {
+              "value": "ERR_PROV_10007",
+              "name": "ErrProv10007"
+            },
+            {
+              "value": "ERR_PROV_10008",
+              "name": "ErrProv10008"
+            },
+            {
+              "value": "ERR_PROV_10009",
+              "name": "ErrProv10009"
+            },
+            {
+              "value": "ERR_PROV_10010",
+              "name": "ErrProv10010"
+            },
+            {
+              "value": "MAILBOX_DISCONNECTED",
+              "name": "MailboxDisconnected"
+            },
+            {
+              "value": "DNS_LOCKED",
+              "name": "DnsLocked"
+            },
+            {
+              "value": "EMAIL_FAILED",
+              "name": "EmailFailed"
+            },
+            {
+              "value": "HIGH_SPAM_LOCK",
+              "name": "HighSpamLock"
+            }
+          ]
+        }
+      },
+      "WarmupErrorFamily": {
+        "enum": [
+          "disconnected",
+          "setup",
+          "reputation",
+          "provider",
+          "unknown"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Group of causes.",
+        "x-ms-enum": {
+          "name": "WarmupErrorFamily",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "disconnected",
+              "name": "Disconnected"
+            },
+            {
+              "value": "setup",
+              "name": "Setup"
+            },
+            {
+              "value": "reputation",
+              "name": "Reputation"
+            },
+            {
+              "value": "provider",
+              "name": "Provider"
+            },
+            {
+              "value": "unknown",
+              "name": "Unknown"
+            }
+          ]
+        }
+      },
+      "WarmupErrorAction": {
+        "enum": [
+          "reconnect",
+          "checkTechSetup",
+          "resume"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The one-click fix in the app: reconnect the mailbox, run the technical setup audit, or resume warmup. Absent when only support can help.",
+        "x-ms-enum": {
+          "name": "WarmupErrorAction",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "reconnect",
+              "name": "Reconnect"
+            },
+            {
+              "value": "checkTechSetup",
+              "name": "CheckTechSetup"
+            },
+            {
+              "value": "resume",
+              "name": "Resume"
             }
           ]
         }
