@@ -2146,7 +2146,7 @@
           "Signal Agents"
         ],
         "summary": "Add Signal Agent Trigger",
-        "description": "Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead. Requires the \u0060campaignSignalTrigger\u0060 beta.",
+        "description": "Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead.",
         "operationId": "PostCampaignsByCampaignIdTriggersWatchLists",
         "parameters": [
           {
@@ -2230,24 +2230,6 @@
               }
             }
           },
-          "403": {
-            "description": "\u0060BETA_NOT_ENABLED\u0060 - the \u0060campaignSignalTrigger\u0060 beta is not enabled for this team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdTriggersWatchLists403Response"
-                },
-                "examples": {
-                  "betaNotEnabled": {
-                    "value": {
-                      "error": "Beta is not enabled",
-                      "code": "BETA_NOT_ENABLED"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "404": {
             "description": "\u0060WATCH_LIST_IMPORT_LEADS_CAMPAIGN_NOT_FOUND\u0060 or \u0060WATCH_LIST_NOT_FOUND\u0060 - the campaign or the Signal Agent does not exist in this workspace.",
             "content": {
@@ -2317,7 +2299,7 @@
           "Signal Agents"
         ],
         "summary": "Remove Signal Agent Trigger",
-        "description": "Detaches a Signal Agent from a campaign\u0027s signal triggers. Leads already pushed stay in the campaign. Requires the \u0060campaignSignalTrigger\u0060 beta.",
+        "description": "Detaches a Signal Agent from a campaign\u0027s signal triggers. Leads already pushed stay in the campaign.",
         "operationId": "DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId",
         "responses": {
           "200": {
@@ -2377,24 +2359,6 @@
                     "value": {
                       "error": "Route unauthorized",
                       "code": "ROUTE_UNAUTHORIZED"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "\u0060BETA_NOT_ENABLED\u0060 - the \u0060campaignSignalTrigger\u0060 beta is not enabled for this team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId403Response"
-                },
-                "examples": {
-                  "betaNotEnabled": {
-                    "value": {
-                      "error": "Beta is not enabled",
-                      "code": "BETA_NOT_ENABLED"
                     }
                   }
                 }
@@ -5294,18 +5258,56 @@
                 "schema": {
                   "$ref": "#/components/schemas/GetLeads200Response"
                 },
-                "example": {
-                  "firstName": "John",
-                  "lastName": "Doe",
-                  "companyName": "lemlist",
-                  "jobTitle": "GTM Engineer",
-                  "companyDomain": "example.com",
-                  "email": "support@lemlist.com",
-                  "_id": "lea_fiDpiGV585wy3Oii2",
-                  "isPaused": false,
-                  "campaignId": "cam_bSn8EORHQxbWPjHvu",
-                  "contactId": "ctc_xW8Ou6C03Csv8vatp",
-                  "emailStatus": "deliverable"
+                "examples": {
+                  "legacy": {
+                    "summary": "No version (legacy flat body)",
+                    "value": {
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "companyName": "lemlist",
+                      "jobTitle": "GTM Engineer",
+                      "companyDomain": "example.com",
+                      "email": "support@lemlist.com",
+                      "_id": "lea_fiDpiGV585wy3Oii2",
+                      "isPaused": false,
+                      "campaignId": "cam_bSn8EORHQxbWPjHvu",
+                      "contactId": "ctc_xW8Ou6C03Csv8vatp",
+                      "emailStatus": "deliverable"
+                    }
+                  },
+                  "v2": {
+                    "summary": "version=v2",
+                    "value": [
+                      {
+                        "_id": "lea_fiDpiGV585wy3Oii2",
+                        "createdAt": "2025-10-27T09:12:45.000Z",
+                        "updatedAt": "2025-10-28T00:40:39.230Z",
+                        "isPaused": false,
+                        "state": "scanned",
+                        "status": "review",
+                        "personalized": false,
+                        "source": "api",
+                        "variables": {
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "companyName": "lemlist",
+                          "jobTitle": "GTM Engineer",
+                          "companyDomain": "example.com",
+                          "email": "support@lemlist.com"
+                        },
+                        "contactId": "ctc_xW8Ou6C03Csv8vatp",
+                        "enrichment": {
+                          "emailStatus": "deliverable"
+                        },
+                        "campaign": {
+                          "id": "cam_bSn8EORHQxbWPjHvu",
+                          "name": "NEW TO DELETE",
+                          "status": "draft"
+                        },
+                        "sendingUser": {}
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -5369,6 +5371,7 @@
                 "example": [
                   {
                     "_id": "lea_fiDpiGV585wy3Oii2",
+                    "createdAt": "2025-10-27T09:12:45.000Z",
                     "updatedAt": "2025-10-28T00:40:39.230Z",
                     "isPaused": false,
                     "state": "scanned",
@@ -5469,6 +5472,17 @@
               "default": 100
             },
             "example": 100
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of leads to skip, for paging past the first page. Default: 0",
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            },
+            "example": 0
           }
         ],
         "responses": {
@@ -5483,7 +5497,8 @@
                   {
                     "_id": "lea_A1B2C3D4E5F6G7H8I9",
                     "contactId": "con_Z9Y8X7W6V5U4T3S2R1",
-                    "state": "scanned"
+                    "state": "scanned",
+                    "createdAt": "2026-03-02T08:15:00.000Z"
                   }
                 ]
               }
@@ -14671,6 +14686,7 @@
           "Activities"
         ],
         "summary": "Get Many Activities",
+        "description": "With \u0060version=v2\u0060, each activity nests its lead under \u0060lead\u0060: the v2 lead object of GET /leads/{email}, \u0060createdAt\u0060 included.",
         "operationId": "GetActivities",
         "parameters": [
           {
@@ -16759,6 +16775,19 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "The API key\u0027s user does not have the \u0022Edit integrations\u0022 permission. Nothing is created or deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostHooks403Response"
+                },
+                "example": {
+                  "error": "You do not have permission to edit webhooks"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Webhook not found",
             "content": {
@@ -16850,6 +16879,19 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The API key\u0027s user does not have the \u0022Edit integrations\u0022 permission. Nothing is created or deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteHooksByHookId403Response"
+                },
+                "example": {
+                  "error": "You do not have permission to edit webhooks"
+                }
+              }
+            }
           },
           "404": {
             "description": "Webhook not found",
@@ -17947,6 +17989,7 @@
           "Email Accounts"
         ],
         "summary": "Disconnect Email Account",
+        "description": "Disconnects an SMTP/IMAP email account of the team.\n\n**Permission:** only the owner of the email account, or an admin of the team when the owner is a member of it, can disconnect it. Otherwise the request fails with \u0060403\u0060 and nothing is disconnected.",
         "operationId": "DeleteUserEmailAccountsByEmailAccountId",
         "parameters": [
           {
@@ -17998,14 +18041,27 @@
             }
           },
           "403": {
-            "description": "You are not allowed to modify this mailbox",
+            "description": "The email account was not disconnected. Two cases, told apart by the \u0060error\u0060 message: the API key\u0027s user is neither the owner of the email account nor an admin of the team the owner belongs to, or the owner is not a member of any of the API key user\u0027s teams.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/DeleteUserEmailAccountsByEmailAccountId403Response"
                 },
-                "example": "You are not allowed to modify this mailbox"
+                "examples": {
+                  "notOwnerOrTeamAdmin": {
+                    "summary": "Only the owner of the email account, or an admin of the team when the owner is a member of it, can disconnect it",
+                    "value": {
+                      "error": "Only the owner of this account or an admin of this team can disconnect it"
+                    }
+                  },
+                  "ownerOutsideTeams": {
+                    "summary": "The owner of the email account is not a member of any of the API key user\u0027s teams",
+                    "value": {
+                      "error": "You are not allowed to modify this mailbox"
+                    }
+                  }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -18921,21 +18977,6 @@
                   "description": "Fallback media schema"
                 },
                 "example": "Insufficient credits"
-              }
-            }
-          },
-          "403": {
-            "description": "\u0060BETA_NOT_ENABLED\u0060 - \u0060campaignId\u0060 was sent but the \u0060campaignSignalTrigger\u0060 beta is not enabled for this team. No agent is created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostWatchlist403Response"
-                },
-                "example": {
-                  "error": "Beta is not enabled",
-                  "code": "BETA_NOT_ENABLED"
-                },
-                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -21624,6 +21665,62 @@
   },
   "components": {
     "schemas": {
+      "LeadV2": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique lead identifier"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the lead was added to the campaign",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp",
+            "format": "date-time"
+          },
+          "isPaused": {
+            "type": "boolean",
+            "description": "Whether the lead is paused"
+          },
+          "state": {
+            "type": "string",
+            "description": "Current state of the lead (e.g., scanned, contacted)"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status (e.g., review, done)"
+          },
+          "personalized": {
+            "type": "boolean",
+            "description": "Whether the lead has personalized content"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source of the lead (e.g., api, csv)"
+          },
+          "variables": {
+            "$ref": "#/components/schemas/LeadV2VariablesProperty"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Associated contact ID"
+          },
+          "enrichment": {
+            "$ref": "#/components/schemas/LeadV2Enrichment"
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/LeadV2Campaign"
+          },
+          "sendingUser": {
+            "$ref": "#/components/schemas/LeadV2SendingUserProperty"
+          }
+        },
+        "description": "A lead as the v2 endpoints return it: GET /leads/{email}, GET /leads with \u0060version=v2\u0060, and the \u0060lead\u0060 nested in GET /activities with \u0060version=v2\u0060. \u0060createdAt\u0060 is the date the lead was added to its campaign."
+      },
       "ApiErrorEnvelope": {
         "required": [
           "success",
@@ -25520,6 +25617,42 @@
         },
         "description": "Only on custom waterfalls; a default waterfall applies to every contact not matched by a custom one."
       },
+      "LeadV2Variables": {
+        "type": "object",
+        "description": "Custom variables associated with the lead"
+      },
+      "LeadV2Enrichment": {
+        "type": "object",
+        "properties": {
+          "emailStatus": {
+            "type": "string",
+            "description": "Email verification status"
+          }
+        },
+        "description": "Enrichment data"
+      },
+      "LeadV2Campaign": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Campaign ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Campaign name"
+          },
+          "status": {
+            "type": "string",
+            "description": "Campaign status"
+          }
+        },
+        "description": "Campaign information"
+      },
+      "LeadV2SendingUser": {
+        "type": "object",
+        "description": "Sending user information"
+      },
       "ApiErrorEnvelopeError": {
         "required": [
           "code",
@@ -27856,17 +27989,6 @@
           }
         }
       },
-      "PostCampaignsByCampaignIdTriggersWatchLists403Response": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
-          }
-        }
-      },
       "PostCampaignsByCampaignIdTriggersWatchLists404Response": {
         "type": "object",
         "properties": {
@@ -27920,17 +28042,6 @@
         }
       },
       "DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId401Response": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
-          }
-        }
-      },
-      "DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId403Response": {
         "type": "object",
         "properties": {
           "error": {
@@ -28894,6 +29005,14 @@
       },
       "GetLeads200Response": {
         "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetLeads200ResponseLegacyNoVersion"
+          },
+          {
+            "$ref": "#/components/schemas/GetLeads200ResponseBranch2"
+          }
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -28939,13 +29058,20 @@
           "emailStatus": {
             "type": "string",
             "description": "Email status of the lead"
+          },
+          "value": {
+            "title": "version=v2",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LeadV2"
+            }
           }
         }
       },
       "GetLeadsByEmail200Response": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItem"
+          "$ref": "#/components/schemas/LeadV2"
         }
       },
       "GetCampaignsByCampaignIdLeads200Response": {
@@ -31746,6 +31872,14 @@
           }
         }
       },
+      "PostHooks403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PostHooks409Response": {
         "type": "object",
         "properties": {
@@ -31777,6 +31911,14 @@
           "campaignId": {
             "type": "string",
             "description": "Associated campaign ID, if applicable"
+          }
+        }
+      },
+      "DeleteHooksByHookId403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -31977,6 +32119,14 @@
         "properties": {
           "ok": {
             "type": "boolean"
+          }
+        }
+      },
+      "DeleteUserEmailAccountsByEmailAccountId403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -32329,7 +32479,7 @@
           },
           "campaignId": {
             "type": "string",
-            "description": "Campaign (cam_xxx) to link as this Signal Agent\u0027s signal trigger, in the same call: every new signal pushes its contact into that campaign as a lead. Only with signalProcessingType = push_to_campaign. A campaign set up as manual in the lemlist app is refused (409). Requires the campaignSignalTrigger beta. Optional; on any refusal no agent is created.",
+            "description": "Campaign (cam_xxx) to link as this Signal Agent\u0027s signal trigger, in the same call: every new signal pushes its contact into that campaign as a lead. Only with signalProcessingType = push_to_campaign. A campaign set up as manual in the lemlist app is refused (409). Optional; on any refusal no agent is created.",
             "example": "cam_ExAmPlE4k8Qz2Wn7R"
           },
           "activate": {
@@ -32339,17 +32489,6 @@
         }
       },
       "PostWatchlist400Response": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
-          }
-        }
-      },
-      "PostWatchlist403Response": {
         "type": "object",
         "properties": {
           "error": {
@@ -33064,6 +33203,21 @@
           }
         }
       },
+      "GetLeads200ResponseBranch2": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "title": "version=v2",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LeadV2"
+            }
+          }
+        }
+      },
       "GetContacts200ResponseBranch1": {
         "required": [
           "value"
@@ -33152,7 +33306,7 @@
       "GetLeadsByEmail200ResponseSchema": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/GetLeadsByEmail200ResponseSchemaItem"
+          "$ref": "#/components/schemas/LeadV2"
         }
       },
       "GetCampaignsByCampaignIdLeads200ResponseSchema": {
@@ -33564,6 +33718,57 @@
         ],
         "description": "A/B test state for this step. \u0060true\u0060 while the test runs (leads are split between variant A and B); \u0060\u0022A\u0022\u0060 or \u0060\u0022B\u0022\u0060 once a winner is selected; absent or \u0060false\u0060 when there is no A/B test. \u0060subject\u0060 and \u0060message\u0060 are always variant A\u0027s \u2014 read variant B via Get A/B Test Variant"
       },
+      "GetLeads200ResponseLegacyNoVersion": {
+        "title": "Legacy (no version)",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the lead",
+            "format": "email"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First name of the lead"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name of the lead"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Company name"
+          },
+          "jobTitle": {
+            "type": "string",
+            "description": "Job title"
+          },
+          "companyDomain": {
+            "type": "string",
+            "description": "Company domain"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Unique identifier for the lead"
+          },
+          "isPaused": {
+            "type": "boolean",
+            "description": "Indicates if the lead is paused"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign the lead is associated with"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Associated contact ID (if any)"
+          },
+          "emailStatus": {
+            "type": "string",
+            "description": "Email status of the lead"
+          }
+        }
+      },
       "PostCampaignsByCampaignIdLeads200ResponseWarningsItemParamsAdditionalProperties": {
         "type": "object",
         "anyOf": [
@@ -33776,6 +33981,14 @@
             "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTestOneOf2"
           }
         ]
+      },
+      "LeadV2VariablesProperty": {
+        "type": "object",
+        "description": "Custom variables associated with the lead"
+      },
+      "LeadV2SendingUserProperty": {
+        "type": "object",
+        "description": "Sending user information"
       },
       "ContactFieldsProperty": {
         "type": "object",
@@ -34421,56 +34634,6 @@
           }
         }
       },
-      "GetLeadsByEmail200ResponseItem": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique lead identifier"
-          },
-          "updatedAt": {
-            "type": "string",
-            "description": "Last update timestamp",
-            "format": "date-time"
-          },
-          "isPaused": {
-            "type": "boolean",
-            "description": "Whether the lead is paused"
-          },
-          "state": {
-            "type": "string",
-            "description": "Current state of the lead (e.g., scanned, contacted)"
-          },
-          "status": {
-            "type": "string",
-            "description": "Current status (e.g., review, done)"
-          },
-          "personalized": {
-            "type": "boolean",
-            "description": "Whether the lead has personalized content"
-          },
-          "source": {
-            "type": "string",
-            "description": "Source of the lead (e.g., api, csv)"
-          },
-          "variables": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemVariables"
-          },
-          "contactId": {
-            "type": "string",
-            "description": "Associated contact ID"
-          },
-          "enrichment": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemEnrichment"
-          },
-          "campaign": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemCampaign"
-          },
-          "sendingUser": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemSendingUser"
-          }
-        }
-      },
       "GetCampaignsByCampaignIdLeads200ResponseItem": {
         "type": "object",
         "properties": {
@@ -34485,6 +34648,11 @@
           "state": {
             "type": "string",
             "description": "Current lead state"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the lead was added to the campaign (the sort key, newest first)",
+            "format": "date-time"
           }
         }
       },
@@ -36334,56 +36502,6 @@
           }
         }
       },
-      "GetLeadsByEmail200ResponseSchemaItem": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique lead identifier"
-          },
-          "updatedAt": {
-            "type": "string",
-            "description": "Last update timestamp",
-            "format": "date-time"
-          },
-          "isPaused": {
-            "type": "boolean",
-            "description": "Whether the lead is paused"
-          },
-          "state": {
-            "type": "string",
-            "description": "Current state of the lead (e.g., scanned, contacted)"
-          },
-          "status": {
-            "type": "string",
-            "description": "Current status (e.g., review, done)"
-          },
-          "personalized": {
-            "type": "boolean",
-            "description": "Whether the lead has personalized content"
-          },
-          "source": {
-            "type": "string",
-            "description": "Source of the lead (e.g., api, csv)"
-          },
-          "variables": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemVariables"
-          },
-          "contactId": {
-            "type": "string",
-            "description": "Associated contact ID"
-          },
-          "enrichment": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemEnrichment"
-          },
-          "campaign": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemCampaign"
-          },
-          "sendingUser": {
-            "$ref": "#/components/schemas/GetLeadsByEmail200ResponseItemSendingUser"
-          }
-        }
-      },
       "GetCampaignsByCampaignIdLeads200ResponseSchemaItem": {
         "type": "object",
         "properties": {
@@ -36398,6 +36516,11 @@
           "state": {
             "type": "string",
             "description": "Current lead state"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the lead was added to the campaign (the sort key, newest first)",
+            "format": "date-time"
           }
         }
       },
@@ -36909,42 +37032,6 @@
             "description": "The branches of a condition step, in execution order with the Else branch last (only on steps of type \u0060conditional\u0060). Each entry owns the sub-sequence its leads walk; look that \u0060sequenceId\u0060 up in this same response to read the branch\u0027s own steps. Use \u0060GET /sequences/{sequenceId}/steps/{stepId}/branches\u0060 to read the same branches as structured parameters instead of raw selectors."
           }
         }
-      },
-      "GetLeadsByEmail200ResponseItemVariables": {
-        "type": "object",
-        "description": "Custom variables associated with the lead"
-      },
-      "GetLeadsByEmail200ResponseItemEnrichment": {
-        "type": "object",
-        "properties": {
-          "emailStatus": {
-            "type": "string",
-            "description": "Email verification status"
-          }
-        },
-        "description": "Enrichment data"
-      },
-      "GetLeadsByEmail200ResponseItemCampaign": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Campaign ID"
-          },
-          "name": {
-            "type": "string",
-            "description": "Campaign name"
-          },
-          "status": {
-            "type": "string",
-            "description": "Campaign status"
-          }
-        },
-        "description": "Campaign information"
-      },
-      "GetLeadsByEmail200ResponseItemSendingUser": {
-        "type": "object",
-        "description": "Sending user information"
       },
       "PostCampaignsByCampaignIdLeads200ResponseWarningsItemParams": {
         "type": "object",

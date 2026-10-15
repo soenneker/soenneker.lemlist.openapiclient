@@ -7,102 +7,28 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
+    /// <summary>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion"/>
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class GetLeads200Response : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class GetLeads200Response : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>ID of the campaign the lead is associated with</summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CampaignId { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2? GetLeads200ResponseBranch2 { get; set; }
 #nullable restore
 #else
-        public string CampaignId { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2 GetLeads200ResponseBranch2 { get; set; }
 #endif
-        /// <summary>Company domain</summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompanyDomain { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion? GetLeads200ResponseLegacyNoVersion { get; set; }
 #nullable restore
 #else
-        public string CompanyDomain { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion GetLeads200ResponseLegacyNoVersion { get; set; }
 #endif
-        /// <summary>Company name</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? CompanyName { get; set; }
-#nullable restore
-#else
-        public string CompanyName { get; set; }
-#endif
-        /// <summary>Associated contact ID (if any)</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ContactId { get; set; }
-#nullable restore
-#else
-        public string ContactId { get; set; }
-#endif
-        /// <summary>Email address of the lead</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Email { get; set; }
-#nullable restore
-#else
-        public string Email { get; set; }
-#endif
-        /// <summary>Email status of the lead</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? EmailStatus { get; set; }
-#nullable restore
-#else
-        public string EmailStatus { get; set; }
-#endif
-        /// <summary>First name of the lead</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? FirstName { get; set; }
-#nullable restore
-#else
-        public string FirstName { get; set; }
-#endif
-        /// <summary>Unique identifier for the lead</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>Indicates if the lead is paused</summary>
-        public bool? IsPaused { get; set; }
-        /// <summary>Job title</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? JobTitle { get; set; }
-#nullable restore
-#else
-        public string JobTitle { get; set; }
-#endif
-        /// <summary>Last name of the lead</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LastName { get; set; }
-#nullable restore
-#else
-        public string LastName { get; set; }
-#endif
-        /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response"/> and sets the default values.
-        /// </summary>
-        public GetLeads200Response()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -111,7 +37,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response();
+            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response();
+            if("GetLeads200ResponseBranch2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.GetLeads200ResponseBranch2 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2();
+            }
+            else if("GetLeads200ResponseLegacyNoVersion".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.GetLeads200ResponseLegacyNoVersion = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion();
+            }
+            return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -119,20 +55,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            if(GetLeads200ResponseBranch2 != null)
             {
-                { "campaignId", n => { CampaignId = n.GetStringValue(); } },
-                { "companyDomain", n => { CompanyDomain = n.GetStringValue(); } },
-                { "companyName", n => { CompanyName = n.GetStringValue(); } },
-                { "contactId", n => { ContactId = n.GetStringValue(); } },
-                { "email", n => { Email = n.GetStringValue(); } },
-                { "emailStatus", n => { EmailStatus = n.GetStringValue(); } },
-                { "firstName", n => { FirstName = n.GetStringValue(); } },
-                { "_id", n => { Id = n.GetStringValue(); } },
-                { "isPaused", n => { IsPaused = n.GetBoolValue(); } },
-                { "jobTitle", n => { JobTitle = n.GetStringValue(); } },
-                { "lastName", n => { LastName = n.GetStringValue(); } },
-            };
+                return GetLeads200ResponseBranch2.GetFieldDeserializers();
+            }
+            else if(GetLeads200ResponseLegacyNoVersion != null)
+            {
+                return GetLeads200ResponseLegacyNoVersion.GetFieldDeserializers();
+            }
+            return new Dictionary<string, Action<IParseNode>>();
         }
         /// <summary>
         /// Serializes information the current object
@@ -141,18 +72,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("campaignId", CampaignId);
-            writer.WriteStringValue("companyDomain", CompanyDomain);
-            writer.WriteStringValue("companyName", CompanyName);
-            writer.WriteStringValue("contactId", ContactId);
-            writer.WriteStringValue("email", Email);
-            writer.WriteStringValue("emailStatus", EmailStatus);
-            writer.WriteStringValue("firstName", FirstName);
-            writer.WriteStringValue("_id", Id);
-            writer.WriteBoolValue("isPaused", IsPaused);
-            writer.WriteStringValue("jobTitle", JobTitle);
-            writer.WriteStringValue("lastName", LastName);
-            writer.WriteAdditionalData(AdditionalData);
+            if(GetLeads200ResponseBranch2 != null)
+            {
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2>(null, GetLeads200ResponseBranch2);
+            }
+            else if(GetLeads200ResponseLegacyNoVersion != null)
+            {
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion>(null, GetLeads200ResponseLegacyNoVersion);
+            }
         }
     }
 }

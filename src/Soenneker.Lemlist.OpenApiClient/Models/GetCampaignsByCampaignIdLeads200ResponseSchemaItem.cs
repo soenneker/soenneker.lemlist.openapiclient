@@ -22,6 +22,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string ContactId { get; set; }
 #endif
+        /// <summary>When the lead was added to the campaign (the sort key, newest first)</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Unique lead identifier</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -64,6 +66,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "contactId", n => { ContactId = n.GetStringValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
             };
@@ -76,6 +79,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("contactId", ContactId);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("_id", Id);
             writer.WriteStringValue("state", State);
             writer.WriteAdditionalData(AdditionalData);

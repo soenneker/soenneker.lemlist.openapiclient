@@ -7,20 +7,21 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
+    /// <summary>
+    /// A lead as the v2 endpoints return it: GET /leads/{email}, GET /leads with `version=v2`, and the `lead` nested in GET /activities with `version=v2`. `createdAt` is the date the lead was added to its campaign.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class GetLeadsByEmail200ResponseSchemaItem : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class LeadV2 : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Campaign information</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemCampaign? Campaign { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Campaign? Campaign { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemCampaign Campaign { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Campaign Campaign { get; set; }
 #endif
         /// <summary>Associated contact ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -30,13 +31,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string ContactId { get; set; }
 #endif
+        /// <summary>When the lead was added to the campaign</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Enrichment data</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemEnrichment? Enrichment { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Enrichment? Enrichment { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemEnrichment Enrichment { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Enrichment Enrichment { get; set; }
 #endif
         /// <summary>Unique lead identifier</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -53,10 +56,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Sending user information</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemSendingUser? SendingUser { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2SendingUserProperty? SendingUser { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemSendingUser SendingUser { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2SendingUserProperty SendingUser { get; set; }
 #endif
         /// <summary>Source of the lead (e.g., api, csv)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -87,27 +90,27 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Custom variables associated with the lead</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables? Variables { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2VariablesProperty? Variables { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables Variables { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2VariablesProperty Variables { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseSchemaItem"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2"/> and sets the default values.
         /// </summary>
-        public GetLeadsByEmail200ResponseSchemaItem()
+        public LeadV2()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseSchemaItem"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseSchemaItem CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2 CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseSchemaItem();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -117,18 +120,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "campaign", n => { Campaign = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemCampaign>(global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemCampaign.CreateFromDiscriminatorValue); } },
+                { "campaign", n => { Campaign = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Campaign>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Campaign.CreateFromDiscriminatorValue); } },
                 { "contactId", n => { ContactId = n.GetStringValue(); } },
-                { "enrichment", n => { Enrichment = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemEnrichment>(global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemEnrichment.CreateFromDiscriminatorValue); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "enrichment", n => { Enrichment = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Enrichment>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Enrichment.CreateFromDiscriminatorValue); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "isPaused", n => { IsPaused = n.GetBoolValue(); } },
                 { "personalized", n => { Personalized = n.GetBoolValue(); } },
-                { "sendingUser", n => { SendingUser = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemSendingUser>(global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemSendingUser.CreateFromDiscriminatorValue); } },
+                { "sendingUser", n => { SendingUser = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2SendingUserProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2SendingUserProperty.CreateFromDiscriminatorValue); } },
                 { "source", n => { Source = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
-                { "variables", n => { Variables = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables>(global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables.CreateFromDiscriminatorValue); } },
+                { "variables", n => { Variables = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2VariablesProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2VariablesProperty.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -138,18 +142,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemCampaign>("campaign", Campaign);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Campaign>("campaign", Campaign);
             writer.WriteStringValue("contactId", ContactId);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemEnrichment>("enrichment", Enrichment);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2Enrichment>("enrichment", Enrichment);
             writer.WriteStringValue("_id", Id);
             writer.WriteBoolValue("isPaused", IsPaused);
             writer.WriteBoolValue("personalized", Personalized);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemSendingUser>("sendingUser", SendingUser);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2SendingUserProperty>("sendingUser", SendingUser);
             writer.WriteStringValue("source", Source);
             writer.WriteStringValue("state", State);
             writer.WriteStringValue("status", Status);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables>("variables", Variables);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2VariablesProperty>("variables", Variables);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

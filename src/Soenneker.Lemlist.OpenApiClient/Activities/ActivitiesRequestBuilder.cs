@@ -47,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
         {
         }
         /// <summary>
-        /// Get Many Activities
+        /// With `version=v2`, each activity nests its lead under `lead`: the v2 lead object of GET /leads/{email}, `createdAt` included.
         /// </summary>
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.Activity&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Get Many Activities
+        /// With `version=v2`, each activity nests its lead under `lead`: the v2 lead object of GET /leads/{email}, `createdAt` included.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -99,7 +99,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Activities
             return new global::Soenneker.Lemlist.OpenApiClient.Activities.ActivitiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Get Many Activities
+        /// With `version=v2`, each activity nests its lead under `lead`: the v2 lead object of GET /leads/{email}, `createdAt` included.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ActivitiesRequestBuilderGetQueryParameters 

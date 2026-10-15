@@ -2,35 +2,45 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// Custom variables associated with the lead
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class GetLeadsByEmail200ResponseItemVariables : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class PostHooks403Response : ApiException, IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The error property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Error { get; set; }
+#nullable restore
+#else
+        public string Error { get; set; }
+#endif
+        /// <summary>The primary error message.</summary>
+        public override string Message { get => base.Message; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostHooks403Response"/> and sets the default values.
         /// </summary>
-        public GetLeadsByEmail200ResponseItemVariables()
+        public PostHooks403Response()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostHooks403Response"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.PostHooks403Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeadsByEmail200ResponseItemVariables();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostHooks403Response();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +50,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "error", n => { Error = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("error", Error);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

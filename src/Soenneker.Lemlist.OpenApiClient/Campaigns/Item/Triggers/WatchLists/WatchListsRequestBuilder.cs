@@ -47,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists
         {
         }
         /// <summary>
-        /// Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead. Requires the `campaignSignalTrigger` beta.
+        /// Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -55,7 +55,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists401Response">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists405Response">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists409Response">When receiving a 409 status code</exception>
@@ -74,7 +73,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists401Response.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists409Response.CreateFromDiscriminatorValue },
@@ -82,7 +80,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdTriggersWatchLists200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead. Requires the `campaignSignalTrigger` beta.
+        /// Links a Signal Agent to a campaign as its signal trigger. Every new signal of the agent then pushes its contact into the campaign as a lead.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

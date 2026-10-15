@@ -16,7 +16,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public bool? Activate { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Campaign (cam_xxx) to link as this Signal Agent&apos;s signal trigger, in the same call: every new signal pushes its contact into that campaign as a lead. Only with signalProcessingType = push_to_campaign. A campaign set up as manual in the lemlist app is refused (409). Requires the campaignSignalTrigger beta. Optional; on any refusal no agent is created.</summary>
+        /// <summary>Campaign (cam_xxx) to link as this Signal Agent&apos;s signal trigger, in the same call: every new signal pushes its contact into that campaign as a lead. Only with signalProcessingType = push_to_campaign. A campaign set up as manual in the lemlist app is refused (409). Optional; on any refusal no agent is created.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CampaignId { get; set; }

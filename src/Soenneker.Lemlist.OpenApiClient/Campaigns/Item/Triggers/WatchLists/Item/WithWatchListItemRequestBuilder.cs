@@ -34,14 +34,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists.Ite
         {
         }
         /// <summary>
-        /// Detaches a Signal Agent from a campaign&apos;s signal triggers. Leads already pushed stay in the campaign. Requires the `campaignSignalTrigger` beta.
+        /// Detaches a Signal Agent from a campaign&apos;s signal triggers. Leads already pushed stay in the campaign.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId401Response">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId405Response">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -58,14 +57,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists.Ite
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId400Response.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId401Response.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId405Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Detaches a Signal Agent from a campaign&apos;s signal triggers. Leads already pushed stay in the campaign. Requires the `campaignSignalTrigger` beta.
+        /// Detaches a Signal Agent from a campaign&apos;s signal triggers. Leads already pushed stay in the campaign.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

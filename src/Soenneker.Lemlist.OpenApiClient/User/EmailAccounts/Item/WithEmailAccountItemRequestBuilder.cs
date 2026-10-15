@@ -40,14 +40,14 @@ namespace Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item
         {
         }
         /// <summary>
-        /// Disconnect Email Account
+        /// Disconnects an SMTP/IMAP email account of the team.**Permission:** only the owner of the email account, or an admin of the team when the owner is a member of it, can disconnect it. Otherwise the request fails with `403` and nothing is disconnected.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUserEmailAccountsByEmailAccountId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response400Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response403Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUserEmailAccountsByEmailAccountId403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -63,13 +63,13 @@ namespace Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response400Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response401Error.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response403Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUserEmailAccountsByEmailAccountId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.Item.DeleteUserEmailAccountsByEmailAccountId200Response404Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUserEmailAccountsByEmailAccountId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUserEmailAccountsByEmailAccountId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Disconnect Email Account
+        /// Disconnects an SMTP/IMAP email account of the team.**Permission:** only the owner of the email account, or an admin of the team when the owner is a member of it, can disconnect it. Otherwise the request fails with `403` and nothing is disconnected.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

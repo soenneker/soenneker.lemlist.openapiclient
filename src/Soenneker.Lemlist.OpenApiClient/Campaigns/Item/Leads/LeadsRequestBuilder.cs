@@ -41,7 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,state*,updateStrategy*,verifyEmail*}", pathParameters)
+        public LeadsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,offset*,state*,updateStrategy*,verifyEmail*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LeadsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,state*,updateStrategy*,verifyEmail*}", rawUrl)
+        public LeadsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads{?deduplicate*,findEmail*,findPhone*,limit*,linkedinEnrichment*,offset*,state*,updateStrategy*,verifyEmail*}", rawUrl)
         {
         }
         /// <summary>
@@ -209,6 +209,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads
             /// <summary>Maximum number of leads to return. Default: 100, Max: 500</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>Number of leads to skip, for paging past the first page. Default: 0</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
             /// <summary>Filter leads by state (e.g., scanned, contacted, interested, notInterested, etc.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
