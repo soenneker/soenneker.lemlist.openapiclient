@@ -4500,6 +4500,1312 @@
         }
       ]
     },
+    "/senders": {
+      "get": {
+        "tags": [
+          "Senders"
+        ],
+        "summary": "List Senders",
+        "description": "Lists the team members who can send, with their channels and the health of each channel. With \u0060campaignId\u0060, each sender and each channel tells whether the campaign pool enables it.",
+        "operationId": "GetSenders",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "query",
+            "description": "Adds \u0060inPool\u0060, the sender strategy and the channel types that the campaign steps use",
+            "schema": {
+              "type": "string"
+            },
+            "example": "cam_A1b2C3d4E5f6G7h8M"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSenders200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1b2C3d4E5f6G7h8M",
+                    "senderStrategy": "random",
+                    "requiredChannelTypes": [
+                      "email",
+                      "whatsapp"
+                    ],
+                    "senders": [
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8K",
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                        "inPool": true,
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8L",
+                            "label": "john@example.com",
+                            "aliases": [
+                              "hello@example.com"
+                            ],
+                            "esp": "google",
+                            "inPool": true,
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": [
+                          {
+                            "scope": "user",
+                            "type": "error",
+                            "code": "no_required_channel_active",
+                            "channelType": "whatsapp"
+                          }
+                        ]
+                      },
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8N",
+                        "name": "Jane Smith",
+                        "email": "jane@example.com",
+                        "inPool": false,
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8P",
+                            "label": "jane@example.com",
+                            "esp": "microsoft",
+                            "inPool": false,
+                            "diagnostics": []
+                          },
+                          {
+                            "type": "whatsapp",
+                            "id": "uwa_A1b2C3d4E5f6G7h8Q",
+                            "label": "\u002B15550100199",
+                            "inPool": false,
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed campaign id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSenders400Response"
+                },
+                "example": {
+                  "error": "Wrong param campaign id",
+                  "code": "WRONG_PARAM_CAMPAIGN_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSenders404Response"
+                },
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "SENDER_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSenders405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/campaigns/{campaignId}/senders": {
+      "get": {
+        "tags": [
+          "Senders"
+        ],
+        "summary": "Get Campaign Senders",
+        "description": "Returns the sender pool of a campaign, as the campaign editor shows it: each sender with its enabled channels and their diagnostics. Requires the Email Pro plan.",
+        "operationId": "GetCampaignsByCampaignIdSenders",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCampaignsByCampaignIdSenders200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1b2C3d4E5f6G7h8M",
+                    "senderStrategy": "random",
+                    "espMatching": false,
+                    "readOnly": false,
+                    "senders": [
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8K",
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8L",
+                            "label": "john@example.com",
+                            "alias": "john@example.com",
+                            "esp": "google",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": [
+                          {
+                            "scope": "user",
+                            "type": "warning",
+                            "code": "license_missing"
+                          }
+                        ]
+                      }
+                    ],
+                    "diagnostics": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed campaign id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCampaignsByCampaignIdSenders400Response"
+                },
+                "example": {
+                  "error": "Wrong param campaign id",
+                  "code": "WRONG_PARAM_CAMPAIGN_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "The sender pool requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCampaignsByCampaignIdSenders404Response"
+                },
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "SENDER_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCampaignsByCampaignIdSenders405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Senders"
+        ],
+        "summary": "Add Campaign Senders",
+        "description": "Adds senders, or channels of senders, to the pool of a campaign. It never removes a sender or a channel. Requires the Email Pro plan.",
+        "operationId": "PostCampaignsByCampaignIdSenders",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCampaignsByCampaignIdSendersRequest"
+              },
+              "example": {
+                "senders": [
+                  {
+                    "userId": "usr_A1b2C3d4E5f6G7h8N"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdSenders200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1b2C3d4E5f6G7h8M",
+                    "senderStrategy": "random",
+                    "espMatching": false,
+                    "readOnly": false,
+                    "senders": [
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8K",
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8L",
+                            "label": "john@example.com",
+                            "alias": "john@example.com",
+                            "esp": "google",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      },
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8N",
+                        "name": "Jane Smith",
+                        "email": "jane@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8P",
+                            "label": "jane@example.com",
+                            "alias": "jane@example.com",
+                            "esp": "microsoft",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      }
+                    ],
+                    "diagnostics": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: the body does not match the schema, a user is not a team member, an account or an alias does not belong to the user, the user has no account of the type, or no step of the campaign uses the channel type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdSenders400Response"
+                },
+                "example": {
+                  "error": "No step of the campaign uses this channel type. Add a step of this type first",
+                  "code": "SENDER_CAMPAIGN_CHANNEL_TYPE_NOT_REQUIRED"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "The sender pool requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdSenders404Response"
+                },
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "SENDER_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdSenders405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The campaign uses a dynamic sender strategy: the leads select the senders, and the pool is read-only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdSenders409Response"
+                },
+                "example": {
+                  "error": "The campaign uses a dynamic sender strategy: the leads select the senders",
+                  "code": "SENDER_CAMPAIGN_DYNAMIC_STRATEGY"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Senders"
+        ],
+        "summary": "Replace Campaign Senders",
+        "description": "Replaces the pool of a campaign with the senders of the body. A sender or a channel outside the body leaves the pool. An empty list clears the pool. Requires the Email Pro plan.",
+        "operationId": "PutCampaignsByCampaignIdSenders",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutCampaignsByCampaignIdSendersRequest"
+              },
+              "example": {
+                "senders": [
+                  {
+                    "userId": "usr_A1b2C3d4E5f6G7h8N",
+                    "channels": [
+                      {
+                        "type": "email",
+                        "id": "usm_A1b2C3d4E5f6G7h8P"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdSenders200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1b2C3d4E5f6G7h8M",
+                    "senderStrategy": "random",
+                    "espMatching": false,
+                    "readOnly": false,
+                    "senders": [
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8N",
+                        "name": "Jane Smith",
+                        "email": "jane@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8P",
+                            "label": "jane@example.com",
+                            "alias": "jane@example.com",
+                            "esp": "microsoft",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      }
+                    ],
+                    "diagnostics": []
+                  },
+                  "impact": {
+                    "contactedLeads": 12
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: the body does not match the schema, a user is not a team member, an account or an alias does not belong to the user, the user has no account of the type, or no step of the campaign uses the channel type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdSenders400Response"
+                },
+                "example": {
+                  "error": "No step of the campaign uses this channel type. Add a step of this type first",
+                  "code": "SENDER_CAMPAIGN_CHANNEL_TYPE_NOT_REQUIRED"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "The sender pool requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdSenders404Response"
+                },
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "SENDER_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdSenders405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The campaign uses a dynamic sender strategy: the leads select the senders, and the pool is read-only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutCampaignsByCampaignIdSenders409Response"
+                },
+                "example": {
+                  "error": "The campaign uses a dynamic sender strategy: the leads select the senders",
+                  "code": "SENDER_CAMPAIGN_DYNAMIC_STRATEGY"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "campaignId",
+          "in": "path",
+          "description": "The unique identifier of the campaign",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "cam_A1b2C3d4E5f6G7h8M"
+        }
+      ]
+    },
+    "/campaigns/{campaignId}/senders/{userId}": {
+      "patch": {
+        "tags": [
+          "Senders"
+        ],
+        "summary": "Update Campaign Sender Channels",
+        "description": "Enables or disables channels of one sender in the pool of a campaign, or changes the alias of a mailbox. The changes apply in order. The other channels of the sender do not change. Requires the Email Pro plan.",
+        "operationId": "PatchCampaignsByCampaignIdSendersByUserId",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserIdRequest"
+              },
+              "example": {
+                "channels": [
+                  {
+                    "type": "whatsapp",
+                    "id": "uwa_A1b2C3d4E5f6G7h8Q",
+                    "enabled": true
+                  },
+                  {
+                    "type": "email",
+                    "id": "usm_A1b2C3d4E5f6G7h8P",
+                    "alias": "hello@example.com"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserId200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1b2C3d4E5f6G7h8M",
+                    "senderStrategy": "random",
+                    "espMatching": false,
+                    "readOnly": false,
+                    "senders": [
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8K",
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8L",
+                            "label": "john@example.com",
+                            "alias": "john@example.com",
+                            "esp": "google",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      },
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8N",
+                        "name": "Jane Smith",
+                        "email": "jane@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8P",
+                            "label": "jane@example.com",
+                            "alias": "hello@example.com",
+                            "esp": "microsoft",
+                            "diagnostics": []
+                          },
+                          {
+                            "type": "whatsapp",
+                            "id": "uwa_A1b2C3d4E5f6G7h8Q",
+                            "label": "\u002B15550100199",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      }
+                    ],
+                    "diagnostics": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: malformed user id, the body does not match the schema, the user is not a team member, an account or an alias does not belong to the user, the user has no account of the type, no step of the campaign uses the channel type, or a change disables LinkedIn",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserId400Response"
+                },
+                "example": {
+                  "error": "LinkedIn cannot be disabled alone. Remove the sender from the campaign instead",
+                  "code": "SENDER_CAMPAIGN_LINKEDIN_IMPLICIT"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "The sender pool requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserId404Response"
+                },
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "SENDER_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserId405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The campaign uses a dynamic sender strategy: the leads select the senders, and the pool is read-only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserId409Response"
+                },
+                "example": {
+                  "error": "The campaign uses a dynamic sender strategy: the leads select the senders",
+                  "code": "SENDER_CAMPAIGN_DYNAMIC_STRATEGY"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Senders"
+        ],
+        "summary": "Remove Campaign Sender",
+        "description": "Removes one sender, with every channel, from the pool of a campaign. The leads not contacted yet go to the other senders of the pool. Requires the Email Pro plan.",
+        "operationId": "DeleteCampaignsByCampaignIdSendersByUserId",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdSendersByUserId200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1b2C3d4E5f6G7h8M",
+                    "senderStrategy": "random",
+                    "espMatching": false,
+                    "readOnly": false,
+                    "senders": [
+                      {
+                        "userId": "usr_A1b2C3d4E5f6G7h8K",
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                        "channels": [
+                          {
+                            "type": "email",
+                            "id": "usm_A1b2C3d4E5f6G7h8L",
+                            "label": "john@example.com",
+                            "alias": "john@example.com",
+                            "esp": "google",
+                            "diagnostics": []
+                          }
+                        ],
+                        "diagnostics": []
+                      }
+                    ],
+                    "diagnostics": []
+                  },
+                  "impact": {
+                    "contactedLeads": 0
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed campaign or user id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdSendersByUserId400Response"
+                },
+                "example": {
+                  "error": "Wrong param user id",
+                  "code": "WRONG_PARAM_USER_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "The sender pool requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdSendersByUserId404Response"
+                },
+                "example": {
+                  "error": "Campaign not found",
+                  "code": "SENDER_CAMPAIGN_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdSendersByUserId405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The campaign uses a dynamic sender strategy: the leads select the senders, and the pool is read-only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdSendersByUserId409Response"
+                },
+                "example": {
+                  "error": "The campaign uses a dynamic sender strategy: the leads select the senders",
+                  "code": "SENDER_CAMPAIGN_DYNAMIC_STRATEGY"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "campaignId",
+          "in": "path",
+          "description": "The unique identifier of the campaign",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "cam_A1b2C3d4E5f6G7h8M"
+        },
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "The team member to change",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "usr_A1b2C3d4E5f6G7h8N"
+        }
+      ]
+    },
+    "/sequences/{sequenceId}/steps/{stepId}/sender": {
+      "get": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "Get Step Sender",
+        "description": "Returns the forced sender of a step. A step without a forced sender uses the sender strategy of the campaign. Requires the Email Pro plan.",
+        "operationId": "GetSequencesBySequenceIdStepsByStepIdSender",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdSender200Response"
+                },
+                "example": {
+                  "data": {
+                    "sequenceId": "seq_A1b2C3d4E5f6G7h8J",
+                    "stepId": "stp_A1b2C3d4E5f6G7h8I",
+                    "stepType": "email",
+                    "sender": {
+                      "userId": "usr_A1b2C3d4E5f6G7h8K",
+                      "channel": {
+                        "type": "email",
+                        "id": "usm_A1b2C3d4E5f6G7h8L",
+                        "alias": "john@example.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed sequence or step id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdSender400Response"
+                },
+                "example": {
+                  "error": "Wrong param id",
+                  "code": "WRONG_PARAM_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "A forced sender requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Sequence, step or campaign not found. A template sequence has no campaign.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdSender404Response"
+                },
+                "example": {
+                  "error": "Step not found",
+                  "code": "SEQUENCE_STEP_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSequencesBySequenceIdStepsByStepIdSender405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "Set Step Sender",
+        "description": "Forces a sender on a step, as the campaign editor does. The step then always sends from this team member, whatever sender the lead got. On a running campaign, the pending tasks of the step move to this sender. Requires the Email Pro plan.",
+        "operationId": "PutSequencesBySequenceIdStepsByStepIdSender",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSenderRequest"
+              },
+              "example": {
+                "userId": "usr_A1b2C3d4E5f6G7h8K",
+                "channel": {
+                  "type": "email",
+                  "id": "usm_A1b2C3d4E5f6G7h8L"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSender200Response"
+                },
+                "example": {
+                  "data": {
+                    "step": {
+                      "sequenceId": "seq_A1b2C3d4E5f6G7h8J",
+                      "stepId": "stp_A1b2C3d4E5f6G7h8I",
+                      "stepType": "email",
+                      "sender": {
+                        "userId": "usr_A1b2C3d4E5f6G7h8K",
+                        "channel": {
+                          "type": "email",
+                          "id": "usm_A1b2C3d4E5f6G7h8L",
+                          "alias": "john@example.com"
+                        }
+                      }
+                    },
+                    "senderPoolChange": {
+                      "enabledChannelTypes": [],
+                      "disabledChannelTypes": [
+                        "email"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: the body does not match the schema, the channel does not match the step, the user is not a team member, the account does not belong to the user, or an InMail step gets a sender without LinkedIn Premium",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSender400Response"
+                },
+                "example": {
+                  "error": "The channel does not match the step: give a channel of the step type, or no channel on a call, manual, API or phone step",
+                  "code": "SENDER_STEP_CHANNEL_MISMATCH"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "A forced sender requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Sequence, step or campaign not found. A template sequence has no campaign.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSender404Response"
+                },
+                "example": {
+                  "error": "Step not found",
+                  "code": "SEQUENCE_STEP_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSender405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "409": {
+            "description": "The step type has no sender",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSender409Response"
+                },
+                "example": {
+                  "error": "This step type has no sender",
+                  "code": "SENDER_STEP_NOT_FORCEABLE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "Remove Step Sender",
+        "description": "Removes the forced sender of a step. The step uses the sender strategy of the campaign again. On a running campaign, the pending tasks of the step move to a sender of the pool. Requires the Email Pro plan.",
+        "operationId": "DeleteSequencesBySequenceIdStepsByStepIdSender",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdSender200Response"
+                },
+                "example": {
+                  "data": {
+                    "step": {
+                      "sequenceId": "seq_A1b2C3d4E5f6G7h8J",
+                      "stepId": "stp_A1b2C3d4E5f6G7h8I",
+                      "stepType": "email"
+                    },
+                    "senderPoolChange": {
+                      "enabledChannelTypes": [
+                        "email"
+                      ],
+                      "disabledChannelTypes": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed sequence or step id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdSender400Response"
+                },
+                "example": {
+                  "error": "Wrong param id",
+                  "code": "WRONG_PARAM_ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "A forced sender requires at least the Email Pro plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "404": {
+            "description": "Sequence, step or campaign not found. A template sequence has no campaign.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdSender404Response"
+                },
+                "example": {
+                  "error": "Step not found",
+                  "code": "SEQUENCE_STEP_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdSender405Response"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "409": {
+            "description": "The step has no sender, or the step is a voice note, which always has a forced sender",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdSender409Response"
+                },
+                "example": {
+                  "error": "A voice note step always has a forced sender. Force another sender instead",
+                  "code": "SENDER_STEP_FORCED_ONLY"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "sequenceId",
+          "in": "path",
+          "description": "The unique identifier of the sequence",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "seq_A1b2C3d4E5f6G7h8J"
+        },
+        {
+          "name": "stepId",
+          "in": "path",
+          "description": "The unique identifier of the step",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "stp_A1b2C3d4E5f6G7h8I"
+        }
+      ]
+    },
     "/schedules": {
       "get": {
         "tags": [
@@ -11733,7 +13039,7 @@
           {
             "name": "crmSyncStatus",
             "in": "query",
-            "description": "Filter contacts by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Values:\n- \u0060synced\u0060 \u2014 the contact has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the contact has no CRM record yet.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised, whatever its reason.\n- A specific error reason (lowercase form), to filter by root cause:\n  - \u0060invalid_email\u0060 \u2014 the CRM refused the contact\u0027s email.\n  - \u0060property_doesnt_exist\u0060 \u2014 a mapped property does not exist in the CRM.\n  - \u0060required_field_missing\u0060 \u2014 a field the CRM requires is missing.\n  - \u0060unique_index_error_contact\u0060 \u2014 the CRM record is already synced with another lemlist contact.\n  - \u0060contact_already_exists_with_name\u0060, \u0060contact_already_exists_with_linkedin_url\u0060, \u0060contact_already_exists_with_email\u0060 \u2014 a CRM contact already exists with the same first and last name, LinkedIn URL or email.\n  - \u0060contact_blocked_by_company\u0060 \u2014 contact not created: its company already exists in the CRM.\n  - \u0060contact_blocked_by_company_search\u0060 \u2014 contact not created: the company search is incomplete, retried later.\n  - \u0060contact_blocked_by_company_without_name\u0060 \u2014 contact not created: its company needs a name to be found in the CRM.\n  - \u0060contact_blocked_by_company_without_key\u0060 \u2014 contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.\n\nOnly applies to the paginated list \u2014 ignored when \u0060idsOrEmails\u0060 or \u0060crmIds\u0060 is provided.",
+            "description": "Filter contacts by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Values:\n- \u0060synced\u0060 \u2014 the contact has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the contact has no CRM record yet.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised, whatever its reason.\n- A specific error reason (lowercase form), to filter by root cause:\n  - \u0060invalid_email\u0060 \u2014 the CRM refused the contact\u0027s email.\n  - \u0060property_doesnt_exist\u0060 \u2014 a mapped property does not exist in the CRM.\n  - \u0060required_field_missing\u0060 \u2014 a field the CRM requires is missing.\n  - \u0060unique_index_error_contact\u0060 \u2014 the CRM record is already synced with another lemlist contact.\n  - \u0060contact_already_exists_with_name\u0060, \u0060contact_already_exists_with_linkedin_url\u0060, \u0060contact_already_exists_with_email\u0060 \u2014 a CRM contact already exists with the same first and last name, LinkedIn URL or email.\n  - \u0060contact_blocked_by_company\u0060 \u2014 contact not created: its company already exists in the CRM.\n  - \u0060contact_blocked_by_company_search\u0060 \u2014 contact not created: the company search is incomplete, retried later.\n  - \u0060contact_blocked_by_company_without_name\u0060 \u2014 contact not created: its company needs a name to be found in the CRM.\n  - \u0060contact_blocked_by_company_without_key\u0060 \u2014 contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.\n  - \u0060contact_blocked_by_company_already_synced\u0060 \u2014 contact not created: its company is already synced with another lemlist company.\n\nOnly applies to the paginated list \u2014 ignored when \u0060idsOrEmails\u0060 or \u0060crmIds\u0060 is provided.",
             "schema": {
               "$ref": "#/components/schemas/GetContactsCrmSyncStatusParameter"
             },
@@ -23359,6 +24665,171 @@
         },
         "description": "One branch of a condition step. Addressed by \u0060sequenceId\u0060 - the sub-sequence its leads walk - never by position. The fields describing what the branch tests depend on the step\u0027s condition; the ones that do not apply are absent."
       },
+      "StepSender": {
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string"
+          },
+          "stepId": {
+            "type": "string"
+          },
+          "stepType": {
+            "type": "string",
+            "description": "The step type. Absent on a legacy email step."
+          },
+          "sender": {
+            "$ref": "#/components/schemas/StepSenderSender"
+          }
+        },
+        "description": "The forced sender of a step."
+      },
+      "SenderPoolChange": {
+        "type": "object",
+        "properties": {
+          "enabledChannelTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderPoolChangeEnabledChannelTypesItem"
+            },
+            "description": "The channel types with an account that enters the pool, in alphabetical order"
+          },
+          "disabledChannelTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderPoolChangeDisabledChannelTypesItem"
+            },
+            "description": "The channel types with an account that leaves the pool, in alphabetical order"
+          }
+        },
+        "description": "The channel types that a step change enables or disables in the sender pool. A type can be in both lists when one account of the type enters the pool and another leaves it. It does not tell whether each sender has an account of the type: read the diagnostics with Get Campaign Senders."
+      },
+      "SenderPool": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string"
+          },
+          "senderStrategy": {
+            "type": "string",
+            "description": "\u0060random\u0060, or a dynamic strategy: \u0060contactOwner\u0060, \u0060leadImporter\u0060 or \u0060customField:\u003Cfield\u003E\u0060."
+          },
+          "espMatching": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when a lead gets a mailbox of the same provider as its address, when the pool has one."
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 for a dynamic sender strategy: the leads select the senders."
+          },
+          "senders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderPoolSendersItem"
+            }
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderDiagnostic"
+            },
+            "description": "The problems of the whole pool, for example no account of a required channel type in the team."
+          }
+        },
+        "description": "The sender pool of a campaign, as the campaign editor shows it."
+      },
+      "SenderDiagnostic": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/SenderDiagnosticScope"
+          },
+          "type": {
+            "$ref": "#/components/schemas/SenderDiagnosticType"
+          },
+          "code": {
+            "$ref": "#/components/schemas/SenderDiagnosticCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "More details, for example the error of a mailbox."
+          },
+          "channelType": {
+            "$ref": "#/components/schemas/SenderDiagnosticChannelType"
+          }
+        },
+        "description": "One health problem of a sender, a channel or the whole pool."
+      },
+      "SenderChannelInput": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SenderChannelInputType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The account to enable: the mailbox id, the WhatsApp account id or the phone number. Omit it for \u0060linkedin\u0060. Without \u0060id\u0060, every healthy account of the type, or every account of the type when none is healthy."
+          },
+          "alias": {
+            "type": "string",
+            "description": "Email only, with an \u0060id\u0060: the alias address of the mailbox to send as."
+          }
+        },
+        "additionalProperties": false,
+        "description": "One channel to enable on a sender."
+      },
+      "SenderInput": {
+        "required": [
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The team member who sends"
+          },
+          "channels": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderChannelInput"
+            },
+            "description": "The channels to enable. Without \u0060channels\u0060, the sender gets the channel types that the campaign steps use, healthy accounts first, as the campaign editor does."
+          }
+        },
+        "additionalProperties": false,
+        "description": "One sender of the pool."
+      },
+      "SenderList": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string",
+            "description": "With \u0060campaignId\u0060 only."
+          },
+          "senderStrategy": {
+            "type": "string",
+            "description": "With \u0060campaignId\u0060 only. The sender strategy of the campaign."
+          },
+          "requiredChannelTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderListRequiredChannelTypesItem"
+            },
+            "description": "With \u0060campaignId\u0060 only. The channel types that the campaign steps use. Only these types can be enabled in the pool."
+          },
+          "senders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderListSendersItem"
+            }
+          }
+        },
+        "description": "The team members who can send, with their channels."
+      },
       "Schedule": {
         "type": "object",
         "properties": {
@@ -26055,6 +27526,78 @@
         "description": "CRM sync status for the company, resolved against the team\u0027s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via \u0060GET /companies?crmSyncStatus=unique_index_error_company\u0060).",
         "nullable": true
       },
+      "StepSenderSender": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The team member who sends the step"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/StepSenderSenderChannel"
+          }
+        },
+        "description": "The forced sender of the step, in the shape of the request body. Absent when the step uses the sender strategy of the campaign."
+      },
+      "SenderPoolSendersItem": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderPoolSendersItemChannelsItem"
+            },
+            "description": "The enabled channels. Remove \u0060label\u0060, \u0060esp\u0060 and \u0060diagnostics\u0060 to get a valid \u0060channels\u0060 entry of the request bodies."
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderDiagnostic"
+            },
+            "description": "The problems that block or limit the sending. See [Get Campaign Senders](/api-reference/endpoints/senders/get-campaign-senders#diagnostics)."
+          }
+        }
+      },
+      "SenderListSendersItem": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "inPool": {
+            "type": "boolean",
+            "description": "With \u0060campaignId\u0060 only. \u0060true\u0060 when the sender is in the pool of the campaign."
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderListSendersItemChannelsItem"
+            }
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderDiagnostic"
+            },
+            "description": "The problems that block or limit the sending. See [Get Campaign Senders](/api-reference/endpoints/senders/get-campaign-senders#diagnostics)."
+          }
+        }
+      },
       "ReportStats": {
         "type": "object",
         "properties": {
@@ -27207,6 +28750,91 @@
           }
         }
       },
+      "StepSenderSenderChannel": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/StepSenderSenderChannelType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The account to send from: the mailbox id, the WhatsApp account id, or the phone number. On LinkedIn, the user id. Without \u0060id\u0060, the first healthy account of the type."
+          },
+          "alias": {
+            "type": "string",
+            "description": "Email only, with an \u0060id\u0060: the alias address of the mailbox to send from."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SenderPoolSendersItemChannelsItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SenderPoolSendersItemChannelsItemType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The mailbox id, the WhatsApp account id, the phone number, or the user id for LinkedIn."
+          },
+          "label": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string",
+            "description": "Email only: the address the mailbox sends as."
+          },
+          "esp": {
+            "$ref": "#/components/schemas/SenderPoolSendersItemChannelsItemEsp"
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderDiagnostic"
+            },
+            "description": "The problems that block or limit the sending. See [Get Campaign Senders](/api-reference/endpoints/senders/get-campaign-senders#diagnostics)."
+          }
+        }
+      },
+      "SenderListSendersItemChannelsItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SenderListSendersItemChannelsItemType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The mailbox id, the WhatsApp account id, the phone number, or the user id for LinkedIn."
+          },
+          "label": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Email only: the alias addresses of the mailbox."
+          },
+          "esp": {
+            "$ref": "#/components/schemas/SenderListSendersItemChannelsItemEsp"
+          },
+          "inPool": {
+            "type": "boolean",
+            "description": "With \u0060campaignId\u0060 only. \u0060true\u0060 when the pool enables the channel."
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderDiagnostic"
+            },
+            "description": "The problems that block or limit the sending. See [Get Campaign Senders](/api-reference/endpoints/senders/get-campaign-senders#diagnostics)."
+          }
+        }
+      },
       "PeopleSchemaExperiencesItemTechnologiesItem": {
         "type": "object",
         "properties": {
@@ -27712,7 +29340,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Array of user IDs (usr_xxx format) to assign as campaign senders. Cannot be used on campaigns with a dynamic sender strategy (contactOwner, leadImporter, customField). Each sender is validated against the campaign\u0027s sending channels (email, LinkedIn, SMS, WhatsApp): senders without capabilities for at least one channel are excluded, and all channels must be covered by at least one sender."
+            "description": "Array of user IDs (usr_xxx format) to assign as campaign senders. Cannot be used on campaigns with a dynamic sender strategy (contactOwner, leadImporter, customField). Each sender is validated against the campaign\u0027s sending channels (email, LinkedIn, SMS, WhatsApp): senders without capabilities for at least one channel are excluded, and every channel that a lead can reach in the sequence must be covered by at least one sender. Replaces the sender pool, with the first account of each channel type for each sender. To add a sender without a replacement, pick an account or an alias, use the [Senders](/api-reference/endpoints/senders/add-campaign-senders) endpoints."
           },
           "autoReview": {
             "type": "boolean",
@@ -28829,6 +30457,552 @@
           },
           "code": {
             "type": "string"
+          }
+        }
+      },
+      "GetSenders400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetSenders404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetSenders405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetCampaignsByCampaignIdSenders400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetCampaignsByCampaignIdSenders404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetCampaignsByCampaignIdSenders405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdSendersRequest": {
+        "required": [
+          "senders"
+        ],
+        "type": "object",
+        "properties": {
+          "senders": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderInput"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostCampaignsByCampaignIdSenders200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPool"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdSenders200ResponseImpact"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdSenders400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdSenders404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdSenders405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdSenders409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdSendersRequest": {
+        "required": [
+          "senders"
+        ],
+        "type": "object",
+        "properties": {
+          "senders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderInput"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PutCampaignsByCampaignIdSenders200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPool"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/PutCampaignsByCampaignIdSenders200ResponseImpact"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdSenders400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdSenders404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdSenders405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PutCampaignsByCampaignIdSenders409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PatchCampaignsByCampaignIdSendersByUserIdRequest": {
+        "required": [
+          "channels"
+        ],
+        "type": "object",
+        "properties": {
+          "channels": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserIdRequestChannelsItem"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatchCampaignsByCampaignIdSendersByUserId200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPool"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserId200ResponseImpact"
+          }
+        }
+      },
+      "PatchCampaignsByCampaignIdSendersByUserId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PatchCampaignsByCampaignIdSendersByUserId404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PatchCampaignsByCampaignIdSendersByUserId405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PatchCampaignsByCampaignIdSendersByUserId409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdSendersByUserId200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPool"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/DeleteCampaignsByCampaignIdSendersByUserId200ResponseImpact"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdSendersByUserId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdSendersByUserId404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdSendersByUserId405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteCampaignsByCampaignIdSendersByUserId409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetSequencesBySequenceIdStepsByStepIdSender400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetSequencesBySequenceIdStepsByStepIdSender404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "GetSequencesBySequenceIdStepsByStepIdSender405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSenderRequest": {
+        "required": [
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The team member who sends the step"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSenderRequestChannel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSender200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSender200ResponseData"
+          }
+        }
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSender400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSender404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSender405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSender409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdSender200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DeleteSequencesBySequenceIdStepsByStepIdSender200ResponseData"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdSender400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdSender404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdSender405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdSender409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
           }
         }
       },
@@ -33297,6 +35471,30 @@
           "$ref": "#/components/schemas/ConditionBranch"
         }
       },
+      "GetSenders200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderList"
+          }
+        }
+      },
+      "GetCampaignsByCampaignIdSenders200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SenderPool"
+          }
+        }
+      },
+      "GetSequencesBySequenceIdStepsByStepIdSender200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/StepSender"
+          }
+        }
+      },
       "GetCampaignsByCampaignIdSchedules200ResponseSchema": {
         "type": "array",
         "items": {
@@ -34631,6 +36829,113 @@
           "conditionalStepIndex": {
             "type": "integer",
             "description": "The index of the conditional step that triggers this sequence (only for conditional sequences)"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdSenders200ResponseImpact": {
+        "type": "object",
+        "properties": {
+          "contactedLeads": {
+            "type": "integer",
+            "description": "The contacted leads that keep a removed sender or a removed channel. Their next steps stop with a \u0022Send user is missing\u0022 error until the sender is back in the pool."
+          }
+        },
+        "description": "Present when the change removes a sender or a channel."
+      },
+      "PutCampaignsByCampaignIdSenders200ResponseImpact": {
+        "type": "object",
+        "properties": {
+          "contactedLeads": {
+            "type": "integer",
+            "description": "The contacted leads that keep a removed sender or a removed channel. Their next steps stop with a \u0022Send user is missing\u0022 error until the sender is back in the pool."
+          }
+        },
+        "description": "Present when the change removes a sender or a channel."
+      },
+      "PatchCampaignsByCampaignIdSendersByUserIdRequestChannelsItem": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PatchCampaignsByCampaignIdSendersByUserIdRequestChannelsItemType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The account: the mailbox id, the WhatsApp account id or the phone number. Omit it for \u0060linkedin\u0060. Without \u0060id\u0060, the change applies to every account of the type."
+          },
+          "alias": {
+            "type": "string",
+            "description": "Email only, with an \u0060id\u0060: the alias address of the mailbox to send as. Forbidden with \u0060enabled: false\u0060."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 enables the channel, \u0060false\u0060 disables it. Without \u0060enabled\u0060, only the alias changes: \u0060id\u0060 and \u0060alias\u0060 are then required."
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatchCampaignsByCampaignIdSendersByUserId200ResponseImpact": {
+        "type": "object",
+        "properties": {
+          "contactedLeads": {
+            "type": "integer",
+            "description": "The contacted leads that keep a removed sender or a removed channel. Their next steps stop with a \u0022Send user is missing\u0022 error until the sender is back in the pool."
+          }
+        },
+        "description": "Present when the change removes a sender or a channel."
+      },
+      "DeleteCampaignsByCampaignIdSendersByUserId200ResponseImpact": {
+        "type": "object",
+        "properties": {
+          "contactedLeads": {
+            "type": "integer",
+            "description": "The contacted leads that keep a removed sender or a removed channel. Their next steps stop with a \u0022Send user is missing\u0022 error until the sender is back in the pool."
+          }
+        },
+        "description": "Present when the change removes a sender or a channel."
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSenderRequestChannel": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PutSequencesBySequenceIdStepsByStepIdSenderRequestChannelType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The account to send from: the mailbox id, the WhatsApp account id, or the phone number. On LinkedIn, the user id. Without \u0060id\u0060, the first healthy account of the type."
+          },
+          "alias": {
+            "type": "string",
+            "description": "Email only, with an \u0060id\u0060: the alias address of the mailbox to send from."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Required on an email, LinkedIn, WhatsApp or SMS step. Forbidden on a call, manual, API or phone step."
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSender200ResponseData": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "$ref": "#/components/schemas/StepSender"
+          },
+          "senderPoolChange": {
+            "$ref": "#/components/schemas/SenderPoolChange"
+          }
+        }
+      },
+      "DeleteSequencesBySequenceIdStepsByStepIdSender200ResponseData": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "$ref": "#/components/schemas/StepSender"
+          },
+          "senderPoolChange": {
+            "$ref": "#/components/schemas/SenderPoolChange"
           }
         }
       },
@@ -37778,6 +40083,291 @@
           ]
         }
       },
+      "SenderPoolChangeEnabledChannelTypesItem": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderPoolChangeEnabledChannelTypesItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderPoolChangeDisabledChannelTypesItem": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderPoolChangeDisabledChannelTypesItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderDiagnosticScope": {
+        "enum": [
+          "channel",
+          "user",
+          "step",
+          "global"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "What the problem is about: one channel, one sender, one step or the whole pool.",
+        "x-ms-enum": {
+          "name": "SenderDiagnosticScope",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "channel",
+              "name": "Channel"
+            },
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "step",
+              "name": "Step"
+            },
+            {
+              "value": "global",
+              "name": "Global"
+            }
+          ]
+        }
+      },
+      "SenderDiagnosticType": {
+        "enum": [
+          "error",
+          "warning",
+          "info"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060error\u0060 blocks the sending. \u0060warning\u0060 and \u0060info\u0060 do not.",
+        "x-ms-enum": {
+          "name": "SenderDiagnosticType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "error",
+              "name": "Error"
+            },
+            {
+              "value": "warning",
+              "name": "Warning"
+            },
+            {
+              "value": "info",
+              "name": "Info"
+            }
+          ]
+        }
+      },
+      "SenderDiagnosticCode": {
+        "enum": [
+          "channel_missing",
+          "channel_disconnected",
+          "channel_linked_elsewhere",
+          "channel_issue",
+          "channel_not_required",
+          "license_missing",
+          "no_required_channel_active",
+          "no_account_connected",
+          "no_sender_enabled",
+          "sender_paused"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderDiagnosticCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "channel_missing",
+              "name": "ChannelMissing"
+            },
+            {
+              "value": "channel_disconnected",
+              "name": "ChannelDisconnected"
+            },
+            {
+              "value": "channel_linked_elsewhere",
+              "name": "ChannelLinkedElsewhere"
+            },
+            {
+              "value": "channel_issue",
+              "name": "ChannelIssue"
+            },
+            {
+              "value": "channel_not_required",
+              "name": "ChannelNotRequired"
+            },
+            {
+              "value": "license_missing",
+              "name": "LicenseMissing"
+            },
+            {
+              "value": "no_required_channel_active",
+              "name": "NoRequiredChannelActive"
+            },
+            {
+              "value": "no_account_connected",
+              "name": "NoAccountConnected"
+            },
+            {
+              "value": "no_sender_enabled",
+              "name": "NoSenderEnabled"
+            },
+            {
+              "value": "sender_paused",
+              "name": "SenderPaused"
+            }
+          ]
+        }
+      },
+      "SenderDiagnosticChannelType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The channel type of the problem. Absent when the problem is not about one channel type.",
+        "x-ms-enum": {
+          "name": "SenderDiagnosticChannelType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderChannelInputType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The channel type. At least one step of the campaign must use it.",
+        "x-ms-enum": {
+          "name": "SenderChannelInputType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderListRequiredChannelTypesItem": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderListRequiredChannelTypesItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
       "WebhookType": {
         "enum": [
           "contacted",
@@ -40671,6 +43261,159 @@
           ]
         }
       },
+      "StepSenderSenderChannelType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The channel type of the step: \u0060email\u0060 on an email step, \u0060linkedin\u0060 on a LinkedIn step, \u0060whatsapp\u0060 on a WhatsApp step, \u0060phone\u0060 on an SMS step.",
+        "x-ms-enum": {
+          "name": "StepSenderSenderChannelType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderPoolSendersItemChannelsItemType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderPoolSendersItemChannelsItemType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderPoolSendersItemChannelsItemEsp": {
+        "enum": [
+          "google",
+          "microsoft",
+          "smtp"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Email only: the provider of the mailbox.",
+        "x-ms-enum": {
+          "name": "SenderPoolSendersItemChannelsItemEsp",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "microsoft",
+              "name": "Microsoft"
+            },
+            {
+              "value": "smtp",
+              "name": "Smtp"
+            }
+          ]
+        }
+      },
+      "SenderListSendersItemChannelsItemType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "SenderListSendersItemChannelsItemType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "SenderListSendersItemChannelsItemEsp": {
+        "enum": [
+          "google",
+          "microsoft",
+          "smtp"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Email only: the provider of the mailbox.",
+        "x-ms-enum": {
+          "name": "SenderListSendersItemChannelsItemEsp",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "microsoft",
+              "name": "Microsoft"
+            },
+            {
+              "value": "smtp",
+              "name": "Smtp"
+            }
+          ]
+        }
+      },
       "SenderPictureSyncResponseDataMailboxesItemProvider": {
         "enum": [
           "google",
@@ -43340,6 +46083,71 @@
           ]
         }
       },
+      "PatchCampaignsByCampaignIdSendersByUserIdRequestChannelsItemType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PatchCampaignsByCampaignIdSendersByUserIdRequestChannelsItemType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
+      "PutSequencesBySequenceIdStepsByStepIdSenderRequestChannelType": {
+        "enum": [
+          "email",
+          "linkedin",
+          "whatsapp",
+          "phone"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The channel type of the step: \u0060email\u0060 on an email step, \u0060linkedin\u0060 on a LinkedIn step, \u0060whatsapp\u0060 on a WhatsApp step, \u0060phone\u0060 on an SMS step.",
+        "x-ms-enum": {
+          "name": "PutSequencesBySequenceIdStepsByStepIdSenderRequestChannelType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            }
+          ]
+        }
+      },
       "GetInboxByContactIdDrafts200ResponseDraftsItemChannel": {
         "enum": [
           "email",
@@ -45140,7 +47948,8 @@
           "contact_blocked_by_company",
           "contact_blocked_by_company_search",
           "contact_blocked_by_company_without_name",
-          "contact_blocked_by_company_without_key"
+          "contact_blocked_by_company_without_key",
+          "contact_blocked_by_company_already_synced"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -45203,6 +48012,10 @@
             {
               "value": "contact_blocked_by_company_without_key",
               "name": "ContactBlockedByCompanyWithoutKey"
+            },
+            {
+              "value": "contact_blocked_by_company_already_synced",
+              "name": "ContactBlockedByCompanyAlreadySynced"
             }
           ]
         }

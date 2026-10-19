@@ -64,5 +64,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         ContactBlockedByCompanyWithoutKey,
         #pragma warning restore CS1591
+        [EnumMember(Value = "contact_blocked_by_company_already_synced")]
+        #pragma warning disable CS1591
+        ContactBlockedByCompanyAlreadySynced,
+        #pragma warning restore CS1591
     }
 }

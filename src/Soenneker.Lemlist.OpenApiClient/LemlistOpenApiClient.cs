@@ -23,6 +23,7 @@ using Soenneker.Lemlist.OpenApiClient.Lemwarm;
 using Soenneker.Lemlist.OpenApiClient.MessageTemplates;
 using Soenneker.Lemlist.OpenApiClient.Schedules;
 using Soenneker.Lemlist.OpenApiClient.SenderPicture;
+using Soenneker.Lemlist.OpenApiClient.Senders;
 using Soenneker.Lemlist.OpenApiClient.Sequences;
 using Soenneker.Lemlist.OpenApiClient.Snippets;
 using Soenneker.Lemlist.OpenApiClient.Tasks;
@@ -129,6 +130,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.SenderPicture.SenderPictureRequestBuilder SenderPicture
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.SenderPicture.SenderPictureRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The senders property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Senders.SendersRequestBuilder Senders
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Senders.SendersRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The sequences property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Sequences.SequencesRequestBuilder Sequences

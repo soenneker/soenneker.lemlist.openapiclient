@@ -80,7 +80,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public bool? OpportunityClicked { get; set; }
         /// <summary>Create an opportunity when a lead replies</summary>
         public bool? OpportunityReplied { get; set; }
-        /// <summary>Array of user IDs (usr_xxx format) to assign as campaign senders. Cannot be used on campaigns with a dynamic sender strategy (contactOwner, leadImporter, customField). Each sender is validated against the campaign&apos;s sending channels (email, LinkedIn, SMS, WhatsApp): senders without capabilities for at least one channel are excluded, and all channels must be covered by at least one sender.</summary>
+        /// <summary>Array of user IDs (usr_xxx format) to assign as campaign senders. Cannot be used on campaigns with a dynamic sender strategy (contactOwner, leadImporter, customField). Each sender is validated against the campaign&apos;s sending channels (email, LinkedIn, SMS, WhatsApp): senders without capabilities for at least one channel are excluded, and every channel that a lead can reach in the sequence must be covered by at least one sender. Replaces the sender pool, with the first account of each channel type for each sender. To add a sender without a replacement, pick an account or an alias, use the [Senders](/api-reference/endpoints/senders/add-campaign-senders) endpoints.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? SendUserIds { get; set; }

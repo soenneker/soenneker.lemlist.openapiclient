@@ -8,6 +8,7 @@ using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Pause;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Schedules;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Sequences;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Start;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes;
@@ -51,6 +52,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Schedules.SchedulesRequestBuilder Schedules
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Schedules.SchedulesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The senders property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.SendersRequestBuilder Senders
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.SendersRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The sequences property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Sequences.SequencesRequestBuilder Sequences
