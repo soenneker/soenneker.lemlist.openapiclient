@@ -18,10 +18,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields400ResponseError? Error { get; set; }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields400ResponseError Error { get; set; }
 #endif
         /// <summary>The primary error message.</summary>
         public override string Message { get => base.Message; }
@@ -52,7 +52,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "error", n => { Error = n.GetStringValue(); } },
+                { "error", n => { Error = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields400ResponseError>(global::Soenneker.Lemlist.OpenApiClient.Models.GetFields400ResponseError.CreateFromDiscriminatorValue); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
             };
         }
@@ -63,7 +63,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("error", Error);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields400ResponseError>("error", Error);
             writer.WriteBoolValue("success", Success);
             writer.WriteAdditionalData(AdditionalData);
         }

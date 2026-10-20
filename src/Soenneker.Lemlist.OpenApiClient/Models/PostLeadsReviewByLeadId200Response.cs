@@ -14,6 +14,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Number of leads launched: 1, or 0 when the lead left review between the checks and the launch</summary>
+        public int? Launched { get; set; }
         /// <summary>The ok property</summary>
         public bool? Ok { get; set; }
         /// <summary>
@@ -41,6 +43,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "launched", n => { Launched = n.GetIntValue(); } },
                 { "ok", n => { Ok = n.GetBoolValue(); } },
             };
         }
@@ -51,6 +54,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("launched", Launched);
             writer.WriteBoolValue("ok", Ok);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -1785,7 +1785,7 @@
           },
           "customField": {
             "type": "string",
-            "description": "`customLeadInfo` only - the tested field, normalized: a lead variable reads back as `variables.<name>`, a contact field as `fields.<name>`. Every branch of the step tests the same field."
+            "description": "`customLeadInfo` only - the tested field, normalized: a lead variable reads back as `variables.<name>`, a contact field as `fields.<name>`, a company field as `company.<field>` (e.g. `company.name`), or as `variables.company<Field>` (e.g. `variables.companyName`) on a step that already tested it that way, which tests the same value. Every branch of the step tests the same field."
           },
           "customOperator": {
             "type": "string",
@@ -10696,7 +10696,7 @@
                   },
                   "customField": {
                     "type": "string",
-                    "description": "For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused."
+                    "description": "For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.<field>` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused."
                   },
                   "customOperator": {
                     "type": "string",
@@ -11084,7 +11084,7 @@
                   },
                   "customField": {
                     "type": "string",
-                    "description": "For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused."
+                    "description": "For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.<field>` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused."
                   },
                   "customOperator": {
                     "type": "string",
@@ -11494,7 +11494,7 @@
                   },
                   "customField": {
                     "type": "string",
-                    "description": "`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. Every branch of a step tests the same field, so changing it here changes it on all of them."
+                    "description": "`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.<field>` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. On a step that already tests `variables.companyName`, the new branch keeps that form. Every branch of a step tests the same field, so changing it here changes it on all of them."
                   },
                   "customOperator": {
                     "type": "string",
@@ -11876,7 +11876,7 @@
                   },
                   "customField": {
                     "type": "string",
-                    "description": "`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. Every branch of a step tests the same field, so changing it here changes it on all of them."
+                    "description": "`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.<field>` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. Every branch of a step tests the same field, so changing it here changes it on all of them."
                   },
                   "customOperator": {
                     "type": "string",
@@ -15342,10 +15342,15 @@
             }
           },
           "403": {
-            "description": "User linked to this API key is blocked",
+            "description": "Possible errors: User linked to this API key is blocked (plain text) / The lead brings a company not yet in lemlist and the API key's user does not have the \"Create companies\" permission (JSON body); nothing is written.",
             "content": {
               "text/plain": {
                 "example": "User linked to this API key is blocked"
+              },
+              "application/json": {
+                "example": {
+                  "error": "You do not have the permission to create companies"
+                }
               }
             }
           },
@@ -15641,6 +15646,14 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The update brings a company not yet in lemlist and the API key's user does not have the \"Create companies\" permission; nothing is written.",
+            "content": {
+              "text/plain": {
+                "example": "You do not have the permission to create companies"
+              }
+            }
           },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Campaign deleted / Contact owner not found: neither a valid email nor a valid user id.",
@@ -16136,7 +16149,7 @@
       ],
       "post": {
         "summary": "Launch Lead",
-        "description": "Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.\n\nYou're auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.\n\nNo need to enable autolaunch in the campaign.\n\nThis endpoint requires an `emailPro` plan or higher.",
+        "description": "Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.\n\nYou're auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.\n\nNo need to enable autolaunch in the campaign.\n\nThis endpoint requires an `emailPro` plan or higher.\n\nRetrying is safe once a call has completed: a lead that is already launched is refused with `CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED`, so it is never launched twice. Do not send concurrent calls for the same lead.",
         "tags": [
           "Leads"
         ],
@@ -16150,17 +16163,22 @@
                   "properties": {
                     "ok": {
                       "type": "boolean"
+                    },
+                    "launched": {
+                      "type": "integer",
+                      "description": "Number of leads launched: 1, or 0 when the lead left review between the checks and the launch"
                     }
                   }
                 },
                 "example": {
-                  "ok": true
+                  "ok": true,
+                  "launched": 1
                 }
               }
             }
           },
           "400": {
-            "description": "The lead cannot be launched. Possible `error` codes: `CAMPAIGN_LEAD_REVIEW_LEAD_PAUSED` (lead is paused), `CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_LAUNCHED` (lead is already launched), `CAMPAIGN_LEAD_REVIEW_LEAD_AI_VARIABLE_INVALID` (missing or invalid AI variables required by the campaign), `CAMPAIGN_LEAD_REVIEW_LEAD_NO_SENDER_AVAILABLE` (no sender available), `CAMPAIGN_LEAD_REVIEW_CAMPAIGN_STEP_ERRORS` (campaign has step errors).",
+            "description": "The lead cannot be launched. Possible `error` codes: `CAMPAIGN_LEAD_REVIEW_LEAD_PAUSED` (lead is paused), `CAMPAIGN_LEAD_REVIEW_LEAD_NOT_SCANNED` (lead is still being imported), `CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED` (lead is not waiting for review, for example already launched), `CAMPAIGN_LEAD_REVIEW_LEAD_AI_VARIABLE_INVALID` (missing or invalid AI variables required by the campaign), `CAMPAIGN_LEAD_REVIEW_LEAD_NO_SENDER_AVAILABLE` (no sender available), `CAMPAIGN_LEAD_REVIEW_CAMPAIGN_NOT_RUNNING` (campaign is archived), `CAMPAIGN_LEAD_REVIEW_CAMPAIGN_STEP_ERRORS` (campaign has step errors).",
             "content": {
               "application/json": {
                 "schema": {
@@ -16175,8 +16193,8 @@
                   }
                 },
                 "example": {
-                  "error": "CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_LAUNCHED",
-                  "message": "Lead is already launched"
+                  "error": "CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED",
+                  "message": "Lead has already been reviewed"
                 }
               }
             }
@@ -16208,6 +16226,16 @@
           },
           "405": {
             "description": "Method not allowed"
+          },
+          "500": {
+            "description": "Unexpected error. The lead may not have been launched: read it back before retrying",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
           }
         }
       }
@@ -17175,6 +17203,16 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "The write would create a company not yet in lemlist and the API key's user does not have the \"Create companies\" permission (`COMPANY_CREATE_NOT_ALLOWED`); nothing is written.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
@@ -17322,6 +17360,16 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "The write would create a company not yet in lemlist and the API key's user does not have the \"Create companies\" permission (`COMPANY_CREATE_NOT_ALLOWED`); nothing is written.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
@@ -17443,6 +17491,16 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The lead has no linked contact, its stored company is not yet in lemlist and the API key's user does not have the \"Create companies\" permission (`COMPANY_CREATE_NOT_ALLOWED`); nothing is written.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                }
+              }
+            }
           },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
@@ -25517,7 +25575,7 @@
       },
       "post": {
         "summary": "Add and update company",
-        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching, in which case `name` and the identifiers become optional. Without `companyId`, `name` is required together with at least one identifier: `domain`, `linkedinUrl` or `linkedinUrlSalesNav`.",
+        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching, in which case `name` and the identifiers become optional. Without `companyId`, `name` is required together with at least one identifier: `domain`, `linkedinUrl` or `linkedinUrlSalesNav`.\n\n**Permission:** creating a company requires the \"Create companies\" permission on the API key's user, otherwise the request fails with `403 COMPANY_CREATE_NOT_ALLOWED`. Updating an existing company does not.",
         "tags": [
           "Companies"
         ],
@@ -25841,6 +25899,27 @@
             "content": {
               "text/plain": {
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The request would create a company and the API key's user does not have the \"Create companies\" permission (`COMPANY_CREATE_NOT_ALLOWED`). Updating an existing company is not affected.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "create-not-allowed": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "COMPANY_CREATE_NOT_ALLOWED",
+                        "message": "You do not have the permission to create companies"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -31763,11 +31842,15 @@
                                 "type": "string",
                                 "enum": [
                                   "text",
+                                  "multilineText",
                                   "number",
                                   "boolean",
                                   "datetime",
                                   "date",
-                                  "phone"
+                                  "phone",
+                                  "url",
+                                  "select",
+                                  "user"
                                 ],
                                 "description": "Field data type"
                               },
@@ -31783,6 +31866,13 @@
                               "crmField": {
                                 "type": "string",
                                 "description": "Corresponding CRM field name (crm_synced fields only)"
+                              },
+                              "options": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "The options of a select field, in order (custom select fields only)"
                               }
                             },
                             "required": [
@@ -31810,11 +31900,15 @@
                                 "type": "string",
                                 "enum": [
                                   "text",
+                                  "multilineText",
                                   "number",
                                   "boolean",
                                   "datetime",
                                   "date",
-                                  "phone"
+                                  "phone",
+                                  "url",
+                                  "select",
+                                  "user"
                                 ],
                                 "description": "Field data type"
                               },
@@ -31830,6 +31924,13 @@
                               "crmField": {
                                 "type": "string",
                                 "description": "Corresponding CRM field name (crm_synced fields only)"
+                              },
+                              "options": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "The options of a select field, in order (custom select fields only)"
                               }
                             },
                             "required": [
@@ -31867,6 +31968,17 @@
                         "source": "custom"
                       },
                       {
+                        "name": "tier",
+                        "label": "Tier",
+                        "type": "select",
+                        "source": "custom",
+                        "options": [
+                          "Gold",
+                          "Silver",
+                          "Bronze"
+                        ]
+                      },
+                      {
                         "name": "leadStatus",
                         "label": "leadStatus",
                         "type": "text",
@@ -31894,7 +32006,7 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad request: an `entity` or `source` value outside its list. `error.code` names the case, `error.message` explains it.",
             "content": {
               "application/json": {
                 "schema": {
@@ -31904,13 +32016,40 @@
                       "type": "boolean"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `INVALID_ENTITY_PARAM` or `INVALID_SOURCE_PARAM`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 },
-                "example": {
-                  "success": false,
-                  "error": "Invalid entity parameter. Must be one of: contact, company"
+                "examples": {
+                  "invalid-entity-param": {
+                    "summary": "`entity` not contact / company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_ENTITY_PARAM",
+                        "message": "Invalid entity parameter. Must be \"contact\" or \"company\""
+                      }
+                    }
+                  },
+                  "invalid-source-param": {
+                    "summary": "`source` not default / custom / crm_synced",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_SOURCE_PARAM",
+                        "message": "Invalid source parameter. Must be \"default\", \"custom\", or \"crm_synced\""
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -31949,8 +32088,839 @@
                   }
                 },
                 "example": {
+                  "error": "Method not allowed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create or Update Field",
+        "description": "Creates a custom field on contacts or companies, or updates the one the entity already has under that `name`, under the rules of the lemlist app: the same reserved names, the same type conversions, the same permission.\n\n**Create.** No field of that `name` on the entity: it is created, as the **New field** button does in the app. Any API key may create a field. The field is created on behalf of the user of the API key and logged in the team activity feed. Once created, write it through `POST /contacts` or `POST /companies` with its `name` as the key. A new contact field is then filled in the background from data lemlist already holds (the LinkedIn data of enriched contacts, the lead variable of the same name in your campaigns).\n\n**Update.** A field of that `name` exists: the call updates it, and the API key user needs the **Update contact & companies fields** permission, as in the app (`403` otherwise, even when nothing would change). What can change:\n\n- `label`, when sent and different;\n- `type`, only to `text` or `multilineText`, from any type but `phone` and `user`: the conversions the app offers. The stored values are converted, as in the app. Any other `type` than the stored one answers `400 TYPE_CHANGE_NOT_ALLOWED`. Note that the app promotes a `text` field to `multilineText` on its own when a value with a line break reaches it (import, CRM, API), and `GET /fields` then lists it as `multilineText`: replaying a body with `type: \"text\"` converts it back and flattens the line breaks, as the app's **Change type** menu does;\n- the options of a `select`, through `upsertOptions` (added when missing, never removed), `renameOptions` (the contacts or companies holding the old value are rewritten to the new one) and `removeOptions` (the contacts or companies holding the option are cleared). Applied in that order: renames, removals, additions. A select keeps at least one option. Options are matched as in the app, regardless of case and surrounding spaces: `gold` matches an existing `Gold`, renaming `Gold` to `GOLD` only changes its case, and values are stored without surrounding spaces, so a value written on a contact or company matches them. An operation already applied reads as done (a rename whose source is gone while its target exists, a removal of an absent option).\n\nSending the same body again changes nothing and answers `200` with empty `changes`.\n\nTwo calls changing the options of the same field at the same time: the one planned from a list that changed meanwhile answers `409 FIELD_CHANGED_RETRY` and writes nothing (the options are written first, before any `label` change); read the field again and replay the call.\n\n**Name.** `name` is the key your integrations write to, and never changes afterwards: it must start with a lowercase letter, followed by letters and digits only. `label` is optional and defaults to `name` on creation.\n\n**Types.** `select` is created with its `upsertOptions` (at least one). A `user` field takes a team member on `POST /contacts` or `POST /companies` (email or `usr_` id), as in the app.\n\n**Read it back.** The response carries the field. A `GET /fields` sent right after may take a moment to list it. Renaming or removing an option, and converting a type, rewrite every contact or company of the team holding a value, within the call.",
+        "tags": [
+          "Fields"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "entity",
+                  "name",
+                  "type"
+                ],
+                "properties": {
+                  "entity": {
+                    "type": "string",
+                    "enum": [
+                      "contact",
+                      "company"
+                    ],
+                    "description": "Entity the field belongs to."
+                  },
+                  "name": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-zA-Z0-9]*$",
+                    "maxLength": 400,
+                    "description": "Key to write the field with on `POST /contacts` or `POST /companies`. Starts with a lowercase letter, followed by letters and digits only. Identifies the field to update; never changes afterwards."
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "text",
+                      "multilineText",
+                      "number",
+                      "date",
+                      "select",
+                      "boolean",
+                      "phone",
+                      "user",
+                      "url"
+                    ],
+                    "description": "Field data type. On an existing field, only `text` or `multilineText` may differ from the stored type (a conversion), and a `phone` or `user` field keeps its type."
+                  },
+                  "label": {
+                    "type": "string",
+                    "maxLength": 400,
+                    "description": "Display name of the field, as shown in lemlist. Cannot contain an HTML tag (`<...>`). Optional: defaults to `name` on creation, unchanged when omitted on an update."
+                  },
+                  "upsertOptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Select fields only. On creation, the options (at least one). On an update, options to add when missing; the present ones and the others are kept, so the same list replays. Distinct and non-empty; compared as in the app, regardless of case and surrounding spaces (`gold` matches an existing `Gold`), and stored without surrounding spaces."
+                  },
+                  "renameOptions": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Select fields only, on an update: `{ \"current value\": \"new value\" }`. The option keeps its identity, so the contacts or companies holding the current value are rewritten to the new one."
+                  },
+                  "removeOptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Select fields only, on an update: options to drop. The contacts or companies holding one are cleared. At least one option must remain."
+                  }
+                }
+              },
+              "examples": {
+                "create-number": {
+                  "summary": "create a number field",
+                  "value": {
+                    "entity": "contact",
+                    "name": "annualRevenue",
+                    "label": "Annual revenue",
+                    "type": "number"
+                  }
+                },
+                "create-select": {
+                  "summary": "create a select field",
+                  "value": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "label": "Tier",
+                    "type": "select",
+                    "upsertOptions": [
+                      "Gold",
+                      "Silver",
+                      "Bronze"
+                    ]
+                  }
+                },
+                "update-select-options": {
+                  "summary": "rename, remove and add options of an existing select",
+                  "value": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "type": "select",
+                    "upsertOptions": [
+                      "Iron"
+                    ],
+                    "renameOptions": {
+                      "Gold": "Platinum"
+                    },
+                    "removeOptions": [
+                      "Bronze"
+                    ]
+                  }
+                },
+                "convert-to-text": {
+                  "summary": "convert an existing field to text",
+                  "value": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "type": "text"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Field updated (or unchanged, on a replay)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "entity": {
+                          "type": "string",
+                          "enum": [
+                            "contact",
+                            "company"
+                          ],
+                          "description": "Entity the field belongs to"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Key to write the field with on `POST /contacts` or `POST /companies`"
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Human-readable display name"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "text",
+                            "multilineText",
+                            "number",
+                            "date",
+                            "select",
+                            "boolean",
+                            "phone",
+                            "user",
+                            "url"
+                          ],
+                          "description": "Field data type"
+                        },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "custom"
+                          ],
+                          "description": "Always `custom`"
+                        },
+                        "options": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "The options of a `select` field, in order (select fields only)"
+                        },
+                        "created": {
+                          "type": "boolean",
+                          "description": "`true` when the call created the field"
+                        },
+                        "updated": {
+                          "type": "boolean",
+                          "description": "`true` when the call changed an existing field; `false` on a replay that changed nothing"
+                        },
+                        "changes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "label",
+                              "type",
+                              "options"
+                            ]
+                          },
+                          "description": "What the call changed on an existing field"
+                        }
+                      },
+                      "required": [
+                        "entity",
+                        "name",
+                        "label",
+                        "type",
+                        "source",
+                        "created",
+                        "updated",
+                        "changes"
+                      ]
+                    }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "label": "Tier",
+                    "type": "select",
+                    "source": "custom",
+                    "options": [
+                      "Platinum",
+                      "Silver",
+                      "Iron"
+                    ],
+                    "created": false,
+                    "updated": true,
+                    "changes": [
+                      "options"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Field created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "entity": {
+                          "type": "string",
+                          "enum": [
+                            "contact",
+                            "company"
+                          ],
+                          "description": "Entity the field belongs to"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Key to write the field with on `POST /contacts` or `POST /companies`"
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Human-readable display name"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "text",
+                            "multilineText",
+                            "number",
+                            "date",
+                            "select",
+                            "boolean",
+                            "phone",
+                            "user",
+                            "url"
+                          ],
+                          "description": "Field data type"
+                        },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "custom"
+                          ],
+                          "description": "Always `custom`"
+                        },
+                        "options": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "The options of a `select` field, in order (select fields only)"
+                        },
+                        "created": {
+                          "type": "boolean",
+                          "description": "`true` when the call created the field"
+                        },
+                        "updated": {
+                          "type": "boolean",
+                          "description": "`true` when the call changed an existing field; `false` on a replay that changed nothing"
+                        },
+                        "changes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "label",
+                              "type",
+                              "options"
+                            ]
+                          },
+                          "description": "What the call changed on an existing field"
+                        }
+                      },
+                      "required": [
+                        "entity",
+                        "name",
+                        "label",
+                        "type",
+                        "source",
+                        "created",
+                        "updated",
+                        "changes"
+                      ]
+                    }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "entity": "contact",
+                    "name": "annualRevenue",
+                    "label": "Annual revenue",
+                    "type": "number",
+                    "source": "custom",
+                    "created": true,
+                    "updated": false,
+                    "changes": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The body is refused. `error.code` names the case, `error.message` explains it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `INVALID_ENTITY_PARAM`, `INVALID_TYPE_PARAM`, `INVALID_LABEL`, `INVALID_NAME`, `OPTIONS_NOT_ALLOWED`, `INVALID_OPTIONS`, `OPTION_NOT_FOUND`, `OPTION_ALREADY_EXISTS`, `FIELD_NAME_RESERVED`, `CONTACT_FIELD_COMPANY_PREFIXED`, `TYPE_CHANGE_NOT_ALLOWED`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "invalid-entity-param": {
+                    "summary": "`entity` missing or not contact / company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_ENTITY_PARAM",
+                        "message": "Invalid entity parameter. Must be \"contact\" or \"company\""
+                      }
+                    }
+                  },
+                  "invalid-type-param": {
+                    "summary": "`type` missing or unknown",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_TYPE_PARAM",
+                        "message": "Invalid type parameter. Must be one of: text, multilineText, number, date, select, boolean, phone, user, url"
+                      }
+                    }
+                  },
+                  "invalid-label": {
+                    "summary": "`label` empty, too long or holding a tag",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_LABEL",
+                        "message": "Invalid label. Must be a non-empty string of at most 400 characters, without a \"<...>\" tag"
+                      }
+                    }
+                  },
+                  "invalid-name": {
+                    "summary": "`name` missing or off the pattern",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_NAME",
+                        "message": "Invalid name. Must start with a lowercase letter followed by letters and digits only, at most 400 characters"
+                      }
+                    }
+                  },
+                  "options-not-allowed": {
+                    "summary": "option operations sent for another type than select",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTIONS_NOT_ALLOWED",
+                        "message": "Option operations (upsertOptions, renameOptions, removeOptions) apply to a select field only"
+                      }
+                    }
+                  },
+                  "invalid-options": {
+                    "summary": "option operations malformed, or no option left",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_OPTIONS",
+                        "message": "Invalid options. Expected non-empty strings of at most 400 characters, without a \"<...>\" tag, distinct regardless of case and surrounding spaces; a select keeps at least one option"
+                      }
+                    }
+                  },
+                  "option-not-found": {
+                    "summary": "a rename source or a removal names an option the field does not have",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTION_NOT_FOUND",
+                        "message": "Option \"Bronze\" does not exist on this field"
+                      }
+                    }
+                  },
+                  "option-already-exists": {
+                    "summary": "a rename target is already an option",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTION_ALREADY_EXISTS",
+                        "message": "Option \"Silver\" already exists on this field"
+                      }
+                    }
+                  },
+                  "field-name-reserved": {
+                    "summary": "name of a default or system field",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "FIELD_NAME_RESERVED",
+                        "message": "This name is reserved for a default or system field"
+                      }
+                    }
+                  },
+                  "contact-field-company-prefixed": {
+                    "summary": "contact field name starting with company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CONTACT_FIELD_COMPANY_PREFIXED",
+                        "message": "A contact field name cannot start with \"company\": that prefix is reserved for company data on import"
+                      }
+                    }
+                  },
+                  "type-change-not-allowed": {
+                    "summary": "a conversion the app does not offer",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "TYPE_CHANGE_NOT_ALLOWED",
+                        "message": "A field can only be converted to text or multilineText, and a phone or user field keeps its type"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the \"Update contact & companies fields\" permission, needed to update or delete a field (creating one needs none, as in the app).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `FIELD_PERMISSION_DENIED`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
                   "success": false,
-                  "error": "Method not allowed. Use GET."
+                  "error": {
+                    "code": "FIELD_PERMISSION_DENIED",
+                    "message": "The API key user is not allowed to update or delete custom fields (permission \"Update contact & companies fields\")"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Another request changed the options of this field between the read and the write; nothing was written. Read the field again and replay the call.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `FIELD_CHANGED_RETRY`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_CHANGED_RETRY",
+                    "message": "The field options were modified by another request meanwhile: read the field again and replay your call"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fields/{entity}/{name}": {
+      "delete": {
+        "summary": "Delete Field",
+        "description": "Deletes a custom field, as the app does: the API key user needs the **Update contact & companies fields** permission; a contact field a campaign still picks its sender through is refused (`409`); then the field is removed from every contact or company of the team and from your CRM field mapping, and the deletion is logged in the team activity feed. The `name` is any stored field name, URL-encoded (a field created in the app may hold characters the API pattern refuses).",
+        "tags": [
+          "Fields"
+        ],
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "path",
+            "required": true,
+            "description": "Entity the field belongs to",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contact",
+                "company"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The field `name`, URL-encoded",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Field deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "entity": {
+                          "type": "string",
+                          "enum": [
+                            "contact",
+                            "company"
+                          ]
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "deleted": {
+                          "type": "boolean",
+                          "enum": [
+                            true
+                          ]
+                        }
+                      },
+                      "required": [
+                        "entity",
+                        "name",
+                        "deleted"
+                      ]
+                    }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "deleted": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: `entity` not contact / company, or a malformed `name`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `INVALID_ENTITY_PARAM`, `INVALID_NAME`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "invalid-entity-param": {
+                    "summary": "`entity` missing or not contact / company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_ENTITY_PARAM",
+                        "message": "Invalid entity parameter. Must be \"contact\" or \"company\""
+                      }
+                    }
+                  },
+                  "invalid-name": {
+                    "summary": "`name` missing or off the pattern",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_NAME",
+                        "message": "Invalid name. Must start with a lowercase letter followed by letters and digits only, at most 400 characters"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the \"Update contact & companies fields\" permission, needed to update or delete a field (creating one needs none, as in the app).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `FIELD_PERMISSION_DENIED`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_PERMISSION_DENIED",
+                    "message": "The API key user is not allowed to update or delete custom fields (permission \"Update contact & companies fields\")"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No custom field of that name on that entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `FIELD_NOT_FOUND`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_NOT_FOUND",
+                    "message": "No custom field with this name on this entity"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A campaign picks its sender through this contact field; `error.message` names the campaigns.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Error code: `FIELD_USED_AS_CAMPAIGN_SENDER`."
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_USED_AS_CAMPAIGN_SENDER",
+                    "message": "This field picks the sender of 1 campaign: Q4 outbound"
+                  }
                 }
               }
             }

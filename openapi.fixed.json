@@ -6972,7 +6972,7 @@
             }
           },
           "403": {
-            "description": "User linked to this API key is blocked",
+            "description": "Possible errors: User linked to this API key is blocked (plain text) / The lead brings a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (JSON body); nothing is written.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6980,6 +6980,15 @@
                   "description": "Fallback media schema"
                 },
                 "example": "User linked to this API key is blocked"
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads403Response"
+                },
+                "example": {
+                  "error": "You do not have the permission to create companies"
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -7172,6 +7181,18 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The update brings a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission; nothing is written.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "You do not have the permission to create companies"
+              }
+            }
           },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Campaign deleted / Contact owner not found: neither a valid email nor a valid user id.",
@@ -7450,7 +7471,7 @@
           "Leads"
         ],
         "summary": "Launch Lead",
-        "description": "Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.\n\nYou\u0027re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.\n\nNo need to enable autolaunch in the campaign.\n\nThis endpoint requires an \u0060emailPro\u0060 plan or higher.",
+        "description": "Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.\n\nYou\u0027re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.\n\nNo need to enable autolaunch in the campaign.\n\nThis endpoint requires an \u0060emailPro\u0060 plan or higher.\n\nRetrying is safe once a call has completed: a lead that is already launched is refused with \u0060CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED\u0060, so it is never launched twice. Do not send concurrent calls for the same lead.",
         "operationId": "PostLeadsReviewByLeadId",
         "responses": {
           "200": {
@@ -7461,21 +7482,22 @@
                   "$ref": "#/components/schemas/PostLeadsReviewByLeadId200Response"
                 },
                 "example": {
-                  "ok": true
+                  "ok": true,
+                  "launched": 1
                 }
               }
             }
           },
           "400": {
-            "description": "The lead cannot be launched. Possible \u0060error\u0060 codes: \u0060CAMPAIGN_LEAD_REVIEW_LEAD_PAUSED\u0060 (lead is paused), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_LAUNCHED\u0060 (lead is already launched), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_AI_VARIABLE_INVALID\u0060 (missing or invalid AI variables required by the campaign), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_NO_SENDER_AVAILABLE\u0060 (no sender available), \u0060CAMPAIGN_LEAD_REVIEW_CAMPAIGN_STEP_ERRORS\u0060 (campaign has step errors).",
+            "description": "The lead cannot be launched. Possible \u0060error\u0060 codes: \u0060CAMPAIGN_LEAD_REVIEW_LEAD_PAUSED\u0060 (lead is paused), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_NOT_SCANNED\u0060 (lead is still being imported), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED\u0060 (lead is not waiting for review, for example already launched), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_AI_VARIABLE_INVALID\u0060 (missing or invalid AI variables required by the campaign), \u0060CAMPAIGN_LEAD_REVIEW_LEAD_NO_SENDER_AVAILABLE\u0060 (no sender available), \u0060CAMPAIGN_LEAD_REVIEW_CAMPAIGN_NOT_RUNNING\u0060 (campaign is archived), \u0060CAMPAIGN_LEAD_REVIEW_CAMPAIGN_STEP_ERRORS\u0060 (campaign has step errors).",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PostLeadsReviewByLeadId400Response"
                 },
                 "example": {
-                  "error": "CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_LAUNCHED",
-                  "message": "Lead is already launched"
+                  "error": "CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED",
+                  "message": "Lead has already been reviewed"
                 }
               }
             }
@@ -7499,6 +7521,20 @@
           },
           "405": {
             "description": "Method not allowed"
+          },
+          "500": {
+            "description": "Unexpected error. The lead may not have been launched: read it back before retrying",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostLeadsReviewByLeadId500Response"
+                },
+                "example": {
+                  "error": "Internal error"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
           }
         }
       },
@@ -8265,6 +8301,20 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "The write would create a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostLeadsByLeadIdVariables403Response"
+                },
+                "example": {
+                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
@@ -8383,6 +8433,20 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "The write would create a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables403Response"
+                },
+                "example": {
+                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
             "content": {
@@ -8475,6 +8539,20 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The lead has no linked contact, its stored company is not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables403Response"
+                },
+                "example": {
+                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
           },
           "404": {
             "description": "Possible errors: Lead not found / Campaign not found / Lead not found [edit-deleted-lead] / Campaign deleted [campaign-deleted]",
@@ -14963,7 +15041,7 @@
           "Companies"
         ],
         "summary": "Add and update company",
-        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing \u0060companyId\u0060, bypassing domain/LinkedIn matching, in which case \u0060name\u0060 and the identifiers become optional. Without \u0060companyId\u0060, \u0060name\u0060 is required together with at least one identifier: \u0060domain\u0060, \u0060linkedinUrl\u0060 or \u0060linkedinUrlSalesNav\u0060.",
+        "description": "Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing \u0060companyId\u0060, bypassing domain/LinkedIn matching, in which case \u0060name\u0060 and the identifiers become optional. Without \u0060companyId\u0060, \u0060name\u0060 is required together with at least one identifier: \u0060domain\u0060, \u0060linkedinUrl\u0060 or \u0060linkedinUrlSalesNav\u0060.\n\n**Permission:** creating a company requires the \u0022Create companies\u0022 permission on the API key\u0027s user, otherwise the request fails with \u0060403 COMPANY_CREATE_NOT_ALLOWED\u0060. Updating an existing company does not.",
         "operationId": "PostCompanies",
         "parameters": [
           {
@@ -15078,6 +15156,27 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The request would create a company and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060). Updating an existing company is not affected.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "create-not-allowed": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "COMPANY_CREATE_NOT_ALLOWED",
+                        "message": "You do not have the permission to create companies"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -19831,6 +19930,17 @@
                         "source": "custom"
                       },
                       {
+                        "name": "tier",
+                        "label": "Tier",
+                        "type": "select",
+                        "source": "custom",
+                        "options": [
+                          "Gold",
+                          "Silver",
+                          "Bronze"
+                        ]
+                      },
+                      {
                         "name": "leadStatus",
                         "label": "leadStatus",
                         "type": "text",
@@ -19858,15 +19968,33 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad request: an \u0060entity\u0060 or \u0060source\u0060 value outside its list. \u0060error.code\u0060 names the case, \u0060error.message\u0060 explains it.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetFields400Response"
                 },
-                "example": {
-                  "success": false,
-                  "error": "Invalid entity parameter. Must be one of: contact, company"
+                "examples": {
+                  "invalid-entity-param": {
+                    "summary": "\u0060entity\u0060 not contact / company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_ENTITY_PARAM",
+                        "message": "Invalid entity parameter. Must be \u0022contact\u0022 or \u0022company\u0022"
+                      }
+                    }
+                  },
+                  "invalid-source-param": {
+                    "summary": "\u0060source\u0060 not default / custom / crm_synced",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_SOURCE_PARAM",
+                        "message": "Invalid source parameter. Must be \u0022default\u0022, \u0022custom\u0022, or \u0022crm_synced\u0022"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -19892,8 +20020,445 @@
                   "$ref": "#/components/schemas/GetFields405Response"
                 },
                 "example": {
+                  "error": "Method not allowed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Fields"
+        ],
+        "summary": "Create or Update Field",
+        "description": "Creates a custom field on contacts or companies, or updates the one the entity already has under that \u0060name\u0060, under the rules of the lemlist app: the same reserved names, the same type conversions, the same permission.\n\n**Create.** No field of that \u0060name\u0060 on the entity: it is created, as the **New field** button does in the app. Any API key may create a field. The field is created on behalf of the user of the API key and logged in the team activity feed. Once created, write it through \u0060POST /contacts\u0060 or \u0060POST /companies\u0060 with its \u0060name\u0060 as the key. A new contact field is then filled in the background from data lemlist already holds (the LinkedIn data of enriched contacts, the lead variable of the same name in your campaigns).\n\n**Update.** A field of that \u0060name\u0060 exists: the call updates it, and the API key user needs the **Update contact \u0026 companies fields** permission, as in the app (\u0060403\u0060 otherwise, even when nothing would change). What can change:\n\n- \u0060label\u0060, when sent and different;\n- \u0060type\u0060, only to \u0060text\u0060 or \u0060multilineText\u0060, from any type but \u0060phone\u0060 and \u0060user\u0060: the conversions the app offers. The stored values are converted, as in the app. Any other \u0060type\u0060 than the stored one answers \u0060400 TYPE_CHANGE_NOT_ALLOWED\u0060. Note that the app promotes a \u0060text\u0060 field to \u0060multilineText\u0060 on its own when a value with a line break reaches it (import, CRM, API), and \u0060GET /fields\u0060 then lists it as \u0060multilineText\u0060: replaying a body with \u0060type: \u0022text\u0022\u0060 converts it back and flattens the line breaks, as the app\u0027s **Change type** menu does;\n- the options of a \u0060select\u0060, through \u0060upsertOptions\u0060 (added when missing, never removed), \u0060renameOptions\u0060 (the contacts or companies holding the old value are rewritten to the new one) and \u0060removeOptions\u0060 (the contacts or companies holding the option are cleared). Applied in that order: renames, removals, additions. A select keeps at least one option. Options are matched as in the app, regardless of case and surrounding spaces: \u0060gold\u0060 matches an existing \u0060Gold\u0060, renaming \u0060Gold\u0060 to \u0060GOLD\u0060 only changes its case, and values are stored without surrounding spaces, so a value written on a contact or company matches them. An operation already applied reads as done (a rename whose source is gone while its target exists, a removal of an absent option).\n\nSending the same body again changes nothing and answers \u0060200\u0060 with empty \u0060changes\u0060.\n\nTwo calls changing the options of the same field at the same time: the one planned from a list that changed meanwhile answers \u0060409 FIELD_CHANGED_RETRY\u0060 and writes nothing (the options are written first, before any \u0060label\u0060 change); read the field again and replay the call.\n\n**Name.** \u0060name\u0060 is the key your integrations write to, and never changes afterwards: it must start with a lowercase letter, followed by letters and digits only. \u0060label\u0060 is optional and defaults to \u0060name\u0060 on creation.\n\n**Types.** \u0060select\u0060 is created with its \u0060upsertOptions\u0060 (at least one). A \u0060user\u0060 field takes a team member on \u0060POST /contacts\u0060 or \u0060POST /companies\u0060 (email or \u0060usr_\u0060 id), as in the app.\n\n**Read it back.** The response carries the field. A \u0060GET /fields\u0060 sent right after may take a moment to list it. Renaming or removing an option, and converting a type, rewrite every contact or company of the team holding a value, within the call.",
+        "operationId": "PostFields",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostFieldsRequest"
+              },
+              "examples": {
+                "create-number": {
+                  "summary": "create a number field",
+                  "value": {
+                    "entity": "contact",
+                    "name": "annualRevenue",
+                    "label": "Annual revenue",
+                    "type": "number"
+                  }
+                },
+                "create-select": {
+                  "summary": "create a select field",
+                  "value": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "label": "Tier",
+                    "type": "select",
+                    "upsertOptions": [
+                      "Gold",
+                      "Silver",
+                      "Bronze"
+                    ]
+                  }
+                },
+                "update-select-options": {
+                  "summary": "rename, remove and add options of an existing select",
+                  "value": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "type": "select",
+                    "upsertOptions": [
+                      "Iron"
+                    ],
+                    "renameOptions": {
+                      "Gold": "Platinum"
+                    },
+                    "removeOptions": [
+                      "Bronze"
+                    ]
+                  }
+                },
+                "convert-to-text": {
+                  "summary": "convert an existing field to text",
+                  "value": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "type": "text"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Field updated (or unchanged, on a replay)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostFields200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "label": "Tier",
+                    "type": "select",
+                    "source": "custom",
+                    "options": [
+                      "Platinum",
+                      "Silver",
+                      "Iron"
+                    ],
+                    "created": false,
+                    "updated": true,
+                    "changes": [
+                      "options"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Field created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostFields201Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "entity": "contact",
+                    "name": "annualRevenue",
+                    "label": "Annual revenue",
+                    "type": "number",
+                    "source": "custom",
+                    "created": true,
+                    "updated": false,
+                    "changes": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The body is refused. \u0060error.code\u0060 names the case, \u0060error.message\u0060 explains it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostFields400Response"
+                },
+                "examples": {
+                  "invalid-entity-param": {
+                    "summary": "\u0060entity\u0060 missing or not contact / company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_ENTITY_PARAM",
+                        "message": "Invalid entity parameter. Must be \u0022contact\u0022 or \u0022company\u0022"
+                      }
+                    }
+                  },
+                  "invalid-type-param": {
+                    "summary": "\u0060type\u0060 missing or unknown",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_TYPE_PARAM",
+                        "message": "Invalid type parameter. Must be one of: text, multilineText, number, date, select, boolean, phone, user, url"
+                      }
+                    }
+                  },
+                  "invalid-label": {
+                    "summary": "\u0060label\u0060 empty, too long or holding a tag",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_LABEL",
+                        "message": "Invalid label. Must be a non-empty string of at most 400 characters, without a \u0022\u003C...\u003E\u0022 tag"
+                      }
+                    }
+                  },
+                  "invalid-name": {
+                    "summary": "\u0060name\u0060 missing or off the pattern",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_NAME",
+                        "message": "Invalid name. Must start with a lowercase letter followed by letters and digits only, at most 400 characters"
+                      }
+                    }
+                  },
+                  "options-not-allowed": {
+                    "summary": "option operations sent for another type than select",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTIONS_NOT_ALLOWED",
+                        "message": "Option operations (upsertOptions, renameOptions, removeOptions) apply to a select field only"
+                      }
+                    }
+                  },
+                  "invalid-options": {
+                    "summary": "option operations malformed, or no option left",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_OPTIONS",
+                        "message": "Invalid options. Expected non-empty strings of at most 400 characters, without a \u0022\u003C...\u003E\u0022 tag, distinct regardless of case and surrounding spaces; a select keeps at least one option"
+                      }
+                    }
+                  },
+                  "option-not-found": {
+                    "summary": "a rename source or a removal names an option the field does not have",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTION_NOT_FOUND",
+                        "message": "Option \u0022Bronze\u0022 does not exist on this field"
+                      }
+                    }
+                  },
+                  "option-already-exists": {
+                    "summary": "a rename target is already an option",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTION_ALREADY_EXISTS",
+                        "message": "Option \u0022Silver\u0022 already exists on this field"
+                      }
+                    }
+                  },
+                  "field-name-reserved": {
+                    "summary": "name of a default or system field",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "FIELD_NAME_RESERVED",
+                        "message": "This name is reserved for a default or system field"
+                      }
+                    }
+                  },
+                  "contact-field-company-prefixed": {
+                    "summary": "contact field name starting with company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CONTACT_FIELD_COMPANY_PREFIXED",
+                        "message": "A contact field name cannot start with \u0022company\u0022: that prefix is reserved for company data on import"
+                      }
+                    }
+                  },
+                  "type-change-not-allowed": {
+                    "summary": "a conversion the app does not offer",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "TYPE_CHANGE_NOT_ALLOWED",
+                        "message": "A field can only be converted to text or multilineText, and a phone or user field keeps its type"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostFields401Response"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the \u0022Update contact \u0026 companies fields\u0022 permission, needed to update or delete a field (creating one needs none, as in the app).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostFields403Response"
+                },
+                "example": {
                   "success": false,
-                  "error": "Method not allowed. Use GET."
+                  "error": {
+                    "code": "FIELD_PERMISSION_DENIED",
+                    "message": "The API key user is not allowed to update or delete custom fields (permission \u0022Update contact \u0026 companies fields\u0022)"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Another request changed the options of this field between the read and the write; nothing was written. Read the field again and replay the call.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostFields409Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_CHANGED_RETRY",
+                    "message": "The field options were modified by another request meanwhile: read the field again and replay your call"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fields/{entity}/{name}": {
+      "delete": {
+        "tags": [
+          "Fields"
+        ],
+        "summary": "Delete Field",
+        "description": "Deletes a custom field, as the app does: the API key user needs the **Update contact \u0026 companies fields** permission; a contact field a campaign still picks its sender through is refused (\u0060409\u0060); then the field is removed from every contact or company of the team and from your CRM field mapping, and the deletion is logged in the team activity feed. The \u0060name\u0060 is any stored field name, URL-encoded (a field created in the app may hold characters the API pattern refuses).",
+        "operationId": "DeleteFieldsByEntityByName",
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "path",
+            "description": "Entity the field belongs to",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeleteFieldsByEntityByNameEntityParameter"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The field \u0060name\u0060, URL-encoded",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Field deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFieldsByEntityByName200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "entity": "contact",
+                    "name": "tier",
+                    "deleted": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: \u0060entity\u0060 not contact / company, or a malformed \u0060name\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFieldsByEntityByName400Response"
+                },
+                "examples": {
+                  "invalid-entity-param": {
+                    "summary": "\u0060entity\u0060 missing or not contact / company",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_ENTITY_PARAM",
+                        "message": "Invalid entity parameter. Must be \u0022contact\u0022 or \u0022company\u0022"
+                      }
+                    }
+                  },
+                  "invalid-name": {
+                    "summary": "\u0060name\u0060 missing or off the pattern",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_NAME",
+                        "message": "Invalid name. Must start with a lowercase letter followed by letters and digits only, at most 400 characters"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFieldsByEntityByName401Response"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the \u0022Update contact \u0026 companies fields\u0022 permission, needed to update or delete a field (creating one needs none, as in the app).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFieldsByEntityByName403Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_PERMISSION_DENIED",
+                    "message": "The API key user is not allowed to update or delete custom fields (permission \u0022Update contact \u0026 companies fields\u0022)"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No custom field of that name on that entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFieldsByEntityByName404Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_NOT_FOUND",
+                    "message": "No custom field with this name on this entity"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A campaign picks its sender through this contact field; \u0060error.message\u0060 names the campaigns.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFieldsByEntityByName409Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "FIELD_USED_AS_CAMPAIGN_SENDER",
+                    "message": "This field picks the sender of 1 campaign: Q4 outbound"
+                  }
                 }
               }
             }
@@ -24646,7 +25211,7 @@
           },
           "customField": {
             "type": "string",
-            "description": "\u0060customLeadInfo\u0060 only - the tested field, normalized: a lead variable reads back as \u0060variables.\u003Cname\u003E\u0060, a contact field as \u0060fields.\u003Cname\u003E\u0060. Every branch of the step tests the same field."
+            "description": "\u0060customLeadInfo\u0060 only - the tested field, normalized: a lead variable reads back as \u0060variables.\u003Cname\u003E\u0060, a contact field as \u0060fields.\u003Cname\u003E\u0060, a company field as \u0060company.\u003Cfield\u003E\u0060 (e.g. \u0060company.name\u0060), or as \u0060variables.company\u003CField\u003E\u0060 (e.g. \u0060variables.companyName\u0060) on a step that already tested it that way, which tests the same value. Every branch of the step tests the same field."
           },
           "customOperator": {
             "$ref": "#/components/schemas/ConditionBranchCustomOperator"
@@ -29897,7 +30462,7 @@
           },
           "customField": {
             "type": "string",
-            "description": "For conditional steps keyed \u0060customLeadInfo\u0060 only. The field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. \u0060$\u0060 and the reserved keys \u0060_id\u0060, \u0060teamId\u0060, \u0060campaignId\u0060, \u0060leadId\u0060, \u0060__proto__\u0060, \u0060constructor\u0060 and \u0060prototype\u0060 are refused."
+            "description": "For conditional steps keyed \u0060customLeadInfo\u0060 only. The field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. A company field is written \u0060company.\u003Cfield\u003E\u0060 - \u0060company.name\u0060, or \u0060company.sector\u0060 for a company custom field named \u0060Sector\u0060 - and \u0060companyName\u0060 or \u0060variables.companyName\u0060 is stored as \u0060company.name\u0060. \u0060$\u0060 and the reserved keys \u0060_id\u0060, \u0060teamId\u0060, \u0060campaignId\u0060, \u0060leadId\u0060, \u0060__proto__\u0060, \u0060constructor\u0060 and \u0060prototype\u0060 are refused."
           },
           "customOperator": {
             "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsRequestCustomOperator"
@@ -30021,7 +30586,7 @@
           },
           "customField": {
             "type": "string",
-            "description": "For conditional steps keyed \u0060customLeadInfo\u0060 only. The field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. \u0060$\u0060 and the reserved keys \u0060_id\u0060, \u0060teamId\u0060, \u0060campaignId\u0060, \u0060leadId\u0060, \u0060__proto__\u0060, \u0060constructor\u0060 and \u0060prototype\u0060 are refused."
+            "description": "For conditional steps keyed \u0060customLeadInfo\u0060 only. The field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. A company field is written \u0060company.\u003Cfield\u003E\u0060 - \u0060company.name\u0060, or \u0060company.sector\u0060 for a company custom field named \u0060Sector\u0060 - and \u0060companyName\u0060 or \u0060variables.companyName\u0060 is stored as \u0060company.name\u0060. \u0060$\u0060 and the reserved keys \u0060_id\u0060, \u0060teamId\u0060, \u0060campaignId\u0060, \u0060leadId\u0060, \u0060__proto__\u0060, \u0060constructor\u0060 and \u0060prototype\u0060 are refused."
           },
           "customOperator": {
             "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdRequestCustomOperator"
@@ -30185,7 +30750,7 @@
           },
           "customField": {
             "type": "string",
-            "description": "\u0060customLeadInfo\u0060 only - the field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. Every branch of a step tests the same field, so changing it here changes it on all of them."
+            "description": "\u0060customLeadInfo\u0060 only - the field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. A company field is written \u0060company.\u003Cfield\u003E\u0060 - \u0060company.name\u0060, or \u0060company.sector\u0060 for a company custom field named \u0060Sector\u0060 - and \u0060companyName\u0060 or \u0060variables.companyName\u0060 is stored as \u0060company.name\u0060. On a step that already tests \u0060variables.companyName\u0060, the new branch keeps that form. Every branch of a step tests the same field, so changing it here changes it on all of them."
           },
           "customOperator": {
             "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsByStepIdBranchesRequestCustomOperator"
@@ -30346,7 +30911,7 @@
           },
           "customField": {
             "type": "string",
-            "description": "\u0060customLeadInfo\u0060 only - the field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. Every branch of a step tests the same field, so changing it here changes it on all of them."
+            "description": "\u0060customLeadInfo\u0060 only - the field to test. A bare name reads as a lead variable (\u0060jobTitle\u0060 becomes \u0060variables.jobTitle\u0060); prefix with \u0060fields.\u0060 to test a contact field. A company field is written \u0060company.\u003Cfield\u003E\u0060 - \u0060company.name\u0060, or \u0060company.sector\u0060 for a company custom field named \u0060Sector\u0060 - and \u0060companyName\u0060 or \u0060variables.companyName\u0060 is stored as \u0060company.name\u0060. Every branch of a step tests the same field, so changing it here changes it on all of them."
           },
           "customOperator": {
             "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestCustomOperator"
@@ -31366,6 +31931,14 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdLeads403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteCampaignsByCampaignIdLeads200Response": {
         "type": "object",
         "properties": {
@@ -31538,6 +32111,10 @@
         "properties": {
           "ok": {
             "type": "boolean"
+          },
+          "launched": {
+            "type": "integer",
+            "description": "Number of leads launched: 1, or 0 when the lead left review between the checks and the launch"
           }
         }
       },
@@ -31559,6 +32136,14 @@
             "type": "string"
           },
           "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostLeadsReviewByLeadId500Response": {
+        "type": "object",
+        "properties": {
+          "error": {
             "type": "string"
           }
         }
@@ -31880,6 +32465,14 @@
           }
         }
       },
+      "PostLeadsByLeadIdVariables403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PostLeadsByLeadIdVariables409Response": {
         "type": "object",
         "properties": {
@@ -31915,6 +32508,14 @@
           }
         }
       },
+      "PatchLeadsByLeadIdVariables403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PatchLeadsByLeadIdVariables409Response": {
         "type": "object",
         "properties": {
@@ -31946,6 +32547,14 @@
             "type": "boolean"
           },
           "status": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteLeadsByLeadIdVariables403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
             "type": "string"
           }
         }
@@ -34556,7 +35165,7 @@
             "type": "boolean"
           },
           "error": {
-            "type": "string"
+            "$ref": "#/components/schemas/GetFields400ResponseError"
           }
         }
       },
@@ -34576,6 +35185,176 @@
           },
           "error": {
             "type": "string"
+          }
+        }
+      },
+      "PostFieldsRequest": {
+        "required": [
+          "entity",
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/PostFieldsRequestEntity"
+          },
+          "name": {
+            "maxLength": 400,
+            "pattern": "^[a-z][a-zA-Z0-9]*$",
+            "type": "string",
+            "description": "Key to write the field with on \u0060POST /contacts\u0060 or \u0060POST /companies\u0060. Starts with a lowercase letter, followed by letters and digits only. Identifies the field to update; never changes afterwards."
+          },
+          "type": {
+            "$ref": "#/components/schemas/PostFieldsRequestType"
+          },
+          "label": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "Display name of the field, as shown in lemlist. Cannot contain an HTML tag (\u0060\u003C...\u003E\u0060). Optional: defaults to \u0060name\u0060 on creation, unchanged when omitted on an update."
+          },
+          "upsertOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Select fields only. On creation, the options (at least one). On an update, options to add when missing; the present ones and the others are kept, so the same list replays. Distinct and non-empty; compared as in the app, regardless of case and surrounding spaces (\u0060gold\u0060 matches an existing \u0060Gold\u0060), and stored without surrounding spaces."
+          },
+          "renameOptions": {
+            "$ref": "#/components/schemas/PostFieldsRequestRenameOptions"
+          },
+          "removeOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Select fields only, on an update: options to drop. The contacts or companies holding one are cleared. At least one option must remain."
+          }
+        }
+      },
+      "PostFields200Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostFields200ResponseData"
+          }
+        }
+      },
+      "PostFields201Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostFields201ResponseData"
+          }
+        }
+      },
+      "PostFields400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostFields400ResponseError"
+          }
+        }
+      },
+      "PostFields401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "PostFields403Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostFields403ResponseError"
+          }
+        }
+      },
+      "PostFields409Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostFields409ResponseError"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName200Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName200ResponseData"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName400ResponseError"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName401Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName403Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName403ResponseError"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName404ResponseError"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName409Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName409ResponseError"
           }
         }
       },
@@ -38400,6 +39179,236 @@
           }
         }
       },
+      "GetFields400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060INVALID_ENTITY_PARAM\u0060 or \u0060INVALID_SOURCE_PARAM\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostFieldsRequestRenameOptions": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Select fields only, on an update: \u0060{ \u0022current value\u0022: \u0022new value\u0022 }\u0060. The option keeps its identity, so the contacts or companies holding the current value are rewritten to the new one."
+      },
+      "PostFields200ResponseData": {
+        "required": [
+          "entity",
+          "name",
+          "label",
+          "type",
+          "source",
+          "created",
+          "updated",
+          "changes"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/PostFields200ResponseDataEntity"
+          },
+          "name": {
+            "type": "string",
+            "description": "Key to write the field with on \u0060POST /contacts\u0060 or \u0060POST /companies\u0060"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable display name"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PostFields200ResponseDataType"
+          },
+          "source": {
+            "$ref": "#/components/schemas/CustomSource"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The options of a \u0060select\u0060 field, in order (select fields only)"
+          },
+          "created": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the call created the field"
+          },
+          "updated": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the call changed an existing field; \u0060false\u0060 on a replay that changed nothing"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostFields200ResponseDataChangesItem"
+            },
+            "description": "What the call changed on an existing field"
+          }
+        }
+      },
+      "PostFields201ResponseData": {
+        "required": [
+          "entity",
+          "name",
+          "label",
+          "type",
+          "source",
+          "created",
+          "updated",
+          "changes"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/PostFields201ResponseDataEntity"
+          },
+          "name": {
+            "type": "string",
+            "description": "Key to write the field with on \u0060POST /contacts\u0060 or \u0060POST /companies\u0060"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable display name"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PostFields201ResponseDataType"
+          },
+          "source": {
+            "$ref": "#/components/schemas/CustomSource"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The options of a \u0060select\u0060 field, in order (select fields only)"
+          },
+          "created": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the call created the field"
+          },
+          "updated": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the call changed an existing field; \u0060false\u0060 on a replay that changed nothing"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostFields201ResponseDataChangesItem"
+            },
+            "description": "What the call changed on an existing field"
+          }
+        }
+      },
+      "PostFields400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060INVALID_ENTITY_PARAM\u0060, \u0060INVALID_TYPE_PARAM\u0060, \u0060INVALID_LABEL\u0060, \u0060INVALID_NAME\u0060, \u0060OPTIONS_NOT_ALLOWED\u0060, \u0060INVALID_OPTIONS\u0060, \u0060OPTION_NOT_FOUND\u0060, \u0060OPTION_ALREADY_EXISTS\u0060, \u0060FIELD_NAME_RESERVED\u0060, \u0060CONTACT_FIELD_COMPANY_PREFIXED\u0060, \u0060TYPE_CHANGE_NOT_ALLOWED\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostFields403ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060FIELD_PERMISSION_DENIED\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostFields409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060FIELD_CHANGED_RETRY\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName200ResponseData": {
+        "required": [
+          "entity",
+          "name",
+          "deleted"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName200ResponseDataEntity"
+          },
+          "name": {
+            "type": "string"
+          },
+          "deleted": {
+            "$ref": "#/components/schemas/DeleteFieldsByEntityByName200ResponseDataDeleted"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060INVALID_ENTITY_PARAM\u0060, \u0060INVALID_NAME\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName403ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060FIELD_PERMISSION_DENIED\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060FIELD_NOT_FOUND\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteFieldsByEntityByName409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code: \u0060FIELD_USED_AS_CAMPAIGN_SENDER\u0060."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "GetCampaignsByCampaignIdStatutes200ResponseStatutesItem": {
         "type": "object",
         "properties": {
@@ -39660,6 +40669,13 @@
           "crmField": {
             "type": "string",
             "description": "Corresponding CRM field name (crm_synced fields only)"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The options of a select field, in order (custom select fields only)"
           }
         }
       },
@@ -39689,6 +40705,13 @@
           "crmField": {
             "type": "string",
             "description": "Corresponding CRM field name (crm_synced fields only)"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The options of a select field, in order (custom select fields only)"
           }
         }
       },
@@ -45245,6 +46268,87 @@
           ]
         }
       },
+      "PostFieldsRequestEntity": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Entity the field belongs to.",
+        "x-ms-enum": {
+          "name": "PostFieldsRequestEntity",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
+      "PostFieldsRequestType": {
+        "enum": [
+          "text",
+          "multilineText",
+          "number",
+          "date",
+          "select",
+          "boolean",
+          "phone",
+          "user",
+          "url"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Field data type. On an existing field, only \u0060text\u0060 or \u0060multilineText\u0060 may differ from the stored type (a conversion), and a \u0060phone\u0060 or \u0060user\u0060 field keeps its type.",
+        "x-ms-enum": {
+          "name": "PostFieldsRequestType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "multilineText",
+              "name": "MultilineText"
+            },
+            {
+              "value": "number",
+              "name": "Number"
+            },
+            {
+              "value": "date",
+              "name": "Date"
+            },
+            {
+              "value": "select",
+              "name": "Select"
+            },
+            {
+              "value": "boolean",
+              "name": "Boolean"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            },
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "url",
+              "name": "Url"
+            }
+          ]
+        }
+      },
       "PostWatchlistRequestType": {
         "enum": [
           "companyIsHiring",
@@ -46348,6 +47452,269 @@
           ]
         }
       },
+      "PostFields200ResponseDataEntity": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Entity the field belongs to",
+        "x-ms-enum": {
+          "name": "PostFields200ResponseDataEntity",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
+      "PostFields200ResponseDataType": {
+        "enum": [
+          "text",
+          "multilineText",
+          "number",
+          "date",
+          "select",
+          "boolean",
+          "phone",
+          "user",
+          "url"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Field data type",
+        "x-ms-enum": {
+          "name": "PostFields200ResponseDataType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "multilineText",
+              "name": "MultilineText"
+            },
+            {
+              "value": "number",
+              "name": "Number"
+            },
+            {
+              "value": "date",
+              "name": "Date"
+            },
+            {
+              "value": "select",
+              "name": "Select"
+            },
+            {
+              "value": "boolean",
+              "name": "Boolean"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            },
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "url",
+              "name": "Url"
+            }
+          ]
+        }
+      },
+      "CustomSource": {
+        "enum": [
+          "custom"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Always \u0060custom\u0060",
+        "x-ms-enum": {
+          "name": "CustomSource",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "custom",
+              "name": "Custom"
+            }
+          ]
+        }
+      },
+      "PostFields200ResponseDataChangesItem": {
+        "enum": [
+          "label",
+          "type",
+          "options"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostFields200ResponseDataChangesItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "label",
+              "name": "Label"
+            },
+            {
+              "value": "type",
+              "name": "Type"
+            },
+            {
+              "value": "options",
+              "name": "Options"
+            }
+          ]
+        }
+      },
+      "PostFields201ResponseDataEntity": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Entity the field belongs to",
+        "x-ms-enum": {
+          "name": "PostFields201ResponseDataEntity",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
+      "PostFields201ResponseDataType": {
+        "enum": [
+          "text",
+          "multilineText",
+          "number",
+          "date",
+          "select",
+          "boolean",
+          "phone",
+          "user",
+          "url"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Field data type",
+        "x-ms-enum": {
+          "name": "PostFields201ResponseDataType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "multilineText",
+              "name": "MultilineText"
+            },
+            {
+              "value": "number",
+              "name": "Number"
+            },
+            {
+              "value": "date",
+              "name": "Date"
+            },
+            {
+              "value": "select",
+              "name": "Select"
+            },
+            {
+              "value": "boolean",
+              "name": "Boolean"
+            },
+            {
+              "value": "phone",
+              "name": "Phone"
+            },
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "url",
+              "name": "Url"
+            }
+          ]
+        }
+      },
+      "PostFields201ResponseDataChangesItem": {
+        "enum": [
+          "label",
+          "type",
+          "options"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "PostFields201ResponseDataChangesItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "label",
+              "name": "Label"
+            },
+            {
+              "value": "type",
+              "name": "Type"
+            },
+            {
+              "value": "options",
+              "name": "Options"
+            }
+          ]
+        }
+      },
+      "DeleteFieldsByEntityByName200ResponseDataEntity": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "DeleteFieldsByEntityByName200ResponseDataEntity",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
+      "DeleteFieldsByEntityByName200ResponseDataDeleted": {
+        "enum": [
+          true
+        ],
+        "type": "boolean",
+        "additionalProperties": false
+      },
       "GetCampaignsByCampaignIdStatutes200ResponseStatutesItemType": {
         "enum": [
           "issue",
@@ -46601,11 +47968,15 @@
       "GetFields200ResponseDataContactItemType": {
         "enum": [
           "text",
+          "multilineText",
           "number",
           "boolean",
           "datetime",
           "date",
-          "phone"
+          "phone",
+          "url",
+          "select",
+          "user"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -46617,6 +47988,10 @@
             {
               "value": "text",
               "name": "Text"
+            },
+            {
+              "value": "multilineText",
+              "name": "MultilineText"
             },
             {
               "value": "number",
@@ -46637,6 +48012,18 @@
             {
               "value": "phone",
               "name": "Phone"
+            },
+            {
+              "value": "url",
+              "name": "Url"
+            },
+            {
+              "value": "select",
+              "name": "Select"
+            },
+            {
+              "value": "user",
+              "name": "User"
             }
           ]
         }
@@ -46672,11 +48059,15 @@
       "GetFields200ResponseDataCompanyItemType": {
         "enum": [
           "text",
+          "multilineText",
           "number",
           "boolean",
           "datetime",
           "date",
-          "phone"
+          "phone",
+          "url",
+          "select",
+          "user"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -46688,6 +48079,10 @@
             {
               "value": "text",
               "name": "Text"
+            },
+            {
+              "value": "multilineText",
+              "name": "MultilineText"
             },
             {
               "value": "number",
@@ -46708,6 +48103,18 @@
             {
               "value": "phone",
               "name": "Phone"
+            },
+            {
+              "value": "url",
+              "name": "Url"
+            },
+            {
+              "value": "select",
+              "name": "Select"
+            },
+            {
+              "value": "user",
+              "name": "User"
             }
           ]
         }
@@ -48479,6 +49886,28 @@
             {
               "value": "crm_synced",
               "name": "CrmSynced"
+            }
+          ]
+        }
+      },
+      "DeleteFieldsByEntityByNameEntityParameter": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "DeleteFieldsByEntityByNameEntityParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
             }
           ]
         }

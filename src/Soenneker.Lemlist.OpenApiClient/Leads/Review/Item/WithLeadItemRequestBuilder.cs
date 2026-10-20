@@ -34,13 +34,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Review.Item
         {
         }
         /// <summary>
-        /// Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.
+        /// Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.Retrying is safe once a call has completed: a lead that is already launched is refused with `CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED`, so it is never launched twice. Do not send concurrent calls for the same lead.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId500Response">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,11 +56,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Review.Item
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId400Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId404Response.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId500Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsReviewByLeadId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.
+        /// Use this endpoint to launch a lead that is waiting for review, without having to enable campaign-wide auto-review.You&apos;re auto launching this specific lead, while still enforcing every other launch guard: the campaign must have no step errors, any AI variables required by the campaign must be valid for the lead, and a sender must be available.No need to enable autolaunch in the campaign.This endpoint requires an `emailPro` plan or higher.Retrying is safe once a call has completed: a lead that is already launched is refused with `CAMPAIGN_LEAD_REVIEW_LEAD_ALREADY_REVIEWED`, so it is never launched twice. Do not send concurrent calls for the same lead.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

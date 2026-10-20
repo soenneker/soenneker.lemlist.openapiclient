@@ -23,7 +23,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> CallStatusFilter { get; set; }
 #endif
-        /// <summary>`customLeadInfo` only - the tested field, normalized: a lead variable reads back as `variables.&lt;name&gt;`, a contact field as `fields.&lt;name&gt;`. Every branch of the step tests the same field.</summary>
+        /// <summary>`customLeadInfo` only - the tested field, normalized: a lead variable reads back as `variables.&lt;name&gt;`, a contact field as `fields.&lt;name&gt;`, a company field as `company.&lt;field&gt;` (e.g. `company.name`), or as `variables.company&lt;Field&gt;` (e.g. `variables.companyName`) on a step that already tested it that way, which tests the same value. Every branch of the step tests the same field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CustomField { get; set; }

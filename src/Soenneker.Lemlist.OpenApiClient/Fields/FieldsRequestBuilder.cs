@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Fields.Item;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Fields
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class FieldsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.fields.item collection</summary>
+        /// <param name="position">Entity the field belongs to</param>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Fields.Item.WithEntityItemRequestBuilder"/></returns>
+        public global::Soenneker.Lemlist.OpenApiClient.Fields.Item.WithEntityItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("entity", position);
+                return new global::Soenneker.Lemlist.OpenApiClient.Fields.Item.WithEntityItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Fields.FieldsRequestBuilder"/> and sets the default values.
         /// </summary>
@@ -61,6 +74,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Fields
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Creates a custom field on contacts or companies, or updates the one the entity already has under that `name`, under the rules of the lemlist app: the same reserved names, the same type conversions, the same permission.**Create.** No field of that `name` on the entity: it is created, as the **New field** button does in the app. Any API key may create a field. The field is created on behalf of the user of the API key and logged in the team activity feed. Once created, write it through `POST /contacts` or `POST /companies` with its `name` as the key. A new contact field is then filled in the background from data lemlist already holds (the LinkedIn data of enriched contacts, the lead variable of the same name in your campaigns).**Update.** A field of that `name` exists: the call updates it, and the API key user needs the **Update contact &amp; companies fields** permission, as in the app (`403` otherwise, even when nothing would change). What can change:- `label`, when sent and different;- `type`, only to `text` or `multilineText`, from any type but `phone` and `user`: the conversions the app offers. The stored values are converted, as in the app. Any other `type` than the stored one answers `400 TYPE_CHANGE_NOT_ALLOWED`. Note that the app promotes a `text` field to `multilineText` on its own when a value with a line break reaches it (import, CRM, API), and `GET /fields` then lists it as `multilineText`: replaying a body with `type: &quot;text&quot;` converts it back and flattens the line breaks, as the app&apos;s **Change type** menu does;- the options of a `select`, through `upsertOptions` (added when missing, never removed), `renameOptions` (the contacts or companies holding the old value are rewritten to the new one) and `removeOptions` (the contacts or companies holding the option are cleared). Applied in that order: renames, removals, additions. A select keeps at least one option. Options are matched as in the app, regardless of case and surrounding spaces: `gold` matches an existing `Gold`, renaming `Gold` to `GOLD` only changes its case, and values are stored without surrounding spaces, so a value written on a contact or company matches them. An operation already applied reads as done (a rename whose source is gone while its target exists, a removal of an absent option).Sending the same body again changes nothing and answers `200` with empty `changes`.Two calls changing the options of the same field at the same time: the one planned from a list that changed meanwhile answers `409 FIELD_CHANGED_RETRY` and writes nothing (the options are written first, before any `label` change); read the field again and replay the call.**Name.** `name` is the key your integrations write to, and never changes afterwards: it must start with a lowercase letter, followed by letters and digits only. `label` is optional and defaults to `name` on creation.**Types.** `select` is created with its `upsertOptions` (at least one). A `user` field takes a team member on `POST /contacts` or `POST /companies` (email or `usr_` id), as in the app.**Read it back.** The response carries the field. A `GET /fields` sent right after may take a moment to list it. Renaming or removing an option, and converting a type, rewrite every contact or company of the team holding a value, within the call.
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200Response"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostFields400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostFields401Response">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostFields403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostFields409Response">When receiving a 409 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200Response> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostFields400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.PostFields401Response.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostFields403Response.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostFields409Response.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// List Fields
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -77,6 +121,28 @@ namespace Soenneker.Lemlist.OpenApiClient.Fields
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Creates a custom field on contacts or companies, or updates the one the entity already has under that `name`, under the rules of the lemlist app: the same reserved names, the same type conversions, the same permission.**Create.** No field of that `name` on the entity: it is created, as the **New field** button does in the app. Any API key may create a field. The field is created on behalf of the user of the API key and logged in the team activity feed. Once created, write it through `POST /contacts` or `POST /companies` with its `name` as the key. A new contact field is then filled in the background from data lemlist already holds (the LinkedIn data of enriched contacts, the lead variable of the same name in your campaigns).**Update.** A field of that `name` exists: the call updates it, and the API key user needs the **Update contact &amp; companies fields** permission, as in the app (`403` otherwise, even when nothing would change). What can change:- `label`, when sent and different;- `type`, only to `text` or `multilineText`, from any type but `phone` and `user`: the conversions the app offers. The stored values are converted, as in the app. Any other `type` than the stored one answers `400 TYPE_CHANGE_NOT_ALLOWED`. Note that the app promotes a `text` field to `multilineText` on its own when a value with a line break reaches it (import, CRM, API), and `GET /fields` then lists it as `multilineText`: replaying a body with `type: &quot;text&quot;` converts it back and flattens the line breaks, as the app&apos;s **Change type** menu does;- the options of a `select`, through `upsertOptions` (added when missing, never removed), `renameOptions` (the contacts or companies holding the old value are rewritten to the new one) and `removeOptions` (the contacts or companies holding the option are cleared). Applied in that order: renames, removals, additions. A select keeps at least one option. Options are matched as in the app, regardless of case and surrounding spaces: `gold` matches an existing `Gold`, renaming `Gold` to `GOLD` only changes its case, and values are stored without surrounding spaces, so a value written on a contact or company matches them. An operation already applied reads as done (a rename whose source is gone while its target exists, a removal of an absent option).Sending the same body again changes nothing and answers `200` with empty `changes`.Two calls changing the options of the same field at the same time: the one planned from a list that changed meanwhile answers `409 FIELD_CHANGED_RETRY` and writes nothing (the options are written first, before any `label` change); read the field again and replay the call.**Name.** `name` is the key your integrations write to, and never changes afterwards: it must start with a lowercase letter, followed by letters and digits only. `label` is optional and defaults to `name` on creation.**Types.** `select` is created with its `upsertOptions` (at least one). A `user` field takes a team member on `POST /contacts` or `POST /companies` (email or `usr_` id), as in the app.**Read it back.** The response carries the field. A `GET /fields` sent right after may take a moment to list it. Renaming or removing an option, and converting a type, rewrite every contact or company of the team holding a value, within the call.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>

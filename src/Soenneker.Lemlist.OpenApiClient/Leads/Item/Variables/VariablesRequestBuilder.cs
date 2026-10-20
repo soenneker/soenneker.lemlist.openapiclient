@@ -40,6 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response404Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -55,6 +56,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables400Response.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.DeleteLeadsByLeadIdVariables200Response404Error.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByLeadIdVariables409Response.CreateFromDiscriminatorValue },
             };
@@ -67,6 +69,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response404Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -82,6 +85,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables400Response.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PatchLeadsByLeadIdVariables200Response404Error.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByLeadIdVariables409Response.CreateFromDiscriminatorValue },
             };
@@ -94,6 +98,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response404Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -109,6 +114,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables400Response.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.PostLeadsByLeadIdVariables200Response404Error.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdVariables409Response.CreateFromDiscriminatorValue },
             };

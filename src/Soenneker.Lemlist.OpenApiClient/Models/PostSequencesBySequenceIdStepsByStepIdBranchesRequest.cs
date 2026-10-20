@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> CallStatusFilter { get; set; }
 #endif
-        /// <summary>`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. Every branch of a step tests the same field, so changing it here changes it on all of them.</summary>
+        /// <summary>`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.&lt;field&gt;` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. On a step that already tests `variables.companyName`, the new branch keeps that form. Every branch of a step tests the same field, so changing it here changes it on all of them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CustomField { get; set; }

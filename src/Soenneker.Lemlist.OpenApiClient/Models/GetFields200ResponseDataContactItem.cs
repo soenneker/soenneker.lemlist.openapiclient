@@ -38,6 +38,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>The options of a select field, in order (custom select fields only)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Options { get; set; }
+#nullable restore
+#else
+        public List<string> Options { get; set; }
+#endif
         /// <summary>Origin of the field</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataContactItemSource? Source { get; set; }
         /// <summary>Field data type</summary>
@@ -70,6 +78,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "crmField", n => { CrmField = n.GetStringValue(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "options", n => { Options = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "source", n => { Source = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataContactItemSource>(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataContactItemType>(); } },
             };
@@ -84,6 +93,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("crmField", CrmField);
             writer.WriteStringValue("label", Label);
             writer.WriteStringValue("name", Name);
+            writer.WriteCollectionOfPrimitiveValues<string>("options", Options);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataContactItemSource>("source", Source);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataContactItemType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);

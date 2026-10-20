@@ -11,6 +11,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Text,
         #pragma warning restore CS1591
+        [EnumMember(Value = "multilineText")]
+        #pragma warning disable CS1591
+        MultilineText,
+        #pragma warning restore CS1591
         [EnumMember(Value = "number")]
         #pragma warning disable CS1591
         Number,
@@ -30,6 +34,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "phone")]
         #pragma warning disable CS1591
         Phone,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "url")]
+        #pragma warning disable CS1591
+        Url,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "select")]
+        #pragma warning disable CS1591
+        Select,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user")]
+        #pragma warning disable CS1591
+        User,
         #pragma warning restore CS1591
     }
 }
