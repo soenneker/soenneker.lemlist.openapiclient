@@ -39,6 +39,7 @@ namespace Soenneker.Lemlist.OpenApiClient.ContactSourcing.Contacts
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactSourcingContacts403Response">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactSourcingContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -50,7 +51,11 @@ namespace Soenneker.Lemlist.OpenApiClient.ContactSourcing.Contacts
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            await RequestAdapter.SendNoContentAsync(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostContactSourcingContacts403Response.CreateFromDiscriminatorValue },
+            };
+            await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Turns one contact-sourcing recommendation into a lemlist contact.`leadId` comes from a run&apos;s `contacts[].leadId` — a People-Database id, not a contact id. `companyId` is required and verified: the new contact is filed under that account, whatever the person&apos;s profile lists as their current employer. Someone your workspace already has as a contact is left where they are — an Add never moves a contact from one account to another — and the call answers 409 rather than reporting a creation that did not happen.
@@ -70,6 +75,7 @@ namespace Soenneker.Lemlist.OpenApiClient.ContactSourcing.Contacts
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }

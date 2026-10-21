@@ -62,6 +62,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string ContactOwner { get; set; }
 #endif
+        /// <summary>Closed beta: refused as an unknown field (`400 INVALID_FIELD`) unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (`003…`) or Lead (`00Q…`) id of 15 or 18 characters. Requires an admin API key. A new contact is created already linked; an existing one has its link moved to this record. An id another contact holds updates that contact when the body carries its email or LinkedIn URL, and is refused otherwise. See the endpoint page for the refusals.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CrmId { get; set; }
+#nullable restore
+#else
+        public string CrmId { get; set; }
+#endif
         /// <summary>Contact email address. Used as a unique key for upsert matching. At least one of `contactId`, `email`, `linkedinUrl`, or `linkedinUrlSalesNav` is required.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -141,6 +149,30 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #nullable restore
 #else
         public string Location { get; set; }
+#endif
+        /// <summary>LinkedIn connections count of the person, from the People Database. 500 usually means 500 or more.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PeopleDbConnectionCount { get; set; }
+#nullable restore
+#else
+        public string PeopleDbConnectionCount { get; set; }
+#endif
+        /// <summary>Department of the person, from the People Database.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PeopleDbDepartment { get; set; }
+#nullable restore
+#else
+        public string PeopleDbDepartment { get; set; }
+#endif
+        /// <summary>Seniority of the person, from the People Database.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PeopleDbSeniority { get; set; }
+#nullable restore
+#else
+        public string PeopleDbSeniority { get; set; }
 #endif
         /// <summary>Contact phone number.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -230,6 +262,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "companyLinkedinUrl", n => { CompanyLinkedinUrl = n.GetStringValue(); } },
                 { "contactId", n => { ContactId = n.GetStringValue(); } },
                 { "contactOwner", n => { ContactOwner = n.GetStringValue(); } },
+                { "crmId", n => { CrmId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
                 { "industry", n => { Industry = n.GetStringValue(); } },
@@ -240,6 +273,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
                 { "linkedinUrlSalesNav", n => { LinkedinUrlSalesNav = n.GetStringValue(); } },
                 { "location", n => { Location = n.GetStringValue(); } },
+                { "peopleDbConnectionCount", n => { PeopleDbConnectionCount = n.GetStringValue(); } },
+                { "peopleDbDepartment", n => { PeopleDbDepartment = n.GetStringValue(); } },
+                { "peopleDbSeniority", n => { PeopleDbSeniority = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "picture", n => { Picture = n.GetStringValue(); } },
                 { "skills", n => { Skills = n.GetStringValue(); } },
@@ -262,6 +298,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("companyLinkedinUrl", CompanyLinkedinUrl);
             writer.WriteStringValue("contactId", ContactId);
             writer.WriteStringValue("contactOwner", ContactOwner);
+            writer.WriteStringValue("crmId", CrmId);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("firstName", FirstName);
             writer.WriteStringValue("industry", Industry);
@@ -272,6 +309,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("linkedinUrl", LinkedinUrl);
             writer.WriteStringValue("linkedinUrlSalesNav", LinkedinUrlSalesNav);
             writer.WriteStringValue("location", Location);
+            writer.WriteStringValue("peopleDbConnectionCount", PeopleDbConnectionCount);
+            writer.WriteStringValue("peopleDbDepartment", PeopleDbDepartment);
+            writer.WriteStringValue("peopleDbSeniority", PeopleDbSeniority);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("picture", Picture);
             writer.WriteStringValue("skills", Skills);

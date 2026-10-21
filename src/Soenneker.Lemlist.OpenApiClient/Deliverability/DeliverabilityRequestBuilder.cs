@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Deliverability.Alerts;
+using Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Deliverability
         public global::Soenneker.Lemlist.OpenApiClient.Deliverability.Alerts.AlertsRequestBuilder Alerts
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Deliverability.Alerts.AlertsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The incidents property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents.IncidentsRequestBuilder Incidents
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents.IncidentsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Deliverability.DeliverabilityRequestBuilder"/> and sets the default values.

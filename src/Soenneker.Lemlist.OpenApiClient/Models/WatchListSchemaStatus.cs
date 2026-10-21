@@ -23,9 +23,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         InsufficientCredits,
         #pragma warning restore CS1591
+        [EnumMember(Value = "github_token_required")]
+        #pragma warning disable CS1591
+        GithubTokenRequired,
+        #pragma warning restore CS1591
         [EnumMember(Value = "empty_crm_lists")]
         #pragma warning disable CS1591
         EmptyCrmLists,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "excluded_crm_lists_too_large")]
+        #pragma warning disable CS1591
+        ExcludedCrmListsTooLarge,
         #pragma warning restore CS1591
         [EnumMember(Value = "error")]
         #pragma warning disable CS1591

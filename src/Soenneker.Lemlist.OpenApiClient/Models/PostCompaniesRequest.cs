@@ -30,6 +30,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string CompanyOwner { get; set; }
 #endif
+        /// <summary>Closed beta: refused as an unknown field (`400 INVALID_FIELD`) unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the company to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Account (`001…`) id of 15 or 18 characters. Requires an admin API key. A new company is created already linked; an existing one has its link moved to this record, and its contacts’ associations follow. An id another company holds updates that company when the body carries its domain, LinkedIn URL or Sales Navigator URL, and is refused otherwise. See the endpoint page for the refusals.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CrmId { get; set; }
+#nullable restore
+#else
+        public string CrmId { get; set; }
+#endif
         /// <summary>Company description.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -178,6 +186,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "companyId", n => { CompanyId = n.GetStringValue(); } },
                 { "companyOwner", n => { CompanyOwner = n.GetStringValue(); } },
+                { "crmId", n => { CrmId = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "domain", n => { Domain = n.GetStringValue(); } },
                 { "foundedOn", n => { FoundedOn = n.GetStringValue(); } },
@@ -204,6 +213,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("companyId", CompanyId);
             writer.WriteStringValue("companyOwner", CompanyOwner);
+            writer.WriteStringValue("crmId", CrmId);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("domain", Domain);
             writer.WriteStringValue("foundedOn", FoundedOn);

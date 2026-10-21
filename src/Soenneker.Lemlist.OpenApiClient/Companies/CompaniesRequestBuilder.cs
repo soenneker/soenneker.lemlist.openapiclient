@@ -94,7 +94,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.PostCompanies200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 422 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -112,7 +114,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.PostCompanies200Response401Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
-                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
+                { "503", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

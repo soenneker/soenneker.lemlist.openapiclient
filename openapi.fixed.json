@@ -6972,7 +6972,7 @@
             }
           },
           "403": {
-            "description": "Possible errors: User linked to this API key is blocked (plain text) / The lead brings a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (JSON body); nothing is written.",
+            "description": "Possible errors: User linked to this API key is blocked (plain text) / The lead brings a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (JSON body) / The lead brings a contact not yet in lemlist and the API key\u0027s user does not have the \u0022Create contacts\u0022 permission (JSON body); nothing is written.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6985,8 +6985,17 @@
                 "schema": {
                   "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads403Response"
                 },
-                "example": {
-                  "error": "You do not have the permission to create companies"
+                "examples": {
+                  "company-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create companies"
+                    }
+                  },
+                  "contact-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create contacts"
+                    }
+                  }
                 },
                 "x-schema-inferred-from-examples": true
               }
@@ -7183,14 +7192,21 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "The update brings a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission; nothing is written.",
+            "description": "Possible errors: The update brings a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission / The lead has no linked contact, the update would create one and the API key\u0027s user does not have the \u0022Create contacts\u0022 permission; nothing is written.",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "object",
                   "description": "Fallback media schema"
                 },
-                "example": "You do not have the permission to create companies"
+                "examples": {
+                  "company-create-not-allowed": {
+                    "value": "You do not have the permission to create companies"
+                  },
+                  "contact-create-not-allowed": {
+                    "value": "You do not have the permission to create contacts"
+                  }
+                }
               }
             }
           },
@@ -8302,14 +8318,23 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "The write would create a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); nothing is written.",
+            "description": "Possible errors: The write would create a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060) / The lead has no linked contact, the write would create one and the API key\u0027s user does not have the \u0022Create contacts\u0022 permission (\u0060CONTACT_CREATE_NOT_ALLOWED\u0060); nothing is written.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PostLeadsByLeadIdVariables403Response"
                 },
-                "example": {
-                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                "examples": {
+                  "company-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                    }
+                  },
+                  "contact-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create contacts [CONTACT_CREATE_NOT_ALLOWED]"
+                    }
+                  }
                 },
                 "x-schema-inferred-from-examples": true
               }
@@ -8434,14 +8459,23 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "The write would create a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); nothing is written.",
+            "description": "Possible errors: The write would create a company not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060) / The lead has no linked contact, the write would create one and the API key\u0027s user does not have the \u0022Create contacts\u0022 permission (\u0060CONTACT_CREATE_NOT_ALLOWED\u0060); nothing is written.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PatchLeadsByLeadIdVariables403Response"
                 },
-                "example": {
-                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                "examples": {
+                  "company-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                    }
+                  },
+                  "contact-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create contacts [CONTACT_CREATE_NOT_ALLOWED]"
+                    }
+                  }
                 },
                 "x-schema-inferred-from-examples": true
               }
@@ -8541,14 +8575,23 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "The lead has no linked contact, its stored company is not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); nothing is written.",
+            "description": "Possible errors: The lead has no linked contact, its stored company is not yet in lemlist and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060) / The lead has no linked contact, the write would create one and the API key\u0027s user does not have the \u0022Create contacts\u0022 permission (\u0060CONTACT_CREATE_NOT_ALLOWED\u0060); nothing is written.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteLeadsByLeadIdVariables403Response"
                 },
-                "example": {
-                  "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                "examples": {
+                  "company-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create companies [COMPANY_CREATE_NOT_ALLOWED]"
+                    }
+                  },
+                  "contact-create-not-allowed": {
+                    "value": {
+                      "error": "You do not have the permission to create contacts [CONTACT_CREATE_NOT_ALLOWED]"
+                    }
+                  }
                 },
                 "x-schema-inferred-from-examples": true
               }
@@ -13338,7 +13381,7 @@
           "Contacts"
         ],
         "summary": "Add and update contact",
-        "description": "Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing \u0060contactId\u0060, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing \u0060companyId\u0060, \u0060companyDomain\u0060, or \u0060companyLinkedinUrl\u0060.",
+        "description": "Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the \u0060updateStrategy\u0060 query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing \u0060contactId\u0060, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing \u0060companyId\u0060, \u0060companyDomain\u0060, or \u0060companyLinkedinUrl\u0060.\n\n**Permission:** creating a contact requires the \u0022Create contacts\u0022 permission on the API key\u0027s user, otherwise the request fails with \u0060403 CONTACT_CREATE_NOT_ALLOWED\u0060. Updating an existing contact does not.",
         "operationId": "PostContacts",
         "parameters": [
           {
@@ -13470,8 +13513,38 @@
               }
             }
           },
+          "403": {
+            "description": "The request would create a contact and the API key\u0027s user does not have the \u0022Create contacts\u0022 permission (\u0060CONTACT_CREATE_NOT_ALLOWED\u0060); updating an existing contact is not affected. Or the API key does not belong to a team admin, and the body carries \u0060crmId\u0060 (\u0060CRM_ID_UPDATE_NOT_ALLOWED\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
+                },
+                "examples": {
+                  "create-not-allowed": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CONTACT_CREATE_NOT_ALLOWED",
+                        "message": "You do not have the permission to create contacts"
+                      }
+                    }
+                  },
+                  "not-admin": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_ID_UPDATE_NOT_ALLOWED",
+                        "message": "Only a team admin can define or change the CRM id of a record"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
-            "description": "No contact of the team matches \u0060contactId\u0060 (\u0060CONTACT_NOT_FOUND_BY_ID\u0060).",
+            "description": "No contact of the team matches \u0060contactId\u0060 (\u0060CONTACT_NOT_FOUND_BY_ID\u0060), or the contact whose link \u0060crmId\u0060 moves was deleted meanwhile (\u0060CRM_ID_RECORD_NOT_FOUND\u0060).",
             "content": {
               "application/json": {
                 "schema": {
@@ -13492,11 +13565,11 @@
             }
           },
           "409": {
-            "description": "An email, LinkedIn or Sales Navigator URL already belongs to another contact (\u0060CONTACT_IDENTIFIER_CONFLICT\u0060); retrying as is fails again.",
+            "description": "An email, LinkedIn or Sales Navigator URL already belongs to another contact (\u0060CONTACT_IDENTIFIER_CONFLICT\u0060); retrying as is fails again. With \u0060crmId\u0060: another contact holds that CRM id and the body carries none of its identifiers (\u0060CRM_ID_ALREADY_LINKED\u0060, \u0060error.conflictingRecord\u0060 names it). Nothing is written.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
                 },
                 "examples": {
                   "conflict": {
@@ -13505,6 +13578,82 @@
                       "error": {
                         "code": "CONTACT_IDENTIFIER_CONFLICT",
                         "message": "An identifier (email, linkedinUrl or salesnavUrl) already belongs to another contact"
+                      }
+                    }
+                  },
+                  "crm-id-already-linked": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_ID_ALREADY_LINKED",
+                        "message": "This CRM id is already used by another lemlist record",
+                        "conflictingRecord": {
+                          "contactId": "ctc_A1B2C3D4E5F6G7H8i",
+                          "email": "jane@example.com",
+                          "name": "Jane Smith"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u0060crmId\u0060 names no live record the contact can be linked to: none in the CRM (\u0060CRM_RECORD_NOT_FOUND\u0060), a record merged into another one (\u0060CRM_RECORD_MERGED\u0060, \u0060error.survivorId\u0060), a converted Salesforce Lead (\u0060CRM_RECORD_CONVERTED\u0060, \u0060error.convertedContactId\u0060), or a Salesforce Lead while the team does not sync Leads (\u0060CRM_ID_LEADS_NOT_SYNCED\u0060). Nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
+                },
+                "examples": {
+                  "merged": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_MERGED",
+                        "message": "This CRM record was merged into another one: use the id of the surviving record (survivorId)",
+                        "survivorId": "987654321"
+                      }
+                    }
+                  },
+                  "converted": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_CONVERTED",
+                        "message": "This Salesforce Lead was converted: use the id of the Contact it became (convertedContactId)",
+                        "convertedContactId": "003000000000000AAA"
+                      }
+                    }
+                  },
+                  "not-found": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_NOT_FOUND",
+                        "message": "No record with this id exists in the CRM"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The CRM could not be reached to check the record sent as \u0060crmId\u0060 (\u0060CRM_RECORD_UNREACHABLE\u0060). Nothing is written; retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
+                },
+                "examples": {
+                  "unreachable": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_UNREACHABLE",
+                        "message": "The CRM could not be reached to check this record, please retry"
                       }
                     }
                   }
@@ -15160,7 +15309,7 @@
             }
           },
           "403": {
-            "description": "The request would create a company and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060). Updating an existing company is not affected.",
+            "description": "The request would create a company and the API key\u0027s user does not have the \u0022Create companies\u0022 permission (\u0060COMPANY_CREATE_NOT_ALLOWED\u0060); updating an existing company is not affected. Or the API key does not belong to a team admin, and the body carries \u0060crmId\u0060 (\u0060CRM_ID_UPDATE_NOT_ALLOWED\u0060).",
             "content": {
               "application/json": {
                 "schema": {
@@ -15175,13 +15324,22 @@
                         "message": "You do not have the permission to create companies"
                       }
                     }
+                  },
+                  "not-admin": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_ID_UPDATE_NOT_ALLOWED",
+                        "message": "Only a team admin can define or change the CRM id of a record"
+                      }
+                    }
                   }
                 }
               }
             }
           },
           "404": {
-            "description": "No company of the team matches \u0060companyId\u0060 (\u0060COMPANY_NOT_FOUND_BY_ID\u0060).",
+            "description": "No company of the team matches \u0060companyId\u0060 (\u0060COMPANY_NOT_FOUND_BY_ID\u0060), or the company whose link \u0060crmId\u0060 moves was deleted meanwhile (\u0060CRM_ID_RECORD_NOT_FOUND\u0060).",
             "content": {
               "application/json": {
                 "schema": {
@@ -15202,11 +15360,11 @@
             }
           },
           "409": {
-            "description": "A domain, LinkedIn or Sales Navigator URL already belongs to another company (\u0060COMPANY_IDENTIFIER_CONFLICT\u0060); retrying as is fails again.",
+            "description": "A domain, LinkedIn or Sales Navigator URL already belongs to another company (\u0060COMPANY_IDENTIFIER_CONFLICT\u0060); retrying as is fails again. With \u0060crmId\u0060: another company holds that CRM id and the body carries none of its domain, LinkedIn URL or Sales Navigator URL (\u0060CRM_ID_ALREADY_LINKED\u0060, \u0060error.conflictingRecord\u0060 names it), or the company found by its name alone is linked to another CRM record (\u0060COMPANY_LINKED_TO_OTHER_CRM_RECORD\u0060: send its \u0060companyId\u0060 with \u0060crmId\u0060 to move the link). Nothing is written.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
                 },
                 "examples": {
                   "conflict": {
@@ -15215,6 +15373,72 @@
                       "error": {
                         "code": "COMPANY_IDENTIFIER_CONFLICT",
                         "message": "An identifier (domain, linkedinUrl or salesnavUrl) already belongs to another company"
+                      }
+                    }
+                  },
+                  "crm-id-already-linked": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_ID_ALREADY_LINKED",
+                        "message": "This CRM id is already used by another lemlist record",
+                        "conflictingRecord": {
+                          "companyId": "cpn_A1B2C3D4E5F6G7H8j",
+                          "name": "Acme Inc",
+                          "domain": "acme.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u0060crmId\u0060 names no live record the company can be linked to: none in the CRM (\u0060CRM_RECORD_NOT_FOUND\u0060), or a record merged into another one (\u0060CRM_RECORD_MERGED\u0060, \u0060error.survivorId\u0060). Nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
+                },
+                "examples": {
+                  "merged": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_MERGED",
+                        "message": "This CRM record was merged into another one: use the id of the surviving record (survivorId)",
+                        "survivorId": "987654321"
+                      }
+                    }
+                  },
+                  "not-found": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_NOT_FOUND",
+                        "message": "No record with this id exists in the CRM"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The CRM could not be reached to check the record sent as \u0060crmId\u0060 (\u0060CRM_RECORD_UNREACHABLE\u0060). Nothing is written; retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmIdLinkErrorEnvelope"
+                },
+                "examples": {
+                  "unreachable": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "CRM_RECORD_UNREACHABLE",
+                        "message": "The CRM could not be reached to check this record, please retry"
                       }
                     }
                   }
@@ -20806,7 +21030,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign.",
+            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -20819,9 +21043,29 @@
                 "schema": {
                   "$ref": "#/components/schemas/PostWatchlist400Response"
                 },
-                "example": {
-                  "error": "campaignId must be a campaign id (cam_xxx) and requires signalProcessingType = \u0022push_to_campaign\u0022",
-                  "code": "WATCH_LIST_API_INVALID_CAMPAIGN_ID"
+                "examples": {
+                  "invalidCampaignId": {
+                    "value": {
+                      "error": "campaignId must be a campaign id (cam_xxx) and requires signalProcessingType = \u0022push_to_campaign\u0022",
+                      "code": "WATCH_LIST_API_INVALID_CAMPAIGN_ID"
+                    }
+                  },
+                  "invalidExternalSignalMapping": {
+                    "value": {
+                      "error": "Invalid filters \u2014 see details for which filterIds or required properties were rejected",
+                      "code": "WATCH_LIST_API_INVALID_FILTERS",
+                      "details": {
+                        "invalidFilters": [
+                          {
+                            "reason": "INVALID_FILTER_VALUE",
+                            "filterId": "externalSignalFieldMapping",
+                            "value": "[{\u0022sourceKey\u0022:\u0022domain\u0022,\u0022targetKey\u0022:\u0022company.domain\u0022}]",
+                            "message": "company.name must be mapped for externalSignalCompany"
+                          }
+                        ]
+                      }
+                    }
+                  }
                 },
                 "x-schema-inferred-from-examples": true
               }
@@ -21943,6 +22187,183 @@
         }
       }
     },
+    "/deliverability/incidents": {
+      "get": {
+        "tags": [
+          "Deliverability alerts"
+        ],
+        "summary": "List Deliverability Incidents",
+        "description": "Lists your team\u0027s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.\n\nAn incident stays \u0060active\u0060 until the issue clears, then becomes \u0060resolved\u0060 with a \u0060resolvedAt\u0060 date. Alert types turned off in your team\u0027s Notifications settings (Deliverability \u003E Alerts) are never returned. Resolved incidents are kept 90 days.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "operationId": "ListDeliverabilityIncidents",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Only incidents of this type.",
+            "schema": {
+              "$ref": "#/components/schemas/ListDeliverabilityIncidentsTypeParameter"
+            },
+            "example": "dnsIssue"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "\u0060active\u0060: the issue is still there. \u0060resolved\u0060: it cleared. Omit for both.",
+            "schema": {
+              "$ref": "#/components/schemas/ListDeliverabilityIncidentsStateParameter"
+            },
+            "example": "active"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Only incidents on mailboxes owned by this teammate.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "usr_Example3Hd8Pv5Rt1"
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Only incidents detected at or after this date or instant (ISO 8601; a date-time needs its offset).",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-10-01"
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "Only incidents detected at or before this date or instant (ISO 8601; a date-time needs its offset).",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-10-31T23:59:59Z"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of incidents to return.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of incidents to skip, for pagination.",
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDeliverabilityIncidents200Response"
+                },
+                "example": {
+                  "data": {
+                    "incidents": [
+                      {
+                        "_id": "dli_A1B2C3D4E5F6G7H8J",
+                        "userId": "usr_Example3Hd8Pv5Rt1",
+                        "userMailboxId": "usm_FakeQ4Lz7Nb2Xc9Vj",
+                        "mailboxEmail": "john@example.com",
+                        "type": "dnsIssue",
+                        "state": "active",
+                        "message": "SPF record missing for example.com\nDMARC record missing for example.com",
+                        "openedAt": "2026-10-07T16:23:00.000Z"
+                      }
+                    ],
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - a query parameter has an invalid value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliverabilityIncidentError"
+                },
+                "example": {
+                  "error": "Invalid query parameters: check type, state, userId, since, until, limit and skip.",
+                  "code": "DELIVERABILITY_INCIDENT_INVALID_INPUT"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliverabilityIncidentError"
+                },
+                "example": {
+                  "error": "Route unauthorized",
+                  "code": "ROUTE_UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The beta is not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliverabilityIncidentError"
+                },
+                "example": {
+                  "error": "Beta is not enabled",
+                  "code": "BETA_NOT_ENABLED"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed - only GET is supported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliverabilityIncidentError"
+                },
+                "example": {
+                  "error": "Route bad method",
+                  "code": "ROUTE_BAD_METHOD"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliverabilityIncidentError"
+                },
+                "example": {
+                  "error": "Internal error",
+                  "code": "INTERNAL_ERROR"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/sender-picture/mailboxes": {
       "get": {
         "tags": [
@@ -22879,6 +23300,21 @@
           "402": {
             "description": "\u0060findEmail\u0060 was asked for without the credits for it."
           },
+          "403": {
+            "description": "The API key\u0027s user does not have the \u0022Create contacts\u0022 permission (\u0060ABS_CONTACT_SOURCING_CONTACT_CREATE_NOT_ALLOWED\u0060). Every Add creates a contact, so the check runs on every call, before the \u0060402\u0060, \u0060404\u0060 and \u0060409\u0060 checks; nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactSourcingContacts403Response"
+                },
+                "example": {
+                  "error": "ABS_CONTACT_SOURCING_CONTACT_CREATE_NOT_ALLOWED",
+                  "message": "You do not have the permission to create contacts"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
           "404": {
             "description": "The person is already one of your contacts, or no longer in the People Database. Re-run the sourcing to refresh the recommendations."
           },
@@ -23591,6 +24027,23 @@
           }
         },
         "description": "A lead as the v2 endpoints return it: GET /leads/{email}, GET /leads with \u0060version=v2\u0060, and the \u0060lead\u0060 nested in GET /activities with \u0060version=v2\u0060. \u0060createdAt\u0060 is the date the lead was added to its campaign."
+      },
+      "CrmIdLinkErrorEnvelope": {
+        "required": [
+          "success",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "$ref": "#/components/schemas/CrmIdLinkErrorEnvelopeError"
+          }
+        },
+        "description": "Error envelope of a refused \u0060crmId\u0060 (closed beta) on the contact and company upserts. The extra fields name what to send instead."
       },
       "ApiErrorEnvelope": {
         "required": [
@@ -27169,6 +27622,66 @@
         },
         "description": "A deliverability alert configuration. The alert is evaluated periodically against your warm-up or outreach metrics and triggers notifications through the configured channels (in-app, email, webhook, Slack) when the threshold is breached."
       },
+      "DeliverabilityIncident": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique identifier of the incident"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Owner of the mailbox"
+          },
+          "userMailboxId": {
+            "type": "string",
+            "description": "Mailbox the incident is about"
+          },
+          "mailboxEmail": {
+            "type": "string",
+            "description": "Sending address of the mailbox"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DeliverabilityIncidentType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/DeliverabilityIncidentState"
+          },
+          "code": {
+            "type": "string",
+            "description": "Error code reported by the provider or by lemwarm, when known"
+          },
+          "message": {
+            "type": "string",
+            "description": "Plain-text explanation of the problem, when known"
+          },
+          "openedAt": {
+            "type": "string",
+            "description": "When the problem was detected",
+            "format": "date-time"
+          },
+          "resolvedAt": {
+            "type": "string",
+            "description": "When the problem cleared. Absent while \u0060active\u0060",
+            "format": "date-time"
+          }
+        },
+        "description": "One deliverability problem on one of your mailboxes. It opens when the problem is detected and resolves when the mailbox recovers."
+      },
+      "DeliverabilityIncidentError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable explanation of the failure"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases"
+          }
+        },
+        "description": "Error envelope returned by the deliverability incidents endpoint."
+      },
       "SenderPictureMailbox": {
         "type": "object",
         "properties": {
@@ -27688,6 +28201,34 @@
       "LeadV2SendingUser": {
         "type": "object",
         "description": "Sending user information"
+      },
+      "CrmIdLinkErrorEnvelopeError": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation."
+          },
+          "conflictingRecord": {
+            "$ref": "#/components/schemas/CrmIdLinkErrorEnvelopeErrorConflictingRecord"
+          },
+          "survivorId": {
+            "type": "string",
+            "description": "With \u0060CRM_RECORD_MERGED\u0060: the CRM record the sent one was merged into. Send this id instead."
+          },
+          "convertedContactId": {
+            "type": "string",
+            "description": "With \u0060CRM_RECORD_CONVERTED\u0060: the Salesforce Contact the Lead was converted into. Send this id instead."
+          }
+        }
       },
       "ApiErrorEnvelopeError": {
         "required": [
@@ -29235,6 +29776,37 @@
           }
         },
         "description": "The contact\u0027s resolved country (from its \u0060location\u0060, \u0060country\u0060 or company data), as ISO 3166-1 alpha-2 codes."
+      },
+      "CrmIdLinkErrorEnvelopeErrorConflictingRecord": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "The contact holding the id (contact upsert)."
+          },
+          "companyId": {
+            "type": "string",
+            "description": "The company holding the id (company upsert)."
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "description": "Primary email of the contact."
+          },
+          "linkedinUrl": {
+            "type": "string"
+          },
+          "linkedinUrlSalesNav": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Domain of the company."
+          }
+        },
+        "description": "With \u0060CRM_ID_ALREADY_LINKED\u0060: the lemlist record already linked to this CRM id."
       },
       "CampaignPerChannelStatsLinkedinBreakdown": {
         "type": "object",
@@ -33556,6 +34128,18 @@
             "type": "string",
             "description": "Contact tagline."
           },
+          "peopleDbSeniority": {
+            "type": "string",
+            "description": "Seniority of the person, from the People Database."
+          },
+          "peopleDbDepartment": {
+            "type": "string",
+            "description": "Department of the person, from the People Database."
+          },
+          "peopleDbConnectionCount": {
+            "type": "string",
+            "description": "LinkedIn connections count of the person, from the People Database. 500 usually means 500 or more."
+          },
           "contactOwner": {
             "type": "string",
             "description": "Owner of the contact. Can be a user ID (e.g. \u0060usr_...\u0060) or a team member\u0027s email address. If the provided value does not match a team member, the contact is still written with an \u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 entry in \u0060warnings\u0060: the owner defaults to the API key owner on creation and is unchanged on update. On update it replaces the current owner, except under \u0060fillEmptyOnly\u0060 where it is only set when the contact has none."
@@ -33576,6 +34160,11 @@
           "companyLinkedinUrl": {
             "type": "string",
             "description": "LinkedIn URL of a company already existing in lemlist to link to this contact. Used if \u0060companyId\u0060 and \u0060companyDomain\u0060 are not provided."
+          },
+          "crmId": {
+            "type": "string",
+            "description": "Closed beta: refused as an unknown field (\u0060400 INVALID_FIELD\u0060) unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (\u0060003\u2026\u0060) or Lead (\u006000Q\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. A new contact is created already linked; an existing one has its link moved to this record. An id another contact holds updates that contact when the body carries its email or LinkedIn URL, and is refused otherwise. See the endpoint page for the refusals.",
+            "example": "123456789"
           }
         },
         "additionalProperties": {
@@ -34037,6 +34626,11 @@
             "type": "string",
             "description": "Origin of the company record. Set on creation only and cannot be updated afterwards. Defaults to \u0060api\u0060.",
             "default": "api"
+          },
+          "crmId": {
+            "type": "string",
+            "description": "Closed beta: refused as an unknown field (\u0060400 INVALID_FIELD\u0060) unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the company to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Account (\u0060001\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. A new company is created already linked; an existing one has its link moved to this record, and its contacts\u2019 associations follow. An id another company holds updates that company when the body carries its domain, LinkedIn URL or Sales Navigator URL, and is refused otherwise. See the endpoint page for the refusals.",
+            "example": "123456789"
           }
         },
         "additionalProperties": {
@@ -35449,6 +36043,9 @@
           },
           "code": {
             "type": "string"
+          },
+          "details": {
+            "$ref": "#/components/schemas/PostWatchlist400ResponseDetails"
           }
         }
       },
@@ -35678,6 +36275,14 @@
         "properties": {
           "deleted": {
             "type": "boolean"
+          }
+        }
+      },
+      "ListDeliverabilityIncidents200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ListDeliverabilityIncidents200ResponseData"
           }
         }
       },
@@ -36105,6 +36710,17 @@
             "type": "boolean",
             "description": "Also run email enrichment on the new contact. Spends enrichment credits.",
             "default": false
+          }
+        }
+      },
+      "PostContactSourcingContacts403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
           }
         }
       },
@@ -38437,7 +39053,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked); \u0060FIELDS_KEPT\u0060 (values the update strategy kept)."
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked); \u0060FIELDS_KEPT\u0060 (values the update strategy kept); \u0060CRM_ID_NOT_APPLIED\u0060 (\u0060crmId\u0060 not applied: the contact stays linked to another CRM record of the same person, typically a Salesforce Contact facing a Lead id; send its \u0060contactId\u0060 to move the link)."
           },
           "message": {
             "type": "string"
@@ -38501,6 +39117,9 @@
             "type": "boolean",
             "description": "Whether the contact is unsubscribed"
           },
+          "crmSync": {
+            "type": "string"
+          },
           "created": {
             "type": "boolean",
             "description": "\u0060true\u0060 when a new contact was created, \u0060false\u0060 when an existing contact was updated."
@@ -38520,7 +39139,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked); \u0060FIELDS_KEPT\u0060 (values the update strategy kept)."
+            "description": "\u0060OWNER_NOT_FOUND\u0060 or \u0060INVALID_OWNER_FORMAT\u0060 (\u0060contactOwner\u0060 matches no team member); \u0060COMPANY_NOT_FOUND_BY_ID\u0060, \u0060COMPANY_NOT_FOUND_BY_DOMAIN\u0060 or \u0060COMPANY_NOT_FOUND_BY_LINKEDIN_URL\u0060 (company not linked); \u0060FIELDS_KEPT\u0060 (values the update strategy kept); \u0060CRM_ID_NOT_APPLIED\u0060 (\u0060crmId\u0060 not applied: the contact stays linked to another CRM record of the same person, typically a Salesforce Contact facing a Lead id; send its \u0060contactId\u0060 to move the link)."
           },
           "message": {
             "type": "string"
@@ -38535,7 +39154,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060MISSING_IDENTIFIER\u0060, \u0060INVALID_CONTACT_ID\u0060, \u0060INVALID_EMAIL\u0060, \u0060INVALID_ADDITIONAL_EMAILS\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, \u0060CONTACT_VALIDATION_FAILED\u0060, or \u0060INVALID_UPDATE_STRATEGY\u0060."
+            "description": "Error code: \u0060MISSING_IDENTIFIER\u0060, \u0060INVALID_CONTACT_ID\u0060, \u0060INVALID_EMAIL\u0060, \u0060INVALID_ADDITIONAL_EMAILS\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, \u0060CONTACT_VALIDATION_FAILED\u0060, \u0060INVALID_UPDATE_STRATEGY\u0060, \u0060INVALID_CRM_ID\u0060 (\u0060crmId\u0060 does not have the format of the connected CRM, or points to another kind of record), or \u0060NO_CRM_CONNECTED\u0060 (\u0060crmId\u0060 sent while no CRM is connected)."
           },
           "message": {
             "type": "string"
@@ -38705,6 +39324,9 @@
             "type": "string",
             "description": "User ID who created the record"
           },
+          "crmSync": {
+            "type": "string"
+          },
           "created": {
             "type": "boolean",
             "description": "\u0060true\u0060 when a new company was created, \u0060false\u0060 when an existing company was updated."
@@ -38735,7 +39357,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060MISSING_REQUIRED_FIELD\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_DOMAIN\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, \u0060COMPANY_VALIDATION_FAILED\u0060, or \u0060INVALID_UPDATE_STRATEGY\u0060."
+            "description": "Error code: \u0060MISSING_REQUIRED_FIELD\u0060, \u0060INVALID_COMPANY_ID\u0060, \u0060INVALID_DOMAIN\u0060, \u0060INVALID_LINKEDIN_URL\u0060, \u0060INVALID_FIELD\u0060, \u0060INVALID_USER_FIELD_FORMAT\u0060, \u0060USER_FIELD_NOT_FOUND\u0060, \u0060COMPANY_VALIDATION_FAILED\u0060, \u0060INVALID_UPDATE_STRATEGY\u0060, \u0060INVALID_CRM_ID\u0060 (\u0060crmId\u0060 does not have the format of the connected CRM, or points to another kind of record), or \u0060NO_CRM_CONNECTED\u0060 (\u0060crmId\u0060 sent while no CRM is connected)."
           },
           "message": {
             "type": "string"
@@ -39515,12 +40137,38 @@
         },
         "description": "Task/opportunity template applied to each signal when signalProcessingType is create_opportunity."
       },
+      "PostWatchlist400ResponseDetails": {
+        "type": "object",
+        "properties": {
+          "invalidFilters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostWatchlist400ResponseDetailsInvalidFiltersItem"
+            }
+          }
+        }
+      },
       "PostWatchlistCrmLists429ResponseDetails": {
         "type": "object",
         "properties": {
           "monitorMax": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "ListDeliverabilityIncidents200ResponseData": {
+        "type": "object",
+        "properties": {
+          "incidents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliverabilityIncident"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "Number of incidents matching the filters, across all pages"
           }
         }
       },
@@ -40733,6 +41381,23 @@
           "message": {
             "type": "string",
             "description": "Message body"
+          }
+        }
+      },
+      "PostWatchlist400ResponseDetailsInvalidFiltersItem": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "filterId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
           }
         }
       },
@@ -42901,7 +43566,9 @@
           "inactive",
           "draft",
           "insufficient_credits",
+          "github_token_required",
           "empty_crm_lists",
+          "excluded_crm_lists_too_large",
           "error",
           "delete"
         ],
@@ -42929,8 +43596,16 @@
               "name": "InsufficientCredits"
             },
             {
+              "value": "github_token_required",
+              "name": "GithubTokenRequired"
+            },
+            {
               "value": "empty_crm_lists",
               "name": "EmptyCrmLists"
+            },
+            {
+              "value": "excluded_crm_lists_too_large",
+              "name": "ExcludedCrmListsTooLarge"
             },
             {
               "value": "error",
@@ -43859,6 +44534,62 @@
             {
               "value": "consecutive",
               "name": "Consecutive"
+            }
+          ]
+        }
+      },
+      "DeliverabilityIncidentType": {
+        "enum": [
+          "dnsIssue",
+          "mailboxDisconnected",
+          "lemwarmDisconnected",
+          "lemwarmPaused"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060dnsIssue\u0060: an SPF, DMARC, MX or custom tracking domain check failed, so sending is locked. \u0060mailboxDisconnected\u0060: lemlist lost access to the mailbox. \u0060lemwarmDisconnected\u0060: the mailbox was disconnected while warming up, so warm-up stopped. \u0060lemwarmPaused\u0060: lemwarm paused the warm-up after a bounce or a sending failure.",
+        "x-ms-enum": {
+          "name": "DeliverabilityIncidentType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "dnsIssue",
+              "name": "DnsIssue"
+            },
+            {
+              "value": "mailboxDisconnected",
+              "name": "MailboxDisconnected"
+            },
+            {
+              "value": "lemwarmDisconnected",
+              "name": "LemwarmDisconnected"
+            },
+            {
+              "value": "lemwarmPaused",
+              "name": "LemwarmPaused"
+            }
+          ]
+        }
+      },
+      "DeliverabilityIncidentState": {
+        "enum": [
+          "active",
+          "resolved"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060active\u0060 while the problem lasts, \u0060resolved\u0060 once it cleared",
+        "x-ms-enum": {
+          "name": "DeliverabilityIncidentState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "active",
+              "name": "Active"
+            },
+            {
+              "value": "resolved",
+              "name": "Resolved"
             }
           ]
         }
@@ -50257,6 +50988,60 @@
             {
               "value": "timeframe",
               "name": "Timeframe"
+            }
+          ]
+        }
+      },
+      "ListDeliverabilityIncidentsTypeParameter": {
+        "enum": [
+          "dnsIssue",
+          "mailboxDisconnected",
+          "lemwarmDisconnected",
+          "lemwarmPaused"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "ListDeliverabilityIncidentsTypeParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "dnsIssue",
+              "name": "DnsIssue"
+            },
+            {
+              "value": "mailboxDisconnected",
+              "name": "MailboxDisconnected"
+            },
+            {
+              "value": "lemwarmDisconnected",
+              "name": "LemwarmDisconnected"
+            },
+            {
+              "value": "lemwarmPaused",
+              "name": "LemwarmPaused"
+            }
+          ]
+        }
+      },
+      "ListDeliverabilityIncidentsStateParameter": {
+        "enum": [
+          "active",
+          "resolved"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "x-ms-enum": {
+          "name": "ListDeliverabilityIncidentsStateParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "active",
+              "name": "Active"
+            },
+            {
+              "value": "resolved",
+              "name": "Resolved"
             }
           ]
         }
