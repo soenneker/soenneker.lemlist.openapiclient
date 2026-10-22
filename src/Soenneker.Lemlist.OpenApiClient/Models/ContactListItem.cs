@@ -35,6 +35,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string CreatedBy { get; set; }
 #endif
+        /// <summary>CRM sync status for the contact, resolved against the team&apos;s active CRM provider. Only present when a CRM is connected and the contact is linked to a record in it or was searched for in it. Read `searching` and `notFoundAt` to follow a Search &amp; connect or Create in CRM.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSync? CrmSync { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSync CrmSync { get; set; }
+#endif
         /// <summary>Contact&apos;s primary email address</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -162,6 +170,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "companyId", n => { CompanyId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "createdBy", n => { CreatedBy = n.GetStringValue(); } },
+                { "crmSync", n => { CrmSync = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSync>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSync.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "fieldRejections", n => { FieldRejections = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>(global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
@@ -188,6 +197,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("companyId", CompanyId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("createdBy", CreatedBy);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSync>("crmSync", CrmSync);
             writer.WriteStringValue("email", Email);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>("fieldRejections", FieldRejections);
             writer.WriteStringValue("firstName", FirstName);

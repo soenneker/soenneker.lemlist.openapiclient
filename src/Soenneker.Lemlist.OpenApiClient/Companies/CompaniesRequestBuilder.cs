@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Companies.Crm;
 using Soenneker.Lemlist.OpenApiClient.Companies.Item;
 using Soenneker.Lemlist.OpenApiClient.Companies.Lists;
 using Soenneker.Lemlist.OpenApiClient.Companies.Merge;
@@ -20,6 +21,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompaniesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The crm property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Companies.Crm.CrmRequestBuilder Crm
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Companies.Crm.CrmRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The lists property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Companies.Lists.ListsRequestBuilder Lists
         {
@@ -186,7 +192,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             [QueryParameter("crmIds")]
             public string CrmIds { get; set; }
 #endif
-            /// <summary>Filter companies by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Common values:- `synced` — the company has a CRM record and no sync errors.- `not_synced` — the company has no CRM record yet.- `error` — at least one sync error is currently raised.- A specific error reason (lowercase form), to filter by root cause: `unique_index_error_company`, `property_doesnt_exist`, `required_field_missing`, `company_already_exists_with_name`, `company_already_exists_with_linkedin_url`.For each returned company, see `crmSync.errors[].metadata.alreadyExistingCompanyId` to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).</summary>
+            /// <summary>Filter companies by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Common values:- `synced` — the company has a CRM record and no sync errors.- `not_synced` — the company has no CRM record yet.- `searching` — a CRM search (Search &amp; connect, Create in CRM), started less than 15 minutes ago, is queued or running for the company.- `not_found` — the last CRM search found no record for the company.- `error` — at least one sync error is currently raised.- A specific error reason (lowercase form), to filter by root cause: `unique_index_error_company`, `property_doesnt_exist`, `required_field_missing`, `company_already_exists_with_name`, `company_already_exists_with_linkedin_url`.For each returned company, see `crmSync.errors[].metadata.alreadyExistingCompanyId` to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).</summary>
             [QueryParameter("crmSyncStatus")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesCrmSyncStatusParameter? CrmSyncStatus { get; set; }
             /// <summary>Filter companies to those carrying a field rejection with this reason — a value lemlist refused to write, raised during CRM sync (`crm_sync_*`). Returns an empty list (`total: 0`) when no company matches. Each returned company exposes the full detail under `fieldRejections[]` (which field, why, and `conflictingRecordId` for duplicates). Independent of `crmSyncStatus` (which keys off the live provider errors); this filter reads the stored field rejections. Only applies to the paginated list — ignored when `idsOrDomains` is provided (that path returns the exact companies requested, unfiltered).</summary>

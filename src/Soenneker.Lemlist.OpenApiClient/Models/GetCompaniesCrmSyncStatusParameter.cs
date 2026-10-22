@@ -20,6 +20,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Error,
         #pragma warning restore CS1591
+        [EnumMember(Value = "searching")]
+        #pragma warning disable CS1591
+        Searching,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "not_found")]
+        #pragma warning disable CS1591
+        NotFound,
+        #pragma warning restore CS1591
         [EnumMember(Value = "unique_index_error_company")]
         #pragma warning disable CS1591
         UniqueIndexErrorCompany,

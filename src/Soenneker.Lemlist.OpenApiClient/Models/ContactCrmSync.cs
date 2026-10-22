@@ -31,8 +31,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncErrorsItem> Errors { get; set; }
 #endif
+        /// <summary>When the last CRM search found no matching record. `null` otherwise.</summary>
+        public DateTimeOffset? NotFoundAt { get; set; }
         /// <summary>Active CRM provider for the team.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncProvider? Provider { get; set; }
+        /// <summary>`true` while a CRM search (Search &amp; connect, Create in CRM) is queued or running for this contact. A search started more than 15 minutes ago no longer counts: it stalled.</summary>
+        public bool? Searching { get; set; }
         /// <summary>When `true`, automatic sync is paused for this contact.</summary>
         public bool? SyncDisabled { get; set; }
         /// <summary>
@@ -62,7 +66,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "crmRecordId", n => { CrmRecordId = n.GetStringValue(); } },
                 { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncErrorsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncErrorsItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "notFoundAt", n => { NotFoundAt = n.GetDateTimeOffsetValue(); } },
                 { "provider", n => { Provider = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncProvider>(); } },
+                { "searching", n => { Searching = n.GetBoolValue(); } },
                 { "syncDisabled", n => { SyncDisabled = n.GetBoolValue(); } },
             };
         }
@@ -75,7 +81,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("crmRecordId", CrmRecordId);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncErrorsItem>("errors", Errors);
+            writer.WriteDateTimeOffsetValue("notFoundAt", NotFoundAt);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSyncProvider>("provider", Provider);
+            writer.WriteBoolValue("searching", Searching);
             writer.WriteBoolValue("syncDisabled", SyncDisabled);
             writer.WriteAdditionalData(AdditionalData);
         }

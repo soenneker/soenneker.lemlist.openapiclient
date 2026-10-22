@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.V2.Campaigns;
+using Soenneker.Lemlist.OpenApiClient.V2.Crm;
 using Soenneker.Lemlist.OpenApiClient.V2.Enrichments;
 using Soenneker.Lemlist.OpenApiClient.V2.Tasks;
 using Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes;
@@ -22,6 +23,11 @@ namespace Soenneker.Lemlist.OpenApiClient.V2
         public global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.CampaignsRequestBuilder Campaigns
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.CampaignsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The crm property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.V2.Crm.CrmRequestBuilder Crm
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.V2.Crm.CrmRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The enrichments property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.V2.Enrichments.EnrichmentsRequestBuilder Enrichments

@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Contacts.Crm;
 using Soenneker.Lemlist.OpenApiClient.Contacts.Export;
 using Soenneker.Lemlist.OpenApiClient.Contacts.Item;
 using Soenneker.Lemlist.OpenApiClient.Contacts.Lists;
@@ -21,6 +22,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContactsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The crm property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Contacts.Crm.CrmRequestBuilder Crm
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Contacts.Crm.CrmRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The export property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder Export
         {
@@ -232,7 +238,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             [QueryParameter("crmIds")]
             public string CrmIds { get; set; }
 #endif
-            /// <summary>Filter contacts by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Values:- `synced` — the contact has a CRM record and no sync errors.- `not_synced` — the contact has no CRM record yet.- `error` — at least one sync error is currently raised, whatever its reason.- A specific error reason (lowercase form), to filter by root cause:  - `invalid_email` — the CRM refused the contact&apos;s email.  - `property_doesnt_exist` — a mapped property does not exist in the CRM.  - `required_field_missing` — a field the CRM requires is missing.  - `unique_index_error_contact` — the CRM record is already synced with another lemlist contact.  - `contact_already_exists_with_name`, `contact_already_exists_with_linkedin_url`, `contact_already_exists_with_email` — a CRM contact already exists with the same first and last name, LinkedIn URL or email.  - `contact_blocked_by_company` — contact not created: its company already exists in the CRM.  - `contact_blocked_by_company_search` — contact not created: the company search is incomplete, retried later.  - `contact_blocked_by_company_without_name` — contact not created: its company needs a name to be found in the CRM.  - `contact_blocked_by_company_without_key` — contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.  - `contact_blocked_by_company_already_synced` — contact not created: its company is already synced with another lemlist company.Only applies to the paginated list — ignored when `idsOrEmails` or `crmIds` is provided.</summary>
+            /// <summary>Filter contacts by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Values:- `synced` — the contact has a CRM record and no sync errors.- `not_synced` — the contact has no CRM record yet.- `searching` — a CRM search (Search &amp; connect, Create in CRM), started less than 15 minutes ago, is queued or running for the contact.- `not_found` — the last CRM search found no record for the contact.- `error` — at least one sync error is currently raised, whatever its reason.- A specific error reason (lowercase form), to filter by root cause:  - `invalid_email` — the CRM refused the contact&apos;s email.  - `property_doesnt_exist` — a mapped property does not exist in the CRM.  - `required_field_missing` — a field the CRM requires is missing.  - `unique_index_error_contact` — the CRM record is already synced with another lemlist contact.  - `contact_already_exists_with_name`, `contact_already_exists_with_linkedin_url`, `contact_already_exists_with_email` — a CRM contact already exists with the same first and last name, LinkedIn URL or email.  - `contact_blocked_by_company` — contact not created: its company already exists in the CRM.  - `contact_blocked_by_company_search` — contact not created: the company search is incomplete, retried later.  - `contact_blocked_by_company_without_name` — contact not created: its company needs a name to be found in the CRM.  - `contact_blocked_by_company_without_key` — contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.  - `contact_blocked_by_company_already_synced` — contact not created: its company is already synced with another lemlist company.Only applies to the paginated list — ignored when `idsOrEmails` or `crmIds` is provided.</summary>
             [QueryParameter("crmSyncStatus")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsCrmSyncStatusParameter? CrmSyncStatus { get; set; }
             /// <summary>Search contacts by exact email address.</summary>

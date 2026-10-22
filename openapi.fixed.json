@@ -8783,6 +8783,277 @@
         }
       }
     },
+    "/v2/crm/logs": {
+      "get": {
+        "tags": [
+          "CRMs"
+        ],
+        "summary": "Get CRM Logs",
+        "description": "Retrieves CRM sync history: every operation lemlist ran with your CRM (creation, update, activity, association\u2026), newest first, with its outcome and the CRM\u0027s error message when it failed. Internal steps of the sync engine are not listed. Available from the Email Pro plan.\n\n**For one record**, pass \u0060contactId\u0060 or \u0060companyId\u0060, not both: you get its whole history, with every CRM it was synced with, as the CRM logs filter of its Activities tab shows it. A company\u0027s history does not include the operations about its contacts: read them with \u0060contactId\u0060. A record without logs, or an id your team does not have (unknown, deleted or merged into another record), answers \u0060200\u0060 with an empty \u0060data\u0060.\n\n**For your whole team**, pass neither: you get the operations with your connected CRM over a period of 31 days at most, the last 31 days by default, as Settings \u2192 Integrations \u2192 CRM \u2192 Logs shows them. A team without a connected CRM answers \u0060200\u0060 with an empty \u0060data\u0060. Operations logged at the same instant have no fixed order in this list, so across pages one of them can be repeated or skipped.",
+        "operationId": "GetV2CrmLogs",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "query",
+            "description": "The contact whose history to read (\u0060ctc_xxx\u0060). Pass \u0060contactId\u0060 or \u0060companyId\u0060, not both; without either, the team\u0027s history is listed. An empty value answers \u0060INVALID_PARAMETER\u0060.",
+            "schema": {
+              "pattern": "^ctc_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "example": "ctc_FVFd4GJGdYis6ht8D"
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "description": "The company whose history to read (\u0060cpn_xxx\u0060). Pass \u0060contactId\u0060 or \u0060companyId\u0060, not both; without either, the team\u0027s history is listed. An empty value answers \u0060INVALID_PARAMETER\u0060.",
+            "schema": {
+              "pattern": "^cpn_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "example": "cpn_3TiwSo3LiiOqjH5EH"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number, starting at 1. Default: 1. \u0060page \u00D7 limit\u0060 must not exceed 5,000 (\u0060PAGE_OUT_OF_RANGE\u0060): beyond the 5,000 most recent rows, call again with \u0060to\u0060 set to the \u0060createdAt\u0060 of the last log you received. \u0060to\u0060 is inclusive, so the logs of that instant come back: skip the \u0060_id\u0060s you already have.",
+            "schema": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of logs per page, from 1 to 100. Default: 100.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "example": "100"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Only the logs in these states, comma-separated: \u0060pending\u0060, \u0060done\u0060, \u0060error\u0060, \u0060aborted\u0060. When the parameter is repeated, the last value is used.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "error,aborted"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Only the logs of these categories, comma-separated: \u0060contact\u0060, \u0060company\u0060, \u0060association\u0060, \u0060activity\u0060, \u0060email\u0060, \u0060linkedin\u0060, \u0060sms\u0060, \u0060whatsapp\u0060, \u0060call\u0060, \u0060note\u0060, \u0060task\u0060, \u0060deal\u0060, \u0060event\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "contact,association"
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "description": "Only the logs of these operations, comma-separated, by their \u0060method\u0060 name (see \u0060CrmLog.method\u0060). A name covers both directions: \u0060contact_update\u0060 is a lemlist write and a change received from the CRM. With \u0060category\u0060, both filters apply. When the parameter is repeated, the last value is used.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "contact_update,task_complete"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Only the logs created at or after this date (ISO 8601, read in UTC: a time without offset is UTC, a date without time starts at 00:00). For a record, no default: its whole history. For the team, 31 days before \u0060to\u0060 by default, and \u0060from\u0060 and \u0060to\u0060 may span 31 days at most (\u0060INVALID_DATE_RANGE\u0060): with dates without time, \u0060from=2026-08-01\u0026to=2026-08-31\u0060 is the widest window.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2026-09-01T00:00:00.000Z"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Only the logs created at or before this date (ISO 8601, read in UTC: a time without offset is UTC, a date without time covers that whole day, up to 23:59:59.999). Default: now.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2026-09-30T23:59:59.999Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetV2CrmLogs200Response"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "csa_WyNegcZi0ICh8UCWn",
+                      "crm": "hubspot",
+                      "direction": "lemlist_to_crm",
+                      "createdAt": "2026-09-28T09:12:00.653Z",
+                      "doneAt": "2026-09-28T09:12:02.940Z",
+                      "method": "contact_update",
+                      "label": "Contact update",
+                      "category": "contact",
+                      "state": "done",
+                      "contactId": "ctc_FVFd4GJGdYis6ht8D",
+                      "crmObjectId": "12345678901",
+                      "updatedFields": {
+                        "email": "john@example.com",
+                        "jobtitle": "Head of Sales"
+                      }
+                    },
+                    {
+                      "_id": "csa_J2SnPYgyKcs8Arith",
+                      "crm": "hubspot",
+                      "direction": "lemlist_to_crm",
+                      "createdAt": "2026-09-27T16:40:10.605Z",
+                      "method": "contact_update",
+                      "label": "Contact update",
+                      "category": "contact",
+                      "state": "error",
+                      "contactId": "ctc_FVFd4GJGdYis6ht8D",
+                      "error": {
+                        "code": "INVALID_EMAIL",
+                        "statusCode": 400,
+                        "message": "Property values were not valid",
+                        "label": "Invalid email"
+                      }
+                    },
+                    {
+                      "_id": "csa_DutgEnp4Kw6bF0XSZ",
+                      "crm": "hubspot",
+                      "direction": "lemlist_to_crm",
+                      "createdAt": "2026-09-26T11:05:42.118Z",
+                      "doneAt": "2026-09-26T11:05:43.501Z",
+                      "method": "association_from_company",
+                      "label": "Association from company",
+                      "category": "association",
+                      "state": "done",
+                      "contactId": "ctc_FVFd4GJGdYis6ht8D",
+                      "companyId": "cpn_3TiwSo3LiiOqjH5EH",
+                      "crmObjectId": "98765432109",
+                      "updatedFields": {
+                        "companyId": "__created__"
+                      }
+                    }
+                  ],
+                  "hasMore": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request: \u0060INVALID_PARAMETER\u0060 (both \u0060contactId\u0060 and \u0060companyId\u0060, or an empty or malformed id; a \u0060page\u0060, \u0060limit\u0060, \u0060state\u0060, \u0060category\u0060 or \u0060method\u0060 outside the contract), \u0060INVALID_DATE_RANGE\u0060 (an unparsable date, \u0060from\u0060 after \u0060to\u0060, or a team period over 31 days), \u0060PAGE_OUT_OF_RANGE\u0060 (\u0060page \u00D7 limit\u0060 above 5,000). A request without an API key answers the plain-text message \u0060no api key provided\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "teamPeriodTooWide": {
+                    "summary": "Team period over 31 days",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_DATE_RANGE",
+                        "message": "Invalid date range: from and to must be at most 31 days apart without contactId or companyId"
+                      }
+                    }
+                  },
+                  "invalidParameter": {
+                    "summary": "Invalid query parameter",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_PARAMETER",
+                        "message": "Invalid query parameter: limit must be an integer between 1 and 100"
+                      }
+                    }
+                  },
+                  "invalidDateRange": {
+                    "summary": "Invalid date range",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_DATE_RANGE",
+                        "message": "Invalid date range: from is after to"
+                      }
+                    }
+                  },
+                  "pageOutOfRange": {
+                    "summary": "Page past the 5,000 most recent logs",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "PAGE_OUT_OF_RANGE",
+                        "message": "Requested page is beyond the readable sync history: page * limit must not exceed 5000"
+                      }
+                    }
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "no api key provided"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "The team\u0027s plan is below Email Pro, the plan CRM sync logs are available from.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "route is available starting emailPro plan"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "504": {
+            "description": "\u0060READ_TOO_SLOW\u0060: the read took more than 10 seconds, typically a rare filter over a dense team period. Narrow \u0060from\u0060 / \u0060to\u0060, or pass a \u0060contactId\u0060 or a \u0060companyId\u0060; the same request will time out again.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "READ_TOO_SLOW",
+                    "message": "The read took too long: narrow from / to, or pass a contactId or a companyId"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/campaigns/{campaignId}/leads/import": {
       "post": {
         "tags": [
@@ -13160,7 +13431,7 @@
           {
             "name": "crmSyncStatus",
             "in": "query",
-            "description": "Filter contacts by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Values:\n- \u0060synced\u0060 \u2014 the contact has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the contact has no CRM record yet.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised, whatever its reason.\n- A specific error reason (lowercase form), to filter by root cause:\n  - \u0060invalid_email\u0060 \u2014 the CRM refused the contact\u0027s email.\n  - \u0060property_doesnt_exist\u0060 \u2014 a mapped property does not exist in the CRM.\n  - \u0060required_field_missing\u0060 \u2014 a field the CRM requires is missing.\n  - \u0060unique_index_error_contact\u0060 \u2014 the CRM record is already synced with another lemlist contact.\n  - \u0060contact_already_exists_with_name\u0060, \u0060contact_already_exists_with_linkedin_url\u0060, \u0060contact_already_exists_with_email\u0060 \u2014 a CRM contact already exists with the same first and last name, LinkedIn URL or email.\n  - \u0060contact_blocked_by_company\u0060 \u2014 contact not created: its company already exists in the CRM.\n  - \u0060contact_blocked_by_company_search\u0060 \u2014 contact not created: the company search is incomplete, retried later.\n  - \u0060contact_blocked_by_company_without_name\u0060 \u2014 contact not created: its company needs a name to be found in the CRM.\n  - \u0060contact_blocked_by_company_without_key\u0060 \u2014 contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.\n  - \u0060contact_blocked_by_company_already_synced\u0060 \u2014 contact not created: its company is already synced with another lemlist company.\n\nOnly applies to the paginated list \u2014 ignored when \u0060idsOrEmails\u0060 or \u0060crmIds\u0060 is provided.",
+            "description": "Filter contacts by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Values:\n- \u0060synced\u0060 \u2014 the contact has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the contact has no CRM record yet.\n- \u0060searching\u0060 \u2014 a CRM search (Search \u0026 connect, Create in CRM), started less than 15 minutes ago, is queued or running for the contact.\n- \u0060not_found\u0060 \u2014 the last CRM search found no record for the contact.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised, whatever its reason.\n- A specific error reason (lowercase form), to filter by root cause:\n  - \u0060invalid_email\u0060 \u2014 the CRM refused the contact\u0027s email.\n  - \u0060property_doesnt_exist\u0060 \u2014 a mapped property does not exist in the CRM.\n  - \u0060required_field_missing\u0060 \u2014 a field the CRM requires is missing.\n  - \u0060unique_index_error_contact\u0060 \u2014 the CRM record is already synced with another lemlist contact.\n  - \u0060contact_already_exists_with_name\u0060, \u0060contact_already_exists_with_linkedin_url\u0060, \u0060contact_already_exists_with_email\u0060 \u2014 a CRM contact already exists with the same first and last name, LinkedIn URL or email.\n  - \u0060contact_blocked_by_company\u0060 \u2014 contact not created: its company already exists in the CRM.\n  - \u0060contact_blocked_by_company_search\u0060 \u2014 contact not created: the company search is incomplete, retried later.\n  - \u0060contact_blocked_by_company_without_name\u0060 \u2014 contact not created: its company needs a name to be found in the CRM.\n  - \u0060contact_blocked_by_company_without_key\u0060 \u2014 contact not created: its company needs a domain or LinkedIn URL to be found in the CRM.\n  - \u0060contact_blocked_by_company_already_synced\u0060 \u2014 contact not created: its company is already synced with another lemlist company.\n\nOnly applies to the paginated list \u2014 ignored when \u0060idsOrEmails\u0060 or \u0060crmIds\u0060 is provided.",
             "schema": {
               "$ref": "#/components/schemas/GetContactsCrmSyncStatusParameter"
             },
@@ -13231,6 +13502,8 @@
                           "provider": "hubspot",
                           "crmRecordId": "123456789",
                           "syncDisabled": false,
+                          "searching": false,
+                          "notFoundAt": null,
                           "errors": []
                         }
                       },
@@ -13294,6 +13567,14 @@
                           "createdBy": "usr_ahfFktBBHUIxbVG5P",
                           "unsubscribed": false,
                           "campaignCount": 1,
+                          "crmSync": {
+                            "provider": "hubspot",
+                            "crmRecordId": "123456789",
+                            "syncDisabled": false,
+                            "searching": false,
+                            "notFoundAt": null,
+                            "errors": []
+                          },
                           "fieldRejections": []
                         }
                       ],
@@ -13780,6 +14061,208 @@
                   "error": {
                     "code": "ENTITY_MERGE_ENRICHMENT_IN_PROGRESS",
                     "message": "A record is being enriched, retry once it finishes"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/crm/search-and-connect": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Search \u0026 Connect Contacts in the CRM",
+        "description": "Searches your connected CRM for each contact and links it to the CRM record found \u2014 the **Search \u0026 connect** action of the Contacts page. No CRM record is ever created: use \u0060POST /contacts/crm/create\u0060 for that. Each contact it links then syncs its mapped fields with that CRM record, which can update it.\n\nTarget the contacts with \u0060idsOrEmails\u0060 (lemlist ids or email addresses) **or** with \u0060listId\u0060 for a whole contact list: 10,000 contacts at most either way.\n\n**Asynchronous:** the call queues the work and answers at once with what was queued, not with what the CRM returned. Each contact\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after: read it with \u0060GET /contacts?idsOrEmails=...\u0060 (100 per call), or, after a list, list its contacts by state with \u0060listId\u0060 and \u0060crmSyncStatus\u0060: \u0060searching\u0060 while the search runs, then \u0060synced\u0060 once linked, or \u0060not_found\u0060 when no CRM record matched. Without \u0060listId\u0060, \u0060crmSyncStatus\u0060 reads every contact of the team: do not poll it.\n\n- A contact already linked to a CRM record is synced with it again (\u0060alreadyLinked\u0060).\n- A contact with nothing to search the CRM with is left untouched (\u0060notSearchable\u0060).\n- A contact whose CRM search is already queued is not queued twice (\u0060alreadyInProgress\u0060).\n\nRequires a connected CRM (HubSpot, Salesforce, Pipedrive, Attio or Zoho).",
+        "operationId": "PostContactsCrmSearchAndConnect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostContactsCrmSearchAndConnectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Queued \u2014 **not done yet.** The counts say what was queued; each record\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmSearchAndConnect200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "alreadyLinked": 2,
+                    "toSearch": 6,
+                    "notSearchable": 1,
+                    "alreadyInProgress": 0,
+                    "notFound": [
+                      "jane.doe@acme.com"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Possible error codes: \u0060INVALID_SELECTION\u0060 (neither or both of \u0060idsOrEmails\u0060 and \u0060listId\u0060, or an empty \u0060idsOrEmails\u0060), \u0060TOO_MANY_RECORDS\u0060 (more than 10,000 references), \u0060INVALID_LIST_ID\u0060 (not a \u0060clt_xxx\u0060 id), \u0060LIST_ENTITY_MISMATCH\u0060 (the list does not hold contacts), \u0060LIST_TOO_LARGE\u0060 (the list holds more than 10,000 contacts), \u0060NO_CRM_CONNECTED\u0060 (no CRM connected to the team), \u0060VALIDATION_ERROR\u0060 (a field of the wrong type).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmSearchAndConnect400Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "NO_CRM_CONNECTED",
+                    "message": "No CRM connected for this team"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "The team has no list with this \u0060listId\u0060 (\u0060LIST_NOT_FOUND\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmSearchAndConnect404Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "LIST_NOT_FOUND",
+                    "message": "List not found"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/crm/create": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create Contacts in the CRM",
+        "description": "Pushes contacts to your connected CRM \u2014 the **Create in CRM** action of the Contacts page. Each contact is searched in the CRM first: linked to the record found, created in the CRM otherwise. On Salesforce, \u0060asLead: true\u0060 creates the missing contacts as Leads.\n\nTarget the contacts with \u0060idsOrEmails\u0060 (lemlist ids or email addresses) **or** with \u0060listId\u0060 for a whole contact list: 10,000 contacts at most either way.\n\n**Asynchronous:** the call queues the work and answers at once with what was queued, not with what the CRM returned. Each contact\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after: read it with \u0060GET /contacts?idsOrEmails=...\u0060 (100 per call), or, after a list, list its contacts by state with \u0060listId\u0060 and \u0060crmSyncStatus\u0060: \u0060searching\u0060 while the search runs, then \u0060synced\u0060 once linked or created, or \u0060error\u0060 with its reason when the CRM refused it. Without \u0060listId\u0060, \u0060crmSyncStatus\u0060 reads every contact of the team: do not poll it.\n\n- A contact already linked to a CRM record is synced with it again (\u0060alreadyLinked\u0060).\n- A contact with nothing to search the CRM with is left untouched (\u0060notSearchable\u0060).\n- A contact whose CRM search is already queued is not queued twice (\u0060alreadyInProgress\u0060).\n\nRequires a connected CRM (HubSpot, Salesforce, Pipedrive, Attio or Zoho) and an API key of a team **admin**. On Salesforce, the connection must grant the object created (Contact, or Lead with \u0060asLead\u0060).",
+        "operationId": "PostContactsCrmCreate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostContactsCrmCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Queued \u2014 **not done yet.** The counts say what was queued; each record\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmCreate200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "alreadyLinked": 2,
+                    "toCreate": 6,
+                    "notSearchable": 1,
+                    "alreadyInProgress": 0,
+                    "notFound": [
+                      "jane.doe@acme.com"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Possible error codes: \u0060INVALID_SELECTION\u0060 (neither or both of \u0060idsOrEmails\u0060 and \u0060listId\u0060, or an empty \u0060idsOrEmails\u0060), \u0060TOO_MANY_RECORDS\u0060 (more than 10,000 references), \u0060INVALID_LIST_ID\u0060 (not a \u0060clt_xxx\u0060 id), \u0060LIST_ENTITY_MISMATCH\u0060 (the list does not hold contacts), \u0060LIST_TOO_LARGE\u0060 (the list holds more than 10,000 contacts), \u0060NO_CRM_CONNECTED\u0060 (no CRM connected to the team), \u0060VALIDATION_ERROR\u0060 (a field of the wrong type), \u0060AS_LEAD_NOT_SUPPORTED\u0060 (\u0060asLead\u0060 outside Salesforce), \u0060CRM_OBJECT_NOT_ALLOWED\u0060 (the Salesforce connection does not grant the object to create).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmCreate400Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "NO_CRM_CONNECTED",
+                    "message": "No CRM connected for this team"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key does not belong to a team admin (\u0060CREATE_IN_CRM_NOT_ALLOWED\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmCreate403Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "CREATE_IN_CRM_NOT_ALLOWED",
+                    "message": "Only a team admin can create records in the CRM"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "404": {
+            "description": "The team has no list with this \u0060listId\u0060 (\u0060LIST_NOT_FOUND\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsCrmCreate404Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "LIST_NOT_FOUND",
+                    "message": "List not found"
                   }
                 },
                 "x-schema-inferred-from-examples": true
@@ -14980,7 +15463,7 @@
           {
             "name": "crmSyncStatus",
             "in": "query",
-            "description": "Filter companies by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Common values:\n- \u0060synced\u0060 \u2014 the company has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the company has no CRM record yet.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised.\n- A specific error reason (lowercase form), to filter by root cause: \u0060unique_index_error_company\u0060, \u0060property_doesnt_exist\u0060, \u0060required_field_missing\u0060, \u0060company_already_exists_with_name\u0060, \u0060company_already_exists_with_linkedin_url\u0060.\n\nFor each returned company, see \u0060crmSync.errors[].metadata.alreadyExistingCompanyId\u0060 to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).",
+            "description": "Filter companies by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected \u2014 otherwise the request returns \u0060400 NO_CRM_CONNECTED\u0060. Common values:\n- \u0060synced\u0060 \u2014 the company has a CRM record and no sync errors.\n- \u0060not_synced\u0060 \u2014 the company has no CRM record yet.\n- \u0060searching\u0060 \u2014 a CRM search (Search \u0026 connect, Create in CRM), started less than 15 minutes ago, is queued or running for the company.\n- \u0060not_found\u0060 \u2014 the last CRM search found no record for the company.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised.\n- A specific error reason (lowercase form), to filter by root cause: \u0060unique_index_error_company\u0060, \u0060property_doesnt_exist\u0060, \u0060required_field_missing\u0060, \u0060company_already_exists_with_name\u0060, \u0060company_already_exists_with_linkedin_url\u0060.\n\nFor each returned company, see \u0060crmSync.errors[].metadata.alreadyExistingCompanyId\u0060 to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).",
             "schema": {
               "$ref": "#/components/schemas/GetCompaniesCrmSyncStatusParameter"
             },
@@ -15064,6 +15547,8 @@
                         "provider": "hubspot",
                         "crmRecordId": null,
                         "syncDisabled": false,
+                        "searching": false,
+                        "notFoundAt": null,
                         "errors": [
                           {
                             "type": "CONNECT_FAILED",
@@ -15852,6 +16337,208 @@
         }
       }
     },
+    "/companies/crm/search-and-connect": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Search \u0026 Connect Companies in the CRM",
+        "description": "Searches your connected CRM for each company and links it to the CRM record found \u2014 the **Search \u0026 connect** action of the Companies page. No CRM record is ever created: use \u0060POST /companies/crm/create\u0060 for that. Each company it links then syncs its mapped fields with that CRM record, which can update it.\n\nTarget the companies with \u0060idsOrDomains\u0060 (lemlist ids or domains) **or** with \u0060listId\u0060 for a whole company list: 10,000 companies at most either way, a domain counting every company that carries it.\n\n**Asynchronous:** the call queues the work and answers at once with what was queued, not with what the CRM returned. Each company\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after: read it with \u0060GET /companies?idsOrDomains=...\u0060 (100 per call), or, after a list, list its companies by state with \u0060listId\u0060 and \u0060crmSyncStatus\u0060: \u0060searching\u0060 while the search runs, then \u0060synced\u0060 once linked, or \u0060not_found\u0060 when no CRM record matched. Without \u0060listId\u0060, \u0060crmSyncStatus\u0060 reads every company of the team: do not poll it.\n\n- A company already linked to a CRM record is synced with it again (\u0060alreadyLinked\u0060).\n- A company with nothing to search the CRM with is left untouched (\u0060notSearchable\u0060).\n- A company whose CRM search is already queued is not queued twice (\u0060alreadyInProgress\u0060).\n\nRequires a connected CRM (HubSpot, Salesforce, Pipedrive, Attio or Zoho).",
+        "operationId": "PostCompaniesCrmSearchAndConnect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Queued \u2014 **not done yet.** The counts say what was queued; each record\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnect200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "alreadyLinked": 2,
+                    "toSearch": 6,
+                    "notSearchable": 1,
+                    "alreadyInProgress": 0,
+                    "notFound": [
+                      "unknown-domain.io"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Possible error codes: \u0060INVALID_SELECTION\u0060 (neither or both of \u0060idsOrDomains\u0060 and \u0060listId\u0060, or an empty \u0060idsOrDomains\u0060), \u0060TOO_MANY_RECORDS\u0060 (more than 10,000 references), \u0060TOO_MANY_MATCHES\u0060 (the domains match more than 10,000 companies in total), \u0060INVALID_LIST_ID\u0060 (not a \u0060clt_xxx\u0060 id), \u0060LIST_ENTITY_MISMATCH\u0060 (the list does not hold companies), \u0060LIST_TOO_LARGE\u0060 (the list holds more than 10,000 companies), \u0060NO_CRM_CONNECTED\u0060 (no CRM connected to the team), \u0060VALIDATION_ERROR\u0060 (a field of the wrong type).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnect400Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "NO_CRM_CONNECTED",
+                    "message": "No CRM connected for this team"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "The team has no list with this \u0060listId\u0060 (\u0060LIST_NOT_FOUND\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnect404Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "LIST_NOT_FOUND",
+                    "message": "List not found"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/crm/create": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Create Companies in the CRM",
+        "description": "Pushes companies to your connected CRM \u2014 the **Create in CRM** action of the Companies page. Each company is searched in the CRM first: linked to the record found, created in the CRM otherwise.\n\nTarget the companies with \u0060idsOrDomains\u0060 (lemlist ids or domains) **or** with \u0060listId\u0060 for a whole company list: 10,000 companies at most either way, a domain counting every company that carries it.\n\n**Asynchronous:** the call queues the work and answers at once with what was queued, not with what the CRM returned. Each company\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after: read it with \u0060GET /companies?idsOrDomains=...\u0060 (100 per call), or, after a list, list its companies by state with \u0060listId\u0060 and \u0060crmSyncStatus\u0060: \u0060searching\u0060 while the search runs, then \u0060synced\u0060 once linked or created, or \u0060error\u0060 with its reason when the CRM refused it. Without \u0060listId\u0060, \u0060crmSyncStatus\u0060 reads every company of the team: do not poll it.\n\n- A company already linked to a CRM record is synced with it again (\u0060alreadyLinked\u0060).\n- A company with nothing to search the CRM with is left untouched (\u0060notSearchable\u0060).\n- A company whose CRM search is already queued is not queued twice (\u0060alreadyInProgress\u0060).\n\nRequires a connected CRM (HubSpot, Salesforce, Pipedrive, Attio or Zoho) and an API key of a team **admin**. On Salesforce, the connection must grant the object created (Account).",
+        "operationId": "PostCompaniesCrmCreate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCompaniesCrmCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Queued \u2014 **not done yet.** The counts say what was queued; each record\u0027s outcome lands on its \u0060crmSync\u0060 block shortly after.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmCreate200Response"
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "alreadyLinked": 2,
+                    "toCreate": 6,
+                    "notSearchable": 1,
+                    "alreadyInProgress": 0,
+                    "notFound": [
+                      "unknown-domain.io"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Possible error codes: \u0060INVALID_SELECTION\u0060 (neither or both of \u0060idsOrDomains\u0060 and \u0060listId\u0060, or an empty \u0060idsOrDomains\u0060), \u0060TOO_MANY_RECORDS\u0060 (more than 10,000 references), \u0060TOO_MANY_MATCHES\u0060 (the domains match more than 10,000 companies in total), \u0060INVALID_LIST_ID\u0060 (not a \u0060clt_xxx\u0060 id), \u0060LIST_ENTITY_MISMATCH\u0060 (the list does not hold companies), \u0060LIST_TOO_LARGE\u0060 (the list holds more than 10,000 companies), \u0060NO_CRM_CONNECTED\u0060 (no CRM connected to the team), \u0060VALIDATION_ERROR\u0060 (a field of the wrong type), \u0060AS_LEAD_NOT_SUPPORTED\u0060 (\u0060asLead\u0060 sent: Leads are contacts only), \u0060CRM_OBJECT_NOT_ALLOWED\u0060 (the Salesforce connection does not grant the object to create).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmCreate400Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "NO_CRM_CONNECTED",
+                    "message": "No CRM connected for this team"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key does not belong to a team admin (\u0060CREATE_IN_CRM_NOT_ALLOWED\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmCreate403Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "CREATE_IN_CRM_NOT_ALLOWED",
+                    "message": "Only a team admin can create records in the CRM"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "404": {
+            "description": "The team has no list with this \u0060listId\u0060 (\u0060LIST_NOT_FOUND\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesCrmCreate404Response"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "LIST_NOT_FOUND",
+                    "message": "List not found"
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
     "/companies/{companyId}": {
       "get": {
         "tags": [
@@ -15900,6 +16587,8 @@
                     "provider": "hubspot",
                     "crmRecordId": "12345678901",
                     "syncDisabled": false,
+                    "searching": false,
+                    "notFoundAt": null,
                     "errors": []
                   }
                 }
@@ -25362,6 +26051,9 @@
             "type": "integer",
             "description": "Number of campaigns the contact is in"
           },
+          "crmSync": {
+            "$ref": "#/components/schemas/ContactListItemCrmSync"
+          },
           "fieldRejections": {
             "type": "array",
             "items": {
@@ -25528,6 +26220,73 @@
           }
         },
         "description": "A text note attached to a contact record, as returned by \u0060GET\u0060 and \u0060POST /contacts/{idOrEmail}/notes\u0060."
+      },
+      "CrmLog": {
+        "required": [
+          "_id",
+          "crm",
+          "direction",
+          "method",
+          "label",
+          "state"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique log identifier (\u0060csa_xxx\u0060)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When lemlist queued the operation",
+            "format": "date-time"
+          },
+          "doneAt": {
+            "type": "string",
+            "description": "When lemlist finished the operation. Present on \u0060done\u0060 logs and on logs aborted by a user or by a campaign move; absent on \u0060pending\u0060 and \u0060error\u0060 logs, and on other aborts.",
+            "format": "date-time"
+          },
+          "crm": {
+            "type": "string",
+            "description": "The CRM the operation ran against, e.g. \u0060hubspot\u0060, \u0060salesforce\u0060, \u0060pipedrive\u0060. A contact\u0027s or a company\u0027s history keeps the logs of a CRM the team has since left; the team history lists the connected CRM only."
+          },
+          "direction": {
+            "$ref": "#/components/schemas/CrmLogDirection"
+          },
+          "method": {
+            "type": "string",
+            "description": "Name of the operation, e.g. \u0060contact_update\u0060. \u0060direction\u0060 tells a lemlist write from the CRM change it mirrors. Known values: \u0060activity_create\u0060, \u0060activity_import\u0060, \u0060association_from_company\u0060, \u0060association_from_contact\u0060, \u0060association_remove\u0060, \u0060association_update\u0060, \u0060call_create\u0060, \u0060call_update\u0060, \u0060company_create\u0060, \u0060company_delete\u0060, \u0060company_merge\u0060, \u0060company_owner_update\u0060, \u0060company_restore\u0060, \u0060company_update\u0060, \u0060contact_create\u0060, \u0060contact_delete\u0060, \u0060contact_merge\u0060, \u0060contact_owner_update\u0060, \u0060contact_restore\u0060, \u0060contact_update\u0060, \u0060custom_activity_create\u0060, \u0060deal_create\u0060, \u0060email_message_create\u0060, \u0060event_create\u0060, \u0060experience_update\u0060, \u0060lead_status_update\u0060, \u0060linkedin_message_create\u0060, \u0060note_create\u0060, \u0060note_import\u0060, \u0060note_update\u0060, \u0060sms_message_create\u0060, \u0060task_complete\u0060, \u0060task_create\u0060, \u0060task_delete\u0060, \u0060task_import\u0060, \u0060task_update\u0060, \u0060whatsapp_message_create\u0060. An operation lemlist has not named yet keeps its own identifier: filter with \u0060category\u0060 rather than on this value."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable name of the operation, in English, e.g. \u0060Contact update\u0060. Equals \u0060method\u0060 when the operation has no label."
+          },
+          "category": {
+            "$ref": "#/components/schemas/CrmLogCategory"
+          },
+          "state": {
+            "$ref": "#/components/schemas/CrmLogState"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "The contact the operation is about (\u0060ctc_xxx\u0060). Present on contact rows and on the rows of a contact-company association."
+          },
+          "companyId": {
+            "type": "string",
+            "description": "The company the operation is about (\u0060cpn_xxx\u0060). Present on company rows and on the rows of a contact-company association."
+          },
+          "crmObjectId": {
+            "type": "string",
+            "description": "ID of the record in the CRM"
+          },
+          "updatedFields": {
+            "$ref": "#/components/schemas/CrmLogUpdatedFieldsProperty"
+          },
+          "error": {
+            "$ref": "#/components/schemas/CrmLogError"
+          }
+        },
+        "description": "One operation lemlist ran with the team\u0027s connected CRM for a contact or a company, as returned by \u0060GET /v2/crm/logs\u0060."
       },
       "Sequence": {
         "type": "object",
@@ -28592,6 +29351,16 @@
             "type": "boolean",
             "description": "When \u0060true\u0060, automatic sync is paused for this contact."
           },
+          "searching": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 while a CRM search (Search \u0026 connect, Create in CRM) is queued or running for this contact. A search started more than 15 minutes ago no longer counts: it stalled."
+          },
+          "notFoundAt": {
+            "type": "string",
+            "description": "When the last CRM search found no matching record. \u0060null\u0060 otherwise.",
+            "format": "date-time",
+            "nullable": true
+          },
           "errors": {
             "type": "array",
             "items": {
@@ -28601,6 +29370,41 @@
           }
         },
         "description": "CRM sync status for the contact, resolved against the team\u0027s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected and the contact has a record in it. \u0060crmRecordId\u0060 maps a \u0060crmIds\u0060 lookup back to the ids sent."
+      },
+      "ContactListItemCrmSync": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/ContactListItemCrmSyncProvider"
+          },
+          "crmRecordId": {
+            "type": "string",
+            "description": "Identifier of the contact record on the CRM side. \u0060null\u0060 when the lemlist contact has not been synced yet.",
+            "nullable": true
+          },
+          "syncDisabled": {
+            "type": "boolean",
+            "description": "When \u0060true\u0060, automatic sync is paused for this contact."
+          },
+          "searching": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 while a CRM search (Search \u0026 connect, Create in CRM) is queued or running for this contact. A search started more than 15 minutes ago no longer counts: it stalled."
+          },
+          "notFoundAt": {
+            "type": "string",
+            "description": "When the last CRM search found no matching record. \u0060null\u0060 otherwise.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactListItemCrmSyncErrorsItem"
+            },
+            "description": "List of recent sync errors. Empty when the contact is synced cleanly."
+          }
+        },
+        "description": "CRM sync status for the contact, resolved against the team\u0027s active CRM provider. Only present when a CRM is connected and the contact is linked to a record in it or was searched for in it. Read \u0060searching\u0060 and \u0060notFoundAt\u0060 to follow a Search \u0026 connect or Create in CRM."
       },
       "CompanyFields": {
         "type": "object",
@@ -28621,6 +29425,16 @@
             "type": "boolean",
             "description": "When \u0060true\u0060, automatic sync is paused for this company."
           },
+          "searching": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 while a CRM search (Search \u0026 connect, Create in CRM) is queued or running for this company. A search started more than 15 minutes ago no longer counts: it stalled."
+          },
+          "notFoundAt": {
+            "type": "string",
+            "description": "When the last CRM search found no matching record. \u0060null\u0060 otherwise.",
+            "format": "date-time",
+            "nullable": true
+          },
           "errors": {
             "type": "array",
             "items": {
@@ -28631,6 +29445,32 @@
         },
         "description": "CRM sync status for the company, resolved against the team\u0027s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via \u0060GET /companies?crmSyncStatus=unique_index_error_company\u0060).",
         "nullable": true
+      },
+      "CrmLogUpdatedFields": {
+        "type": "object",
+        "description": "Fields sent to or received from the CRM, with their values"
+      },
+      "CrmLogError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Stable error or abort code, e.g. \u0060INVALID_EMAIL\u0060"
+          },
+          "statusCode": {
+            "type": "integer",
+            "description": "HTTP status the CRM answered, when known"
+          },
+          "message": {
+            "type": "string",
+            "description": "The CRM\u0027s own message, in English, untranslated. Its wording can change: rely on \u0060code\u0060."
+          },
+          "label": {
+            "type": "string",
+            "description": "lemlist\u0027s explanation of \u0060code\u0060, in English"
+          }
+        },
+        "description": "Present on \u0060error\u0060 rows, and on \u0060aborted\u0060 rows where it carries the reason."
       },
       "StepSenderSender": {
         "type": "object",
@@ -29866,6 +30706,27 @@
           }
         }
       },
+      "ContactListItemCrmSyncErrorsItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Coarse error category (e.g. \u0060CONNECT_FAILED\u0060, \u0060CREATE_FAILED\u0060, \u0060UPDATE_FAILED\u0060)."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Specific error reason (e.g. \u0060UNIQUE_INDEX_ERROR_CONTACT\u0060, \u0060INVALID_EMAIL\u0060, \u0060PROPERTY_DOESNT_EXIST\u0060)."
+          },
+          "raisedAt": {
+            "type": "string",
+            "description": "Timestamp when the error was last raised.",
+            "format": "date-time"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/ContactListItemCrmSyncErrorsItemMetadataProperty"
+          }
+        }
+      },
       "CompanyCrmSyncErrorsItem": {
         "type": "object",
         "properties": {
@@ -30120,6 +30981,10 @@
         }
       },
       "ContactCrmSyncErrorsItemMetadata": {
+        "type": "object",
+        "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
+      },
+      "ContactListItemCrmSyncErrorsItemMetadata": {
         "type": "object",
         "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
       },
@@ -34318,6 +35183,134 @@
           }
         }
       },
+      "PostContactsCrmSearchAndConnectRequest": {
+        "type": "object",
+        "properties": {
+          "idsOrEmails": {
+            "maxItems": 10000,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "lemlist contact ids (\u0060ctc_xxx\u0060) or email addresses, 10,000 at most. Send either \u0060idsOrEmails\u0060 or \u0060listId\u0060."
+          },
+          "listId": {
+            "type": "string",
+            "description": "A contact list id (\u0060clt_xxx\u0060): acts on every contact of the list, static or dynamic, 10,000 at most. Use it instead of \u0060idsOrEmails\u0060.",
+            "example": "clt_Ab12Cd34Ef56Gh78I"
+          }
+        }
+      },
+      "PostContactsCrmSearchAndConnect200Response": {
+        "required": [
+          "success",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostContactsCrmSearchAndConnect200ResponseData"
+          }
+        }
+      },
+      "PostContactsCrmSearchAndConnect400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsCrmSearchAndConnect400ResponseError"
+          }
+        }
+      },
+      "PostContactsCrmSearchAndConnect404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsCrmSearchAndConnect404ResponseError"
+          }
+        }
+      },
+      "PostContactsCrmCreateRequest": {
+        "type": "object",
+        "properties": {
+          "idsOrEmails": {
+            "maxItems": 10000,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "lemlist contact ids (\u0060ctc_xxx\u0060) or email addresses, 10,000 at most. Send either \u0060idsOrEmails\u0060 or \u0060listId\u0060."
+          },
+          "listId": {
+            "type": "string",
+            "description": "A contact list id (\u0060clt_xxx\u0060): acts on every contact of the list, static or dynamic, 10,000 at most. Use it instead of \u0060idsOrEmails\u0060.",
+            "example": "clt_Ab12Cd34Ef56Gh78I"
+          },
+          "asLead": {
+            "type": "boolean",
+            "description": "Salesforce only: create the contacts missing from the CRM as Leads instead of Contacts.",
+            "example": false
+          }
+        }
+      },
+      "PostContactsCrmCreate200Response": {
+        "required": [
+          "success",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostContactsCrmCreate200ResponseData"
+          }
+        }
+      },
+      "PostContactsCrmCreate400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsCrmCreate400ResponseError"
+          }
+        }
+      },
+      "PostContactsCrmCreate403Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsCrmCreate403ResponseError"
+          }
+        }
+      },
+      "PostContactsCrmCreate404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostContactsCrmCreate404ResponseError"
+          }
+        }
+      },
       "DeleteContactsByIdOrEmail200Response": {
         "required": [
           "success",
@@ -34849,6 +35842,129 @@
           },
           "error": {
             "$ref": "#/components/schemas/PostCompaniesMerge409ResponseError"
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnectRequest": {
+        "type": "object",
+        "properties": {
+          "idsOrDomains": {
+            "maxItems": 10000,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "lemlist company ids (\u0060cpn_xxx\u0060) or domains, 10,000 at most. A domain designates every company carrying it: 10,000 companies at most in total. Send either \u0060idsOrDomains\u0060 or \u0060listId\u0060."
+          },
+          "listId": {
+            "type": "string",
+            "description": "A company list id (\u0060clt_xxx\u0060): acts on every company of the list, static or dynamic, 10,000 at most. Use it instead of \u0060idsOrDomains\u0060.",
+            "example": "clt_Ab12Cd34Ef56Gh78I"
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnect200Response": {
+        "required": [
+          "success",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnect200ResponseData"
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnect400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnect400ResponseError"
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnect404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesCrmSearchAndConnect404ResponseError"
+          }
+        }
+      },
+      "PostCompaniesCrmCreateRequest": {
+        "type": "object",
+        "properties": {
+          "idsOrDomains": {
+            "maxItems": 10000,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "lemlist company ids (\u0060cpn_xxx\u0060) or domains, 10,000 at most. A domain designates every company carrying it: 10,000 companies at most in total. Send either \u0060idsOrDomains\u0060 or \u0060listId\u0060."
+          },
+          "listId": {
+            "type": "string",
+            "description": "A company list id (\u0060clt_xxx\u0060): acts on every company of the list, static or dynamic, 10,000 at most. Use it instead of \u0060idsOrDomains\u0060.",
+            "example": "clt_Ab12Cd34Ef56Gh78I"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate200Response": {
+        "required": [
+          "success",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostCompaniesCrmCreate200ResponseData"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate400Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesCrmCreate400ResponseError"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate403Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesCrmCreate403ResponseError"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate404Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostCompaniesCrmCreate404ResponseError"
           }
         }
       },
@@ -36938,6 +38054,25 @@
           "$ref": "#/components/schemas/GetCrmFilters200ResponseSchemaItem"
         }
       },
+      "GetV2CrmLogs200Response": {
+        "required": [
+          "data",
+          "hasMore"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrmLog"
+            }
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Whether older logs exist past this page. For a contact or a company, it stays \u0060false\u0060 on the page ending at row 5,000, even when older logs exist. For the team, it says whether they exist, and the next page answers \u0060PAGE_OUT_OF_RANGE\u0060. Past row 5,000, call again with \u0060to\u0060."
+          }
+        }
+      },
       "GetDatabaseFilters200ResponseSchema": {
         "type": "array",
         "items": {
@@ -37591,6 +38726,10 @@
         "type": "object",
         "description": "Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under \u0060fields\u0060, never at the top level of the object."
       },
+      "CrmLogUpdatedFieldsProperty": {
+        "type": "object",
+        "description": "Fields sent to or received from the CRM, with their values"
+      },
       "CrmFilterCriteriaProperty": {
         "type": "object"
       },
@@ -37627,6 +38766,10 @@
         "type": "object"
       },
       "ContactCrmSyncErrorsItemMetadataProperty": {
+        "type": "object",
+        "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
+      },
+      "ContactListItemCrmSyncErrorsItemMetadataProperty": {
         "type": "object",
         "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
       },
@@ -39194,6 +40337,131 @@
           }
         }
       },
+      "PostContactsCrmSearchAndConnect200ResponseData": {
+        "required": [
+          "alreadyLinked",
+          "toSearch",
+          "notSearchable",
+          "alreadyInProgress",
+          "notFound"
+        ],
+        "type": "object",
+        "properties": {
+          "alreadyLinked": {
+            "type": "integer",
+            "description": "Contacts already linked to a CRM record: synced with it again instead of searched."
+          },
+          "toSearch": {
+            "type": "integer",
+            "description": "Contacts searched in the CRM: linked to the record found, flagged \u0060not_found\u0060 otherwise."
+          },
+          "notSearchable": {
+            "type": "integer",
+            "description": "Records with nothing the CRM can be searched with: no email address or LinkedIn URL for a contact, no domain or LinkedIn URL for a company (Pipedrive also searches by name). Left untouched."
+          },
+          "alreadyInProgress": {
+            "type": "integer",
+            "description": "Contacts whose CRM search was already queued: not queued twice."
+          },
+          "notFound": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The references sent that match no contact of your team, as sent. Always empty with \u0060listId\u0060."
+          }
+        }
+      },
+      "PostContactsCrmSearchAndConnect400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostContactsCrmSearchAndConnect404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostContactsCrmCreate200ResponseData": {
+        "required": [
+          "alreadyLinked",
+          "toCreate",
+          "notSearchable",
+          "alreadyInProgress",
+          "notFound"
+        ],
+        "type": "object",
+        "properties": {
+          "alreadyLinked": {
+            "type": "integer",
+            "description": "Contacts already linked to a CRM record: synced with it again instead of searched."
+          },
+          "toCreate": {
+            "type": "integer",
+            "description": "Contacts searched in the CRM first: linked to the record found, created in the CRM otherwise."
+          },
+          "notSearchable": {
+            "type": "integer",
+            "description": "Records with nothing the CRM can be searched with: no email address or LinkedIn URL for a contact, no domain or LinkedIn URL for a company (Pipedrive also searches by name). Left untouched."
+          },
+          "alreadyInProgress": {
+            "type": "integer",
+            "description": "Contacts whose CRM search was already queued: not queued twice."
+          },
+          "notFound": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The references sent that match no contact of your team, as sent. Always empty with \u0060listId\u0060."
+          }
+        }
+      },
+      "PostContactsCrmCreate400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostContactsCrmCreate403ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostContactsCrmCreate404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteContactsByIdOrEmail403ResponseError": {
         "type": "object",
         "properties": {
@@ -39422,6 +40690,131 @@
         }
       },
       "PostCompaniesMerge409ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnect200ResponseData": {
+        "required": [
+          "alreadyLinked",
+          "toSearch",
+          "notSearchable",
+          "alreadyInProgress",
+          "notFound"
+        ],
+        "type": "object",
+        "properties": {
+          "alreadyLinked": {
+            "type": "integer",
+            "description": "Companies already linked to a CRM record: synced with it again instead of searched."
+          },
+          "toSearch": {
+            "type": "integer",
+            "description": "Companies searched in the CRM: linked to the record found, flagged \u0060not_found\u0060 otherwise."
+          },
+          "notSearchable": {
+            "type": "integer",
+            "description": "Records with nothing the CRM can be searched with: no email address or LinkedIn URL for a contact, no domain or LinkedIn URL for a company (Pipedrive also searches by name). Left untouched."
+          },
+          "alreadyInProgress": {
+            "type": "integer",
+            "description": "Companies whose CRM search was already queued: not queued twice."
+          },
+          "notFound": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The references sent that match no company of your team, as sent. Always empty with \u0060listId\u0060."
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnect400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesCrmSearchAndConnect404ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate200ResponseData": {
+        "required": [
+          "alreadyLinked",
+          "toCreate",
+          "notSearchable",
+          "alreadyInProgress",
+          "notFound"
+        ],
+        "type": "object",
+        "properties": {
+          "alreadyLinked": {
+            "type": "integer",
+            "description": "Companies already linked to a CRM record: synced with it again instead of searched."
+          },
+          "toCreate": {
+            "type": "integer",
+            "description": "Companies searched in the CRM first: linked to the record found, created in the CRM otherwise."
+          },
+          "notSearchable": {
+            "type": "integer",
+            "description": "Records with nothing the CRM can be searched with: no email address or LinkedIn URL for a contact, no domain or LinkedIn URL for a company (Pipedrive also searches by name). Left untouched."
+          },
+          "alreadyInProgress": {
+            "type": "integer",
+            "description": "Companies whose CRM search was already queued: not queued twice."
+          },
+          "notFound": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The references sent that match no company of your team, as sent. Always empty with \u0060listId\u0060."
+          }
+        }
+      },
+      "PostCompaniesCrmCreate400ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate403ResponseError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesCrmCreate404ResponseError": {
         "type": "object",
         "properties": {
           "code": {
@@ -41583,6 +42976,140 @@
         "type": "integer",
         "additionalProperties": false,
         "description": "\u00600\u0060 low, \u00601\u0060 medium, \u00602\u0060 high. Absent when the task has no priority."
+      },
+      "CrmLogDirection": {
+        "enum": [
+          "lemlist_to_crm",
+          "crm_to_lemlist"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060lemlist_to_crm\u0060 for a write lemlist sent to the CRM, \u0060crm_to_lemlist\u0060 for a change received from the CRM",
+        "x-ms-enum": {
+          "name": "CrmLogDirection",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "lemlist_to_crm",
+              "name": "LemlistToCrm"
+            },
+            {
+              "value": "crm_to_lemlist",
+              "name": "CrmToLemlist"
+            }
+          ]
+        }
+      },
+      "CrmLogCategory": {
+        "enum": [
+          "contact",
+          "company",
+          "association",
+          "activity",
+          "email",
+          "linkedin",
+          "sms",
+          "whatsapp",
+          "call",
+          "note",
+          "task",
+          "deal",
+          "event"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Kind of record the operation acted on. Absent when the operation has no category.",
+        "x-ms-enum": {
+          "name": "CrmLogCategory",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            },
+            {
+              "value": "association",
+              "name": "Association"
+            },
+            {
+              "value": "activity",
+              "name": "Activity"
+            },
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "sms",
+              "name": "Sms"
+            },
+            {
+              "value": "whatsapp",
+              "name": "Whatsapp"
+            },
+            {
+              "value": "call",
+              "name": "Call"
+            },
+            {
+              "value": "note",
+              "name": "Note"
+            },
+            {
+              "value": "task",
+              "name": "Task"
+            },
+            {
+              "value": "deal",
+              "name": "Deal"
+            },
+            {
+              "value": "event",
+              "name": "EventValue"
+            }
+          ]
+        }
+      },
+      "CrmLogState": {
+        "enum": [
+          "pending",
+          "done",
+          "error",
+          "aborted"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "\u0060pending\u0060: queued, not run yet. \u0060done\u0060: the CRM accepted it. \u0060error\u0060: the CRM refused it, see \u0060error\u0060. \u0060aborted\u0060: lemlist skipped it, \u0060error.code\u0060 gives the reason.",
+        "x-ms-enum": {
+          "name": "CrmLogState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "done",
+              "name": "Done"
+            },
+            {
+              "value": "error",
+              "name": "Error"
+            },
+            {
+              "value": "aborted",
+              "name": "Aborted"
+            }
+          ]
+        }
       },
       "StepType": {
         "enum": [
@@ -44809,6 +46336,34 @@
         "description": "Active CRM provider for the team.",
         "x-ms-enum": {
           "name": "ContactCrmSyncProvider",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "hubspot",
+              "name": "Hubspot"
+            },
+            {
+              "value": "salesforce",
+              "name": "Salesforce"
+            },
+            {
+              "value": "pipedrive",
+              "name": "Pipedrive"
+            }
+          ]
+        }
+      },
+      "ContactListItemCrmSyncProvider": {
+        "enum": [
+          "hubspot",
+          "salesforce",
+          "pipedrive"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Active CRM provider for the team.",
+        "x-ms-enum": {
+          "name": "ContactListItemCrmSyncProvider",
           "modelAsString": false,
           "values": [
             {
@@ -50076,6 +51631,8 @@
           "synced",
           "not_synced",
           "error",
+          "searching",
+          "not_found",
           "invalid_email",
           "property_doesnt_exist",
           "required_field_missing",
@@ -50106,6 +51663,14 @@
             {
               "value": "error",
               "name": "Error"
+            },
+            {
+              "value": "searching",
+              "name": "Searching"
+            },
+            {
+              "value": "not_found",
+              "name": "NotFound"
             },
             {
               "value": "invalid_email",
@@ -50273,6 +51838,8 @@
           "synced",
           "not_synced",
           "error",
+          "searching",
+          "not_found",
           "unique_index_error_company",
           "property_doesnt_exist",
           "required_field_missing",
@@ -50296,6 +51863,14 @@
             {
               "value": "error",
               "name": "Error"
+            },
+            {
+              "value": "searching",
+              "name": "Searching"
+            },
+            {
+              "value": "not_found",
+              "name": "NotFound"
             },
             {
               "value": "unique_index_error_company",
