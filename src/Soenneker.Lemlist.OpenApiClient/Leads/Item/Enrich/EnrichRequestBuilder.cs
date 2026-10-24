@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
 {
     /// <summary>
-    /// Builds and executes requests for operations under \leads\{email-id}\enrich
+    /// Builds and executes requests for operations under \leads\{email}\enrich
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class EnrichRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public EnrichRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/leads/{email%2Did}/enrich{?findEmail*,findPhone*,force*,linkedinEnrichment*,verifyEmail*,webhookUrl*}", pathParameters)
+        public EnrichRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/leads/{email}/enrich{?findEmail*,findPhone*,force*,linkedinEnrichment*,verifyEmail*,webhookUrl*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,37 +30,35 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public EnrichRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/leads/{email%2Did}/enrich{?findEmail*,findPhone*,force*,linkedinEnrichment*,verifyEmail*,webhookUrl*}", rawUrl)
+        public EnrichRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/leads/{email}/enrich{?findEmail*,findPhone*,force*,linkedinEnrichment*,verifyEmail*,webhookUrl*}", rawUrl)
         {
         }
         /// <summary>
         /// Enrich Lead
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich404Response">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich409Response">When receiving a 409 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich500Response">When receiving a 500 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich409Response">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich500Response">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.PostLeadsByLeadIdEnrich200Response400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich404Response.CreateFromDiscriminatorValue },
-                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich409Response.CreateFromDiscriminatorValue },
-                { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich500Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich404Response.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich409Response.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich500Response.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByLeadIdEnrich200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Enrich Lead

@@ -59,7 +59,6 @@ namespace Soenneker.Lemlist.OpenApiClient.MessageTemplates
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetMessageTemplates400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.MessageTemplates.MessageTemplateListResponse401Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.MessageTemplateListResponse?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.MessageTemplates.MessageTemplatesRequestBuilder.MessageTemplatesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -73,7 +72,6 @@ namespace Soenneker.Lemlist.OpenApiClient.MessageTemplates
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetMessageTemplates400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.MessageTemplates.MessageTemplateListResponse401Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.MessageTemplateListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.MessageTemplateListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

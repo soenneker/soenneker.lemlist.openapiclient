@@ -40,8 +40,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Ite
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response402Error">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response">When receiving a 409 status code</exception>
@@ -58,8 +56,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Ite
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response401Error.CreateFromDiscriminatorValue },
-                { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId200Response402Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response.CreateFromDiscriminatorValue },
@@ -74,8 +70,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Ite
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.ConditionBranch401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.ConditionBranch402Error">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response">When receiving a 409 status code</exception>
@@ -93,8 +87,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Ite
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.ConditionBranch401Error.CreateFromDiscriminatorValue },
-                { "402", global::Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Branches.Item.ConditionBranch402Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceId409Response.CreateFromDiscriminatorValue },

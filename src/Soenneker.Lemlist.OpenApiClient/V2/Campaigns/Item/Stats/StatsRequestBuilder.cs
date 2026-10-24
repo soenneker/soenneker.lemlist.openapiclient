@@ -39,9 +39,6 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.GetV2CampaignsByCampaignIdStats200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.GetV2CampaignsByCampaignIdStats200Response404Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.GetV2CampaignsByCampaignIdStats200Response405Error">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.StatsRequestBuilder.StatsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -52,13 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.GetV2CampaignsByCampaignIdStats200Response400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.GetV2CampaignsByCampaignIdStats200Response404Error.CreateFromDiscriminatorValue },
-                { "405", global::Soenneker.Lemlist.OpenApiClient.V2.Campaigns.Item.Stats.GetV2CampaignsByCampaignIdStats200Response405Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdStats200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieve detailed statistics for a specific campaign, with filtering options by date, user, A/B testing, and communication channels.

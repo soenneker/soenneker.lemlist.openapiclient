@@ -39,7 +39,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.Export400Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -50,11 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.Export400Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.

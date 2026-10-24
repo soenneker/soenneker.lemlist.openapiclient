@@ -8,18 +8,18 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList"/>, List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.Contact&gt;
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class GetContacts200Response : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1"/></summary>
+        /// <summary>Composed type representation for type List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.Contact&gt;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1? GetContacts200ResponseBranch1 { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>? Contact { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1 GetContacts200ResponseBranch1 { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact> Contact { get; set; }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -39,13 +39,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response();
-            if("GetContacts200ResponseBranch1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.GetContacts200ResponseBranch1 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1();
-            }
-            else if("GetContacts200ResponseList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("GetContacts200ResponseList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.GetContacts200ResponseList = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList();
+            }
+            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(global::Soenneker.Lemlist.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact> contactValue)
+            {
+                result.Contact = contactValue;
             }
             return result;
         }
@@ -55,11 +55,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(GetContacts200ResponseBranch1 != null)
-            {
-                return GetContacts200ResponseBranch1.GetFieldDeserializers();
-            }
-            else if(GetContacts200ResponseList != null)
+            if(GetContacts200ResponseList != null)
             {
                 return GetContacts200ResponseList.GetFieldDeserializers();
             }
@@ -72,13 +68,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(GetContacts200ResponseBranch1 != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseBranch1>(null, GetContacts200ResponseBranch1);
-            }
-            else if(GetContacts200ResponseList != null)
+            if(GetContacts200ResponseList != null)
             {
                 writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList>(null, GetContacts200ResponseList);
+            }
+            else if(Contact != null)
+            {
+                writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(null, Contact);
             }
         }
     }

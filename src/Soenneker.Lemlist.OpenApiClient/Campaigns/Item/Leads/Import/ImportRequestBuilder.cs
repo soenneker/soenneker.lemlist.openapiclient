@@ -41,7 +41,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,7 +56,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Import.PostCampaignsByCampaignIdLeadsImport200Response401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport404Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);

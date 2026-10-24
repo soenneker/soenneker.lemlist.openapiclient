@@ -46,7 +46,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.DeleteCompaniesByCompanyId200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -62,7 +61,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.DeleteCompaniesByCompanyId200Response401Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
             };
@@ -75,7 +73,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Company401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -90,7 +87,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Companies.Item.Company401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);

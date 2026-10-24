@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip
 {
     /// <summary>
-    /// Builds and executes requests for operations under \campaigns\{campaignId}\leads\{leadIdOrEmail-id}\steps\{stepId}\skip
+    /// Builds and executes requests for operations under \campaigns\{campaignId}\leads\{leadId}\steps\{stepId}\skip
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SkipRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.S
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SkipRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}/steps/{stepId}/skip", pathParameters)
+        public SkipRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadId}/steps/{stepId}/skip", pathParameters)
         {
         }
         /// <summary>
@@ -30,38 +30,36 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.S
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SkipRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}/steps/{stepId}/skip", rawUrl)
+        public SkipRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadId}/steps/{stepId}/skip", rawUrl)
         {
         }
         /// <summary>
         /// Skip one step of a running campaign for a single lead. Cannot be undone. Deprecated, still working: use POST /campaigns/{campaignId}/steps/{stepId}/skip-for-leads, which takes 1 to 100 leads per call.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip404Response">When receiving a 404 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip422Response">When receiving a 422 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip404Response">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip422Response">When receiving a 422 status code</exception>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip200Response> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response401Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip404Response.CreateFromDiscriminatorValue },
-                { "422", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip422Response.CreateFromDiscriminatorValue },
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip400Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip404Response.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip422Response.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdOrEmailStepsByStepIdSkip200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdSkip200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Skip one step of a running campaign for a single lead. Cannot be undone. Deprecated, still working: use POST /campaigns/{campaignId}/steps/{stepId}/skip-for-leads, which takes 1 to 100 leads per call.

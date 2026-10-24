@@ -56,14 +56,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads
         }
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.leads.item collection</summary>
         /// <param name="position">The email address of the lead</param>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.EmailItemRequestBuilder"/></returns>
-        public global::Soenneker.Lemlist.OpenApiClient.Leads.Item.EmailItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Leads.Item.WithEmailItemRequestBuilder"/></returns>
+        public global::Soenneker.Lemlist.OpenApiClient.Leads.Item.WithEmailItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("email%2Did", position);
-                return new global::Soenneker.Lemlist.OpenApiClient.Leads.Item.EmailItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("email", position);
+                return new global::Soenneker.Lemlist.OpenApiClient.Leads.Item.WithEmailItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>
@@ -88,8 +88,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -100,12 +98,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Leads.GetLeads200Response404Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieve a lead using either their email address or lead ID

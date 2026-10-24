@@ -11,7 +11,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \campaigns\{campaignId}\leads\{leadIdOrEmail-id}\steps\{stepId}
+    /// Builds and executes requests for operations under \campaigns\{campaignId}\leads\{leadId}\steps\{stepId}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithStepItemRequestBuilder : BaseRequestBuilder
@@ -31,7 +31,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithStepItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}/steps/{stepId}", pathParameters)
+        public WithStepItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadId}/steps/{stepId}", pathParameters)
         {
         }
         /// <summary>
@@ -39,7 +39,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithStepItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}/steps/{stepId}", rawUrl)
+        public WithStepItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadId}/steps/{stepId}", rawUrl)
         {
         }
     }

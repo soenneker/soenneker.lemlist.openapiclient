@@ -41,11 +41,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists.WatchListApiWatchListResponse401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists409Response">When receiving a 409 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists429Response">When receiving a 429 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists.WatchListApiWatchListResponse500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmListsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -60,11 +58,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists.WatchListApiWatchListResponse401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists409Response.CreateFromDiscriminatorValue },
                 { "429", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists429Response.CreateFromDiscriminatorValue },
-                { "500", global::Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists.WatchListApiWatchListResponse500Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

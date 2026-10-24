@@ -8,19 +8,11 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion"/>, List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2&gt;
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class GetLeads200Response : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2? GetLeads200ResponseBranch2 { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2 GetLeads200ResponseBranch2 { get; set; }
-#endif
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -28,6 +20,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #nullable restore
 #else
         public global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion GetLeads200ResponseLegacyNoVersion { get; set; }
+#endif
+        /// <summary>Composed type representation for type List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2&gt;</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>? LeadV2 { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2> LeadV2 { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,13 +39,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response();
-            if("GetLeads200ResponseBranch2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.GetLeads200ResponseBranch2 = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2();
-            }
-            else if("GetLeads200ResponseLegacyNoVersion".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("GetLeads200ResponseLegacyNoVersion".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.GetLeads200ResponseLegacyNoVersion = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion();
+            }
+            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2> leadV2Value)
+            {
+                result.LeadV2 = leadV2Value;
             }
             return result;
         }
@@ -55,11 +55,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(GetLeads200ResponseBranch2 != null)
-            {
-                return GetLeads200ResponseBranch2.GetFieldDeserializers();
-            }
-            else if(GetLeads200ResponseLegacyNoVersion != null)
+            if(GetLeads200ResponseLegacyNoVersion != null)
             {
                 return GetLeads200ResponseLegacyNoVersion.GetFieldDeserializers();
             }
@@ -72,13 +68,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(GetLeads200ResponseBranch2 != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseBranch2>(null, GetLeads200ResponseBranch2);
-            }
-            else if(GetLeads200ResponseLegacyNoVersion != null)
+            if(GetLeads200ResponseLegacyNoVersion != null)
             {
                 writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion>(null, GetLeads200ResponseLegacyNoVersion);
+            }
+            else if(LeadV2 != null)
+            {
+                writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(null, LeadV2);
             }
         }
     }

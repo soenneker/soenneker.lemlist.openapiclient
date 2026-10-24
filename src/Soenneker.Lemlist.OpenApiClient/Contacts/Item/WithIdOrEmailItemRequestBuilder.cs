@@ -45,7 +45,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.DeleteContactsByIdOrEmail200Response401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail409Response">When receiving a 409 status code</exception>
@@ -61,7 +60,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.DeleteContactsByIdOrEmail200Response401Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail409Response.CreateFromDiscriminatorValue },
@@ -75,7 +73,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Contact401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -90,7 +87,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Contacts.Item.Contact401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);

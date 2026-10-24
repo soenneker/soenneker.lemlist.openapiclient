@@ -39,8 +39,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.DeleteUnsubscribesByEmail200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.DeleteUnsubscribesByEmail200Response404Error">When receiving a 404 status code</exception>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,12 +50,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.DeleteUnsubscribesByEmail200Response400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.DeleteUnsubscribesByEmail200Response404Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Unsubscribe by Email
@@ -65,10 +58,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response403Error">When receiving a 403 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response404Error">When receiving a 404 status code</exception>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -80,14 +69,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response400Error.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response401Error.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response403Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.GetUnsubscribesByEmail200Response404Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Add Unsubscribe Email or Domain
@@ -95,8 +77,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.PostUnsubscribesByEmail200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.PostUnsubscribesByEmail200Response404Error">When receiving a 404 status code</exception>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -108,12 +88,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.PostUnsubscribesByEmail200Response400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item.PostUnsubscribesByEmail200Response404Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Delete Unsubscribe Email

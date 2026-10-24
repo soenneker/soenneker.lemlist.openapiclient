@@ -20,10 +20,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Values to include. For `externalSignalFieldMapping` and `externalSignalCustomFieldMapping`, an array of mapping objects (see `WatchListExternalSignalMapping`); the JSON-serialized form returned when reading an agent is also accepted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterInItem>? In { get; set; }
+        public List<string>? In { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterInItem> In { get; set; }
+        public List<string> In { get; set; }
 #endif
         /// <summary>Values to exclude</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -59,7 +59,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "filterId", n => { FilterId = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId>(); } },
-                { "in", n => { In = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterInItem>(global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterInItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "in", n => { In = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "out", n => { Out = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId>("filterId", FilterId);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterInItem>("in", In);
+            writer.WriteCollectionOfPrimitiveValues<string>("in", In);
             writer.WriteCollectionOfPrimitiveValues<string>("out", Out);
             writer.WriteAdditionalData(AdditionalData);
         }

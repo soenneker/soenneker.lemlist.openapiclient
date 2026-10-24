@@ -7,122 +7,13 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>
-    /// A contact record in your CRM, as the lookups (`GET /contacts?idsOrEmails=`, `GET /contacts?crmIds=`, `GET /contacts/{idOrEmail}`) return it. Not to be confused with a lead which is a contact specifically added to a campaign.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+    #pragma warning disable CS1591
     public partial class Contact : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>List of campaigns the contact is associated with</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCampaignsItem>? Campaigns { get; set; }
-#nullable restore
-#else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCampaignsItem> Campaigns { get; set; }
-#endif
-        /// <summary>Contact creation timestamp</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>ID of the user who created the contact</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? CreatedBy { get; set; }
-#nullable restore
-#else
-        public string CreatedBy { get; set; }
-#endif
-        /// <summary>CRM sync status for the contact, resolved against the team&apos;s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected and the contact has a record in it. `crmRecordId` maps a `crmIds` lookup back to the ids sent.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSync? CrmSync { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSync CrmSync { get; set; }
-#endif
-        /// <summary>Contact&apos;s primary email address</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Email { get; set; }
-#nullable restore
-#else
-        public string Email { get; set; }
-#endif
-        /// <summary>Values lemlist refused to write on this contact, each with its reason. Empty when none. Filter the list endpoint to only flagged contacts via `GET /contacts?fieldRejectionReason=...`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>? FieldRejections { get; set; }
-#nullable restore
-#else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection> FieldRejections { get; set; }
-#endif
-        /// <summary>Contact fields, standard (`firstName`, `lastName`, `phone`, `jobTitle`...) and custom</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty? Fields { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty Fields { get; set; }
-#endif
-        /// <summary>Contact&apos;s calculated full name</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? FullName { get; set; }
-#nullable restore
-#else
-        public string FullName { get; set; }
-#endif
-        /// <summary>Unique contact identifier</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>Contact&apos;s LinkedIn profile URL</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LinkedinUrl { get; set; }
-#nullable restore
-#else
-        public string LinkedinUrl { get; set; }
-#endif
-        /// <summary>Contact&apos;s LinkedIn Sales Navigator URL</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LinkedinUrlSalesNav { get; set; }
-#nullable restore
-#else
-        public string LinkedinUrlSalesNav { get; set; }
-#endif
-        /// <summary>ID of the user who owns this contact</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? OwnerId { get; set; }
-#nullable restore
-#else
-        public string OwnerId { get; set; }
-#endif
-        /// <summary>Verification status of each verified phone number.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem>? PhonesStatuses { get; set; }
-#nullable restore
-#else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem> PhonesStatuses { get; set; }
-#endif
-        /// <summary>Team identifier the contact belongs to</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? TeamId { get; set; }
-#nullable restore
-#else
-        public string TeamId { get; set; }
-#endif
-        /// <summary>Whether the contact is globally unsubscribed. When true, no outreach will be sent to this contact.</summary>
-        public bool? Unsubscribed { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Contact"/> and sets the default values.
         /// </summary>
@@ -148,21 +39,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "campaigns", n => { Campaigns = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCampaignsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactCampaignsItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "createdBy", n => { CreatedBy = n.GetStringValue(); } },
-                { "crmSync", n => { CrmSync = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSync>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSync.CreateFromDiscriminatorValue); } },
-                { "email", n => { Email = n.GetStringValue(); } },
-                { "fieldRejections", n => { FieldRejections = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>(global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "fields", n => { Fields = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty.CreateFromDiscriminatorValue); } },
-                { "fullName", n => { FullName = n.GetStringValue(); } },
-                { "_id", n => { Id = n.GetStringValue(); } },
-                { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
-                { "linkedinUrlSalesNav", n => { LinkedinUrlSalesNav = n.GetStringValue(); } },
-                { "ownerId", n => { OwnerId = n.GetStringValue(); } },
-                { "phonesStatuses", n => { PhonesStatuses = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "teamId", n => { TeamId = n.GetStringValue(); } },
-                { "unsubscribed", n => { Unsubscribed = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -172,21 +48,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCampaignsItem>("campaigns", Campaigns);
-            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteStringValue("createdBy", CreatedBy);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactCrmSync>("crmSync", CrmSync);
-            writer.WriteStringValue("email", Email);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>("fieldRejections", FieldRejections);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactFieldsProperty>("fields", Fields);
-            writer.WriteStringValue("fullName", FullName);
-            writer.WriteStringValue("_id", Id);
-            writer.WriteStringValue("linkedinUrl", LinkedinUrl);
-            writer.WriteStringValue("linkedinUrlSalesNav", LinkedinUrlSalesNav);
-            writer.WriteStringValue("ownerId", OwnerId);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactPhonesStatusesItem>("phonesStatuses", PhonesStatuses);
-            writer.WriteStringValue("teamId", TeamId);
-            writer.WriteBoolValue("unsubscribed", Unsubscribed);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

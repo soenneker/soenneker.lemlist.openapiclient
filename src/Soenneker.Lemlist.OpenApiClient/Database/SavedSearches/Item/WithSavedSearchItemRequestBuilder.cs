@@ -40,7 +40,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item.SavedSearchDeleteResponse401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +55,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item.SavedSearchDeleteResponse401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
             };
@@ -69,7 +67,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item.SavedSearchResponse401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -85,7 +82,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item.SavedSearchResponse401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
             };
@@ -99,7 +95,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item.SavedSearchResponse401Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 409 status code</exception>
@@ -117,7 +112,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Database.SavedSearches.Item.SavedSearchResponse401Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },

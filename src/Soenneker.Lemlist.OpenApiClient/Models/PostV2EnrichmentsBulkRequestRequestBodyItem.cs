@@ -25,18 +25,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Input data for enrichment. Required fields depend on enrichmentRequests.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemInput? Input { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput? Input { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemInput Input { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput Input { get; set; }
 #endif
         /// <summary>Custom data to be returned in the response and webhook. Can be a string or an object</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata? Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata? Metadata { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata Metadata { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem"/> and sets the default values.
@@ -64,8 +64,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "enrichmentRequests", n => { EnrichmentRequests = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem>()?.AsList(); } },
-                { "input", n => { Input = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemInput>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemInput.CreateFromDiscriminatorValue); } },
-                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata.CreateFromDiscriminatorValue); } },
+                { "input", n => { Input = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput.CreateFromDiscriminatorValue); } },
+                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -76,8 +76,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem>("enrichmentRequests", EnrichmentRequests);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemInput>("input", Input);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata>("metadata", Metadata);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput>("input", Input);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata>("metadata", Metadata);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

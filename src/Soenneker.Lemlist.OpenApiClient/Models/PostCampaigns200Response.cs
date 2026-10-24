@@ -91,18 +91,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The senders property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendersItem>? Senders { get; set; }
+        public UntypedNode? Senders { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendersItem> Senders { get; set; }
+        public UntypedNode Senders { get; set; }
 #endif
         /// <summary>The sendUsers property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendUsersItem>? SendUsers { get; set; }
+        public UntypedNode? SendUsers { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendUsersItem> SendUsers { get; set; }
+        public UntypedNode SendUsers { get; set; }
 #endif
         /// <summary>The sequenceId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -141,10 +141,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The variableKeys property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseVariableKeysItem>? VariableKeys { get; set; }
+        public UntypedNode? VariableKeys { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseVariableKeysItem> VariableKeys { get; set; }
+        public UntypedNode VariableKeys { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200Response"/> and sets the default values.
@@ -184,14 +184,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "reviewedCount", n => { ReviewedCount = n.GetIntValue(); } },
                 { "scannedCount", n => { ScannedCount = n.GetIntValue(); } },
                 { "scheduleIds", n => { ScheduleIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "sendUsers", n => { SendUsers = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendUsersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendUsersItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "senders", n => { Senders = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendersItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "sendUsers", n => { SendUsers = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "senders", n => { Senders = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "sequenceId", n => { SequenceId = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
                 { "stopOnEmailReplied", n => { StopOnEmailReplied = n.GetBoolValue(); } },
                 { "teamId", n => { TeamId = n.GetStringValue(); } },
                 { "unsubscribe", n => { Unsubscribe = n.GetStringValue(); } },
-                { "variableKeys", n => { VariableKeys = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseVariableKeysItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseVariableKeysItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "variableKeys", n => { VariableKeys = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -214,14 +214,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("reviewedCount", ReviewedCount);
             writer.WriteIntValue("scannedCount", ScannedCount);
             writer.WriteCollectionOfPrimitiveValues<string>("scheduleIds", ScheduleIds);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendersItem>("senders", Senders);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseSendUsersItem>("sendUsers", SendUsers);
+            writer.WriteObjectValue<UntypedNode>("senders", Senders);
+            writer.WriteObjectValue<UntypedNode>("sendUsers", SendUsers);
             writer.WriteStringValue("sequenceId", SequenceId);
             writer.WriteStringValue("state", State);
             writer.WriteBoolValue("stopOnEmailReplied", StopOnEmailReplied);
             writer.WriteStringValue("teamId", TeamId);
             writer.WriteStringValue("unsubscribe", Unsubscribe);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200ResponseVariableKeysItem>("variableKeys", VariableKeys);
+            writer.WriteObjectValue<UntypedNode>("variableKeys", VariableKeys);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

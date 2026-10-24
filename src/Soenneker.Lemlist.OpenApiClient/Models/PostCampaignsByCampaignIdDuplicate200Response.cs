@@ -63,10 +63,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The senders property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdDuplicate200ResponseSendersItem>? Senders { get; set; }
+        public UntypedNode? Senders { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdDuplicate200ResponseSendersItem> Senders { get; set; }
+        public UntypedNode Senders { get; set; }
 #endif
         /// <summary>The sequenceId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -117,7 +117,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "labels", n => { Labels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "senders", n => { Senders = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdDuplicate200ResponseSendersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdDuplicate200ResponseSendersItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "senders", n => { Senders = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "sequenceId", n => { SequenceId = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
             };
@@ -137,7 +137,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("_id", Id);
             writer.WriteCollectionOfPrimitiveValues<string>("labels", Labels);
             writer.WriteStringValue("name", Name);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdDuplicate200ResponseSendersItem>("senders", Senders);
+            writer.WriteObjectValue<UntypedNode>("senders", Senders);
             writer.WriteStringValue("sequenceId", SequenceId);
             writer.WriteStringValue("status", Status);
             writer.WriteAdditionalData(AdditionalData);

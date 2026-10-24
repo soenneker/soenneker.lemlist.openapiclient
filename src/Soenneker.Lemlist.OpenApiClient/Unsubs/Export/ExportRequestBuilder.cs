@@ -38,7 +38,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubs.Export
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Unsubs.Export.Export400Error">When receiving a 400 status code</exception>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -50,11 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubs.Export
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.Unsubs.Export.Export400Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Export Unsubscribes

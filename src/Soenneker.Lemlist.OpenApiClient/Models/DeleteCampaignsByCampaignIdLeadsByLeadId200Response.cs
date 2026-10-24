@@ -7,126 +7,28 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
+    /// <summary>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2"/>
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class DeleteCampaignsByCampaignIdLeadsByLeadId200Response : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class DeleteCampaignsByCampaignIdLeadsByLeadId200Response : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The campaignId property</summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CampaignId { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1? DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1 { get; set; }
 #nullable restore
 #else
-        public string CampaignId { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1 DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1 { get; set; }
 #endif
-        /// <summary>The companyDomain property</summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompanyDomain { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2? DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2 { get; set; }
 #nullable restore
 #else
-        public string CompanyDomain { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2 DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2 { get; set; }
 #endif
-        /// <summary>The companyName property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? CompanyName { get; set; }
-#nullable restore
-#else
-        public string CompanyName { get; set; }
-#endif
-        /// <summary>The contactId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ContactId { get; set; }
-#nullable restore
-#else
-        public string ContactId { get; set; }
-#endif
-        /// <summary>The CompanyName property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseCompanyName { get; set; }
-#nullable restore
-#else
-        public string DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseCompanyName { get; set; }
-#endif
-        /// <summary>The email property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Email { get; set; }
-#nullable restore
-#else
-        public string Email { get; set; }
-#endif
-        /// <summary>The emailStatus property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? EmailStatus { get; set; }
-#nullable restore
-#else
-        public string EmailStatus { get; set; }
-#endif
-        /// <summary>The firstName property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? FirstName { get; set; }
-#nullable restore
-#else
-        public string FirstName { get; set; }
-#endif
-        /// <summary>The id property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>The industry property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Industry { get; set; }
-#nullable restore
-#else
-        public string Industry { get; set; }
-#endif
-        /// <summary>The isPaused property</summary>
-        public bool? IsPaused { get; set; }
-        /// <summary>The jobTitle property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? JobTitle { get; set; }
-#nullable restore
-#else
-        public string JobTitle { get; set; }
-#endif
-        /// <summary>The lastName property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LastName { get; set; }
-#nullable restore
-#else
-        public string LastName { get; set; }
-#endif
-        /// <summary>The preferredContactMethod property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? PreferredContactMethod { get; set; }
-#nullable restore
-#else
-        public string PreferredContactMethod { get; set; }
-#endif
-        /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response"/> and sets the default values.
-        /// </summary>
-        public DeleteCampaignsByCampaignIdLeadsByLeadId200Response()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -135,7 +37,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response();
+            var result = new global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response();
+            result.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1 = new global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1();
+            result.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2 = new global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2();
+            return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -143,23 +48,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            if(DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1 != null || DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2 != null)
             {
-                { "campaignId", n => { CampaignId = n.GetStringValue(); } },
-                { "companyDomain", n => { CompanyDomain = n.GetStringValue(); } },
-                { "companyName", n => { CompanyName = n.GetStringValue(); } },
-                { "contactId", n => { ContactId = n.GetStringValue(); } },
-                { "Company name", n => { DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseCompanyName = n.GetStringValue(); } },
-                { "email", n => { Email = n.GetStringValue(); } },
-                { "emailStatus", n => { EmailStatus = n.GetStringValue(); } },
-                { "firstName", n => { FirstName = n.GetStringValue(); } },
-                { "_id", n => { Id = n.GetStringValue(); } },
-                { "industry", n => { Industry = n.GetStringValue(); } },
-                { "isPaused", n => { IsPaused = n.GetBoolValue(); } },
-                { "jobTitle", n => { JobTitle = n.GetStringValue(); } },
-                { "lastName", n => { LastName = n.GetStringValue(); } },
-                { "preferredContactMethod", n => { PreferredContactMethod = n.GetStringValue(); } },
-            };
+                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1, DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2);
+            }
+            return new Dictionary<string, Action<IParseNode>>();
         }
         /// <summary>
         /// Serializes information the current object
@@ -168,21 +61,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("campaignId", CampaignId);
-            writer.WriteStringValue("companyDomain", CompanyDomain);
-            writer.WriteStringValue("companyName", CompanyName);
-            writer.WriteStringValue("contactId", ContactId);
-            writer.WriteStringValue("Company name", DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseCompanyName);
-            writer.WriteStringValue("email", Email);
-            writer.WriteStringValue("emailStatus", EmailStatus);
-            writer.WriteStringValue("firstName", FirstName);
-            writer.WriteStringValue("_id", Id);
-            writer.WriteStringValue("industry", Industry);
-            writer.WriteBoolValue("isPaused", IsPaused);
-            writer.WriteStringValue("jobTitle", JobTitle);
-            writer.WriteStringValue("lastName", LastName);
-            writer.WriteStringValue("preferredContactMethod", PreferredContactMethod);
-            writer.WriteAdditionalData(AdditionalData);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1>(null, DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf1, DeleteCampaignsByCampaignIdLeadsByLeadId200ResponseAnyOf2);
         }
     }
 }

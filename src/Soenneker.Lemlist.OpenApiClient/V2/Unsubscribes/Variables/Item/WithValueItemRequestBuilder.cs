@@ -39,8 +39,6 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item
         /// <returns>A <see cref="string"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.DeleteV2UnsubscribesVariablesByValue200ResponseSchema400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.DeleteV2UnsubscribesVariablesByValue200ResponseSchema409Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<string?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -51,12 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.DeleteV2UnsubscribesVariablesByValue200ResponseSchema400Error.CreateFromDiscriminatorValue },
-                { "409", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.DeleteV2UnsubscribesVariablesByValue200ResponseSchema409Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendPrimitiveAsync<string>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendPrimitiveAsync<string>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves a specific unsubscribed variable by its value.
@@ -64,8 +57,6 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesVariablesByValue200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.GetV2UnsubscribesVariablesByValue200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.GetV2UnsubscribesVariablesByValue200Response404Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesVariablesByValue200Response?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -76,12 +67,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.GetV2UnsubscribesVariablesByValue200Response400Error.CreateFromDiscriminatorValue },
-                { "404", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.GetV2UnsubscribesVariablesByValue200Response404Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesVariablesByValue200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesVariablesByValue200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesVariablesByValue200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesVariablesByValue200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Unsubscribes a single variable. This operation is idempotent — if the variable is already unsubscribed, the existing record is returned.
@@ -89,8 +75,6 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesVariablesByValue200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.PostV2UnsubscribesVariablesByValue200Response400Error">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.PostV2UnsubscribesVariablesByValue200Response500Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesVariablesByValue200Response?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -101,12 +85,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "400", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.PostV2UnsubscribesVariablesByValue200Response400Error.CreateFromDiscriminatorValue },
-                { "500", global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Variables.Item.PostV2UnsubscribesVariablesByValue200Response500Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesVariablesByValue200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesVariablesByValue200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesVariablesByValue200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostV2UnsubscribesVariablesByValue200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Removes a variable from the unsubscribe list. Variables with a protected source (LEAD or ABUSE) cannot be re-subscribed.

@@ -10,7 +10,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps
 {
     /// <summary>
-    /// Builds and executes requests for operations under \campaigns\{campaignId}\leads\{leadIdOrEmail-id}\steps
+    /// Builds and executes requests for operations under \campaigns\{campaignId}\leads\{leadId}\steps
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class StepsRequestBuilder : BaseRequestBuilder
@@ -32,7 +32,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public StepsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}/steps", pathParameters)
+        public StepsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadId}/steps", pathParameters)
         {
         }
         /// <summary>
@@ -40,7 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public StepsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadIdOrEmail%2Did}/steps", rawUrl)
+        public StepsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns/{campaignId}/leads/{leadId}/steps", rawUrl)
         {
         }
     }

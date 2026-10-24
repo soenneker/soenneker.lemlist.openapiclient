@@ -7,44 +7,28 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
+    /// <summary>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1"/>, <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf2"/>
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class PostV2EnrichmentsBulk200ResponseSchemaItem : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class PostV2EnrichmentsBulk200ResponseSchemaItem : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Error code for failed enrichment</summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1? PostV2EnrichmentsBulk200ResponseItemOneOf1 { get; set; }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1 PostV2EnrichmentsBulk200ResponseItemOneOf1 { get; set; }
 #endif
-        /// <summary>Enrichment ID</summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf2? PostV2EnrichmentsBulk200ResponseItemOneOf2 { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf2 PostV2EnrichmentsBulk200ResponseItemOneOf2 { get; set; }
 #endif
-        /// <summary>The metadata provided in the request</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata? Metadata { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata Metadata { get; set; }
-#endif
-        /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem"/> and sets the default values.
-        /// </summary>
-        public PostV2EnrichmentsBulk200ResponseSchemaItem()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -53,7 +37,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem();
+            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var result = new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem();
+            if("PostV2EnrichmentsBulk200ResponseItemOneOf1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.PostV2EnrichmentsBulk200ResponseItemOneOf1 = new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1();
+            }
+            else if("PostV2EnrichmentsBulk200ResponseItemOneOf2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.PostV2EnrichmentsBulk200ResponseItemOneOf2 = new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf2();
+            }
+            return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -61,12 +55,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            if(PostV2EnrichmentsBulk200ResponseItemOneOf1 != null)
             {
-                { "error", n => { Error = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata.CreateFromDiscriminatorValue); } },
-            };
+                return PostV2EnrichmentsBulk200ResponseItemOneOf1.GetFieldDeserializers();
+            }
+            else if(PostV2EnrichmentsBulk200ResponseItemOneOf2 != null)
+            {
+                return PostV2EnrichmentsBulk200ResponseItemOneOf2.GetFieldDeserializers();
+            }
+            return new Dictionary<string, Action<IParseNode>>();
         }
         /// <summary>
         /// Serializes information the current object
@@ -75,10 +72,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("error", Error);
-            writer.WriteStringValue("id", Id);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemMetadata>("metadata", Metadata);
-            writer.WriteAdditionalData(AdditionalData);
+            if(PostV2EnrichmentsBulk200ResponseItemOneOf1 != null)
+            {
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1>(null, PostV2EnrichmentsBulk200ResponseItemOneOf1);
+            }
+            else if(PostV2EnrichmentsBulk200ResponseItemOneOf2 != null)
+            {
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf2>(null, PostV2EnrichmentsBulk200ResponseItemOneOf2);
+            }
         }
     }
 }

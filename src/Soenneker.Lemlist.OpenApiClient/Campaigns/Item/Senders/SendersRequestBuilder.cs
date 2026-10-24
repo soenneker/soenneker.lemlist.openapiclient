@@ -53,8 +53,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdSenders400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.GetCampaignsByCampaignIdSenders200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.GetCampaignsByCampaignIdSenders200Response402Error">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdSenders404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdSenders405Response">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -70,8 +68,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdSenders400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.GetCampaignsByCampaignIdSenders200Response401Error.CreateFromDiscriminatorValue },
-                { "402", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.GetCampaignsByCampaignIdSenders200Response402Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdSenders404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdSenders405Response.CreateFromDiscriminatorValue },
             };
@@ -85,8 +81,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PostCampaignsByCampaignIdSenders200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PostCampaignsByCampaignIdSenders200Response402Error">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders405Response">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders409Response">When receiving a 409 status code</exception>
@@ -104,8 +98,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PostCampaignsByCampaignIdSenders200Response401Error.CreateFromDiscriminatorValue },
-                { "402", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PostCampaignsByCampaignIdSenders200Response402Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders409Response.CreateFromDiscriminatorValue },
@@ -120,8 +112,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders400Response">When receiving a 400 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PutCampaignsByCampaignIdSenders200Response401Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PutCampaignsByCampaignIdSenders200Response402Error">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders405Response">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders409Response">When receiving a 409 status code</exception>
@@ -139,8 +129,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders400Response.CreateFromDiscriminatorValue },
-                { "401", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PutCampaignsByCampaignIdSenders200Response401Error.CreateFromDiscriminatorValue },
-                { "402", global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.PutCampaignsByCampaignIdSenders200Response402Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdSenders409Response.CreateFromDiscriminatorValue },

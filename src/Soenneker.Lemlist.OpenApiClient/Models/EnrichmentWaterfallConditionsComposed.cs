@@ -11,10 +11,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// Only on custom waterfalls; a default waterfall applies to every contact not matched by a custom one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class EnrichmentWaterfallConditionsComposed : IAdditionalDataHolder, IParsable
+    public partial class EnrichmentWaterfallConditionsComposed : IParsable
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The contact&apos;s resolved country (from its `location`, `country` or company data), as ISO 3166-1 alpha-2 codes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -23,13 +21,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallConditionsCountry Country { get; set; }
 #endif
-        /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallConditionsComposed"/> and sets the default values.
-        /// </summary>
-        public EnrichmentWaterfallConditionsComposed()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -59,7 +50,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallConditionsCountry>("country", Country);
-            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }
