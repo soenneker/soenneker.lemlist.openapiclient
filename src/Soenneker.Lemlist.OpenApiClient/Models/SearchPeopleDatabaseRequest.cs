@@ -22,13 +22,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Excludes { get; set; }
 #endif
-        /// <summary>Array of filters (required)</summary>
+        /// <summary>Array of filters (required, unless `fromSearchId` is provided). With `fromSearchId`, each filter replaces the saved filter with the same `filterId` and the other saved filters are kept; an empty or absent `filters` replays the search as is.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem>? Filters { get; set; }
 #nullable restore
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem> Filters { get; set; }
+#endif
+        /// <summary>Id of a previous People search of your team (not a Companies search): the `search` value returned by `POST /database/people` (optional). The search is replayed with its saved filters. Each filter you pass in `filters` replaces the saved filter with the same `filterId`, the other saved filters are kept, and the merged filters are validated again as for a new search. With `fromSearchId`, `filters` is optional: an empty or absent `filters` replays the search as is.A `search` id can be replayed for 6 months. A replay counts as one search in the daily search quota (see `limitation` in the response); only a paid part triggered elsewhere, such as LinkedIn post engagement, is not billed again.If no search matches this id for your team and this mode, or the search is older than 6 months, the request is rejected with 404.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FromSearchId { get; set; }
+#nullable restore
+#else
+        public string FromSearchId { get; set; }
 #endif
         /// <summary>Page (optional)</summary>
         public int? Page { get; set; }
@@ -69,6 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "excludes", n => { Excludes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "fromSearchId", n => { FromSearchId = n.GetStringValue(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "search", n => { Search = n.GetStringValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
@@ -83,6 +92,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("excludes", Excludes);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem>("filters", Filters);
+            writer.WriteStringValue("fromSearchId", FromSearchId);
             writer.WriteIntValue("page", Page);
             writer.WriteStringValue("search", Search);
             writer.WriteIntValue("size", Size);

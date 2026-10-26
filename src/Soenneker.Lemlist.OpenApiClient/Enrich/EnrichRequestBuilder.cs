@@ -19,7 +19,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
     public partial class EnrichRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Soenneker.Lemlist.OpenApiClient.enrich.item collection</summary>
-        /// <param name="position">Unique enrichment ID</param>
+        /// <param name="position">Enrichment ID returned when the enrichment was started</param>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Enrich.Item.WithEnrichItemRequestBuilder"/></returns>
         public global::Soenneker.Lemlist.OpenApiClient.Enrich.Item.WithEnrichItemRequestBuilder this[string position]
         {
@@ -47,25 +47,36 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
         {
         }
         /// <summary>
-        /// Enrich Data
+        /// Start one enrichment for one person. Answers with the enrichment `id` right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result). Every call starts a new enrichment and uses credits, even for a person enriched before.Enable at least one of `findEmail`, `findPhone`, `verifyEmail` and `linkedinEnrichment`; a flag is on only when its value is the string `true`. Requesting `findEmail` and `verifyEmail` together runs only one of them: `verifyEmail` when a valid `email` is given, `findEmail` otherwise. Which inputs each workflow needs is listed in [Bulk Enrich Data](/api-reference/endpoints/enrich/bulk-enrich-data#required-inputs). Unknown or empty parameters are ignored.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200ResponseSchema"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich500Response">When receiving a 500 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich503Response">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200ResponseSchema?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200Response?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200ResponseSchema> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200Response> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200ResponseSchema>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200ResponseSchema.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich400Response.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich403Response.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich500Response.CreateFromDiscriminatorValue },
+                { "503", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich503Response.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Enrich Data
+        /// Start one enrichment for one person. Answers with the enrichment `id` right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result). Every call starts a new enrichment and uses credits, even for a person enriched before.Enable at least one of `findEmail`, `findPhone`, `verifyEmail` and `linkedinEnrichment`; a flag is on only when its value is the string `true`. Requesting `findEmail` and `verifyEmail` together runs only one of them: `verifyEmail` when a valid `email` is given, `findEmail` otherwise. Which inputs each workflow needs is listed in [Bulk Enrich Data](/api-reference/endpoints/enrich/bulk-enrich-data#required-inputs). Unknown or empty parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -93,12 +104,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             return new global::Soenneker.Lemlist.OpenApiClient.Enrich.EnrichRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Enrich Data
+        /// Start one enrichment for one person. Answers with the enrichment `id` right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result). Every call starts a new enrichment and uses credits, even for a person enriched before.Enable at least one of `findEmail`, `findPhone`, `verifyEmail` and `linkedinEnrichment`; a flag is on only when its value is the string `true`. Requesting `findEmail` and `verifyEmail` together runs only one of them: `verifyEmail` when a valid `email` is given, `findEmail` otherwise. Which inputs each workflow needs is listed in [Bulk Enrich Data](/api-reference/endpoints/enrich/bulk-enrich-data#required-inputs). Unknown or empty parameters are ignored.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class EnrichRequestBuilderPostQueryParameters 
         {
-            /// <summary>Company domain</summary>
+            /// <summary>Domain of the person&apos;s company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("companyDomain")]
@@ -108,7 +119,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             [QueryParameter("companyDomain")]
             public string CompanyDomain { get; set; }
 #endif
-            /// <summary>Company name</summary>
+            /// <summary>Name of the person&apos;s company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("companyName")]
@@ -118,7 +129,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             [QueryParameter("companyName")]
             public string CompanyName { get; set; }
 #endif
-            /// <summary>Email address</summary>
+            /// <summary>Email address of the person</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("email")]
@@ -128,13 +139,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             [QueryParameter("email")]
             public string Email { get; set; }
 #endif
-            /// <summary>Find verified email</summary>
+            /// <summary>Find the person&apos;s email. On when set to `true`.</summary>
             [QueryParameter("findEmail")]
             public bool? FindEmail { get; set; }
-            /// <summary>Find phone number</summary>
+            /// <summary>Find the person&apos;s phone number. On when set to `true`.</summary>
             [QueryParameter("findPhone")]
             public bool? FindPhone { get; set; }
-            /// <summary>First name</summary>
+            /// <summary>First name of the person</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("firstName")]
@@ -154,7 +165,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             [QueryParameter("jobTitle")]
             public string JobTitle { get; set; }
 #endif
-            /// <summary>Last name</summary>
+            /// <summary>Last name of the person</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("lastName")]
@@ -164,10 +175,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             [QueryParameter("lastName")]
             public string LastName { get; set; }
 #endif
-            /// <summary>Run LinkedIn enrichment</summary>
+            /// <summary>Enrich the person&apos;s LinkedIn profile. On when set to `true`.</summary>
             [QueryParameter("linkedinEnrichment")]
             public bool? LinkedinEnrichment { get; set; }
-            /// <summary>LinkedIn URL</summary>
+            /// <summary>LinkedIn profile URL of the person</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("linkedinUrl")]
@@ -177,10 +188,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             [QueryParameter("linkedinUrl")]
             public string LinkedinUrl { get; set; }
 #endif
-            /// <summary>Verify existing email</summary>
+            /// <summary>Verify the deliverability of `email`. On when set to `true`.</summary>
             [QueryParameter("verifyEmail")]
             public bool? VerifyEmail { get; set; }
-            /// <summary>Webhook URL for enrichment events</summary>
+            /// <summary>URL that receives the `enrichmentDone` or `enrichmentError` event of this enrichment, on top of your team&apos;s webhooks. See the webhooks of the Enrichment object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("webhookUrl")]

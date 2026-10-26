@@ -7,45 +7,42 @@ using System.IO;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
+    /// <summary>
+    /// Result of `find_email` and/or `verify`. Present only when one of them was requested and produced a result.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class PostV2EnrichmentsBulk200ResponseItemOneOf1 : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class EnrichDataEmail : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Enrichment ID</summary>
+        /// <summary>The address found by `find_email`. Absent when `notFound` is true or when only `verify` ran.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Email { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Email { get; set; }
 #endif
-        /// <summary>The metadata provided in the request</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata? Metadata { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata Metadata { get; set; }
-#endif
+        /// <summary>Set when `find_email` ran. True whenever no address is returned, including when the person opted out of enrichment: their address is never returned.</summary>
+        public bool? NotFound { get; set; }
+        /// <summary>Deliverability of the address: the `verify` verdict, or the check `find_email` runs on the address it finds. Absent when no check resolved.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmailStatus? Status { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmail"/> and sets the default values.
         /// </summary>
-        public PostV2EnrichmentsBulk200ResponseItemOneOf1()
+        public EnrichDataEmail()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmail"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1 CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmail CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1();
+            return new global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmail();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -55,8 +52,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata.CreateFromDiscriminatorValue); } },
+                { "email", n => { Email = n.GetStringValue(); } },
+                { "notFound", n => { NotFound = n.GetBoolValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmailStatus>(); } },
             };
         }
         /// <summary>
@@ -66,8 +64,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("id", Id);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata>("metadata", Metadata);
+            writer.WriteStringValue("email", Email);
+            writer.WriteBoolValue("notFound", NotFound);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichDataEmailStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

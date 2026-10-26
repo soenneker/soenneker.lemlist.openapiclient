@@ -14,6 +14,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The step&apos;s own name, shown instead of its type label (&quot;Email&quot;, &quot;Call&quot;) wherever the app names the step. Absent when the step has none</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CustomName { get; set; }
+#nullable restore
+#else
+        public string CustomName { get; set; }
+#endif
         /// <summary>The delay property</summary>
         public int? Delay { get; set; }
         /// <summary>The emailTemplateId property</summary>
@@ -73,6 +81,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "customName", n => { CustomName = n.GetStringValue(); } },
                 { "delay", n => { Delay = n.GetIntValue(); } },
                 { "emailTemplateId", n => { EmailTemplateId = n.GetStringValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
@@ -87,6 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("customName", CustomName);
             writer.WriteIntValue("delay", Delay);
             writer.WriteStringValue("emailTemplateId", EmailTemplateId);
             writer.WriteStringValue("_id", Id);

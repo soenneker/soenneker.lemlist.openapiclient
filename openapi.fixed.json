@@ -9177,7 +9177,7 @@
           "People Database"
         ],
         "summary": "Search People Database",
-        "description": "This endpoint allows you to query our People database. To do so, you may use the following parameters: filters (required), page (optional), size (optional), and excludes (optional). Each filter should have the following properties: filterId (filter identifier), in (list of the values you want to include), and out (list of the values you want to exclude). To know which filters you are able to use, refer to the GET Filters section.\n\nThe \u0060department\u0060 filter accepts the following values: \u0060Sales\u0060, \u0060Customer service\u0060, \u0060Engineering\u0060, \u0060Marketing\u0060, \u0060Operations\u0060, \u0060Human Resources\u0060, \u0060Finance / Legal / Admin\u0060, \u0060Other\u0060.",
+        "description": "This endpoint allows you to query our People database. To do so, you may use the following parameters: filters (required, unless \u0060fromSearchId\u0060 is provided), fromSearchId (optional), page (optional), size (optional), and excludes (optional). Each filter should have the following properties: filterId (filter identifier), in (list of the values you want to include), and out (list of the values you want to exclude). To know which filters you are able to use, refer to the GET Filters section. To run a previous search again, pass the \u0060search\u0060 id it returned as \u0060fromSearchId\u0060.\n\nThe \u0060department\u0060 filter accepts the following values: \u0060Sales\u0060, \u0060Customer service\u0060, \u0060Engineering\u0060, \u0060Marketing\u0060, \u0060Operations\u0060, \u0060Human Resources\u0060, \u0060Finance / Legal / Admin\u0060, \u0060Other\u0060.",
         "operationId": "SearchPeopleDatabase",
         "requestBody": {
           "description": "Search criteria. Provide one or more filters and optionally control pagination with page/size",
@@ -9301,6 +9301,17 @@
               }
             }
           },
+          "404": {
+            "description": "No search found for this \u0060fromSearchId\u0060 in this team and mode (another team, another mode, or older than 6 months)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "No search found for this fromSearchId in this team and mode. Pass the searchId returned by a search of the same mode, or run the search again with filters"
+              }
+            }
+          },
           "405": {
             "description": "Method not allowed"
           }
@@ -9313,7 +9324,7 @@
           "People Database"
         ],
         "summary": "Search Companies Database",
-        "description": "Search the lemlist Companies database using structured filters with pagination support. Returns comprehensive company data including technologies used, location, employee count, and other business intelligence.",
+        "description": "Search the lemlist Companies database using structured filters with pagination support. Returns comprehensive company data including technologies used, location, employee count, and other business intelligence. To run a previous search again, pass the \u0060search\u0060 id it returned as \u0060fromSearchId\u0060.",
         "operationId": "PostDatabaseCompanies",
         "requestBody": {
           "content": {
@@ -9588,6 +9599,17 @@
                   "description": "Fallback media schema"
                 },
                 "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "404": {
+            "description": "No search found for this \u0060fromSearchId\u0060 in this team and mode (another team, another mode, or older than 6 months)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "No search found for this fromSearchId in this team and mode. Pass the searchId returned by a search of the same mode, or run the search again with filters"
               }
             }
           },
@@ -15270,7 +15292,7 @@
           {
             "name": "listId",
             "in": "query",
-            "description": "Filter companies to the members of a static CRM company list (\u0060clt_xxx\u0060 format). Combines with every other filter. Ignored when \u0060idsOrDomains\u0060 is provided.",
+            "description": "Filter companies to the members of a CRM company list (\u0060clt_xxx\u0060 format): a static list, or a dynamic list kept in sync with its filters. A legacy dynamic list, evaluated from its saved filters each time it is read, is rejected with \u0060CRM_LIST_DYNAMIC\u0060; both kinds of dynamic list show \u0060dynamic: true\u0060 in \u0060GET /companies/lists\u0060. Combines with every other filter. Ignored when \u0060idsOrDomains\u0060 is provided.",
             "schema": {
               "pattern": "^clt_[a-zA-Z0-9]\u002B$",
               "type": "string"
@@ -15387,7 +15409,7 @@
             }
           },
           "400": {
-            "description": "Either a plain \u0060{ \u0022error\u0022: \u0022...\u0022 }\u0060 (\u0060Bad team\u0060, \u0060limit\u0060 below 1), or a validation envelope. Possible error codes: \u0060INVALID_CRM_ID\u0060 (a \u0060crmIds\u0060 list with no usable value, or a value longer than 25 characters), \u0060TOO_MANY_CRM_IDS\u0060 (more than 100 \u0060crmIds\u0060 values), \u0060INVALID_IDS_OR_DOMAINS\u0060 (no valid id or domain in \u0060idsOrDomains\u0060), \u0060TOO_MANY_IDS_OR_DOMAINS\u0060 (more than 100 \u0060idsOrDomains\u0060 values), \u0060CRM_LIST_ENTITY_MISMATCH\u0060 (the \u0060listId\u0060 points at a contact list), \u0060CRM_LIST_DYNAMIC\u0060 (the list is filter-driven, so it has no stored membership to filter on), \u0060INVALID_CRM_SYNC_STATUS\u0060, \u0060NO_CRM_CONNECTED\u0060 (\u0060crmSyncStatus\u0060 without a connected CRM), \u0060INVALID_FIELD_REJECTION_REASON\u0060.",
+            "description": "Either a plain \u0060{ \u0022error\u0022: \u0022...\u0022 }\u0060 (\u0060Bad team\u0060, \u0060limit\u0060 below 1), or a validation envelope. Possible error codes: \u0060INVALID_CRM_ID\u0060 (a \u0060crmIds\u0060 list with no usable value, or a value longer than 25 characters), \u0060TOO_MANY_CRM_IDS\u0060 (more than 100 \u0060crmIds\u0060 values), \u0060INVALID_IDS_OR_DOMAINS\u0060 (no valid id or domain in \u0060idsOrDomains\u0060), \u0060TOO_MANY_IDS_OR_DOMAINS\u0060 (more than 100 \u0060idsOrDomains\u0060 values), \u0060CRM_LIST_ENTITY_MISMATCH\u0060 (the \u0060listId\u0060 points at a contact list), \u0060CRM_LIST_DYNAMIC\u0060 (the list is a legacy dynamic list, evaluated from its saved filters when read, so it has no stored membership to filter on), \u0060INVALID_CRM_SYNC_STATUS\u0060, \u0060NO_CRM_CONNECTED\u0060 (\u0060crmSyncStatus\u0060 without a connected CRM), \u0060INVALID_FIELD_REJECTION_REASON\u0060.",
             "content": {
               "application/json": {
                 "schema": {
@@ -15445,7 +15467,7 @@
                       "success": false,
                       "error": {
                         "code": "CRM_LIST_DYNAMIC",
-                        "message": "This list is dynamic (filter-driven) and cannot be searched by membership"
+                        "message": "This list is evaluated from its saved filters at read time and cannot be searched by membership"
                       }
                     }
                   }
@@ -18985,41 +19007,90 @@
           "Enrich"
         ],
         "summary": "Get Enrichment Result",
+        "description": "Read the state and result of an enrichment started with Enrich Data, Enrich Lead or Bulk Enrich Data. The HTTP status follows \u0060enrichmentStatus\u0060: 200 \u0060done\u0060, 202 \u0060in-progress\u0060, 400 \u0060failed\u0060, 404 \u0060not-found\u0060. Prefer webhooks to polling: see the Enrichment object.",
         "operationId": "GetEnrichByEnrichId",
         "parameters": [
           {
             "name": "enrichId",
             "in": "path",
-            "description": "Unique enrichment ID",
+            "description": "Enrichment ID returned when the enrichment was started",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "example": "enr_123"
+            "example": "enr_ExampleA1b2C3d4E5"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Done. \u0060data\u0060 holds a key per requested workflow that produced a result, including a \u0060find_email\u0060 or \u0060find_phone\u0060 that found nothing (\u0060notFound: true\u0060); requested workflows that ended without any result are listed in \u0060failedWorkflows\u0060. A cancelled enrichment also answers \u0060done\u0060.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetEnrichByEnrichId200ResponseSchema"
+                  "$ref": "#/components/schemas/Enrich"
                 },
-                "example": {
-                  "enrichmentId": "enr_FPgMU8ZUVBnOZBuZ6",
-                  "enrichmentStatus": "done",
-                  "input": {
-                    "firstName": "John",
-                    "lastName": "lemlist",
-                    "linkedinUrl": "https://www.linkedin.com/in/lemlist",
-                    "companyName": "lemlist",
-                    "companyDomain": "lemlist.com"
+                "examples": {
+                  "done": {
+                    "summary": "Email and phone found",
+                    "value": {
+                      "enrichmentId": "enr_ExampleA1b2C3d4E5",
+                      "enrichmentStatus": "done",
+                      "input": {
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "companyName": "Acme Inc",
+                        "companyDomain": "example.com"
+                      },
+                      "data": {
+                        "email": {
+                          "email": "john@example.com",
+                          "notFound": false,
+                          "status": "deliverable"
+                        },
+                        "phone": {
+                          "phone": "\u002B15555550100",
+                          "additionalPhones": [
+                            "\u002B15555550101"
+                          ],
+                          "notFound": false
+                        }
+                      }
+                    }
                   },
-                  "data": {
-                    "email": {
-                      "email": "john@lemlist.co",
-                      "notFound": false
+                  "notFound": {
+                    "summary": "Email not found, phone workflow ended without result",
+                    "value": {
+                      "enrichmentId": "enr_ExampleA1b2C3d4E5",
+                      "enrichmentStatus": "done",
+                      "input": {
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "companyName": "Acme Inc",
+                        "companyDomain": "example.com"
+                      },
+                      "data": {
+                        "email": {
+                          "notFound": true
+                        }
+                      },
+                      "failedWorkflows": [
+                        "find_phone"
+                      ]
+                    }
+                  },
+                  "verify": {
+                    "summary": "Email verified",
+                    "value": {
+                      "enrichmentId": "enr_ExampleA1b2C3d4E5",
+                      "enrichmentStatus": "done",
+                      "input": {
+                        "email": "john@example.com"
+                      },
+                      "data": {
+                        "email": {
+                          "status": "risky"
+                        }
+                      }
                     }
                   }
                 }
@@ -19027,16 +19098,58 @@
             }
           },
           "202": {
-            "description": "In progress"
+            "description": "In progress: poll again later",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Enrich"
+                },
+                "example": {
+                  "enrichmentId": "enr_ExampleA1b2C3d4E5",
+                  "enrichmentStatus": "in-progress",
+                  "input": {
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "companyName": "Acme Inc",
+                    "companyDomain": "example.com"
+                  },
+                  "data": {}
+                }
+              }
+            }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Failed as a whole: \u0060code\u0060 names why and \u0060reason\u0060 explains it. Also \u0060{\u0022error\u0022: \u0022Bad params\u0022}\u0060 when no ID is given.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/Enrich"
                 },
-                "example": "Bad team"
+                "examples": {
+                  "failed": {
+                    "summary": "Enrichment failed",
+                    "value": {
+                      "enrichmentId": "enr_ExampleA1b2C3d4E5",
+                      "enrichmentStatus": "failed",
+                      "error": "PROVIDER_TIMEOUT",
+                      "code": "PROVIDER_TIMEOUT",
+                      "reason": "The enrichment provider did not respond in time",
+                      "input": {
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "companyName": "Acme Inc",
+                        "companyDomain": "example.com"
+                      },
+                      "data": {}
+                    }
+                  },
+                  "badParams": {
+                    "summary": "No enrichment ID",
+                    "value": {
+                      "error": "Bad params"
+                    }
+                  }
+                }
               }
             }
           },
@@ -19044,13 +19157,18 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Enrichment not found",
+            "description": "No enrichment with this ID in your team",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/Enrich"
                 },
-                "example": "Enrichment not found"
+                "example": {
+                  "enrichmentId": "enr_ExampleA1b2C3d4E5",
+                  "enrichmentStatus": "not-found",
+                  "error": "Enrichment not found",
+                  "data": {}
+                }
               }
             }
           },
@@ -19066,12 +19184,13 @@
           "Enrich"
         ],
         "summary": "Enrich Data",
+        "description": "Start one enrichment for one person. Answers with the enrichment \u0060id\u0060 right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result). Every call starts a new enrichment and uses credits, even for a person enriched before.\n\nEnable at least one of \u0060findEmail\u0060, \u0060findPhone\u0060, \u0060verifyEmail\u0060 and \u0060linkedinEnrichment\u0060; a flag is on only when its value is the string \u0060true\u0060. Requesting \u0060findEmail\u0060 and \u0060verifyEmail\u0060 together runs only one of them: \u0060verifyEmail\u0060 when a valid \u0060email\u0060 is given, \u0060findEmail\u0060 otherwise. Which inputs each workflow needs is listed in [Bulk Enrich Data](/api-reference/endpoints/enrich/bulk-enrich-data#required-inputs). Unknown or empty parameters are ignored.",
         "operationId": "PostEnrich",
         "parameters": [
           {
             "name": "findEmail",
             "in": "query",
-            "description": "Find verified email",
+            "description": "Find the person\u0027s email. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19080,7 +19199,7 @@
           {
             "name": "verifyEmail",
             "in": "query",
-            "description": "Verify existing email",
+            "description": "Verify the deliverability of \u0060email\u0060. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19089,7 +19208,7 @@
           {
             "name": "linkedinEnrichment",
             "in": "query",
-            "description": "Run LinkedIn enrichment",
+            "description": "Enrich the person\u0027s LinkedIn profile. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19098,7 +19217,7 @@
           {
             "name": "email",
             "in": "query",
-            "description": "Email address",
+            "description": "Email address of the person",
             "schema": {
               "type": "string"
             },
@@ -19107,7 +19226,7 @@
           {
             "name": "linkedinUrl",
             "in": "query",
-            "description": "LinkedIn URL",
+            "description": "LinkedIn profile URL of the person",
             "schema": {
               "type": "string"
             },
@@ -19116,7 +19235,7 @@
           {
             "name": "firstName",
             "in": "query",
-            "description": "First name",
+            "description": "First name of the person",
             "schema": {
               "type": "string"
             },
@@ -19125,7 +19244,7 @@
           {
             "name": "lastName",
             "in": "query",
-            "description": "Last name",
+            "description": "Last name of the person",
             "schema": {
               "type": "string"
             },
@@ -19134,7 +19253,7 @@
           {
             "name": "companyDomain",
             "in": "query",
-            "description": "Company domain",
+            "description": "Domain of the person\u0027s company",
             "schema": {
               "type": "string"
             },
@@ -19143,7 +19262,7 @@
           {
             "name": "companyName",
             "in": "query",
-            "description": "Company name",
+            "description": "Name of the person\u0027s company",
             "schema": {
               "type": "string"
             },
@@ -19161,7 +19280,7 @@
           {
             "name": "findPhone",
             "in": "query",
-            "description": "Find phone number",
+            "description": "Find the person\u0027s phone number. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19170,35 +19289,80 @@
           {
             "name": "webhookUrl",
             "in": "query",
-            "description": "Webhook URL for enrichment events",
+            "description": "URL that receives the \u0060enrichmentDone\u0060 or \u0060enrichmentError\u0060 event of this enrichment, on top of your team\u0027s webhooks. See the webhooks of the Enrichment object.",
             "schema": {
               "type": "string"
             },
-            "example": "https://webhook.site/*your-webhook-id*/"
+            "example": "https://example.com/webhooks/lemlist"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Enrichment started",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostEnrich200ResponseSchema"
+                  "$ref": "#/components/schemas/PostEnrich200Response"
                 },
                 "example": {
-                  "id": "enr_CzQDYYcS5vDG1ZvQi"
+                  "id": "enr_ExampleA1b2C3d4E5"
                 }
               }
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / Bad request / No enrichment requested (findEmail, findPhone, linkedinEnrichment or verifyEmail required) / Invalid webhookUrl",
+            "description": "Bad request, or enrichment not started. For a rejected enrichment, \u0060code\u0060 names why and \u0060message\u0060 explains it; \u0060error\u0060 is a short legacy text: \u0060Missing credits\u0060 (\u0060MISSING_FUNDS\u0060), \u0060Email is missing\u0060 (\u0060MISSING_EMAIL\u0060), \u0060Missing inputs\u0060 (\u0060MISSING_INPUTS\u0060), \u0060Failed to enrich lead\u0060 for the other codes.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostEnrich400Response"
                 },
-                "example": "Bad team"
+                "examples": {
+                  "noEnrichment": {
+                    "summary": "No workflow enabled",
+                    "value": {
+                      "error": "No enrichment requested (findEmail, findPhone, linkedinEnrichment or verifyEmail required)"
+                    }
+                  },
+                  "invalidWebhookUrl": {
+                    "summary": "Invalid webhookUrl",
+                    "value": {
+                      "error": "Invalid webhookUrl"
+                    }
+                  },
+                  "missingInputs": {
+                    "summary": "Not enough inputs",
+                    "value": {
+                      "error": "Missing inputs",
+                      "code": "MISSING_INPUTS",
+                      "message": "Missing LinkedIn url OR the combination of first name, last name, company name, company domain"
+                    }
+                  },
+                  "missingFunds": {
+                    "summary": "Not enough credits",
+                    "value": {
+                      "error": "Missing credits",
+                      "code": "MISSING_FUNDS",
+                      "message": "Not enough credits to complete this enrichment"
+                    }
+                  },
+                  "missingEmail": {
+                    "summary": "No email to verify",
+                    "value": {
+                      "error": "Email is missing",
+                      "code": "MISSING_EMAIL",
+                      "message": "Email address is required for verification"
+                    }
+                  },
+                  "notAllowed": {
+                    "summary": "Missing permission",
+                    "value": {
+                      "error": "Failed to enrich lead",
+                      "code": "NOT_ALLOWED_PHONE",
+                      "message": "You don\u0027t have permission to find phone numbers"
+                    }
+                  }
+                }
               }
             }
           },
@@ -19213,8 +19377,65 @@
               }
             }
           },
+          "403": {
+            "description": "The user\u0027s LinkedIn account must be connected in Settings to enrich",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostEnrich403Response"
+                },
+                "example": {
+                  "error": "linkedin-not-linked",
+                  "code": "CREDITS_USAGE_FORBIDDEN",
+                  "message": "User LinkedIn account needs to be connected in \u201CSettings\u201D to enrich"
+                }
+              }
+            }
+          },
           "405": {
             "description": "Method not allowed"
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostEnrich500Response"
+                },
+                "example": {
+                  "error": "Failed to enrich lead"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "503": {
+            "description": "Enrichment is temporarily paused for your team or for lemlist: retry later",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostEnrich503Response"
+                },
+                "examples": {
+                  "systemDisabled": {
+                    "summary": "Enrichment service paused",
+                    "value": {
+                      "error": "Enrichment service is temporarily unavailable, please retry later",
+                      "code": "SYSTEM_DISABLED",
+                      "message": "Enrichment service is temporarily unavailable, please retry later"
+                    }
+                  },
+                  "teamInError": {
+                    "summary": "Team paused",
+                    "value": {
+                      "error": "The enrichment process is blocked on your team. Please contact support for assistance.",
+                      "code": "TEAM_IN_ERROR",
+                      "message": "The enrichment process is blocked on your team. Please contact support for assistance."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -19225,17 +19446,17 @@
           "Enrich"
         ],
         "summary": "Bulk Enrich Data",
-        "description": "Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call.",
+        "description": "Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call. Each row answers with its own enrichment \u0060id\u0060, or with an \u0060error\u0060 code and a \u0060message\u0060 when that row could not be started. A malformed row rejects the whole call with a 400. Every call starts new enrichments and uses credits, even for a person enriched before.",
         "operationId": "PostV2EnrichmentsBulk",
         "parameters": [
           {
             "name": "webhookUrl",
             "in": "query",
-            "description": "Webhook URL for enrichment events",
+            "description": "URL that receives the \u0060enrichmentDone\u0060 or \u0060enrichmentError\u0060 event of each enrichment of the call, on top of your team\u0027s webhooks. See the webhooks of the Enrichment object.",
             "schema": {
               "type": "string"
             },
-            "example": "https://n8n.example.com/webhook/lemlist-webhook-surprise"
+            "example": "https://example.com/webhooks/lemlist"
           }
         ],
         "requestBody": {
@@ -19353,7 +19574,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success - Returns enrichment IDs and metadata for each request",
+            "description": "One item per row, in the order of the request: an enrichment \u0060id\u0060, or an \u0060error\u0060 code with its \u0060message\u0060 when the row could not be started",
             "content": {
               "application/json": {
                 "schema": {
@@ -19364,17 +19585,18 @@
                     "summary": "Find email response",
                     "value": [
                       {
-                        "id": "enr_rt3yG1uvSOAmNgsOm",
+                        "id": "enr_ExampleA1b2C3d4E5",
                         "metadata": {
                           "id": "some_id"
                         }
                       },
                       {
-                        "id": "enr_KdG7p3VNyiCgmcYTv",
+                        "id": "enr_ExampleF6g7H8i9J0",
                         "metadata": "some_id"
                       },
                       {
                         "error": "MISSING_INPUTS",
+                        "message": "Missing LinkedIn url OR the combination of first name, last name, company name, company domain",
                         "metadata": "some_id"
                       }
                     ]
@@ -19383,13 +19605,14 @@
                     "summary": "Find phone response",
                     "value": [
                       {
-                        "id": "enr_bPawymIrM37F6yHBe",
+                        "id": "enr_ExampleK1l2M3n4O5",
                         "metadata": {
                           "id": "some_id"
                         }
                       },
                       {
                         "error": "MISSING_INPUTS",
+                        "message": "Missing LinkedIn url OR the combination of first name, last name, company name, company domain",
                         "metadata": "some_id"
                       }
                     ]
@@ -19398,13 +19621,14 @@
                     "summary": "Verify email response",
                     "value": [
                       {
-                        "id": "enr_N84uOiUB0RYx5LIEb",
+                        "id": "enr_ExampleP6q7R8s9T0",
                         "metadata": {
                           "id": "some_id"
                         }
                       },
                       {
                         "error": "MISSING_EMAIL",
+                        "message": "Email address is required for verification",
                         "metadata": "some_id"
                       }
                     ]
@@ -19413,13 +19637,14 @@
                     "summary": "LinkedIn enrichment response",
                     "value": [
                       {
-                        "id": "enr_zsHo0j5j6HNC0MXgQ",
+                        "id": "enr_ExampleU1v2W3x4Y5",
                         "metadata": {
                           "id": "some_id"
                         }
                       },
                       {
-                        "error": "MISSING_LINKEDIN_URL",
+                        "error": "MISSING_INPUTS",
+                        "message": "Missing LinkedIn url OR the combination of first name, last name, company name, company domain",
                         "metadata": "some_id"
                       }
                     ]
@@ -19429,7 +19654,7 @@
             }
           },
           "400": {
-            "description": "Bad Request - Invalid input format or parameters",
+            "description": "The whole call is rejected: the body is \u0060{\u0022error\u0022: \u0022\u003CCODE\u003E\u0022}\u0060",
             "content": {
               "application/json": {
                 "schema": {
@@ -19438,14 +19663,14 @@
                 "examples": {
                   "wrong_input_format": {
                     "summary": "Wrong input format",
-                    "description": "The input of each enrichment must be an object containing at least one of the required fields",
+                    "description": "An input is not an object, has a key that is not an input field, or a value that is not a string, is longer than 400 characters or contains a \u0060\u003C\u2026\u003E\u0060 sequence",
                     "value": {
                       "error": "WRONG_INPUT_FORMAT"
                     }
                   },
                   "wrong_metadata_format": {
                     "summary": "Wrong metadata format",
-                    "description": "The metadata field must be a string or an object",
+                    "description": "A metadata is neither a string nor an object whose values are strings, or one of its strings is longer than 400 characters or contains a \u0060\u003C\u2026\u003E\u0060 sequence",
                     "value": {
                       "error": "WRONG_METADATA_FORMAT"
                     }
@@ -19491,6 +19716,13 @@
                     "value": {
                       "error": "WRONG_BODY_FORMAT"
                     }
+                  },
+                  "wrong_webhook_url": {
+                    "summary": "Wrong webhook URL",
+                    "description": "The webhookUrl query parameter is not a valid URL",
+                    "value": {
+                      "error": "WRONG_WEBHOOK_URL"
+                    }
                   }
                 }
               }
@@ -19508,7 +19740,32 @@
             }
           },
           "405": {
-            "description": "Method not allowed"
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostV2EnrichmentsBulk405Response"
+                },
+                "example": {
+                  "error": "METHOD_NOT_ALLOWED"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostV2EnrichmentsBulk500Response"
+                },
+                "example": {
+                  "error": "An error occurred"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
           }
         }
       }
@@ -19519,6 +19776,7 @@
           "Enrich"
         ],
         "summary": "Enrich Lead",
+        "description": "Start an enrichment of a lead of your team, from the data of its contact. Enable at least one of \u0060findEmail\u0060, \u0060findPhone\u0060, \u0060verifyEmail\u0060 and \u0060linkedinEnrichment\u0060. Answers with the enrichment \u0060id\u0060 right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result).",
         "operationId": "PostLeadsByEmailEnrich",
         "parameters": [
           {
@@ -19529,12 +19787,12 @@
             "schema": {
               "type": "string"
             },
-            "example": "lea_123"
+            "example": "lea_ExampleA1b2C3d4E5"
           },
           {
             "name": "findEmail",
             "in": "query",
-            "description": "Search email address in another campaign",
+            "description": "Find the lead\u0027s email. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19543,7 +19801,7 @@
           {
             "name": "verifyEmail",
             "in": "query",
-            "description": "Find verified email",
+            "description": "Verify the deliverability of the lead\u0027s email. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19552,7 +19810,7 @@
           {
             "name": "linkedinEnrichment",
             "in": "query",
-            "description": "Run LinkedIn enrichment",
+            "description": "Enrich the lead\u0027s LinkedIn profile. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19561,7 +19819,7 @@
           {
             "name": "findPhone",
             "in": "query",
-            "description": "Find phone number",
+            "description": "Find the lead\u0027s phone number. On when set to \u0060true\u0060.",
             "schema": {
               "type": "boolean"
             },
@@ -19570,11 +19828,11 @@
           {
             "name": "webhookUrl",
             "in": "query",
-            "description": "Webhook URL for enrichment events",
+            "description": "URL that receives the \u0060enrichmentDone\u0060 or \u0060enrichmentError\u0060 event of this enrichment, on top of your team\u0027s webhooks. See the webhooks of the Enrichment object.",
             "schema": {
               "type": "string"
             },
-            "example": "https://n8n.example.com/webhook/lemlist-webhook-surprise"
+            "example": "https://example.com/webhooks/lemlist"
           },
           {
             "name": "force",
@@ -19595,24 +19853,102 @@
                   "$ref": "#/components/schemas/PostLeadsByEmailEnrich200Response"
                 },
                 "example": {
-                  "id": "enr_Ohbs0mEsWmDjTnxTi"
+                  "id": "enr_ExampleK1l2M3n4O5"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Bad request, or enrichment not started. For a rejected enrichment, \u0060code\u0060 names why and \u0060message\u0060 explains it; \u0060error\u0060 is a short legacy text: \u0060Missing credits\u0060 (\u0060MISSING_FUNDS\u0060), \u0060Email is missing\u0060 (\u0060MISSING_EMAIL\u0060), \u0060Missing inputs\u0060 (\u0060MISSING_INPUTS\u0060), \u0060Failed to enrich lead\u0060 for the other codes.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/PostLeadsByEmailEnrich400Response"
                 },
-                "example": "Bad team"
+                "examples": {
+                  "badParams": {
+                    "summary": "No lead ID",
+                    "value": {
+                      "error": "Bad params"
+                    }
+                  },
+                  "invalidLeadId": {
+                    "summary": "Malformed lead ID",
+                    "value": {
+                      "error": "Invalid leadId"
+                    }
+                  },
+                  "leadNotEnrichable": {
+                    "summary": "The lead state is neither \u0060scanned\u0060 nor \u0060imported\u0060",
+                    "value": {
+                      "error": "lemrich is not available for lead reviewed"
+                    }
+                  },
+                  "noEnrichment": {
+                    "summary": "No workflow enabled",
+                    "value": {
+                      "error": "invalid feature param"
+                    }
+                  },
+                  "invalidWebhookUrl": {
+                    "summary": "Invalid webhookUrl",
+                    "value": {
+                      "error": "invalid webhookUrl"
+                    }
+                  },
+                  "missingInputs": {
+                    "summary": "Not enough inputs",
+                    "value": {
+                      "error": "Missing inputs",
+                      "code": "MISSING_INPUTS",
+                      "message": "Missing LinkedIn url OR the combination of first name, last name, company name, company domain"
+                    }
+                  },
+                  "missingFunds": {
+                    "summary": "Not enough credits",
+                    "value": {
+                      "error": "Missing credits",
+                      "code": "MISSING_FUNDS",
+                      "message": "Not enough credits to complete this enrichment"
+                    }
+                  },
+                  "missingEmail": {
+                    "summary": "No email to verify",
+                    "value": {
+                      "error": "Email is missing",
+                      "code": "MISSING_EMAIL",
+                      "message": "Email address is required for verification"
+                    }
+                  },
+                  "notAllowed": {
+                    "summary": "Missing permission",
+                    "value": {
+                      "error": "Failed to enrich lead",
+                      "code": "NOT_ALLOWED_PHONE",
+                      "message": "You don\u0027t have permission to find phone numbers"
+                    }
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "The user\u0027s LinkedIn account must be connected in Settings to enrich",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostLeadsByEmailEnrich403Response"
+                },
+                "example": {
+                  "error": "linkedin-not-linked",
+                  "code": "CREDITS_USAGE_FORBIDDEN",
+                  "message": "User LinkedIn account needs to be connected in \u201CSettings\u201D to enrich"
+                }
+              }
+            }
           },
           "404": {
             "description": "Lead or contact not found",
@@ -19623,7 +19959,7 @@
                 },
                 "examples": {
                   "leadNotFound": {
-                    "summary": "Lead does not exist",
+                    "summary": "No lead with this ID in your team",
                     "value": {
                       "error": "Lead not found",
                       "code": "LEAD_NOT_FOUND"
@@ -19645,7 +19981,7 @@
             "description": "Method not allowed"
           },
           "409": {
-            "description": "Enrichment cannot proceed because of the current state of the lead/contact",
+            "description": "Enrichment not started. \u0060ALREADY_ENRICHED\u0060 when none of the requested workflows can add anything: the contact already has the data, a recent enrichment on the same inputs found nothing, \u0060verifyEmail\u0060 is requested but the contact has no email, or the value was rejected as a CRM duplicate. Without a \u0060code\u0060, the lead is already being enriched.",
             "content": {
               "application/json": {
                 "schema": {
@@ -19653,7 +19989,7 @@
                 },
                 "examples": {
                   "alreadyEnriched": {
-                    "summary": "Contact already has the requested data \u2014 retry with ?force=true to override",
+                    "summary": "No requested workflow can add anything \u2014 \u0060force=true\u0060 only bypasses data already present on the contact",
                     "value": {
                       "error": "Enrichment skipped: contact already has the requested data or was recently enriched",
                       "code": "ALREADY_ENRICHED"
@@ -19671,7 +20007,7 @@
             }
           },
           "500": {
-            "description": "Enrichment failed",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -19681,6 +20017,34 @@
                   "error": "Failed to enrich lead"
                 },
                 "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "503": {
+            "description": "Enrichment is temporarily paused for your team or for lemlist: retry later",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostLeadsByEmailEnrich503Response"
+                },
+                "examples": {
+                  "systemDisabled": {
+                    "summary": "Enrichment service paused",
+                    "value": {
+                      "error": "Enrichment service is temporarily unavailable, please retry later",
+                      "code": "SYSTEM_DISABLED",
+                      "message": "Enrichment service is temporarily unavailable, please retry later"
+                    }
+                  },
+                  "teamInError": {
+                    "summary": "Team paused",
+                    "value": {
+                      "error": "The enrichment process is blocked on your team. Please contact support for assistance.",
+                      "code": "TEAM_IN_ERROR",
+                      "message": "The enrichment process is blocked on your team. Please contact support for assistance."
+                    }
+                  }
+                }
               }
             }
           }
@@ -25445,45 +25809,39 @@
       "Enrich": {
         "type": "object",
         "properties": {
-          "_id": {
+          "enrichmentId": {
             "type": "string",
-            "description": "Unique enrichment request identifier"
+            "description": "Identifier of the enrichment"
           },
-          "status": {
-            "$ref": "#/components/schemas/EnrichStatus"
+          "enrichmentStatus": {
+            "$ref": "#/components/schemas/EnrichEnrichmentStatus"
           },
-          "email": {
+          "input": {
+            "$ref": "#/components/schemas/EnrichInputProperty"
+          },
+          "data": {
+            "$ref": "#/components/schemas/EnrichData"
+          },
+          "failedWorkflows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichFailedWorkflowsItem"
+            },
+            "description": "On \u0060done\u0060, the requested workflows that ended without any result; they have no key in \u0060data\u0060. A \u0060find_email\u0060 or \u0060find_phone\u0060 that found nothing is not listed: it answers \u0060notFound: true\u0060 in \u0060data\u0060. A workflow lemlist runs on its own as a dependency of a requested one is never listed. Only present when not empty."
+          },
+          "code": {
+            "$ref": "#/components/schemas/EnrichCode"
+          },
+          "reason": {
             "type": "string",
-            "description": "Found email address",
-            "format": "email"
+            "description": "On \u0060failed\u0060, a human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060reason\u0060."
           },
-          "phone": {
+          "error": {
             "type": "string",
-            "description": "Found phone number"
-          },
-          "firstName": {
-            "type": "string",
-            "description": "Found first name"
-          },
-          "lastName": {
-            "type": "string",
-            "description": "Found last name"
-          },
-          "companyName": {
-            "type": "string",
-            "description": "Found company name"
-          },
-          "linkedinUrl": {
-            "type": "string",
-            "description": "Found LinkedIn URL",
-            "format": "uri"
-          },
-          "credits": {
-            "type": "integer",
-            "description": "Credits consumed"
+            "description": "On \u0060failed\u0060, the raw cause stored on the enrichment, absent when none was stored; prefer \u0060code\u0060. On \u0060not-found\u0060, \u0060Enrichment not found\u0060."
           }
         },
-        "description": "Contact information discovered through data enrichment (emails, phone numbers, LinkedIn URLs)."
+        "description": "An enrichment: one request to find an email or a phone number, verify an email or enrich a LinkedIn profile for one person. This is the shape \u0060GET /enrich/{enrichId}\u0060 answers with; webhooks carry the same results under other key names (see the Webhooks section)."
       },
       "Task": {
         "type": "object",
@@ -26010,6 +26368,10 @@
           "order": {
             "type": "integer",
             "description": "Position in sequence"
+          },
+          "customName": {
+            "type": "string",
+            "description": "The step\u0027s own name, shown instead of its type label (\u0022Email\u0022, \u0022Call\u0022) wherever the app names the step. Absent when the step has none"
           },
           "delay": {
             "type": "integer",
@@ -28971,6 +29333,25 @@
           }
         }
       },
+      "EnrichInput": {
+        "type": "object",
+        "description": "The inputs the enrichment was started with, echoed back. Absent on \u0060not-found\u0060."
+      },
+      "EnrichData": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/EnrichDataEmail"
+          },
+          "phone": {
+            "$ref": "#/components/schemas/EnrichDataPhone"
+          },
+          "linkedin": {
+            "$ref": "#/components/schemas/EnrichDataLinkedinProperty"
+          }
+        },
+        "description": "What the enrichment found, keyed by result. Empty unless \u0060enrichmentStatus\u0060 is \u0060done\u0060. A key is present only for a requested workflow that produced a result. A \u0060find_email\u0060 or \u0060find_phone\u0060 that found nothing still has its key, with \u0060notFound: true\u0060. A requested workflow that ended without any result has no key and is listed in \u0060failedWorkflows\u0060."
+      },
       "ContactFields": {
         "type": "object",
         "description": "Contact fields, standard (\u0060firstName\u0060, \u0060lastName\u0060, \u0060phone\u0060, \u0060jobTitle\u0060...) and custom"
@@ -30357,6 +30738,49 @@
           }
         }
       },
+      "EnrichDataEmail": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The address found by \u0060find_email\u0060. Absent when \u0060notFound\u0060 is true or when only \u0060verify\u0060 ran.",
+            "format": "email"
+          },
+          "notFound": {
+            "type": "boolean",
+            "description": "Set when \u0060find_email\u0060 ran. True whenever no address is returned, including when the person opted out of enrichment: their address is never returned."
+          },
+          "status": {
+            "$ref": "#/components/schemas/EnrichDataEmailStatus"
+          }
+        },
+        "description": "Result of \u0060find_email\u0060 and/or \u0060verify\u0060. Present only when one of them was requested and produced a result."
+      },
+      "EnrichDataPhone": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "The phone number found. Absent when \u0060notFound\u0060 is true."
+          },
+          "additionalPhones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other numbers returned by the provider, when it returned more than one."
+          },
+          "notFound": {
+            "type": "boolean",
+            "description": "True whenever no number is returned, including when the person opted out of enrichment: their number is never returned."
+          }
+        },
+        "description": "Result of \u0060find_phone\u0060. Present only when it was requested and produced a result."
+      },
+      "EnrichDataLinkedin": {
+        "type": "object",
+        "description": "Result of \u0060linkedin_enrichment\u0060: the LinkedIn profile as returned by the data source (identity, current company, \u0060positionGroups\u0060, \u2026). Present only when it was requested and produced a result."
+      },
       "ContactCrmSyncErrorsItem": {
         "type": "object",
         "properties": {
@@ -31534,6 +31958,11 @@
             "type": "string",
             "description": "For \u0060linkedinSend\u0060 steps only. The premium variant of the out-of-network note, sent instead of \u0060altMessage\u0060 when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Rejected with \u0060400\u0060 on any other step type"
           },
+          "customName": {
+            "maxLength": 70,
+            "type": "string",
+            "description": "The step\u0027s own name, shown instead of its type label (\u0022Email\u0022, \u0022Call\u0022) wherever the app names the step. Plain text, up to 70 characters once trimmed and once runs of spaces collapse to one; HTML tags count toward the 70, then are dropped. A longer name is rejected with \u0060400\u0060. Accepted on every step type, ignored on \u0060conditional\u0060 steps, which keep their type label"
+          },
           "title": {
             "type": "string",
             "description": "Title or label for manual steps"
@@ -31607,6 +32036,10 @@
           "type": {
             "type": "string"
           },
+          "customName": {
+            "type": "string",
+            "description": "The step\u0027s own name, shown instead of its type label (\u0022Email\u0022, \u0022Call\u0022) wherever the app names the step. Absent when the step has none"
+          },
           "delay": {
             "type": "integer"
           },
@@ -31657,6 +32090,11 @@
           "altMessagePremium": {
             "type": "string",
             "description": "For \u0060linkedinSend\u0060 steps only. The premium variant of the out-of-network note, sent instead of \u0060altMessage\u0060 when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Pass an empty string to clear it. Rejected with \u0060400\u0060 on any other step type"
+          },
+          "customName": {
+            "maxLength": 70,
+            "type": "string",
+            "description": "The step\u0027s own name, shown instead of its type label (\u0022Email\u0022, \u0022Call\u0022) wherever the app names the step. Plain text, up to 70 characters once trimmed and once runs of spaces collapse to one; HTML tags count toward the 70, then are dropped. A longer name is rejected with \u0060400\u0060. Accepted on every step type, ignored on \u0060conditional\u0060 steps, which keep their type label. Pass an empty string to remove it and go back to the type label; omit it to keep the current name"
           },
           "title": {
             "type": "string",
@@ -31730,6 +32168,10 @@
           },
           "type": {
             "type": "string"
+          },
+          "customName": {
+            "type": "string",
+            "description": "The step\u0027s own name, shown instead of its type label (\u0022Email\u0022, \u0022Call\u0022) wherever the app names the step. Absent when the step has none"
           },
           "delay": {
             "type": "integer"
@@ -33683,7 +34125,13 @@
             "items": {
               "$ref": "#/components/schemas/SearchPeopleDatabaseRequestFiltersItem"
             },
-            "description": "Array of filters (required)"
+            "description": "Array of filters (required, unless \u0060fromSearchId\u0060 is provided). With \u0060fromSearchId\u0060, each filter replaces the saved filter with the same \u0060filterId\u0060 and the other saved filters are kept; an empty or absent \u0060filters\u0060 replays the search as is."
+          },
+          "fromSearchId": {
+            "pattern": "^lsh_[a-zA-Z0-9]{17}$",
+            "type": "string",
+            "description": "Id of a previous People search of your team (not a Companies search): the \u0060search\u0060 value returned by \u0060POST /database/people\u0060 (optional). The search is replayed with its saved filters. Each filter you pass in \u0060filters\u0060 replaces the saved filter with the same \u0060filterId\u0060, the other saved filters are kept, and the merged filters are validated again as for a new search. With \u0060fromSearchId\u0060, \u0060filters\u0060 is optional: an empty or absent \u0060filters\u0060 replays the search as is.\n\nA \u0060search\u0060 id can be replayed for 6 months. A replay counts as one search in the daily search quota (see \u0060limitation\u0060 in the response); only a paid part triggered elsewhere, such as LinkedIn post engagement, is not billed again.\n\nIf no search matches this id for your team and this mode, or the search is older than 6 months, the request is rejected with 404.",
+            "example": "lsh_ExAmPlEuJiOYFFPTI"
           },
           "page": {
             "minimum": 1,
@@ -33717,7 +34165,13 @@
             "items": {
               "$ref": "#/components/schemas/PostDatabaseCompaniesRequestFiltersItem"
             },
-            "description": "Array of filter objects to narrow down search results. Each filter has a filterId and inclusion/exclusion criteria."
+            "description": "Array of filter objects to narrow down search results. Each filter has a filterId and inclusion/exclusion criteria. Optional when \u0060fromSearchId\u0060 is provided: each filter then replaces the saved filter with the same \u0060filterId\u0060, the other saved filters are kept, and an empty or absent \u0060filters\u0060 replays the search as is."
+          },
+          "fromSearchId": {
+            "pattern": "^lsh_[a-zA-Z0-9]{17}$",
+            "type": "string",
+            "description": "Id of a previous Companies search of your team (not a People search): the \u0060search\u0060 value returned by \u0060POST /database/companies\u0060 (optional). The search is replayed with its saved filters. Each filter you pass in \u0060filters\u0060 replaces the saved filter with the same \u0060filterId\u0060, the other saved filters are kept, and the merged filters are validated again as for a new search. With \u0060fromSearchId\u0060, \u0060filters\u0060 is optional: an empty or absent \u0060filters\u0060 replays the search as is.\n\nA \u0060search\u0060 id can be replayed for 6 months. A replay counts as one search in the daily search quota (see \u0060limitation\u0060 in the response); only a paid part triggered elsewhere, such as LinkedIn post engagement, is not billed again.\n\nIf no search matches this id for your team and this mode, or the search is older than 6 months, the request is rejected with 404.",
+            "example": "lsh_ExAmPlE3wQ7nKd5Hs"
           },
           "page": {
             "type": "integer",
@@ -35982,11 +36436,70 @@
           }
         }
       },
-      "GetEnrichByEnrichId200Response": {
-        "type": "object"
-      },
       "PostEnrich200Response": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Enrichment ID"
+          }
+        }
+      },
+      "PostEnrich400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Short legacy text, or what is wrong with the request"
+          },
+          "code": {
+            "$ref": "#/components/schemas/PostEnrich400ResponseCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060message\u0060."
+          }
+        }
+      },
+      "PostEnrich403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Always \u0060linkedin-not-linked\u0060"
+          },
+          "code": {
+            "$ref": "#/components/schemas/CreditsUsageForbiddenCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060message\u0060."
+          }
+        }
+      },
+      "PostEnrich500Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "PostEnrich503Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Same text as \u0060message\u0060, so possibly translated too. Branch on \u0060code\u0060"
+          },
+          "code": {
+            "$ref": "#/components/schemas/PostEnrich503ResponseCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060message\u0060."
+          }
+        }
       },
       "PostV2EnrichmentsBulkRequest": {
         "maxItems": 500,
@@ -36009,12 +36522,60 @@
           }
         }
       },
+      "PostV2EnrichmentsBulk405Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "PostV2EnrichmentsBulk500Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PostLeadsByEmailEnrich200Response": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
             "description": "Enrichment ID"
+          }
+        }
+      },
+      "PostLeadsByEmailEnrich400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Short legacy text, or what is wrong with the request"
+          },
+          "code": {
+            "$ref": "#/components/schemas/PostLeadsByEmailEnrich400ResponseCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060message\u0060."
+          }
+        }
+      },
+      "PostLeadsByEmailEnrich403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Always \u0060linkedin-not-linked\u0060"
+          },
+          "code": {
+            "$ref": "#/components/schemas/CreditsUsageForbiddenCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060message\u0060."
           }
         }
       },
@@ -36045,6 +36606,22 @@
         "properties": {
           "error": {
             "type": "string"
+          }
+        }
+      },
+      "PostLeadsByEmailEnrich503Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Same text as \u0060message\u0060, so possibly translated too. Branch on \u0060code\u0060"
+          },
+          "code": {
+            "$ref": "#/components/schemas/PostLeadsByEmailEnrich503ResponseCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060code\u0060, possibly translated to the language of the API user. Branch on \u0060code\u0060, never on \u0060message\u0060."
           }
         }
       },
@@ -37603,7 +38180,7 @@
           },
           "search": {
             "type": "string",
-            "description": "Unique identifier of the current search"
+            "description": "Unique identifier of the current search. Reuse it as \u0060fromSearchId\u0060 on \u0060POST /database/people\u0060 to replay this search; it stays valid for 6 months."
           },
           "limitation": {
             "type": "integer",
@@ -37642,7 +38219,7 @@
           },
           "search": {
             "type": "string",
-            "description": "Search session identifier"
+            "description": "Search session identifier. Reuse it as \u0060fromSearchId\u0060 on \u0060POST /database/companies\u0060 to replay this search; it stays valid for 6 months."
           },
           "limitation": {
             "type": "integer",
@@ -37884,12 +38461,6 @@
         "items": {
           "$ref": "#/components/schemas/Webhook"
         }
-      },
-      "GetEnrichByEnrichId200ResponseSchema": {
-        "type": "object"
-      },
-      "PostEnrich200ResponseSchema": {
-        "type": "object"
       },
       "PostV2EnrichmentsBulkRequestRequestBody": {
         "maxItems": 500,
@@ -38233,15 +38804,30 @@
           }
         ]
       },
-      "PostV2EnrichmentsBulk200ResponseItem": {
+      "PostV2EnrichmentsBulkRequestItemMetadata": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemOneOf1"
+            "type": "string"
           },
           {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemOneOf2"
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulkRequestItemMetadataOneOf2"
           }
-        ]
+        ],
+        "description": "Custom data returned in the response and in the webhooks. A string, or an object whose values are strings, each of at most 400 characters without any \u0060\u003C\u2026\u003E\u0060 sequence; anything else rejects the whole call with \u0060WRONG_METADATA_FORMAT\u0060.",
+        "example": {
+          "id": "some_id"
+        }
+      },
+      "PostV2EnrichmentsBulk200ResponseItemMetadata": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemMetadataOneOf2"
+          }
+        ],
+        "description": "The metadata sent with the row, when any"
       },
       "PostSequencesBySequenceIdStepsByStepIdAbTest200ResponseAbTest": {
         "oneOf": [
@@ -38273,42 +38859,6 @@
           }
         ]
       },
-      "PostV2EnrichmentsBulk200ResponseSchemaItem": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemOneOf1"
-          },
-          {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemOneOf2"
-          }
-        ]
-      },
-      "PostV2EnrichmentsBulk200ResponseItemOneOf1": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Enrichment ID",
-            "example": "enr_KzCb0f9dbIjtRqyEO"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata"
-          }
-        }
-      },
-      "PostV2EnrichmentsBulk200ResponseItemOneOf2": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string",
-            "description": "Error code for failed enrichment",
-            "example": "MISSING_INPUTS"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemOneOf2Metadata"
-          }
-        }
-      },
       "LeadV2VariablesProperty": {
         "type": "object",
         "description": "Custom variables associated with the lead"
@@ -38316,6 +38866,10 @@
       "LeadV2SendingUserProperty": {
         "type": "object",
         "description": "Sending user information"
+      },
+      "EnrichInputProperty": {
+        "type": "object",
+        "description": "The inputs the enrichment was started with, echoed back. Absent on \u0060not-found\u0060."
       },
       "ContactFieldsProperty": {
         "type": "object",
@@ -38351,6 +38905,10 @@
           }
         },
         "description": "Allowed filters keyed by signal type"
+      },
+      "EnrichDataLinkedinProperty": {
+        "type": "object",
+        "description": "Result of \u0060linkedin_enrichment\u0060: the LinkedIn profile as returned by the data source (identity, current company, \u0060positionGroups\u0060, \u2026). Present only when it was requested and produced a result."
       },
       "SignalSchemaSignalDataExternalSignalCustomFieldsProperty": {
         "type": "object",
@@ -40584,6 +41142,7 @@
       },
       "PostV2EnrichmentsBulkRequestItem": {
         "required": [
+          "input",
           "enrichmentRequests"
         ],
         "type": "object",
@@ -40596,7 +41155,7 @@
             "items": {
               "$ref": "#/components/schemas/PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem"
             },
-            "description": "Array of enrichment types to perform. Must contain at least one of: find_email, find_phone, verify, linkedin_enrichment",
+            "description": "Enrichment types to perform, at least one of: find_email, find_phone, verify, linkedin_enrichment. Requesting find_email and verify together runs only one of them: verify when \u0060input.email\u0060 is a valid email, find_email otherwise.",
             "example": [
               "find_email",
               "verify"
@@ -40604,6 +41163,26 @@
           },
           "metadata": {
             "$ref": "#/components/schemas/PostV2EnrichmentsBulkRequestItemMetadata"
+          }
+        }
+      },
+      "PostV2EnrichmentsBulk200ResponseItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Enrichment ID, when the row was started",
+            "example": "enr_ExampleA1b2C3d4E5"
+          },
+          "error": {
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemError"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060error\u0060, present with it, possibly translated to the language of the API user. Branch on \u0060error\u0060, never on \u0060message\u0060."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemMetadata"
           }
         }
       },
@@ -41786,6 +42365,7 @@
       },
       "PostV2EnrichmentsBulkRequestRequestBodyItem": {
         "required": [
+          "input",
           "enrichmentRequests"
         ],
         "type": "object",
@@ -41798,38 +42378,36 @@
             "items": {
               "$ref": "#/components/schemas/PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem"
             },
-            "description": "Array of enrichment types to perform. Must contain at least one of: find_email, find_phone, verify, linkedin_enrichment",
+            "description": "Enrichment types to perform, at least one of: find_email, find_phone, verify, linkedin_enrichment. Requesting find_email and verify together runs only one of them: verify when \u0060input.email\u0060 is a valid email, find_email otherwise.",
             "example": [
               "find_email",
               "verify"
             ]
           },
           "metadata": {
-            "$ref": "#/components/schemas/PostV2EnrichmentsBulkRequestRequestBodyItemMetadata"
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulkRequestItemMetadata"
           }
         }
       },
-      "PostV2EnrichmentsBulk200ResponseItemOneOf1Metadata": {
-        "anyOf": [
-          {
-            "type": "string"
+      "PostV2EnrichmentsBulk200ResponseSchemaItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Enrichment ID, when the row was started",
+            "example": "enr_ExampleA1b2C3d4E5"
           },
-          {
-            "type": "object"
-          }
-        ],
-        "description": "The metadata provided in the request"
-      },
-      "PostV2EnrichmentsBulk200ResponseItemOneOf2Metadata": {
-        "anyOf": [
-          {
-            "type": "string"
+          "error": {
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemError"
           },
-          {
-            "type": "object"
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of \u0060error\u0060, present with it, possibly translated to the language of the API user. Branch on \u0060error\u0060, never on \u0060message\u0060."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PostV2EnrichmentsBulk200ResponseItemMetadata"
           }
-        ],
-        "description": "The metadata provided in the request"
+        }
       },
       "GetTeamSenders200ResponseItemCampaignsItem": {
         "type": "object",
@@ -41924,6 +42502,10 @@
           "type": {
             "type": "string",
             "description": "The type of step (e.g., email, linkedinSend, linkedinInMail, linkedinInvite, conditional)"
+          },
+          "customName": {
+            "type": "string",
+            "description": "The step\u0027s own name, shown instead of its type label (\u0022Email\u0022, \u0022Call\u0022) wherever the app names the step. Absent when the step has none"
           },
           "index": {
             "type": "integer",
@@ -42205,21 +42787,7 @@
             "example": "Marketing Manager"
           }
         },
-        "description": "Input data for enrichment. Required fields depend on enrichmentRequests."
-      },
-      "PostV2EnrichmentsBulkRequestItemMetadata": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "object"
-          }
-        ],
-        "description": "Custom data to be returned in the response and webhook. Can be a string or an object",
-        "example": {
-          "id": "some_id"
-        }
+        "description": "Input data for enrichment. Required fields depend on enrichmentRequests (see Required inputs). Values must be strings of at most 400 characters without any \u0060\u003C\u2026\u003E\u0060 sequence; an unknown key or any other value rejects the whole call with \u0060WRONG_INPUT_FORMAT\u0060."
       },
       "GetUserChannels200ResponseEmailAccountsItem": {
         "type": "object",
@@ -42403,21 +42971,7 @@
             "example": "Marketing Manager"
           }
         },
-        "description": "Input data for enrichment. Required fields depend on enrichmentRequests."
-      },
-      "PostV2EnrichmentsBulkRequestRequestBodyItemMetadata": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "object"
-          }
-        ],
-        "description": "Custom data to be returned in the response and webhook. Can be a string or an object",
-        "example": {
-          "id": "some_id"
-        }
+        "description": "Input data for enrichment. Required fields depend on enrichmentRequests (see Required inputs). Values must be strings of at most 400 characters without any \u0060\u003C\u2026\u003E\u0060 sequence; an unknown key or any other value rejects the whole call with \u0060WRONG_INPUT_FORMAT\u0060."
       },
       "GetCampaignsByCampaignIdSequences200ResponseAdditionalPropertiesStepsItemConditionsItem": {
         "type": "object",
@@ -42561,29 +43115,97 @@
           ]
         }
       },
-      "EnrichStatus": {
+      "EnrichEnrichmentStatus": {
         "enum": [
-          "pending",
-          "completed",
-          "failed"
+          "done",
+          "in-progress",
+          "failed",
+          "not-found"
         ],
         "type": "string",
-        "description": "Enrichment status",
+        "description": "Lifecycle state of the enrichment, not to be confused with \u0060data.email.status\u0060. Each state comes with its own HTTP status: \u0060done\u0060 200, \u0060in-progress\u0060 202, \u0060failed\u0060 400, \u0060not-found\u0060 404. A cancelled enrichment answers \u0060done\u0060.",
         "x-ms-enum": {
-          "name": "EnrichStatus",
+          "name": "EnrichEnrichmentStatus",
           "modelAsString": false,
           "values": [
             {
-              "value": "pending",
-              "name": "Pending"
+              "value": "done",
+              "name": "Done"
             },
             {
-              "value": "completed",
-              "name": "Completed"
+              "value": "in-progress",
+              "name": "InProgress"
             },
             {
               "value": "failed",
               "name": "Failed"
+            },
+            {
+              "value": "not-found",
+              "name": "NotFound"
+            }
+          ]
+        }
+      },
+      "EnrichFailedWorkflowsItem": {
+        "enum": [
+          "find_email",
+          "find_phone",
+          "verify",
+          "linkedin_enrichment"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "EnrichFailedWorkflowsItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "find_email",
+              "name": "FindEmail"
+            },
+            {
+              "value": "find_phone",
+              "name": "FindPhone"
+            },
+            {
+              "value": "verify",
+              "name": "Verify"
+            },
+            {
+              "value": "linkedin_enrichment",
+              "name": "LinkedinEnrichment"
+            }
+          ]
+        }
+      },
+      "EnrichCode": {
+        "enum": [
+          "FAILED_TO_PROCESS",
+          "INVALID_INPUT",
+          "PROVIDER_TIMEOUT",
+          "PROVIDER_REJECTED"
+        ],
+        "type": "string",
+        "description": "On \u0060failed\u0060, why the enrichment failed. An unknown or missing cause reads as \u0060FAILED_TO_PROCESS\u0060.",
+        "x-ms-enum": {
+          "name": "EnrichCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "FAILED_TO_PROCESS",
+              "name": "FailedToProcess"
+            },
+            {
+              "value": "INVALID_INPUT",
+              "name": "InvalidInput"
+            },
+            {
+              "value": "PROVIDER_TIMEOUT",
+              "name": "ProviderTimeout"
+            },
+            {
+              "value": "PROVIDER_REJECTED",
+              "name": "ProviderRejected"
             }
           ]
         }
@@ -46120,6 +46742,33 @@
           ]
         }
       },
+      "EnrichDataEmailStatus": {
+        "enum": [
+          "deliverable",
+          "risky",
+          "undeliverable"
+        ],
+        "type": "string",
+        "description": "Deliverability of the address: the \u0060verify\u0060 verdict, or the check \u0060find_email\u0060 runs on the address it finds. Absent when no check resolved.",
+        "x-ms-enum": {
+          "name": "EnrichDataEmailStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "deliverable",
+              "name": "Deliverable"
+            },
+            {
+              "value": "risky",
+              "name": "Risky"
+            },
+            {
+              "value": "undeliverable",
+              "name": "Undeliverable"
+            }
+          ]
+        }
+      },
       "StepSenderSenderChannelType": {
         "enum": [
           "email",
@@ -47984,6 +48633,117 @@
           ]
         }
       },
+      "PostEnrich400ResponseCode": {
+        "enum": [
+          "BAD_EMAIL",
+          "BAD_LINKEDIN_URL",
+          "MISSING_EMAIL",
+          "MISSING_INPUTS",
+          "MISSING_FUNDS",
+          "NOT_ALLOWED_EMAIL",
+          "NOT_ALLOWED_PHONE",
+          "NOT_ALLOWED_LINKEDIN",
+          "NOT_ALLOWED_VERIFY",
+          "LINKEDIN_UNSUBSCRIBED",
+          "TEAM_BLOCKED",
+          "NO_AVAILABLE_PROVIDER"
+        ],
+        "type": "string",
+        "description": "Why the enrichment was not started. See the request errors of the Enrichment object.",
+        "x-ms-enum": {
+          "name": "PostEnrich400ResponseCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "BAD_EMAIL",
+              "name": "BadEmail"
+            },
+            {
+              "value": "BAD_LINKEDIN_URL",
+              "name": "BadLinkedinUrl"
+            },
+            {
+              "value": "MISSING_EMAIL",
+              "name": "MissingEmail"
+            },
+            {
+              "value": "MISSING_INPUTS",
+              "name": "MissingInputs"
+            },
+            {
+              "value": "MISSING_FUNDS",
+              "name": "MissingFunds"
+            },
+            {
+              "value": "NOT_ALLOWED_EMAIL",
+              "name": "NotAllowedEmail"
+            },
+            {
+              "value": "NOT_ALLOWED_PHONE",
+              "name": "NotAllowedPhone"
+            },
+            {
+              "value": "NOT_ALLOWED_LINKEDIN",
+              "name": "NotAllowedLinkedin"
+            },
+            {
+              "value": "NOT_ALLOWED_VERIFY",
+              "name": "NotAllowedVerify"
+            },
+            {
+              "value": "LINKEDIN_UNSUBSCRIBED",
+              "name": "LinkedinUnsubscribed"
+            },
+            {
+              "value": "TEAM_BLOCKED",
+              "name": "TeamBlocked"
+            },
+            {
+              "value": "NO_AVAILABLE_PROVIDER",
+              "name": "NoAvailableProvider"
+            }
+          ]
+        }
+      },
+      "CreditsUsageForbiddenCode": {
+        "enum": [
+          "CREDITS_USAGE_FORBIDDEN"
+        ],
+        "type": "string",
+        "description": "Why the enrichment was not started. See the request errors of the Enrichment object.",
+        "x-ms-enum": {
+          "name": "CreditsUsageForbiddenCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "CREDITS_USAGE_FORBIDDEN",
+              "name": "CreditsUsageForbidden"
+            }
+          ]
+        }
+      },
+      "PostEnrich503ResponseCode": {
+        "enum": [
+          "TEAM_IN_ERROR",
+          "SYSTEM_DISABLED"
+        ],
+        "type": "string",
+        "description": "Why the enrichment was not started. See the request errors of the Enrichment object.",
+        "x-ms-enum": {
+          "name": "PostEnrich503ResponseCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "TEAM_IN_ERROR",
+              "name": "TeamInError"
+            },
+            {
+              "value": "SYSTEM_DISABLED",
+              "name": "SystemDisabled"
+            }
+          ]
+        }
+      },
       "PostV2EnrichmentsBulk400ResponseError": {
         "enum": [
           "WRONG_INPUT_FORMAT",
@@ -47993,7 +48753,8 @@
           "UNAUTHORIZED_WORKFLOW_REQUESTED",
           "TOO_MANY_ENRICHMENTS_REQUESTED",
           "NO_ENRICHMENTS_REQUESTED",
-          "WRONG_BODY_FORMAT"
+          "WRONG_BODY_FORMAT",
+          "WRONG_WEBHOOK_URL"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -48031,6 +48792,104 @@
             {
               "value": "WRONG_BODY_FORMAT",
               "name": "WrongBodyFormat"
+            },
+            {
+              "value": "WRONG_WEBHOOK_URL",
+              "name": "WrongWebhookUrl"
+            }
+          ]
+        }
+      },
+      "PostLeadsByEmailEnrich400ResponseCode": {
+        "enum": [
+          "BAD_EMAIL",
+          "BAD_LINKEDIN_URL",
+          "MISSING_EMAIL",
+          "MISSING_INPUTS",
+          "MISSING_FUNDS",
+          "NOT_ALLOWED_EMAIL",
+          "NOT_ALLOWED_PHONE",
+          "NOT_ALLOWED_LINKEDIN",
+          "NOT_ALLOWED_VERIFY",
+          "LINKEDIN_UNSUBSCRIBED",
+          "TEAM_BLOCKED",
+          "NO_AVAILABLE_PROVIDER"
+        ],
+        "type": "string",
+        "description": "Why the enrichment was not started. See the request errors of the Enrichment object.",
+        "x-ms-enum": {
+          "name": "PostLeadsByEmailEnrich400ResponseCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "BAD_EMAIL",
+              "name": "BadEmail"
+            },
+            {
+              "value": "BAD_LINKEDIN_URL",
+              "name": "BadLinkedinUrl"
+            },
+            {
+              "value": "MISSING_EMAIL",
+              "name": "MissingEmail"
+            },
+            {
+              "value": "MISSING_INPUTS",
+              "name": "MissingInputs"
+            },
+            {
+              "value": "MISSING_FUNDS",
+              "name": "MissingFunds"
+            },
+            {
+              "value": "NOT_ALLOWED_EMAIL",
+              "name": "NotAllowedEmail"
+            },
+            {
+              "value": "NOT_ALLOWED_PHONE",
+              "name": "NotAllowedPhone"
+            },
+            {
+              "value": "NOT_ALLOWED_LINKEDIN",
+              "name": "NotAllowedLinkedin"
+            },
+            {
+              "value": "NOT_ALLOWED_VERIFY",
+              "name": "NotAllowedVerify"
+            },
+            {
+              "value": "LINKEDIN_UNSUBSCRIBED",
+              "name": "LinkedinUnsubscribed"
+            },
+            {
+              "value": "TEAM_BLOCKED",
+              "name": "TeamBlocked"
+            },
+            {
+              "value": "NO_AVAILABLE_PROVIDER",
+              "name": "NoAvailableProvider"
+            }
+          ]
+        }
+      },
+      "PostLeadsByEmailEnrich503ResponseCode": {
+        "enum": [
+          "TEAM_IN_ERROR",
+          "SYSTEM_DISABLED"
+        ],
+        "type": "string",
+        "description": "Why the enrichment was not started. See the request errors of the Enrichment object.",
+        "x-ms-enum": {
+          "name": "PostLeadsByEmailEnrich503ResponseCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "TEAM_IN_ERROR",
+              "name": "TeamInError"
+            },
+            {
+              "value": "SYSTEM_DISABLED",
+              "name": "SystemDisabled"
             }
           ]
         }
@@ -49187,6 +50046,93 @@
             {
               "value": "linkedin_enrichment",
               "name": "LinkedinEnrichment"
+            }
+          ]
+        }
+      },
+      "PostV2EnrichmentsBulk200ResponseItemError": {
+        "enum": [
+          "BAD_EMAIL",
+          "BAD_LINKEDIN_URL",
+          "MISSING_EMAIL",
+          "MISSING_INPUTS",
+          "MISSING_FUNDS",
+          "CREDITS_USAGE_FORBIDDEN",
+          "NOT_ALLOWED_EMAIL",
+          "NOT_ALLOWED_PHONE",
+          "NOT_ALLOWED_LINKEDIN",
+          "NOT_ALLOWED_VERIFY",
+          "LINKEDIN_UNSUBSCRIBED",
+          "TEAM_BLOCKED",
+          "TEAM_IN_ERROR",
+          "SYSTEM_DISABLED",
+          "NO_AVAILABLE_PROVIDER"
+        ],
+        "type": "string",
+        "description": "Why the row was not started. See the request errors of the Enrichment object.",
+        "x-ms-enum": {
+          "name": "PostV2EnrichmentsBulk200ResponseItemError",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "BAD_EMAIL",
+              "name": "BadEmail"
+            },
+            {
+              "value": "BAD_LINKEDIN_URL",
+              "name": "BadLinkedinUrl"
+            },
+            {
+              "value": "MISSING_EMAIL",
+              "name": "MissingEmail"
+            },
+            {
+              "value": "MISSING_INPUTS",
+              "name": "MissingInputs"
+            },
+            {
+              "value": "MISSING_FUNDS",
+              "name": "MissingFunds"
+            },
+            {
+              "value": "CREDITS_USAGE_FORBIDDEN",
+              "name": "CreditsUsageForbidden"
+            },
+            {
+              "value": "NOT_ALLOWED_EMAIL",
+              "name": "NotAllowedEmail"
+            },
+            {
+              "value": "NOT_ALLOWED_PHONE",
+              "name": "NotAllowedPhone"
+            },
+            {
+              "value": "NOT_ALLOWED_LINKEDIN",
+              "name": "NotAllowedLinkedin"
+            },
+            {
+              "value": "NOT_ALLOWED_VERIFY",
+              "name": "NotAllowedVerify"
+            },
+            {
+              "value": "LINKEDIN_UNSUBSCRIBED",
+              "name": "LinkedinUnsubscribed"
+            },
+            {
+              "value": "TEAM_BLOCKED",
+              "name": "TeamBlocked"
+            },
+            {
+              "value": "TEAM_IN_ERROR",
+              "name": "TeamInError"
+            },
+            {
+              "value": "SYSTEM_DISABLED",
+              "name": "SystemDisabled"
+            },
+            {
+              "value": "NO_AVAILABLE_PROVIDER",
+              "name": "NoAvailableProvider"
             }
           ]
         }
@@ -52030,6 +52976,18 @@
               "name": "DefaultPhone"
             }
           ]
+        }
+      },
+      "PostV2EnrichmentsBulkRequestItemMetadataOneOf2": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "PostV2EnrichmentsBulk200ResponseItemMetadataOneOf2": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
         }
       }
     },

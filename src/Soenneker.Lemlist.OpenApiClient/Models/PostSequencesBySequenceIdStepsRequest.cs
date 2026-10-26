@@ -48,6 +48,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string CustomField { get; set; }
 #endif
+        /// <summary>The step&apos;s own name, shown instead of its type label (&quot;Email&quot;, &quot;Call&quot;) wherever the app names the step. Plain text, up to 70 characters once trimmed and once runs of spaces collapse to one; HTML tags count toward the 70, then are dropped. A longer name is rejected with `400`. Accepted on every step type, ignored on `conditional` steps, which keep their type label</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CustomName { get; set; }
+#nullable restore
+#else
+        public string CustomName { get; set; }
+#endif
         /// <summary>For conditional steps keyed `customLeadInfo` only. How the field is compared.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator? CustomOperator { get; set; }
         /// <summary>For conditional steps keyed `customLeadInfo` only. The value the field is compared to. Required for `equal` and `contains`, and refused for `empty` and `notEmpty`.</summary>
@@ -160,6 +168,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "conditionKey", n => { ConditionKey = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey>(); } },
                 { "customField", n => { CustomField = n.GetStringValue(); } },
+                { "customName", n => { CustomName = n.GetStringValue(); } },
                 { "customOperator", n => { CustomOperator = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator>(); } },
                 { "customValue", n => { CustomValue = n.GetStringValue(); } },
                 { "delay", n => { Delay = n.GetIntValue(); } },
@@ -191,6 +200,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey>("conditionKey", ConditionKey);
             writer.WriteStringValue("customField", CustomField);
+            writer.WriteStringValue("customName", CustomName);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator>("customOperator", CustomOperator);
             writer.WriteStringValue("customValue", CustomValue);
             writer.WriteIntValue("delay", Delay);

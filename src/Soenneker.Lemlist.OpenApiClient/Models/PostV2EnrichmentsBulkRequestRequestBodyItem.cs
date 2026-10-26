@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Array of enrichment types to perform. Must contain at least one of: find_email, find_phone, verify, linkedin_enrichment</summary>
+        /// <summary>Enrichment types to perform, at least one of: find_email, find_phone, verify, linkedin_enrichment. Requesting find_email and verify together runs only one of them: verify when `input.email` is a valid email, find_email otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?>? EnrichmentRequests { get; set; }
@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?> EnrichmentRequests { get; set; }
 #endif
-        /// <summary>Input data for enrichment. Required fields depend on enrichmentRequests.</summary>
+        /// <summary>Input data for enrichment. Required fields depend on enrichmentRequests (see Required inputs). Values must be strings of at most 400 characters without any `&lt;…&gt;` sequence; an unknown key or any other value rejects the whole call with `WRONG_INPUT_FORMAT`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput? Input { get; set; }
@@ -30,13 +30,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput Input { get; set; }
 #endif
-        /// <summary>Custom data to be returned in the response and webhook. Can be a string or an object</summary>
+        /// <summary>Custom data returned in the response and in the webhooks. A string, or an object whose values are strings, each of at most 400 characters without any `&lt;…&gt;` sequence; anything else rejects the whole call with `WRONG_METADATA_FORMAT`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata? Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata? Metadata { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata Metadata { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem"/> and sets the default values.
@@ -65,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "enrichmentRequests", n => { EnrichmentRequests = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem>()?.AsList(); } },
                 { "input", n => { Input = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput.CreateFromDiscriminatorValue); } },
-                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata.CreateFromDiscriminatorValue); } },
+                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata>(global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -77,7 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem>("enrichmentRequests", EnrichmentRequests);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput>("input", Input);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemMetadata>("metadata", Metadata);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata>("metadata", Metadata);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

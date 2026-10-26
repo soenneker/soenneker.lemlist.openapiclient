@@ -40,5 +40,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         WrongBodyFormat,
         #pragma warning restore CS1591
+        [EnumMember(Value = "WRONG_WEBHOOK_URL")]
+        #pragma warning disable CS1591
+        WrongWebhookUrl,
+        #pragma warning restore CS1591
     }
 }

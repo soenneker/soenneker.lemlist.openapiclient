@@ -217,7 +217,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             /// <summary>Number of companies to retrieve. Default: 100. Maximum: 500</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
-            /// <summary>Filter companies to the members of a static CRM company list (`clt_xxx` format). Combines with every other filter. Ignored when `idsOrDomains` is provided.</summary>
+            /// <summary>Filter companies to the members of a CRM company list (`clt_xxx` format): a static list, or a dynamic list kept in sync with its filters. A legacy dynamic list, evaluated from its saved filters each time it is read, is rejected with `CRM_LIST_DYNAMIC`; both kinds of dynamic list show `dynamic: true` in `GET /companies/lists`. Combines with every other filter. Ignored when `idsOrDomains` is provided.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("listId")]

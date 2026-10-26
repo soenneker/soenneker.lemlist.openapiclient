@@ -14,13 +14,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Array of filter objects to narrow down search results. Each filter has a filterId and inclusion/exclusion criteria.</summary>
+        /// <summary>Array of filter objects to narrow down search results. Each filter has a filterId and inclusion/exclusion criteria. Optional when `fromSearchId` is provided: each filter then replaces the saved filter with the same `filterId`, the other saved filters are kept, and an empty or absent `filters` replays the search as is.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem>? Filters { get; set; }
 #nullable restore
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem> Filters { get; set; }
+#endif
+        /// <summary>Id of a previous Companies search of your team (not a People search): the `search` value returned by `POST /database/companies` (optional). The search is replayed with its saved filters. Each filter you pass in `filters` replaces the saved filter with the same `filterId`, the other saved filters are kept, and the merged filters are validated again as for a new search. With `fromSearchId`, `filters` is optional: an empty or absent `filters` replays the search as is.A `search` id can be replayed for 6 months. A replay counts as one search in the daily search quota (see `limitation` in the response); only a paid part triggered elsewhere, such as LinkedIn post engagement, is not billed again.If no search matches this id for your team and this mode, or the search is older than 6 months, the request is rejected with 404.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FromSearchId { get; set; }
+#nullable restore
+#else
+        public string FromSearchId { get; set; }
 #endif
         /// <summary>Page number for pagination (default: 1)</summary>
         public int? Page { get; set; }
@@ -52,6 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "fromSearchId", n => { FromSearchId = n.GetStringValue(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
             };
@@ -64,6 +73,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem>("filters", Filters);
+            writer.WriteStringValue("fromSearchId", FromSearchId);
             writer.WriteIntValue("page", Page);
             writer.WriteIntValue("size", Size);
             writer.WriteAdditionalData(AdditionalData);

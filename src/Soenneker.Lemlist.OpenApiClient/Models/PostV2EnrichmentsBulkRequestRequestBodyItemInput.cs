@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Input data for enrichment. Required fields depend on enrichmentRequests.
+    /// Input data for enrichment. Required fields depend on enrichmentRequests (see Required inputs). Values must be strings of at most 400 characters without any `&lt;…&gt;` sequence; an unknown key or any other value rejects the whole call with `WRONG_INPUT_FORMAT`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PostV2EnrichmentsBulkRequestRequestBodyItemInput : IAdditionalDataHolder, IParsable

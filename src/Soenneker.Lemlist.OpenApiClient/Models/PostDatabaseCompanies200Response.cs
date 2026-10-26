@@ -26,7 +26,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchema> Results { get; set; }
 #endif
-        /// <summary>Search session identifier</summary>
+        /// <summary>Search session identifier. Reuse it as `fromSearchId` on `POST /database/companies` to replay this search; it stays valid for 6 months.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Search { get; set; }

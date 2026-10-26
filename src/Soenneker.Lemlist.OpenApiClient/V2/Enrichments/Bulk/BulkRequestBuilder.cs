@@ -34,13 +34,15 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Bulk
         {
         }
         /// <summary>
-        /// Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call.
+        /// Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call. Each row answers with its own enrichment `id`, or with an `error` code and a `message` when that row could not be started. A malformed row rejects the whole call with a 400. Every call starts new enrichments and uses credits, even for a person enriched before.
         /// </summary>
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem&gt;</returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk405Response">When receiving a 405 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk500Response">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem>?> PostAsync(List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem> body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Bulk.BulkRequestBuilder.BulkRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,12 +57,14 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Bulk
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk400Response.CreateFromDiscriminatorValue },
+                { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk405Response.CreateFromDiscriminatorValue },
+                { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk500Response.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call.
+        /// Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call. Each row answers with its own enrichment `id`, or with an `error` code and a `message` when that row could not be started. A malformed row rejects the whole call with a 400. Every call starts new enrichments and uses credits, even for a person enriched before.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -91,12 +95,12 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Bulk
             return new global::Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Bulk.BulkRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call.
+        /// Send a batch of enrichment requests for multiple entities. Maximum 500 enrichment requests per call. Each row answers with its own enrichment `id`, or with an `error` code and a `message` when that row could not be started. A malformed row rejects the whole call with a 400. Every call starts new enrichments and uses credits, even for a person enriched before.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class BulkRequestBuilderPostQueryParameters 
         {
-            /// <summary>Webhook URL for enrichment events</summary>
+            /// <summary>URL that receives the `enrichmentDone` or `enrichmentError` event of each enrichment of the call, on top of your team&apos;s webhooks. See the webhooks of the Enrichment object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("webhookUrl")]

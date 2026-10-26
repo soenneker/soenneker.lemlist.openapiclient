@@ -26,7 +26,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema> Results { get; set; }
 #endif
-        /// <summary>Unique identifier of the current search</summary>
+        /// <summary>Unique identifier of the current search. Reuse it as `fromSearchId` on `POST /database/people` to replay this search; it stays valid for 6 months.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Search { get; set; }

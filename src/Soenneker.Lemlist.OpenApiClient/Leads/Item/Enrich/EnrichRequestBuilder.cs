@@ -34,14 +34,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
         {
         }
         /// <summary>
-        /// Enrich Lead
+        /// Start an enrichment of a lead of your team, from the data of its contact. Enable at least one of `findEmail`, `findPhone`, `verifyEmail` and `linkedinEnrichment`. Answers with the enrichment `id` right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result).
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich409Response">When receiving a 409 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich500Response">When receiving a 500 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich503Response">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response?> PostAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder.EnrichRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -54,14 +57,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich400Response.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich409Response.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich500Response.CreateFromDiscriminatorValue },
+                { "503", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich503Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Enrich Lead
+        /// Start an enrichment of a lead of your team, from the data of its contact. Enable at least one of `findEmail`, `findPhone`, `verifyEmail` and `linkedinEnrichment`. Answers with the enrichment `id` right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,27 +95,27 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
             return new global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich.EnrichRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Enrich Lead
+        /// Start an enrichment of a lead of your team, from the data of its contact. Enable at least one of `findEmail`, `findPhone`, `verifyEmail` and `linkedinEnrichment`. Answers with the enrichment `id` right away; the result comes later through webhooks or [Get Enrichment Result](/api-reference/endpoints/enrich/get-enrichment-result).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class EnrichRequestBuilderPostQueryParameters 
         {
-            /// <summary>Search email address in another campaign</summary>
+            /// <summary>Find the lead&apos;s email. On when set to `true`.</summary>
             [QueryParameter("findEmail")]
             public bool? FindEmail { get; set; }
-            /// <summary>Find phone number</summary>
+            /// <summary>Find the lead&apos;s phone number. On when set to `true`.</summary>
             [QueryParameter("findPhone")]
             public bool? FindPhone { get; set; }
             /// <summary>Re-run an enrichment that would otherwise be skipped. Bypasses skips caused by data already present on the contact: existing email, existing phone, LinkedIn enrichment already done for the same `linkedinUrl` / `linkedinUrlSalesNav`, or email already having a deliverability status.Does **not** bypass:- **Enrichment currently in progress** — if another enrichment is already running for this contact, the request is still skipped (no parallel enrichments, no double billing).- **Previously returned not-found** — for `findEmail` and `findPhone`, if a prior enrichment with the same inputs (`linkedinUrl`, `linkedinUrlSalesNav`, first / last name, company name / domain / LinkedIn URL) already returned not-found, the request is still skipped. Changing any of those inputs on the lead lifts the block without needing `force`.</summary>
             [QueryParameter("force")]
             public bool? Force { get; set; }
-            /// <summary>Run LinkedIn enrichment</summary>
+            /// <summary>Enrich the lead&apos;s LinkedIn profile. On when set to `true`.</summary>
             [QueryParameter("linkedinEnrichment")]
             public bool? LinkedinEnrichment { get; set; }
-            /// <summary>Find verified email</summary>
+            /// <summary>Verify the deliverability of the lead&apos;s email. On when set to `true`.</summary>
             [QueryParameter("verifyEmail")]
             public bool? VerifyEmail { get; set; }
-            /// <summary>Webhook URL for enrichment events</summary>
+            /// <summary>URL that receives the `enrichmentDone` or `enrichmentError` event of this enrichment, on top of your team&apos;s webhooks. See the webhooks of the Enrichment object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("webhookUrl")]
