@@ -360,3 +360,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Generated API endpoint source, not runtime logs.
+!src/Soenneker.Lemlist.OpenApiClient/V2/Crm/Logs/
+!src/Soenneker.Lemlist.OpenApiClient/V2/Crm/Logs/**
