@@ -24,6 +24,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>`true` when the call created the field</summary>
         public bool? Created { get; set; }
+        /// <summary>Beta. The CRM picklist a synced `select` mirrors (synced fields only): its options follow the CRM</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataCrmPicklist? CrmPicklist { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataCrmPicklist CrmPicklist { get; set; }
+#endif
         /// <summary>Entity the field belongs to</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataEntity? Entity { get; set; }
         /// <summary>Human-readable display name</summary>
@@ -83,6 +91,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "changes", n => { Changes = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataChangesItem>()?.AsList(); } },
                 { "created", n => { Created = n.GetBoolValue(); } },
+                { "crmPicklist", n => { CrmPicklist = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataCrmPicklist>(global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataCrmPicklist.CreateFromDiscriminatorValue); } },
                 { "entity", n => { Entity = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataEntity>(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -101,6 +110,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataChangesItem>("changes", Changes);
             writer.WriteBoolValue("created", Created);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataCrmPicklist>("crmPicklist", CrmPicklist);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFields200ResponseDataEntity>("entity", Entity);
             writer.WriteStringValue("label", Label);
             writer.WriteStringValue("name", Name);

@@ -22,6 +22,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string CrmField { get; set; }
 #endif
+        /// <summary>Beta. The CRM picklist a custom select is synced with (synced fields only): its options follow the CRM and cannot be edited through the API</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklist? CrmPicklist { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklist CrmPicklist { get; set; }
+#endif
         /// <summary>Human-readable display name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -76,6 +84,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "crmField", n => { CrmField = n.GetStringValue(); } },
+                { "crmPicklist", n => { CrmPicklist = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklist>(global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklist.CreateFromDiscriminatorValue); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "options", n => { Options = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
@@ -91,6 +100,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("crmField", CrmField);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklist>("crmPicklist", CrmPicklist);
             writer.WriteStringValue("label", Label);
             writer.WriteStringValue("name", Name);
             writer.WriteCollectionOfPrimitiveValues<string>("options", Options);

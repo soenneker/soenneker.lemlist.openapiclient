@@ -35,7 +35,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public DateTimeOffset? NotFoundAt { get; set; }
         /// <summary>Active CRM provider for the team.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncProvider? Provider { get; set; }
-        /// <summary>`true` while a CRM search (Search &amp; connect, Create in CRM) is queued or running for this contact. A search started more than 15 minutes ago no longer counts: it stalled.</summary>
+        /// <summary>`true` while a CRM search (Search &amp; connect, Create in CRM) is queued or running for this contact, however long the queue takes. A search marked running more than 15 minutes ago with nothing left in the queue stalled: the read clears it and returns `false`.</summary>
         public bool? Searching { get; set; }
         /// <summary>When `true`, automatic sync is paused for this contact.</summary>
         public bool? SyncDisabled { get; set; }

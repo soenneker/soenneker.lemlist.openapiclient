@@ -37,15 +37,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response();
-            if("GetContacts200ResponseList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.GetContacts200ResponseList = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList();
-            }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(global::Soenneker.Lemlist.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact> contactValue)
+            if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(global::Soenneker.Lemlist.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.Contact> contactValue)
             {
                 result.Contact = contactValue;
+            }
+            else {
+                result.GetContacts200ResponseList = new global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList();
             }
             return result;
         }
@@ -57,7 +55,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(GetContacts200ResponseList != null)
             {
-                return GetContacts200ResponseList.GetFieldDeserializers();
+                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(GetContacts200ResponseList);
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -68,13 +66,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(GetContacts200ResponseList != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList>(null, GetContacts200ResponseList);
-            }
-            else if(Contact != null)
+            if(Contact != null)
             {
                 writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.Contact>(null, Contact);
+            }
+            else {
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200ResponseList>(null, GetContacts200ResponseList);
             }
         }
     }

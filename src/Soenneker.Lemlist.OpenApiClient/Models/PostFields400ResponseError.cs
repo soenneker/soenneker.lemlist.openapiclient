@@ -14,7 +14,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Error code: `INVALID_ENTITY_PARAM`, `INVALID_TYPE_PARAM`, `INVALID_LABEL`, `INVALID_NAME`, `OPTIONS_NOT_ALLOWED`, `INVALID_OPTIONS`, `OPTION_NOT_FOUND`, `OPTION_ALREADY_EXISTS`, `FIELD_NAME_RESERVED`, `CONTACT_FIELD_COMPANY_PREFIXED`, `TYPE_CHANGE_NOT_ALLOWED`.</summary>
+        /// <summary>Error code: `INVALID_ENTITY_PARAM`, `INVALID_TYPE_PARAM`, `INVALID_LABEL`, `INVALID_NAME`, `OPTIONS_NOT_ALLOWED`, `INVALID_OPTIONS`, `OPTION_NOT_FOUND`, `OPTION_ALREADY_EXISTS`, `FIELD_NAME_RESERVED`, `CONTACT_FIELD_COMPANY_PREFIXED`, `TYPE_CHANGE_NOT_ALLOWED`, `INVALID_CRM_PICKLIST`; with `crmPicklist`, `CRM_SYNC_PICKLIST_OBJECT_TYPE_INVALID`, `CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_FOUND`, `CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_SINGLE_SELECT`, `CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_MAPPABLE`, `CRM_SYNC_PICKLIST_CRM_PROPERTY_READ_ONLY`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }

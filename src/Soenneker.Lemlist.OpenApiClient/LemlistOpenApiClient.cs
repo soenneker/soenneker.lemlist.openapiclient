@@ -7,6 +7,8 @@ using Microsoft.Kiota.Serialization.Json;
 using Microsoft.Kiota.Serialization.Multipart;
 using Microsoft.Kiota.Serialization.Text;
 using Soenneker.Lemlist.OpenApiClient.Activities;
+using Soenneker.Lemlist.OpenApiClient.CallStatuses;
+using Soenneker.Lemlist.OpenApiClient.Calls;
 using Soenneker.Lemlist.OpenApiClient.Campaigns;
 using Soenneker.Lemlist.OpenApiClient.Companies;
 using Soenneker.Lemlist.OpenApiClient.ContactSourcing;
@@ -22,6 +24,7 @@ using Soenneker.Lemlist.OpenApiClient.Leads;
 using Soenneker.Lemlist.OpenApiClient.Lemwarm;
 using Soenneker.Lemlist.OpenApiClient.MessageTemplates;
 using Soenneker.Lemlist.OpenApiClient.Schedules;
+using Soenneker.Lemlist.OpenApiClient.SelfRecovery;
 using Soenneker.Lemlist.OpenApiClient.SenderPicture;
 using Soenneker.Lemlist.OpenApiClient.Senders;
 using Soenneker.Lemlist.OpenApiClient.Sequences;
@@ -50,6 +53,16 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.Activities.ActivitiesRequestBuilder Activities
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Activities.ActivitiesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The calls property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Calls.CallsRequestBuilder Calls
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Calls.CallsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The callStatuses property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.CallStatuses.CallStatusesRequestBuilder CallStatuses
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.CallStatuses.CallStatusesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The campaigns property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.CampaignsRequestBuilder Campaigns
@@ -125,6 +138,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.Schedules.SchedulesRequestBuilder Schedules
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Schedules.SchedulesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The selfRecovery property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.SelfRecovery.SelfRecoveryRequestBuilder SelfRecovery
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.SelfRecovery.SelfRecoveryRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The senderPicture property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.SenderPicture.SenderPictureRequestBuilder SenderPicture

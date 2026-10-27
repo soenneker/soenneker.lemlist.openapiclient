@@ -37,15 +37,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200Response();
-            if("GetLeads200ResponseLegacyNoVersion".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.GetLeads200ResponseLegacyNoVersion = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion();
-            }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2> leadV2Value)
+            if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2> leadV2Value)
             {
                 result.LeadV2 = leadV2Value;
+            }
+            else {
+                result.GetLeads200ResponseLegacyNoVersion = new global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion();
             }
             return result;
         }
@@ -57,7 +55,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(GetLeads200ResponseLegacyNoVersion != null)
             {
-                return GetLeads200ResponseLegacyNoVersion.GetFieldDeserializers();
+                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(GetLeads200ResponseLegacyNoVersion);
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -68,13 +66,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(GetLeads200ResponseLegacyNoVersion != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion>(null, GetLeads200ResponseLegacyNoVersion);
-            }
-            else if(LeadV2 != null)
+            if(LeadV2 != null)
             {
                 writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(null, LeadV2);
+            }
+            else {
+                writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetLeads200ResponseLegacyNoVersion>(null, GetLeads200ResponseLegacyNoVersion);
             }
         }
     }

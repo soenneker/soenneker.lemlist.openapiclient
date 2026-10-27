@@ -14,6 +14,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Beta. Creates the `select` synced with a single-select picklist of your connected CRM: its options are the picklist&apos;s active options, kept in sync, and the field is mapped to the CRM property. Creation only, with `type: &quot;select&quot;` and no option operations. A read-only property (computed by the CRM) or a picklist without any option is refused.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist? CrmPicklist { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist CrmPicklist { get; set; }
+#endif
         /// <summary>Entity the field belongs to.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity? Entity { get; set; }
         /// <summary>Display name of the field, as shown in lemlist. Cannot contain an HTML tag (`&lt;...&gt;`). Optional: defaults to `name` on creation, unchanged when omitted on an update.</summary>
@@ -83,6 +91,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "crmPicklist", n => { CrmPicklist = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist>(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist.CreateFromDiscriminatorValue); } },
                 { "entity", n => { Entity = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity>(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -99,6 +108,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist>("crmPicklist", CrmPicklist);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity>("entity", Entity);
             writer.WriteStringValue("label", Label);
             writer.WriteStringValue("name", Name);

@@ -43,7 +43,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 result.String = stringValue;
             }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item> postCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1ItemValue)
+            else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item> postCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1ItemValue)
             {
                 result.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1Item = postCampaignsByCampaignIdLeadsImportRequestEnrichFeatureOneOf1ItemValue;
             }
