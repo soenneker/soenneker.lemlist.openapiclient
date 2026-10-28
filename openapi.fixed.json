@@ -2131,6 +2131,114 @@
         }
       ]
     },
+    "/campaigns/{campaignId}/abm-leads": {
+      "post": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "Add ABM Campaign Leads",
+        "description": "**Beta**: requires the ABM beta on your team, otherwise the call answers \u0060403 BETA_NOT_ENABLED\u0060.\n\nAdds People Database people to an account-based (ABM) campaign. Each person becomes a contact filed under the campaign\u0027s company, whatever their profile lists as their current employer, then a lead of the campaign. Someone your workspace already has as a contact of another company is skipped, never moved.",
+        "operationId": "PostCampaignsByCampaignIdAbmLeads",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeadsRequest"
+              },
+              "example": {
+                "leadIds": [
+                  "123456789",
+                  "987654321"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "What the call did. A skipped person is a normal outcome, not an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeads200Response"
+                },
+                "example": {
+                  "data": {
+                    "addedCount": 1,
+                    "alreadyInCampaignCount": 0,
+                    "skipped": [
+                      {
+                        "leadId": "987654321",
+                        "code": "ABS_CONTACT_SOURCING_CONTACT_ON_ANOTHER_COMPANY"
+                      }
+                    ]
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060leadIds\u0060 is missing, empty or longer than the limit, or \u0060campaignId\u0060 is malformed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeads400Response"
+                },
+                "example": {
+                  "error": "Too many leads selected",
+                  "code": "ABS_ENGAGE_TOO_MANY_LEADS"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "403": {
+            "description": "The ABM beta is not enabled for your team (\u0060BETA_NOT_ENABLED\u0060), or the API key\u0027s user does not have the \u0022Create contacts\u0022 permission (\u0060ABS_CONTACT_SOURCING_CONTACT_CREATE_NOT_ALLOWED\u0060). Nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeads403Response"
+                },
+                "example": {
+                  "error": "Beta is not enabled",
+                  "code": "BETA_NOT_ENABLED"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "404": {
+            "description": "The campaign is not an ABM campaign of your team (\u0060ABS_ENGAGE_CAMPAIGN_NOT_ABM\u0060), or its company no longer exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeads404Response"
+                },
+                "example": {
+                  "error": "This campaign is not an ABM campaign",
+                  "code": "ABS_ENGAGE_CAMPAIGN_NOT_ABM"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "campaignId",
+          "in": "path",
+          "description": "The ABM campaign, opened with Engage on a company",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "cam_A1B2C3D4E5F6G7H8I9"
+        }
+      ]
+    },
     "/campaigns/{campaignId}/steps/{stepId}/skip-for-leads": {
       "post": {
         "tags": [
@@ -9496,6 +9604,240 @@
           },
           "405": {
             "description": "Method not allowed"
+          }
+        }
+      }
+    },
+    "/database/people/linkedin-post-engagement": {
+      "post": {
+        "tags": [
+          "People Database"
+        ],
+        "summary": "Search LinkedIn Post Engagers",
+        "description": "Finds the people who commented on or reacted to a LinkedIn post and returns them as People Database rows, in a single call.\n\nThe post is read first, then the engagers are searched in the People Database. Comments are collected before reactions, the post author is excluded and the slugs are deduplicated, for at most 1000 people. \u0060filters\u0060 are applied to the engagers in the same search, for example to keep one country.\n\nThis endpoint is paid: each call debits 50 credits once the post has been read, even when the search finds nobody. A \u0060200\u0060 always means credits were debited, and no error code debits credits.\n\nThe response carries a \u0060search\u0060 id. To get the next pages or to refine the filters, send it as \u0060fromSearchId\u0060 to \u0060POST /database/people\u0060. This debits no credits, but it counts in the 24-hour People Database search quota, like any search. Do not call this endpoint again on the same post for that, it would be billed again.",
+        "operationId": "SearchLinkedInPostEngagers",
+        "requestBody": {
+          "description": "The LinkedIn post to read, and optionally the filters to apply to its engagers. Unknown keys are rejected with 400.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchLinkedInPostEngagersRequest"
+              },
+              "example": {
+                "url": "https://www.linkedin.com/posts/example-post-activity-1234567890123456789-AbCd",
+                "type": "all",
+                "filters": [
+                  {
+                    "filterId": "country",
+                    "in": [
+                      "France"
+                    ],
+                    "out": []
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The post was read and 50 credits were debited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchLinkedInPostEngagers200Response"
+                },
+                "example": {
+                  "data": {
+                    "slugs": [
+                      "john-doe",
+                      "jane-smith"
+                    ],
+                    "totals": {
+                      "comments": 1,
+                      "reactions": 1
+                    },
+                    "isCapped": false,
+                    "filters": [
+                      {
+                        "filterId": "leadLinkedInSlug",
+                        "in": [
+                          "john-doe",
+                          "jane-smith"
+                        ],
+                        "out": []
+                      },
+                      {
+                        "filterId": "country",
+                        "in": [
+                          "France"
+                        ],
+                        "out": []
+                      }
+                    ],
+                    "search": "lsh_ExAmPlEnGgR8d2Kq5",
+                    "people": {
+                      "results": [
+                        {
+                          "lead_id": 100000001,
+                          "full_name": "John Doe",
+                          "country": "France",
+                          "lead_linkedin_url": "https://www.linkedin.com/in/john-doe",
+                          "linkedin_short": "john-doe",
+                          "headline": "Head of Sales at Acme Inc",
+                          "current_exp_company_name": "Acme Inc"
+                        }
+                      ],
+                      "total": 1,
+                      "page": 1,
+                      "size": 100
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. No credit is debited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "examples": {
+                  "ROUTE_BAD_REQUEST": {
+                    "summary": "ROUTE_BAD_REQUEST",
+                    "value": {
+                      "error": "Route bad request",
+                      "code": "ROUTE_BAD_REQUEST"
+                    }
+                  },
+                  "LINKEDIN_POST_ENGAGEMENT_INVALID_URL": {
+                    "summary": "LINKEDIN_POST_ENGAGEMENT_INVALID_URL",
+                    "value": {
+                      "error": "This link is not a LinkedIn post; paste the link of a LinkedIn post",
+                      "code": "LINKEDIN_POST_ENGAGEMENT_INVALID_URL"
+                    }
+                  },
+                  "LINKEDIN_POST_ENGAGEMENT_INVALID_FILTERS": {
+                    "summary": "LINKEDIN_POST_ENGAGEMENT_INVALID_FILTERS",
+                    "value": {
+                      "error": "filters must be People Database leads filters available over the API, without linkedinPostEngagement or leadLinkedInSlug: the search sets those itself",
+                      "code": "LINKEDIN_POST_ENGAGEMENT_INVALID_FILTERS"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "402": {
+            "description": "Payment required. No credit is debited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "examples": {
+                  "LINKEDIN_POST_ENGAGEMENT_PAID_PLAN_REQUIRED": {
+                    "summary": "LINKEDIN_POST_ENGAGEMENT_PAID_PLAN_REQUIRED",
+                    "value": {
+                      "error": "The LinkedIn post engagement search is only available on a paid plan; upgrade to use it",
+                      "code": "LINKEDIN_POST_ENGAGEMENT_PAID_PLAN_REQUIRED"
+                    }
+                  },
+                  "LINKEDIN_POST_ENGAGEMENT_INSUFFICIENT_CREDITS": {
+                    "summary": "LINKEDIN_POST_ENGAGEMENT_INSUFFICIENT_CREDITS",
+                    "value": {
+                      "error": "Not enough credits. Buy credits to use this feature.",
+                      "code": "LINKEDIN_POST_ENGAGEMENT_INSUFFICIENT_CREDITS"
+                    }
+                  },
+                  "limit-reached": {
+                    "summary": "limit-reached",
+                    "value": {
+                      "error": "Monthly credit limit reached. Please contact your admin to get more",
+                      "code": "limit-reached"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. No credit is debited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "examples": {
+                  "BETA_NOT_ENABLED": {
+                    "summary": "BETA_NOT_ENABLED",
+                    "value": {
+                      "error": "Beta is not enabled",
+                      "code": "BETA_NOT_ENABLED"
+                    }
+                  },
+                  "linkedin-not-linked": {
+                    "summary": "linkedin-not-linked",
+                    "value": {
+                      "error": "LinkedIn account not linked",
+                      "code": "linkedin-not-linked"
+                    }
+                  },
+                  "LINKEDIN_POST_ENGAGEMENT_SEARCH_QUOTA_REACHED": {
+                    "summary": "LINKEDIN_POST_ENGAGEMENT_SEARCH_QUOTA_REACHED",
+                    "value": {
+                      "error": "The team has reached its People Database search quota for the last 24 hours; no credits were spent, try again later",
+                      "code": "LINKEDIN_POST_ENGAGEMENT_SEARCH_QUOTA_REACHED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "422": {
+            "description": "The post is private, deleted or cannot be found. No credit is debited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "This LinkedIn post could not be read; it may be private or deleted, check the link",
+                  "code": "LINKEDIN_POST_ENGAGEMENT_POST_UNAVAILABLE"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "LinkedIn data is unavailable. No credit is debited, try again later.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaError"
+                },
+                "example": {
+                  "error": "LinkedIn data is temporarily unavailable; no credits were spent, try again in a minute",
+                  "code": "LINKEDIN_POST_ENGAGEMENT_PROVIDER_FAILED"
+                }
+              }
+            }
           }
         }
       }
@@ -26973,6 +27315,10 @@
             "type": "number",
             "description": "0-based count of the sequence steps already delivered to this lead."
           },
+          "journeyDepth": {
+            "type": "number",
+            "description": "0-based depth of the step on the lead\u0027s own path: the step the lead reached before it, plus one. Skipped steps count; a step added to the sequence after the lead passed that point does not. Absent on activities recorded before the field shipped: read \u0060totalSequenceStep\u0060 then."
+          },
           "createdAt": {
             "type": "string",
             "description": "When the activity occurred",
@@ -31736,6 +32082,66 @@
             "type": "string",
             "description": "[competitorReactions] Engagement date"
           },
+          "warmIntrosIntroStrength": {
+            "type": "number",
+            "description": "[warmIntros] Intro strength score of the best intro path, from 0 to 100"
+          },
+          "warmIntrosIntroTier": {
+            "type": "string",
+            "description": "[warmIntros] Intro tier, one of strong, likely or possible"
+          },
+          "warmIntrosIntroReason": {
+            "type": "string",
+            "description": "[warmIntros] Sentence explaining the introduction"
+          },
+          "warmIntrosIntroPathsCount": {
+            "type": "number",
+            "description": "[warmIntros] Number of intro paths found for the lead"
+          },
+          "warmIntrosIntroType": {
+            "type": "string",
+            "description": "[warmIntros] Type of the best intro path"
+          },
+          "warmIntrosIntroducerName": {
+            "type": "string",
+            "description": "[warmIntros] Name of the introducer of the best path"
+          },
+          "warmIntrosIntroducerTitle": {
+            "type": "string",
+            "description": "[warmIntros] Job title of the introducer"
+          },
+          "warmIntrosIntroducerLinkedinUrl": {
+            "type": "string",
+            "description": "[warmIntros] LinkedIn URL of the introducer"
+          },
+          "warmIntrosSharedCompany": {
+            "type": "string",
+            "description": "[warmIntros] Company where the introducer and the lead worked together"
+          },
+          "warmIntrosSharedCompanyLinkedinUrl": {
+            "type": "string",
+            "description": "[warmIntros] LinkedIn URL of the shared company"
+          },
+          "warmIntrosSharedCompanyEmployeeCount": {
+            "type": "number",
+            "description": "[warmIntros] Employee count of the shared company"
+          },
+          "warmIntrosOverlapStart": {
+            "type": "string",
+            "description": "[warmIntros] Start of the overlap period, YYYY-MM"
+          },
+          "warmIntrosOverlapEnd": {
+            "type": "string",
+            "description": "[warmIntros] End of the overlap period, YYYY-MM"
+          },
+          "warmIntrosOverlapMonths": {
+            "type": "number",
+            "description": "[warmIntros] Months the introducer and the lead worked together"
+          },
+          "warmIntrosSameFunction": {
+            "type": "boolean",
+            "description": "[warmIntros] Whether the introducer and the lead had the same function"
+          },
           "acquisitionType": {
             "type": "string",
             "description": "[mergersAcquisitions] Acquisition type"
@@ -33025,6 +33431,64 @@
         }
       },
       "PostCampaignsByCampaignIdStepsByStepIdSkip422Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdAbmLeadsRequest": {
+        "required": [
+          "leadIds"
+        ],
+        "type": "object",
+        "properties": {
+          "leadIds": {
+            "maxItems": 199,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "People Database ids, from People Database search results or a contact-sourcing run\u0027s \u0060contacts[].leadId\u0060."
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdAbmLeads200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeads200ResponseData"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdAbmLeads400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdAbmLeads403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCampaignsByCampaignIdAbmLeads404Response": {
         "type": "object",
         "properties": {
           "error": {
@@ -35604,6 +36068,50 @@
           "search": {
             "type": "string",
             "description": "Free-text query across common people fields (e.g., name, title, company, location)"
+          }
+        }
+      },
+      "SearchLinkedInPostEngagersRequest": {
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "type": "string",
+            "description": "Link of the LinkedIn post. Prefer the post page (\u0060linkedin.com/posts/...\u0060). A short \u0060lnkd.in\u0060 link or a \u0060linkedin.com/feed/update/urn:li:activity:...\u0060 link also works, but a feed/update link can fail on a post published in the last few hours.",
+            "example": "https://www.linkedin.com/posts/example-post-activity-1234567890123456789-AbCd"
+          },
+          "type": {
+            "$ref": "#/components/schemas/SearchLinkedInPostEngagersRequestType"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonaFilter"
+            },
+            "description": "People Database leads filters (optional), applied to the engagers in the same search, for example a country. They are validated before any credit is debited. \u0060linkedinPostEngagement\u0060 and \u0060leadLinkedInSlug\u0060 are rejected with 400, the search sets them itself."
+          },
+          "size": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Number of People Database rows returned in \u0060data.people\u0060, between 1 and 100 (optional).",
+            "default": 100
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchLinkedInPostEngagers200Response": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SearchLinkedInPostEngagers200ResponseData"
           }
         }
       },
@@ -41038,6 +41546,25 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdAbmLeads200ResponseData": {
+        "type": "object",
+        "properties": {
+          "addedCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "alreadyInCampaignCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skipped": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem"
+            }
+          }
+        }
+      },
       "PostCampaignsByCampaignIdStepsByStepIdSkipForLeads200ResponseResultsItem": {
         "type": "object",
         "properties": {
@@ -41934,6 +42461,48 @@
               "type": "string"
             },
             "description": "List of the values you want to exclude"
+          }
+        }
+      },
+      "SearchLinkedInPostEngagers200ResponseData": {
+        "required": [
+          "slugs",
+          "totals",
+          "isCapped",
+          "filters"
+        ],
+        "type": "object",
+        "properties": {
+          "slugs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "LinkedIn slugs of the engagers, post author excluded and deduplicated"
+          },
+          "totals": {
+            "$ref": "#/components/schemas/SearchLinkedInPostEngagers200ResponseDataTotals"
+          },
+          "isCapped": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the post had more than 1000 engagers"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonaFilter"
+            },
+            "description": "Exact filters of the People Database search: \u0060leadLinkedInSlug\u0060 plus the filters you passed. Empty when nobody engaged with the post."
+          },
+          "search": {
+            "type": "string",
+            "description": "Id of the People Database search. Send it as \u0060fromSearchId\u0060 to \u0060POST /database/people\u0060 to get the next pages or refine the filters. This debits no credits, but it counts in the 24-hour People Database search quota, like any search. Absent when nobody engaged with the post."
+          },
+          "people": {
+            "$ref": "#/components/schemas/SearchLinkedInPostEngagers200ResponseDataPeople"
+          },
+          "peopleSearchFailed": {
+            "$ref": "#/components/schemas/SearchLinkedInPostEngagers200ResponseDataPeopleSearchFailed"
           }
         }
       },
@@ -44597,6 +45166,17 @@
           }
         }
       },
+      "PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem": {
+        "type": "object",
+        "properties": {
+          "leadId": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "GetCampaignsByCampaignIdSequences200ResponseAdditionalPropertiesStepsItem": {
         "type": "object",
         "properties": {
@@ -44698,6 +45278,45 @@
           "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060, the keys that went to the company record."
+      },
+      "SearchLinkedInPostEngagers200ResponseDataTotals": {
+        "type": "object",
+        "properties": {
+          "comments": {
+            "type": "integer",
+            "description": "Number of comments on the post"
+          },
+          "reactions": {
+            "type": "integer",
+            "description": "Number of reactions on the post"
+          }
+        },
+        "description": "Totals announced by LinkedIn for the requested \u0060type\u0060"
+      },
+      "SearchLinkedInPostEngagers200ResponseDataPeople": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleSchema"
+            },
+            "description": "Results array"
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of results"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page number"
+          },
+          "size": {
+            "type": "integer",
+            "description": "Size of the results"
+          }
+        },
+        "description": "First page of the People Database search, in the format of \u0060POST /database/people\u0060. Absent when nobody engaged with the post or when the People Database search failed."
       },
       "GetTasks200ResponseResultsItemCampaign": {
         "type": "object",
@@ -47499,6 +48118,7 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
+          "warmIntros",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
@@ -47560,6 +48180,10 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
+            },
+            {
+              "value": "warmIntros",
+              "name": "WarmIntros"
             },
             {
               "value": "technologyChange",
@@ -47683,6 +48307,7 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
+          "warmIntros",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
@@ -47744,6 +48369,10 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
+            },
+            {
+              "value": "warmIntros",
+              "name": "WarmIntros"
             },
             {
               "value": "technologyChange",
@@ -48175,6 +48804,7 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
+          "warmIntros",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
@@ -48236,6 +48866,10 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
+            },
+            {
+              "value": "warmIntros",
+              "name": "WarmIntros"
             },
             {
               "value": "technologyChange",
@@ -48444,6 +49078,7 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
+          "warmIntros",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
@@ -48501,6 +49136,10 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
+            },
+            {
+              "value": "warmIntros",
+              "name": "WarmIntros"
             },
             {
               "value": "technologyChange",
@@ -50527,6 +51166,34 @@
           ]
         }
       },
+      "SearchLinkedInPostEngagersRequestType": {
+        "enum": [
+          "all",
+          "comments",
+          "reactions"
+        ],
+        "type": "string",
+        "description": "Which engagers to collect. \u0060all\u0060 collects the comments first, then the reactions.",
+        "example": "all",
+        "x-ms-enum": {
+          "name": "SearchLinkedInPostEngagersRequestType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "all",
+              "name": "All"
+            },
+            {
+              "value": "comments",
+              "name": "Comments"
+            },
+            {
+              "value": "reactions",
+              "name": "Reactions"
+            }
+          ]
+        }
+      },
       "CreatePersonaRequestMode": {
         "enum": [
           "leads",
@@ -51630,6 +52297,7 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
+          "warmIntros",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
@@ -51687,6 +52355,10 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
+            },
+            {
+              "value": "warmIntros",
+              "name": "WarmIntros"
             },
             {
               "value": "technologyChange",
@@ -52481,6 +53153,13 @@
             }
           ]
         }
+      },
+      "SearchLinkedInPostEngagers200ResponseDataPeopleSearchFailed": {
+        "enum": [
+          true
+        ],
+        "type": "boolean",
+        "description": "Present and \u0060true\u0060 when the credits were debited and \u0060slugs\u0060 exist, but the People Database search failed. Run \u0060POST /database/people\u0060 yourself with \u0060filters\u0060."
       },
       "GetInboxByContactIdDrafts200ResponseDraftsItemChannel": {
         "enum": [
@@ -55469,6 +56148,7 @@
           "customSignals",
           "competitorConnections",
           "competitorReactions",
+          "warmIntros",
           "technologyChange",
           "linkedinPeopleProfile",
           "linkedinCompanyProfile",
@@ -55525,6 +56205,10 @@
             {
               "value": "competitorReactions",
               "name": "CompetitorReactions"
+            },
+            {
+              "value": "warmIntros",
+              "name": "WarmIntros"
             },
             {
               "value": "technologyChange",

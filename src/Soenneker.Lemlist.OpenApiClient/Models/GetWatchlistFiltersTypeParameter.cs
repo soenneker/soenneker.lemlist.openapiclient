@@ -40,6 +40,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CompetitorReactions,
         #pragma warning restore CS1591
+        [EnumMember(Value = "warmIntros")]
+        #pragma warning disable CS1591
+        WarmIntros,
+        #pragma warning restore CS1591
         [EnumMember(Value = "technologyChange")]
         #pragma warning disable CS1591
         TechnologyChange,

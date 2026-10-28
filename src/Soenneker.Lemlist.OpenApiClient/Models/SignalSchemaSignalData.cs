@@ -649,6 +649,96 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string VisitorWebsite { get; set; }
 #endif
+        /// <summary>[warmIntros] LinkedIn URL of the introducer</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosIntroducerLinkedinUrl { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosIntroducerLinkedinUrl { get; set; }
+#endif
+        /// <summary>[warmIntros] Name of the introducer of the best path</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosIntroducerName { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosIntroducerName { get; set; }
+#endif
+        /// <summary>[warmIntros] Job title of the introducer</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosIntroducerTitle { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosIntroducerTitle { get; set; }
+#endif
+        /// <summary>[warmIntros] Number of intro paths found for the lead</summary>
+        public double? WarmIntrosIntroPathsCount { get; set; }
+        /// <summary>[warmIntros] Sentence explaining the introduction</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosIntroReason { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosIntroReason { get; set; }
+#endif
+        /// <summary>[warmIntros] Intro strength score of the best intro path, from 0 to 100</summary>
+        public double? WarmIntrosIntroStrength { get; set; }
+        /// <summary>[warmIntros] Intro tier, one of strong, likely or possible</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosIntroTier { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosIntroTier { get; set; }
+#endif
+        /// <summary>[warmIntros] Type of the best intro path</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosIntroType { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosIntroType { get; set; }
+#endif
+        /// <summary>[warmIntros] End of the overlap period, YYYY-MM</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosOverlapEnd { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosOverlapEnd { get; set; }
+#endif
+        /// <summary>[warmIntros] Months the introducer and the lead worked together</summary>
+        public double? WarmIntrosOverlapMonths { get; set; }
+        /// <summary>[warmIntros] Start of the overlap period, YYYY-MM</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosOverlapStart { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosOverlapStart { get; set; }
+#endif
+        /// <summary>[warmIntros] Whether the introducer and the lead had the same function</summary>
+        public bool? WarmIntrosSameFunction { get; set; }
+        /// <summary>[warmIntros] Company where the introducer and the lead worked together</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosSharedCompany { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosSharedCompany { get; set; }
+#endif
+        /// <summary>[warmIntros] Employee count of the shared company</summary>
+        public double? WarmIntrosSharedCompanyEmployeeCount { get; set; }
+        /// <summary>[warmIntros] LinkedIn URL of the shared company</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WarmIntrosSharedCompanyLinkedinUrl { get; set; }
+#nullable restore
+#else
+        public string WarmIntrosSharedCompanyLinkedinUrl { get; set; }
+#endif
         /// <summary>[companyEmployeeVisitedMyWebsite] Page URL that was visited</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -765,6 +855,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "visitorCountry", n => { VisitorCountry = n.GetStringValue(); } },
                 { "visitorDuration", n => { VisitorDuration = n.GetIntValue(); } },
                 { "visitorWebsite", n => { VisitorWebsite = n.GetStringValue(); } },
+                { "warmIntrosIntroPathsCount", n => { WarmIntrosIntroPathsCount = n.GetDoubleValue(); } },
+                { "warmIntrosIntroReason", n => { WarmIntrosIntroReason = n.GetStringValue(); } },
+                { "warmIntrosIntroStrength", n => { WarmIntrosIntroStrength = n.GetDoubleValue(); } },
+                { "warmIntrosIntroTier", n => { WarmIntrosIntroTier = n.GetStringValue(); } },
+                { "warmIntrosIntroType", n => { WarmIntrosIntroType = n.GetStringValue(); } },
+                { "warmIntrosIntroducerLinkedinUrl", n => { WarmIntrosIntroducerLinkedinUrl = n.GetStringValue(); } },
+                { "warmIntrosIntroducerName", n => { WarmIntrosIntroducerName = n.GetStringValue(); } },
+                { "warmIntrosIntroducerTitle", n => { WarmIntrosIntroducerTitle = n.GetStringValue(); } },
+                { "warmIntrosOverlapEnd", n => { WarmIntrosOverlapEnd = n.GetStringValue(); } },
+                { "warmIntrosOverlapMonths", n => { WarmIntrosOverlapMonths = n.GetDoubleValue(); } },
+                { "warmIntrosOverlapStart", n => { WarmIntrosOverlapStart = n.GetStringValue(); } },
+                { "warmIntrosSameFunction", n => { WarmIntrosSameFunction = n.GetBoolValue(); } },
+                { "warmIntrosSharedCompany", n => { WarmIntrosSharedCompany = n.GetStringValue(); } },
+                { "warmIntrosSharedCompanyEmployeeCount", n => { WarmIntrosSharedCompanyEmployeeCount = n.GetDoubleValue(); } },
+                { "warmIntrosSharedCompanyLinkedinUrl", n => { WarmIntrosSharedCompanyLinkedinUrl = n.GetStringValue(); } },
                 { "websiteVisited", n => { WebsiteVisited = n.GetStringValue(); } },
             };
         }
@@ -858,6 +963,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("visitorCountry", VisitorCountry);
             writer.WriteIntValue("visitorDuration", VisitorDuration);
             writer.WriteStringValue("visitorWebsite", VisitorWebsite);
+            writer.WriteStringValue("warmIntrosIntroducerLinkedinUrl", WarmIntrosIntroducerLinkedinUrl);
+            writer.WriteStringValue("warmIntrosIntroducerName", WarmIntrosIntroducerName);
+            writer.WriteStringValue("warmIntrosIntroducerTitle", WarmIntrosIntroducerTitle);
+            writer.WriteDoubleValue("warmIntrosIntroPathsCount", WarmIntrosIntroPathsCount);
+            writer.WriteStringValue("warmIntrosIntroReason", WarmIntrosIntroReason);
+            writer.WriteDoubleValue("warmIntrosIntroStrength", WarmIntrosIntroStrength);
+            writer.WriteStringValue("warmIntrosIntroTier", WarmIntrosIntroTier);
+            writer.WriteStringValue("warmIntrosIntroType", WarmIntrosIntroType);
+            writer.WriteStringValue("warmIntrosOverlapEnd", WarmIntrosOverlapEnd);
+            writer.WriteDoubleValue("warmIntrosOverlapMonths", WarmIntrosOverlapMonths);
+            writer.WriteStringValue("warmIntrosOverlapStart", WarmIntrosOverlapStart);
+            writer.WriteBoolValue("warmIntrosSameFunction", WarmIntrosSameFunction);
+            writer.WriteStringValue("warmIntrosSharedCompany", WarmIntrosSharedCompany);
+            writer.WriteDoubleValue("warmIntrosSharedCompanyEmployeeCount", WarmIntrosSharedCompanyEmployeeCount);
+            writer.WriteStringValue("warmIntrosSharedCompanyLinkedinUrl", WarmIntrosSharedCompanyLinkedinUrl);
             writer.WriteStringValue("websiteVisited", WebsiteVisited);
             writer.WriteAdditionalData(AdditionalData);
         }

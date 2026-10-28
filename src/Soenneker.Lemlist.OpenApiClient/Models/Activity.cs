@@ -41,6 +41,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>0-based depth of the step on the lead&apos;s own path: the step the lead reached before it, plus one. Skipped steps count; a step added to the sequence after the lead passed that point does not. Absent on activities recorded before the field shipped: read `totalSequenceStep` then.</summary>
+        public double? JourneyDepth { get; set; }
         /// <summary>Lead company name as it was when the activity happened. Same scope as `leadFirstName`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -132,6 +134,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "contactId", n => { ContactId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
+                { "journeyDepth", n => { JourneyDepth = n.GetDoubleValue(); } },
                 { "leadCompanyName", n => { LeadCompanyName = n.GetStringValue(); } },
                 { "leadEmail", n => { LeadEmail = n.GetStringValue(); } },
                 { "leadFirstName", n => { LeadFirstName = n.GetStringValue(); } },
@@ -155,6 +158,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("contactId", ContactId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("_id", Id);
+            writer.WriteDoubleValue("journeyDepth", JourneyDepth);
             writer.WriteStringValue("leadCompanyName", LeadCompanyName);
             writer.WriteStringValue("leadEmail", LeadEmail);
             writer.WriteStringValue("leadFirstName", LeadFirstName);

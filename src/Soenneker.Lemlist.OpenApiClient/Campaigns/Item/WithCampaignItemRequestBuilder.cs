@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.AbmLeads;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Duplicate;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads;
@@ -28,6 +29,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithCampaignItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The abmLeads property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.AbmLeads.AbmLeadsRequestBuilder AbmLeads
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.AbmLeads.AbmLeadsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The duplicate property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Duplicate.DuplicateRequestBuilder Duplicate
         {
