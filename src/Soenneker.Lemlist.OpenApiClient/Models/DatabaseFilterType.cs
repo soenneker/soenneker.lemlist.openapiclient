@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>Kind of input the filter expects. `level` is a two-level dropdown of the People Database UI; it is reported as `select` by default.</summary>
+    /// <summary>Kind of input the filter expects. `level` is a two-level dropdown of the People Database UI; it is reported as `select` by default. A `slider` filter takes `min|max` ranges in `in` (see `range`) and no `out` value. The search, export and Create persona endpoints refuse an `out` value or a range in another format on it.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum DatabaseFilterType
     {

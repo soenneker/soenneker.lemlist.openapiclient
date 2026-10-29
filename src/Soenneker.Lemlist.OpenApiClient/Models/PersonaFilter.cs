@@ -25,7 +25,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string FilterId { get; set; }
 #endif
-        /// <summary>Values to include</summary>
+        /// <summary>Values to include. For a `slider` filter, one or more `min|max` ranges (e.g. `2015|2024`). Create persona refuses a slider range in another format with `PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER`. A saved search stores it as is, but the search endpoints refuse it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? In { get; set; }
@@ -33,7 +33,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> In { get; set; }
 #endif
-        /// <summary>Values to exclude</summary>
+        /// <summary>Values to exclude. Keep it empty on a `slider` filter. Create persona refuses a slider `out` value with `PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER`. A saved search stores it but ignores it, and the search endpoints refuse it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Out { get; set; }

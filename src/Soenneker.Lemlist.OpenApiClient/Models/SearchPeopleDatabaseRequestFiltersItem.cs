@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string FilterId { get; set; }
 #endif
-        /// <summary>List of the values you want to include</summary>
+        /// <summary>List of the values you want to include. For a `slider` filter, one or more `min|max` ranges, both bounds included (e.g. `2015|2024`). A record matches if it falls in any of them. Each range is two numbers joined by `|`; negative and decimal numbers are allowed. Another format (such as `2015-2024`, `10%|50%` or `2015|`) is refused with a 400.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? In { get; set; }
@@ -30,7 +30,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> In { get; set; }
 #endif
-        /// <summary>List of the values you want to exclude</summary>
+        /// <summary>List of the values you want to exclude. Must be empty on a `slider` filter, which refuses `out` with a 400. To exclude a range, send the ranges around it in `in`: `[&quot;1900|1989&quot;, &quot;2001|2026&quot;]` on `currentCompanyFounded` excludes the companies founded from 1990 to 2000.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Out { get; set; }

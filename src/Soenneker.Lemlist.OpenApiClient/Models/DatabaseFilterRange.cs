@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Slider configuration, for the `slider` filters
+    /// Slider configuration, for the `slider` filters. Send the ranges to keep in the filter&apos;s `in`, formatted `min|max` like `default`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DatabaseFilterRange : IAdditionalDataHolder, IParsable

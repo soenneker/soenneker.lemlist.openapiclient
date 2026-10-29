@@ -92,7 +92,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Companies.Export
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ExportRequestBuilderGetQueryParameters 
         {
-            /// <summary>The search to export, URL-encoded JSON array — the same `filters` array `POST /database/companies` takes. Each entry needs a `filterId` and at least one `in`/`out` value.Filter ids and their allowed values come from `GET /database/filters?mode=companies`. That endpoint returns `values` only for filters with a closed list; filters of type `autocomplete` (companies, countries, technologies…) have no enumerable list, so their values are discovered by running a search rather than read upfront.</summary>
+            /// <summary>The search to export, URL-encoded JSON array — the same `filters` array `POST /database/companies` takes. Each entry needs a `filterId` and at least one `in`/`out` value. A `slider` filter takes `min|max` ranges in `in` only: an `out` value on it, or a range in another format, is refused with a 400.Filter ids and their allowed values come from `GET /database/filters?mode=companies`. That endpoint returns `values` only for filters with a closed list; filters of type `autocomplete` (companies, countries, technologies…) have no enumerable list, so their values are discovered by running a search rather than read upfront.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("filters")]

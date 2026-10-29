@@ -39,7 +39,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterModeItem?> Mode { get; set; }
 #endif
-        /// <summary>Slider configuration, for the `slider` filters</summary>
+        /// <summary>Slider configuration, for the `slider` filters. Send the ranges to keep in the filter&apos;s `in`, formatted `min|max` like `default`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange? Range { get; set; }
@@ -47,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterRange Range { get; set; }
 #endif
-        /// <summary>Kind of input the filter expects. `level` is a two-level dropdown of the People Database UI; it is reported as `select` by default.</summary>
+        /// <summary>Kind of input the filter expects. `level` is a two-level dropdown of the People Database UI; it is reported as `select` by default. A `slider` filter takes `min|max` ranges in `in` (see `range`) and no `out` value. The search, export and Create persona endpoints refuse an `out` value or a range in another format on it.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilterType? Type { get; set; }
         /// <summary>Allowed values, for the filters that have a fixed list</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

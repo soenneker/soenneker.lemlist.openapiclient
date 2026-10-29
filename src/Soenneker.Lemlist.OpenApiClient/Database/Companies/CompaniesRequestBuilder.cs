@@ -40,7 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Companies
         {
         }
         /// <summary>
-        /// Search the lemlist Companies database using structured filters with pagination support. Returns comprehensive company data including technologies used, location, employee count, and other business intelligence. To run a previous search again, pass the `search` id it returned as `fromSearchId`.
+        /// Search the lemlist Companies database using structured filters with pagination support. Returns comprehensive company data including technologies used, location, employee count, and other business intelligence. Filters of type `slider` (such as `currentCompanyFounded`) take one or more `min|max` ranges in `in`: two numbers joined by `|`, such as `2015|2024`. Their `out` must be an empty array. An `out` value, or a range in another format (such as `2015-2024`), is refused with a 400 `Parameter filters is invalid`. To exclude a range, send the ranges around it in `in`. To run a previous search again, pass the `search` id it returned as `fromSearchId`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompanies200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -60,7 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Companies
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompanies200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Search the lemlist Companies database using structured filters with pagination support. Returns comprehensive company data including technologies used, location, employee count, and other business intelligence. To run a previous search again, pass the `search` id it returned as `fromSearchId`.
+        /// Search the lemlist Companies database using structured filters with pagination support. Returns comprehensive company data including technologies used, location, employee count, and other business intelligence. Filters of type `slider` (such as `currentCompanyFounded`) take one or more `min|max` ranges in `in`: two numbers joined by `|`, such as `2015|2024`. Their `out` must be an empty array. An `out` value, or a range in another format (such as `2015-2024`), is refused with a 400 `Parameter filters is invalid`. To exclude a range, send the ranges around it in `in`. To run a previous search again, pass the `search` id it returned as `fromSearchId`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
