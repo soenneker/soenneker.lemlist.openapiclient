@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("mailboxes") is { } nullNodeMailboxes && nullNodeMailboxes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mailboxes = null;
+            if (parseNode.GetChildNode("mailboxes") is null) { _explicitNullValueMailboxes = default!; _explicitNullProperties?.Remove("mailboxes"); }
+            else if (parseNode.GetChildNode("mailboxes") is { } nullNodeMailboxes && nullNodeMailboxes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mailboxes = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The mailboxes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.DomainMailbox>? Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.DomainMailbox>? Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; AdditionalData?.Remove("mailboxes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.DomainMailbox>? _explicitNullValueMailboxes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.DomainMailbox> Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.DomainMailbox> Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; AdditionalData?.Remove("mailboxes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.DomainMailbox> _explicitNullValueMailboxes = default!;
 #endif
         /// <summary>

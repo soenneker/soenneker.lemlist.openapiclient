@@ -17,23 +17,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("enqueued") is { } nullNodeEnqueued && nullNodeEnqueued.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enqueued = null;
-            if (parseNode.GetChildNode("mailboxes") is { } nullNodeMailboxes && nullNodeMailboxes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mailboxes = null;
+            if (parseNode.GetChildNode("enqueued") is null) { _explicitNullValueEnqueued = default!; _explicitNullProperties?.Remove("enqueued"); }
+            else if (parseNode.GetChildNode("enqueued") is { } nullNodeEnqueued && nullNodeEnqueued.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enqueued = null;
+            if (parseNode.GetChildNode("mailboxes") is null) { _explicitNullValueMailboxes = default!; _explicitNullProperties?.Remove("mailboxes"); }
+            else if (parseNode.GetChildNode("mailboxes") is { } nullNodeMailboxes && nullNodeMailboxes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mailboxes = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>How many mailboxes were queued. `0` when every mailbox in scope is already synced or already being pushed.</summary>
-        public int? Enqueued { get => _explicitNullValueEnqueued; set { _explicitNullValueEnqueued = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enqueued"); else _explicitNullProperties?.Remove("enqueued"); } }
+        public int? Enqueued { get => _explicitNullValueEnqueued; set { _explicitNullValueEnqueued = value; AdditionalData?.Remove("enqueued"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enqueued"); else _explicitNullProperties?.Remove("enqueued"); } }
         private int? _explicitNullValueEnqueued = default!;
         /// <summary>The mailboxes targeted by the sync</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponseDataMailboxesItem>? Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponseDataMailboxesItem>? Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; AdditionalData?.Remove("mailboxes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponseDataMailboxesItem>? _explicitNullValueMailboxes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponseDataMailboxesItem> Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponseDataMailboxesItem> Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; AdditionalData?.Remove("mailboxes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponseDataMailboxesItem> _explicitNullValueMailboxes = default!;
 #endif
         /// <summary>

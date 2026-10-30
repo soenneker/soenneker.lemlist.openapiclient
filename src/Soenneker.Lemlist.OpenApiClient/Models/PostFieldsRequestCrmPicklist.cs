@@ -18,8 +18,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("crmField") is { } nullNodeCrmField && nullNodeCrmField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmField = null;
-            if (parseNode.GetChildNode("objectType") is { } nullNodeObjectType && nullNodeObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectType = null;
+            if (parseNode.GetChildNode("crmField") is null) { _explicitNullValueCrmField = default!; _explicitNullProperties?.Remove("crmField"); }
+            else if (parseNode.GetChildNode("crmField") is { } nullNodeCrmField && nullNodeCrmField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmField = null;
+            if (parseNode.GetChildNode("objectType") is null) { _explicitNullValueObjectType = default!; _explicitNullProperties?.Remove("objectType"); }
+            else if (parseNode.GetChildNode("objectType") is { } nullNodeObjectType && nullNodeObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectType = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,15 +29,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Internal (API) name of the CRM property, as your CRM shows it: `hs_lead_status` on HubSpot, `LeadSource` on Salesforce.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
+        public string? CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; AdditionalData?.Remove("crmField"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
         private string? _explicitNullValueCrmField = default!;
 #nullable restore
 #else
-        public string CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
+        public string CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; AdditionalData?.Remove("crmField"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
         private string _explicitNullValueCrmField = default!;
 #endif
         /// <summary>The CRM object of the property. Defaults to `contacts` for a contact field and `companies` for a company field; `leads` reads a Salesforce Lead property for a contact field.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklistObjectType? ObjectType { get => _explicitNullValueObjectType; set { _explicitNullValueObjectType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("objectType"); else _explicitNullProperties?.Remove("objectType"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklistObjectType? ObjectType { get => _explicitNullValueObjectType; set { _explicitNullValueObjectType = value; AdditionalData?.Remove("objectType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("objectType"); else _explicitNullProperties?.Remove("objectType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklistObjectType? _explicitNullValueObjectType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist"/> and sets the default values.
@@ -63,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "crmField", n => { CrmField = n.GetStringValue(); } },
-                { "objectType", n => { ObjectType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklistObjectType>(); } },
+                { "objectType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklistObjectType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueObjectType = default; _explicitNullProperties?.Remove("objectType"); AdditionalData["objectType"] = unknown; } else { ObjectType = parsed; AdditionalData.Remove("objectType"); } } },
             };
         }
         /// <summary>

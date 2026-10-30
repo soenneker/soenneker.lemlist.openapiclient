@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("drafts") is { } nullNodeDrafts && nullNodeDrafts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Drafts = null;
+            if (parseNode.GetChildNode("drafts") is null) { _explicitNullValueDrafts = default!; _explicitNullProperties?.Remove("drafts"); }
+            else if (parseNode.GetChildNode("drafts") is { } nullNodeDrafts && nullNodeDrafts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Drafts = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The drafts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>? Drafts { get => _explicitNullValueDrafts; set { _explicitNullValueDrafts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("drafts"); else _explicitNullProperties?.Remove("drafts"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>? Drafts { get => _explicitNullValueDrafts; set { _explicitNullValueDrafts = value; AdditionalData?.Remove("drafts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("drafts"); else _explicitNullProperties?.Remove("drafts"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>? _explicitNullValueDrafts = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem> Drafts { get => _explicitNullValueDrafts; set { _explicitNullValueDrafts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("drafts"); else _explicitNullProperties?.Remove("drafts"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem> Drafts { get => _explicitNullValueDrafts; set { _explicitNullValueDrafts = value; AdditionalData?.Remove("drafts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("drafts"); else _explicitNullProperties?.Remove("drafts"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem> _explicitNullValueDrafts = default!;
 #endif
         /// <summary>

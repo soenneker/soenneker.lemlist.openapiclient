@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("companyIds") is { } nullNodeCompanyIds && nullNodeCompanyIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyIds = null;
+            if (parseNode.GetChildNode("companyIds") is null) { _explicitNullValueCompanyIds = default!; _explicitNullProperties?.Remove("companyIds"); }
+            else if (parseNode.GetChildNode("companyIds") is { } nullNodeCompanyIds && nullNodeCompanyIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Array of company IDs (`cpn_xxx` format) to add to or remove from the list. Required, non-empty, maximum 1,000 per request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
+        public List<string>? CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; AdditionalData?.Remove("companyIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
         private List<string>? _explicitNullValueCompanyIds = default!;
 #nullable restore
 #else
-        public List<string> CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
+        public List<string> CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; AdditionalData?.Remove("companyIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
         private List<string> _explicitNullValueCompanyIds = default!;
 #endif
         /// <summary>

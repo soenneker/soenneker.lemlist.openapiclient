@@ -17,14 +17,22 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("crmPicklist") is { } nullNodeCrmPicklist && nullNodeCrmPicklist.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmPicklist = null;
-            if (parseNode.GetChildNode("entity") is { } nullNodeEntity && nullNodeEntity.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Entity = null;
-            if (parseNode.GetChildNode("label") is { } nullNodeLabel && nullNodeLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Label = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("removeOptions") is { } nullNodeRemoveOptions && nullNodeRemoveOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemoveOptions = null;
-            if (parseNode.GetChildNode("renameOptions") is { } nullNodeRenameOptions && nullNodeRenameOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RenameOptions = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
-            if (parseNode.GetChildNode("upsertOptions") is { } nullNodeUpsertOptions && nullNodeUpsertOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpsertOptions = null;
+            if (parseNode.GetChildNode("crmPicklist") is null) { _explicitNullValueCrmPicklist = default!; _explicitNullProperties?.Remove("crmPicklist"); }
+            else if (parseNode.GetChildNode("crmPicklist") is { } nullNodeCrmPicklist && nullNodeCrmPicklist.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmPicklist = null;
+            if (parseNode.GetChildNode("entity") is null) { _explicitNullValueEntity = default!; _explicitNullProperties?.Remove("entity"); }
+            else if (parseNode.GetChildNode("entity") is { } nullNodeEntity && nullNodeEntity.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Entity = null;
+            if (parseNode.GetChildNode("label") is null) { _explicitNullValueLabel = default!; _explicitNullProperties?.Remove("label"); }
+            else if (parseNode.GetChildNode("label") is { } nullNodeLabel && nullNodeLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Label = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("removeOptions") is null) { _explicitNullValueRemoveOptions = default!; _explicitNullProperties?.Remove("removeOptions"); }
+            else if (parseNode.GetChildNode("removeOptions") is { } nullNodeRemoveOptions && nullNodeRemoveOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemoveOptions = null;
+            if (parseNode.GetChildNode("renameOptions") is null) { _explicitNullValueRenameOptions = default!; _explicitNullProperties?.Remove("renameOptions"); }
+            else if (parseNode.GetChildNode("renameOptions") is { } nullNodeRenameOptions && nullNodeRenameOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RenameOptions = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("upsertOptions") is null) { _explicitNullValueUpsertOptions = default!; _explicitNullProperties?.Remove("upsertOptions"); }
+            else if (parseNode.GetChildNode("upsertOptions") is { } nullNodeUpsertOptions && nullNodeUpsertOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpsertOptions = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -32,67 +40,67 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Beta. Creates the `select` synced with a single-select picklist of your connected CRM: its options are the picklist&apos;s active options, kept in sync, and the field is mapped to the CRM property. Creation only, with `type: &quot;select&quot;` and no option operations. A read-only property (computed by the CRM) or a picklist without any option is refused.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist? CrmPicklist { get => _explicitNullValueCrmPicklist; set { _explicitNullValueCrmPicklist = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmPicklist"); else _explicitNullProperties?.Remove("crmPicklist"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist? CrmPicklist { get => _explicitNullValueCrmPicklist; set { _explicitNullValueCrmPicklist = value; AdditionalData?.Remove("crmPicklist"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmPicklist"); else _explicitNullProperties?.Remove("crmPicklist"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist? _explicitNullValueCrmPicklist = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist CrmPicklist { get => _explicitNullValueCrmPicklist; set { _explicitNullValueCrmPicklist = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmPicklist"); else _explicitNullProperties?.Remove("crmPicklist"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist CrmPicklist { get => _explicitNullValueCrmPicklist; set { _explicitNullValueCrmPicklist = value; AdditionalData?.Remove("crmPicklist"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmPicklist"); else _explicitNullProperties?.Remove("crmPicklist"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist _explicitNullValueCrmPicklist = default!;
 #endif
         /// <summary>Entity the field belongs to.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity? Entity { get => _explicitNullValueEntity; set { _explicitNullValueEntity = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("entity"); else _explicitNullProperties?.Remove("entity"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity? Entity { get => _explicitNullValueEntity; set { _explicitNullValueEntity = value; AdditionalData?.Remove("entity"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("entity"); else _explicitNullProperties?.Remove("entity"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity? _explicitNullValueEntity = default!;
         /// <summary>Display name of the field, as shown in lemlist. Cannot contain an HTML tag (`&lt;...&gt;`). Optional: defaults to `name` on creation, unchanged when omitted on an update.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
+        public string? Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; AdditionalData?.Remove("label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
         private string? _explicitNullValueLabel = default!;
 #nullable restore
 #else
-        public string Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
+        public string Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; AdditionalData?.Remove("label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
         private string _explicitNullValueLabel = default!;
 #endif
         /// <summary>Key to write the field with on `POST /contacts` or `POST /companies`. Starts with a lowercase letter, followed by letters and digits only. Identifies the field to update; never changes afterwards.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>Select fields only, on an update: options to drop. The contacts or companies holding one are cleared. At least one option must remain.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? RemoveOptions { get => _explicitNullValueRemoveOptions; set { _explicitNullValueRemoveOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removeOptions"); else _explicitNullProperties?.Remove("removeOptions"); } }
+        public List<string>? RemoveOptions { get => _explicitNullValueRemoveOptions; set { _explicitNullValueRemoveOptions = value; AdditionalData?.Remove("removeOptions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removeOptions"); else _explicitNullProperties?.Remove("removeOptions"); } }
         private List<string>? _explicitNullValueRemoveOptions = default!;
 #nullable restore
 #else
-        public List<string> RemoveOptions { get => _explicitNullValueRemoveOptions; set { _explicitNullValueRemoveOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removeOptions"); else _explicitNullProperties?.Remove("removeOptions"); } }
+        public List<string> RemoveOptions { get => _explicitNullValueRemoveOptions; set { _explicitNullValueRemoveOptions = value; AdditionalData?.Remove("removeOptions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removeOptions"); else _explicitNullProperties?.Remove("removeOptions"); } }
         private List<string> _explicitNullValueRemoveOptions = default!;
 #endif
         /// <summary>Select fields only, on an update: `{ &quot;current value&quot;: &quot;new value&quot; }`. The option keeps its identity, so the contacts or companies holding the current value are rewritten to the new one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions? RenameOptions { get => _explicitNullValueRenameOptions; set { _explicitNullValueRenameOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("renameOptions"); else _explicitNullProperties?.Remove("renameOptions"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions? RenameOptions { get => _explicitNullValueRenameOptions; set { _explicitNullValueRenameOptions = value; AdditionalData?.Remove("renameOptions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("renameOptions"); else _explicitNullProperties?.Remove("renameOptions"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions? _explicitNullValueRenameOptions = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions RenameOptions { get => _explicitNullValueRenameOptions; set { _explicitNullValueRenameOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("renameOptions"); else _explicitNullProperties?.Remove("renameOptions"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions RenameOptions { get => _explicitNullValueRenameOptions; set { _explicitNullValueRenameOptions = value; AdditionalData?.Remove("renameOptions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("renameOptions"); else _explicitNullProperties?.Remove("renameOptions"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions _explicitNullValueRenameOptions = default!;
 #endif
         /// <summary>Field data type. On an existing field, only `text` or `multilineText` may differ from the stored type (a conversion), and a `phone` or `user` field keeps its type.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestType? _explicitNullValueType = default!;
         /// <summary>Select fields only. On creation, the options (at least one). On an update, options to add when missing; the present ones and the others are kept, so the same list replays. Distinct and non-empty; compared as in the app, regardless of case and surrounding spaces (`gold` matches an existing `Gold`), and stored without surrounding spaces.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? UpsertOptions { get => _explicitNullValueUpsertOptions; set { _explicitNullValueUpsertOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("upsertOptions"); else _explicitNullProperties?.Remove("upsertOptions"); } }
+        public List<string>? UpsertOptions { get => _explicitNullValueUpsertOptions; set { _explicitNullValueUpsertOptions = value; AdditionalData?.Remove("upsertOptions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("upsertOptions"); else _explicitNullProperties?.Remove("upsertOptions"); } }
         private List<string>? _explicitNullValueUpsertOptions = default!;
 #nullable restore
 #else
-        public List<string> UpsertOptions { get => _explicitNullValueUpsertOptions; set { _explicitNullValueUpsertOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("upsertOptions"); else _explicitNullProperties?.Remove("upsertOptions"); } }
+        public List<string> UpsertOptions { get => _explicitNullValueUpsertOptions; set { _explicitNullValueUpsertOptions = value; AdditionalData?.Remove("upsertOptions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("upsertOptions"); else _explicitNullProperties?.Remove("upsertOptions"); } }
         private List<string> _explicitNullValueUpsertOptions = default!;
 #endif
         /// <summary>
@@ -121,12 +129,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "crmPicklist", n => { CrmPicklist = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist>(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestCrmPicklist.CreateFromDiscriminatorValue); } },
-                { "entity", n => { Entity = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity>(); } },
+                { "entity", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestEntity>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueEntity = default; _explicitNullProperties?.Remove("entity"); AdditionalData["entity"] = unknown; } else { Entity = parsed; AdditionalData.Remove("entity"); } } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "removeOptions", n => { RemoveOptions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "renameOptions", n => { RenameOptions = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions>(global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestRenameOptions.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestType>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostFieldsRequestType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "upsertOptions", n => { UpsertOptions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }

@@ -17,9 +17,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("deletedCompanyId") is { } nullNodeDeletedCompanyId && nullNodeDeletedCompanyId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DeletedCompanyId = null;
-            if (parseNode.GetChildNode("success") is { } nullNodeSuccess && nullNodeSuccess.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Success = null;
-            if (parseNode.GetChildNode("unlinkedContacts") is { } nullNodeUnlinkedContacts && nullNodeUnlinkedContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UnlinkedContacts = null;
+            if (parseNode.GetChildNode("deletedCompanyId") is null) { _explicitNullValueDeletedCompanyId = default!; _explicitNullProperties?.Remove("deletedCompanyId"); }
+            else if (parseNode.GetChildNode("deletedCompanyId") is { } nullNodeDeletedCompanyId && nullNodeDeletedCompanyId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DeletedCompanyId = null;
+            if (parseNode.GetChildNode("success") is null) { _explicitNullValueSuccess = default!; _explicitNullProperties?.Remove("success"); }
+            else if (parseNode.GetChildNode("success") is { } nullNodeSuccess && nullNodeSuccess.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Success = null;
+            if (parseNode.GetChildNode("unlinkedContacts") is null) { _explicitNullValueUnlinkedContacts = default!; _explicitNullProperties?.Remove("unlinkedContacts"); }
+            else if (parseNode.GetChildNode("unlinkedContacts") is { } nullNodeUnlinkedContacts && nullNodeUnlinkedContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UnlinkedContacts = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,18 +30,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>ID of the deleted lemlist company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DeletedCompanyId { get => _explicitNullValueDeletedCompanyId; set { _explicitNullValueDeletedCompanyId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deletedCompanyId"); else _explicitNullProperties?.Remove("deletedCompanyId"); } }
+        public string? DeletedCompanyId { get => _explicitNullValueDeletedCompanyId; set { _explicitNullValueDeletedCompanyId = value; AdditionalData?.Remove("deletedCompanyId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deletedCompanyId"); else _explicitNullProperties?.Remove("deletedCompanyId"); } }
         private string? _explicitNullValueDeletedCompanyId = default!;
 #nullable restore
 #else
-        public string DeletedCompanyId { get => _explicitNullValueDeletedCompanyId; set { _explicitNullValueDeletedCompanyId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deletedCompanyId"); else _explicitNullProperties?.Remove("deletedCompanyId"); } }
+        public string DeletedCompanyId { get => _explicitNullValueDeletedCompanyId; set { _explicitNullValueDeletedCompanyId = value; AdditionalData?.Remove("deletedCompanyId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deletedCompanyId"); else _explicitNullProperties?.Remove("deletedCompanyId"); } }
         private string _explicitNullValueDeletedCompanyId = default!;
 #endif
         /// <summary>The success property</summary>
-        public bool? Success { get => _explicitNullValueSuccess; set { _explicitNullValueSuccess = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("success"); else _explicitNullProperties?.Remove("success"); } }
+        public bool? Success { get => _explicitNullValueSuccess; set { _explicitNullValueSuccess = value; AdditionalData?.Remove("success"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("success"); else _explicitNullProperties?.Remove("success"); } }
         private bool? _explicitNullValueSuccess = default!;
         /// <summary>Number of contacts whose `companyId` was unset before deletion. Only present when `force=true`.</summary>
-        public int? UnlinkedContacts { get => _explicitNullValueUnlinkedContacts; set { _explicitNullValueUnlinkedContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unlinkedContacts"); else _explicitNullProperties?.Remove("unlinkedContacts"); } }
+        public int? UnlinkedContacts { get => _explicitNullValueUnlinkedContacts; set { _explicitNullValueUnlinkedContacts = value; AdditionalData?.Remove("unlinkedContacts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unlinkedContacts"); else _explicitNullProperties?.Remove("unlinkedContacts"); } }
         private int? _explicitNullValueUnlinkedContacts = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response"/> and sets the default values.

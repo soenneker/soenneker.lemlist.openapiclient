@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("skill") is { } nullNodeSkill && nullNodeSkill.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Skill = null;
-            if (parseNode.GetChildNode("skill_id") is { } nullNodeSkillId && nullNodeSkillId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkillId = null;
+            if (parseNode.GetChildNode("skill") is null) { _explicitNullValueSkill = default!; _explicitNullProperties?.Remove("skill"); }
+            else if (parseNode.GetChildNode("skill") is { } nullNodeSkill && nullNodeSkill.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Skill = null;
+            if (parseNode.GetChildNode("skill_id") is null) { _explicitNullValueSkillId = default!; _explicitNullProperties?.Remove("skill_id"); }
+            else if (parseNode.GetChildNode("skill_id") is { } nullNodeSkillId && nullNodeSkillId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkillId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The skill property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Skill { get => _explicitNullValueSkill; set { _explicitNullValueSkill = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill"); else _explicitNullProperties?.Remove("skill"); } }
+        public string? Skill { get => _explicitNullValueSkill; set { _explicitNullValueSkill = value; AdditionalData?.Remove("skill"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill"); else _explicitNullProperties?.Remove("skill"); } }
         private string? _explicitNullValueSkill = default!;
 #nullable restore
 #else
-        public string Skill { get => _explicitNullValueSkill; set { _explicitNullValueSkill = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill"); else _explicitNullProperties?.Remove("skill"); } }
+        public string Skill { get => _explicitNullValueSkill; set { _explicitNullValueSkill = value; AdditionalData?.Remove("skill"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill"); else _explicitNullProperties?.Remove("skill"); } }
         private string _explicitNullValueSkill = default!;
 #endif
         /// <summary>The skill_id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SkillId { get => _explicitNullValueSkillId; set { _explicitNullValueSkillId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill_id"); else _explicitNullProperties?.Remove("skill_id"); } }
+        public string? SkillId { get => _explicitNullValueSkillId; set { _explicitNullValueSkillId = value; AdditionalData?.Remove("skill_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill_id"); else _explicitNullProperties?.Remove("skill_id"); } }
         private string? _explicitNullValueSkillId = default!;
 #nullable restore
 #else
-        public string SkillId { get => _explicitNullValueSkillId; set { _explicitNullValueSkillId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill_id"); else _explicitNullProperties?.Remove("skill_id"); } }
+        public string SkillId { get => _explicitNullValueSkillId; set { _explicitNullValueSkillId = value; AdditionalData?.Remove("skill_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skill_id"); else _explicitNullProperties?.Remove("skill_id"); } }
         private string _explicitNullValueSkillId = default!;
 #endif
         /// <summary>

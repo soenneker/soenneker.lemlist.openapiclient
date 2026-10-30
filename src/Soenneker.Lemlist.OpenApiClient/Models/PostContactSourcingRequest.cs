@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("companyIds") is { } nullNodeCompanyIds && nullNodeCompanyIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyIds = null;
-            if (parseNode.GetChildNode("overwrite") is { } nullNodeOverwrite && nullNodeOverwrite.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Overwrite = null;
+            if (parseNode.GetChildNode("companyIds") is null) { _explicitNullValueCompanyIds = default!; _explicitNullProperties?.Remove("companyIds"); }
+            else if (parseNode.GetChildNode("companyIds") is { } nullNodeCompanyIds && nullNodeCompanyIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyIds = null;
+            if (parseNode.GetChildNode("overwrite") is null) { _explicitNullValueOverwrite = default!; _explicitNullProperties?.Remove("overwrite"); }
+            else if (parseNode.GetChildNode("overwrite") is { } nullNodeOverwrite && nullNodeOverwrite.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Overwrite = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,15 +28,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Accounts to source contacts for (`cpn_xxx` format).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
+        public List<string>? CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; AdditionalData?.Remove("companyIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
         private List<string>? _explicitNullValueCompanyIds = default!;
 #nullable restore
 #else
-        public List<string> CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
+        public List<string> CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; AdditionalData?.Remove("companyIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companyIds"); else _explicitNullProperties?.Remove("companyIds"); } }
         private List<string> _explicitNullValueCompanyIds = default!;
 #endif
         /// <summary>The overwrite property</summary>
-        public bool? Overwrite { get => _explicitNullValueOverwrite; set { _explicitNullValueOverwrite = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("overwrite"); else _explicitNullProperties?.Remove("overwrite"); } }
+        public bool? Overwrite { get => _explicitNullValueOverwrite; set { _explicitNullValueOverwrite = value; AdditionalData?.Remove("overwrite"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("overwrite"); else _explicitNullProperties?.Remove("overwrite"); } }
         private bool? _explicitNullValueOverwrite = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactSourcingRequest"/> and sets the default values.

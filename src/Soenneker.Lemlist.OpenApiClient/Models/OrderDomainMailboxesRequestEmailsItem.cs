@@ -17,10 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("assignToUser") is { } nullNodeAssignToUser && nullNodeAssignToUser.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignToUser = null;
-            if (parseNode.GetChildNode("sendername") is { } nullNodeSendername && nullNodeSendername.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sendername = null;
-            if (parseNode.GetChildNode("username") is { } nullNodeUsername && nullNodeUsername.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Username = null;
-            if (parseNode.GetChildNode("workspaceAdmin") is { } nullNodeWorkspaceAdmin && nullNodeWorkspaceAdmin.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WorkspaceAdmin = null;
+            if (parseNode.GetChildNode("assignToUser") is null) { _explicitNullValueAssignToUser = default!; _explicitNullProperties?.Remove("assignToUser"); }
+            else if (parseNode.GetChildNode("assignToUser") is { } nullNodeAssignToUser && nullNodeAssignToUser.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignToUser = null;
+            if (parseNode.GetChildNode("sendername") is null) { _explicitNullValueSendername = default!; _explicitNullProperties?.Remove("sendername"); }
+            else if (parseNode.GetChildNode("sendername") is { } nullNodeSendername && nullNodeSendername.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sendername = null;
+            if (parseNode.GetChildNode("username") is null) { _explicitNullValueUsername = default!; _explicitNullProperties?.Remove("username"); }
+            else if (parseNode.GetChildNode("username") is { } nullNodeUsername && nullNodeUsername.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Username = null;
+            if (parseNode.GetChildNode("workspaceAdmin") is null) { _explicitNullValueWorkspaceAdmin = default!; _explicitNullProperties?.Remove("workspaceAdmin"); }
+            else if (parseNode.GetChildNode("workspaceAdmin") is { } nullNodeWorkspaceAdmin && nullNodeWorkspaceAdmin.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WorkspaceAdmin = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,35 +32,35 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Team member who will send from the mailbox. Defaults to the API key user, so pass it for every mailbox when ordering for several people.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssignToUser { get => _explicitNullValueAssignToUser; set { _explicitNullValueAssignToUser = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUser"); else _explicitNullProperties?.Remove("assignToUser"); } }
+        public string? AssignToUser { get => _explicitNullValueAssignToUser; set { _explicitNullValueAssignToUser = value; AdditionalData?.Remove("assignToUser"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUser"); else _explicitNullProperties?.Remove("assignToUser"); } }
         private string? _explicitNullValueAssignToUser = default!;
 #nullable restore
 #else
-        public string AssignToUser { get => _explicitNullValueAssignToUser; set { _explicitNullValueAssignToUser = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUser"); else _explicitNullProperties?.Remove("assignToUser"); } }
+        public string AssignToUser { get => _explicitNullValueAssignToUser; set { _explicitNullValueAssignToUser = value; AdditionalData?.Remove("assignToUser"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUser"); else _explicitNullProperties?.Remove("assignToUser"); } }
         private string _explicitNullValueAssignToUser = default!;
 #endif
         /// <summary>Display name of an `infraforge` (SMTP) mailbox. Google Workspace and Microsoft 365 mailboxes take the name of the assigned user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Sendername { get => _explicitNullValueSendername; set { _explicitNullValueSendername = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendername"); else _explicitNullProperties?.Remove("sendername"); } }
+        public string? Sendername { get => _explicitNullValueSendername; set { _explicitNullValueSendername = value; AdditionalData?.Remove("sendername"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendername"); else _explicitNullProperties?.Remove("sendername"); } }
         private string? _explicitNullValueSendername = default!;
 #nullable restore
 #else
-        public string Sendername { get => _explicitNullValueSendername; set { _explicitNullValueSendername = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendername"); else _explicitNullProperties?.Remove("sendername"); } }
+        public string Sendername { get => _explicitNullValueSendername; set { _explicitNullValueSendername = value; AdditionalData?.Remove("sendername"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendername"); else _explicitNullProperties?.Remove("sendername"); } }
         private string _explicitNullValueSendername = default!;
 #endif
         /// <summary>Local part of the address, lowercased: `john` for `john@getacme.com`</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Username { get => _explicitNullValueUsername; set { _explicitNullValueUsername = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("username"); else _explicitNullProperties?.Remove("username"); } }
+        public string? Username { get => _explicitNullValueUsername; set { _explicitNullValueUsername = value; AdditionalData?.Remove("username"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("username"); else _explicitNullProperties?.Remove("username"); } }
         private string? _explicitNullValueUsername = default!;
 #nullable restore
 #else
-        public string Username { get => _explicitNullValueUsername; set { _explicitNullValueUsername = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("username"); else _explicitNullProperties?.Remove("username"); } }
+        public string Username { get => _explicitNullValueUsername; set { _explicitNullValueUsername = value; AdditionalData?.Remove("username"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("username"); else _explicitNullProperties?.Remove("username"); } }
         private string _explicitNullValueUsername = default!;
 #endif
         /// <summary>`google` domains only: the mailbox that becomes the Google Workspace super admin. Only applies while the domain has no admin yet; without it, lemlist picks one of the ordered mailboxes.</summary>
-        public bool? WorkspaceAdmin { get => _explicitNullValueWorkspaceAdmin; set { _explicitNullValueWorkspaceAdmin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("workspaceAdmin"); else _explicitNullProperties?.Remove("workspaceAdmin"); } }
+        public bool? WorkspaceAdmin { get => _explicitNullValueWorkspaceAdmin; set { _explicitNullValueWorkspaceAdmin = value; AdditionalData?.Remove("workspaceAdmin"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("workspaceAdmin"); else _explicitNullProperties?.Remove("workspaceAdmin"); } }
         private bool? _explicitNullValueWorkspaceAdmin = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.OrderDomainMailboxesRequestEmailsItem"/> and sets the default values.

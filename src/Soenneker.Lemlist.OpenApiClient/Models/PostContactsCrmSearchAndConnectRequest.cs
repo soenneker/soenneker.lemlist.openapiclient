@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("idsOrEmails") is { } nullNodeIdsOrEmails && nullNodeIdsOrEmails.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IdsOrEmails = null;
-            if (parseNode.GetChildNode("listId") is { } nullNodeListId && nullNodeListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ListId = null;
+            if (parseNode.GetChildNode("idsOrEmails") is null) { _explicitNullValueIdsOrEmails = default!; _explicitNullProperties?.Remove("idsOrEmails"); }
+            else if (parseNode.GetChildNode("idsOrEmails") is { } nullNodeIdsOrEmails && nullNodeIdsOrEmails.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IdsOrEmails = null;
+            if (parseNode.GetChildNode("listId") is null) { _explicitNullValueListId = default!; _explicitNullProperties?.Remove("listId"); }
+            else if (parseNode.GetChildNode("listId") is { } nullNodeListId && nullNodeListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ListId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>lemlist contact ids (`ctc_xxx`) or email addresses, 10,000 at most. Send either `idsOrEmails` or `listId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? IdsOrEmails { get => _explicitNullValueIdsOrEmails; set { _explicitNullValueIdsOrEmails = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrEmails"); else _explicitNullProperties?.Remove("idsOrEmails"); } }
+        public List<string>? IdsOrEmails { get => _explicitNullValueIdsOrEmails; set { _explicitNullValueIdsOrEmails = value; AdditionalData?.Remove("idsOrEmails"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrEmails"); else _explicitNullProperties?.Remove("idsOrEmails"); } }
         private List<string>? _explicitNullValueIdsOrEmails = default!;
 #nullable restore
 #else
-        public List<string> IdsOrEmails { get => _explicitNullValueIdsOrEmails; set { _explicitNullValueIdsOrEmails = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrEmails"); else _explicitNullProperties?.Remove("idsOrEmails"); } }
+        public List<string> IdsOrEmails { get => _explicitNullValueIdsOrEmails; set { _explicitNullValueIdsOrEmails = value; AdditionalData?.Remove("idsOrEmails"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrEmails"); else _explicitNullProperties?.Remove("idsOrEmails"); } }
         private List<string> _explicitNullValueIdsOrEmails = default!;
 #endif
         /// <summary>A contact list id (`clt_xxx`): acts on every contact of the list, static or dynamic, 10,000 at most. Use it instead of `idsOrEmails`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
+        public string? ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; AdditionalData?.Remove("listId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
         private string? _explicitNullValueListId = default!;
 #nullable restore
 #else
-        public string ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
+        public string ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; AdditionalData?.Remove("listId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
         private string _explicitNullValueListId = default!;
 #endif
         /// <summary>

@@ -17,10 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("applied") is { } nullNodeApplied && nullNodeApplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Applied = null;
-            if (parseNode.GetChildNode("assignedToUserId") is { } nullNodeAssignedToUserId && nullNodeAssignedToUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignedToUserId = null;
-            if (parseNode.GetChildNode("mailboxId") is { } nullNodeMailboxId && nullNodeMailboxId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MailboxId = null;
-            if (parseNode.GetChildNode("ok") is { } nullNodeOk && nullNodeOk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ok = null;
+            if (parseNode.GetChildNode("applied") is null) { _explicitNullValueApplied = default!; _explicitNullProperties?.Remove("applied"); }
+            else if (parseNode.GetChildNode("applied") is { } nullNodeApplied && nullNodeApplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Applied = null;
+            if (parseNode.GetChildNode("assignedToUserId") is null) { _explicitNullValueAssignedToUserId = default!; _explicitNullProperties?.Remove("assignedToUserId"); }
+            else if (parseNode.GetChildNode("assignedToUserId") is { } nullNodeAssignedToUserId && nullNodeAssignedToUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignedToUserId = null;
+            if (parseNode.GetChildNode("mailboxId") is null) { _explicitNullValueMailboxId = default!; _explicitNullProperties?.Remove("mailboxId"); }
+            else if (parseNode.GetChildNode("mailboxId") is { } nullNodeMailboxId && nullNodeMailboxId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MailboxId = null;
+            if (parseNode.GetChildNode("ok") is null) { _explicitNullValueOk = default!; _explicitNullProperties?.Remove("ok"); }
+            else if (parseNode.GetChildNode("ok") is { } nullNodeOk && nullNodeOk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ok = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,35 +32,35 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Fields applied</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Applied { get => _explicitNullValueApplied; set { _explicitNullValueApplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied"); else _explicitNullProperties?.Remove("applied"); } }
+        public List<string>? Applied { get => _explicitNullValueApplied; set { _explicitNullValueApplied = value; AdditionalData?.Remove("applied"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied"); else _explicitNullProperties?.Remove("applied"); } }
         private List<string>? _explicitNullValueApplied = default!;
 #nullable restore
 #else
-        public List<string> Applied { get => _explicitNullValueApplied; set { _explicitNullValueApplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied"); else _explicitNullProperties?.Remove("applied"); } }
+        public List<string> Applied { get => _explicitNullValueApplied; set { _explicitNullValueApplied = value; AdditionalData?.Remove("applied"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied"); else _explicitNullProperties?.Remove("applied"); } }
         private List<string> _explicitNullValueApplied = default!;
 #endif
         /// <summary>The assignedToUserId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssignedToUserId { get => _explicitNullValueAssignedToUserId; set { _explicitNullValueAssignedToUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignedToUserId"); else _explicitNullProperties?.Remove("assignedToUserId"); } }
+        public string? AssignedToUserId { get => _explicitNullValueAssignedToUserId; set { _explicitNullValueAssignedToUserId = value; AdditionalData?.Remove("assignedToUserId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignedToUserId"); else _explicitNullProperties?.Remove("assignedToUserId"); } }
         private string? _explicitNullValueAssignedToUserId = default!;
 #nullable restore
 #else
-        public string AssignedToUserId { get => _explicitNullValueAssignedToUserId; set { _explicitNullValueAssignedToUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignedToUserId"); else _explicitNullProperties?.Remove("assignedToUserId"); } }
+        public string AssignedToUserId { get => _explicitNullValueAssignedToUserId; set { _explicitNullValueAssignedToUserId = value; AdditionalData?.Remove("assignedToUserId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignedToUserId"); else _explicitNullProperties?.Remove("assignedToUserId"); } }
         private string _explicitNullValueAssignedToUserId = default!;
 #endif
         /// <summary>The mailboxId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
+        public string? MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; AdditionalData?.Remove("mailboxId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
         private string? _explicitNullValueMailboxId = default!;
 #nullable restore
 #else
-        public string MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
+        public string MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; AdditionalData?.Remove("mailboxId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
         private string _explicitNullValueMailboxId = default!;
 #endif
         /// <summary>The ok property</summary>
-        public bool? Ok { get => _explicitNullValueOk; set { _explicitNullValueOk = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ok"); else _explicitNullProperties?.Remove("ok"); } }
+        public bool? Ok { get => _explicitNullValueOk; set { _explicitNullValueOk = value; AdditionalData?.Remove("ok"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ok"); else _explicitNullProperties?.Remove("ok"); } }
         private bool? _explicitNullValueOk = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UpdateDomainMailbox200Response"/> and sets the default values.

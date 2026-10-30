@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("primaryId") is { } nullNodePrimaryId && nullNodePrimaryId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryId = null;
-            if (parseNode.GetChildNode("secondaryIds") is { } nullNodeSecondaryIds && nullNodeSecondaryIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryIds = null;
+            if (parseNode.GetChildNode("primaryId") is null) { _explicitNullValuePrimaryId = default!; _explicitNullProperties?.Remove("primaryId"); }
+            else if (parseNode.GetChildNode("primaryId") is { } nullNodePrimaryId && nullNodePrimaryId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryId = null;
+            if (parseNode.GetChildNode("secondaryIds") is null) { _explicitNullValueSecondaryIds = default!; _explicitNullProperties?.Remove("secondaryIds"); }
+            else if (parseNode.GetChildNode("secondaryIds") is { } nullNodeSecondaryIds && nullNodeSecondaryIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The surviving company. A lemlist company id (`cpn_xxx`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PrimaryId { get => _explicitNullValuePrimaryId; set { _explicitNullValuePrimaryId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primaryId"); else _explicitNullProperties?.Remove("primaryId"); } }
+        public string? PrimaryId { get => _explicitNullValuePrimaryId; set { _explicitNullValuePrimaryId = value; AdditionalData?.Remove("primaryId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primaryId"); else _explicitNullProperties?.Remove("primaryId"); } }
         private string? _explicitNullValuePrimaryId = default!;
 #nullable restore
 #else
-        public string PrimaryId { get => _explicitNullValuePrimaryId; set { _explicitNullValuePrimaryId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primaryId"); else _explicitNullProperties?.Remove("primaryId"); } }
+        public string PrimaryId { get => _explicitNullValuePrimaryId; set { _explicitNullValuePrimaryId = value; AdditionalData?.Remove("primaryId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primaryId"); else _explicitNullProperties?.Remove("primaryId"); } }
         private string _explicitNullValuePrimaryId = default!;
 #endif
         /// <summary>The companies folded into the survivor then deleted, 9 at most. A lemlist company id (`cpn_xxx`). Must not contain `primaryId`, and each company is listed once.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? SecondaryIds { get => _explicitNullValueSecondaryIds; set { _explicitNullValueSecondaryIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondaryIds"); else _explicitNullProperties?.Remove("secondaryIds"); } }
+        public List<string>? SecondaryIds { get => _explicitNullValueSecondaryIds; set { _explicitNullValueSecondaryIds = value; AdditionalData?.Remove("secondaryIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondaryIds"); else _explicitNullProperties?.Remove("secondaryIds"); } }
         private List<string>? _explicitNullValueSecondaryIds = default!;
 #nullable restore
 #else
-        public List<string> SecondaryIds { get => _explicitNullValueSecondaryIds; set { _explicitNullValueSecondaryIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondaryIds"); else _explicitNullProperties?.Remove("secondaryIds"); } }
+        public List<string> SecondaryIds { get => _explicitNullValueSecondaryIds; set { _explicitNullValueSecondaryIds = value; AdditionalData?.Remove("secondaryIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondaryIds"); else _explicitNullProperties?.Remove("secondaryIds"); } }
         private List<string> _explicitNullValueSecondaryIds = default!;
 #endif
         /// <summary>

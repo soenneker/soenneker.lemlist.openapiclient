@@ -19,72 +19,80 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("code") is { } nullNodeCode && nullNodeCode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Code = null;
-            if (parseNode.GetChildNode("data") is { } nullNodeDataEscaped && nullNodeDataEscaped.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataEscaped = null;
-            if (parseNode.GetChildNode("enrichmentId") is { } nullNodeEnrichmentId && nullNodeEnrichmentId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnrichmentId = null;
-            if (parseNode.GetChildNode("enrichmentStatus") is { } nullNodeEnrichmentStatus && nullNodeEnrichmentStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnrichmentStatus = null;
-            if (parseNode.GetChildNode("error") is { } nullNodeError && nullNodeError.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Error = null;
-            if (parseNode.GetChildNode("failedWorkflows") is { } nullNodeFailedWorkflows && nullNodeFailedWorkflows.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FailedWorkflows = null;
-            if (parseNode.GetChildNode("input") is { } nullNodeInput && nullNodeInput.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Input = null;
-            if (parseNode.GetChildNode("reason") is { } nullNodeReason && nullNodeReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reason = null;
+            if (parseNode.GetChildNode("code") is null) { _explicitNullValueCode = default!; _explicitNullProperties?.Remove("code"); }
+            else if (parseNode.GetChildNode("code") is { } nullNodeCode && nullNodeCode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Code = null;
+            if (parseNode.GetChildNode("data") is null) { _explicitNullValueDataEscaped = default!; _explicitNullProperties?.Remove("data"); }
+            else if (parseNode.GetChildNode("data") is { } nullNodeDataEscaped && nullNodeDataEscaped.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataEscaped = null;
+            if (parseNode.GetChildNode("enrichmentId") is null) { _explicitNullValueEnrichmentId = default!; _explicitNullProperties?.Remove("enrichmentId"); }
+            else if (parseNode.GetChildNode("enrichmentId") is { } nullNodeEnrichmentId && nullNodeEnrichmentId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnrichmentId = null;
+            if (parseNode.GetChildNode("enrichmentStatus") is null) { _explicitNullValueEnrichmentStatus = default!; _explicitNullProperties?.Remove("enrichmentStatus"); }
+            else if (parseNode.GetChildNode("enrichmentStatus") is { } nullNodeEnrichmentStatus && nullNodeEnrichmentStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnrichmentStatus = null;
+            if (parseNode.GetChildNode("error") is null) { _explicitNullValueError = default!; _explicitNullProperties?.Remove("error"); }
+            else if (parseNode.GetChildNode("error") is { } nullNodeError && nullNodeError.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Error = null;
+            if (parseNode.GetChildNode("failedWorkflows") is null) { _explicitNullValueFailedWorkflows = default!; _explicitNullProperties?.Remove("failedWorkflows"); }
+            else if (parseNode.GetChildNode("failedWorkflows") is { } nullNodeFailedWorkflows && nullNodeFailedWorkflows.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FailedWorkflows = null;
+            if (parseNode.GetChildNode("input") is null) { _explicitNullValueInput = default!; _explicitNullProperties?.Remove("input"); }
+            else if (parseNode.GetChildNode("input") is { } nullNodeInput && nullNodeInput.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Input = null;
+            if (parseNode.GetChildNode("reason") is null) { _explicitNullValueReason = default!; _explicitNullProperties?.Remove("reason"); }
+            else if (parseNode.GetChildNode("reason") is { } nullNodeReason && nullNodeReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reason = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>On `failed`, why the enrichment failed. An unknown or missing cause reads as `FAILED_TO_PROCESS`.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichCode? Code { get => _explicitNullValueCode; set { _explicitNullValueCode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("code"); else _explicitNullProperties?.Remove("code"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichCode? Code { get => _explicitNullValueCode; set { _explicitNullValueCode = value; AdditionalData?.Remove("code"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("code"); else _explicitNullProperties?.Remove("code"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.EnrichCode? _explicitNullValueCode = default!;
         /// <summary>What the enrichment found, keyed by result. Empty unless `enrichmentStatus` is `done`. A key is present only for a requested workflow that produced a result. A `find_email` or `find_phone` that found nothing still has its key, with `notFound: true`. A requested workflow that ended without any result has no key and is listed in `failedWorkflows`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData? DataEscaped { get => _explicitNullValueDataEscaped; set { _explicitNullValueDataEscaped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData? DataEscaped { get => _explicitNullValueDataEscaped; set { _explicitNullValueDataEscaped = value; AdditionalData?.Remove("data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData? _explicitNullValueDataEscaped = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData DataEscaped { get => _explicitNullValueDataEscaped; set { _explicitNullValueDataEscaped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData DataEscaped { get => _explicitNullValueDataEscaped; set { _explicitNullValueDataEscaped = value; AdditionalData?.Remove("data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData _explicitNullValueDataEscaped = default!;
 #endif
         /// <summary>Identifier of the enrichment</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? EnrichmentId { get => _explicitNullValueEnrichmentId; set { _explicitNullValueEnrichmentId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentId"); else _explicitNullProperties?.Remove("enrichmentId"); } }
+        public string? EnrichmentId { get => _explicitNullValueEnrichmentId; set { _explicitNullValueEnrichmentId = value; AdditionalData?.Remove("enrichmentId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentId"); else _explicitNullProperties?.Remove("enrichmentId"); } }
         private string? _explicitNullValueEnrichmentId = default!;
 #nullable restore
 #else
-        public string EnrichmentId { get => _explicitNullValueEnrichmentId; set { _explicitNullValueEnrichmentId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentId"); else _explicitNullProperties?.Remove("enrichmentId"); } }
+        public string EnrichmentId { get => _explicitNullValueEnrichmentId; set { _explicitNullValueEnrichmentId = value; AdditionalData?.Remove("enrichmentId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentId"); else _explicitNullProperties?.Remove("enrichmentId"); } }
         private string _explicitNullValueEnrichmentId = default!;
 #endif
         /// <summary>Lifecycle state of the enrichment, not to be confused with `data.email.status`. Each state comes with its own HTTP status: `done` 200, `in-progress` 202, `failed` 400, `not-found` 404. A cancelled enrichment answers `done`.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichEnrichmentStatus? EnrichmentStatus { get => _explicitNullValueEnrichmentStatus; set { _explicitNullValueEnrichmentStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentStatus"); else _explicitNullProperties?.Remove("enrichmentStatus"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichEnrichmentStatus? EnrichmentStatus { get => _explicitNullValueEnrichmentStatus; set { _explicitNullValueEnrichmentStatus = value; AdditionalData?.Remove("enrichmentStatus"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentStatus"); else _explicitNullProperties?.Remove("enrichmentStatus"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.EnrichEnrichmentStatus? _explicitNullValueEnrichmentStatus = default!;
         /// <summary>On `failed`, the raw cause stored on the enrichment, absent when none was stored; prefer `code`. On `not-found`, `Enrichment not found`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get => _explicitNullValueError; set { _explicitNullValueError = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("error"); else _explicitNullProperties?.Remove("error"); } }
+        public string? Error { get => _explicitNullValueError; set { _explicitNullValueError = value; AdditionalData?.Remove("error"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("error"); else _explicitNullProperties?.Remove("error"); } }
         private string? _explicitNullValueError = default!;
 #nullable restore
 #else
-        public string Error { get => _explicitNullValueError; set { _explicitNullValueError = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("error"); else _explicitNullProperties?.Remove("error"); } }
+        public string Error { get => _explicitNullValueError; set { _explicitNullValueError = value; AdditionalData?.Remove("error"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("error"); else _explicitNullProperties?.Remove("error"); } }
         private string _explicitNullValueError = default!;
 #endif
         /// <summary>On `done`, the requested workflows that ended without any result; they have no key in `data`. A `find_email` or `find_phone` that found nothing is not listed: it answers `notFound: true` in `data`. A workflow lemlist runs on its own as a dependency of a requested one is never listed. Only present when not empty.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem?>? FailedWorkflows { get => _explicitNullValueFailedWorkflows; set { _explicitNullValueFailedWorkflows = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("failedWorkflows"); else _explicitNullProperties?.Remove("failedWorkflows"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem?>? FailedWorkflows { get => _explicitNullValueFailedWorkflows; set { _explicitNullValueFailedWorkflows = value; AdditionalData?.Remove("failedWorkflows"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("failedWorkflows"); else _explicitNullProperties?.Remove("failedWorkflows"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem?>? _explicitNullValueFailedWorkflows = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem?> FailedWorkflows { get => _explicitNullValueFailedWorkflows; set { _explicitNullValueFailedWorkflows = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("failedWorkflows"); else _explicitNullProperties?.Remove("failedWorkflows"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem?> FailedWorkflows { get => _explicitNullValueFailedWorkflows; set { _explicitNullValueFailedWorkflows = value; AdditionalData?.Remove("failedWorkflows"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("failedWorkflows"); else _explicitNullProperties?.Remove("failedWorkflows"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem?> _explicitNullValueFailedWorkflows = default!;
 #endif
         /// <summary>The inputs the enrichment was started with, echoed back. Absent on `not-found`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty? Input { get => _explicitNullValueInput; set { _explicitNullValueInput = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("input"); else _explicitNullProperties?.Remove("input"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty? Input { get => _explicitNullValueInput; set { _explicitNullValueInput = value; AdditionalData?.Remove("input"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("input"); else _explicitNullProperties?.Remove("input"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty? _explicitNullValueInput = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty Input { get => _explicitNullValueInput; set { _explicitNullValueInput = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("input"); else _explicitNullProperties?.Remove("input"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty Input { get => _explicitNullValueInput; set { _explicitNullValueInput = value; AdditionalData?.Remove("input"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("input"); else _explicitNullProperties?.Remove("input"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty _explicitNullValueInput = default!;
 #endif
         /// <summary>The primary error message.</summary>
@@ -92,11 +100,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>On `failed`, a human-readable explanation of `code`, possibly translated to the language of the API user. Branch on `code`, never on `reason`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get => _explicitNullValueReason; set { _explicitNullValueReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reason"); else _explicitNullProperties?.Remove("reason"); } }
+        public string? Reason { get => _explicitNullValueReason; set { _explicitNullValueReason = value; AdditionalData?.Remove("reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reason"); else _explicitNullProperties?.Remove("reason"); } }
         private string? _explicitNullValueReason = default!;
 #nullable restore
 #else
-        public string Reason { get => _explicitNullValueReason; set { _explicitNullValueReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reason"); else _explicitNullProperties?.Remove("reason"); } }
+        public string Reason { get => _explicitNullValueReason; set { _explicitNullValueReason = value; AdditionalData?.Remove("reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reason"); else _explicitNullProperties?.Remove("reason"); } }
         private string _explicitNullValueReason = default!;
 #endif
         /// <summary>
@@ -124,10 +132,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "code", n => { Code = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichCode>(); } },
+                { "code", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichCode>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCode = default; _explicitNullProperties?.Remove("code"); AdditionalData["code"] = unknown; } else { Code = parsed; AdditionalData.Remove("code"); } } },
                 { "data", n => { DataEscaped = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData>(global::Soenneker.Lemlist.OpenApiClient.Models.EnrichData.CreateFromDiscriminatorValue); } },
                 { "enrichmentId", n => { EnrichmentId = n.GetStringValue(); } },
-                { "enrichmentStatus", n => { EnrichmentStatus = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichEnrichmentStatus>(); } },
+                { "enrichmentStatus", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichEnrichmentStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueEnrichmentStatus = default; _explicitNullProperties?.Remove("enrichmentStatus"); AdditionalData["enrichmentStatus"] = unknown; } else { EnrichmentStatus = parsed; AdditionalData.Remove("enrichmentStatus"); } } },
                 { "error", n => { Error = n.GetStringValue(); } },
                 { "failedWorkflows", n => { FailedWorkflows = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichFailedWorkflowsItem>()?.AsList(); } },
                 { "input", n => { Input = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.EnrichInputProperty.CreateFromDiscriminatorValue); } },

@@ -17,27 +17,30 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("addedCount") is { } nullNodeAddedCount && nullNodeAddedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddedCount = null;
-            if (parseNode.GetChildNode("alreadyInCampaignCount") is { } nullNodeAlreadyInCampaignCount && nullNodeAlreadyInCampaignCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyInCampaignCount = null;
-            if (parseNode.GetChildNode("skipped") is { } nullNodeSkipped && nullNodeSkipped.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Skipped = null;
+            if (parseNode.GetChildNode("addedCount") is null) { _explicitNullValueAddedCount = default!; _explicitNullProperties?.Remove("addedCount"); }
+            else if (parseNode.GetChildNode("addedCount") is { } nullNodeAddedCount && nullNodeAddedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddedCount = null;
+            if (parseNode.GetChildNode("alreadyInCampaignCount") is null) { _explicitNullValueAlreadyInCampaignCount = default!; _explicitNullProperties?.Remove("alreadyInCampaignCount"); }
+            else if (parseNode.GetChildNode("alreadyInCampaignCount") is { } nullNodeAlreadyInCampaignCount && nullNodeAlreadyInCampaignCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyInCampaignCount = null;
+            if (parseNode.GetChildNode("skipped") is null) { _explicitNullValueSkipped = default!; _explicitNullProperties?.Remove("skipped"); }
+            else if (parseNode.GetChildNode("skipped") is { } nullNodeSkipped && nullNodeSkipped.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Skipped = null;
         }
 
         /// <summary>The addedCount property</summary>
-        public long? AddedCount { get => _explicitNullValueAddedCount; set { _explicitNullValueAddedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("addedCount"); else _explicitNullProperties?.Remove("addedCount"); } }
+        public long? AddedCount { get => _explicitNullValueAddedCount; set { _explicitNullValueAddedCount = value; AdditionalData?.Remove("addedCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("addedCount"); else _explicitNullProperties?.Remove("addedCount"); } }
         private long? _explicitNullValueAddedCount = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The alreadyInCampaignCount property</summary>
-        public long? AlreadyInCampaignCount { get => _explicitNullValueAlreadyInCampaignCount; set { _explicitNullValueAlreadyInCampaignCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyInCampaignCount"); else _explicitNullProperties?.Remove("alreadyInCampaignCount"); } }
+        public long? AlreadyInCampaignCount { get => _explicitNullValueAlreadyInCampaignCount; set { _explicitNullValueAlreadyInCampaignCount = value; AdditionalData?.Remove("alreadyInCampaignCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyInCampaignCount"); else _explicitNullProperties?.Remove("alreadyInCampaignCount"); } }
         private long? _explicitNullValueAlreadyInCampaignCount = default!;
         /// <summary>The skipped property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>? Skipped { get => _explicitNullValueSkipped; set { _explicitNullValueSkipped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skipped"); else _explicitNullProperties?.Remove("skipped"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>? Skipped { get => _explicitNullValueSkipped; set { _explicitNullValueSkipped = value; AdditionalData?.Remove("skipped"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skipped"); else _explicitNullProperties?.Remove("skipped"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>? _explicitNullValueSkipped = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem> Skipped { get => _explicitNullValueSkipped; set { _explicitNullValueSkipped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skipped"); else _explicitNullProperties?.Remove("skipped"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem> Skipped { get => _explicitNullValueSkipped; set { _explicitNullValueSkipped = value; AdditionalData?.Remove("skipped"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skipped"); else _explicitNullProperties?.Remove("skipped"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem> _explicitNullValueSkipped = default!;
 #endif
         /// <summary>

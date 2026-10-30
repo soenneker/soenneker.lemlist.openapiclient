@@ -18,10 +18,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
-            if (parseNode.GetChildNode("requiredChannelTypes") is { } nullNodeRequiredChannelTypes && nullNodeRequiredChannelTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequiredChannelTypes = null;
-            if (parseNode.GetChildNode("senders") is { } nullNodeSenders && nullNodeSenders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Senders = null;
-            if (parseNode.GetChildNode("senderStrategy") is { } nullNodeSenderStrategy && nullNodeSenderStrategy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderStrategy = null;
+            if (parseNode.GetChildNode("campaignId") is null) { _explicitNullValueCampaignId = default!; _explicitNullProperties?.Remove("campaignId"); }
+            else if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
+            if (parseNode.GetChildNode("requiredChannelTypes") is null) { _explicitNullValueRequiredChannelTypes = default!; _explicitNullProperties?.Remove("requiredChannelTypes"); }
+            else if (parseNode.GetChildNode("requiredChannelTypes") is { } nullNodeRequiredChannelTypes && nullNodeRequiredChannelTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequiredChannelTypes = null;
+            if (parseNode.GetChildNode("senders") is null) { _explicitNullValueSenders = default!; _explicitNullProperties?.Remove("senders"); }
+            else if (parseNode.GetChildNode("senders") is { } nullNodeSenders && nullNodeSenders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Senders = null;
+            if (parseNode.GetChildNode("senderStrategy") is null) { _explicitNullValueSenderStrategy = default!; _explicitNullProperties?.Remove("senderStrategy"); }
+            else if (parseNode.GetChildNode("senderStrategy") is { } nullNodeSenderStrategy && nullNodeSenderStrategy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderStrategy = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -29,41 +33,41 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>With `campaignId` only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
+        public string? CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; AdditionalData?.Remove("campaignId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
         private string? _explicitNullValueCampaignId = default!;
 #nullable restore
 #else
-        public string CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
+        public string CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; AdditionalData?.Remove("campaignId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
         private string _explicitNullValueCampaignId = default!;
 #endif
         /// <summary>With `campaignId` only. The channel types that the campaign steps use. Only these types can be enabled in the pool.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListRequiredChannelTypesItem?>? RequiredChannelTypes { get => _explicitNullValueRequiredChannelTypes; set { _explicitNullValueRequiredChannelTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("requiredChannelTypes"); else _explicitNullProperties?.Remove("requiredChannelTypes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListRequiredChannelTypesItem?>? RequiredChannelTypes { get => _explicitNullValueRequiredChannelTypes; set { _explicitNullValueRequiredChannelTypes = value; AdditionalData?.Remove("requiredChannelTypes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("requiredChannelTypes"); else _explicitNullProperties?.Remove("requiredChannelTypes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListRequiredChannelTypesItem?>? _explicitNullValueRequiredChannelTypes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListRequiredChannelTypesItem?> RequiredChannelTypes { get => _explicitNullValueRequiredChannelTypes; set { _explicitNullValueRequiredChannelTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("requiredChannelTypes"); else _explicitNullProperties?.Remove("requiredChannelTypes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListRequiredChannelTypesItem?> RequiredChannelTypes { get => _explicitNullValueRequiredChannelTypes; set { _explicitNullValueRequiredChannelTypes = value; AdditionalData?.Remove("requiredChannelTypes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("requiredChannelTypes"); else _explicitNullProperties?.Remove("requiredChannelTypes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListRequiredChannelTypesItem?> _explicitNullValueRequiredChannelTypes = default!;
 #endif
         /// <summary>The senders property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListSendersItem>? Senders { get => _explicitNullValueSenders; set { _explicitNullValueSenders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senders"); else _explicitNullProperties?.Remove("senders"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListSendersItem>? Senders { get => _explicitNullValueSenders; set { _explicitNullValueSenders = value; AdditionalData?.Remove("senders"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senders"); else _explicitNullProperties?.Remove("senders"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListSendersItem>? _explicitNullValueSenders = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListSendersItem> Senders { get => _explicitNullValueSenders; set { _explicitNullValueSenders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senders"); else _explicitNullProperties?.Remove("senders"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListSendersItem> Senders { get => _explicitNullValueSenders; set { _explicitNullValueSenders = value; AdditionalData?.Remove("senders"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senders"); else _explicitNullProperties?.Remove("senders"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderListSendersItem> _explicitNullValueSenders = default!;
 #endif
         /// <summary>With `campaignId` only. The sender strategy of the campaign.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderStrategy { get => _explicitNullValueSenderStrategy; set { _explicitNullValueSenderStrategy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderStrategy"); else _explicitNullProperties?.Remove("senderStrategy"); } }
+        public string? SenderStrategy { get => _explicitNullValueSenderStrategy; set { _explicitNullValueSenderStrategy = value; AdditionalData?.Remove("senderStrategy"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderStrategy"); else _explicitNullProperties?.Remove("senderStrategy"); } }
         private string? _explicitNullValueSenderStrategy = default!;
 #nullable restore
 #else
-        public string SenderStrategy { get => _explicitNullValueSenderStrategy; set { _explicitNullValueSenderStrategy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderStrategy"); else _explicitNullProperties?.Remove("senderStrategy"); } }
+        public string SenderStrategy { get => _explicitNullValueSenderStrategy; set { _explicitNullValueSenderStrategy = value; AdditionalData?.Remove("senderStrategy"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderStrategy"); else _explicitNullProperties?.Remove("senderStrategy"); } }
         private string _explicitNullValueSenderStrategy = default!;
 #endif
         /// <summary>

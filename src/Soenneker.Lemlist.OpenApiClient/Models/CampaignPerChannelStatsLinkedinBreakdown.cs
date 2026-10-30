@@ -18,8 +18,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("notDelivered") is { } nullNodeNotDelivered && nullNodeNotDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotDelivered = null;
-            if (parseNode.GetChildNode("sent") is { } nullNodeSent && nullNodeSent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sent = null;
+            if (parseNode.GetChildNode("notDelivered") is null) { _explicitNullValueNotDelivered = default!; _explicitNullProperties?.Remove("notDelivered"); }
+            else if (parseNode.GetChildNode("notDelivered") is { } nullNodeNotDelivered && nullNodeNotDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotDelivered = null;
+            if (parseNode.GetChildNode("sent") is null) { _explicitNullValueSent = default!; _explicitNullProperties?.Remove("sent"); }
+            else if (parseNode.GetChildNode("sent") is { } nullNodeSent && nullNodeSent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sent = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>A LinkedIn counter split by message sub-type. The three values sum to the aggregated counter of the same name on `perChannel.linkedin`. All three keys are always present, `0` when there is no matching activity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts? NotDelivered { get => _explicitNullValueNotDelivered; set { _explicitNullValueNotDelivered = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notDelivered"); else _explicitNullProperties?.Remove("notDelivered"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts? NotDelivered { get => _explicitNullValueNotDelivered; set { _explicitNullValueNotDelivered = value; AdditionalData?.Remove("notDelivered"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notDelivered"); else _explicitNullProperties?.Remove("notDelivered"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts? _explicitNullValueNotDelivered = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts NotDelivered { get => _explicitNullValueNotDelivered; set { _explicitNullValueNotDelivered = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notDelivered"); else _explicitNullProperties?.Remove("notDelivered"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts NotDelivered { get => _explicitNullValueNotDelivered; set { _explicitNullValueNotDelivered = value; AdditionalData?.Remove("notDelivered"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notDelivered"); else _explicitNullProperties?.Remove("notDelivered"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts _explicitNullValueNotDelivered = default!;
 #endif
         /// <summary>A LinkedIn counter split by message sub-type. The three values sum to the aggregated counter of the same name on `perChannel.linkedin`. All three keys are always present, `0` when there is no matching activity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts? Sent { get => _explicitNullValueSent; set { _explicitNullValueSent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent"); else _explicitNullProperties?.Remove("sent"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts? Sent { get => _explicitNullValueSent; set { _explicitNullValueSent = value; AdditionalData?.Remove("sent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent"); else _explicitNullProperties?.Remove("sent"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts? _explicitNullValueSent = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts Sent { get => _explicitNullValueSent; set { _explicitNullValueSent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent"); else _explicitNullProperties?.Remove("sent"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts Sent { get => _explicitNullValueSent; set { _explicitNullValueSent = value; AdditionalData?.Remove("sent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent"); else _explicitNullProperties?.Remove("sent"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts _explicitNullValueSent = default!;
 #endif
         /// <summary>

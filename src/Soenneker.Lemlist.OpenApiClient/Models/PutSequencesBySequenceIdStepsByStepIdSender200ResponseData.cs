@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("senderPoolChange") is { } nullNodeSenderPoolChange && nullNodeSenderPoolChange.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderPoolChange = null;
-            if (parseNode.GetChildNode("step") is { } nullNodeStep && nullNodeStep.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Step = null;
+            if (parseNode.GetChildNode("senderPoolChange") is null) { _explicitNullValueSenderPoolChange = default!; _explicitNullProperties?.Remove("senderPoolChange"); }
+            else if (parseNode.GetChildNode("senderPoolChange") is { } nullNodeSenderPoolChange && nullNodeSenderPoolChange.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderPoolChange = null;
+            if (parseNode.GetChildNode("step") is null) { _explicitNullValueStep = default!; _explicitNullProperties?.Remove("step"); }
+            else if (parseNode.GetChildNode("step") is { } nullNodeStep && nullNodeStep.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Step = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The channel types that a step change enables or disables in the sender pool. A type can be in both lists when one account of the type enters the pool and another leaves it. It does not tell whether each sender has an account of the type: read the diagnostics with Get Campaign Senders.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange? SenderPoolChange { get => _explicitNullValueSenderPoolChange; set { _explicitNullValueSenderPoolChange = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderPoolChange"); else _explicitNullProperties?.Remove("senderPoolChange"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange? SenderPoolChange { get => _explicitNullValueSenderPoolChange; set { _explicitNullValueSenderPoolChange = value; AdditionalData?.Remove("senderPoolChange"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderPoolChange"); else _explicitNullProperties?.Remove("senderPoolChange"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange? _explicitNullValueSenderPoolChange = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange SenderPoolChange { get => _explicitNullValueSenderPoolChange; set { _explicitNullValueSenderPoolChange = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderPoolChange"); else _explicitNullProperties?.Remove("senderPoolChange"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange SenderPoolChange { get => _explicitNullValueSenderPoolChange; set { _explicitNullValueSenderPoolChange = value; AdditionalData?.Remove("senderPoolChange"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderPoolChange"); else _explicitNullProperties?.Remove("senderPoolChange"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange _explicitNullValueSenderPoolChange = default!;
 #endif
         /// <summary>The forced sender of a step.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.StepSender? Step { get => _explicitNullValueStep; set { _explicitNullValueStep = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step"); else _explicitNullProperties?.Remove("step"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.StepSender? Step { get => _explicitNullValueStep; set { _explicitNullValueStep = value; AdditionalData?.Remove("step"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step"); else _explicitNullProperties?.Remove("step"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.StepSender? _explicitNullValueStep = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.StepSender Step { get => _explicitNullValueStep; set { _explicitNullValueStep = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step"); else _explicitNullProperties?.Remove("step"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.StepSender Step { get => _explicitNullValueStep; set { _explicitNullValueStep = value; AdditionalData?.Remove("step"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step"); else _explicitNullProperties?.Remove("step"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.StepSender _explicitNullValueStep = default!;
 #endif
         /// <summary>

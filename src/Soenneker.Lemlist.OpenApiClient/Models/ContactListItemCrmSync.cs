@@ -18,12 +18,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("crmRecordId") is { } nullNodeCrmRecordId && nullNodeCrmRecordId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmRecordId = null;
-            if (parseNode.GetChildNode("errors") is { } nullNodeErrors && nullNodeErrors.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Errors = null;
-            if (parseNode.GetChildNode("notFoundAt") is { } nullNodeNotFoundAt && nullNodeNotFoundAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotFoundAt = null;
-            if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
-            if (parseNode.GetChildNode("searching") is { } nullNodeSearching && nullNodeSearching.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Searching = null;
-            if (parseNode.GetChildNode("syncDisabled") is { } nullNodeSyncDisabled && nullNodeSyncDisabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SyncDisabled = null;
+            if (parseNode.GetChildNode("crmRecordId") is null) { _explicitNullValueCrmRecordId = default!; _explicitNullProperties?.Remove("crmRecordId"); }
+            else if (parseNode.GetChildNode("crmRecordId") is { } nullNodeCrmRecordId && nullNodeCrmRecordId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmRecordId = null;
+            if (parseNode.GetChildNode("errors") is null) { _explicitNullValueErrors = default!; _explicitNullProperties?.Remove("errors"); }
+            else if (parseNode.GetChildNode("errors") is { } nullNodeErrors && nullNodeErrors.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Errors = null;
+            if (parseNode.GetChildNode("notFoundAt") is null) { _explicitNullValueNotFoundAt = default!; _explicitNullProperties?.Remove("notFoundAt"); }
+            else if (parseNode.GetChildNode("notFoundAt") is { } nullNodeNotFoundAt && nullNodeNotFoundAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotFoundAt = null;
+            if (parseNode.GetChildNode("provider") is null) { _explicitNullValueProvider = default!; _explicitNullProperties?.Remove("provider"); }
+            else if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
+            if (parseNode.GetChildNode("searching") is null) { _explicitNullValueSearching = default!; _explicitNullProperties?.Remove("searching"); }
+            else if (parseNode.GetChildNode("searching") is { } nullNodeSearching && nullNodeSearching.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Searching = null;
+            if (parseNode.GetChildNode("syncDisabled") is null) { _explicitNullValueSyncDisabled = default!; _explicitNullProperties?.Remove("syncDisabled"); }
+            else if (parseNode.GetChildNode("syncDisabled") is { } nullNodeSyncDisabled && nullNodeSyncDisabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SyncDisabled = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -31,34 +37,34 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Identifier of the contact record on the CRM side. `null` when the lemlist contact has not been synced yet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CrmRecordId { get => _explicitNullValueCrmRecordId; set { _explicitNullValueCrmRecordId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmRecordId"); else _explicitNullProperties?.Remove("crmRecordId"); } }
+        public string? CrmRecordId { get => _explicitNullValueCrmRecordId; set { _explicitNullValueCrmRecordId = value; AdditionalData?.Remove("crmRecordId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmRecordId"); else _explicitNullProperties?.Remove("crmRecordId"); } }
         private string? _explicitNullValueCrmRecordId = default!;
 #nullable restore
 #else
-        public string CrmRecordId { get => _explicitNullValueCrmRecordId; set { _explicitNullValueCrmRecordId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmRecordId"); else _explicitNullProperties?.Remove("crmRecordId"); } }
+        public string CrmRecordId { get => _explicitNullValueCrmRecordId; set { _explicitNullValueCrmRecordId = value; AdditionalData?.Remove("crmRecordId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmRecordId"); else _explicitNullProperties?.Remove("crmRecordId"); } }
         private string _explicitNullValueCrmRecordId = default!;
 #endif
         /// <summary>List of recent sync errors. Empty when the contact is synced cleanly.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem>? Errors { get => _explicitNullValueErrors; set { _explicitNullValueErrors = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("errors"); else _explicitNullProperties?.Remove("errors"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem>? Errors { get => _explicitNullValueErrors; set { _explicitNullValueErrors = value; AdditionalData?.Remove("errors"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("errors"); else _explicitNullProperties?.Remove("errors"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem>? _explicitNullValueErrors = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem> Errors { get => _explicitNullValueErrors; set { _explicitNullValueErrors = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("errors"); else _explicitNullProperties?.Remove("errors"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem> Errors { get => _explicitNullValueErrors; set { _explicitNullValueErrors = value; AdditionalData?.Remove("errors"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("errors"); else _explicitNullProperties?.Remove("errors"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem> _explicitNullValueErrors = default!;
 #endif
         /// <summary>When the last CRM search found no matching record. `null` otherwise.</summary>
-        public DateTimeOffset? NotFoundAt { get => _explicitNullValueNotFoundAt; set { _explicitNullValueNotFoundAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notFoundAt"); else _explicitNullProperties?.Remove("notFoundAt"); } }
+        public DateTimeOffset? NotFoundAt { get => _explicitNullValueNotFoundAt; set { _explicitNullValueNotFoundAt = value; AdditionalData?.Remove("notFoundAt"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notFoundAt"); else _explicitNullProperties?.Remove("notFoundAt"); } }
         private DateTimeOffset? _explicitNullValueNotFoundAt = default!;
         /// <summary>Active CRM provider for the team.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; AdditionalData?.Remove("provider"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncProvider? _explicitNullValueProvider = default!;
         /// <summary>`true` while a CRM search (Search &amp; connect, Create in CRM) is queued or running for this contact, however long the queue takes. A search marked running more than 15 minutes ago with nothing left in the queue stalled: the read clears it and returns `false`.</summary>
-        public bool? Searching { get => _explicitNullValueSearching; set { _explicitNullValueSearching = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("searching"); else _explicitNullProperties?.Remove("searching"); } }
+        public bool? Searching { get => _explicitNullValueSearching; set { _explicitNullValueSearching = value; AdditionalData?.Remove("searching"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("searching"); else _explicitNullProperties?.Remove("searching"); } }
         private bool? _explicitNullValueSearching = default!;
         /// <summary>When `true`, automatic sync is paused for this contact.</summary>
-        public bool? SyncDisabled { get => _explicitNullValueSyncDisabled; set { _explicitNullValueSyncDisabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("syncDisabled"); else _explicitNullProperties?.Remove("syncDisabled"); } }
+        public bool? SyncDisabled { get => _explicitNullValueSyncDisabled; set { _explicitNullValueSyncDisabled = value; AdditionalData?.Remove("syncDisabled"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("syncDisabled"); else _explicitNullProperties?.Remove("syncDisabled"); } }
         private bool? _explicitNullValueSyncDisabled = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSync"/> and sets the default values.
@@ -88,7 +94,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "crmRecordId", n => { CrmRecordId = n.GetStringValue(); } },
                 { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncErrorsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "notFoundAt", n => { NotFoundAt = n.GetDateTimeOffsetValue(); } },
-                { "provider", n => { Provider = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncProvider>(); } },
+                { "provider", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ContactListItemCrmSyncProvider>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueProvider = default; _explicitNullProperties?.Remove("provider"); AdditionalData["provider"] = unknown; } else { Provider = parsed; AdditionalData.Remove("provider"); } } },
                 { "searching", n => { Searching = n.GetBoolValue(); } },
                 { "syncDisabled", n => { SyncDisabled = n.GetBoolValue(); } },
             };

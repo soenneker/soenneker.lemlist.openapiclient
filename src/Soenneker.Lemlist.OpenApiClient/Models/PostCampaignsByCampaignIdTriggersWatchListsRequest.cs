@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("watchListId") is { } nullNodeWatchListId && nullNodeWatchListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WatchListId = null;
+            if (parseNode.GetChildNode("watchListId") is null) { _explicitNullValueWatchListId = default!; _explicitNullProperties?.Remove("watchListId"); }
+            else if (parseNode.GetChildNode("watchListId") is { } nullNodeWatchListId && nullNodeWatchListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WatchListId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Id of the Signal Agent (wat_xxx) to link to the campaign.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
+        public string? WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; AdditionalData?.Remove("watchListId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
         private string? _explicitNullValueWatchListId = default!;
 #nullable restore
 #else
-        public string WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
+        public string WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; AdditionalData?.Remove("watchListId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
         private string _explicitNullValueWatchListId = default!;
 #endif
         /// <summary>

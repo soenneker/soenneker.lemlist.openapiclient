@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("draftId") is { } nullNodeDraftId && nullNodeDraftId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DraftId = null;
+            if (parseNode.GetChildNode("draftId") is null) { _explicitNullValueDraftId = default!; _explicitNullProperties?.Remove("draftId"); }
+            else if (parseNode.GetChildNode("draftId") is { } nullNodeDraftId && nullNodeDraftId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DraftId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>ID of the created draft</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DraftId { get => _explicitNullValueDraftId; set { _explicitNullValueDraftId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draftId"); else _explicitNullProperties?.Remove("draftId"); } }
+        public string? DraftId { get => _explicitNullValueDraftId; set { _explicitNullValueDraftId = value; AdditionalData?.Remove("draftId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draftId"); else _explicitNullProperties?.Remove("draftId"); } }
         private string? _explicitNullValueDraftId = default!;
 #nullable restore
 #else
-        public string DraftId { get => _explicitNullValueDraftId; set { _explicitNullValueDraftId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draftId"); else _explicitNullProperties?.Remove("draftId"); } }
+        public string DraftId { get => _explicitNullValueDraftId; set { _explicitNullValueDraftId = value; AdditionalData?.Remove("draftId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draftId"); else _explicitNullProperties?.Remove("draftId"); } }
         private string _explicitNullValueDraftId = default!;
 #endif
         /// <summary>

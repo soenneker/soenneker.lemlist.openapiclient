@@ -18,47 +18,53 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("callAnswered") is { } nullNodeCallAnswered && nullNodeCallAnswered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallAnswered = null;
-            if (parseNode.GetChildNode("callNegative") is { } nullNodeCallNegative && nullNodeCallNegative.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallNegative = null;
-            if (parseNode.GetChildNode("callPositive") is { } nullNodeCallPositive && nullNodeCallPositive.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallPositive = null;
-            if (parseNode.GetChildNode("key") is { } nullNodeKey && nullNodeKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Key = null;
-            if (parseNode.GetChildNode("label") is { } nullNodeLabel && nullNodeLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Label = null;
-            if (parseNode.GetChildNode("pausesCampaigns") is { } nullNodePausesCampaigns && nullNodePausesCampaigns.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PausesCampaigns = null;
+            if (parseNode.GetChildNode("callAnswered") is null) { _explicitNullValueCallAnswered = default!; _explicitNullProperties?.Remove("callAnswered"); }
+            else if (parseNode.GetChildNode("callAnswered") is { } nullNodeCallAnswered && nullNodeCallAnswered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallAnswered = null;
+            if (parseNode.GetChildNode("callNegative") is null) { _explicitNullValueCallNegative = default!; _explicitNullProperties?.Remove("callNegative"); }
+            else if (parseNode.GetChildNode("callNegative") is { } nullNodeCallNegative && nullNodeCallNegative.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallNegative = null;
+            if (parseNode.GetChildNode("callPositive") is null) { _explicitNullValueCallPositive = default!; _explicitNullProperties?.Remove("callPositive"); }
+            else if (parseNode.GetChildNode("callPositive") is { } nullNodeCallPositive && nullNodeCallPositive.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallPositive = null;
+            if (parseNode.GetChildNode("key") is null) { _explicitNullValueKey = default!; _explicitNullProperties?.Remove("key"); }
+            else if (parseNode.GetChildNode("key") is { } nullNodeKey && nullNodeKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Key = null;
+            if (parseNode.GetChildNode("label") is null) { _explicitNullValueLabel = default!; _explicitNullProperties?.Remove("label"); }
+            else if (parseNode.GetChildNode("label") is { } nullNodeLabel && nullNodeLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Label = null;
+            if (parseNode.GetChildNode("pausesCampaigns") is null) { _explicitNullValuePausesCampaigns = default!; _explicitNullProperties?.Remove("pausesCampaigns"); }
+            else if (parseNode.GetChildNode("pausesCampaigns") is { } nullNodePausesCampaigns && nullNodePausesCampaigns.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PausesCampaigns = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The status counts the call as answered in the reports.</summary>
-        public bool? CallAnswered { get => _explicitNullValueCallAnswered; set { _explicitNullValueCallAnswered = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callAnswered"); else _explicitNullProperties?.Remove("callAnswered"); } }
+        public bool? CallAnswered { get => _explicitNullValueCallAnswered; set { _explicitNullValueCallAnswered = value; AdditionalData?.Remove("callAnswered"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callAnswered"); else _explicitNullProperties?.Remove("callAnswered"); } }
         private bool? _explicitNullValueCallAnswered = default!;
         /// <summary>The status marks the lead as not interested.</summary>
-        public bool? CallNegative { get => _explicitNullValueCallNegative; set { _explicitNullValueCallNegative = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callNegative"); else _explicitNullProperties?.Remove("callNegative"); } }
+        public bool? CallNegative { get => _explicitNullValueCallNegative; set { _explicitNullValueCallNegative = value; AdditionalData?.Remove("callNegative"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callNegative"); else _explicitNullProperties?.Remove("callNegative"); } }
         private bool? _explicitNullValueCallNegative = default!;
         /// <summary>The status marks the lead as interested and stops its campaign.</summary>
-        public bool? CallPositive { get => _explicitNullValueCallPositive; set { _explicitNullValueCallPositive = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callPositive"); else _explicitNullProperties?.Remove("callPositive"); } }
+        public bool? CallPositive { get => _explicitNullValueCallPositive; set { _explicitNullValueCallPositive = value; AdditionalData?.Remove("callPositive"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callPositive"); else _explicitNullProperties?.Remove("callPositive"); } }
         private bool? _explicitNullValueCallPositive = default!;
         /// <summary>What `callStatus` takes on `POST /calls` and `PATCH /calls/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Key { get => _explicitNullValueKey; set { _explicitNullValueKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("key"); else _explicitNullProperties?.Remove("key"); } }
+        public string? Key { get => _explicitNullValueKey; set { _explicitNullValueKey = value; AdditionalData?.Remove("key"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("key"); else _explicitNullProperties?.Remove("key"); } }
         private string? _explicitNullValueKey = default!;
 #nullable restore
 #else
-        public string Key { get => _explicitNullValueKey; set { _explicitNullValueKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("key"); else _explicitNullProperties?.Remove("key"); } }
+        public string Key { get => _explicitNullValueKey; set { _explicitNullValueKey = value; AdditionalData?.Remove("key"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("key"); else _explicitNullProperties?.Remove("key"); } }
         private string _explicitNullValueKey = default!;
 #endif
         /// <summary>The label property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
+        public string? Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; AdditionalData?.Remove("label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
         private string? _explicitNullValueLabel = default!;
 #nullable restore
 #else
-        public string Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
+        public string Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; AdditionalData?.Remove("label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
         private string _explicitNullValueLabel = default!;
 #endif
         /// <summary>The status pauses campaigns for the lead or its company.</summary>
-        public bool? PausesCampaigns { get => _explicitNullValuePausesCampaigns; set { _explicitNullValuePausesCampaigns = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pausesCampaigns"); else _explicitNullProperties?.Remove("pausesCampaigns"); } }
+        public bool? PausesCampaigns { get => _explicitNullValuePausesCampaigns; set { _explicitNullValuePausesCampaigns = value; AdditionalData?.Remove("pausesCampaigns"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pausesCampaigns"); else _explicitNullProperties?.Remove("pausesCampaigns"); } }
         private bool? _explicitNullValuePausesCampaigns = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CallStatus"/> and sets the default values.

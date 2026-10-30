@@ -18,21 +18,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("inMails") is { } nullNodeInMails && nullNodeInMails.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InMails = null;
-            if (parseNode.GetChildNode("messages") is { } nullNodeMessages && nullNodeMessages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Messages = null;
-            if (parseNode.GetChildNode("voiceNotes") is { } nullNodeVoiceNotes && nullNodeVoiceNotes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) VoiceNotes = null;
+            if (parseNode.GetChildNode("inMails") is null) { _explicitNullValueInMails = default!; _explicitNullProperties?.Remove("inMails"); }
+            else if (parseNode.GetChildNode("inMails") is { } nullNodeInMails && nullNodeInMails.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InMails = null;
+            if (parseNode.GetChildNode("messages") is null) { _explicitNullValueMessages = default!; _explicitNullProperties?.Remove("messages"); }
+            else if (parseNode.GetChildNode("messages") is { } nullNodeMessages && nullNodeMessages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Messages = null;
+            if (parseNode.GetChildNode("voiceNotes") is null) { _explicitNullValueVoiceNotes = default!; _explicitNullProperties?.Remove("voiceNotes"); }
+            else if (parseNode.GetChildNode("voiceNotes") is { } nullNodeVoiceNotes && nullNodeVoiceNotes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) VoiceNotes = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>InMails.</summary>
-        public int? InMails { get => _explicitNullValueInMails; set { _explicitNullValueInMails = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inMails"); else _explicitNullProperties?.Remove("inMails"); } }
+        public int? InMails { get => _explicitNullValueInMails; set { _explicitNullValueInMails = value; AdditionalData?.Remove("inMails"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inMails"); else _explicitNullProperties?.Remove("inMails"); } }
         private int? _explicitNullValueInMails = default!;
         /// <summary>Regular LinkedIn messages.</summary>
-        public int? Messages { get => _explicitNullValueMessages; set { _explicitNullValueMessages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("messages"); else _explicitNullProperties?.Remove("messages"); } }
+        public int? Messages { get => _explicitNullValueMessages; set { _explicitNullValueMessages = value; AdditionalData?.Remove("messages"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("messages"); else _explicitNullProperties?.Remove("messages"); } }
         private int? _explicitNullValueMessages = default!;
         /// <summary>LinkedIn voice notes.</summary>
-        public int? VoiceNotes { get => _explicitNullValueVoiceNotes; set { _explicitNullValueVoiceNotes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("voiceNotes"); else _explicitNullProperties?.Remove("voiceNotes"); } }
+        public int? VoiceNotes { get => _explicitNullValueVoiceNotes; set { _explicitNullValueVoiceNotes = value; AdditionalData?.Remove("voiceNotes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("voiceNotes"); else _explicitNullProperties?.Remove("voiceNotes"); } }
         private int? _explicitNullValueVoiceNotes = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinSubTypeCounts"/> and sets the default values.

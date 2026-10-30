@@ -18,34 +18,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("filterId") is { } nullNodeFilterId && nullNodeFilterId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FilterId = null;
-            if (parseNode.GetChildNode("in") is { } nullNodeIn && nullNodeIn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) In = null;
-            if (parseNode.GetChildNode("out") is { } nullNodeOut && nullNodeOut.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Out = null;
+            if (parseNode.GetChildNode("filterId") is null) { _explicitNullValueFilterId = default!; _explicitNullProperties?.Remove("filterId"); }
+            else if (parseNode.GetChildNode("filterId") is { } nullNodeFilterId && nullNodeFilterId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FilterId = null;
+            if (parseNode.GetChildNode("in") is null) { _explicitNullValueIn = default!; _explicitNullProperties?.Remove("in"); }
+            else if (parseNode.GetChildNode("in") is { } nullNodeIn && nullNodeIn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) In = null;
+            if (parseNode.GetChildNode("out") is null) { _explicitNullValueOut = default!; _explicitNullProperties?.Remove("out"); }
+            else if (parseNode.GetChildNode("out") is { } nullNodeOut && nullNodeOut.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Out = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Filter identifier</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId? FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId? FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; AdditionalData?.Remove("filterId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId? _explicitNullValueFilterId = default!;
         /// <summary>Values to include. For `externalSignalFieldMapping` and `externalSignalCustomFieldMapping`, an array of mapping objects (see `WatchListExternalSignalMapping`); the JSON-serialized form returned when reading an agent is also accepted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>? In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
+        public List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>? In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; AdditionalData?.Remove("in"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
         private List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>? _explicitNullValueIn = default!;
 #nullable restore
 #else
-        public List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode> In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
+        public List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode> In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; AdditionalData?.Remove("in"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
         private List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode> _explicitNullValueIn = default!;
 #endif
         /// <summary>Values to exclude</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
+        public List<string>? Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; AdditionalData?.Remove("out"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
         private List<string>? _explicitNullValueOut = default!;
 #nullable restore
 #else
-        public List<string> Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
+        public List<string> Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; AdditionalData?.Remove("out"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
         private List<string> _explicitNullValueOut = default!;
 #endif
         /// <summary>
@@ -73,7 +76,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "filterId", n => { FilterId = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId>(); } },
+                { "filterId", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilterFilterId>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueFilterId = default; _explicitNullProperties?.Remove("filterId"); AdditionalData["filterId"] = unknown; } else { FilterId = parsed; AdditionalData.Remove("filterId"); } } },
                 { "in", n => { In = n.GetCollectionOfObjectValues<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "out", n => { Out = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };

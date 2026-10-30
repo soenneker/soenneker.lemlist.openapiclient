@@ -17,12 +17,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("authCode") is { } nullNodeAuthCode && nullNodeAuthCode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AuthCode = null;
-            if (parseNode.GetChildNode("billingContact") is { } nullNodeBillingContact && nullNodeBillingContact.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BillingContact = null;
-            if (parseNode.GetChildNode("dnsRecords") is { } nullNodeDnsRecords && nullNodeDnsRecords.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DnsRecords = null;
-            if (parseNode.GetChildNode("domain") is { } nullNodeDomain && nullNodeDomain.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Domain = null;
-            if (parseNode.GetChildNode("isTransfer") is { } nullNodeIsTransfer && nullNodeIsTransfer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IsTransfer = null;
-            if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
+            if (parseNode.GetChildNode("authCode") is null) { _explicitNullValueAuthCode = default!; _explicitNullProperties?.Remove("authCode"); }
+            else if (parseNode.GetChildNode("authCode") is { } nullNodeAuthCode && nullNodeAuthCode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AuthCode = null;
+            if (parseNode.GetChildNode("billingContact") is null) { _explicitNullValueBillingContact = default!; _explicitNullProperties?.Remove("billingContact"); }
+            else if (parseNode.GetChildNode("billingContact") is { } nullNodeBillingContact && nullNodeBillingContact.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BillingContact = null;
+            if (parseNode.GetChildNode("dnsRecords") is null) { _explicitNullValueDnsRecords = default!; _explicitNullProperties?.Remove("dnsRecords"); }
+            else if (parseNode.GetChildNode("dnsRecords") is { } nullNodeDnsRecords && nullNodeDnsRecords.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DnsRecords = null;
+            if (parseNode.GetChildNode("domain") is null) { _explicitNullValueDomain = default!; _explicitNullProperties?.Remove("domain"); }
+            else if (parseNode.GetChildNode("domain") is { } nullNodeDomain && nullNodeDomain.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Domain = null;
+            if (parseNode.GetChildNode("isTransfer") is null) { _explicitNullValueIsTransfer = default!; _explicitNullProperties?.Remove("isTransfer"); }
+            else if (parseNode.GetChildNode("isTransfer") is { } nullNodeIsTransfer && nullNodeIsTransfer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IsTransfer = null;
+            if (parseNode.GetChildNode("provider") is null) { _explicitNullValueProvider = default!; _explicitNullProperties?.Remove("provider"); }
+            else if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -30,48 +36,48 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Transfer authorization code from the current registrar. Required when `isTransfer` is `true`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AuthCode { get => _explicitNullValueAuthCode; set { _explicitNullValueAuthCode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authCode"); else _explicitNullProperties?.Remove("authCode"); } }
+        public string? AuthCode { get => _explicitNullValueAuthCode; set { _explicitNullValueAuthCode = value; AdditionalData?.Remove("authCode"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authCode"); else _explicitNullProperties?.Remove("authCode"); } }
         private string? _explicitNullValueAuthCode = default!;
 #nullable restore
 #else
-        public string AuthCode { get => _explicitNullValueAuthCode; set { _explicitNullValueAuthCode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authCode"); else _explicitNullProperties?.Remove("authCode"); } }
+        public string AuthCode { get => _explicitNullValueAuthCode; set { _explicitNullValueAuthCode = value; AdditionalData?.Remove("authCode"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authCode"); else _explicitNullProperties?.Remove("authCode"); } }
         private string _explicitNullValueAuthCode = default!;
 #endif
         /// <summary>Registrant contact of the team, sent to the registrar. Stored on the team and reused for every later purchase; sending it again overwrites the stored one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DomainBillingContact? BillingContact { get => _explicitNullValueBillingContact; set { _explicitNullValueBillingContact = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("billingContact"); else _explicitNullProperties?.Remove("billingContact"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DomainBillingContact? BillingContact { get => _explicitNullValueBillingContact; set { _explicitNullValueBillingContact = value; AdditionalData?.Remove("billingContact"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("billingContact"); else _explicitNullProperties?.Remove("billingContact"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DomainBillingContact? _explicitNullValueBillingContact = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DomainBillingContact BillingContact { get => _explicitNullValueBillingContact; set { _explicitNullValueBillingContact = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("billingContact"); else _explicitNullProperties?.Remove("billingContact"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DomainBillingContact BillingContact { get => _explicitNullValueBillingContact; set { _explicitNullValueBillingContact = value; AdditionalData?.Remove("billingContact"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("billingContact"); else _explicitNullProperties?.Remove("billingContact"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DomainBillingContact _explicitNullValueBillingContact = default!;
 #endif
         /// <summary>Transfer only: records to recreate on the zone once the transfer completes. Ignored for a registration.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem>? DnsRecords { get => _explicitNullValueDnsRecords; set { _explicitNullValueDnsRecords = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dnsRecords"); else _explicitNullProperties?.Remove("dnsRecords"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem>? DnsRecords { get => _explicitNullValueDnsRecords; set { _explicitNullValueDnsRecords = value; AdditionalData?.Remove("dnsRecords"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dnsRecords"); else _explicitNullProperties?.Remove("dnsRecords"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem>? _explicitNullValueDnsRecords = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem> DnsRecords { get => _explicitNullValueDnsRecords; set { _explicitNullValueDnsRecords = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dnsRecords"); else _explicitNullProperties?.Remove("dnsRecords"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem> DnsRecords { get => _explicitNullValueDnsRecords; set { _explicitNullValueDnsRecords = value; AdditionalData?.Remove("dnsRecords"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dnsRecords"); else _explicitNullProperties?.Remove("dnsRecords"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem> _explicitNullValueDnsRecords = default!;
 #endif
         /// <summary>Domain to buy or transfer</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Domain { get => _explicitNullValueDomain; set { _explicitNullValueDomain = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("domain"); else _explicitNullProperties?.Remove("domain"); } }
+        public string? Domain { get => _explicitNullValueDomain; set { _explicitNullValueDomain = value; AdditionalData?.Remove("domain"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("domain"); else _explicitNullProperties?.Remove("domain"); } }
         private string? _explicitNullValueDomain = default!;
 #nullable restore
 #else
-        public string Domain { get => _explicitNullValueDomain; set { _explicitNullValueDomain = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("domain"); else _explicitNullProperties?.Remove("domain"); } }
+        public string Domain { get => _explicitNullValueDomain; set { _explicitNullValueDomain = value; AdditionalData?.Remove("domain"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("domain"); else _explicitNullProperties?.Remove("domain"); } }
         private string _explicitNullValueDomain = default!;
 #endif
         /// <summary>Transfer a domain registered elsewhere instead of registering a new one</summary>
-        public bool? IsTransfer { get => _explicitNullValueIsTransfer; set { _explicitNullValueIsTransfer = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("isTransfer"); else _explicitNullProperties?.Remove("isTransfer"); } }
+        public bool? IsTransfer { get => _explicitNullValueIsTransfer; set { _explicitNullValueIsTransfer = value; AdditionalData?.Remove("isTransfer"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("isTransfer"); else _explicitNullProperties?.Remove("isTransfer"); } }
         private bool? _explicitNullValueIsTransfer = default!;
         /// <summary>Mailbox provider of the domain, permanent: `google` (Google Workspace), `m365` (Microsoft 365) or `infraforge` (SMTP). Pick one listed in the Search Domains `providers`. A transfer requires `google`.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; AdditionalData?.Remove("provider"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestProvider? _explicitNullValueProvider = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequest"/> and sets the default values.
@@ -104,7 +110,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "dnsRecords", n => { DnsRecords = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestDnsRecordsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "domain", n => { Domain = n.GetStringValue(); } },
                 { "isTransfer", n => { IsTransfer = n.GetBoolValue(); } },
-                { "provider", n => { Provider = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestProvider>(); } },
+                { "provider", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PurchaseDomainRequestProvider>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueProvider = default; _explicitNullProperties?.Remove("provider"); AdditionalData["provider"] = unknown; } else { Provider = parsed; AdditionalData.Remove("provider"); } } },
             };
         }
         /// <summary>

@@ -17,31 +17,35 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("deduplicate") is { } nullNodeDeduplicate && nullNodeDeduplicate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deduplicate = null;
-            if (parseNode.GetChildNode("duplicateProcessingType") is { } nullNodeDuplicateProcessingType && nullNodeDuplicateProcessingType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DuplicateProcessingType = null;
-            if (parseNode.GetChildNode("importFromExistingSignals") is { } nullNodeImportFromExistingSignals && nullNodeImportFromExistingSignals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImportFromExistingSignals = null;
-            if (parseNode.GetChildNode("watchListIds") is { } nullNodeWatchListIds && nullNodeWatchListIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WatchListIds = null;
+            if (parseNode.GetChildNode("deduplicate") is null) { _explicitNullValueDeduplicate = default!; _explicitNullProperties?.Remove("deduplicate"); }
+            else if (parseNode.GetChildNode("deduplicate") is { } nullNodeDeduplicate && nullNodeDeduplicate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deduplicate = null;
+            if (parseNode.GetChildNode("duplicateProcessingType") is null) { _explicitNullValueDuplicateProcessingType = default!; _explicitNullProperties?.Remove("duplicateProcessingType"); }
+            else if (parseNode.GetChildNode("duplicateProcessingType") is { } nullNodeDuplicateProcessingType && nullNodeDuplicateProcessingType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DuplicateProcessingType = null;
+            if (parseNode.GetChildNode("importFromExistingSignals") is null) { _explicitNullValueImportFromExistingSignals = default!; _explicitNullProperties?.Remove("importFromExistingSignals"); }
+            else if (parseNode.GetChildNode("importFromExistingSignals") is { } nullNodeImportFromExistingSignals && nullNodeImportFromExistingSignals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImportFromExistingSignals = null;
+            if (parseNode.GetChildNode("watchListIds") is null) { _explicitNullValueWatchListIds = default!; _explicitNullProperties?.Remove("watchListIds"); }
+            else if (parseNode.GetChildNode("watchListIds") is { } nullNodeWatchListIds && nullNodeWatchListIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WatchListIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether a contact already in the campaign is skipped instead of being added again.</summary>
-        public bool? Deduplicate { get => _explicitNullValueDeduplicate; set { _explicitNullValueDeduplicate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deduplicate"); else _explicitNullProperties?.Remove("deduplicate"); } }
+        public bool? Deduplicate { get => _explicitNullValueDeduplicate; set { _explicitNullValueDeduplicate = value; AdditionalData?.Remove("deduplicate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deduplicate"); else _explicitNullProperties?.Remove("deduplicate"); } }
         private bool? _explicitNullValueDeduplicate = default!;
         /// <summary>How a duplicate contact is handled.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200ResponseDataDuplicateProcessingType? DuplicateProcessingType { get => _explicitNullValueDuplicateProcessingType; set { _explicitNullValueDuplicateProcessingType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("duplicateProcessingType"); else _explicitNullProperties?.Remove("duplicateProcessingType"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200ResponseDataDuplicateProcessingType? DuplicateProcessingType { get => _explicitNullValueDuplicateProcessingType; set { _explicitNullValueDuplicateProcessingType = value; AdditionalData?.Remove("duplicateProcessingType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("duplicateProcessingType"); else _explicitNullProperties?.Remove("duplicateProcessingType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200ResponseDataDuplicateProcessingType? _explicitNullValueDuplicateProcessingType = default!;
         /// <summary>Whether signals detected before the link are backfilled into the campaign. `false` on a link made through the API; change it in the campaign editor.</summary>
-        public bool? ImportFromExistingSignals { get => _explicitNullValueImportFromExistingSignals; set { _explicitNullValueImportFromExistingSignals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("importFromExistingSignals"); else _explicitNullProperties?.Remove("importFromExistingSignals"); } }
+        public bool? ImportFromExistingSignals { get => _explicitNullValueImportFromExistingSignals; set { _explicitNullValueImportFromExistingSignals = value; AdditionalData?.Remove("importFromExistingSignals"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("importFromExistingSignals"); else _explicitNullProperties?.Remove("importFromExistingSignals"); } }
         private bool? _explicitNullValueImportFromExistingSignals = default!;
         /// <summary>Every Signal Agent linked to the campaign as a signal trigger.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? WatchListIds { get => _explicitNullValueWatchListIds; set { _explicitNullValueWatchListIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListIds"); else _explicitNullProperties?.Remove("watchListIds"); } }
+        public List<string>? WatchListIds { get => _explicitNullValueWatchListIds; set { _explicitNullValueWatchListIds = value; AdditionalData?.Remove("watchListIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListIds"); else _explicitNullProperties?.Remove("watchListIds"); } }
         private List<string>? _explicitNullValueWatchListIds = default!;
 #nullable restore
 #else
-        public List<string> WatchListIds { get => _explicitNullValueWatchListIds; set { _explicitNullValueWatchListIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListIds"); else _explicitNullProperties?.Remove("watchListIds"); } }
+        public List<string> WatchListIds { get => _explicitNullValueWatchListIds; set { _explicitNullValueWatchListIds = value; AdditionalData?.Remove("watchListIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListIds"); else _explicitNullProperties?.Remove("watchListIds"); } }
         private List<string> _explicitNullValueWatchListIds = default!;
 #endif
         /// <summary>
@@ -70,7 +74,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "deduplicate", n => { Deduplicate = n.GetBoolValue(); } },
-                { "duplicateProcessingType", n => { DuplicateProcessingType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200ResponseDataDuplicateProcessingType>(); } },
+                { "duplicateProcessingType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200ResponseDataDuplicateProcessingType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDuplicateProcessingType = default; _explicitNullProperties?.Remove("duplicateProcessingType"); AdditionalData["duplicateProcessingType"] = unknown; } else { DuplicateProcessingType = parsed; AdditionalData.Remove("duplicateProcessingType"); } } },
                 { "importFromExistingSignals", n => { ImportFromExistingSignals = n.GetBoolValue(); } },
                 { "watchListIds", n => { WatchListIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };

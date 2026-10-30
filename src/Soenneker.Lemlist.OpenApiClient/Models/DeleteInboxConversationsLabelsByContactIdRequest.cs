@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("labelIds") is { } nullNodeLabelIds && nullNodeLabelIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LabelIds = null;
+            if (parseNode.GetChildNode("labelIds") is null) { _explicitNullValueLabelIds = default!; _explicitNullProperties?.Remove("labelIds"); }
+            else if (parseNode.GetChildNode("labelIds") is { } nullNodeLabelIds && nullNodeLabelIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LabelIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Array of label IDs to remove</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LabelIds { get => _explicitNullValueLabelIds; set { _explicitNullValueLabelIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labelIds"); else _explicitNullProperties?.Remove("labelIds"); } }
+        public List<string>? LabelIds { get => _explicitNullValueLabelIds; set { _explicitNullValueLabelIds = value; AdditionalData?.Remove("labelIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labelIds"); else _explicitNullProperties?.Remove("labelIds"); } }
         private List<string>? _explicitNullValueLabelIds = default!;
 #nullable restore
 #else
-        public List<string> LabelIds { get => _explicitNullValueLabelIds; set { _explicitNullValueLabelIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labelIds"); else _explicitNullProperties?.Remove("labelIds"); } }
+        public List<string> LabelIds { get => _explicitNullValueLabelIds; set { _explicitNullValueLabelIds = value; AdditionalData?.Remove("labelIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labelIds"); else _explicitNullProperties?.Remove("labelIds"); } }
         private List<string> _explicitNullValueLabelIds = default!;
 #endif
         /// <summary>

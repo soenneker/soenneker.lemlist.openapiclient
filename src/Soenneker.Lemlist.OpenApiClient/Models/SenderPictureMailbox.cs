@@ -18,13 +18,20 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
-            if (parseNode.GetChildNode("hasOverride") is { } nullNodeHasOverride && nullNodeHasOverride.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HasOverride = null;
-            if (parseNode.GetChildNode("lastError") is { } nullNodeLastError && nullNodeLastError.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastError = null;
-            if (parseNode.GetChildNode("mailboxId") is { } nullNodeMailboxId && nullNodeMailboxId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MailboxId = null;
-            if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
-            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
-            if (parseNode.GetChildNode("syncedAt") is { } nullNodeSyncedAt && nullNodeSyncedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SyncedAt = null;
+            if (parseNode.GetChildNode("email") is null) { _explicitNullValueEmail = default!; _explicitNullProperties?.Remove("email"); }
+            else if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
+            if (parseNode.GetChildNode("hasOverride") is null) { _explicitNullValueHasOverride = default!; _explicitNullProperties?.Remove("hasOverride"); }
+            else if (parseNode.GetChildNode("hasOverride") is { } nullNodeHasOverride && nullNodeHasOverride.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HasOverride = null;
+            if (parseNode.GetChildNode("lastError") is null) { _explicitNullValueLastError = default!; _explicitNullProperties?.Remove("lastError"); }
+            else if (parseNode.GetChildNode("lastError") is { } nullNodeLastError && nullNodeLastError.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastError = null;
+            if (parseNode.GetChildNode("mailboxId") is null) { _explicitNullValueMailboxId = default!; _explicitNullProperties?.Remove("mailboxId"); }
+            else if (parseNode.GetChildNode("mailboxId") is { } nullNodeMailboxId && nullNodeMailboxId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MailboxId = null;
+            if (parseNode.GetChildNode("provider") is null) { _explicitNullValueProvider = default!; _explicitNullProperties?.Remove("provider"); }
+            else if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
+            if (parseNode.GetChildNode("status") is null) { _explicitNullValueStatus = default!; _explicitNullProperties?.Remove("status"); }
+            else if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("syncedAt") is null) { _explicitNullValueSyncedAt = default!; _explicitNullProperties?.Remove("syncedAt"); }
+            else if (parseNode.GetChildNode("syncedAt") is { } nullNodeSyncedAt && nullNodeSyncedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SyncedAt = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -32,44 +39,44 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Address of the mailbox</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
+        public string? Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; AdditionalData?.Remove("email"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
         private string? _explicitNullValueEmail = default!;
 #nullable restore
 #else
-        public string Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
+        public string Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; AdditionalData?.Remove("email"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
         private string _explicitNullValueEmail = default!;
 #endif
         /// <summary>`true` when this mailbox uses its own picture instead of its owner&apos;s lemlist profile picture</summary>
-        public bool? HasOverride { get => _explicitNullValueHasOverride; set { _explicitNullValueHasOverride = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hasOverride"); else _explicitNullProperties?.Remove("hasOverride"); } }
+        public bool? HasOverride { get => _explicitNullValueHasOverride; set { _explicitNullValueHasOverride = value; AdditionalData?.Remove("hasOverride"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hasOverride"); else _explicitNullProperties?.Remove("hasOverride"); } }
         private bool? _explicitNullValueHasOverride = default!;
         /// <summary>Why the last push failed, `null` otherwise</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastError { get => _explicitNullValueLastError; set { _explicitNullValueLastError = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastError"); else _explicitNullProperties?.Remove("lastError"); } }
+        public string? LastError { get => _explicitNullValueLastError; set { _explicitNullValueLastError = value; AdditionalData?.Remove("lastError"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastError"); else _explicitNullProperties?.Remove("lastError"); } }
         private string? _explicitNullValueLastError = default!;
 #nullable restore
 #else
-        public string LastError { get => _explicitNullValueLastError; set { _explicitNullValueLastError = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastError"); else _explicitNullProperties?.Remove("lastError"); } }
+        public string LastError { get => _explicitNullValueLastError; set { _explicitNullValueLastError = value; AdditionalData?.Remove("lastError"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastError"); else _explicitNullProperties?.Remove("lastError"); } }
         private string _explicitNullValueLastError = default!;
 #endif
         /// <summary>Unique identifier of the purchased mailbox (`dem_...`). Pass it as `mailboxId` to [Sync Sender Picture](/api-reference/endpoints/sender-picture/sync-sender-picture).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
+        public string? MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; AdditionalData?.Remove("mailboxId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
         private string? _explicitNullValueMailboxId = default!;
 #nullable restore
 #else
-        public string MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
+        public string MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; AdditionalData?.Remove("mailboxId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }
         private string _explicitNullValueMailboxId = default!;
 #endif
         /// <summary>Where the picture is pushed. `null` when the mailbox cannot take a picture (see `not-supported`).</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; AdditionalData?.Remove("provider"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider? _explicitNullValueProvider = default!;
         /// <summary>`synced`: the current picture is on the mailbox. `not-synced`: never pushed, or the picture changed since. `queued` / `syncing`: a push is in progress. `failed`: the last push failed, `lastError` says why. `not-supported`: not a Google Workspace or Microsoft 365 mailbox bought through lemlist, nothing can be pushed.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus? _explicitNullValueStatus = default!;
         /// <summary>When the picture was last pushed, `null` if never</summary>
-        public DateTimeOffset? SyncedAt { get => _explicitNullValueSyncedAt; set { _explicitNullValueSyncedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("syncedAt"); else _explicitNullProperties?.Remove("syncedAt"); } }
+        public DateTimeOffset? SyncedAt { get => _explicitNullValueSyncedAt; set { _explicitNullValueSyncedAt = value; AdditionalData?.Remove("syncedAt"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("syncedAt"); else _explicitNullProperties?.Remove("syncedAt"); } }
         private DateTimeOffset? _explicitNullValueSyncedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailbox"/> and sets the default values.
@@ -100,8 +107,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "hasOverride", n => { HasOverride = n.GetBoolValue(); } },
                 { "lastError", n => { LastError = n.GetStringValue(); } },
                 { "mailboxId", n => { MailboxId = n.GetStringValue(); } },
-                { "provider", n => { Provider = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider>(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus>(); } },
+                { "provider", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueProvider = default; _explicitNullProperties?.Remove("provider"); AdditionalData["provider"] = unknown; } else { Provider = parsed; AdditionalData.Remove("provider"); } } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "syncedAt", n => { SyncedAt = n.GetDateTimeOffsetValue(); } },
             };
         }

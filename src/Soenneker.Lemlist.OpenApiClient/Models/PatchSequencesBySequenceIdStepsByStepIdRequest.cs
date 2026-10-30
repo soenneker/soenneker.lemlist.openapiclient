@@ -17,28 +17,50 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("altMessage") is { } nullNodeAltMessage && nullNodeAltMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessage = null;
-            if (parseNode.GetChildNode("altMessagePremium") is { } nullNodeAltMessagePremium && nullNodeAltMessagePremium.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessagePremium = null;
-            if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
-            if (parseNode.GetChildNode("conditionKey") is { } nullNodeConditionKey && nullNodeConditionKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConditionKey = null;
-            if (parseNode.GetChildNode("customField") is { } nullNodeCustomField && nullNodeCustomField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomField = null;
-            if (parseNode.GetChildNode("customName") is { } nullNodeCustomName && nullNodeCustomName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomName = null;
-            if (parseNode.GetChildNode("customOperator") is { } nullNodeCustomOperator && nullNodeCustomOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomOperator = null;
-            if (parseNode.GetChildNode("customValue") is { } nullNodeCustomValue && nullNodeCustomValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomValue = null;
-            if (parseNode.GetChildNode("delay") is { } nullNodeDelay && nullNodeDelay.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delay = null;
-            if (parseNode.GetChildNode("delayType") is { } nullNodeDelayType && nullNodeDelayType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DelayType = null;
-            if (parseNode.GetChildNode("endorseAnyFallback") is { } nullNodeEndorseAnyFallback && nullNodeEndorseAnyFallback.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndorseAnyFallback = null;
-            if (parseNode.GetChildNode("images") is { } nullNodeImages && nullNodeImages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Images = null;
-            if (parseNode.GetChildNode("leadAction") is { } nullNodeLeadAction && nullNodeLeadAction.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadAction = null;
-            if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
-            if (parseNode.GetChildNode("method") is { } nullNodeMethod && nullNodeMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Method = null;
-            if (parseNode.GetChildNode("recordMode") is { } nullNodeRecordMode && nullNodeRecordMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecordMode = null;
-            if (parseNode.GetChildNode("skillName") is { } nullNodeSkillName && nullNodeSkillName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkillName = null;
-            if (parseNode.GetChildNode("subject") is { } nullNodeSubject && nullNodeSubject.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subject = null;
-            if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
-            if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
-            if (parseNode.GetChildNode("videos") is { } nullNodeVideos && nullNodeVideos.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Videos = null;
+            if (parseNode.GetChildNode("altMessage") is null) { _explicitNullValueAltMessage = default!; _explicitNullProperties?.Remove("altMessage"); }
+            else if (parseNode.GetChildNode("altMessage") is { } nullNodeAltMessage && nullNodeAltMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessage = null;
+            if (parseNode.GetChildNode("altMessagePremium") is null) { _explicitNullValueAltMessagePremium = default!; _explicitNullProperties?.Remove("altMessagePremium"); }
+            else if (parseNode.GetChildNode("altMessagePremium") is { } nullNodeAltMessagePremium && nullNodeAltMessagePremium.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessagePremium = null;
+            if (parseNode.GetChildNode("campaignId") is null) { _explicitNullValueCampaignId = default!; _explicitNullProperties?.Remove("campaignId"); }
+            else if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
+            if (parseNode.GetChildNode("conditionKey") is null) { _explicitNullValueConditionKey = default!; _explicitNullProperties?.Remove("conditionKey"); }
+            else if (parseNode.GetChildNode("conditionKey") is { } nullNodeConditionKey && nullNodeConditionKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConditionKey = null;
+            if (parseNode.GetChildNode("customField") is null) { _explicitNullValueCustomField = default!; _explicitNullProperties?.Remove("customField"); }
+            else if (parseNode.GetChildNode("customField") is { } nullNodeCustomField && nullNodeCustomField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomField = null;
+            if (parseNode.GetChildNode("customName") is null) { _explicitNullValueCustomName = default!; _explicitNullProperties?.Remove("customName"); }
+            else if (parseNode.GetChildNode("customName") is { } nullNodeCustomName && nullNodeCustomName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomName = null;
+            if (parseNode.GetChildNode("customOperator") is null) { _explicitNullValueCustomOperator = default!; _explicitNullProperties?.Remove("customOperator"); }
+            else if (parseNode.GetChildNode("customOperator") is { } nullNodeCustomOperator && nullNodeCustomOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomOperator = null;
+            if (parseNode.GetChildNode("customValue") is null) { _explicitNullValueCustomValue = default!; _explicitNullProperties?.Remove("customValue"); }
+            else if (parseNode.GetChildNode("customValue") is { } nullNodeCustomValue && nullNodeCustomValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomValue = null;
+            if (parseNode.GetChildNode("delay") is null) { _explicitNullValueDelay = default!; _explicitNullProperties?.Remove("delay"); }
+            else if (parseNode.GetChildNode("delay") is { } nullNodeDelay && nullNodeDelay.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delay = null;
+            if (parseNode.GetChildNode("delayType") is null) { _explicitNullValueDelayType = default!; _explicitNullProperties?.Remove("delayType"); }
+            else if (parseNode.GetChildNode("delayType") is { } nullNodeDelayType && nullNodeDelayType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DelayType = null;
+            if (parseNode.GetChildNode("endorseAnyFallback") is null) { _explicitNullValueEndorseAnyFallback = default!; _explicitNullProperties?.Remove("endorseAnyFallback"); }
+            else if (parseNode.GetChildNode("endorseAnyFallback") is { } nullNodeEndorseAnyFallback && nullNodeEndorseAnyFallback.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndorseAnyFallback = null;
+            if (parseNode.GetChildNode("images") is null) { _explicitNullValueImages = default!; _explicitNullProperties?.Remove("images"); }
+            else if (parseNode.GetChildNode("images") is { } nullNodeImages && nullNodeImages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Images = null;
+            if (parseNode.GetChildNode("leadAction") is null) { _explicitNullValueLeadAction = default!; _explicitNullProperties?.Remove("leadAction"); }
+            else if (parseNode.GetChildNode("leadAction") is { } nullNodeLeadAction && nullNodeLeadAction.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadAction = null;
+            if (parseNode.GetChildNode("message") is null) { _explicitNullValueMessage = default!; _explicitNullProperties?.Remove("message"); }
+            else if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
+            if (parseNode.GetChildNode("method") is null) { _explicitNullValueMethod = default!; _explicitNullProperties?.Remove("method"); }
+            else if (parseNode.GetChildNode("method") is { } nullNodeMethod && nullNodeMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Method = null;
+            if (parseNode.GetChildNode("recordMode") is null) { _explicitNullValueRecordMode = default!; _explicitNullProperties?.Remove("recordMode"); }
+            else if (parseNode.GetChildNode("recordMode") is { } nullNodeRecordMode && nullNodeRecordMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecordMode = null;
+            if (parseNode.GetChildNode("skillName") is null) { _explicitNullValueSkillName = default!; _explicitNullProperties?.Remove("skillName"); }
+            else if (parseNode.GetChildNode("skillName") is { } nullNodeSkillName && nullNodeSkillName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkillName = null;
+            if (parseNode.GetChildNode("subject") is null) { _explicitNullValueSubject = default!; _explicitNullProperties?.Remove("subject"); }
+            else if (parseNode.GetChildNode("subject") is { } nullNodeSubject && nullNodeSubject.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subject = null;
+            if (parseNode.GetChildNode("title") is null) { _explicitNullValueTitle = default!; _explicitNullProperties?.Remove("title"); }
+            else if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("url") is null) { _explicitNullValueUrl = default!; _explicitNullProperties?.Remove("url"); }
+            else if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("videos") is null) { _explicitNullValueVideos = default!; _explicitNullProperties?.Remove("videos"); }
+            else if (parseNode.GetChildNode("videos") is { } nullNodeVideos && nullNodeVideos.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Videos = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -46,158 +68,158 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The LinkedIn note sent instead of `message` in specific cases, with a meaning that depends on the step type. On `linkedinInvite`: the premium invitation note attached to the connection request, used when the sending account has LinkedIn Premium. On `linkedinSend` and `linkedinVoiceNote`: the out-of-network note, sent as a connection request when the lead is not a 1st-degree connection. Pass an empty string to clear it. LinkedIn caps a connection-request note at 200 characters on a free account and 300 on Premium or Sales Navigator. This endpoint does not enforce those caps, but an over-long note is a blocking step error: the campaign refuses to launch until it is shortened</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
+        public string? AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; AdditionalData?.Remove("altMessage"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
         private string? _explicitNullValueAltMessage = default!;
 #nullable restore
 #else
-        public string AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
+        public string AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; AdditionalData?.Remove("altMessage"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
         private string _explicitNullValueAltMessage = default!;
 #endif
         /// <summary>For `linkedinSend` steps only. The premium variant of the out-of-network note, sent instead of `altMessage` when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Pass an empty string to clear it. Rejected with `400` on any other step type</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
+        public string? AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; AdditionalData?.Remove("altMessagePremium"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
         private string? _explicitNullValueAltMessagePremium = default!;
 #nullable restore
 #else
-        public string AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
+        public string AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; AdditionalData?.Remove("altMessagePremium"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
         private string _explicitNullValueAltMessagePremium = default!;
 #endif
         /// <summary>Target campaign ID for sendToAnotherCampaign steps. The campaign must exist and not be archived</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
+        public string? CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; AdditionalData?.Remove("campaignId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
         private string? _explicitNullValueCampaignId = default!;
 #nullable restore
 #else
-        public string CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
+        public string CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; AdditionalData?.Remove("campaignId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
         private string _explicitNullValueCampaignId = default!;
 #endif
         /// <summary>Condition key for conditional steps</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey? ConditionKey { get => _explicitNullValueConditionKey; set { _explicitNullValueConditionKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conditionKey"); else _explicitNullProperties?.Remove("conditionKey"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey? ConditionKey { get => _explicitNullValueConditionKey; set { _explicitNullValueConditionKey = value; AdditionalData?.Remove("conditionKey"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conditionKey"); else _explicitNullProperties?.Remove("conditionKey"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey? _explicitNullValueConditionKey = default!;
         /// <summary>For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.&lt;field&gt;` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
+        public string? CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; AdditionalData?.Remove("customField"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
         private string? _explicitNullValueCustomField = default!;
 #nullable restore
 #else
-        public string CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
+        public string CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; AdditionalData?.Remove("customField"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
         private string _explicitNullValueCustomField = default!;
 #endif
         /// <summary>The step&apos;s own name, shown instead of its type label (&quot;Email&quot;, &quot;Call&quot;) wherever the app names the step. Plain text, up to 70 characters once trimmed and once runs of spaces collapse to one; HTML tags count toward the 70, then are dropped. A longer name is rejected with `400`. Accepted on every step type, ignored on `conditional` steps, which keep their type label. Pass an empty string to remove it and go back to the type label; omit it to keep the current name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomName { get => _explicitNullValueCustomName; set { _explicitNullValueCustomName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customName"); else _explicitNullProperties?.Remove("customName"); } }
+        public string? CustomName { get => _explicitNullValueCustomName; set { _explicitNullValueCustomName = value; AdditionalData?.Remove("customName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customName"); else _explicitNullProperties?.Remove("customName"); } }
         private string? _explicitNullValueCustomName = default!;
 #nullable restore
 #else
-        public string CustomName { get => _explicitNullValueCustomName; set { _explicitNullValueCustomName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customName"); else _explicitNullProperties?.Remove("customName"); } }
+        public string CustomName { get => _explicitNullValueCustomName; set { _explicitNullValueCustomName = value; AdditionalData?.Remove("customName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customName"); else _explicitNullProperties?.Remove("customName"); } }
         private string _explicitNullValueCustomName = default!;
 #endif
         /// <summary>For conditional steps keyed `customLeadInfo` only. How the field is compared.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestCustomOperator? CustomOperator { get => _explicitNullValueCustomOperator; set { _explicitNullValueCustomOperator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customOperator"); else _explicitNullProperties?.Remove("customOperator"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestCustomOperator? CustomOperator { get => _explicitNullValueCustomOperator; set { _explicitNullValueCustomOperator = value; AdditionalData?.Remove("customOperator"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customOperator"); else _explicitNullProperties?.Remove("customOperator"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestCustomOperator? _explicitNullValueCustomOperator = default!;
         /// <summary>For conditional steps keyed `customLeadInfo` only. The value the field is compared to. Required for `equal` and `contains`, and refused for `empty` and `notEmpty`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
+        public string? CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; AdditionalData?.Remove("customValue"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
         private string? _explicitNullValueCustomValue = default!;
 #nullable restore
 #else
-        public string CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
+        public string CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; AdditionalData?.Remove("customValue"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
         private string _explicitNullValueCustomValue = default!;
 #endif
         /// <summary>Delay in days before executing this step</summary>
-        public int? Delay { get => _explicitNullValueDelay; set { _explicitNullValueDelay = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delay"); else _explicitNullProperties?.Remove("delay"); } }
+        public int? Delay { get => _explicitNullValueDelay; set { _explicitNullValueDelay = value; AdditionalData?.Remove("delay"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delay"); else _explicitNullProperties?.Remove("delay"); } }
         private int? _explicitNullValueDelay = default!;
         /// <summary>Delay type for conditional steps</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType? DelayType { get => _explicitNullValueDelayType; set { _explicitNullValueDelayType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delayType"); else _explicitNullProperties?.Remove("delayType"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType? DelayType { get => _explicitNullValueDelayType; set { _explicitNullValueDelayType = value; AdditionalData?.Remove("delayType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delayType"); else _explicitNullProperties?.Remove("delayType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType? _explicitNullValueDelayType = default!;
         /// <summary>Applies to `linkedinEndorse` steps only. When `true` and the named skill is not on the lead&apos;s profile, lemlist falls back to endorsing any available skill.</summary>
-        public bool? EndorseAnyFallback { get => _explicitNullValueEndorseAnyFallback; set { _explicitNullValueEndorseAnyFallback = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endorseAnyFallback"); else _explicitNullProperties?.Remove("endorseAnyFallback"); } }
+        public bool? EndorseAnyFallback { get => _explicitNullValueEndorseAnyFallback; set { _explicitNullValueEndorseAnyFallback = value; AdditionalData?.Remove("endorseAnyFallback"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endorseAnyFallback"); else _explicitNullProperties?.Remove("endorseAnyFallback"); } }
         private bool? _explicitNullValueEndorseAnyFallback = default!;
         /// <summary>Public HTTPS URLs of images to attach to a `linkedinInvite` or `linkedinSend` step. Replaces the step&apos;s current images — pass an empty array to clear them. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Images { get => _explicitNullValueImages; set { _explicitNullValueImages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("images"); else _explicitNullProperties?.Remove("images"); } }
+        public List<string>? Images { get => _explicitNullValueImages; set { _explicitNullValueImages = value; AdditionalData?.Remove("images"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("images"); else _explicitNullProperties?.Remove("images"); } }
         private List<string>? _explicitNullValueImages = default!;
 #nullable restore
 #else
-        public List<string> Images { get => _explicitNullValueImages; set { _explicitNullValueImages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("images"); else _explicitNullProperties?.Remove("images"); } }
+        public List<string> Images { get => _explicitNullValueImages; set { _explicitNullValueImages = value; AdditionalData?.Remove("images"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("images"); else _explicitNullProperties?.Remove("images"); } }
         private List<string> _explicitNullValueImages = default!;
 #endif
         /// <summary>Applies to `sendToAnotherCampaign` steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. `continue` keeps it running the remaining steps, `pause` pauses it, `stop` ends the source campaign for it. Omitted leaves the step without a value, which behaves as `continue`; a step added from the lemlist UI defaults to `stop`. A transfer that fails always pauses the lead, whatever this says.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction? LeadAction { get => _explicitNullValueLeadAction; set { _explicitNullValueLeadAction = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadAction"); else _explicitNullProperties?.Remove("leadAction"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction? LeadAction { get => _explicitNullValueLeadAction; set { _explicitNullValueLeadAction = value; AdditionalData?.Remove("leadAction"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadAction"); else _explicitNullProperties?.Remove("leadAction"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction? _explicitNullValueLeadAction = default!;
         /// <summary>Content of the email or message (for email, linkedinInvite, linkedinSend, linkedinInMail, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in `ai` record mode). Pass an empty string to clear it (ignored on manual and phone steps). On a linkedinInMail step it is sent as plain text (LinkedIn does not render HTML), and a blank one is saved but blocks the campaign launch</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        public string? Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; AdditionalData?.Remove("message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
         private string? _explicitNullValueMessage = default!;
 #nullable restore
 #else
-        public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; AdditionalData?.Remove("message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
         private string _explicitNullValueMessage = default!;
 #endif
         /// <summary>HTTP method for API steps</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod? Method { get => _explicitNullValueMethod; set { _explicitNullValueMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("method"); else _explicitNullProperties?.Remove("method"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod? Method { get => _explicitNullValueMethod; set { _explicitNullValueMethod = value; AdditionalData?.Remove("method"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("method"); else _explicitNullProperties?.Remove("method"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod? _explicitNullValueMethod = default!;
         /// <summary>Applies to `linkedinVoiceNote` steps only. Determines how the audio is sourced. `manual` (default) means the user records the audio themselves from the lemlist UI after step creation; `ai` means lemlist generates the audio from a text template provided in the lemlist UI.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode? RecordMode { get => _explicitNullValueRecordMode; set { _explicitNullValueRecordMode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recordMode"); else _explicitNullProperties?.Remove("recordMode"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode? RecordMode { get => _explicitNullValueRecordMode; set { _explicitNullValueRecordMode = value; AdditionalData?.Remove("recordMode"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recordMode"); else _explicitNullProperties?.Remove("recordMode"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode? _explicitNullValueRecordMode = default!;
         /// <summary>Name of the LinkedIn skill to endorse on the lead&apos;s profile. Applies to `linkedinEndorse` steps only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SkillName { get => _explicitNullValueSkillName; set { _explicitNullValueSkillName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skillName"); else _explicitNullProperties?.Remove("skillName"); } }
+        public string? SkillName { get => _explicitNullValueSkillName; set { _explicitNullValueSkillName = value; AdditionalData?.Remove("skillName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skillName"); else _explicitNullProperties?.Remove("skillName"); } }
         private string? _explicitNullValueSkillName = default!;
 #nullable restore
 #else
-        public string SkillName { get => _explicitNullValueSkillName; set { _explicitNullValueSkillName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skillName"); else _explicitNullProperties?.Remove("skillName"); } }
+        public string SkillName { get => _explicitNullValueSkillName; set { _explicitNullValueSkillName = value; AdditionalData?.Remove("skillName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skillName"); else _explicitNullProperties?.Remove("skillName"); } }
         private string _explicitNullValueSkillName = default!;
 #endif
         /// <summary>Email subject line (for email steps). Pass an empty string to remove it: the email then replies in the thread of the previous email sent to the lead in this campaign. On `linkedinInMail` steps it is the InMail subject: a blank one is saved but blocks the campaign launch</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        public string? Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; AdditionalData?.Remove("subject"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
         private string? _explicitNullValueSubject = default!;
 #nullable restore
 #else
-        public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; AdditionalData?.Remove("subject"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
         private string _explicitNullValueSubject = default!;
 #endif
         /// <summary>Title or label for manual steps</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string? _explicitNullValueTitle = default!;
 #nullable restore
 #else
-        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>The type of step (required but cannot be changed - must match the existing step type)</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestType? _explicitNullValueType = default!;
         /// <summary>URL of the API endpoint to call (for api steps). Must start with http:// or https://</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string? _explicitNullValueUrl = default!;
 #nullable restore
 #else
-        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string _explicitNullValueUrl = default!;
 #endif
         /// <summary>Public HTTPS URLs of videos to attach to a `linkedinInvite` or `linkedinSend` step. Replaces the step&apos;s current videos — pass an empty array to clear them. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Videos { get => _explicitNullValueVideos; set { _explicitNullValueVideos = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("videos"); else _explicitNullProperties?.Remove("videos"); } }
+        public List<string>? Videos { get => _explicitNullValueVideos; set { _explicitNullValueVideos = value; AdditionalData?.Remove("videos"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("videos"); else _explicitNullProperties?.Remove("videos"); } }
         private List<string>? _explicitNullValueVideos = default!;
 #nullable restore
 #else
-        public List<string> Videos { get => _explicitNullValueVideos; set { _explicitNullValueVideos = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("videos"); else _explicitNullProperties?.Remove("videos"); } }
+        public List<string> Videos { get => _explicitNullValueVideos; set { _explicitNullValueVideos = value; AdditionalData?.Remove("videos"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("videos"); else _explicitNullProperties?.Remove("videos"); } }
         private List<string> _explicitNullValueVideos = default!;
 #endif
         /// <summary>
@@ -228,23 +250,23 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "altMessage", n => { AltMessage = n.GetStringValue(); } },
                 { "altMessagePremium", n => { AltMessagePremium = n.GetStringValue(); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
-                { "conditionKey", n => { ConditionKey = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey>(); } },
+                { "conditionKey", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestConditionKey>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueConditionKey = default; _explicitNullProperties?.Remove("conditionKey"); AdditionalData["conditionKey"] = unknown; } else { ConditionKey = parsed; AdditionalData.Remove("conditionKey"); } } },
                 { "customField", n => { CustomField = n.GetStringValue(); } },
                 { "customName", n => { CustomName = n.GetStringValue(); } },
-                { "customOperator", n => { CustomOperator = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestCustomOperator>(); } },
+                { "customOperator", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestCustomOperator>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCustomOperator = default; _explicitNullProperties?.Remove("customOperator"); AdditionalData["customOperator"] = unknown; } else { CustomOperator = parsed; AdditionalData.Remove("customOperator"); } } },
                 { "customValue", n => { CustomValue = n.GetStringValue(); } },
                 { "delay", n => { Delay = n.GetIntValue(); } },
-                { "delayType", n => { DelayType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType>(); } },
+                { "delayType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDelayType = default; _explicitNullProperties?.Remove("delayType"); AdditionalData["delayType"] = unknown; } else { DelayType = parsed; AdditionalData.Remove("delayType"); } } },
                 { "endorseAnyFallback", n => { EndorseAnyFallback = n.GetBoolValue(); } },
                 { "images", n => { Images = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "leadAction", n => { LeadAction = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>(); } },
+                { "leadAction", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLeadAction = default; _explicitNullProperties?.Remove("leadAction"); AdditionalData["leadAction"] = unknown; } else { LeadAction = parsed; AdditionalData.Remove("leadAction"); } } },
                 { "message", n => { Message = n.GetStringValue(); } },
-                { "method", n => { Method = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod>(); } },
-                { "recordMode", n => { RecordMode = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode>(); } },
+                { "method", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMethod = default; _explicitNullProperties?.Remove("method"); AdditionalData["method"] = unknown; } else { Method = parsed; AdditionalData.Remove("method"); } } },
+                { "recordMode", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueRecordMode = default; _explicitNullProperties?.Remove("recordMode"); AdditionalData["recordMode"] = unknown; } else { RecordMode = parsed; AdditionalData.Remove("recordMode"); } } },
                 { "skillName", n => { SkillName = n.GetStringValue(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestType>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "videos", n => { Videos = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };

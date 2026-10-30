@@ -17,71 +17,78 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("activate") is { } nullNodeActivate && nullNodeActivate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Activate = null;
-            if (parseNode.GetChildNode("emoji") is { } nullNodeEmoji && nullNodeEmoji.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Emoji = null;
-            if (parseNode.GetChildNode("filters") is { } nullNodeFilters && nullNodeFilters.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Filters = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("personaId") is { } nullNodePersonaId && nullNodePersonaId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonaId = null;
-            if (parseNode.GetChildNode("signalProcessingType") is { } nullNodeSignalProcessingType && nullNodeSignalProcessingType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignalProcessingType = null;
-            if (parseNode.GetChildNode("watchListId") is { } nullNodeWatchListId && nullNodeWatchListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WatchListId = null;
+            if (parseNode.GetChildNode("activate") is null) { _explicitNullValueActivate = default!; _explicitNullProperties?.Remove("activate"); }
+            else if (parseNode.GetChildNode("activate") is { } nullNodeActivate && nullNodeActivate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Activate = null;
+            if (parseNode.GetChildNode("emoji") is null) { _explicitNullValueEmoji = default!; _explicitNullProperties?.Remove("emoji"); }
+            else if (parseNode.GetChildNode("emoji") is { } nullNodeEmoji && nullNodeEmoji.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Emoji = null;
+            if (parseNode.GetChildNode("filters") is null) { _explicitNullValueFilters = default!; _explicitNullProperties?.Remove("filters"); }
+            else if (parseNode.GetChildNode("filters") is { } nullNodeFilters && nullNodeFilters.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Filters = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("personaId") is null) { _explicitNullValuePersonaId = default!; _explicitNullProperties?.Remove("personaId"); }
+            else if (parseNode.GetChildNode("personaId") is { } nullNodePersonaId && nullNodePersonaId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonaId = null;
+            if (parseNode.GetChildNode("signalProcessingType") is null) { _explicitNullValueSignalProcessingType = default!; _explicitNullProperties?.Remove("signalProcessingType"); }
+            else if (parseNode.GetChildNode("signalProcessingType") is { } nullNodeSignalProcessingType && nullNodeSignalProcessingType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignalProcessingType = null;
+            if (parseNode.GetChildNode("watchListId") is null) { _explicitNullValueWatchListId = default!; _explicitNullProperties?.Remove("watchListId"); }
+            else if (parseNode.GetChildNode("watchListId") is { } nullNodeWatchListId && nullNodeWatchListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WatchListId = null;
         }
 
         /// <summary>Toggle the agent status. false deactivates (pauses) it immediately. true activates a draft or reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be paused. Omit to leave the status unchanged.</summary>
-        public bool? Activate { get => _explicitNullValueActivate; set { _explicitNullValueActivate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("activate"); else _explicitNullProperties?.Remove("activate"); } }
+        public bool? Activate { get => _explicitNullValueActivate; set { _explicitNullValueActivate = value; AdditionalData?.Remove("activate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("activate"); else _explicitNullProperties?.Remove("activate"); } }
         private bool? _explicitNullValueActivate = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>New emoji</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        public string? Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; AdditionalData?.Remove("emoji"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
         private string? _explicitNullValueEmoji = default!;
 #nullable restore
 #else
-        public string Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        public string Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; AdditionalData?.Remove("emoji"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
         private string _explicitNullValueEmoji = default!;
 #endif
         /// <summary>Replacement filters (validated against the agent&apos;s signal type)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>? Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>? Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; AdditionalData?.Remove("filters"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>? _explicitNullValueFilters = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter> Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter> Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; AdditionalData?.Remove("filters"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter> _explicitNullValueFilters = default!;
 #endif
         /// <summary>New display name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>Persona (pdp_xxx) used to source contacts from the People Database. Only for a company Signal Agent with signalProcessingType = push_to_campaign whose signal type does not already ship its own contact. Optional; rejected on any other configuration.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PersonaId { get => _explicitNullValuePersonaId; set { _explicitNullValuePersonaId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personaId"); else _explicitNullProperties?.Remove("personaId"); } }
+        public string? PersonaId { get => _explicitNullValuePersonaId; set { _explicitNullValuePersonaId = value; AdditionalData?.Remove("personaId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personaId"); else _explicitNullProperties?.Remove("personaId"); } }
         private string? _explicitNullValuePersonaId = default!;
 #nullable restore
 #else
-        public string PersonaId { get => _explicitNullValuePersonaId; set { _explicitNullValuePersonaId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personaId"); else _explicitNullProperties?.Remove("personaId"); } }
+        public string PersonaId { get => _explicitNullValuePersonaId; set { _explicitNullValuePersonaId = value; AdditionalData?.Remove("personaId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personaId"); else _explicitNullProperties?.Remove("personaId"); } }
         private string _explicitNullValuePersonaId = default!;
 #endif
         /// <summary>New signal processing type</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchWatchlistRequestSignalProcessingType? SignalProcessingType { get => _explicitNullValueSignalProcessingType; set { _explicitNullValueSignalProcessingType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalProcessingType"); else _explicitNullProperties?.Remove("signalProcessingType"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchWatchlistRequestSignalProcessingType? SignalProcessingType { get => _explicitNullValueSignalProcessingType; set { _explicitNullValueSignalProcessingType = value; AdditionalData?.Remove("signalProcessingType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalProcessingType"); else _explicitNullProperties?.Remove("signalProcessingType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchWatchlistRequestSignalProcessingType? _explicitNullValueSignalProcessingType = default!;
         /// <summary>Signal Agent id to update</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
+        public string? WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; AdditionalData?.Remove("watchListId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
         private string? _explicitNullValueWatchListId = default!;
 #nullable restore
 #else
-        public string WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
+        public string WatchListId { get => _explicitNullValueWatchListId; set { _explicitNullValueWatchListId = value; AdditionalData?.Remove("watchListId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("watchListId"); else _explicitNullProperties?.Remove("watchListId"); } }
         private string _explicitNullValueWatchListId = default!;
 #endif
         /// <summary>
@@ -114,7 +121,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>(global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "personaId", n => { PersonaId = n.GetStringValue(); } },
-                { "signalProcessingType", n => { SignalProcessingType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchWatchlistRequestSignalProcessingType>(); } },
+                { "signalProcessingType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchWatchlistRequestSignalProcessingType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSignalProcessingType = default; _explicitNullProperties?.Remove("signalProcessingType"); AdditionalData["signalProcessingType"] = unknown; } else { SignalProcessingType = parsed; AdditionalData.Remove("signalProcessingType"); } } },
                 { "watchListId", n => { WatchListId = n.GetStringValue(); } },
             };
         }

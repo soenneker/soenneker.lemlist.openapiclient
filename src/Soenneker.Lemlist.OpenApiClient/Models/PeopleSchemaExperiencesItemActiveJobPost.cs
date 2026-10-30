@@ -18,8 +18,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("count_by_department") is { } nullNodeCountByDepartment && nullNodeCountByDepartment.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CountByDepartment = null;
-            if (parseNode.GetChildNode("total") is { } nullNodeTotal && nullNodeTotal.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Total = null;
+            if (parseNode.GetChildNode("count_by_department") is null) { _explicitNullValueCountByDepartment = default!; _explicitNullProperties?.Remove("count_by_department"); }
+            else if (parseNode.GetChildNode("count_by_department") is { } nullNodeCountByDepartment && nullNodeCountByDepartment.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CountByDepartment = null;
+            if (parseNode.GetChildNode("total") is null) { _explicitNullValueTotal = default!; _explicitNullProperties?.Remove("total"); }
+            else if (parseNode.GetChildNode("total") is { } nullNodeTotal && nullNodeTotal.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Total = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Count per department (`customer_service`, `engineering`, `finance_legal_admin`, `human_resources`, `marketing`, `operations`, `other`, `sales`)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty? CountByDepartment { get => _explicitNullValueCountByDepartment; set { _explicitNullValueCountByDepartment = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_by_department"); else _explicitNullProperties?.Remove("count_by_department"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty? CountByDepartment { get => _explicitNullValueCountByDepartment; set { _explicitNullValueCountByDepartment = value; AdditionalData?.Remove("count_by_department"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_by_department"); else _explicitNullProperties?.Remove("count_by_department"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty? _explicitNullValueCountByDepartment = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty CountByDepartment { get => _explicitNullValueCountByDepartment; set { _explicitNullValueCountByDepartment = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_by_department"); else _explicitNullProperties?.Remove("count_by_department"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty CountByDepartment { get => _explicitNullValueCountByDepartment; set { _explicitNullValueCountByDepartment = value; AdditionalData?.Remove("count_by_department"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_by_department"); else _explicitNullProperties?.Remove("count_by_department"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty _explicitNullValueCountByDepartment = default!;
 #endif
         /// <summary>The total property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Total { get => _explicitNullValueTotal; set { _explicitNullValueTotal = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total"); else _explicitNullProperties?.Remove("total"); } }
+        public string? Total { get => _explicitNullValueTotal; set { _explicitNullValueTotal = value; AdditionalData?.Remove("total"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total"); else _explicitNullProperties?.Remove("total"); } }
         private string? _explicitNullValueTotal = default!;
 #nullable restore
 #else
-        public string Total { get => _explicitNullValueTotal; set { _explicitNullValueTotal = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total"); else _explicitNullProperties?.Remove("total"); } }
+        public string Total { get => _explicitNullValueTotal; set { _explicitNullValueTotal = value; AdditionalData?.Remove("total"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total"); else _explicitNullProperties?.Remove("total"); } }
         private string _explicitNullValueTotal = default!;
 #endif
         /// <summary>

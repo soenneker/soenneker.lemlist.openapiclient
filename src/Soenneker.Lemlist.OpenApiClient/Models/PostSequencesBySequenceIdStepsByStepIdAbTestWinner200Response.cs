@@ -17,23 +17,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("abTest") is { } nullNodeAbTest && nullNodeAbTest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AbTest = null;
-            if (parseNode.GetChildNode("stepId") is { } nullNodeStepId && nullNodeStepId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StepId = null;
+            if (parseNode.GetChildNode("abTest") is null) { _explicitNullValueAbTest = default!; _explicitNullProperties?.Remove("abTest"); }
+            else if (parseNode.GetChildNode("abTest") is { } nullNodeAbTest && nullNodeAbTest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AbTest = null;
+            if (parseNode.GetChildNode("stepId") is null) { _explicitNullValueStepId = default!; _explicitNullProperties?.Remove("stepId"); }
+            else if (parseNode.GetChildNode("stepId") is { } nullNodeStepId && nullNodeStepId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StepId = null;
         }
 
         /// <summary>The abTest property</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200ResponseAbTest? AbTest { get => _explicitNullValueAbTest; set { _explicitNullValueAbTest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("abTest"); else _explicitNullProperties?.Remove("abTest"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200ResponseAbTest? AbTest { get => _explicitNullValueAbTest; set { _explicitNullValueAbTest = value; AdditionalData?.Remove("abTest"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("abTest"); else _explicitNullProperties?.Remove("abTest"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200ResponseAbTest? _explicitNullValueAbTest = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The stepId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stepId"); else _explicitNullProperties?.Remove("stepId"); } }
+        public string? StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; AdditionalData?.Remove("stepId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stepId"); else _explicitNullProperties?.Remove("stepId"); } }
         private string? _explicitNullValueStepId = default!;
 #nullable restore
 #else
-        public string StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stepId"); else _explicitNullProperties?.Remove("stepId"); } }
+        public string StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; AdditionalData?.Remove("stepId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stepId"); else _explicitNullProperties?.Remove("stepId"); } }
         private string _explicitNullValueStepId = default!;
 #endif
         /// <summary>
@@ -61,7 +63,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "abTest", n => { AbTest = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200ResponseAbTest>(); } },
+                { "abTest", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsByStepIdAbTestWinner200ResponseAbTest>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueAbTest = default; _explicitNullProperties?.Remove("abTest"); AdditionalData["abTest"] = unknown; } else { AbTest = parsed; AdditionalData.Remove("abTest"); } } },
                 { "stepId", n => { StepId = n.GetStringValue(); } },
             };
         }

@@ -18,15 +18,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("assetId") is { } nullNodeAssetId && nullNodeAssetId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssetId = null;
-            if (parseNode.GetChildNode("assetLabel") is { } nullNodeAssetLabel && nullNodeAssetLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssetLabel = null;
-            if (parseNode.GetChildNode("assetType") is { } nullNodeAssetType && nullNodeAssetType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssetType = null;
-            if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
-            if (parseNode.GetChildNode("lastDiagnosisKey") is { } nullNodeLastDiagnosisKey && nullNodeLastDiagnosisKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastDiagnosisKey = null;
-            if (parseNode.GetChildNode("openedAt") is { } nullNodeOpenedAt && nullNodeOpenedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OpenedAt = null;
-            if (parseNode.GetChildNode("recommendations") is { } nullNodeRecommendations && nullNodeRecommendations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Recommendations = null;
-            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
-            if (parseNode.GetChildNode("teamId") is { } nullNodeTeamId && nullNodeTeamId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamId = null;
+            if (parseNode.GetChildNode("assetId") is null) { _explicitNullValueAssetId = default!; _explicitNullProperties?.Remove("assetId"); }
+            else if (parseNode.GetChildNode("assetId") is { } nullNodeAssetId && nullNodeAssetId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssetId = null;
+            if (parseNode.GetChildNode("assetLabel") is null) { _explicitNullValueAssetLabel = default!; _explicitNullProperties?.Remove("assetLabel"); }
+            else if (parseNode.GetChildNode("assetLabel") is { } nullNodeAssetLabel && nullNodeAssetLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssetLabel = null;
+            if (parseNode.GetChildNode("assetType") is null) { _explicitNullValueAssetType = default!; _explicitNullProperties?.Remove("assetType"); }
+            else if (parseNode.GetChildNode("assetType") is { } nullNodeAssetType && nullNodeAssetType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssetType = null;
+            if (parseNode.GetChildNode("_id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("_id"); }
+            else if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("lastDiagnosisKey") is null) { _explicitNullValueLastDiagnosisKey = default!; _explicitNullProperties?.Remove("lastDiagnosisKey"); }
+            else if (parseNode.GetChildNode("lastDiagnosisKey") is { } nullNodeLastDiagnosisKey && nullNodeLastDiagnosisKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastDiagnosisKey = null;
+            if (parseNode.GetChildNode("openedAt") is null) { _explicitNullValueOpenedAt = default!; _explicitNullProperties?.Remove("openedAt"); }
+            else if (parseNode.GetChildNode("openedAt") is { } nullNodeOpenedAt && nullNodeOpenedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OpenedAt = null;
+            if (parseNode.GetChildNode("recommendations") is null) { _explicitNullValueRecommendations = default!; _explicitNullProperties?.Remove("recommendations"); }
+            else if (parseNode.GetChildNode("recommendations") is { } nullNodeRecommendations && nullNodeRecommendations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Recommendations = null;
+            if (parseNode.GetChildNode("status") is null) { _explicitNullValueStatus = default!; _explicitNullProperties?.Remove("status"); }
+            else if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("teamId") is null) { _explicitNullValueTeamId = default!; _explicitNullProperties?.Remove("teamId"); }
+            else if (parseNode.GetChildNode("teamId") is { } nullNodeTeamId && nullNodeTeamId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -34,70 +43,70 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>ID of the affected asset (a mailbox, prefixed with `usm_`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssetId { get => _explicitNullValueAssetId; set { _explicitNullValueAssetId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetId"); else _explicitNullProperties?.Remove("assetId"); } }
+        public string? AssetId { get => _explicitNullValueAssetId; set { _explicitNullValueAssetId = value; AdditionalData?.Remove("assetId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetId"); else _explicitNullProperties?.Remove("assetId"); } }
         private string? _explicitNullValueAssetId = default!;
 #nullable restore
 #else
-        public string AssetId { get => _explicitNullValueAssetId; set { _explicitNullValueAssetId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetId"); else _explicitNullProperties?.Remove("assetId"); } }
+        public string AssetId { get => _explicitNullValueAssetId; set { _explicitNullValueAssetId = value; AdditionalData?.Remove("assetId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetId"); else _explicitNullProperties?.Remove("assetId"); } }
         private string _explicitNullValueAssetId = default!;
 #endif
         /// <summary>Human-readable label for the asset (usually the mailbox email).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssetLabel { get => _explicitNullValueAssetLabel; set { _explicitNullValueAssetLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetLabel"); else _explicitNullProperties?.Remove("assetLabel"); } }
+        public string? AssetLabel { get => _explicitNullValueAssetLabel; set { _explicitNullValueAssetLabel = value; AdditionalData?.Remove("assetLabel"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetLabel"); else _explicitNullProperties?.Remove("assetLabel"); } }
         private string? _explicitNullValueAssetLabel = default!;
 #nullable restore
 #else
-        public string AssetLabel { get => _explicitNullValueAssetLabel; set { _explicitNullValueAssetLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetLabel"); else _explicitNullProperties?.Remove("assetLabel"); } }
+        public string AssetLabel { get => _explicitNullValueAssetLabel; set { _explicitNullValueAssetLabel = value; AdditionalData?.Remove("assetLabel"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetLabel"); else _explicitNullProperties?.Remove("assetLabel"); } }
         private string _explicitNullValueAssetLabel = default!;
 #endif
         /// <summary>Type of the affected asset.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.MailboxAssetType? AssetType { get => _explicitNullValueAssetType; set { _explicitNullValueAssetType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetType"); else _explicitNullProperties?.Remove("assetType"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.MailboxAssetType? AssetType { get => _explicitNullValueAssetType; set { _explicitNullValueAssetType = value; AdditionalData?.Remove("assetType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assetType"); else _explicitNullProperties?.Remove("assetType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.MailboxAssetType? _explicitNullValueAssetType = default!;
         /// <summary>Case identifier (prefixed with `srh_`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
         private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
         private string _explicitNullValueId = default!;
 #endif
         /// <summary>Internal key used to dedup identical diagnoses across ticks.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastDiagnosisKey { get => _explicitNullValueLastDiagnosisKey; set { _explicitNullValueLastDiagnosisKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastDiagnosisKey"); else _explicitNullProperties?.Remove("lastDiagnosisKey"); } }
+        public string? LastDiagnosisKey { get => _explicitNullValueLastDiagnosisKey; set { _explicitNullValueLastDiagnosisKey = value; AdditionalData?.Remove("lastDiagnosisKey"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastDiagnosisKey"); else _explicitNullProperties?.Remove("lastDiagnosisKey"); } }
         private string? _explicitNullValueLastDiagnosisKey = default!;
 #nullable restore
 #else
-        public string LastDiagnosisKey { get => _explicitNullValueLastDiagnosisKey; set { _explicitNullValueLastDiagnosisKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastDiagnosisKey"); else _explicitNullProperties?.Remove("lastDiagnosisKey"); } }
+        public string LastDiagnosisKey { get => _explicitNullValueLastDiagnosisKey; set { _explicitNullValueLastDiagnosisKey = value; AdditionalData?.Remove("lastDiagnosisKey"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastDiagnosisKey"); else _explicitNullProperties?.Remove("lastDiagnosisKey"); } }
         private string _explicitNullValueLastDiagnosisKey = default!;
 #endif
         /// <summary>When the case was opened.</summary>
-        public DateTimeOffset? OpenedAt { get => _explicitNullValueOpenedAt; set { _explicitNullValueOpenedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("openedAt"); else _explicitNullProperties?.Remove("openedAt"); } }
+        public DateTimeOffset? OpenedAt { get => _explicitNullValueOpenedAt; set { _explicitNullValueOpenedAt = value; AdditionalData?.Remove("openedAt"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("openedAt"); else _explicitNullProperties?.Remove("openedAt"); } }
         private DateTimeOffset? _explicitNullValueOpenedAt = default!;
         /// <summary>Ordered list of recommended fixes (primary first).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation>? Recommendations { get => _explicitNullValueRecommendations; set { _explicitNullValueRecommendations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recommendations"); else _explicitNullProperties?.Remove("recommendations"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation>? Recommendations { get => _explicitNullValueRecommendations; set { _explicitNullValueRecommendations = value; AdditionalData?.Remove("recommendations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recommendations"); else _explicitNullProperties?.Remove("recommendations"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation>? _explicitNullValueRecommendations = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation> Recommendations { get => _explicitNullValueRecommendations; set { _explicitNullValueRecommendations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recommendations"); else _explicitNullProperties?.Remove("recommendations"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation> Recommendations { get => _explicitNullValueRecommendations; set { _explicitNullValueRecommendations = value; AdditionalData?.Remove("recommendations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recommendations"); else _explicitNullProperties?.Remove("recommendations"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation> _explicitNullValueRecommendations = default!;
 #endif
         /// <summary>`recommended` when nothing ran (no authorized + wired action); `executed` when at least one recommendation was applied.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryCaseStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryCaseStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryCaseStatus? _explicitNullValueStatus = default!;
         /// <summary>ID of the team that owns the case.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TeamId { get => _explicitNullValueTeamId; set { _explicitNullValueTeamId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teamId"); else _explicitNullProperties?.Remove("teamId"); } }
+        public string? TeamId { get => _explicitNullValueTeamId; set { _explicitNullValueTeamId = value; AdditionalData?.Remove("teamId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teamId"); else _explicitNullProperties?.Remove("teamId"); } }
         private string? _explicitNullValueTeamId = default!;
 #nullable restore
 #else
-        public string TeamId { get => _explicitNullValueTeamId; set { _explicitNullValueTeamId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teamId"); else _explicitNullProperties?.Remove("teamId"); } }
+        public string TeamId { get => _explicitNullValueTeamId; set { _explicitNullValueTeamId = value; AdditionalData?.Remove("teamId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teamId"); else _explicitNullProperties?.Remove("teamId"); } }
         private string _explicitNullValueTeamId = default!;
 #endif
         /// <summary>
@@ -127,12 +136,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "assetId", n => { AssetId = n.GetStringValue(); } },
                 { "assetLabel", n => { AssetLabel = n.GetStringValue(); } },
-                { "assetType", n => { AssetType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.MailboxAssetType>(); } },
+                { "assetType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.MailboxAssetType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueAssetType = default; _explicitNullProperties?.Remove("assetType"); AdditionalData["assetType"] = unknown; } else { AssetType = parsed; AdditionalData.Remove("assetType"); } } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "lastDiagnosisKey", n => { LastDiagnosisKey = n.GetStringValue(); } },
                 { "openedAt", n => { OpenedAt = n.GetDateTimeOffsetValue(); } },
                 { "recommendations", n => { Recommendations = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation>(global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryCaseStatus>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryCaseStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "teamId", n => { TeamId = n.GetStringValue(); } },
             };
         }

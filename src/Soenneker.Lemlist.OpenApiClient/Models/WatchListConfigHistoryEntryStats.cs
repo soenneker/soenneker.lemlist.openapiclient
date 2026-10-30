@@ -18,8 +18,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("campaigns") is { } nullNodeCampaigns && nullNodeCampaigns.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Campaigns = null;
-            if (parseNode.GetChildNode("signalsCount") is { } nullNodeSignalsCount && nullNodeSignalsCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignalsCount = null;
+            if (parseNode.GetChildNode("campaigns") is null) { _explicitNullValueCampaigns = default!; _explicitNullProperties?.Remove("campaigns"); }
+            else if (parseNode.GetChildNode("campaigns") is { } nullNodeCampaigns && nullNodeCampaigns.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Campaigns = null;
+            if (parseNode.GetChildNode("signalsCount") is null) { _explicitNullValueSignalsCount = default!; _explicitNullProperties?.Remove("signalsCount"); }
+            else if (parseNode.GetChildNode("signalsCount") is { } nullNodeSignalsCount && nullNodeSignalsCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignalsCount = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,15 +29,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Per-campaign breakdown (push_to_campaign agents only)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStatsCampaignsItemProperty>? Campaigns { get => _explicitNullValueCampaigns; set { _explicitNullValueCampaigns = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaigns"); else _explicitNullProperties?.Remove("campaigns"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStatsCampaignsItemProperty>? Campaigns { get => _explicitNullValueCampaigns; set { _explicitNullValueCampaigns = value; AdditionalData?.Remove("campaigns"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaigns"); else _explicitNullProperties?.Remove("campaigns"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStatsCampaignsItemProperty>? _explicitNullValueCampaigns = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStatsCampaignsItemProperty> Campaigns { get => _explicitNullValueCampaigns; set { _explicitNullValueCampaigns = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaigns"); else _explicitNullProperties?.Remove("campaigns"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStatsCampaignsItemProperty> Campaigns { get => _explicitNullValueCampaigns; set { _explicitNullValueCampaigns = value; AdditionalData?.Remove("campaigns"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaigns"); else _explicitNullProperties?.Remove("campaigns"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStatsCampaignsItemProperty> _explicitNullValueCampaigns = default!;
 #endif
         /// <summary>Number of signals detected in the window</summary>
-        public int? SignalsCount { get => _explicitNullValueSignalsCount; set { _explicitNullValueSignalsCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalsCount"); else _explicitNullProperties?.Remove("signalsCount"); } }
+        public int? SignalsCount { get => _explicitNullValueSignalsCount; set { _explicitNullValueSignalsCount = value; AdditionalData?.Remove("signalsCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalsCount"); else _explicitNullProperties?.Remove("signalsCount"); } }
         private int? _explicitNullValueSignalsCount = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListConfigHistoryEntryStats"/> and sets the default values.

@@ -134,7 +134,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.DELETE, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.lemlist.com/api", "/leads/{email}/variables", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
@@ -153,7 +153,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         public RequestInformation ToPatchRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPatchQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.PATCH, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.PATCH, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.lemlist.com/api", "/leads/{email}/variables", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
@@ -172,7 +172,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables.VariablesRequestBuilder.VariablesRequestBuilderPostQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.POST, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.lemlist.com/api", "/leads/{email}/variables", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;

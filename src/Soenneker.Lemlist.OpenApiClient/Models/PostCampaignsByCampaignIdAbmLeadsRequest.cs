@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("leadIds") is { } nullNodeLeadIds && nullNodeLeadIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadIds = null;
+            if (parseNode.GetChildNode("leadIds") is null) { _explicitNullValueLeadIds = default!; _explicitNullProperties?.Remove("leadIds"); }
+            else if (parseNode.GetChildNode("leadIds") is { } nullNodeLeadIds && nullNodeLeadIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>People Database ids, from People Database search results or a contact-sourcing run&apos;s `contacts[].leadId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LeadIds { get => _explicitNullValueLeadIds; set { _explicitNullValueLeadIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadIds"); else _explicitNullProperties?.Remove("leadIds"); } }
+        public List<string>? LeadIds { get => _explicitNullValueLeadIds; set { _explicitNullValueLeadIds = value; AdditionalData?.Remove("leadIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadIds"); else _explicitNullProperties?.Remove("leadIds"); } }
         private List<string>? _explicitNullValueLeadIds = default!;
 #nullable restore
 #else
-        public List<string> LeadIds { get => _explicitNullValueLeadIds; set { _explicitNullValueLeadIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadIds"); else _explicitNullProperties?.Remove("leadIds"); } }
+        public List<string> LeadIds { get => _explicitNullValueLeadIds; set { _explicitNullValueLeadIds = value; AdditionalData?.Remove("leadIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadIds"); else _explicitNullProperties?.Remove("leadIds"); } }
         private List<string> _explicitNullValueLeadIds = default!;
 #endif
         /// <summary>

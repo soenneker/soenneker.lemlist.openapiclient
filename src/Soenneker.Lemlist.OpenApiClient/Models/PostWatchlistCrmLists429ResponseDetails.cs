@@ -17,13 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("monitorMax") is { } nullNodeMonitorMax && nullNodeMonitorMax.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorMax = null;
+            if (parseNode.GetChildNode("monitorMax") is null) { _explicitNullValueMonitorMax = default!; _explicitNullProperties?.Remove("monitorMax"); }
+            else if (parseNode.GetChildNode("monitorMax") is { } nullNodeMonitorMax && nullNodeMonitorMax.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorMax = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The monitorMax property</summary>
-        public long? MonitorMax { get => _explicitNullValueMonitorMax; set { _explicitNullValueMonitorMax = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitorMax"); else _explicitNullProperties?.Remove("monitorMax"); } }
+        public long? MonitorMax { get => _explicitNullValueMonitorMax; set { _explicitNullValueMonitorMax = value; AdditionalData?.Remove("monitorMax"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitorMax"); else _explicitNullProperties?.Remove("monitorMax"); } }
         private long? _explicitNullValueMonitorMax = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists429ResponseDetails"/> and sets the default values.

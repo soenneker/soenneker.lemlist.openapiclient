@@ -7474,14 +7474,8 @@
             "description": "The unique identifier of the campaign",
             "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+              "type": "string",
+              "x-client-inline-scalar": true
             },
             "example": "cam_A1B2C3D4E5F6G7H8I9"
           },
@@ -7491,14 +7485,8 @@
             "description": "The unique identifier of the lead\n\nThe email of the lead",
             "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+              "type": "string",
+              "x-client-inline-scalar": true
             },
             "example": "alex.doe@example.com"
           }
@@ -14022,7 +14010,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetContacts400Response"
+                  "$ref": "#/components/schemas/GetContacts400ResponseError"
                 },
                 "examples": {
                   "search-too-short": {
@@ -15997,7 +15985,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetCompanies400Response"
+                  "$ref": "#/components/schemas/GetCompanies400ResponseError"
                 },
                 "examples": {
                   "bad-team": {
@@ -36491,18 +36479,8 @@
           }
         ]
       },
-      "DeleteCampaignsByCampaignIdLeadsByLeadId400PlainResponse": {
-        "anyOf": [
-          {},
-          {}
-        ]
-      },
-      "DeleteCampaignsByCampaignIdLeadsByLeadId404PlainResponse": {
-        "anyOf": [
-          {},
-          {}
-        ]
-      },
+      "DeleteCampaignsByCampaignIdLeadsByLeadId400PlainResponse": {},
+      "DeleteCampaignsByCampaignIdLeadsByLeadId404PlainResponse": {},
       "PostLeadsStartByLeadId200Response": {
         "type": "array",
         "items": {
@@ -46532,28 +46510,28 @@
       "PostCampaignsByCampaignIdLeads200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
       "PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060 and \u0060FIELDS_KEPT\u0060."
       },
       "PostLeadsByEmailVariables200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PostLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060, the keys that went to the company record."
       },
       "PatchLeadsByEmailVariables200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PatchLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: \u0060fields\u0060 for \u0060company-fields-write-company-record\u0060, the keys that went to the company record."
       },
@@ -46660,7 +46638,7 @@
       "PostContacts200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PostContacts200ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
@@ -46679,14 +46657,14 @@
       "PostContacts201ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PostContacts201ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
       "PostCompanies200ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PostCompanies200ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
@@ -46697,7 +46675,7 @@
       "PostCompanies201ResponseWarningsItemParams": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/PostCompanies201ResponseWarningsItemParamsAdditionalProperties"
+          "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
         "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
       },
@@ -52787,6 +52765,10 @@
           "modelAsString": false,
           "values": [
             {
+              "value": "",
+              "name": "EnumValue"
+            },
+            {
               "value": "0",
               "name": "Value0"
             },
@@ -52814,6 +52796,10 @@
           "name": "PatchTasksRequestPriority",
           "modelAsString": false,
           "values": [
+            {
+              "value": "",
+              "name": "EnumValue"
+            },
             {
               "value": "0",
               "name": "Value0"
@@ -58142,6 +58128,60 @@
         "type": "object",
         "additionalProperties": {
           "type": "string"
+        }
+      },
+      "GetContacts400ResponseError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "x-client-untyped-value": true,
+            "x-client-original-field-schemas": [
+              {
+                "type": "string",
+                "description": "Human-readable explanation."
+              },
+              {
+                "$ref": "#/components/schemas/ApiErrorEnvelopeError"
+              }
+            ]
+          },
+          "success": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "x-client-original-error-schema": {
+          "$ref": "#/components/schemas/GetContacts400Response"
+        }
+      },
+      "GetCompanies400ResponseError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "x-client-untyped-value": true,
+            "x-client-original-field-schemas": [
+              {
+                "type": "string",
+                "description": "Human-readable explanation."
+              },
+              {
+                "$ref": "#/components/schemas/ApiErrorEnvelopeError"
+              }
+            ]
+          },
+          "success": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "x-client-original-error-schema": {
+          "$ref": "#/components/schemas/GetCompanies400Response"
         }
       },
       "PostContactsSuccessResponse": {

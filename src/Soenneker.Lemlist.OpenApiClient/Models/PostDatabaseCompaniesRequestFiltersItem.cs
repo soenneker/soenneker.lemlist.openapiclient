@@ -17,9 +17,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("filterId") is { } nullNodeFilterId && nullNodeFilterId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FilterId = null;
-            if (parseNode.GetChildNode("in") is { } nullNodeIn && nullNodeIn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) In = null;
-            if (parseNode.GetChildNode("out") is { } nullNodeOut && nullNodeOut.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Out = null;
+            if (parseNode.GetChildNode("filterId") is null) { _explicitNullValueFilterId = default!; _explicitNullProperties?.Remove("filterId"); }
+            else if (parseNode.GetChildNode("filterId") is { } nullNodeFilterId && nullNodeFilterId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FilterId = null;
+            if (parseNode.GetChildNode("in") is null) { _explicitNullValueIn = default!; _explicitNullProperties?.Remove("in"); }
+            else if (parseNode.GetChildNode("in") is { } nullNodeIn && nullNodeIn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) In = null;
+            if (parseNode.GetChildNode("out") is null) { _explicitNullValueOut = default!; _explicitNullProperties?.Remove("out"); }
+            else if (parseNode.GetChildNode("out") is { } nullNodeOut && nullNodeOut.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Out = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,31 +30,31 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The identifier of the filter to apply (e.g., &apos;currentCompanyTechnologies&apos;, &apos;companySize&apos;, &apos;industry&apos;)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
+        public string? FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; AdditionalData?.Remove("filterId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
         private string? _explicitNullValueFilterId = default!;
 #nullable restore
 #else
-        public string FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
+        public string FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; AdditionalData?.Remove("filterId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
         private string _explicitNullValueFilterId = default!;
 #endif
         /// <summary>Array of values to include in the filter. For a `slider` filter, one or more `min|max` ranges, both bounds included (e.g. `2015|2024`). A record matches if it falls in any of them. Each range is two numbers joined by `|`; negative and decimal numbers are allowed. Another format (such as `2015-2024`, `10%|50%` or `2015|`) is refused with a 400.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
+        public List<string>? In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; AdditionalData?.Remove("in"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
         private List<string>? _explicitNullValueIn = default!;
 #nullable restore
 #else
-        public List<string> In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
+        public List<string> In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; AdditionalData?.Remove("in"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
         private List<string> _explicitNullValueIn = default!;
 #endif
         /// <summary>Array of values to exclude from the filter. Must be empty on a `slider` filter, which refuses `out` with a 400. To exclude a range, send the ranges around it in `in`: `[&quot;1900|1989&quot;, &quot;2001|2026&quot;]` on `currentCompanyFounded` excludes the companies founded from 1990 to 2000.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
+        public List<string>? Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; AdditionalData?.Remove("out"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
         private List<string>? _explicitNullValueOut = default!;
 #nullable restore
 #else
-        public List<string> Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
+        public List<string> Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; AdditionalData?.Remove("out"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
         private List<string> _explicitNullValueOut = default!;
 #endif
         /// <summary>

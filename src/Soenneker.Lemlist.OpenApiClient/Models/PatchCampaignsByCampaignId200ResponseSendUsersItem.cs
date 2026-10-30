@@ -17,10 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
-            if (parseNode.GetChildNode("mailboxes") is { } nullNodeMailboxes && nullNodeMailboxes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mailboxes = null;
-            if (parseNode.GetChildNode("phoneNumbers") is { } nullNodePhoneNumbers && nullNodePhoneNumbers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PhoneNumbers = null;
-            if (parseNode.GetChildNode("whatsappAccountIds") is { } nullNodeWhatsappAccountIds && nullNodeWhatsappAccountIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WhatsappAccountIds = null;
+            if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
+            else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("mailboxes") is null) { _explicitNullValueMailboxes = default!; _explicitNullProperties?.Remove("mailboxes"); }
+            else if (parseNode.GetChildNode("mailboxes") is { } nullNodeMailboxes && nullNodeMailboxes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mailboxes = null;
+            if (parseNode.GetChildNode("phoneNumbers") is null) { _explicitNullValuePhoneNumbers = default!; _explicitNullProperties?.Remove("phoneNumbers"); }
+            else if (parseNode.GetChildNode("phoneNumbers") is { } nullNodePhoneNumbers && nullNodePhoneNumbers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PhoneNumbers = null;
+            if (parseNode.GetChildNode("whatsappAccountIds") is null) { _explicitNullValueWhatsappAccountIds = default!; _explicitNullProperties?.Remove("whatsappAccountIds"); }
+            else if (parseNode.GetChildNode("whatsappAccountIds") is { } nullNodeWhatsappAccountIds && nullNodeWhatsappAccountIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WhatsappAccountIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,41 +32,41 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>User ID of the sender</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string _explicitNullValueId = default!;
 #endif
         /// <summary>Connected email mailboxes</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItemMailboxesItem>? Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItemMailboxesItem>? Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; AdditionalData?.Remove("mailboxes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItemMailboxesItem>? _explicitNullValueMailboxes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItemMailboxesItem> Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItemMailboxesItem> Mailboxes { get => _explicitNullValueMailboxes; set { _explicitNullValueMailboxes = value; AdditionalData?.Remove("mailboxes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxes"); else _explicitNullProperties?.Remove("mailboxes"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItemMailboxesItem> _explicitNullValueMailboxes = default!;
 #endif
         /// <summary>Connected phone numbers</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? PhoneNumbers { get => _explicitNullValuePhoneNumbers; set { _explicitNullValuePhoneNumbers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phoneNumbers"); else _explicitNullProperties?.Remove("phoneNumbers"); } }
+        public List<string>? PhoneNumbers { get => _explicitNullValuePhoneNumbers; set { _explicitNullValuePhoneNumbers = value; AdditionalData?.Remove("phoneNumbers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phoneNumbers"); else _explicitNullProperties?.Remove("phoneNumbers"); } }
         private List<string>? _explicitNullValuePhoneNumbers = default!;
 #nullable restore
 #else
-        public List<string> PhoneNumbers { get => _explicitNullValuePhoneNumbers; set { _explicitNullValuePhoneNumbers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phoneNumbers"); else _explicitNullProperties?.Remove("phoneNumbers"); } }
+        public List<string> PhoneNumbers { get => _explicitNullValuePhoneNumbers; set { _explicitNullValuePhoneNumbers = value; AdditionalData?.Remove("phoneNumbers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phoneNumbers"); else _explicitNullProperties?.Remove("phoneNumbers"); } }
         private List<string> _explicitNullValuePhoneNumbers = default!;
 #endif
         /// <summary>Connected WhatsApp account IDs</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? WhatsappAccountIds { get => _explicitNullValueWhatsappAccountIds; set { _explicitNullValueWhatsappAccountIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsappAccountIds"); else _explicitNullProperties?.Remove("whatsappAccountIds"); } }
+        public List<string>? WhatsappAccountIds { get => _explicitNullValueWhatsappAccountIds; set { _explicitNullValueWhatsappAccountIds = value; AdditionalData?.Remove("whatsappAccountIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsappAccountIds"); else _explicitNullProperties?.Remove("whatsappAccountIds"); } }
         private List<string>? _explicitNullValueWhatsappAccountIds = default!;
 #nullable restore
 #else
-        public List<string> WhatsappAccountIds { get => _explicitNullValueWhatsappAccountIds; set { _explicitNullValueWhatsappAccountIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsappAccountIds"); else _explicitNullProperties?.Remove("whatsappAccountIds"); } }
+        public List<string> WhatsappAccountIds { get => _explicitNullValueWhatsappAccountIds; set { _explicitNullValueWhatsappAccountIds = value; AdditionalData?.Remove("whatsappAccountIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsappAccountIds"); else _explicitNullProperties?.Remove("whatsappAccountIds"); } }
         private List<string> _explicitNullValueWhatsappAccountIds = default!;
 #endif
         /// <summary>

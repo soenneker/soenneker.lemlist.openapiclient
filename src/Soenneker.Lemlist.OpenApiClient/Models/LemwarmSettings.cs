@@ -18,42 +18,47 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("active") is { } nullNodeActive && nullNodeActive.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Active = null;
-            if (parseNode.GetChildNode("dailyLimit") is { } nullNodeDailyLimit && nullNodeDailyLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DailyLimit = null;
-            if (parseNode.GetChildNode("deliverability") is { } nullNodeDeliverability && nullNodeDeliverability.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deliverability = null;
-            if (parseNode.GetChildNode("warmDailyVarianceEnabled") is { } nullNodeWarmDailyVarianceEnabled && nullNodeWarmDailyVarianceEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmDailyVarianceEnabled = null;
-            if (parseNode.GetChildNode("warmupTemplate") is { } nullNodeWarmupTemplate && nullNodeWarmupTemplate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmupTemplate = null;
+            if (parseNode.GetChildNode("active") is null) { _explicitNullValueActive = default!; _explicitNullProperties?.Remove("active"); }
+            else if (parseNode.GetChildNode("active") is { } nullNodeActive && nullNodeActive.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Active = null;
+            if (parseNode.GetChildNode("dailyLimit") is null) { _explicitNullValueDailyLimit = default!; _explicitNullProperties?.Remove("dailyLimit"); }
+            else if (parseNode.GetChildNode("dailyLimit") is { } nullNodeDailyLimit && nullNodeDailyLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DailyLimit = null;
+            if (parseNode.GetChildNode("deliverability") is null) { _explicitNullValueDeliverability = default!; _explicitNullProperties?.Remove("deliverability"); }
+            else if (parseNode.GetChildNode("deliverability") is { } nullNodeDeliverability && nullNodeDeliverability.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deliverability = null;
+            if (parseNode.GetChildNode("warmDailyVarianceEnabled") is null) { _explicitNullValueWarmDailyVarianceEnabled = default!; _explicitNullProperties?.Remove("warmDailyVarianceEnabled"); }
+            else if (parseNode.GetChildNode("warmDailyVarianceEnabled") is { } nullNodeWarmDailyVarianceEnabled && nullNodeWarmDailyVarianceEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmDailyVarianceEnabled = null;
+            if (parseNode.GetChildNode("warmupTemplate") is null) { _explicitNullValueWarmupTemplate = default!; _explicitNullProperties?.Remove("warmupTemplate"); }
+            else if (parseNode.GetChildNode("warmupTemplate") is { } nullNodeWarmupTemplate && nullNodeWarmupTemplate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmupTemplate = null;
         }
 
         /// <summary>The active property</summary>
-        public bool? Active { get => _explicitNullValueActive; set { _explicitNullValueActive = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("active"); else _explicitNullProperties?.Remove("active"); } }
+        public bool? Active { get => _explicitNullValueActive; set { _explicitNullValueActive = value; AdditionalData?.Remove("active"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("active"); else _explicitNullProperties?.Remove("active"); } }
         private bool? _explicitNullValueActive = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The dailyLimit property</summary>
-        public int? DailyLimit { get => _explicitNullValueDailyLimit; set { _explicitNullValueDailyLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dailyLimit"); else _explicitNullProperties?.Remove("dailyLimit"); } }
+        public int? DailyLimit { get => _explicitNullValueDailyLimit; set { _explicitNullValueDailyLimit = value; AdditionalData?.Remove("dailyLimit"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dailyLimit"); else _explicitNullProperties?.Remove("dailyLimit"); } }
         private int? _explicitNullValueDailyLimit = default!;
         /// <summary>The deliverability property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability? Deliverability { get => _explicitNullValueDeliverability; set { _explicitNullValueDeliverability = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliverability"); else _explicitNullProperties?.Remove("deliverability"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability? Deliverability { get => _explicitNullValueDeliverability; set { _explicitNullValueDeliverability = value; AdditionalData?.Remove("deliverability"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliverability"); else _explicitNullProperties?.Remove("deliverability"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability? _explicitNullValueDeliverability = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability Deliverability { get => _explicitNullValueDeliverability; set { _explicitNullValueDeliverability = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliverability"); else _explicitNullProperties?.Remove("deliverability"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability Deliverability { get => _explicitNullValueDeliverability; set { _explicitNullValueDeliverability = value; AdditionalData?.Remove("deliverability"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliverability"); else _explicitNullProperties?.Remove("deliverability"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability _explicitNullValueDeliverability = default!;
 #endif
         /// <summary>Whether a random daily variance is applied to the warmup email target</summary>
-        public bool? WarmDailyVarianceEnabled { get => _explicitNullValueWarmDailyVarianceEnabled; set { _explicitNullValueWarmDailyVarianceEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmDailyVarianceEnabled"); else _explicitNullProperties?.Remove("warmDailyVarianceEnabled"); } }
+        public bool? WarmDailyVarianceEnabled { get => _explicitNullValueWarmDailyVarianceEnabled; set { _explicitNullValueWarmDailyVarianceEnabled = value; AdditionalData?.Remove("warmDailyVarianceEnabled"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmDailyVarianceEnabled"); else _explicitNullProperties?.Remove("warmDailyVarianceEnabled"); } }
         private bool? _explicitNullValueWarmDailyVarianceEnabled = default!;
         /// <summary>The warmupTemplate property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WarmupTemplate { get => _explicitNullValueWarmupTemplate; set { _explicitNullValueWarmupTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmupTemplate"); else _explicitNullProperties?.Remove("warmupTemplate"); } }
+        public string? WarmupTemplate { get => _explicitNullValueWarmupTemplate; set { _explicitNullValueWarmupTemplate = value; AdditionalData?.Remove("warmupTemplate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmupTemplate"); else _explicitNullProperties?.Remove("warmupTemplate"); } }
         private string? _explicitNullValueWarmupTemplate = default!;
 #nullable restore
 #else
-        public string WarmupTemplate { get => _explicitNullValueWarmupTemplate; set { _explicitNullValueWarmupTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmupTemplate"); else _explicitNullProperties?.Remove("warmupTemplate"); } }
+        public string WarmupTemplate { get => _explicitNullValueWarmupTemplate; set { _explicitNullValueWarmupTemplate = value; AdditionalData?.Remove("warmupTemplate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmupTemplate"); else _explicitNullProperties?.Remove("warmupTemplate"); } }
         private string _explicitNullValueWarmupTemplate = default!;
 #endif
         /// <summary>

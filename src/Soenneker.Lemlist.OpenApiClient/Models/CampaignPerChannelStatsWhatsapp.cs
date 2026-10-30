@@ -18,29 +18,34 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("delivered") is { } nullNodeDelivered && nullNodeDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delivered = null;
-            if (parseNode.GetChildNode("notDelivered") is { } nullNodeNotDelivered && nullNodeNotDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotDelivered = null;
-            if (parseNode.GetChildNode("opened") is { } nullNodeOpened && nullNodeOpened.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Opened = null;
-            if (parseNode.GetChildNode("replied") is { } nullNodeReplied && nullNodeReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Replied = null;
-            if (parseNode.GetChildNode("sent") is { } nullNodeSent && nullNodeSent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sent = null;
+            if (parseNode.GetChildNode("delivered") is null) { _explicitNullValueDelivered = default!; _explicitNullProperties?.Remove("delivered"); }
+            else if (parseNode.GetChildNode("delivered") is { } nullNodeDelivered && nullNodeDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delivered = null;
+            if (parseNode.GetChildNode("notDelivered") is null) { _explicitNullValueNotDelivered = default!; _explicitNullProperties?.Remove("notDelivered"); }
+            else if (parseNode.GetChildNode("notDelivered") is { } nullNodeNotDelivered && nullNodeNotDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotDelivered = null;
+            if (parseNode.GetChildNode("opened") is null) { _explicitNullValueOpened = default!; _explicitNullProperties?.Remove("opened"); }
+            else if (parseNode.GetChildNode("opened") is { } nullNodeOpened && nullNodeOpened.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Opened = null;
+            if (parseNode.GetChildNode("replied") is null) { _explicitNullValueReplied = default!; _explicitNullProperties?.Remove("replied"); }
+            else if (parseNode.GetChildNode("replied") is { } nullNodeReplied && nullNodeReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Replied = null;
+            if (parseNode.GetChildNode("sent") is null) { _explicitNullValueSent = default!; _explicitNullProperties?.Remove("sent"); }
+            else if (parseNode.GetChildNode("sent") is { } nullNodeSent && nullNodeSent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sent = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>WhatsApp messages delivered.</summary>
-        public int? Delivered { get => _explicitNullValueDelivered; set { _explicitNullValueDelivered = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delivered"); else _explicitNullProperties?.Remove("delivered"); } }
+        public int? Delivered { get => _explicitNullValueDelivered; set { _explicitNullValueDelivered = value; AdditionalData?.Remove("delivered"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delivered"); else _explicitNullProperties?.Remove("delivered"); } }
         private int? _explicitNullValueDelivered = default!;
         /// <summary>WhatsApp messages that failed to send.</summary>
-        public int? NotDelivered { get => _explicitNullValueNotDelivered; set { _explicitNullValueNotDelivered = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notDelivered"); else _explicitNullProperties?.Remove("notDelivered"); } }
+        public int? NotDelivered { get => _explicitNullValueNotDelivered; set { _explicitNullValueNotDelivered = value; AdditionalData?.Remove("notDelivered"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notDelivered"); else _explicitNullProperties?.Remove("notDelivered"); } }
         private int? _explicitNullValueNotDelivered = default!;
         /// <summary>WhatsApp messages opened.</summary>
-        public int? Opened { get => _explicitNullValueOpened; set { _explicitNullValueOpened = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opened"); else _explicitNullProperties?.Remove("opened"); } }
+        public int? Opened { get => _explicitNullValueOpened; set { _explicitNullValueOpened = value; AdditionalData?.Remove("opened"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opened"); else _explicitNullProperties?.Remove("opened"); } }
         private int? _explicitNullValueOpened = default!;
         /// <summary>WhatsApp messages replied to.</summary>
-        public int? Replied { get => _explicitNullValueReplied; set { _explicitNullValueReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("replied"); else _explicitNullProperties?.Remove("replied"); } }
+        public int? Replied { get => _explicitNullValueReplied; set { _explicitNullValueReplied = value; AdditionalData?.Remove("replied"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("replied"); else _explicitNullProperties?.Remove("replied"); } }
         private int? _explicitNullValueReplied = default!;
         /// <summary>WhatsApp messages sent.</summary>
-        public int? Sent { get => _explicitNullValueSent; set { _explicitNullValueSent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent"); else _explicitNullProperties?.Remove("sent"); } }
+        public int? Sent { get => _explicitNullValueSent; set { _explicitNullValueSent = value; AdditionalData?.Remove("sent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent"); else _explicitNullProperties?.Remove("sent"); } }
         private int? _explicitNullValueSent = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp"/> and sets the default values.

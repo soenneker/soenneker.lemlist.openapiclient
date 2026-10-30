@@ -17,10 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("authorizedActions") is { } nullNodeAuthorizedActions && nullNodeAuthorizedActions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AuthorizedActions = null;
-            if (parseNode.GetChildNode("digestFrequency") is { } nullNodeDigestFrequency && nullNodeDigestFrequency.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DigestFrequency = null;
-            if (parseNode.GetChildNode("enabled") is { } nullNodeEnabled && nullNodeEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enabled = null;
-            if (parseNode.GetChildNode("monitoredSignals") is { } nullNodeMonitoredSignals && nullNodeMonitoredSignals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitoredSignals = null;
+            if (parseNode.GetChildNode("authorizedActions") is null) { _explicitNullValueAuthorizedActions = default!; _explicitNullProperties?.Remove("authorizedActions"); }
+            else if (parseNode.GetChildNode("authorizedActions") is { } nullNodeAuthorizedActions && nullNodeAuthorizedActions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AuthorizedActions = null;
+            if (parseNode.GetChildNode("digestFrequency") is null) { _explicitNullValueDigestFrequency = default!; _explicitNullProperties?.Remove("digestFrequency"); }
+            else if (parseNode.GetChildNode("digestFrequency") is { } nullNodeDigestFrequency && nullNodeDigestFrequency.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DigestFrequency = null;
+            if (parseNode.GetChildNode("enabled") is null) { _explicitNullValueEnabled = default!; _explicitNullProperties?.Remove("enabled"); }
+            else if (parseNode.GetChildNode("enabled") is { } nullNodeEnabled && nullNodeEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enabled = null;
+            if (parseNode.GetChildNode("monitoredSignals") is null) { _explicitNullValueMonitoredSignals = default!; _explicitNullProperties?.Remove("monitoredSignals"); }
+            else if (parseNode.GetChildNode("monitoredSignals") is { } nullNodeMonitoredSignals && nullNodeMonitoredSignals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitoredSignals = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,27 +32,27 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Replaces the authorized-actions list. Only fixDns and recover are accepted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem?>? AuthorizedActions { get => _explicitNullValueAuthorizedActions; set { _explicitNullValueAuthorizedActions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authorizedActions"); else _explicitNullProperties?.Remove("authorizedActions"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem?>? AuthorizedActions { get => _explicitNullValueAuthorizedActions; set { _explicitNullValueAuthorizedActions = value; AdditionalData?.Remove("authorizedActions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authorizedActions"); else _explicitNullProperties?.Remove("authorizedActions"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem?>? _explicitNullValueAuthorizedActions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem?> AuthorizedActions { get => _explicitNullValueAuthorizedActions; set { _explicitNullValueAuthorizedActions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authorizedActions"); else _explicitNullProperties?.Remove("authorizedActions"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem?> AuthorizedActions { get => _explicitNullValueAuthorizedActions; set { _explicitNullValueAuthorizedActions = value; AdditionalData?.Remove("authorizedActions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("authorizedActions"); else _explicitNullProperties?.Remove("authorizedActions"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem?> _explicitNullValueAuthorizedActions = default!;
 #endif
         /// <summary>How often team admins get the recovery summary email: daily, or weekly on Mondays.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestDigestFrequency? DigestFrequency { get => _explicitNullValueDigestFrequency; set { _explicitNullValueDigestFrequency = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("digestFrequency"); else _explicitNullProperties?.Remove("digestFrequency"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestDigestFrequency? DigestFrequency { get => _explicitNullValueDigestFrequency; set { _explicitNullValueDigestFrequency = value; AdditionalData?.Remove("digestFrequency"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("digestFrequency"); else _explicitNullProperties?.Remove("digestFrequency"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestDigestFrequency? _explicitNullValueDigestFrequency = default!;
         /// <summary>Turn self-recovery on or off.</summary>
-        public bool? Enabled { get => _explicitNullValueEnabled; set { _explicitNullValueEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabled"); else _explicitNullProperties?.Remove("enabled"); } }
+        public bool? Enabled { get => _explicitNullValueEnabled; set { _explicitNullValueEnabled = value; AdditionalData?.Remove("enabled"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabled"); else _explicitNullProperties?.Remove("enabled"); } }
         private bool? _explicitNullValueEnabled = default!;
         /// <summary>Replaces the monitored-signals list.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem?>? MonitoredSignals { get => _explicitNullValueMonitoredSignals; set { _explicitNullValueMonitoredSignals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitoredSignals"); else _explicitNullProperties?.Remove("monitoredSignals"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem?>? MonitoredSignals { get => _explicitNullValueMonitoredSignals; set { _explicitNullValueMonitoredSignals = value; AdditionalData?.Remove("monitoredSignals"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitoredSignals"); else _explicitNullProperties?.Remove("monitoredSignals"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem?>? _explicitNullValueMonitoredSignals = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem?> MonitoredSignals { get => _explicitNullValueMonitoredSignals; set { _explicitNullValueMonitoredSignals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitoredSignals"); else _explicitNullProperties?.Remove("monitoredSignals"); } }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem?> MonitoredSignals { get => _explicitNullValueMonitoredSignals; set { _explicitNullValueMonitoredSignals = value; AdditionalData?.Remove("monitoredSignals"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitoredSignals"); else _explicitNullProperties?.Remove("monitoredSignals"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem?> _explicitNullValueMonitoredSignals = default!;
 #endif
         /// <summary>
@@ -77,7 +81,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "authorizedActions", n => { AuthorizedActions = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestAuthorizedActionsItem>()?.AsList(); } },
-                { "digestFrequency", n => { DigestFrequency = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestDigestFrequency>(); } },
+                { "digestFrequency", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestDigestFrequency>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDigestFrequency = default; _explicitNullProperties?.Remove("digestFrequency"); AdditionalData["digestFrequency"] = unknown; } else { DigestFrequency = parsed; AdditionalData.Remove("digestFrequency"); } } },
                 { "enabled", n => { Enabled = n.GetBoolValue(); } },
                 { "monitoredSignals", n => { MonitoredSignals = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSelfRecoveryConfigRequestMonitoredSignalsItem>()?.AsList(); } },
             };

@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("idsOrDomains") is { } nullNodeIdsOrDomains && nullNodeIdsOrDomains.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IdsOrDomains = null;
-            if (parseNode.GetChildNode("listId") is { } nullNodeListId && nullNodeListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ListId = null;
+            if (parseNode.GetChildNode("idsOrDomains") is null) { _explicitNullValueIdsOrDomains = default!; _explicitNullProperties?.Remove("idsOrDomains"); }
+            else if (parseNode.GetChildNode("idsOrDomains") is { } nullNodeIdsOrDomains && nullNodeIdsOrDomains.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IdsOrDomains = null;
+            if (parseNode.GetChildNode("listId") is null) { _explicitNullValueListId = default!; _explicitNullProperties?.Remove("listId"); }
+            else if (parseNode.GetChildNode("listId") is { } nullNodeListId && nullNodeListId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ListId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>lemlist company ids (`cpn_xxx`) or domains, 10,000 at most. A domain designates every company carrying it: 10,000 companies at most in total. Send either `idsOrDomains` or `listId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? IdsOrDomains { get => _explicitNullValueIdsOrDomains; set { _explicitNullValueIdsOrDomains = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrDomains"); else _explicitNullProperties?.Remove("idsOrDomains"); } }
+        public List<string>? IdsOrDomains { get => _explicitNullValueIdsOrDomains; set { _explicitNullValueIdsOrDomains = value; AdditionalData?.Remove("idsOrDomains"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrDomains"); else _explicitNullProperties?.Remove("idsOrDomains"); } }
         private List<string>? _explicitNullValueIdsOrDomains = default!;
 #nullable restore
 #else
-        public List<string> IdsOrDomains { get => _explicitNullValueIdsOrDomains; set { _explicitNullValueIdsOrDomains = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrDomains"); else _explicitNullProperties?.Remove("idsOrDomains"); } }
+        public List<string> IdsOrDomains { get => _explicitNullValueIdsOrDomains; set { _explicitNullValueIdsOrDomains = value; AdditionalData?.Remove("idsOrDomains"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("idsOrDomains"); else _explicitNullProperties?.Remove("idsOrDomains"); } }
         private List<string> _explicitNullValueIdsOrDomains = default!;
 #endif
         /// <summary>A company list id (`clt_xxx`): acts on every company of the list, static or dynamic, 10,000 at most. Use it instead of `idsOrDomains`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
+        public string? ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; AdditionalData?.Remove("listId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
         private string? _explicitNullValueListId = default!;
 #nullable restore
 #else
-        public string ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
+        public string ListId { get => _explicitNullValueListId; set { _explicitNullValueListId = value; AdditionalData?.Remove("listId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("listId"); else _explicitNullProperties?.Remove("listId"); } }
         private string _explicitNullValueListId = default!;
 #endif
         /// <summary>

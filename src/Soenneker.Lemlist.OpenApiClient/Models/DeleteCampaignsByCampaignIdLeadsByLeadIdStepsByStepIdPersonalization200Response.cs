@@ -17,13 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("reset") is { } nullNodeReset && nullNodeReset.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reset = null;
+            if (parseNode.GetChildNode("reset") is null) { _explicitNullValueReset = default!; _explicitNullProperties?.Remove("reset"); }
+            else if (parseNode.GetChildNode("reset") is { } nullNodeReset && nullNodeReset.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reset = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The reset property</summary>
-        public bool? Reset { get => _explicitNullValueReset; set { _explicitNullValueReset = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reset"); else _explicitNullProperties?.Remove("reset"); } }
+        public bool? Reset { get => _explicitNullValueReset; set { _explicitNullValueReset = value; AdditionalData?.Remove("reset"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reset"); else _explicitNullProperties?.Remove("reset"); } }
         private bool? _explicitNullValueReset = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization200Response"/> and sets the default values.

@@ -17,23 +17,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("ok") is { } nullNodeOk && nullNodeOk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ok = null;
-            if (parseNode.GetChildNode("removedSequenceIds") is { } nullNodeRemovedSequenceIds && nullNodeRemovedSequenceIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemovedSequenceIds = null;
+            if (parseNode.GetChildNode("ok") is null) { _explicitNullValueOk = default!; _explicitNullProperties?.Remove("ok"); }
+            else if (parseNode.GetChildNode("ok") is { } nullNodeOk && nullNodeOk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ok = null;
+            if (parseNode.GetChildNode("removedSequenceIds") is null) { _explicitNullValueRemovedSequenceIds = default!; _explicitNullProperties?.Remove("removedSequenceIds"); }
+            else if (parseNode.GetChildNode("removedSequenceIds") is { } nullNodeRemovedSequenceIds && nullNodeRemovedSequenceIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemovedSequenceIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The ok property</summary>
-        public bool? Ok { get => _explicitNullValueOk; set { _explicitNullValueOk = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ok"); else _explicitNullProperties?.Remove("ok"); } }
+        public bool? Ok { get => _explicitNullValueOk; set { _explicitNullValueOk = value; AdditionalData?.Remove("ok"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ok"); else _explicitNullProperties?.Remove("ok"); } }
         private bool? _explicitNullValueOk = default!;
         /// <summary>The sub-tree sequences deleted with the branch. Empty when the branch held no steps of its own.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? RemovedSequenceIds { get => _explicitNullValueRemovedSequenceIds; set { _explicitNullValueRemovedSequenceIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removedSequenceIds"); else _explicitNullProperties?.Remove("removedSequenceIds"); } }
+        public List<string>? RemovedSequenceIds { get => _explicitNullValueRemovedSequenceIds; set { _explicitNullValueRemovedSequenceIds = value; AdditionalData?.Remove("removedSequenceIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removedSequenceIds"); else _explicitNullProperties?.Remove("removedSequenceIds"); } }
         private List<string>? _explicitNullValueRemovedSequenceIds = default!;
 #nullable restore
 #else
-        public List<string> RemovedSequenceIds { get => _explicitNullValueRemovedSequenceIds; set { _explicitNullValueRemovedSequenceIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removedSequenceIds"); else _explicitNullProperties?.Remove("removedSequenceIds"); } }
+        public List<string> RemovedSequenceIds { get => _explicitNullValueRemovedSequenceIds; set { _explicitNullValueRemovedSequenceIds = value; AdditionalData?.Remove("removedSequenceIds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removedSequenceIds"); else _explicitNullProperties?.Remove("removedSequenceIds"); } }
         private List<string> _explicitNullValueRemovedSequenceIds = default!;
 #endif
         /// <summary>

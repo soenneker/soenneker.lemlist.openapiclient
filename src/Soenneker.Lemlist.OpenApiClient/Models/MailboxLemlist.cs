@@ -17,13 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("emailLimit") is { } nullNodeEmailLimit && nullNodeEmailLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailLimit = null;
+            if (parseNode.GetChildNode("emailLimit") is null) { _explicitNullValueEmailLimit = default!; _explicitNullProperties?.Remove("emailLimit"); }
+            else if (parseNode.GetChildNode("emailLimit") is { } nullNodeEmailLimit && nullNodeEmailLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailLimit = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Daily send limit</summary>
-        public int? EmailLimit { get => _explicitNullValueEmailLimit; set { _explicitNullValueEmailLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailLimit"); else _explicitNullProperties?.Remove("emailLimit"); } }
+        public int? EmailLimit { get => _explicitNullValueEmailLimit; set { _explicitNullValueEmailLimit = value; AdditionalData?.Remove("emailLimit"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailLimit"); else _explicitNullProperties?.Remove("emailLimit"); } }
         private int? _explicitNullValueEmailLimit = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.MailboxLemlist"/> and sets the default values.

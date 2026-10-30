@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("interest") is { } nullNodeInterest && nullNodeInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Interest = null;
-            if (parseNode.GetChildNode("interest_id") is { } nullNodeInterestId && nullNodeInterestId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InterestId = null;
+            if (parseNode.GetChildNode("interest") is null) { _explicitNullValueInterest = default!; _explicitNullProperties?.Remove("interest"); }
+            else if (parseNode.GetChildNode("interest") is { } nullNodeInterest && nullNodeInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Interest = null;
+            if (parseNode.GetChildNode("interest_id") is null) { _explicitNullValueInterestId = default!; _explicitNullProperties?.Remove("interest_id"); }
+            else if (parseNode.GetChildNode("interest_id") is { } nullNodeInterestId && nullNodeInterestId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InterestId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The interest property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Interest { get => _explicitNullValueInterest; set { _explicitNullValueInterest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest"); else _explicitNullProperties?.Remove("interest"); } }
+        public string? Interest { get => _explicitNullValueInterest; set { _explicitNullValueInterest = value; AdditionalData?.Remove("interest"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest"); else _explicitNullProperties?.Remove("interest"); } }
         private string? _explicitNullValueInterest = default!;
 #nullable restore
 #else
-        public string Interest { get => _explicitNullValueInterest; set { _explicitNullValueInterest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest"); else _explicitNullProperties?.Remove("interest"); } }
+        public string Interest { get => _explicitNullValueInterest; set { _explicitNullValueInterest = value; AdditionalData?.Remove("interest"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest"); else _explicitNullProperties?.Remove("interest"); } }
         private string _explicitNullValueInterest = default!;
 #endif
         /// <summary>The interest_id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InterestId { get => _explicitNullValueInterestId; set { _explicitNullValueInterestId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest_id"); else _explicitNullProperties?.Remove("interest_id"); } }
+        public string? InterestId { get => _explicitNullValueInterestId; set { _explicitNullValueInterestId = value; AdditionalData?.Remove("interest_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest_id"); else _explicitNullProperties?.Remove("interest_id"); } }
         private string? _explicitNullValueInterestId = default!;
 #nullable restore
 #else
-        public string InterestId { get => _explicitNullValueInterestId; set { _explicitNullValueInterestId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest_id"); else _explicitNullProperties?.Remove("interest_id"); } }
+        public string InterestId { get => _explicitNullValueInterestId; set { _explicitNullValueInterestId = value; AdditionalData?.Remove("interest_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interest_id"); else _explicitNullProperties?.Remove("interest_id"); } }
         private string _explicitNullValueInterestId = default!;
 #endif
         /// <summary>

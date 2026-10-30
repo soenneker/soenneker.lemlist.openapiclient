@@ -17,32 +17,36 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("addedCount") is { } nullNodeAddedCount && nullNodeAddedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddedCount = null;
-            if (parseNode.GetChildNode("alreadyInList") is { } nullNodeAlreadyInList && nullNodeAlreadyInList.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyInList = null;
-            if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
-            if (parseNode.GetChildNode("removedCount") is { } nullNodeRemovedCount && nullNodeRemovedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemovedCount = null;
+            if (parseNode.GetChildNode("addedCount") is null) { _explicitNullValueAddedCount = default!; _explicitNullProperties?.Remove("addedCount"); }
+            else if (parseNode.GetChildNode("addedCount") is { } nullNodeAddedCount && nullNodeAddedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddedCount = null;
+            if (parseNode.GetChildNode("alreadyInList") is null) { _explicitNullValueAlreadyInList = default!; _explicitNullProperties?.Remove("alreadyInList"); }
+            else if (parseNode.GetChildNode("alreadyInList") is { } nullNodeAlreadyInList && nullNodeAlreadyInList.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyInList = null;
+            if (parseNode.GetChildNode("message") is null) { _explicitNullValueMessage = default!; _explicitNullProperties?.Remove("message"); }
+            else if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
+            if (parseNode.GetChildNode("removedCount") is null) { _explicitNullValueRemovedCount = default!; _explicitNullProperties?.Remove("removedCount"); }
+            else if (parseNode.GetChildNode("removedCount") is { } nullNodeRemovedCount && nullNodeRemovedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemovedCount = null;
         }
 
         /// <summary>Number of companies added to the list (add only).</summary>
-        public int? AddedCount { get => _explicitNullValueAddedCount; set { _explicitNullValueAddedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("addedCount"); else _explicitNullProperties?.Remove("addedCount"); } }
+        public int? AddedCount { get => _explicitNullValueAddedCount; set { _explicitNullValueAddedCount = value; AdditionalData?.Remove("addedCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("addedCount"); else _explicitNullProperties?.Remove("addedCount"); } }
         private int? _explicitNullValueAddedCount = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Number of companies that were already in the list and therefore skipped (add only).</summary>
-        public int? AlreadyInList { get => _explicitNullValueAlreadyInList; set { _explicitNullValueAlreadyInList = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyInList"); else _explicitNullProperties?.Remove("alreadyInList"); } }
+        public int? AlreadyInList { get => _explicitNullValueAlreadyInList; set { _explicitNullValueAlreadyInList = value; AdditionalData?.Remove("alreadyInList"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyInList"); else _explicitNullProperties?.Remove("alreadyInList"); } }
         private int? _explicitNullValueAlreadyInList = default!;
         /// <summary>The message property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        public string? Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; AdditionalData?.Remove("message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
         private string? _explicitNullValueMessage = default!;
 #nullable restore
 #else
-        public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; AdditionalData?.Remove("message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
         private string _explicitNullValueMessage = default!;
 #endif
         /// <summary>Number of list associations actually removed (remove only). Companies that were not in the list are not counted.</summary>
-        public int? RemovedCount { get => _explicitNullValueRemovedCount; set { _explicitNullValueRemovedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removedCount"); else _explicitNullProperties?.Remove("removedCount"); } }
+        public int? RemovedCount { get => _explicitNullValueRemovedCount; set { _explicitNullValueRemovedCount = value; AdditionalData?.Remove("removedCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("removedCount"); else _explicitNullProperties?.Remove("removedCount"); } }
         private int? _explicitNullValueRemovedCount = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesListsByListIdEntities200Response"/> and sets the default values.

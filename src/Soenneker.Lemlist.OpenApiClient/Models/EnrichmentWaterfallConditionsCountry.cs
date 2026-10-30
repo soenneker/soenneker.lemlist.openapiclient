@@ -18,8 +18,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("in") is { } nullNodeIn && nullNodeIn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) In = null;
-            if (parseNode.GetChildNode("out") is { } nullNodeOut && nullNodeOut.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Out = null;
+            if (parseNode.GetChildNode("in") is null) { _explicitNullValueIn = default!; _explicitNullProperties?.Remove("in"); }
+            else if (parseNode.GetChildNode("in") is { } nullNodeIn && nullNodeIn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) In = null;
+            if (parseNode.GetChildNode("out") is null) { _explicitNullValueOut = default!; _explicitNullProperties?.Remove("out"); }
+            else if (parseNode.GetChildNode("out") is { } nullNodeOut && nullNodeOut.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Out = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Countries that match. Unique.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
+        public List<string>? In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; AdditionalData?.Remove("in"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
         private List<string>? _explicitNullValueIn = default!;
 #nullable restore
 #else
-        public List<string> In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
+        public List<string> In { get => _explicitNullValueIn; set { _explicitNullValueIn = value; AdditionalData?.Remove("in"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in"); else _explicitNullProperties?.Remove("in"); } }
         private List<string> _explicitNullValueIn = default!;
 #endif
         /// <summary>Countries that exclude the contact. Unique, disjoint from `in`. At least one of `in` or `out` must be non-empty.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
+        public List<string>? Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; AdditionalData?.Remove("out"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
         private List<string>? _explicitNullValueOut = default!;
 #nullable restore
 #else
-        public List<string> Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
+        public List<string> Out { get => _explicitNullValueOut; set { _explicitNullValueOut = value; AdditionalData?.Remove("out"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("out"); else _explicitNullProperties?.Remove("out"); } }
         private List<string> _explicitNullValueOut = default!;
 #endif
         /// <summary>

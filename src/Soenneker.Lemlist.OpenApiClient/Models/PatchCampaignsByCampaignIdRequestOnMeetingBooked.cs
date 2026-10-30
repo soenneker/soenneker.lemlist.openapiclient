@@ -18,17 +18,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("campaignProgress") is { } nullNodeCampaignProgress && nullNodeCampaignProgress.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignProgress = null;
-            if (parseNode.GetChildNode("propagateProgressToCompany") is { } nullNodePropagateProgressToCompany && nullNodePropagateProgressToCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PropagateProgressToCompany = null;
+            if (parseNode.GetChildNode("campaignProgress") is null) { _explicitNullValueCampaignProgress = default!; _explicitNullProperties?.Remove("campaignProgress"); }
+            else if (parseNode.GetChildNode("campaignProgress") is { } nullNodeCampaignProgress && nullNodeCampaignProgress.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignProgress = null;
+            if (parseNode.GetChildNode("propagateProgressToCompany") is null) { _explicitNullValuePropagateProgressToCompany = default!; _explicitNullProperties?.Remove("propagateProgressToCompany"); }
+            else if (parseNode.GetChildNode("propagateProgressToCompany") is { } nullNodePropagateProgressToCompany && nullNodePropagateProgressToCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PropagateProgressToCompany = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>What happens to the lead when a meeting is booked.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBookedCampaignProgress? CampaignProgress { get => _explicitNullValueCampaignProgress; set { _explicitNullValueCampaignProgress = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignProgress"); else _explicitNullProperties?.Remove("campaignProgress"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBookedCampaignProgress? CampaignProgress { get => _explicitNullValueCampaignProgress; set { _explicitNullValueCampaignProgress = value; AdditionalData?.Remove("campaignProgress"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignProgress"); else _explicitNullProperties?.Remove("campaignProgress"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBookedCampaignProgress? _explicitNullValueCampaignProgress = default!;
         /// <summary>Apply the same action to other leads in the same company.</summary>
-        public bool? PropagateProgressToCompany { get => _explicitNullValuePropagateProgressToCompany; set { _explicitNullValuePropagateProgressToCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("propagateProgressToCompany"); else _explicitNullProperties?.Remove("propagateProgressToCompany"); } }
+        public bool? PropagateProgressToCompany { get => _explicitNullValuePropagateProgressToCompany; set { _explicitNullValuePropagateProgressToCompany = value; AdditionalData?.Remove("propagateProgressToCompany"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("propagateProgressToCompany"); else _explicitNullProperties?.Remove("propagateProgressToCompany"); } }
         private bool? _explicitNullValuePropagateProgressToCompany = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked"/> and sets the default values.
@@ -55,7 +57,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "campaignProgress", n => { CampaignProgress = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBookedCampaignProgress>(); } },
+                { "campaignProgress", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBookedCampaignProgress>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCampaignProgress = default; _explicitNullProperties?.Remove("campaignProgress"); AdditionalData["campaignProgress"] = unknown; } else { CampaignProgress = parsed; AdditionalData.Remove("campaignProgress"); } } },
                 { "propagateProgressToCompany", n => { PropagateProgressToCompany = n.GetBoolValue(); } },
             };
         }

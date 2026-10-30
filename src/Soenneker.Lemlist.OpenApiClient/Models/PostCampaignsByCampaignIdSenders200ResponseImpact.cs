@@ -18,13 +18,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("contactedLeads") is { } nullNodeContactedLeads && nullNodeContactedLeads.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContactedLeads = null;
+            if (parseNode.GetChildNode("contactedLeads") is null) { _explicitNullValueContactedLeads = default!; _explicitNullProperties?.Remove("contactedLeads"); }
+            else if (parseNode.GetChildNode("contactedLeads") is { } nullNodeContactedLeads && nullNodeContactedLeads.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContactedLeads = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The contacted leads that keep a removed sender or a removed channel. Their next steps stop with a &quot;Send user is missing&quot; error until the sender is back in the pool.</summary>
-        public int? ContactedLeads { get => _explicitNullValueContactedLeads; set { _explicitNullValueContactedLeads = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contactedLeads"); else _explicitNullProperties?.Remove("contactedLeads"); } }
+        public int? ContactedLeads { get => _explicitNullValueContactedLeads; set { _explicitNullValueContactedLeads = value; AdditionalData?.Remove("contactedLeads"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contactedLeads"); else _explicitNullProperties?.Remove("contactedLeads"); } }
         private int? _explicitNullValueContactedLeads = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdSenders200ResponseImpact"/> and sets the default values.

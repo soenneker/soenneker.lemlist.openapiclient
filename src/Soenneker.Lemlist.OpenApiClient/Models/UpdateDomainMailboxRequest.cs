@@ -17,7 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("assignToUserId") is { } nullNodeAssignToUserId && nullNodeAssignToUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignToUserId = null;
+            if (parseNode.GetChildNode("assignToUserId") is null) { _explicitNullValueAssignToUserId = default!; _explicitNullProperties?.Remove("assignToUserId"); }
+            else if (parseNode.GetChildNode("assignToUserId") is { } nullNodeAssignToUserId && nullNodeAssignToUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignToUserId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Team member who will send from the mailbox</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssignToUserId { get => _explicitNullValueAssignToUserId; set { _explicitNullValueAssignToUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUserId"); else _explicitNullProperties?.Remove("assignToUserId"); } }
+        public string? AssignToUserId { get => _explicitNullValueAssignToUserId; set { _explicitNullValueAssignToUserId = value; AdditionalData?.Remove("assignToUserId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUserId"); else _explicitNullProperties?.Remove("assignToUserId"); } }
         private string? _explicitNullValueAssignToUserId = default!;
 #nullable restore
 #else
-        public string AssignToUserId { get => _explicitNullValueAssignToUserId; set { _explicitNullValueAssignToUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUserId"); else _explicitNullProperties?.Remove("assignToUserId"); } }
+        public string AssignToUserId { get => _explicitNullValueAssignToUserId; set { _explicitNullValueAssignToUserId = value; AdditionalData?.Remove("assignToUserId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignToUserId"); else _explicitNullProperties?.Remove("assignToUserId"); } }
         private string _explicitNullValueAssignToUserId = default!;
 #endif
         /// <summary>

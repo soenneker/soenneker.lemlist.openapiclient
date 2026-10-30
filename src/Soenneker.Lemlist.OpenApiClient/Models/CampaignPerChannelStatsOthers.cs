@@ -18,21 +18,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("interested") is { } nullNodeInterested && nullNodeInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Interested = null;
-            if (parseNode.GetChildNode("notInterested") is { } nullNodeNotInterested && nullNodeNotInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotInterested = null;
-            if (parseNode.GetChildNode("unsubscribed") is { } nullNodeUnsubscribed && nullNodeUnsubscribed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Unsubscribed = null;
+            if (parseNode.GetChildNode("interested") is null) { _explicitNullValueInterested = default!; _explicitNullProperties?.Remove("interested"); }
+            else if (parseNode.GetChildNode("interested") is { } nullNodeInterested && nullNodeInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Interested = null;
+            if (parseNode.GetChildNode("notInterested") is null) { _explicitNullValueNotInterested = default!; _explicitNullProperties?.Remove("notInterested"); }
+            else if (parseNode.GetChildNode("notInterested") is { } nullNodeNotInterested && nullNodeNotInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotInterested = null;
+            if (parseNode.GetChildNode("unsubscribed") is null) { _explicitNullValueUnsubscribed = default!; _explicitNullProperties?.Remove("unsubscribed"); }
+            else if (parseNode.GetChildNode("unsubscribed") is { } nullNodeUnsubscribed && nullNodeUnsubscribed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Unsubscribed = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Leads marked as interested.</summary>
-        public int? Interested { get => _explicitNullValueInterested; set { _explicitNullValueInterested = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interested"); else _explicitNullProperties?.Remove("interested"); } }
+        public int? Interested { get => _explicitNullValueInterested; set { _explicitNullValueInterested = value; AdditionalData?.Remove("interested"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interested"); else _explicitNullProperties?.Remove("interested"); } }
         private int? _explicitNullValueInterested = default!;
         /// <summary>Leads marked as not interested.</summary>
-        public int? NotInterested { get => _explicitNullValueNotInterested; set { _explicitNullValueNotInterested = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notInterested"); else _explicitNullProperties?.Remove("notInterested"); } }
+        public int? NotInterested { get => _explicitNullValueNotInterested; set { _explicitNullValueNotInterested = value; AdditionalData?.Remove("notInterested"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notInterested"); else _explicitNullProperties?.Remove("notInterested"); } }
         private int? _explicitNullValueNotInterested = default!;
         /// <summary>Unsubscribes.</summary>
-        public int? Unsubscribed { get => _explicitNullValueUnsubscribed; set { _explicitNullValueUnsubscribed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unsubscribed"); else _explicitNullProperties?.Remove("unsubscribed"); } }
+        public int? Unsubscribed { get => _explicitNullValueUnsubscribed; set { _explicitNullValueUnsubscribed = value; AdditionalData?.Remove("unsubscribed"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unsubscribed"); else _explicitNullProperties?.Remove("unsubscribed"); } }
         private int? _explicitNullValueUnsubscribed = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers"/> and sets the default values.

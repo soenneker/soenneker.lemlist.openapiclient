@@ -17,8 +17,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("imap") is { } nullNodeImap && nullNodeImap.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Imap = null;
-            if (parseNode.GetChildNode("smtp") is { } nullNodeSmtp && nullNodeSmtp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Smtp = null;
+            if (parseNode.GetChildNode("imap") is null) { _explicitNullValueImap = default!; _explicitNullProperties?.Remove("imap"); }
+            else if (parseNode.GetChildNode("imap") is { } nullNodeImap && nullNodeImap.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Imap = null;
+            if (parseNode.GetChildNode("smtp") is null) { _explicitNullValueSmtp = default!; _explicitNullProperties?.Remove("smtp"); }
+            else if (parseNode.GetChildNode("smtp") is { } nullNodeSmtp && nullNodeSmtp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Smtp = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The imap property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseImap? Imap { get => _explicitNullValueImap; set { _explicitNullValueImap = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap"); else _explicitNullProperties?.Remove("imap"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseImap? Imap { get => _explicitNullValueImap; set { _explicitNullValueImap = value; AdditionalData?.Remove("imap"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap"); else _explicitNullProperties?.Remove("imap"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseImap? _explicitNullValueImap = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseImap Imap { get => _explicitNullValueImap; set { _explicitNullValueImap = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap"); else _explicitNullProperties?.Remove("imap"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseImap Imap { get => _explicitNullValueImap; set { _explicitNullValueImap = value; AdditionalData?.Remove("imap"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap"); else _explicitNullProperties?.Remove("imap"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseImap _explicitNullValueImap = default!;
 #endif
         /// <summary>The smtp property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseSmtp? Smtp { get => _explicitNullValueSmtp; set { _explicitNullValueSmtp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp"); else _explicitNullProperties?.Remove("smtp"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseSmtp? Smtp { get => _explicitNullValueSmtp; set { _explicitNullValueSmtp = value; AdditionalData?.Remove("smtp"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp"); else _explicitNullProperties?.Remove("smtp"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseSmtp? _explicitNullValueSmtp = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseSmtp Smtp { get => _explicitNullValueSmtp; set { _explicitNullValueSmtp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp"); else _explicitNullProperties?.Remove("smtp"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseSmtp Smtp { get => _explicitNullValueSmtp; set { _explicitNullValueSmtp = value; AdditionalData?.Remove("smtp"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp"); else _explicitNullProperties?.Remove("smtp"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsByEmailAccountIdTest200ResponseSmtp _explicitNullValueSmtp = default!;
 #endif
         /// <summary>

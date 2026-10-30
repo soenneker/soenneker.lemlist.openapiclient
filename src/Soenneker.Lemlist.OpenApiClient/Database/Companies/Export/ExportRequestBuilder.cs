@@ -74,7 +74,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Companies.Export
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Database.Companies.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.lemlist.com/api", "/database/companies/export", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "text/csv, application/json");
             return requestInfo;

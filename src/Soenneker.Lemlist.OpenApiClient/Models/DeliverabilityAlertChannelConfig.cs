@@ -18,10 +18,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
-            if (parseNode.GetChildNode("inapp") is { } nullNodeInapp && nullNodeInapp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Inapp = null;
-            if (parseNode.GetChildNode("slack") is { } nullNodeSlack && nullNodeSlack.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Slack = null;
-            if (parseNode.GetChildNode("webhook") is { } nullNodeWebhook && nullNodeWebhook.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Webhook = null;
+            if (parseNode.GetChildNode("email") is null) { _explicitNullValueEmail = default!; _explicitNullProperties?.Remove("email"); }
+            else if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
+            if (parseNode.GetChildNode("inapp") is null) { _explicitNullValueInapp = default!; _explicitNullProperties?.Remove("inapp"); }
+            else if (parseNode.GetChildNode("inapp") is { } nullNodeInapp && nullNodeInapp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Inapp = null;
+            if (parseNode.GetChildNode("slack") is null) { _explicitNullValueSlack = default!; _explicitNullProperties?.Remove("slack"); }
+            else if (parseNode.GetChildNode("slack") is { } nullNodeSlack && nullNodeSlack.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Slack = null;
+            if (parseNode.GetChildNode("webhook") is null) { _explicitNullValueWebhook = default!; _explicitNullProperties?.Remove("webhook"); }
+            else if (parseNode.GetChildNode("webhook") is { } nullNodeWebhook && nullNodeWebhook.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Webhook = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -29,41 +33,41 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The email property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigEmail? Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigEmail? Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; AdditionalData?.Remove("email"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigEmail? _explicitNullValueEmail = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigEmail Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigEmail Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; AdditionalData?.Remove("email"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigEmail _explicitNullValueEmail = default!;
 #endif
         /// <summary>The inapp property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigInapp? Inapp { get => _explicitNullValueInapp; set { _explicitNullValueInapp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inapp"); else _explicitNullProperties?.Remove("inapp"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigInapp? Inapp { get => _explicitNullValueInapp; set { _explicitNullValueInapp = value; AdditionalData?.Remove("inapp"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inapp"); else _explicitNullProperties?.Remove("inapp"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigInapp? _explicitNullValueInapp = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigInapp Inapp { get => _explicitNullValueInapp; set { _explicitNullValueInapp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inapp"); else _explicitNullProperties?.Remove("inapp"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigInapp Inapp { get => _explicitNullValueInapp; set { _explicitNullValueInapp = value; AdditionalData?.Remove("inapp"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inapp"); else _explicitNullProperties?.Remove("inapp"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigInapp _explicitNullValueInapp = default!;
 #endif
         /// <summary>The slack property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigSlack? Slack { get => _explicitNullValueSlack; set { _explicitNullValueSlack = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slack"); else _explicitNullProperties?.Remove("slack"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigSlack? Slack { get => _explicitNullValueSlack; set { _explicitNullValueSlack = value; AdditionalData?.Remove("slack"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slack"); else _explicitNullProperties?.Remove("slack"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigSlack? _explicitNullValueSlack = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigSlack Slack { get => _explicitNullValueSlack; set { _explicitNullValueSlack = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slack"); else _explicitNullProperties?.Remove("slack"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigSlack Slack { get => _explicitNullValueSlack; set { _explicitNullValueSlack = value; AdditionalData?.Remove("slack"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slack"); else _explicitNullProperties?.Remove("slack"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigSlack _explicitNullValueSlack = default!;
 #endif
         /// <summary>The webhook property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigWebhook? Webhook { get => _explicitNullValueWebhook; set { _explicitNullValueWebhook = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("webhook"); else _explicitNullProperties?.Remove("webhook"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigWebhook? Webhook { get => _explicitNullValueWebhook; set { _explicitNullValueWebhook = value; AdditionalData?.Remove("webhook"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("webhook"); else _explicitNullProperties?.Remove("webhook"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigWebhook? _explicitNullValueWebhook = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigWebhook Webhook { get => _explicitNullValueWebhook; set { _explicitNullValueWebhook = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("webhook"); else _explicitNullProperties?.Remove("webhook"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigWebhook Webhook { get => _explicitNullValueWebhook; set { _explicitNullValueWebhook = value; AdditionalData?.Remove("webhook"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("webhook"); else _explicitNullProperties?.Remove("webhook"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfigWebhook _explicitNullValueWebhook = default!;
 #endif
         /// <summary>

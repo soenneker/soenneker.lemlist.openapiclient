@@ -18,28 +18,31 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("crm") is { } nullNodeCrm && nullNodeCrm.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Crm = null;
-            if (parseNode.GetChildNode("crmField") is { } nullNodeCrmField && nullNodeCrmField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmField = null;
-            if (parseNode.GetChildNode("objectType") is { } nullNodeObjectType && nullNodeObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectType = null;
+            if (parseNode.GetChildNode("crm") is null) { _explicitNullValueCrm = default!; _explicitNullProperties?.Remove("crm"); }
+            else if (parseNode.GetChildNode("crm") is { } nullNodeCrm && nullNodeCrm.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Crm = null;
+            if (parseNode.GetChildNode("crmField") is null) { _explicitNullValueCrmField = default!; _explicitNullProperties?.Remove("crmField"); }
+            else if (parseNode.GetChildNode("crmField") is { } nullNodeCrmField && nullNodeCrmField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmField = null;
+            if (parseNode.GetChildNode("objectType") is null) { _explicitNullValueObjectType = default!; _explicitNullProperties?.Remove("objectType"); }
+            else if (parseNode.GetChildNode("objectType") is { } nullNodeObjectType && nullNodeObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectType = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The CRM the picklist belongs to</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistCrm? Crm { get => _explicitNullValueCrm; set { _explicitNullValueCrm = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crm"); else _explicitNullProperties?.Remove("crm"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistCrm? Crm { get => _explicitNullValueCrm; set { _explicitNullValueCrm = value; AdditionalData?.Remove("crm"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crm"); else _explicitNullProperties?.Remove("crm"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistCrm? _explicitNullValueCrm = default!;
         /// <summary>Internal (API) name of the CRM property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
+        public string? CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; AdditionalData?.Remove("crmField"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
         private string? _explicitNullValueCrmField = default!;
 #nullable restore
 #else
-        public string CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
+        public string CrmField { get => _explicitNullValueCrmField; set { _explicitNullValueCrmField = value; AdditionalData?.Remove("crmField"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmField"); else _explicitNullProperties?.Remove("crmField"); } }
         private string _explicitNullValueCrmField = default!;
 #endif
         /// <summary>The CRM object of the property</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistObjectType? ObjectType { get => _explicitNullValueObjectType; set { _explicitNullValueObjectType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("objectType"); else _explicitNullProperties?.Remove("objectType"); } }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistObjectType? ObjectType { get => _explicitNullValueObjectType; set { _explicitNullValueObjectType = value; AdditionalData?.Remove("objectType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("objectType"); else _explicitNullProperties?.Remove("objectType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistObjectType? _explicitNullValueObjectType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklist"/> and sets the default values.
@@ -66,9 +69,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "crm", n => { Crm = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistCrm>(); } },
+                { "crm", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistCrm>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCrm = default; _explicitNullProperties?.Remove("crm"); AdditionalData["crm"] = unknown; } else { Crm = parsed; AdditionalData.Remove("crm"); } } },
                 { "crmField", n => { CrmField = n.GetStringValue(); } },
-                { "objectType", n => { ObjectType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistObjectType>(); } },
+                { "objectType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetFields200ResponseDataCompanyItemCrmPicklistObjectType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueObjectType = default; _explicitNullProperties?.Remove("objectType"); AdditionalData["objectType"] = unknown; } else { ObjectType = parsed; AdditionalData.Remove("objectType"); } } },
             };
         }
         /// <summary>

@@ -17,17 +17,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("requestedCount") is { } nullNodeRequestedCount && nullNodeRequestedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequestedCount = null;
-            if (parseNode.GetChildNode("updatedCount") is { } nullNodeUpdatedCount && nullNodeUpdatedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedCount = null;
+            if (parseNode.GetChildNode("requestedCount") is null) { _explicitNullValueRequestedCount = default!; _explicitNullProperties?.Remove("requestedCount"); }
+            else if (parseNode.GetChildNode("requestedCount") is { } nullNodeRequestedCount && nullNodeRequestedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequestedCount = null;
+            if (parseNode.GetChildNode("updatedCount") is null) { _explicitNullValueUpdatedCount = default!; _explicitNullProperties?.Remove("updatedCount"); }
+            else if (parseNode.GetChildNode("updatedCount") is { } nullNodeUpdatedCount && nullNodeUpdatedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedCount = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Number of signal ids sent in the request</summary>
-        public int? RequestedCount { get => _explicitNullValueRequestedCount; set { _explicitNullValueRequestedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("requestedCount"); else _explicitNullProperties?.Remove("requestedCount"); } }
+        public int? RequestedCount { get => _explicitNullValueRequestedCount; set { _explicitNullValueRequestedCount = value; AdditionalData?.Remove("requestedCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("requestedCount"); else _explicitNullProperties?.Remove("requestedCount"); } }
         private int? _explicitNullValueRequestedCount = default!;
         /// <summary>Number of signals whose status was updated. Can be lower than requestedCount: the write is team-scoped, so ids that were deleted or belong to another team are skipped.</summary>
-        public int? UpdatedCount { get => _explicitNullValueUpdatedCount; set { _explicitNullValueUpdatedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updatedCount"); else _explicitNullProperties?.Remove("updatedCount"); } }
+        public int? UpdatedCount { get => _explicitNullValueUpdatedCount; set { _explicitNullValueUpdatedCount = value; AdditionalData?.Remove("updatedCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updatedCount"); else _explicitNullProperties?.Remove("updatedCount"); } }
         private int? _explicitNullValueUpdatedCount = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiUpdateSignalStatusResponseData"/> and sets the default values.
