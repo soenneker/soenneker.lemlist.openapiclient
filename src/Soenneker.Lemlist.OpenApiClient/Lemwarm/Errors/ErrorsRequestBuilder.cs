@@ -53,6 +53,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Errors
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.GetLemwarmErrors403Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetLemwarmErrors200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetLemwarmErrors200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

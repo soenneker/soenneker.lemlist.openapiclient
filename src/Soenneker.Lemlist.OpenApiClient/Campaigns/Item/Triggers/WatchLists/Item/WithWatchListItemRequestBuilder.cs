@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.WatchLists.Ite
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId401Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId405Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdTriggersWatchListsByWatchListId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

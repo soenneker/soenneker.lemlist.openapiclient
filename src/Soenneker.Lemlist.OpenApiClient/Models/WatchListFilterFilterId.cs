@@ -119,6 +119,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         DetectionMode,
         #pragma warning restore CS1591
+        [EnumMember(Value = "technologyConfidence")]
+        #pragma warning disable CS1591
+        TechnologyConfidence,
+        #pragma warning restore CS1591
         [EnumMember(Value = "maDealTypes")]
         #pragma warning disable CS1591
         MaDealTypes,
@@ -162,6 +166,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "githubRepoUrls")]
         #pragma warning disable CS1591
         GithubRepoUrls,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "linkedinProfileViewsUserIds")]
+        #pragma warning disable CS1591
+        LinkedinProfileViewsUserIds,
         #pragma warning restore CS1591
     }
 }

@@ -10,6 +10,7 @@ using Soenneker.Lemlist.OpenApiClient.Watchlist.Filters;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.History;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.Item;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.Library;
+using Soenneker.Lemlist.OpenApiClient.Watchlist.LinkedinProfileViews;
 using Soenneker.Lemlist.OpenApiClient.Watchlist.Signals;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +49,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         public global::Soenneker.Lemlist.OpenApiClient.Watchlist.Library.LibraryRequestBuilder Library
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Watchlist.Library.LibraryRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The linkedinProfileViews property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Watchlist.LinkedinProfileViews.LinkedinProfileViewsRequestBuilder LinkedinProfileViews
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Watchlist.LinkedinProfileViews.LinkedinProfileViewsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The signals property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Watchlist.Signals.SignalsRequestBuilder Signals
@@ -98,7 +104,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiDeleteWatchListResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List Signal Agents
@@ -116,7 +122,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiListWatchListsResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update Signal Agent
@@ -136,7 +142,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Create Signal Agent
@@ -162,6 +168,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist
             {
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlist409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

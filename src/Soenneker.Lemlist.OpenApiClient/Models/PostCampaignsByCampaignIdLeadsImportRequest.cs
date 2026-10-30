@@ -11,42 +11,63 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostCampaignsByCampaignIdLeadsImportRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("deduplicate") is { } nullNodeDeduplicate && nullNodeDeduplicate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deduplicate = null;
+            if (parseNode.GetChildNode("enrichFeature") is { } nullNodeEnrichFeature && nullNodeEnrichFeature.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnrichFeature = null;
+            if (parseNode.GetChildNode("filterId") is { } nullNodeFilterId && nullNodeFilterId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FilterId = null;
+            if (parseNode.GetChildNode("filterType") is { } nullNodeFilterType && nullNodeFilterType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FilterType = null;
+            if (parseNode.GetChildNode("userId") is { } nullNodeUserId && nullNodeUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserId = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>`all` (or `true`) skips contacts already in another campaign, `activeOnly` skips only contacts still active in another campaign, `off` (or `false`, the default) imports everyone.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate? Deduplicate { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate? Deduplicate { get => _explicitNullValueDeduplicate; set { _explicitNullValueDeduplicate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deduplicate"); else _explicitNullProperties?.Remove("deduplicate"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate? _explicitNullValueDeduplicate = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate Deduplicate { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate Deduplicate { get => _explicitNullValueDeduplicate; set { _explicitNullValueDeduplicate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deduplicate"); else _explicitNullProperties?.Remove("deduplicate"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate _explicitNullValueDeduplicate = default!;
 #endif
         /// <summary>Enrichments to run on every imported lead, as an array or a `|`-separated string (e.g. `find_email|verify`). Consumes credits for each lead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature? EnrichFeature { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature? EnrichFeature { get => _explicitNullValueEnrichFeature; set { _explicitNullValueEnrichFeature = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichFeature"); else _explicitNullProperties?.Remove("enrichFeature"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature? _explicitNullValueEnrichFeature = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature EnrichFeature { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature EnrichFeature { get => _explicitNullValueEnrichFeature; set { _explicitNullValueEnrichFeature = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichFeature"); else _explicitNullProperties?.Remove("enrichFeature"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature _explicitNullValueEnrichFeature = default!;
 #endif
         /// <summary>Filter ID returned by [Get CRM Filters](/api-reference/endpoints/crm/get-crm-filters)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId? FilterId { get; set; }
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode? FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
+        private global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode? _explicitNullValueFilterId = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId FilterId { get; set; }
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode FilterId { get => _explicitNullValueFilterId; set { _explicitNullValueFilterId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterId"); else _explicitNullProperties?.Remove("filterId"); } }
+        private global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode _explicitNullValueFilterId = default!;
 #endif
         /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot and Pipedrive. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType? FilterType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType? FilterType { get => _explicitNullValueFilterType; set { _explicitNullValueFilterType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filterType"); else _explicitNullProperties?.Remove("filterType"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType? _explicitNullValueFilterType = default!;
         /// <summary>Salesforce only, for a list view scoped to its owner (&quot;My leads&quot;, &quot;My contacts&quot;…): the team member the view is read as. They must have their own Salesforce account connected in lemlist. Leave it out in every other case (reports, views not scoped to an owner); it is ignored for HubSpot and Pipedrive, where your team&apos;s CRM connection is used.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UserId { get; set; }
+        public string? UserId { get => _explicitNullValueUserId; set { _explicitNullValueUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("userId"); else _explicitNullProperties?.Remove("userId"); } }
+        private string? _explicitNullValueUserId = default!;
 #nullable restore
 #else
-        public string UserId { get; set; }
+        public string UserId { get => _explicitNullValueUserId; set { _explicitNullValueUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("userId"); else _explicitNullProperties?.Remove("userId"); } }
+        private string _explicitNullValueUserId = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest"/> and sets the default values.
@@ -63,7 +84,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -75,7 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "deduplicate", n => { Deduplicate = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate.CreateFromDiscriminatorValue); } },
                 { "enrichFeature", n => { EnrichFeature = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature.CreateFromDiscriminatorValue); } },
-                { "filterId", n => { FilterId = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId.CreateFromDiscriminatorValue); } },
+                { "filterId", n => { FilterId = n.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue); } },
                 { "filterType", n => { FilterType = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType>(); } },
                 { "userId", n => { UserId = n.GetStringValue(); } },
             };
@@ -89,9 +110,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestDeduplicate>("deduplicate", Deduplicate);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestEnrichFeature>("enrichFeature", EnrichFeature);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId>("filterId", FilterId);
+            writer.WriteObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>("filterId", FilterId);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequestFilterType>("filterType", FilterType);
             writer.WriteStringValue("userId", UserId);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
         /// <summary>
@@ -117,14 +139,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
             public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId CreateFromDiscriminatorValue(IParseNode parseNode)
             {
+            // A null union input must not initialize an object branch.
+            if (global::System.Object.ReferenceEquals(parseNode, null)) throw new global::System.ArgumentNullException(nameof(parseNode));
+            if (parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId();
+
                 if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
                 var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
                 var result = new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImportRequest.PostCampaignsByCampaignIdLeadsImportRequest_filterId();
-                if(parseNode.GetDoubleValue() is double doubleValue)
+                if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is (global::Microsoft.Kiota.Abstractions.Serialization.UntypedInteger or global::Microsoft.Kiota.Abstractions.Serialization.UntypedLong or global::Microsoft.Kiota.Abstractions.Serialization.UntypedFloat or global::Microsoft.Kiota.Abstractions.Serialization.UntypedDouble or global::Microsoft.Kiota.Abstractions.Serialization.UntypedDecimal) && parseNode.GetDoubleValue() is double doubleValue)
                 {
                     result.Double = doubleValue;
                 }
-                else if(parseNode.GetStringValue() is string stringValue)
+                else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString && parseNode.GetStringValue() is string stringValue)
                 {
                     result.String = stringValue;
                 }
@@ -144,6 +170,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             /// <param name="writer">Serialization writer to use to serialize this model</param>
             public virtual void Serialize(ISerializationWriter writer)
             {
+            // Empty composed wrappers serialize as JSON null.
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (Double == null && String == null) { writer.WriteNullValue(null); return; }
+
                 if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
                 if(Double != null)
                 {

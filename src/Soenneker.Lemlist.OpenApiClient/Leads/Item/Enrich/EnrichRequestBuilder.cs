@@ -63,6 +63,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Enrich
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich409Response.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich500Response.CreateFromDiscriminatorValue },
                 { "503", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich503Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailEnrich200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

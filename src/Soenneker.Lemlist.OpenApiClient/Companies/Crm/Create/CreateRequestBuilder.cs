@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Crm.Create
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmCreate400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmCreate403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmCreate404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmCreate200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmCreate200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

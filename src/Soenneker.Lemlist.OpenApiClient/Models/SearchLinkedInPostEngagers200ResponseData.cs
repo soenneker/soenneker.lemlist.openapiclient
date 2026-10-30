@@ -11,52 +11,78 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class SearchLinkedInPostEngagers200ResponseData : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("filters") is { } nullNodeFilters && nullNodeFilters.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Filters = null;
+            if (parseNode.GetChildNode("isCapped") is { } nullNodeIsCapped && nullNodeIsCapped.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IsCapped = null;
+            if (parseNode.GetChildNode("people") is { } nullNodePeople && nullNodePeople.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) People = null;
+            if (parseNode.GetChildNode("peopleSearchFailed") is { } nullNodePeopleSearchFailed && nullNodePeopleSearchFailed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PeopleSearchFailed = null;
+            if (parseNode.GetChildNode("search") is { } nullNodeSearch && nullNodeSearch.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Search = null;
+            if (parseNode.GetChildNode("slugs") is { } nullNodeSlugs && nullNodeSlugs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Slugs = null;
+            if (parseNode.GetChildNode("totals") is { } nullNodeTotals && nullNodeTotals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Totals = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Exact filters of the People Database search: `leadLinkedInSlug` plus the filters you passed. Empty when nobody engaged with the post.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter>? Filters { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter>? Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter>? _explicitNullValueFilters = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter> Filters { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter> Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter> _explicitNullValueFilters = default!;
 #endif
         /// <summary>`true` when the post had more than 1000 engagers</summary>
-        public bool? IsCapped { get; set; }
+        public bool? IsCapped { get => _explicitNullValueIsCapped; set { _explicitNullValueIsCapped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("isCapped"); else _explicitNullProperties?.Remove("isCapped"); } }
+        private bool? _explicitNullValueIsCapped = default!;
         /// <summary>First page of the People Database search, in the format of `POST /database/people`. Absent when nobody engaged with the post or when the People Database search failed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople? People { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople? People { get => _explicitNullValuePeople; set { _explicitNullValuePeople = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("people"); else _explicitNullProperties?.Remove("people"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople? _explicitNullValuePeople = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople People { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople People { get => _explicitNullValuePeople; set { _explicitNullValuePeople = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("people"); else _explicitNullProperties?.Remove("people"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople _explicitNullValuePeople = default!;
 #endif
         /// <summary>Present and `true` when the credits were debited and `slugs` exist, but the People Database search failed. Run `POST /database/people` yourself with `filters`.</summary>
-        public bool? PeopleSearchFailed { get; set; }
+        public bool? PeopleSearchFailed { get => _explicitNullValuePeopleSearchFailed; set { _explicitNullValuePeopleSearchFailed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("peopleSearchFailed"); else _explicitNullProperties?.Remove("peopleSearchFailed"); } }
+        private bool? _explicitNullValuePeopleSearchFailed = default!;
         /// <summary>Id of the People Database search. Send it as `fromSearchId` to `POST /database/people` to get the next pages or refine the filters. This debits no credits, but it counts in the 24-hour People Database search quota, like any search. Absent when nobody engaged with the post.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Search { get; set; }
+        public string? Search { get => _explicitNullValueSearch; set { _explicitNullValueSearch = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("search"); else _explicitNullProperties?.Remove("search"); } }
+        private string? _explicitNullValueSearch = default!;
 #nullable restore
 #else
-        public string Search { get; set; }
+        public string Search { get => _explicitNullValueSearch; set { _explicitNullValueSearch = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("search"); else _explicitNullProperties?.Remove("search"); } }
+        private string _explicitNullValueSearch = default!;
 #endif
         /// <summary>LinkedIn slugs of the engagers, post author excluded and deduplicated</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Slugs { get; set; }
+        public List<string>? Slugs { get => _explicitNullValueSlugs; set { _explicitNullValueSlugs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slugs"); else _explicitNullProperties?.Remove("slugs"); } }
+        private List<string>? _explicitNullValueSlugs = default!;
 #nullable restore
 #else
-        public List<string> Slugs { get; set; }
+        public List<string> Slugs { get => _explicitNullValueSlugs; set { _explicitNullValueSlugs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slugs"); else _explicitNullProperties?.Remove("slugs"); } }
+        private List<string> _explicitNullValueSlugs = default!;
 #endif
         /// <summary>Totals announced by LinkedIn for the requested `type`</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals? Totals { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals? Totals { get => _explicitNullValueTotals; set { _explicitNullValueTotals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("totals"); else _explicitNullProperties?.Remove("totals"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals? _explicitNullValueTotals = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals Totals { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals Totals { get => _explicitNullValueTotals; set { _explicitNullValueTotals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("totals"); else _explicitNullProperties?.Remove("totals"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals _explicitNullValueTotals = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseData"/> and sets the default values.
@@ -73,7 +99,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseData CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseData();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseData(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -106,6 +132,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("search", Search);
             writer.WriteCollectionOfPrimitiveValues<string>("slugs", Slugs);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataTotals>("totals", Totals);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

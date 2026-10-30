@@ -12,48 +12,70 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CampaignPerChannelStats : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
+            if (parseNode.GetChildNode("linkedin") is { } nullNodeLinkedin && nullNodeLinkedin.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Linkedin = null;
+            if (parseNode.GetChildNode("others") is { } nullNodeOthers && nullNodeOthers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Others = null;
+            if (parseNode.GetChildNode("sms") is { } nullNodeSms && nullNodeSms.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sms = null;
+            if (parseNode.GetChildNode("whatsapp") is { } nullNodeWhatsapp && nullNodeWhatsapp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Whatsapp = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Email counters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail? Email { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail? Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail? _explicitNullValueEmail = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail Email { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail Email { get => _explicitNullValueEmail; set { _explicitNullValueEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email"); else _explicitNullProperties?.Remove("email"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail _explicitNullValueEmail = default!;
 #endif
         /// <summary>LinkedIn counters. `sent` covers message sends only — regular messages, InMails and voice notes. It excludes invitations and non-message actions such as profile visits, follows, likes, comments and endorsements.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin? Linkedin { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin? Linkedin { get => _explicitNullValueLinkedin; set { _explicitNullValueLinkedin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linkedin"); else _explicitNullProperties?.Remove("linkedin"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin? _explicitNullValueLinkedin = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin Linkedin { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin Linkedin { get => _explicitNullValueLinkedin; set { _explicitNullValueLinkedin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linkedin"); else _explicitNullProperties?.Remove("linkedin"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin _explicitNullValueLinkedin = default!;
 #endif
         /// <summary>Counters that belong to no messaging channel — API-driven and manual activities, fused to mirror the single entry of the in-app channel filter.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers? Others { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers? Others { get => _explicitNullValueOthers; set { _explicitNullValueOthers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("others"); else _explicitNullProperties?.Remove("others"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers? _explicitNullValueOthers = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers Others { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers Others { get => _explicitNullValueOthers; set { _explicitNullValueOthers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("others"); else _explicitNullProperties?.Remove("others"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers _explicitNullValueOthers = default!;
 #endif
         /// <summary>SMS counters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms? Sms { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms? Sms { get => _explicitNullValueSms; set { _explicitNullValueSms = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sms"); else _explicitNullProperties?.Remove("sms"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms? _explicitNullValueSms = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms Sms { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms Sms { get => _explicitNullValueSms; set { _explicitNullValueSms = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sms"); else _explicitNullProperties?.Remove("sms"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms _explicitNullValueSms = default!;
 #endif
         /// <summary>WhatsApp counters, messages and voice notes combined.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp? Whatsapp { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp? Whatsapp { get => _explicitNullValueWhatsapp; set { _explicitNullValueWhatsapp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsapp"); else _explicitNullProperties?.Remove("whatsapp"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp? _explicitNullValueWhatsapp = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp Whatsapp { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp Whatsapp { get => _explicitNullValueWhatsapp; set { _explicitNullValueWhatsapp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsapp"); else _explicitNullProperties?.Remove("whatsapp"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp _explicitNullValueWhatsapp = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats"/> and sets the default values.
@@ -70,7 +92,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStats(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -99,6 +121,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsOthers>("others", Others);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsSms>("sms", Sms);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsWhatsapp>("whatsapp", Whatsapp);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

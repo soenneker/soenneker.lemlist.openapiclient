@@ -12,77 +12,127 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DeliverabilityAlert : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("channelConfig") is { } nullNodeChannelConfig && nullNodeChannelConfig.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ChannelConfig = null;
+            if (parseNode.GetChildNode("comparisonOperator") is { } nullNodeComparisonOperator && nullNodeComparisonOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ComparisonOperator = null;
+            if (parseNode.GetChildNode("createdAt") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("createdBy") is { } nullNodeCreatedBy && nullNodeCreatedBy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedBy = null;
+            if (parseNode.GetChildNode("enabled") is { } nullNodeEnabled && nullNodeEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enabled = null;
+            if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("lastCheckedAt") is { } nullNodeLastCheckedAt && nullNodeLastCheckedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastCheckedAt = null;
+            if (parseNode.GetChildNode("lastTriggeredAt") is { } nullNodeLastTriggeredAt && nullNodeLastTriggeredAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastTriggeredAt = null;
+            if (parseNode.GetChildNode("metric") is { } nullNodeMetric && nullNodeMetric.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Metric = null;
+            if (parseNode.GetChildNode("periodDays") is { } nullNodePeriodDays && nullNodePeriodDays.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PeriodDays = null;
+            if (parseNode.GetChildNode("periodMode") is { } nullNodePeriodMode && nullNodePeriodMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PeriodMode = null;
+            if (parseNode.GetChildNode("recheckDelayHours") is { } nullNodeRecheckDelayHours && nullNodeRecheckDelayHours.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecheckDelayHours = null;
+            if (parseNode.GetChildNode("scope") is { } nullNodeScope && nullNodeScope.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Scope = null;
+            if (parseNode.GetChildNode("scopeEntities") is { } nullNodeScopeEntities && nullNodeScopeEntities.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScopeEntities = null;
+            if (parseNode.GetChildNode("severity") is { } nullNodeSeverity && nullNodeSeverity.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Severity = null;
+            if (parseNode.GetChildNode("teamId") is { } nullNodeTeamId && nullNodeTeamId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamId = null;
+            if (parseNode.GetChildNode("threshold") is { } nullNodeThreshold && nullNodeThreshold.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Threshold = null;
+            if (parseNode.GetChildNode("updatedAt") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+            if (parseNode.GetChildNode("widget") is { } nullNodeWidget && nullNodeWidget.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Widget = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Notification channels triggered when the alert fires. At least one channel must be enabled. If omitted on creation, defaults to `inapp` only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig? ChannelConfig { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig? ChannelConfig { get => _explicitNullValueChannelConfig; set { _explicitNullValueChannelConfig = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("channelConfig"); else _explicitNullProperties?.Remove("channelConfig"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig? _explicitNullValueChannelConfig = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig ChannelConfig { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig ChannelConfig { get => _explicitNullValueChannelConfig; set { _explicitNullValueChannelConfig = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("channelConfig"); else _explicitNullProperties?.Remove("channelConfig"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig _explicitNullValueChannelConfig = default!;
 #endif
         /// <summary>How `threshold` is compared to the current value. `below` triggers when the value drops under the threshold; `above` triggers when it exceeds it; `equal` triggers on exact match.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertComparisonOperator? ComparisonOperator { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertComparisonOperator? ComparisonOperator { get => _explicitNullValueComparisonOperator; set { _explicitNullValueComparisonOperator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("comparisonOperator"); else _explicitNullProperties?.Remove("comparisonOperator"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertComparisonOperator? _explicitNullValueComparisonOperator = default!;
         /// <summary>Creation timestamp.</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdAt"); else _explicitNullProperties?.Remove("createdAt"); } }
+        private DateTimeOffset? _explicitNullValueCreatedAt = default!;
         /// <summary>ID of the user who created the alert.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CreatedBy { get; set; }
+        public string? CreatedBy { get => _explicitNullValueCreatedBy; set { _explicitNullValueCreatedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdBy"); else _explicitNullProperties?.Remove("createdBy"); } }
+        private string? _explicitNullValueCreatedBy = default!;
 #nullable restore
 #else
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get => _explicitNullValueCreatedBy; set { _explicitNullValueCreatedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdBy"); else _explicitNullProperties?.Remove("createdBy"); } }
+        private string _explicitNullValueCreatedBy = default!;
 #endif
         /// <summary>Whether the alert is currently active. Disabled alerts are not evaluated.</summary>
-        public bool? Enabled { get; set; }
+        public bool? Enabled { get => _explicitNullValueEnabled; set { _explicitNullValueEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabled"); else _explicitNullProperties?.Remove("enabled"); } }
+        private bool? _explicitNullValueEnabled = default!;
         /// <summary>Unique alert configuration identifier (prefixed with `dac_`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        private string _explicitNullValueId = default!;
 #endif
         /// <summary>Last time the alert was evaluated.</summary>
-        public DateTimeOffset? LastCheckedAt { get; set; }
+        public DateTimeOffset? LastCheckedAt { get => _explicitNullValueLastCheckedAt; set { _explicitNullValueLastCheckedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastCheckedAt"); else _explicitNullProperties?.Remove("lastCheckedAt"); } }
+        private DateTimeOffset? _explicitNullValueLastCheckedAt = default!;
         /// <summary>Last time the alert fired.</summary>
-        public DateTimeOffset? LastTriggeredAt { get; set; }
+        public DateTimeOffset? LastTriggeredAt { get => _explicitNullValueLastTriggeredAt; set { _explicitNullValueLastTriggeredAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastTriggeredAt"); else _explicitNullProperties?.Remove("lastTriggeredAt"); } }
+        private DateTimeOffset? _explicitNullValueLastTriggeredAt = default!;
         /// <summary>Metric being monitored. Valid combinations depend on `widget`: `warmup` supports `inboxRate`, `spamRate`, `score`; `outreach` supports `deliveryRate`, `bounceRate`.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertMetric? Metric { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertMetric? Metric { get => _explicitNullValueMetric; set { _explicitNullValueMetric = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("metric"); else _explicitNullProperties?.Remove("metric"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertMetric? _explicitNullValueMetric = default!;
         /// <summary>Length of the evaluation window, in days (1–30).</summary>
-        public int? PeriodDays { get; set; }
+        public int? PeriodDays { get => _explicitNullValuePeriodDays; set { _explicitNullValuePeriodDays = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("periodDays"); else _explicitNullProperties?.Remove("periodDays"); } }
+        private int? _explicitNullValuePeriodDays = default!;
         /// <summary>How the metric is computed over `periodDays`. `rolling` averages the metric across the window; `consecutive` requires the condition to hold on every one of the most recent `periodDays`.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertPeriodMode? PeriodMode { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertPeriodMode? PeriodMode { get => _explicitNullValuePeriodMode; set { _explicitNullValuePeriodMode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("periodMode"); else _explicitNullProperties?.Remove("periodMode"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertPeriodMode? _explicitNullValuePeriodMode = default!;
         /// <summary>Cool-down between re-evaluations after the alert has triggered, in hours. Defaults to 12.</summary>
-        public int? RecheckDelayHours { get; set; }
+        public int? RecheckDelayHours { get => _explicitNullValueRecheckDelayHours; set { _explicitNullValueRecheckDelayHours = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recheckDelayHours"); else _explicitNullProperties?.Remove("recheckDelayHours"); } }
+        private int? _explicitNullValueRecheckDelayHours = default!;
         /// <summary>Aggregation level the metric is computed at. `global` covers all of the workspace&apos;s mailboxes (warm-up only); `mailbox` evaluates each mailbox individually; `domain` groups mailboxes by their sending domain.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertScope? Scope { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertScope? Scope { get => _explicitNullValueScope; set { _explicitNullValueScope = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scope"); else _explicitNullProperties?.Remove("scope"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertScope? _explicitNullValueScope = default!;
         /// <summary>Restricts the alert to a subset of entities matching `scope`. When empty, all entities of that scope are checked. For `scope=mailbox`, each entry is a composite string `userId|email|mailboxId`. For `scope=domain`, each entry is a domain (e.g. `acme.com`). Ignored when `scope=global`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ScopeEntities { get; set; }
+        public List<string>? ScopeEntities { get => _explicitNullValueScopeEntities; set { _explicitNullValueScopeEntities = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scopeEntities"); else _explicitNullProperties?.Remove("scopeEntities"); } }
+        private List<string>? _explicitNullValueScopeEntities = default!;
 #nullable restore
 #else
-        public List<string> ScopeEntities { get; set; }
+        public List<string> ScopeEntities { get => _explicitNullValueScopeEntities; set { _explicitNullValueScopeEntities = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scopeEntities"); else _explicitNullProperties?.Remove("scopeEntities"); } }
+        private List<string> _explicitNullValueScopeEntities = default!;
 #endif
         /// <summary>Alert severity.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertSeverity? Severity { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertSeverity? Severity { get => _explicitNullValueSeverity; set { _explicitNullValueSeverity = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("severity"); else _explicitNullProperties?.Remove("severity"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertSeverity? _explicitNullValueSeverity = default!;
         /// <summary>ID of the team that owns the alert.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TeamId { get; set; }
+        public string? TeamId { get => _explicitNullValueTeamId; set { _explicitNullValueTeamId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teamId"); else _explicitNullProperties?.Remove("teamId"); } }
+        private string? _explicitNullValueTeamId = default!;
 #nullable restore
 #else
-        public string TeamId { get; set; }
+        public string TeamId { get => _explicitNullValueTeamId; set { _explicitNullValueTeamId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teamId"); else _explicitNullProperties?.Remove("teamId"); } }
+        private string _explicitNullValueTeamId = default!;
 #endif
         /// <summary>Threshold value the metric is compared against (0–100, expressed as a percentage for rate metrics).</summary>
-        public double? Threshold { get; set; }
+        public double? Threshold { get => _explicitNullValueThreshold; set { _explicitNullValueThreshold = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("threshold"); else _explicitNullProperties?.Remove("threshold"); } }
+        private double? _explicitNullValueThreshold = default!;
         /// <summary>Last update timestamp.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updatedAt"); else _explicitNullProperties?.Remove("updatedAt"); } }
+        private DateTimeOffset? _explicitNullValueUpdatedAt = default!;
         /// <summary>Data source the alert evaluates. `warmup` checks lemwarm metrics; `outreach` checks campaign-sending metrics.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertWidget? Widget { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertWidget? Widget { get => _explicitNullValueWidget; set { _explicitNullValueWidget = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("widget"); else _explicitNullProperties?.Remove("widget"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertWidget? _explicitNullValueWidget = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlert"/> and sets the default values.
         /// </summary>
@@ -98,7 +148,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlert CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlert();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlert(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -155,6 +205,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteDoubleValue("threshold", Threshold);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertWidget>("widget", Widget);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

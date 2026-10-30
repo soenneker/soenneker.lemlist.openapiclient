@@ -16,6 +16,7 @@ using Soenneker.Lemlist.OpenApiClient.Contacts;
 using Soenneker.Lemlist.OpenApiClient.Crm;
 using Soenneker.Lemlist.OpenApiClient.Database;
 using Soenneker.Lemlist.OpenApiClient.Deliverability;
+using Soenneker.Lemlist.OpenApiClient.DomainsCore;
 using Soenneker.Lemlist.OpenApiClient.Enrich;
 using Soenneker.Lemlist.OpenApiClient.Fields;
 using Soenneker.Lemlist.OpenApiClient.Hooks;
@@ -99,6 +100,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Deliverability.DeliverabilityRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The domainsCore property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.DomainsCore.DomainsCoreRequestBuilder DomainsCore
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.DomainsCore.DomainsCoreRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The enrich property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Enrich.EnrichRequestBuilder Enrich
         {
@@ -180,6 +186,7 @@ namespace Soenneker.Lemlist.OpenApiClient
             get => new global::Soenneker.Lemlist.OpenApiClient.Unsubs.UnsubsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The unsubscribes property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.UnsubscribesRequestBuilder Unsubscribes
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Unsubscribes.UnsubscribesRequestBuilder(PathParameters, RequestAdapter);

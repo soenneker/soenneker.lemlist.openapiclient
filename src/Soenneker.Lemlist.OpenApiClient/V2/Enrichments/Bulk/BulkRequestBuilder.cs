@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Bulk
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk400Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk405Response.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk500Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulk200ResponseSchemaItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();

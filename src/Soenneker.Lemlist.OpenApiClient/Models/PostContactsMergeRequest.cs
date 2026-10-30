@@ -11,24 +11,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostContactsMergeRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("primaryId") is { } nullNodePrimaryId && nullNodePrimaryId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryId = null;
+            if (parseNode.GetChildNode("secondaryIds") is { } nullNodeSecondaryIds && nullNodeSecondaryIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryIds = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The surviving contact. A lemlist contact id (`ctc_xxx`) or one of the contact&apos;s email addresses.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PrimaryId { get; set; }
+        public string? PrimaryId { get => _explicitNullValuePrimaryId; set { _explicitNullValuePrimaryId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primaryId"); else _explicitNullProperties?.Remove("primaryId"); } }
+        private string? _explicitNullValuePrimaryId = default!;
 #nullable restore
 #else
-        public string PrimaryId { get; set; }
+        public string PrimaryId { get => _explicitNullValuePrimaryId; set { _explicitNullValuePrimaryId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primaryId"); else _explicitNullProperties?.Remove("primaryId"); } }
+        private string _explicitNullValuePrimaryId = default!;
 #endif
         /// <summary>The contacts folded into the survivor then deleted, 9 at most. A lemlist contact id (`ctc_xxx`) or one of the contact&apos;s email addresses. Must not contain `primaryId`, and each contact is listed once.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? SecondaryIds { get; set; }
+        public List<string>? SecondaryIds { get => _explicitNullValueSecondaryIds; set { _explicitNullValueSecondaryIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondaryIds"); else _explicitNullProperties?.Remove("secondaryIds"); } }
+        private List<string>? _explicitNullValueSecondaryIds = default!;
 #nullable restore
 #else
-        public List<string> SecondaryIds { get; set; }
+        public List<string> SecondaryIds { get => _explicitNullValueSecondaryIds; set { _explicitNullValueSecondaryIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondaryIds"); else _explicitNullProperties?.Remove("secondaryIds"); } }
+        private List<string> _explicitNullValueSecondaryIds = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsMergeRequest"/> and sets the default values.
@@ -45,7 +58,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsMergeRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsMergeRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsMergeRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -68,6 +81,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("primaryId", PrimaryId);
             writer.WriteCollectionOfPrimitiveValues<string>("secondaryIds", SecondaryIds);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

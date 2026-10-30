@@ -11,132 +11,198 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostSequencesBySequenceIdStepsRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("altMessage") is { } nullNodeAltMessage && nullNodeAltMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessage = null;
+            if (parseNode.GetChildNode("altMessagePremium") is { } nullNodeAltMessagePremium && nullNodeAltMessagePremium.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessagePremium = null;
+            if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
+            if (parseNode.GetChildNode("conditionKey") is { } nullNodeConditionKey && nullNodeConditionKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConditionKey = null;
+            if (parseNode.GetChildNode("customField") is { } nullNodeCustomField && nullNodeCustomField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomField = null;
+            if (parseNode.GetChildNode("customName") is { } nullNodeCustomName && nullNodeCustomName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomName = null;
+            if (parseNode.GetChildNode("customOperator") is { } nullNodeCustomOperator && nullNodeCustomOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomOperator = null;
+            if (parseNode.GetChildNode("customValue") is { } nullNodeCustomValue && nullNodeCustomValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomValue = null;
+            if (parseNode.GetChildNode("delay") is { } nullNodeDelay && nullNodeDelay.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delay = null;
+            if (parseNode.GetChildNode("delayType") is { } nullNodeDelayType && nullNodeDelayType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DelayType = null;
+            if (parseNode.GetChildNode("endorseAnyFallback") is { } nullNodeEndorseAnyFallback && nullNodeEndorseAnyFallback.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndorseAnyFallback = null;
+            if (parseNode.GetChildNode("images") is { } nullNodeImages && nullNodeImages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Images = null;
+            if (parseNode.GetChildNode("index") is { } nullNodeIndex && nullNodeIndex.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Index = null;
+            if (parseNode.GetChildNode("leadAction") is { } nullNodeLeadAction && nullNodeLeadAction.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadAction = null;
+            if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
+            if (parseNode.GetChildNode("method") is { } nullNodeMethod && nullNodeMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Method = null;
+            if (parseNode.GetChildNode("recordMode") is { } nullNodeRecordMode && nullNodeRecordMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecordMode = null;
+            if (parseNode.GetChildNode("skillName") is { } nullNodeSkillName && nullNodeSkillName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkillName = null;
+            if (parseNode.GetChildNode("subject") is { } nullNodeSubject && nullNodeSubject.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subject = null;
+            if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("videos") is { } nullNodeVideos && nullNodeVideos.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Videos = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The LinkedIn note sent instead of `message` in specific cases, with a meaning that depends on the step type. On `linkedinInvite`: the premium invitation note attached to the connection request, used when the sending account has LinkedIn Premium. On `linkedinSend` and `linkedinVoiceNote`: the out-of-network note, sent as a connection request when the lead is not a 1st-degree connection. Rejected with `400` on any other step type. LinkedIn caps a connection-request note at 200 characters on a free account and 300 on Premium or Sales Navigator. This endpoint does not enforce those caps, but an over-long note is a blocking step error: the campaign refuses to launch until it is shortened</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AltMessage { get; set; }
+        public string? AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
+        private string? _explicitNullValueAltMessage = default!;
 #nullable restore
 #else
-        public string AltMessage { get; set; }
+        public string AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
+        private string _explicitNullValueAltMessage = default!;
 #endif
         /// <summary>For `linkedinSend` steps only. The premium variant of the out-of-network note, sent instead of `altMessage` when the sending LinkedIn account is Premium or Sales Navigator (300-character LinkedIn cap). Rejected with `400` on any other step type</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AltMessagePremium { get; set; }
+        public string? AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
+        private string? _explicitNullValueAltMessagePremium = default!;
 #nullable restore
 #else
-        public string AltMessagePremium { get; set; }
+        public string AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
+        private string _explicitNullValueAltMessagePremium = default!;
 #endif
         /// <summary>Target campaign ID for sendToAnotherCampaign steps. The campaign must exist and not be archived</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CampaignId { get; set; }
+        public string? CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
+        private string? _explicitNullValueCampaignId = default!;
 #nullable restore
 #else
-        public string CampaignId { get; set; }
+        public string CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
+        private string _explicitNullValueCampaignId = default!;
 #endif
         /// <summary>Condition key for conditional steps</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey? ConditionKey { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey? ConditionKey { get => _explicitNullValueConditionKey; set { _explicitNullValueConditionKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conditionKey"); else _explicitNullProperties?.Remove("conditionKey"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestConditionKey? _explicitNullValueConditionKey = default!;
         /// <summary>For conditional steps keyed `customLeadInfo` only. The field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.&lt;field&gt;` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. `$` and the reserved keys `_id`, `teamId`, `campaignId`, `leadId`, `__proto__`, `constructor` and `prototype` are refused.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomField { get; set; }
+        public string? CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
+        private string? _explicitNullValueCustomField = default!;
 #nullable restore
 #else
-        public string CustomField { get; set; }
+        public string CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
+        private string _explicitNullValueCustomField = default!;
 #endif
         /// <summary>The step&apos;s own name, shown instead of its type label (&quot;Email&quot;, &quot;Call&quot;) wherever the app names the step. Plain text, up to 70 characters once trimmed and once runs of spaces collapse to one; HTML tags count toward the 70, then are dropped. A longer name is rejected with `400`. Accepted on every step type, ignored on `conditional` steps, which keep their type label</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomName { get; set; }
+        public string? CustomName { get => _explicitNullValueCustomName; set { _explicitNullValueCustomName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customName"); else _explicitNullProperties?.Remove("customName"); } }
+        private string? _explicitNullValueCustomName = default!;
 #nullable restore
 #else
-        public string CustomName { get; set; }
+        public string CustomName { get => _explicitNullValueCustomName; set { _explicitNullValueCustomName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customName"); else _explicitNullProperties?.Remove("customName"); } }
+        private string _explicitNullValueCustomName = default!;
 #endif
         /// <summary>For conditional steps keyed `customLeadInfo` only. How the field is compared.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator? CustomOperator { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator? CustomOperator { get => _explicitNullValueCustomOperator; set { _explicitNullValueCustomOperator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customOperator"); else _explicitNullProperties?.Remove("customOperator"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestCustomOperator? _explicitNullValueCustomOperator = default!;
         /// <summary>For conditional steps keyed `customLeadInfo` only. The value the field is compared to. Required for `equal` and `contains`, and refused for `empty` and `notEmpty`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomValue { get; set; }
+        public string? CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
+        private string? _explicitNullValueCustomValue = default!;
 #nullable restore
 #else
-        public string CustomValue { get; set; }
+        public string CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
+        private string _explicitNullValueCustomValue = default!;
 #endif
         /// <summary>Delay in days before executing this step. Defaults to 0 for the first step and 1 for subsequent steps</summary>
-        public int? Delay { get; set; }
+        public int? Delay { get => _explicitNullValueDelay; set { _explicitNullValueDelay = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delay"); else _explicitNullProperties?.Remove("delay"); } }
+        private int? _explicitNullValueDelay = default!;
         /// <summary>Delay type for conditional steps</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestDelayType? DelayType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestDelayType? DelayType { get => _explicitNullValueDelayType; set { _explicitNullValueDelayType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delayType"); else _explicitNullProperties?.Remove("delayType"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestDelayType? _explicitNullValueDelayType = default!;
         /// <summary>Applies to `linkedinEndorse` steps only. When `true` and the named skill is not on the lead&apos;s profile, lemlist falls back to endorsing any available skill.</summary>
-        public bool? EndorseAnyFallback { get; set; }
+        public bool? EndorseAnyFallback { get => _explicitNullValueEndorseAnyFallback; set { _explicitNullValueEndorseAnyFallback = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endorseAnyFallback"); else _explicitNullProperties?.Remove("endorseAnyFallback"); } }
+        private bool? _explicitNullValueEndorseAnyFallback = default!;
         /// <summary>Public HTTPS URLs of images to attach to a `linkedinInvite` or `linkedinSend` step. lemlist downloads each file and re-hosts it. Allowed MIME types: `image/png`, `image/jpeg`, `image/gif`. Up to 20 MB per file, and up to 6 items total combined with `videos`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Images { get; set; }
+        public List<string>? Images { get => _explicitNullValueImages; set { _explicitNullValueImages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("images"); else _explicitNullProperties?.Remove("images"); } }
+        private List<string>? _explicitNullValueImages = default!;
 #nullable restore
 #else
-        public List<string> Images { get; set; }
+        public List<string> Images { get => _explicitNullValueImages; set { _explicitNullValueImages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("images"); else _explicitNullProperties?.Remove("images"); } }
+        private List<string> _explicitNullValueImages = default!;
 #endif
         /// <summary>The position within the sequence to insert the new step (≥ -1). If omitted or greater than the number of steps, the new step is added to the end. On a campaign leads have entered, a step inserted before an existing one moves the leads waiting on that step onto the new one; leads already past that position never receive it.</summary>
-        public int? Index { get; set; }
+        public int? Index { get => _explicitNullValueIndex; set { _explicitNullValueIndex = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("index"); else _explicitNullProperties?.Remove("index"); } }
+        private int? _explicitNullValueIndex = default!;
         /// <summary>Applies to `sendToAnotherCampaign` steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. `continue` keeps it running the remaining steps, `pause` pauses it, `stop` ends the source campaign for it. Omitted leaves the step without a value, which behaves as `continue`; a step added from the lemlist UI defaults to `stop`. A transfer that fails always pauses the lead, whatever this says.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction? LeadAction { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction? LeadAction { get => _explicitNullValueLeadAction; set { _explicitNullValueLeadAction = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadAction"); else _explicitNullProperties?.Remove("leadAction"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestLeadAction? _explicitNullValueLeadAction = default!;
         /// <summary>Content of the email or message (used for email, linkedinInvite, linkedinSend, linkedinInMail, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in `ai` record mode). Required for linkedinSend, linkedinInMail, whatsappMessage, and sms. On a linkedinInMail step it is sent as plain text (LinkedIn does not render HTML), and a blank one is saved but blocks the campaign launch</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        private string? _explicitNullValueMessage = default!;
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        private string _explicitNullValueMessage = default!;
 #endif
         /// <summary>HTTP method for API steps</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestMethod? Method { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestMethod? Method { get => _explicitNullValueMethod; set { _explicitNullValueMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("method"); else _explicitNullProperties?.Remove("method"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestMethod? _explicitNullValueMethod = default!;
         /// <summary>Applies to `linkedinVoiceNote` steps only. Determines how the audio is sourced. `manual` (default) means the user records the audio themselves from the lemlist UI after step creation; `ai` means lemlist generates the audio from a text template provided in the lemlist UI.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestRecordMode? RecordMode { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestRecordMode? RecordMode { get => _explicitNullValueRecordMode; set { _explicitNullValueRecordMode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recordMode"); else _explicitNullProperties?.Remove("recordMode"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestRecordMode? _explicitNullValueRecordMode = default!;
         /// <summary>Name of the LinkedIn skill to endorse on the lead&apos;s profile. Applies to `linkedinEndorse` steps only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SkillName { get; set; }
+        public string? SkillName { get => _explicitNullValueSkillName; set { _explicitNullValueSkillName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skillName"); else _explicitNullProperties?.Remove("skillName"); } }
+        private string? _explicitNullValueSkillName = default!;
 #nullable restore
 #else
-        public string SkillName { get; set; }
+        public string SkillName { get => _explicitNullValueSkillName; set { _explicitNullValueSkillName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skillName"); else _explicitNullProperties?.Remove("skillName"); } }
+        private string _explicitNullValueSkillName = default!;
 #endif
         /// <summary>Email subject line (for email steps). Optional: omit it or send an empty string on a follow-up so the email replies in the thread of the previous one. If no email has been sent to the lead in this campaign yet, it goes out with an empty subject. Required on `linkedinInMail` steps, where it is the InMail subject: a blank one is saved but blocks the campaign launch</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subject { get; set; }
+        public string? Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        private string? _explicitNullValueSubject = default!;
 #nullable restore
 #else
-        public string Subject { get; set; }
+        public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        private string _explicitNullValueSubject = default!;
 #endif
         /// <summary>Title or label for manual steps</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        private string? _explicitNullValueTitle = default!;
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>The type of step to create</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestType? Type { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestType? _explicitNullValueType = default!;
         /// <summary>URL of the API endpoint to call (required for api steps). Must start with http:// or https://</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        private string? _explicitNullValueUrl = default!;
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        private string _explicitNullValueUrl = default!;
 #endif
         /// <summary>Public HTTPS URLs of videos to attach to a `linkedinInvite` or `linkedinSend` step. lemlist downloads each file and re-hosts it. Allowed MIME types: `video/mp4`, `video/quicktime`. Up to 20 MB per file, and up to 6 items total combined with `images`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Videos { get; set; }
+        public List<string>? Videos { get => _explicitNullValueVideos; set { _explicitNullValueVideos = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("videos"); else _explicitNullProperties?.Remove("videos"); } }
+        private List<string>? _explicitNullValueVideos = default!;
 #nullable restore
 #else
-        public List<string> Videos { get; set; }
+        public List<string> Videos { get => _explicitNullValueVideos; set { _explicitNullValueVideos = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("videos"); else _explicitNullProperties?.Remove("videos"); } }
+        private List<string> _explicitNullValueVideos = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequest"/> and sets the default values.
@@ -153,7 +219,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -218,6 +284,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostSequencesBySequenceIdStepsRequestType>("type", Type);
             writer.WriteStringValue("url", Url);
             writer.WriteCollectionOfPrimitiveValues<string>("videos", Videos);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

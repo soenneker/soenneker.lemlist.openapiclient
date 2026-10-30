@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Exports contacts or companies from a CRM list as a CSV file. The response is streamed as `text/csv` with a `Content-Disposition: attachment` header.The exported columns depend on the `entity` type:- **contact**: firstName, lastName, email, linkedinUrl, companyName, jobTitle, phone, status, owner, campaigns, contactLists, and more.- **company**: name, domain, linkedinUrl, industry, website, status, size, owner, numberOfContacts, companyLists, and more.Custom fields are included as additional columns.

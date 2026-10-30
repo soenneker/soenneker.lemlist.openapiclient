@@ -92,13 +92,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             {
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage.CreateFromDiscriminatorValue },
                 { "504", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`. Updating an existing contact does not.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsSuccessResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -110,11 +112,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder.ContactsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsSuccessResponse?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder.ContactsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder.ContactsRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsSuccessResponse> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.ContactsRequestBuilder.ContactsRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -127,8 +129,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
                 { "503", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsSuccessResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsSuccessResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves contacts by IDs/emails or by CRM record ids, or searches/lists contacts by name, email, contact list, campaign membership, or company link.When using `idsOrEmails`, returns an array of matching contacts directly.When using `crmIds`, looks the contacts up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns an array of the contacts found, each with the matched id under `crmSync.crmRecordId`. `idsOrEmails` takes precedence over `crmIds`; a lookup ignores the search filters and the pagination.When using `search`, `email`, `listId`, `notInAnyCampaign`, any of the `company*` filters, or no filter at all, returns a paginated response with `data`, `total`, `limit`, and `offset` fields. You can combine filters together to narrow results (e.g. `listId` with `search`, or `notInAnyCampaign` with `companyId`). Calling the endpoint without any filter returns all contacts of the team, paginated.A lookup returns full contacts (`Contact`); the list returns `ContactListItem` objects.The `company*` filters (`companyId`, `companyDomain`, `companyLinkedinUrl`, `companySalesnavUrl`) are mutually exclusive: use only one at a time. `companyDomain` / `companyLinkedinUrl` / `companySalesnavUrl` are resolved to a `companyId` through the Companies collection; if no matching company exists, the endpoint returns an empty list with `total: 0` (not an error), which keeps automation flows simple.

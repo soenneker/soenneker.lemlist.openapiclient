@@ -12,15 +12,28 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestTracking : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("trackClicks") is { } nullNodeTrackClicks && nullNodeTrackClicks.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TrackClicks = null;
+            if (parseNode.GetChildNode("trackOpens") is { } nullNodeTrackOpens && nullNodeTrackOpens.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TrackOpens = null;
+            if (parseNode.GetChildNode("trackReplies") is { } nullNodeTrackReplies && nullNodeTrackReplies.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TrackReplies = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether link click tracking is enabled.</summary>
-        public bool? TrackClicks { get; set; }
+        public bool? TrackClicks { get => _explicitNullValueTrackClicks; set { _explicitNullValueTrackClicks = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trackClicks"); else _explicitNullProperties?.Remove("trackClicks"); } }
+        private bool? _explicitNullValueTrackClicks = default!;
         /// <summary>Whether email open tracking is enabled.</summary>
-        public bool? TrackOpens { get; set; }
+        public bool? TrackOpens { get => _explicitNullValueTrackOpens; set { _explicitNullValueTrackOpens = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trackOpens"); else _explicitNullProperties?.Remove("trackOpens"); } }
+        private bool? _explicitNullValueTrackOpens = default!;
         /// <summary>Whether reply tracking is enabled.</summary>
-        public bool? TrackReplies { get; set; }
+        public bool? TrackReplies { get => _explicitNullValueTrackReplies; set { _explicitNullValueTrackReplies = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trackReplies"); else _explicitNullProperties?.Remove("trackReplies"); } }
+        private bool? _explicitNullValueTrackReplies = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking"/> and sets the default values.
         /// </summary>
@@ -36,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -61,6 +74,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("trackClicks", TrackClicks);
             writer.WriteBoolValue("trackOpens", TrackOpens);
             writer.WriteBoolValue("trackReplies", TrackReplies);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

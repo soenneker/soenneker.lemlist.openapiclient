@@ -57,6 +57,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.Skip
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip400Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip404Response.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip422Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkip200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

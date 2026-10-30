@@ -12,55 +12,88 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SelfRecoveryRecommendation : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("action") is { } nullNodeAction && nullNodeAction.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Action = null;
+            if (parseNode.GetChildNode("confidence") is { } nullNodeConfidence && nullNodeConfidence.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Confidence = null;
+            if (parseNode.GetChildNode("contributingSignals") is { } nullNodeContributingSignals && nullNodeContributingSignals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContributingSignals = null;
+            if (parseNode.GetChildNode("executedAt") is { } nullNodeExecutedAt && nullNodeExecutedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExecutedAt = null;
+            if (parseNode.GetChildNode("executionDetail") is { } nullNodeExecutionDetail && nullNodeExecutionDetail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExecutionDetail = null;
+            if (parseNode.GetChildNode("executionStatus") is { } nullNodeExecutionStatus && nullNodeExecutionStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExecutionStatus = null;
+            if (parseNode.GetChildNode("explanationCode") is { } nullNodeExplanationCode && nullNodeExplanationCode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExplanationCode = null;
+            if (parseNode.GetChildNode("explanationVars") is { } nullNodeExplanationVars && nullNodeExplanationVars.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExplanationVars = null;
+            if (parseNode.GetChildNode("previousEmailsLimit") is { } nullNodePreviousEmailsLimit && nullNodePreviousEmailsLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PreviousEmailsLimit = null;
+            if (parseNode.GetChildNode("rootCause") is { } nullNodeRootCause && nullNodeRootCause.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RootCause = null;
+            if (parseNode.GetChildNode("strategy") is { } nullNodeStrategy && nullNodeStrategy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Strategy = null;
+        }
+
         /// <summary>Concrete asset-level action the strategy executes.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationAction? Action { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationAction? Action { get => _explicitNullValueAction; set { _explicitNullValueAction = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("action"); else _explicitNullProperties?.Remove("action"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationAction? _explicitNullValueAction = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The confidence property</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationConfidence? Confidence { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationConfidence? Confidence { get => _explicitNullValueConfidence; set { _explicitNullValueConfidence = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("confidence"); else _explicitNullProperties?.Remove("confidence"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationConfidence? _explicitNullValueConfidence = default!;
         /// <summary>Signals that contributed to this recommendation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationContributingSignalsItem?>? ContributingSignals { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationContributingSignalsItem?>? ContributingSignals { get => _explicitNullValueContributingSignals; set { _explicitNullValueContributingSignals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contributingSignals"); else _explicitNullProperties?.Remove("contributingSignals"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationContributingSignalsItem?>? _explicitNullValueContributingSignals = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationContributingSignalsItem?> ContributingSignals { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationContributingSignalsItem?> ContributingSignals { get => _explicitNullValueContributingSignals; set { _explicitNullValueContributingSignals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contributingSignals"); else _explicitNullProperties?.Remove("contributingSignals"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationContributingSignalsItem?> _explicitNullValueContributingSignals = default!;
 #endif
         /// <summary>When the action ran.</summary>
-        public DateTimeOffset? ExecutedAt { get; set; }
+        public DateTimeOffset? ExecutedAt { get => _explicitNullValueExecutedAt; set { _explicitNullValueExecutedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("executedAt"); else _explicitNullProperties?.Remove("executedAt"); } }
+        private DateTimeOffset? _explicitNullValueExecutedAt = default!;
         /// <summary>Machine-readable outcome detail (e.g. `already-locked`, `limit-already-low`, `lemwarm:&lt;code&gt;`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExecutionDetail { get; set; }
+        public string? ExecutionDetail { get => _explicitNullValueExecutionDetail; set { _explicitNullValueExecutionDetail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("executionDetail"); else _explicitNullProperties?.Remove("executionDetail"); } }
+        private string? _explicitNullValueExecutionDetail = default!;
 #nullable restore
 #else
-        public string ExecutionDetail { get; set; }
+        public string ExecutionDetail { get => _explicitNullValueExecutionDetail; set { _explicitNullValueExecutionDetail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("executionDetail"); else _explicitNullProperties?.Remove("executionDetail"); } }
+        private string _explicitNullValueExecutionDetail = default!;
 #endif
         /// <summary>Automatic-execution outcome. Absent on pre-execution entries.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationExecutionStatus? ExecutionStatus { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationExecutionStatus? ExecutionStatus { get => _explicitNullValueExecutionStatus; set { _explicitNullValueExecutionStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("executionStatus"); else _explicitNullProperties?.Remove("executionStatus"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationExecutionStatus? _explicitNullValueExecutionStatus = default!;
         /// <summary>Stable code for the explanation text, resolved client-side.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExplanationCode { get; set; }
+        public string? ExplanationCode { get => _explicitNullValueExplanationCode; set { _explicitNullValueExplanationCode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanationCode"); else _explicitNullProperties?.Remove("explanationCode"); } }
+        private string? _explicitNullValueExplanationCode = default!;
 #nullable restore
 #else
-        public string ExplanationCode { get; set; }
+        public string ExplanationCode { get => _explicitNullValueExplanationCode; set { _explicitNullValueExplanationCode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanationCode"); else _explicitNullProperties?.Remove("explanationCode"); } }
+        private string _explicitNullValueExplanationCode = default!;
 #endif
         /// <summary>Ordered substitutions for the explanation text.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ExplanationVars { get; set; }
+        public List<string>? ExplanationVars { get => _explicitNullValueExplanationVars; set { _explicitNullValueExplanationVars = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanationVars"); else _explicitNullProperties?.Remove("explanationVars"); } }
+        private List<string>? _explicitNullValueExplanationVars = default!;
 #nullable restore
 #else
-        public List<string> ExplanationVars { get; set; }
+        public List<string> ExplanationVars { get => _explicitNullValueExplanationVars; set { _explicitNullValueExplanationVars = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanationVars"); else _explicitNullProperties?.Remove("explanationVars"); } }
+        private List<string> _explicitNullValueExplanationVars = default!;
 #endif
         /// <summary>recover only: the daily sending limit before the volume cooldown.</summary>
-        public int? PreviousEmailsLimit { get; set; }
+        public int? PreviousEmailsLimit { get => _explicitNullValuePreviousEmailsLimit; set { _explicitNullValuePreviousEmailsLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("previousEmailsLimit"); else _explicitNullProperties?.Remove("previousEmailsLimit"); } }
+        private int? _explicitNullValuePreviousEmailsLimit = default!;
         /// <summary>Diagnosed root cause of the degradation.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationRootCause? RootCause { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationRootCause? RootCause { get => _explicitNullValueRootCause; set { _explicitNullValueRootCause = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rootCause"); else _explicitNullProperties?.Remove("rootCause"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationRootCause? _explicitNullValueRootCause = default!;
         /// <summary>Recommended recovery strategy (the &quot;what&quot;).</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationStrategy? Strategy { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationStrategy? Strategy { get => _explicitNullValueStrategy; set { _explicitNullValueStrategy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("strategy"); else _explicitNullProperties?.Remove("strategy"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationStrategy? _explicitNullValueStrategy = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation"/> and sets the default values.
         /// </summary>
@@ -76,7 +109,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendation(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -117,6 +150,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("previousEmailsLimit", PreviousEmailsLimit);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationRootCause>("rootCause", RootCause);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SelfRecoveryRecommendationStrategy>("strategy", Strategy);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

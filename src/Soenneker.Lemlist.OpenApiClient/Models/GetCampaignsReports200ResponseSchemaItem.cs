@@ -11,113 +11,179 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class GetCampaignsReports200ResponseSchemaItem : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("createdAt") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("createdBy") is { } nullNodeCreatedBy && nullNodeCreatedBy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedBy = null;
+            if (parseNode.GetChildNode("creator") is { } nullNodeCreator && nullNodeCreator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Creator = null;
+            if (parseNode.GetChildNode("emailsClicked") is { } nullNodeEmailsClicked && nullNodeEmailsClicked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailsClicked = null;
+            if (parseNode.GetChildNode("emailsInterested") is { } nullNodeEmailsInterested && nullNodeEmailsInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailsInterested = null;
+            if (parseNode.GetChildNode("emailsOpened") is { } nullNodeEmailsOpened && nullNodeEmailsOpened.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailsOpened = null;
+            if (parseNode.GetChildNode("emailsReplied") is { } nullNodeEmailsReplied && nullNodeEmailsReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailsReplied = null;
+            if (parseNode.GetChildNode("emailsSent") is { } nullNodeEmailsSent && nullNodeEmailsSent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailsSent = null;
+            if (parseNode.GetChildNode("emailsUnsubscribed") is { } nullNodeEmailsUnsubscribed && nullNodeEmailsUnsubscribed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailsUnsubscribed = null;
+            if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("inSequenceLeadCount") is { } nullNodeInSequenceLeadCount && nullNodeInSequenceLeadCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InSequenceLeadCount = null;
+            if (parseNode.GetChildNode("interested") is { } nullNodeInterested && nullNodeInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Interested = null;
+            if (parseNode.GetChildNode("labels") is { } nullNodeLabels && nullNodeLabels.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Labels = null;
+            if (parseNode.GetChildNode("linkedinOpened") is { } nullNodeLinkedinOpened && nullNodeLinkedinOpened.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LinkedinOpened = null;
+            if (parseNode.GetChildNode("linkedinReplied") is { } nullNodeLinkedinReplied && nullNodeLinkedinReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LinkedinReplied = null;
+            if (parseNode.GetChildNode("linkedinSent") is { } nullNodeLinkedinSent && nullNodeLinkedinSent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LinkedinSent = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("notInterested") is { } nullNodeNotInterested && nullNodeNotInterested.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotInterested = null;
+            if (parseNode.GetChildNode("reviewed") is { } nullNodeReviewed && nullNodeReviewed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reviewed = null;
+            if (parseNode.GetChildNode("reviewedCount") is { } nullNodeReviewedCount && nullNodeReviewedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReviewedCount = null;
+            if (parseNode.GetChildNode("senderNames") is { } nullNodeSenderNames && nullNodeSenderNames.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderNames = null;
+            if (parseNode.GetChildNode("sendersUsers") is { } nullNodeSendersUsers && nullNodeSendersUsers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendersUsers = null;
+            if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
+            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("totalCount") is { } nullNodeTotalCount && nullNodeTotalCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TotalCount = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Campaign creation date</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdAt"); else _explicitNullProperties?.Remove("createdAt"); } }
+        private DateTimeOffset? _explicitNullValueCreatedAt = default!;
         /// <summary>Name of the user who created the campaign</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CreatedBy { get; set; }
+        public string? CreatedBy { get => _explicitNullValueCreatedBy; set { _explicitNullValueCreatedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdBy"); else _explicitNullProperties?.Remove("createdBy"); } }
+        private string? _explicitNullValueCreatedBy = default!;
 #nullable restore
 #else
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get => _explicitNullValueCreatedBy; set { _explicitNullValueCreatedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdBy"); else _explicitNullProperties?.Remove("createdBy"); } }
+        private string _explicitNullValueCreatedBy = default!;
 #endif
         /// <summary>Creator user ID and email in format &apos;userId|email&apos;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Creator { get; set; }
+        public string? Creator { get => _explicitNullValueCreator; set { _explicitNullValueCreator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("creator"); else _explicitNullProperties?.Remove("creator"); } }
+        private string? _explicitNullValueCreator = default!;
 #nullable restore
 #else
-        public string Creator { get; set; }
+        public string Creator { get => _explicitNullValueCreator; set { _explicitNullValueCreator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("creator"); else _explicitNullProperties?.Remove("creator"); } }
+        private string _explicitNullValueCreator = default!;
 #endif
         /// <summary>Number of emails with links clicked</summary>
-        public int? EmailsClicked { get; set; }
+        public int? EmailsClicked { get => _explicitNullValueEmailsClicked; set { _explicitNullValueEmailsClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailsClicked"); else _explicitNullProperties?.Remove("emailsClicked"); } }
+        private int? _explicitNullValueEmailsClicked = default!;
         /// <summary>Number of interested responses via email</summary>
-        public int? EmailsInterested { get; set; }
+        public int? EmailsInterested { get => _explicitNullValueEmailsInterested; set { _explicitNullValueEmailsInterested = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailsInterested"); else _explicitNullProperties?.Remove("emailsInterested"); } }
+        private int? _explicitNullValueEmailsInterested = default!;
         /// <summary>Number of emails opened</summary>
-        public int? EmailsOpened { get; set; }
+        public int? EmailsOpened { get => _explicitNullValueEmailsOpened; set { _explicitNullValueEmailsOpened = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailsOpened"); else _explicitNullProperties?.Remove("emailsOpened"); } }
+        private int? _explicitNullValueEmailsOpened = default!;
         /// <summary>Number of email replies received</summary>
-        public int? EmailsReplied { get; set; }
+        public int? EmailsReplied { get => _explicitNullValueEmailsReplied; set { _explicitNullValueEmailsReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailsReplied"); else _explicitNullProperties?.Remove("emailsReplied"); } }
+        private int? _explicitNullValueEmailsReplied = default!;
         /// <summary>Number of emails sent</summary>
-        public int? EmailsSent { get; set; }
+        public int? EmailsSent { get => _explicitNullValueEmailsSent; set { _explicitNullValueEmailsSent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailsSent"); else _explicitNullProperties?.Remove("emailsSent"); } }
+        private int? _explicitNullValueEmailsSent = default!;
         /// <summary>Number of unsubscribes via email</summary>
-        public int? EmailsUnsubscribed { get; set; }
+        public int? EmailsUnsubscribed { get => _explicitNullValueEmailsUnsubscribed; set { _explicitNullValueEmailsUnsubscribed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailsUnsubscribed"); else _explicitNullProperties?.Remove("emailsUnsubscribed"); } }
+        private int? _explicitNullValueEmailsUnsubscribed = default!;
         /// <summary>Campaign ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        private string _explicitNullValueId = default!;
 #endif
         /// <summary>Number of leads in sequence</summary>
-        public int? InSequenceLeadCount { get; set; }
+        public int? InSequenceLeadCount { get => _explicitNullValueInSequenceLeadCount; set { _explicitNullValueInSequenceLeadCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inSequenceLeadCount"); else _explicitNullProperties?.Remove("inSequenceLeadCount"); } }
+        private int? _explicitNullValueInSequenceLeadCount = default!;
         /// <summary>Total number of interested leads</summary>
-        public int? Interested { get; set; }
+        public int? Interested { get => _explicitNullValueInterested; set { _explicitNullValueInterested = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("interested"); else _explicitNullProperties?.Remove("interested"); } }
+        private int? _explicitNullValueInterested = default!;
         /// <summary>Campaign labels</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Labels { get; set; }
+        public string? Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
+        private string? _explicitNullValueLabels = default!;
 #nullable restore
 #else
-        public string Labels { get; set; }
+        public string Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
+        private string _explicitNullValueLabels = default!;
 #endif
         /// <summary>Number of LinkedIn messages opened</summary>
-        public int? LinkedinOpened { get; set; }
+        public int? LinkedinOpened { get => _explicitNullValueLinkedinOpened; set { _explicitNullValueLinkedinOpened = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linkedinOpened"); else _explicitNullProperties?.Remove("linkedinOpened"); } }
+        private int? _explicitNullValueLinkedinOpened = default!;
         /// <summary>Number of LinkedIn replies received</summary>
-        public int? LinkedinReplied { get; set; }
+        public int? LinkedinReplied { get => _explicitNullValueLinkedinReplied; set { _explicitNullValueLinkedinReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linkedinReplied"); else _explicitNullProperties?.Remove("linkedinReplied"); } }
+        private int? _explicitNullValueLinkedinReplied = default!;
         /// <summary>Number of LinkedIn messages sent</summary>
-        public int? LinkedinSent { get; set; }
+        public int? LinkedinSent { get => _explicitNullValueLinkedinSent; set { _explicitNullValueLinkedinSent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linkedinSent"); else _explicitNullProperties?.Remove("linkedinSent"); } }
+        private int? _explicitNullValueLinkedinSent = default!;
         /// <summary>Campaign name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>Total number of not interested leads</summary>
-        public int? NotInterested { get; set; }
+        public int? NotInterested { get => _explicitNullValueNotInterested; set { _explicitNullValueNotInterested = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notInterested"); else _explicitNullProperties?.Remove("notInterested"); } }
+        private int? _explicitNullValueNotInterested = default!;
         /// <summary>Number of reviewed leads</summary>
-        public int? Reviewed { get; set; }
+        public int? Reviewed { get => _explicitNullValueReviewed; set { _explicitNullValueReviewed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewed"); else _explicitNullProperties?.Remove("reviewed"); } }
+        private int? _explicitNullValueReviewed = default!;
         /// <summary>Number of reviewed leads</summary>
-        public int? ReviewedCount { get; set; }
+        public int? ReviewedCount { get => _explicitNullValueReviewedCount; set { _explicitNullValueReviewedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewedCount"); else _explicitNullProperties?.Remove("reviewedCount"); } }
+        private int? _explicitNullValueReviewedCount = default!;
         /// <summary>Comma-separated list of sender email addresses</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderNames { get; set; }
+        public string? SenderNames { get => _explicitNullValueSenderNames; set { _explicitNullValueSenderNames = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderNames"); else _explicitNullProperties?.Remove("senderNames"); } }
+        private string? _explicitNullValueSenderNames = default!;
 #nullable restore
 #else
-        public string SenderNames { get; set; }
+        public string SenderNames { get => _explicitNullValueSenderNames; set { _explicitNullValueSenderNames = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("senderNames"); else _explicitNullProperties?.Remove("senderNames"); } }
+        private string _explicitNullValueSenderNames = default!;
 #endif
         /// <summary>Comma-separated list of sender names and emails</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SendersUsers { get; set; }
+        public string? SendersUsers { get => _explicitNullValueSendersUsers; set { _explicitNullValueSendersUsers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendersUsers"); else _explicitNullProperties?.Remove("sendersUsers"); } }
+        private string? _explicitNullValueSendersUsers = default!;
 #nullable restore
 #else
-        public string SendersUsers { get; set; }
+        public string SendersUsers { get => _explicitNullValueSendersUsers; set { _explicitNullValueSendersUsers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendersUsers"); else _explicitNullProperties?.Remove("sendersUsers"); } }
+        private string _explicitNullValueSendersUsers = default!;
 #endif
         /// <summary>Campaign state (running, paused, etc.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        private string? _explicitNullValueState = default!;
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        private string _explicitNullValueState = default!;
 #endif
         /// <summary>Campaign status (draft, ended, etc.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        private string? _explicitNullValueStatus = default!;
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        private string _explicitNullValueStatus = default!;
 #endif
         /// <summary>Total number of leads</summary>
-        public int? TotalCount { get; set; }
+        public int? TotalCount { get => _explicitNullValueTotalCount; set { _explicitNullValueTotalCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("totalCount"); else _explicitNullProperties?.Remove("totalCount"); } }
+        private int? _explicitNullValueTotalCount = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsReports200ResponseSchemaItem"/> and sets the default values.
         /// </summary>
@@ -133,7 +199,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsReports200ResponseSchemaItem CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsReports200ResponseSchemaItem();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsReports200ResponseSchemaItem(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -202,6 +268,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("state", State);
             writer.WriteStringValue("status", Status);
             writer.WriteIntValue("totalCount", TotalCount);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

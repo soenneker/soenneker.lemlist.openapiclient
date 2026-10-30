@@ -11,21 +11,40 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PatchLemwarmByUserMailboxIdSettingsRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("answerPercentage") is { } nullNodeAnswerPercentage && nullNodeAnswerPercentage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AnswerPercentage = null;
+            if (parseNode.GetChildNode("internalCommunicationPercent") is { } nullNodeInternalCommunicationPercent && nullNodeInternalCommunicationPercent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InternalCommunicationPercent = null;
+            if (parseNode.GetChildNode("warmDailyVarianceEnabled") is { } nullNodeWarmDailyVarianceEnabled && nullNodeWarmDailyVarianceEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmDailyVarianceEnabled = null;
+            if (parseNode.GetChildNode("warmEmailMax") is { } nullNodeWarmEmailMax && nullNodeWarmEmailMax.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmEmailMax = null;
+            if (parseNode.GetChildNode("warmEmailRampup") is { } nullNodeWarmEmailRampup && nullNodeWarmEmailRampup.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmEmailRampup = null;
+            if (parseNode.GetChildNode("warmUsePlaintext") is { } nullNodeWarmUsePlaintext && nullNodeWarmUsePlaintext.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmUsePlaintext = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Percentage of warmup emails that should be answered (0-100)</summary>
-        public int? AnswerPercentage { get; set; }
+        public int? AnswerPercentage { get => _explicitNullValueAnswerPercentage; set { _explicitNullValueAnswerPercentage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("answerPercentage"); else _explicitNullProperties?.Remove("answerPercentage"); } }
+        private int? _explicitNullValueAnswerPercentage = default!;
         /// <summary>Percentage of warmup emails sent to internal participants (0-100)</summary>
-        public int? InternalCommunicationPercent { get; set; }
+        public int? InternalCommunicationPercent { get => _explicitNullValueInternalCommunicationPercent; set { _explicitNullValueInternalCommunicationPercent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internalCommunicationPercent"); else _explicitNullProperties?.Remove("internalCommunicationPercent"); } }
+        private int? _explicitNullValueInternalCommunicationPercent = default!;
         /// <summary>Whether to apply a random daily variance to the warmup email target (spreads volume day-to-day instead of a flat number)</summary>
-        public bool? WarmDailyVarianceEnabled { get; set; }
+        public bool? WarmDailyVarianceEnabled { get => _explicitNullValueWarmDailyVarianceEnabled; set { _explicitNullValueWarmDailyVarianceEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmDailyVarianceEnabled"); else _explicitNullProperties?.Remove("warmDailyVarianceEnabled"); } }
+        private bool? _explicitNullValueWarmDailyVarianceEnabled = default!;
         /// <summary>Maximum number of warmup emails per day (0-40; the server enforces 1-40 unless the team has the lemwarm0limit beta)</summary>
-        public int? WarmEmailMax { get; set; }
+        public int? WarmEmailMax { get => _explicitNullValueWarmEmailMax; set { _explicitNullValueWarmEmailMax = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmEmailMax"); else _explicitNullProperties?.Remove("warmEmailMax"); } }
+        private int? _explicitNullValueWarmEmailMax = default!;
         /// <summary>Daily increase in the warmup email count (0-40; the server enforces 1-40 unless the team has the lemwarm0limit beta)</summary>
-        public int? WarmEmailRampup { get; set; }
+        public int? WarmEmailRampup { get => _explicitNullValueWarmEmailRampup; set { _explicitNullValueWarmEmailRampup = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmEmailRampup"); else _explicitNullProperties?.Remove("warmEmailRampup"); } }
+        private int? _explicitNullValueWarmEmailRampup = default!;
         /// <summary>Whether warmup emails are sent as plain text</summary>
-        public bool? WarmUsePlaintext { get; set; }
+        public bool? WarmUsePlaintext { get => _explicitNullValueWarmUsePlaintext; set { _explicitNullValueWarmUsePlaintext = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmUsePlaintext"); else _explicitNullProperties?.Remove("warmUsePlaintext"); } }
+        private bool? _explicitNullValueWarmUsePlaintext = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettingsRequest"/> and sets the default values.
         /// </summary>
@@ -41,7 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettingsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettingsRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchLemwarmByUserMailboxIdSettingsRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -72,6 +91,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("warmEmailMax", WarmEmailMax);
             writer.WriteIntValue("warmEmailRampup", WarmEmailRampup);
             writer.WriteBoolValue("warmUsePlaintext", WarmUsePlaintext);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

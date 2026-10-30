@@ -11,25 +11,43 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostCompaniesCrmSearchAndConnect200ResponseData : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("alreadyInProgress") is { } nullNodeAlreadyInProgress && nullNodeAlreadyInProgress.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyInProgress = null;
+            if (parseNode.GetChildNode("alreadyLinked") is { } nullNodeAlreadyLinked && nullNodeAlreadyLinked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyLinked = null;
+            if (parseNode.GetChildNode("notFound") is { } nullNodeNotFound && nullNodeNotFound.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotFound = null;
+            if (parseNode.GetChildNode("notSearchable") is { } nullNodeNotSearchable && nullNodeNotSearchable.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotSearchable = null;
+            if (parseNode.GetChildNode("toSearch") is { } nullNodeToSearch && nullNodeToSearch.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ToSearch = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Companies whose CRM search was already queued: not queued twice.</summary>
-        public int? AlreadyInProgress { get; set; }
+        public int? AlreadyInProgress { get => _explicitNullValueAlreadyInProgress; set { _explicitNullValueAlreadyInProgress = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyInProgress"); else _explicitNullProperties?.Remove("alreadyInProgress"); } }
+        private int? _explicitNullValueAlreadyInProgress = default!;
         /// <summary>Companies already linked to a CRM record: synced with it again instead of searched.</summary>
-        public int? AlreadyLinked { get; set; }
+        public int? AlreadyLinked { get => _explicitNullValueAlreadyLinked; set { _explicitNullValueAlreadyLinked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyLinked"); else _explicitNullProperties?.Remove("alreadyLinked"); } }
+        private int? _explicitNullValueAlreadyLinked = default!;
         /// <summary>The references sent that match no company of your team, as sent. Always empty with `listId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? NotFound { get; set; }
+        public List<string>? NotFound { get => _explicitNullValueNotFound; set { _explicitNullValueNotFound = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notFound"); else _explicitNullProperties?.Remove("notFound"); } }
+        private List<string>? _explicitNullValueNotFound = default!;
 #nullable restore
 #else
-        public List<string> NotFound { get; set; }
+        public List<string> NotFound { get => _explicitNullValueNotFound; set { _explicitNullValueNotFound = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notFound"); else _explicitNullProperties?.Remove("notFound"); } }
+        private List<string> _explicitNullValueNotFound = default!;
 #endif
         /// <summary>Records with nothing the CRM can be searched with: no email address or LinkedIn URL for a contact, no domain or LinkedIn URL for a company (Pipedrive also searches by name). Left untouched.</summary>
-        public int? NotSearchable { get; set; }
+        public int? NotSearchable { get => _explicitNullValueNotSearchable; set { _explicitNullValueNotSearchable = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notSearchable"); else _explicitNullProperties?.Remove("notSearchable"); } }
+        private int? _explicitNullValueNotSearchable = default!;
         /// <summary>Companies searched in the CRM: linked to the record found, flagged `not_found` otherwise.</summary>
-        public int? ToSearch { get; set; }
+        public int? ToSearch { get => _explicitNullValueToSearch; set { _explicitNullValueToSearch = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("toSearch"); else _explicitNullProperties?.Remove("toSearch"); } }
+        private int? _explicitNullValueToSearch = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmSearchAndConnect200ResponseData"/> and sets the default values.
         /// </summary>
@@ -45,7 +63,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmSearchAndConnect200ResponseData CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmSearchAndConnect200ResponseData();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesCrmSearchAndConnect200ResponseData(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -74,6 +92,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<string>("notFound", NotFound);
             writer.WriteIntValue("notSearchable", NotSearchable);
             writer.WriteIntValue("toSearch", ToSearch);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -57,6 +57,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables403Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -84,6 +86,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables403Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -111,6 +115,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables403Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

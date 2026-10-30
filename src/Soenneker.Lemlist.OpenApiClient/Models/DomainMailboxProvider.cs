@@ -5,20 +5,20 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public enum GetCampaignsByCampaignIdExportLeads200ResponseItemEmailStatus
+    public enum DomainMailboxProvider
     #pragma warning restore CS1591
     {
-        [EnumMember(Value = "deliverable")]
+        [EnumMember(Value = "google")]
         #pragma warning disable CS1591
-        Deliverable,
+        Google,
         #pragma warning restore CS1591
-        [EnumMember(Value = "risky")]
+        [EnumMember(Value = "m365")]
         #pragma warning disable CS1591
-        Risky,
+        M365,
         #pragma warning restore CS1591
-        [EnumMember(Value = "undeliverable")]
+        [EnumMember(Value = "infraforge")]
         #pragma warning disable CS1591
-        Undeliverable,
+        Infraforge,
         #pragma warning restore CS1591
     }
 }

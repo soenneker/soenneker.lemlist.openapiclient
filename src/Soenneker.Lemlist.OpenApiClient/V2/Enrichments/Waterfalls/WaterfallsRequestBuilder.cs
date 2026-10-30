@@ -70,6 +70,8 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Waterfalls
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

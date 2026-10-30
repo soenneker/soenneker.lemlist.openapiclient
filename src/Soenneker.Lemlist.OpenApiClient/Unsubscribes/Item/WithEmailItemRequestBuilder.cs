@@ -50,7 +50,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Unsubscribe by Email
@@ -69,7 +69,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Add Unsubscribe Email or Domain
@@ -88,7 +88,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubscribes.Item
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostUnsubscribesByEmail200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Delete Unsubscribe Email

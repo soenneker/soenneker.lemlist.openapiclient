@@ -36,22 +36,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads
         /// <summary>
         /// Export leads from a campaign with filtering options. Returns leads in CSV or JSON format based on their state (e.g., contacted, interested, replied, etc.).
         /// </summary>
-        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem&gt;</returns>
+        /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder.LeadsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCampaignsByCampaignIdExportLeads200ResponseSchemaItem.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-            return collectionResult?.AsList();
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Export leads from a campaign with filtering options. Returns leads in CSV or JSON format based on their state (e.g., contacted, interested, replied, etc.).

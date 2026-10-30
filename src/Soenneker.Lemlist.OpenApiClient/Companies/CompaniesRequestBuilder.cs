@@ -86,13 +86,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             {
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
                 { "504", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Creates a new company or updates an existing one (upsert). If a company with the same domain, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing company directly by providing `companyId`, bypassing domain/LinkedIn matching, in which case `name` and the identifiers become optional. Without `companyId`, `name` is required together with at least one identifier: `domain`, `linkedinUrl` or `linkedinUrlSalesNav`.**Permission:** creating a company requires the &quot;Create companies&quot; permission on the API key&apos;s user, otherwise the request fails with `403 COMPANY_CREATE_NOT_ALLOWED`. Updating an existing company does not.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -104,11 +106,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -121,8 +123,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
                 { "503", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompanies200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.

@@ -11,88 +11,130 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostUserEmailAccountsRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("imap_host") is { } nullNodeImapHost && nullNodeImapHost.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImapHost = null;
+            if (parseNode.GetChildNode("imap_login") is { } nullNodeImapLogin && nullNodeImapLogin.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImapLogin = null;
+            if (parseNode.GetChildNode("imap_password") is { } nullNodeImapPassword && nullNodeImapPassword.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImapPassword = null;
+            if (parseNode.GetChildNode("imap_port") is { } nullNodeImapPort && nullNodeImapPort.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImapPort = null;
+            if (parseNode.GetChildNode("imap_secure") is { } nullNodeImapSecure && nullNodeImapSecure.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImapSecure = null;
+            if (parseNode.GetChildNode("sender_email") is { } nullNodeSenderEmail && nullNodeSenderEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderEmail = null;
+            if (parseNode.GetChildNode("sender_name") is { } nullNodeSenderName && nullNodeSenderName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderName = null;
+            if (parseNode.GetChildNode("smtp_host") is { } nullNodeSmtpHost && nullNodeSmtpHost.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SmtpHost = null;
+            if (parseNode.GetChildNode("smtp_login") is { } nullNodeSmtpLogin && nullNodeSmtpLogin.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SmtpLogin = null;
+            if (parseNode.GetChildNode("smtp_password") is { } nullNodeSmtpPassword && nullNodeSmtpPassword.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SmtpPassword = null;
+            if (parseNode.GetChildNode("smtp_port") is { } nullNodeSmtpPort && nullNodeSmtpPort.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SmtpPort = null;
+            if (parseNode.GetChildNode("smtp_secure") is { } nullNodeSmtpSecure && nullNodeSmtpSecure.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SmtpSecure = null;
+            if (parseNode.GetChildNode("userId") is { } nullNodeUserId && nullNodeUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserId = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>IMAP server hostname.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ImapHost { get; set; }
+        public string? ImapHost { get => _explicitNullValueImapHost; set { _explicitNullValueImapHost = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_host"); else _explicitNullProperties?.Remove("imap_host"); } }
+        private string? _explicitNullValueImapHost = default!;
 #nullable restore
 #else
-        public string ImapHost { get; set; }
+        public string ImapHost { get => _explicitNullValueImapHost; set { _explicitNullValueImapHost = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_host"); else _explicitNullProperties?.Remove("imap_host"); } }
+        private string _explicitNullValueImapHost = default!;
 #endif
         /// <summary>IMAP authentication login.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ImapLogin { get; set; }
+        public string? ImapLogin { get => _explicitNullValueImapLogin; set { _explicitNullValueImapLogin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_login"); else _explicitNullProperties?.Remove("imap_login"); } }
+        private string? _explicitNullValueImapLogin = default!;
 #nullable restore
 #else
-        public string ImapLogin { get; set; }
+        public string ImapLogin { get => _explicitNullValueImapLogin; set { _explicitNullValueImapLogin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_login"); else _explicitNullProperties?.Remove("imap_login"); } }
+        private string _explicitNullValueImapLogin = default!;
 #endif
         /// <summary>IMAP authentication password.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ImapPassword { get; set; }
+        public string? ImapPassword { get => _explicitNullValueImapPassword; set { _explicitNullValueImapPassword = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_password"); else _explicitNullProperties?.Remove("imap_password"); } }
+        private string? _explicitNullValueImapPassword = default!;
 #nullable restore
 #else
-        public string ImapPassword { get; set; }
+        public string ImapPassword { get => _explicitNullValueImapPassword; set { _explicitNullValueImapPassword = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_password"); else _explicitNullProperties?.Remove("imap_password"); } }
+        private string _explicitNullValueImapPassword = default!;
 #endif
         /// <summary>IMAP server port.</summary>
-        public int? ImapPort { get; set; }
+        public int? ImapPort { get => _explicitNullValueImapPort; set { _explicitNullValueImapPort = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_port"); else _explicitNullProperties?.Remove("imap_port"); } }
+        private int? _explicitNullValueImapPort = default!;
         /// <summary>Use SSL/TLS for IMAP connection.</summary>
-        public bool? ImapSecure { get; set; }
+        public bool? ImapSecure { get => _explicitNullValueImapSecure; set { _explicitNullValueImapSecure = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("imap_secure"); else _explicitNullProperties?.Remove("imap_secure"); } }
+        private bool? _explicitNullValueImapSecure = default!;
         /// <summary>Email address used as the sender.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderEmail { get; set; }
+        public string? SenderEmail { get => _explicitNullValueSenderEmail; set { _explicitNullValueSenderEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sender_email"); else _explicitNullProperties?.Remove("sender_email"); } }
+        private string? _explicitNullValueSenderEmail = default!;
 #nullable restore
 #else
-        public string SenderEmail { get; set; }
+        public string SenderEmail { get => _explicitNullValueSenderEmail; set { _explicitNullValueSenderEmail = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sender_email"); else _explicitNullProperties?.Remove("sender_email"); } }
+        private string _explicitNullValueSenderEmail = default!;
 #endif
         /// <summary>Display name for the sender.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderName { get; set; }
+        public string? SenderName { get => _explicitNullValueSenderName; set { _explicitNullValueSenderName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sender_name"); else _explicitNullProperties?.Remove("sender_name"); } }
+        private string? _explicitNullValueSenderName = default!;
 #nullable restore
 #else
-        public string SenderName { get; set; }
+        public string SenderName { get => _explicitNullValueSenderName; set { _explicitNullValueSenderName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sender_name"); else _explicitNullProperties?.Remove("sender_name"); } }
+        private string _explicitNullValueSenderName = default!;
 #endif
         /// <summary>SMTP server hostname.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SmtpHost { get; set; }
+        public string? SmtpHost { get => _explicitNullValueSmtpHost; set { _explicitNullValueSmtpHost = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_host"); else _explicitNullProperties?.Remove("smtp_host"); } }
+        private string? _explicitNullValueSmtpHost = default!;
 #nullable restore
 #else
-        public string SmtpHost { get; set; }
+        public string SmtpHost { get => _explicitNullValueSmtpHost; set { _explicitNullValueSmtpHost = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_host"); else _explicitNullProperties?.Remove("smtp_host"); } }
+        private string _explicitNullValueSmtpHost = default!;
 #endif
         /// <summary>SMTP authentication login.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SmtpLogin { get; set; }
+        public string? SmtpLogin { get => _explicitNullValueSmtpLogin; set { _explicitNullValueSmtpLogin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_login"); else _explicitNullProperties?.Remove("smtp_login"); } }
+        private string? _explicitNullValueSmtpLogin = default!;
 #nullable restore
 #else
-        public string SmtpLogin { get; set; }
+        public string SmtpLogin { get => _explicitNullValueSmtpLogin; set { _explicitNullValueSmtpLogin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_login"); else _explicitNullProperties?.Remove("smtp_login"); } }
+        private string _explicitNullValueSmtpLogin = default!;
 #endif
         /// <summary>SMTP authentication password.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SmtpPassword { get; set; }
+        public string? SmtpPassword { get => _explicitNullValueSmtpPassword; set { _explicitNullValueSmtpPassword = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_password"); else _explicitNullProperties?.Remove("smtp_password"); } }
+        private string? _explicitNullValueSmtpPassword = default!;
 #nullable restore
 #else
-        public string SmtpPassword { get; set; }
+        public string SmtpPassword { get => _explicitNullValueSmtpPassword; set { _explicitNullValueSmtpPassword = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_password"); else _explicitNullProperties?.Remove("smtp_password"); } }
+        private string _explicitNullValueSmtpPassword = default!;
 #endif
         /// <summary>SMTP server port.</summary>
-        public int? SmtpPort { get; set; }
+        public int? SmtpPort { get => _explicitNullValueSmtpPort; set { _explicitNullValueSmtpPort = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_port"); else _explicitNullProperties?.Remove("smtp_port"); } }
+        private int? _explicitNullValueSmtpPort = default!;
         /// <summary>Use SSL/TLS for SMTP connection.</summary>
-        public bool? SmtpSecure { get; set; }
+        public bool? SmtpSecure { get => _explicitNullValueSmtpSecure; set { _explicitNullValueSmtpSecure = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("smtp_secure"); else _explicitNullProperties?.Remove("smtp_secure"); } }
+        private bool? _explicitNullValueSmtpSecure = default!;
         /// <summary>Assign the email account to a specific team member. Must be a member of the team. Defaults to the API key creator or team owner.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UserId { get; set; }
+        public string? UserId { get => _explicitNullValueUserId; set { _explicitNullValueUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("userId"); else _explicitNullProperties?.Remove("userId"); } }
+        private string? _explicitNullValueUserId = default!;
 #nullable restore
 #else
-        public string UserId { get; set; }
+        public string UserId { get => _explicitNullValueUserId; set { _explicitNullValueUserId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("userId"); else _explicitNullProperties?.Remove("userId"); } }
+        private string _explicitNullValueUserId = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsRequest"/> and sets the default values.
@@ -111,7 +153,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostUserEmailAccountsRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -156,6 +198,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("smtp_port", SmtpPort);
             writer.WriteBoolValue("smtp_secure", SmtpSecure);
             writer.WriteStringValue("userId", UserId);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

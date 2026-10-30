@@ -12,17 +12,32 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestOnReplied : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("campaignProgress") is { } nullNodeCampaignProgress && nullNodeCampaignProgress.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignProgress = null;
+            if (parseNode.GetChildNode("createNewTask") is { } nullNodeCreateNewTask && nullNodeCreateNewTask.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreateNewTask = null;
+            if (parseNode.GetChildNode("disableOutOfOffice") is { } nullNodeDisableOutOfOffice && nullNodeDisableOutOfOffice.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableOutOfOffice = null;
+            if (parseNode.GetChildNode("propagateProgressToCompany") is { } nullNodePropagateProgressToCompany && nullNodePropagateProgressToCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PropagateProgressToCompany = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>What happens to the lead on reply.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnRepliedCampaignProgress? CampaignProgress { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnRepliedCampaignProgress? CampaignProgress { get => _explicitNullValueCampaignProgress; set { _explicitNullValueCampaignProgress = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignProgress"); else _explicitNullProperties?.Remove("campaignProgress"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnRepliedCampaignProgress? _explicitNullValueCampaignProgress = default!;
         /// <summary>Create a task when a lead replies.</summary>
-        public bool? CreateNewTask { get; set; }
+        public bool? CreateNewTask { get => _explicitNullValueCreateNewTask; set { _explicitNullValueCreateNewTask = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createNewTask"); else _explicitNullProperties?.Remove("createNewTask"); } }
+        private bool? _explicitNullValueCreateNewTask = default!;
         /// <summary>Whether out-of-office detection is disabled.</summary>
-        public bool? DisableOutOfOffice { get; set; }
+        public bool? DisableOutOfOffice { get => _explicitNullValueDisableOutOfOffice; set { _explicitNullValueDisableOutOfOffice = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableOutOfOffice"); else _explicitNullProperties?.Remove("disableOutOfOffice"); } }
+        private bool? _explicitNullValueDisableOutOfOffice = default!;
         /// <summary>Apply the same action to other leads in the same company.</summary>
-        public bool? PropagateProgressToCompany { get; set; }
+        public bool? PropagateProgressToCompany { get => _explicitNullValuePropagateProgressToCompany; set { _explicitNullValuePropagateProgressToCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("propagateProgressToCompany"); else _explicitNullProperties?.Remove("propagateProgressToCompany"); } }
+        private bool? _explicitNullValuePropagateProgressToCompany = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied"/> and sets the default values.
         /// </summary>
@@ -38,7 +53,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -65,6 +80,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("createNewTask", CreateNewTask);
             writer.WriteBoolValue("disableOutOfOffice", DisableOutOfOffice);
             writer.WriteBoolValue("propagateProgressToCompany", PropagateProgressToCompany);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -11,20 +11,34 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostCampaignsByCampaignIdAbmLeads200ResponseData : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("addedCount") is { } nullNodeAddedCount && nullNodeAddedCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddedCount = null;
+            if (parseNode.GetChildNode("alreadyInCampaignCount") is { } nullNodeAlreadyInCampaignCount && nullNodeAlreadyInCampaignCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AlreadyInCampaignCount = null;
+            if (parseNode.GetChildNode("skipped") is { } nullNodeSkipped && nullNodeSkipped.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Skipped = null;
+        }
+
         /// <summary>The addedCount property</summary>
-        public long? AddedCount { get; set; }
+        public long? AddedCount { get => _explicitNullValueAddedCount; set { _explicitNullValueAddedCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("addedCount"); else _explicitNullProperties?.Remove("addedCount"); } }
+        private long? _explicitNullValueAddedCount = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The alreadyInCampaignCount property</summary>
-        public long? AlreadyInCampaignCount { get; set; }
+        public long? AlreadyInCampaignCount { get => _explicitNullValueAlreadyInCampaignCount; set { _explicitNullValueAlreadyInCampaignCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("alreadyInCampaignCount"); else _explicitNullProperties?.Remove("alreadyInCampaignCount"); } }
+        private long? _explicitNullValueAlreadyInCampaignCount = default!;
         /// <summary>The skipped property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>? Skipped { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>? Skipped { get => _explicitNullValueSkipped; set { _explicitNullValueSkipped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skipped"); else _explicitNullProperties?.Remove("skipped"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>? _explicitNullValueSkipped = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem> Skipped { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem> Skipped { get => _explicitNullValueSkipped; set { _explicitNullValueSkipped = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skipped"); else _explicitNullProperties?.Remove("skipped"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem> _explicitNullValueSkipped = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseData"/> and sets the default values.
@@ -41,7 +55,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseData CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseData();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseData(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -66,6 +80,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteLongValue("addedCount", AddedCount);
             writer.WriteLongValue("alreadyInCampaignCount", AlreadyInCampaignCount);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdAbmLeads200ResponseDataSkippedItem>("skipped", Skipped);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

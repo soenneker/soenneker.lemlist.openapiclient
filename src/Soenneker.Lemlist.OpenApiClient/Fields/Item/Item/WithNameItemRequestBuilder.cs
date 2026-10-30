@@ -61,6 +61,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Fields.Item.Item
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteFieldsByEntityByName403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteFieldsByEntityByName404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteFieldsByEntityByName409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteFieldsByEntityByName200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteFieldsByEntityByName200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

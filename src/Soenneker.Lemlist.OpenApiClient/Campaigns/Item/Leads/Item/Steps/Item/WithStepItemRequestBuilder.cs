@@ -22,6 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Personalization.PersonalizationRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The skip property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip.SkipRequestBuilder Skip
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.Skip.SkipRequestBuilder(PathParameters, RequestAdapter);

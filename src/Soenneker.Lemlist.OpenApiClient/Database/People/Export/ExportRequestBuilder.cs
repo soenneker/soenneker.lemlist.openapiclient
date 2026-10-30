@@ -55,6 +55,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.People.Export
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetDatabasePeopleExport400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.GetDatabasePeopleExport403Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }

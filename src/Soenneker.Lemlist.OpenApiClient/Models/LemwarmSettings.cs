@@ -12,30 +12,49 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class LemwarmSettings : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("active") is { } nullNodeActive && nullNodeActive.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Active = null;
+            if (parseNode.GetChildNode("dailyLimit") is { } nullNodeDailyLimit && nullNodeDailyLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DailyLimit = null;
+            if (parseNode.GetChildNode("deliverability") is { } nullNodeDeliverability && nullNodeDeliverability.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deliverability = null;
+            if (parseNode.GetChildNode("warmDailyVarianceEnabled") is { } nullNodeWarmDailyVarianceEnabled && nullNodeWarmDailyVarianceEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmDailyVarianceEnabled = null;
+            if (parseNode.GetChildNode("warmupTemplate") is { } nullNodeWarmupTemplate && nullNodeWarmupTemplate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WarmupTemplate = null;
+        }
+
         /// <summary>The active property</summary>
-        public bool? Active { get; set; }
+        public bool? Active { get => _explicitNullValueActive; set { _explicitNullValueActive = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("active"); else _explicitNullProperties?.Remove("active"); } }
+        private bool? _explicitNullValueActive = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The dailyLimit property</summary>
-        public int? DailyLimit { get; set; }
+        public int? DailyLimit { get => _explicitNullValueDailyLimit; set { _explicitNullValueDailyLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dailyLimit"); else _explicitNullProperties?.Remove("dailyLimit"); } }
+        private int? _explicitNullValueDailyLimit = default!;
         /// <summary>The deliverability property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability? Deliverability { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability? Deliverability { get => _explicitNullValueDeliverability; set { _explicitNullValueDeliverability = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliverability"); else _explicitNullProperties?.Remove("deliverability"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability? _explicitNullValueDeliverability = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability Deliverability { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability Deliverability { get => _explicitNullValueDeliverability; set { _explicitNullValueDeliverability = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliverability"); else _explicitNullProperties?.Remove("deliverability"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability _explicitNullValueDeliverability = default!;
 #endif
         /// <summary>Whether a random daily variance is applied to the warmup email target</summary>
-        public bool? WarmDailyVarianceEnabled { get; set; }
+        public bool? WarmDailyVarianceEnabled { get => _explicitNullValueWarmDailyVarianceEnabled; set { _explicitNullValueWarmDailyVarianceEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmDailyVarianceEnabled"); else _explicitNullProperties?.Remove("warmDailyVarianceEnabled"); } }
+        private bool? _explicitNullValueWarmDailyVarianceEnabled = default!;
         /// <summary>The warmupTemplate property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WarmupTemplate { get; set; }
+        public string? WarmupTemplate { get => _explicitNullValueWarmupTemplate; set { _explicitNullValueWarmupTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmupTemplate"); else _explicitNullProperties?.Remove("warmupTemplate"); } }
+        private string? _explicitNullValueWarmupTemplate = default!;
 #nullable restore
 #else
-        public string WarmupTemplate { get; set; }
+        public string WarmupTemplate { get => _explicitNullValueWarmupTemplate; set { _explicitNullValueWarmupTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warmupTemplate"); else _explicitNullProperties?.Remove("warmupTemplate"); } }
+        private string _explicitNullValueWarmupTemplate = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings"/> and sets the default values.
@@ -52,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettings(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -81,6 +100,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.LemwarmSettingsDeliverability>("deliverability", Deliverability);
             writer.WriteBoolValue("warmDailyVarianceEnabled", WarmDailyVarianceEnabled);
             writer.WriteStringValue("warmupTemplate", WarmupTemplate);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

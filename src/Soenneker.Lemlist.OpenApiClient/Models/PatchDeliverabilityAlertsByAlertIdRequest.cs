@@ -11,35 +11,58 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PatchDeliverabilityAlertsByAlertIdRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("channelConfig") is { } nullNodeChannelConfig && nullNodeChannelConfig.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ChannelConfig = null;
+            if (parseNode.GetChildNode("comparisonOperator") is { } nullNodeComparisonOperator && nullNodeComparisonOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ComparisonOperator = null;
+            if (parseNode.GetChildNode("enabled") is { } nullNodeEnabled && nullNodeEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enabled = null;
+            if (parseNode.GetChildNode("periodDays") is { } nullNodePeriodDays && nullNodePeriodDays.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PeriodDays = null;
+            if (parseNode.GetChildNode("periodMode") is { } nullNodePeriodMode && nullNodePeriodMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PeriodMode = null;
+            if (parseNode.GetChildNode("scopeEntities") is { } nullNodeScopeEntities && nullNodeScopeEntities.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScopeEntities = null;
+            if (parseNode.GetChildNode("threshold") is { } nullNodeThreshold && nullNodeThreshold.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Threshold = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The channelConfig property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ChannelConfig { get; set; }
+        public string? ChannelConfig { get => _explicitNullValueChannelConfig; set { _explicitNullValueChannelConfig = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("channelConfig"); else _explicitNullProperties?.Remove("channelConfig"); } }
+        private string? _explicitNullValueChannelConfig = default!;
 #nullable restore
 #else
-        public string ChannelConfig { get; set; }
+        public string ChannelConfig { get => _explicitNullValueChannelConfig; set { _explicitNullValueChannelConfig = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("channelConfig"); else _explicitNullProperties?.Remove("channelConfig"); } }
+        private string _explicitNullValueChannelConfig = default!;
 #endif
         /// <summary>The comparisonOperator property</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestComparisonOperator? ComparisonOperator { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestComparisonOperator? ComparisonOperator { get => _explicitNullValueComparisonOperator; set { _explicitNullValueComparisonOperator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("comparisonOperator"); else _explicitNullProperties?.Remove("comparisonOperator"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestComparisonOperator? _explicitNullValueComparisonOperator = default!;
         /// <summary>Pause or resume evaluation of this alert.</summary>
-        public bool? Enabled { get; set; }
+        public bool? Enabled { get => _explicitNullValueEnabled; set { _explicitNullValueEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabled"); else _explicitNullProperties?.Remove("enabled"); } }
+        private bool? _explicitNullValueEnabled = default!;
         /// <summary>The periodDays property</summary>
-        public int? PeriodDays { get; set; }
+        public int? PeriodDays { get => _explicitNullValuePeriodDays; set { _explicitNullValuePeriodDays = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("periodDays"); else _explicitNullProperties?.Remove("periodDays"); } }
+        private int? _explicitNullValuePeriodDays = default!;
         /// <summary>The periodMode property</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestPeriodMode? PeriodMode { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestPeriodMode? PeriodMode { get => _explicitNullValuePeriodMode; set { _explicitNullValuePeriodMode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("periodMode"); else _explicitNullProperties?.Remove("periodMode"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestPeriodMode? _explicitNullValuePeriodMode = default!;
         /// <summary>Same format as on creation. Only meaningful when the alert&apos;s `scope` is `mailbox` or `domain`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ScopeEntities { get; set; }
+        public List<string>? ScopeEntities { get => _explicitNullValueScopeEntities; set { _explicitNullValueScopeEntities = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scopeEntities"); else _explicitNullProperties?.Remove("scopeEntities"); } }
+        private List<string>? _explicitNullValueScopeEntities = default!;
 #nullable restore
 #else
-        public List<string> ScopeEntities { get; set; }
+        public List<string> ScopeEntities { get => _explicitNullValueScopeEntities; set { _explicitNullValueScopeEntities = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scopeEntities"); else _explicitNullProperties?.Remove("scopeEntities"); } }
+        private List<string> _explicitNullValueScopeEntities = default!;
 #endif
         /// <summary>The threshold property</summary>
-        public double? Threshold { get; set; }
+        public double? Threshold { get => _explicitNullValueThreshold; set { _explicitNullValueThreshold = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("threshold"); else _explicitNullProperties?.Remove("threshold"); } }
+        private double? _explicitNullValueThreshold = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequest"/> and sets the default values.
         /// </summary>
@@ -55,7 +78,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -88,6 +111,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchDeliverabilityAlertsByAlertIdRequestPeriodMode>("periodMode", PeriodMode);
             writer.WriteCollectionOfPrimitiveValues<string>("scopeEntities", ScopeEntities);
             writer.WriteDoubleValue("threshold", Threshold);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

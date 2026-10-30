@@ -18,6 +18,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export
     public partial class ExportRequestBuilder : BaseRequestBuilder
     {
         /// <summary>The leads property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder Leads
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export.Leads.LeadsRequestBuilder(PathParameters, RequestAdapter);

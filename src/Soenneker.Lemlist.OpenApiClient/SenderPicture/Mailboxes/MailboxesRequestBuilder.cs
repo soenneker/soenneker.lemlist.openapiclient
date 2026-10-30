@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.SenderPicture.Mailboxes
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureError.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureStatusResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureStatusResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

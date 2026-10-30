@@ -11,31 +11,62 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PatchUsersByUserIdLinkedinLimitsRequest : IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("commentLastPostRetrieveLimit") is { } nullNodeCommentLastPostRetrieveLimit && nullNodeCommentLastPostRetrieveLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CommentLastPostRetrieveLimit = null;
+            if (parseNode.GetChildNode("commentLastPostSendLimit") is { } nullNodeCommentLastPostSendLimit && nullNodeCommentLastPostSendLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CommentLastPostSendLimit = null;
+            if (parseNode.GetChildNode("endorseLimit") is { } nullNodeEndorseLimit && nullNodeEndorseLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndorseLimit = null;
+            if (parseNode.GetChildNode("followLimit") is { } nullNodeFollowLimit && nullNodeFollowLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FollowLimit = null;
+            if (parseNode.GetChildNode("inMailLimit") is { } nullNodeInMailLimit && nullNodeInMailLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InMailLimit = null;
+            if (parseNode.GetChildNode("inviteLimit") is { } nullNodeInviteLimit && nullNodeInviteLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InviteLimit = null;
+            if (parseNode.GetChildNode("inviteRampUp") is { } nullNodeInviteRampUp && nullNodeInviteRampUp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InviteRampUp = null;
+            if (parseNode.GetChildNode("likeLastPostLimit") is { } nullNodeLikeLastPostLimit && nullNodeLikeLastPostLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LikeLastPostLimit = null;
+            if (parseNode.GetChildNode("networkCheckLimit") is { } nullNodeNetworkCheckLimit && nullNodeNetworkCheckLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NetworkCheckLimit = null;
+            if (parseNode.GetChildNode("sendLimit") is { } nullNodeSendLimit && nullNodeSendLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendLimit = null;
+            if (parseNode.GetChildNode("visitLimit") is { } nullNodeVisitLimit && nullNodeVisitLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) VisitLimit = null;
+            if (parseNode.GetChildNode("withdrawInvitationLimit") is { } nullNodeWithdrawInvitationLimit && nullNodeWithdrawInvitationLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WithdrawInvitationLimit = null;
+        }
+
         /// <summary>Max LinkedIn last-post retrievals per day</summary>
-        public int? CommentLastPostRetrieveLimit { get; set; }
+        public int? CommentLastPostRetrieveLimit { get => _explicitNullValueCommentLastPostRetrieveLimit; set { _explicitNullValueCommentLastPostRetrieveLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("commentLastPostRetrieveLimit"); else _explicitNullProperties?.Remove("commentLastPostRetrieveLimit"); } }
+        private int? _explicitNullValueCommentLastPostRetrieveLimit = default!;
         /// <summary>Max LinkedIn last-post comments per day</summary>
-        public int? CommentLastPostSendLimit { get; set; }
+        public int? CommentLastPostSendLimit { get => _explicitNullValueCommentLastPostSendLimit; set { _explicitNullValueCommentLastPostSendLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("commentLastPostSendLimit"); else _explicitNullProperties?.Remove("commentLastPostSendLimit"); } }
+        private int? _explicitNullValueCommentLastPostSendLimit = default!;
         /// <summary>Max LinkedIn endorsements per day</summary>
-        public int? EndorseLimit { get; set; }
+        public int? EndorseLimit { get => _explicitNullValueEndorseLimit; set { _explicitNullValueEndorseLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endorseLimit"); else _explicitNullProperties?.Remove("endorseLimit"); } }
+        private int? _explicitNullValueEndorseLimit = default!;
         /// <summary>Max LinkedIn follows per day</summary>
-        public int? FollowLimit { get; set; }
+        public int? FollowLimit { get => _explicitNullValueFollowLimit; set { _explicitNullValueFollowLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("followLimit"); else _explicitNullProperties?.Remove("followLimit"); } }
+        private int? _explicitNullValueFollowLimit = default!;
         /// <summary>Max LinkedIn InMails per day: a daily throttle, the monthly InMail credits of the LinkedIn plan stay the hard cap</summary>
-        public int? InMailLimit { get; set; }
+        public int? InMailLimit { get => _explicitNullValueInMailLimit; set { _explicitNullValueInMailLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inMailLimit"); else _explicitNullProperties?.Remove("inMailLimit"); } }
+        private int? _explicitNullValueInMailLimit = default!;
         /// <summary>Max LinkedIn invitations per day</summary>
-        public int? InviteLimit { get; set; }
+        public int? InviteLimit { get => _explicitNullValueInviteLimit; set { _explicitNullValueInviteLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inviteLimit"); else _explicitNullProperties?.Remove("inviteLimit"); } }
+        private int? _explicitNullValueInviteLimit = default!;
         /// <summary>Invite ramp-up: how much the daily invitation limit grows each day until it reaches inviteLimit. null turns the ramp-up off; omit it to keep it as is</summary>
-        public int? InviteRampUp { get; set; }
+        public int? InviteRampUp { get => _explicitNullValueInviteRampUp; set { _explicitNullValueInviteRampUp = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("inviteRampUp"); else _explicitNullProperties?.Remove("inviteRampUp"); } }
+        private int? _explicitNullValueInviteRampUp = default!;
         /// <summary>Max LinkedIn last-post likes per day</summary>
-        public int? LikeLastPostLimit { get; set; }
+        public int? LikeLastPostLimit { get => _explicitNullValueLikeLastPostLimit; set { _explicitNullValueLikeLastPostLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("likeLastPostLimit"); else _explicitNullProperties?.Remove("likeLastPostLimit"); } }
+        private int? _explicitNullValueLikeLastPostLimit = default!;
         /// <summary>Max LinkedIn network checks per day</summary>
-        public int? NetworkCheckLimit { get; set; }
+        public int? NetworkCheckLimit { get => _explicitNullValueNetworkCheckLimit; set { _explicitNullValueNetworkCheckLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("networkCheckLimit"); else _explicitNullProperties?.Remove("networkCheckLimit"); } }
+        private int? _explicitNullValueNetworkCheckLimit = default!;
         /// <summary>Max LinkedIn direct messages per day</summary>
-        public int? SendLimit { get; set; }
+        public int? SendLimit { get => _explicitNullValueSendLimit; set { _explicitNullValueSendLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendLimit"); else _explicitNullProperties?.Remove("sendLimit"); } }
+        private int? _explicitNullValueSendLimit = default!;
         /// <summary>Max LinkedIn profile visits per day</summary>
-        public int? VisitLimit { get; set; }
+        public int? VisitLimit { get => _explicitNullValueVisitLimit; set { _explicitNullValueVisitLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("visitLimit"); else _explicitNullProperties?.Remove("visitLimit"); } }
+        private int? _explicitNullValueVisitLimit = default!;
         /// <summary>Max LinkedIn invitation withdrawals per day</summary>
-        public int? WithdrawInvitationLimit { get; set; }
+        public int? WithdrawInvitationLimit { get => _explicitNullValueWithdrawInvitationLimit; set { _explicitNullValueWithdrawInvitationLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("withdrawInvitationLimit"); else _explicitNullProperties?.Remove("withdrawInvitationLimit"); } }
+        private int? _explicitNullValueWithdrawInvitationLimit = default!;
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -44,7 +75,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchUsersByUserIdLinkedinLimitsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchUsersByUserIdLinkedinLimitsRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchUsersByUserIdLinkedinLimitsRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -86,7 +117,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteIntValue("networkCheckLimit", NetworkCheckLimit);
             writer.WriteIntValue("sendLimit", SendLimit);
             writer.WriteIntValue("visitLimit", VisitLimit);
-            writer.WriteIntValue("withdrawInvitationLimit", WithdrawInvitationLimit);
+            writer.WriteIntValue("withdrawInvitationLimit", WithdrawInvitationLimit);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            
         }
     }
 }

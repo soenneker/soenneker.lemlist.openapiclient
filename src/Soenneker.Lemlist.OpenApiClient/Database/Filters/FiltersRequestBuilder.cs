@@ -55,6 +55,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Filters
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DatabaseFilter.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();

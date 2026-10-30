@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.Item
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdSendersByUserId404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdSendersByUserId405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdSendersByUserId409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdSendersByUserId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdSendersByUserId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -90,6 +92,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Senders.Item
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdSendersByUserId404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdSendersByUserId405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdSendersByUserId409Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdSendersByUserId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdSendersByUserId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

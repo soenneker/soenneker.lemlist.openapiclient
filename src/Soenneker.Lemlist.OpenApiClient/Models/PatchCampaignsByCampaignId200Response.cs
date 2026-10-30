@@ -11,57 +11,97 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PatchCampaignsByCampaignId200Response : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("autoLeadInterest") is { } nullNodeAutoLeadInterest && nullNodeAutoLeadInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoLeadInterest = null;
+            if (parseNode.GetChildNode("disableOutOfOffice") is { } nullNodeDisableOutOfOffice && nullNodeDisableOutOfOffice.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableOutOfOffice = null;
+            if (parseNode.GetChildNode("disableTrackClick") is { } nullNodeDisableTrackClick && nullNodeDisableTrackClick.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackClick = null;
+            if (parseNode.GetChildNode("disableTrackOpen") is { } nullNodeDisableTrackOpen && nullNodeDisableTrackOpen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackOpen = null;
+            if (parseNode.GetChildNode("disableTrackReply") is { } nullNodeDisableTrackReply && nullNodeDisableTrackReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackReply = null;
+            if (parseNode.GetChildNode("leadsPausedByInterest") is { } nullNodeLeadsPausedByInterest && nullNodeLeadsPausedByInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadsPausedByInterest = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("opportunityClicked") is { } nullNodeOpportunityClicked && nullNodeOpportunityClicked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OpportunityClicked = null;
+            if (parseNode.GetChildNode("opportunityReplied") is { } nullNodeOpportunityReplied && nullNodeOpportunityReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OpportunityReplied = null;
+            if (parseNode.GetChildNode("sendUsers") is { } nullNodeSendUsers && nullNodeSendUsers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendUsers = null;
+            if (parseNode.GetChildNode("sequenceSharing") is { } nullNodeSequenceSharing && nullNodeSequenceSharing.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SequenceSharing = null;
+            if (parseNode.GetChildNode("stopOnEmailReplied") is { } nullNodeStopOnEmailReplied && nullNodeStopOnEmailReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnEmailReplied = null;
+            if (parseNode.GetChildNode("stopOnLinkClicked") is { } nullNodeStopOnLinkClicked && nullNodeStopOnLinkClicked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnLinkClicked = null;
+            if (parseNode.GetChildNode("stopOnLinkClickedFilter") is { } nullNodeStopOnLinkClickedFilter && nullNodeStopOnLinkClickedFilter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnLinkClickedFilter = null;
+            if (parseNode.GetChildNode("stopOnMeetingBooked") is { } nullNodeStopOnMeetingBooked && nullNodeStopOnMeetingBooked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnMeetingBooked = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Automatically detect lead interest</summary>
-        public bool? AutoLeadInterest { get; set; }
+        public bool? AutoLeadInterest { get => _explicitNullValueAutoLeadInterest; set { _explicitNullValueAutoLeadInterest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoLeadInterest"); else _explicitNullProperties?.Remove("autoLeadInterest"); } }
+        private bool? _explicitNullValueAutoLeadInterest = default!;
         /// <summary>Disable out-of-office detection</summary>
-        public bool? DisableOutOfOffice { get; set; }
+        public bool? DisableOutOfOffice { get => _explicitNullValueDisableOutOfOffice; set { _explicitNullValueDisableOutOfOffice = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableOutOfOffice"); else _explicitNullProperties?.Remove("disableOutOfOffice"); } }
+        private bool? _explicitNullValueDisableOutOfOffice = default!;
         /// <summary>Disable tracking of link clicks</summary>
-        public bool? DisableTrackClick { get; set; }
+        public bool? DisableTrackClick { get => _explicitNullValueDisableTrackClick; set { _explicitNullValueDisableTrackClick = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackClick"); else _explicitNullProperties?.Remove("disableTrackClick"); } }
+        private bool? _explicitNullValueDisableTrackClick = default!;
         /// <summary>Disable tracking of email opens</summary>
-        public bool? DisableTrackOpen { get; set; }
+        public bool? DisableTrackOpen { get => _explicitNullValueDisableTrackOpen; set { _explicitNullValueDisableTrackOpen = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackOpen"); else _explicitNullProperties?.Remove("disableTrackOpen"); } }
+        private bool? _explicitNullValueDisableTrackOpen = default!;
         /// <summary>Disable tracking of email replies</summary>
-        public bool? DisableTrackReply { get; set; }
+        public bool? DisableTrackReply { get => _explicitNullValueDisableTrackReply; set { _explicitNullValueDisableTrackReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackReply"); else _explicitNullProperties?.Remove("disableTrackReply"); } }
+        private bool? _explicitNullValueDisableTrackReply = default!;
         /// <summary>Pause leads based on interest</summary>
-        public bool? LeadsPausedByInterest { get; set; }
+        public bool? LeadsPausedByInterest { get => _explicitNullValueLeadsPausedByInterest; set { _explicitNullValueLeadsPausedByInterest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadsPausedByInterest"); else _explicitNullProperties?.Remove("leadsPausedByInterest"); } }
+        private bool? _explicitNullValueLeadsPausedByInterest = default!;
         /// <summary>The campaign name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>Create an opportunity when a lead clicks a link</summary>
-        public bool? OpportunityClicked { get; set; }
+        public bool? OpportunityClicked { get => _explicitNullValueOpportunityClicked; set { _explicitNullValueOpportunityClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opportunityClicked"); else _explicitNullProperties?.Remove("opportunityClicked"); } }
+        private bool? _explicitNullValueOpportunityClicked = default!;
         /// <summary>Create an opportunity when a lead replies</summary>
-        public bool? OpportunityReplied { get; set; }
+        public bool? OpportunityReplied { get => _explicitNullValueOpportunityReplied; set { _explicitNullValueOpportunityReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opportunityReplied"); else _explicitNullProperties?.Remove("opportunityReplied"); } }
+        private bool? _explicitNullValueOpportunityReplied = default!;
         /// <summary>Configured senders for the campaign. Only present when sendUserIds was provided in the request. Senders that lack capabilities for any campaign sending channel are excluded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItem>? SendUsers { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItem>? SendUsers { get => _explicitNullValueSendUsers; set { _explicitNullValueSendUsers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUsers"); else _explicitNullProperties?.Remove("sendUsers"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItem>? _explicitNullValueSendUsers = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItem> SendUsers { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItem> SendUsers { get => _explicitNullValueSendUsers; set { _explicitNullValueSendUsers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUsers"); else _explicitNullProperties?.Remove("sendUsers"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200ResponseSendUsersItem> _explicitNullValueSendUsers = default!;
 #endif
         /// <summary>Enable sequence sharing for the campaign</summary>
-        public bool? SequenceSharing { get; set; }
+        public bool? SequenceSharing { get => _explicitNullValueSequenceSharing; set { _explicitNullValueSequenceSharing = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sequenceSharing"); else _explicitNullProperties?.Remove("sequenceSharing"); } }
+        private bool? _explicitNullValueSequenceSharing = default!;
         /// <summary>Stop the campaign when a lead replies by email</summary>
-        public bool? StopOnEmailReplied { get; set; }
+        public bool? StopOnEmailReplied { get => _explicitNullValueStopOnEmailReplied; set { _explicitNullValueStopOnEmailReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnEmailReplied"); else _explicitNullProperties?.Remove("stopOnEmailReplied"); } }
+        private bool? _explicitNullValueStopOnEmailReplied = default!;
         /// <summary>Stop the campaign when a link is clicked</summary>
-        public bool? StopOnLinkClicked { get; set; }
+        public bool? StopOnLinkClicked { get => _explicitNullValueStopOnLinkClicked; set { _explicitNullValueStopOnLinkClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClicked"); else _explicitNullProperties?.Remove("stopOnLinkClicked"); } }
+        private bool? _explicitNullValueStopOnLinkClicked = default!;
         /// <summary>Filter for which link clicks should stop the campaign</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StopOnLinkClickedFilter { get; set; }
+        public string? StopOnLinkClickedFilter { get => _explicitNullValueStopOnLinkClickedFilter; set { _explicitNullValueStopOnLinkClickedFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClickedFilter"); else _explicitNullProperties?.Remove("stopOnLinkClickedFilter"); } }
+        private string? _explicitNullValueStopOnLinkClickedFilter = default!;
 #nullable restore
 #else
-        public string StopOnLinkClickedFilter { get; set; }
+        public string StopOnLinkClickedFilter { get => _explicitNullValueStopOnLinkClickedFilter; set { _explicitNullValueStopOnLinkClickedFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClickedFilter"); else _explicitNullProperties?.Remove("stopOnLinkClickedFilter"); } }
+        private string _explicitNullValueStopOnLinkClickedFilter = default!;
 #endif
         /// <summary>Stop the campaign when a meeting is booked</summary>
-        public bool? StopOnMeetingBooked { get; set; }
+        public bool? StopOnMeetingBooked { get => _explicitNullValueStopOnMeetingBooked; set { _explicitNullValueStopOnMeetingBooked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnMeetingBooked"); else _explicitNullProperties?.Remove("stopOnMeetingBooked"); } }
+        private bool? _explicitNullValueStopOnMeetingBooked = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200Response"/> and sets the default values.
         /// </summary>
@@ -77,7 +117,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200Response();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignId200Response(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -126,6 +166,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("stopOnLinkClicked", StopOnLinkClicked);
             writer.WriteStringValue("stopOnLinkClickedFilter", StopOnLinkClickedFilter);
             writer.WriteBoolValue("stopOnMeetingBooked", StopOnMeetingBooked);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

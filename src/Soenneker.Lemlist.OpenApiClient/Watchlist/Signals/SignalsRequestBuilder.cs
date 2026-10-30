@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.Signals
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFetchSignalsResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFetchSignalsResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFetchSignalsResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFetchSignalsResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Bulk-set the status of one or several signals to handled or ignored.
@@ -69,7 +69,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.Signals
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiUpdateSignalStatusResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiUpdateSignalStatusResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiUpdateSignalStatusResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiUpdateSignalStatusResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Signal Agent signals

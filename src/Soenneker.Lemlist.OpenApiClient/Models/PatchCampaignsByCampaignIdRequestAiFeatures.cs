@@ -12,27 +12,42 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestAiFeatures : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("onInterestedReply") is { } nullNodeOnInterestedReply && nullNodeOnInterestedReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OnInterestedReply = null;
+            if (parseNode.GetChildNode("onNotInterestedReply") is { } nullNodeOnNotInterestedReply && nullNodeOnNotInterestedReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OnNotInterestedReply = null;
+            if (parseNode.GetChildNode("scoreReplies") is { } nullNodeScoreReplies && nullNodeScoreReplies.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScoreReplies = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>AI action when a reply is detected as INTERESTED.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply? OnInterestedReply { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply? OnInterestedReply { get => _explicitNullValueOnInterestedReply; set { _explicitNullValueOnInterestedReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onInterestedReply"); else _explicitNullProperties?.Remove("onInterestedReply"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply? _explicitNullValueOnInterestedReply = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply OnInterestedReply { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply OnInterestedReply { get => _explicitNullValueOnInterestedReply; set { _explicitNullValueOnInterestedReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onInterestedReply"); else _explicitNullProperties?.Remove("onInterestedReply"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply _explicitNullValueOnInterestedReply = default!;
 #endif
         /// <summary>AI action when a reply is detected as NOT interested.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply? OnNotInterestedReply { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply? OnNotInterestedReply { get => _explicitNullValueOnNotInterestedReply; set { _explicitNullValueOnNotInterestedReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onNotInterestedReply"); else _explicitNullProperties?.Remove("onNotInterestedReply"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply? _explicitNullValueOnNotInterestedReply = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply OnNotInterestedReply { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply OnNotInterestedReply { get => _explicitNullValueOnNotInterestedReply; set { _explicitNullValueOnNotInterestedReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onNotInterestedReply"); else _explicitNullProperties?.Remove("onNotInterestedReply"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply _explicitNullValueOnNotInterestedReply = default!;
 #endif
         /// <summary>Enable AI reply scoring for this campaign.</summary>
-        public bool? ScoreReplies { get; set; }
+        public bool? ScoreReplies { get => _explicitNullValueScoreReplies; set { _explicitNullValueScoreReplies = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scoreReplies"); else _explicitNullProperties?.Remove("scoreReplies"); } }
+        private bool? _explicitNullValueScoreReplies = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures"/> and sets the default values.
         /// </summary>
@@ -48,7 +63,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -73,6 +88,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply>("onInterestedReply", OnInterestedReply);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnNotInterestedReply>("onNotInterestedReply", OnNotInterestedReply);
             writer.WriteBoolValue("scoreReplies", ScoreReplies);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

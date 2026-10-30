@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.P
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization409Response.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization422Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -90,6 +92,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.Steps.Item.P
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization409Response.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalization422Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.StepPersonalization>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.StepPersonalization.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

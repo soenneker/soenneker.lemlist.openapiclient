@@ -59,6 +59,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Crm.Create
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsCrmCreate400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsCrmCreate403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsCrmCreate404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsCrmCreate200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsCrmCreate200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

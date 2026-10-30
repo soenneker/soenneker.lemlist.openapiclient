@@ -12,59 +12,91 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WatchListSchema : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("emoji") is { } nullNodeEmoji && nullNodeEmoji.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Emoji = null;
+            if (parseNode.GetChildNode("entity") is { } nullNodeEntity && nullNodeEntity.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Entity = null;
+            if (parseNode.GetChildNode("filters") is { } nullNodeFilters && nullNodeFilters.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Filters = null;
+            if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("segmentType") is { } nullNodeSegmentType && nullNodeSegmentType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SegmentType = null;
+            if (parseNode.GetChildNode("signalOpportunityTemplate") is { } nullNodeSignalOpportunityTemplate && nullNodeSignalOpportunityTemplate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignalOpportunityTemplate = null;
+            if (parseNode.GetChildNode("signalProcessingType") is { } nullNodeSignalProcessingType && nullNodeSignalProcessingType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignalProcessingType = null;
+            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Emoji shown next to the agent name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Emoji { get; set; }
+        public string? Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        private string? _explicitNullValueEmoji = default!;
 #nullable restore
 #else
-        public string Emoji { get; set; }
+        public string Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        private string _explicitNullValueEmoji = default!;
 #endif
         /// <summary>Entity kind the agent tracks</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaEntity? Entity { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaEntity? Entity { get => _explicitNullValueEntity; set { _explicitNullValueEntity = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("entity"); else _explicitNullProperties?.Remove("entity"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaEntity? _explicitNullValueEntity = default!;
         /// <summary>Filters narrowing which entities/events are tracked</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>? Filters { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>? Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter>? _explicitNullValueFilters = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter> Filters { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter> Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListFilter> _explicitNullValueFilters = default!;
 #endif
         /// <summary>Unique Signal Agent identifier</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
+        private string _explicitNullValueId = default!;
 #endif
         /// <summary>Display name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>How the monitored entities are sourced</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSegmentType? SegmentType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSegmentType? SegmentType { get => _explicitNullValueSegmentType; set { _explicitNullValueSegmentType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("segmentType"); else _explicitNullProperties?.Remove("segmentType"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSegmentType? _explicitNullValueSegmentType = default!;
         /// <summary>Task/opportunity template applied to each signal when signalProcessingType is create_opportunity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalOpportunityTemplate? SignalOpportunityTemplate { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalOpportunityTemplate? SignalOpportunityTemplate { get => _explicitNullValueSignalOpportunityTemplate; set { _explicitNullValueSignalOpportunityTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalOpportunityTemplate"); else _explicitNullProperties?.Remove("signalOpportunityTemplate"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalOpportunityTemplate? _explicitNullValueSignalOpportunityTemplate = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalOpportunityTemplate SignalOpportunityTemplate { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalOpportunityTemplate SignalOpportunityTemplate { get => _explicitNullValueSignalOpportunityTemplate; set { _explicitNullValueSignalOpportunityTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalOpportunityTemplate"); else _explicitNullProperties?.Remove("signalOpportunityTemplate"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalOpportunityTemplate _explicitNullValueSignalOpportunityTemplate = default!;
 #endif
         /// <summary>How detected signals are processed</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalProcessingType? SignalProcessingType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalProcessingType? SignalProcessingType { get => _explicitNullValueSignalProcessingType; set { _explicitNullValueSignalProcessingType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signalProcessingType"); else _explicitNullProperties?.Remove("signalProcessingType"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalProcessingType? _explicitNullValueSignalProcessingType = default!;
         /// <summary>Lifecycle status</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaStatus? Status { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaStatus? _explicitNullValueStatus = default!;
         /// <summary>Signal type monitored by this Signal Agent</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaType? Type { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaType? _explicitNullValueType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchema"/> and sets the default values.
         /// </summary>
@@ -80,7 +112,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchema CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchema();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchema(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -119,6 +151,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaSignalProcessingType>("signalProcessingType", SignalProcessingType);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaStatus>("status", Status);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListSchemaType>("type", Type);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

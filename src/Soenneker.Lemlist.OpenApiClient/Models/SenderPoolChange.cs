@@ -12,24 +12,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SenderPoolChange : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("disabledChannelTypes") is { } nullNodeDisabledChannelTypes && nullNodeDisabledChannelTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisabledChannelTypes = null;
+            if (parseNode.GetChildNode("enabledChannelTypes") is { } nullNodeEnabledChannelTypes && nullNodeEnabledChannelTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnabledChannelTypes = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The channel types with an account that leaves the pool, in alphabetical order</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem?>? DisabledChannelTypes { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem?>? DisabledChannelTypes { get => _explicitNullValueDisabledChannelTypes; set { _explicitNullValueDisabledChannelTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disabledChannelTypes"); else _explicitNullProperties?.Remove("disabledChannelTypes"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem?>? _explicitNullValueDisabledChannelTypes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem?> DisabledChannelTypes { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem?> DisabledChannelTypes { get => _explicitNullValueDisabledChannelTypes; set { _explicitNullValueDisabledChannelTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disabledChannelTypes"); else _explicitNullProperties?.Remove("disabledChannelTypes"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem?> _explicitNullValueDisabledChannelTypes = default!;
 #endif
         /// <summary>The channel types with an account that enters the pool, in alphabetical order</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem?>? EnabledChannelTypes { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem?>? EnabledChannelTypes { get => _explicitNullValueEnabledChannelTypes; set { _explicitNullValueEnabledChannelTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabledChannelTypes"); else _explicitNullProperties?.Remove("enabledChannelTypes"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem?>? _explicitNullValueEnabledChannelTypes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem?> EnabledChannelTypes { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem?> EnabledChannelTypes { get => _explicitNullValueEnabledChannelTypes; set { _explicitNullValueEnabledChannelTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabledChannelTypes"); else _explicitNullProperties?.Remove("enabledChannelTypes"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem?> _explicitNullValueEnabledChannelTypes = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange"/> and sets the default values.
@@ -46,7 +59,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChange(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -69,6 +82,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeDisabledChannelTypesItem>("disabledChannelTypes", DisabledChannelTypes);
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolChangeEnabledChannelTypesItem>("enabledChannelTypes", EnabledChannelTypes);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

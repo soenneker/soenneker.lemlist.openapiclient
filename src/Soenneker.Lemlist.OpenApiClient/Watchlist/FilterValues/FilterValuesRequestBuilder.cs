@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFilterValuesResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFilterValuesResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFilterValuesResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiFilterValuesResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Autocomplete filter values
@@ -85,7 +85,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class FilterValuesRequestBuilderGetQueryParameters 
         {
-            /// <summary>Filter to resolve values for</summary>
+            /// <summary>Filter to resolve values for. `linkedinProfileViewsUserIds` takes no `query` and resolves to the ids of the team members whose LinkedIn account is connected to lemlist, the only ids a `linkedinProfileViews` Signal Agent accepts.</summary>
             [QueryParameter("filterId")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetWatchlistFilterValuesFilterIdParameter? FilterId { get; set; }
             /// <summary>Search text (required for autocomplete filters). 1-100 characters.</summary>

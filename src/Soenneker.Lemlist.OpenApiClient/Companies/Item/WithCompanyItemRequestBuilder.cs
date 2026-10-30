@@ -63,6 +63,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -88,6 +90,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

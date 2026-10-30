@@ -11,51 +11,77 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequest : IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("altMessage") is { } nullNodeAltMessage && nullNodeAltMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessage = null;
+            if (parseNode.GetChildNode("altMessagePremium") is { } nullNodeAltMessagePremium && nullNodeAltMessagePremium.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AltMessagePremium = null;
+            if (parseNode.GetChildNode("cc") is { } nullNodeCc && nullNodeCc.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Cc = null;
+            if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
+            if (parseNode.GetChildNode("plainText") is { } nullNodePlainText && nullNodePlainText.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PlainText = null;
+            if (parseNode.GetChildNode("subject") is { } nullNodeSubject && nullNodeSubject.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subject = null;
+            if (parseNode.GetChildNode("variant") is { } nullNodeVariant && nullNodeVariant.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variant = null;
+        }
+
         /// <summary>LinkedIn invitation and LinkedIn message steps only. The connection-request note, 300 characters at most on an invitation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AltMessage { get; set; }
+        public string? AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
+        private string? _explicitNullValueAltMessage = default!;
 #nullable restore
 #else
-        public string AltMessage { get; set; }
+        public string AltMessage { get => _explicitNullValueAltMessage; set { _explicitNullValueAltMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessage"); else _explicitNullProperties?.Remove("altMessage"); } }
+        private string _explicitNullValueAltMessage = default!;
 #endif
         /// <summary>LinkedIn message steps only. The note sent from a premium account.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AltMessagePremium { get; set; }
+        public string? AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
+        private string? _explicitNullValueAltMessagePremium = default!;
 #nullable restore
 #else
-        public string AltMessagePremium { get; set; }
+        public string AltMessagePremium { get => _explicitNullValueAltMessagePremium; set { _explicitNullValueAltMessagePremium = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("altMessagePremium"); else _explicitNullProperties?.Remove("altMessagePremium"); } }
+        private string _explicitNullValueAltMessagePremium = default!;
 #endif
         /// <summary>Email steps only. An empty array removes the cc for this lead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Cc { get; set; }
+        public List<string>? Cc { get => _explicitNullValueCc; set { _explicitNullValueCc = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cc"); else _explicitNullProperties?.Remove("cc"); } }
+        private List<string>? _explicitNullValueCc = default!;
 #nullable restore
 #else
-        public List<string> Cc { get; set; }
+        public List<string> Cc { get => _explicitNullValueCc; set { _explicitNullValueCc = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cc"); else _explicitNullProperties?.Remove("cc"); } }
+        private List<string> _explicitNullValueCc = default!;
 #endif
         /// <summary>The message body. HTML on email steps; plain text on LinkedIn, SMS and WhatsApp steps (HTML is converted to text). Cannot be blank, except on a LinkedIn invitation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        private string? _explicitNullValueMessage = default!;
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
+        private string _explicitNullValueMessage = default!;
 #endif
         /// <summary>Email steps only. Send this lead a plain-text email.</summary>
-        public bool? PlainText { get; set; }
+        public bool? PlainText { get => _explicitNullValuePlainText; set { _explicitNullValuePlainText = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("plainText"); else _explicitNullProperties?.Remove("plainText"); } }
+        private bool? _explicitNullValuePlainText = default!;
         /// <summary>Email steps only. On a follow-up email, a non-empty subject starts a new thread; omit it to stay in the thread.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subject { get; set; }
+        public string? Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        private string? _explicitNullValueSubject = default!;
 #nullable restore
 #else
-        public string Subject { get; set; }
+        public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        private string _explicitNullValueSubject = default!;
 #endif
         /// <summary>A/B variant to write on. Defaults to the variant the lead is already on: the winner once one is picked, else the variant already personalized, else the variant of the lead&apos;s scheduled task, else A.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequestVariant? Variant { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequestVariant? Variant { get => _explicitNullValueVariant; set { _explicitNullValueVariant = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variant"); else _explicitNullProperties?.Remove("variant"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequestVariant? _explicitNullValueVariant = default!;
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -64,7 +90,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -96,7 +122,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("message", Message);
             writer.WriteBoolValue("plainText", PlainText);
             writer.WriteStringValue("subject", Subject);
-            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequestVariant>("variant", Variant);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PutCampaignsByCampaignIdLeadsByLeadIdStepsByStepIdPersonalizationRequestVariant>("variant", Variant);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            
         }
     }
 }

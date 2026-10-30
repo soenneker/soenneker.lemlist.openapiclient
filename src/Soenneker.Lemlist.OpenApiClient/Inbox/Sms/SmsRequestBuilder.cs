@@ -57,6 +57,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox.Sms
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxSms400Response.CreateFromDiscriminatorValue },
                 { "402", global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxSms402Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxSms200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxSms200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

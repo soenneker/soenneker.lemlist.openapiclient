@@ -61,6 +61,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.CrmLists
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists404Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists409Response.CreateFromDiscriminatorValue },
                 { "429", global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistCrmLists429Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.WatchListApiWatchListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

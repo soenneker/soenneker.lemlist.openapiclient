@@ -11,16 +11,26 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class GetInboxByContactIdDrafts200Response : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("drafts") is { } nullNodeDrafts && nullNodeDrafts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Drafts = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The drafts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>? Drafts { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>? Drafts { get => _explicitNullValueDrafts; set { _explicitNullValueDrafts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("drafts"); else _explicitNullProperties?.Remove("drafts"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>? _explicitNullValueDrafts = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem> Drafts { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem> Drafts { get => _explicitNullValueDrafts; set { _explicitNullValueDrafts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("drafts"); else _explicitNullProperties?.Remove("drafts"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem> _explicitNullValueDrafts = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200Response"/> and sets the default values.
@@ -37,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200Response();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200Response(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -58,6 +68,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDrafts200ResponseDraftsItem>("drafts", Drafts);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

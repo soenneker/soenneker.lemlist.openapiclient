@@ -53,6 +53,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsByIdOrEmailNotes404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsByIdOrEmailNotes200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsByIdOrEmailNotes200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -80,6 +82,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsByIdOrEmailNotes400Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsByIdOrEmailNotes404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ContactNote>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ContactNote.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

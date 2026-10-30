@@ -3,22 +3,21 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
+    /// <summary>The CRM object of the property</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public enum GetV2CampaignsByCampaignIdExportLeads200ResponseItemEmailStatus
-    #pragma warning restore CS1591
+    public enum PostFields201ResponseDataCrmPicklistObjectType
     {
-        [EnumMember(Value = "deliverable")]
+        [EnumMember(Value = "contacts")]
         #pragma warning disable CS1591
-        Deliverable,
+        Contacts,
         #pragma warning restore CS1591
-        [EnumMember(Value = "risky")]
+        [EnumMember(Value = "leads")]
         #pragma warning disable CS1591
-        Risky,
+        Leads,
         #pragma warning restore CS1591
-        [EnumMember(Value = "undeliverable")]
+        [EnumMember(Value = "companies")]
         #pragma warning disable CS1591
-        Undeliverable,
+        Companies,
         #pragma warning restore CS1591
     }
 }

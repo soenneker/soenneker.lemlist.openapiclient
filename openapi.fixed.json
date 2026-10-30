@@ -3092,11 +3092,19 @@
             "content": {
               "text/csv": {
                 "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/GetV2CampaignsByCampaignIdExportLeads200CsvResponseSchema"
                 }
               },
               "application/json": {
                 "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/GetV2CampaignsByCampaignIdExportLeads200ResponseSchema"
                 }
               }
@@ -3176,11 +3184,19 @@
             "content": {
               "text/csv": {
                 "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/GetCampaignsByCampaignIdExportLeads200CsvResponseSchema"
                 }
               },
               "application/json": {
                 "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/GetCampaignsByCampaignIdExportLeads200ResponseSchema"
                 }
               }
@@ -14129,7 +14145,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostContacts200Response"
+                  "$ref": "#/components/schemas/PostContactsSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -14155,6 +14171,9 @@
                     "updated": true,
                     "companyLinked": false
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostContacts200Response"
                 }
               }
             }
@@ -14164,7 +14183,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostContacts201Response"
+                  "$ref": "#/components/schemas/PostContactsSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -14191,6 +14210,9 @@
                     "companyLinked": true,
                     "companyId": "cpn_gG7PsmZFpEAnpMCHO"
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostContacts201Response"
                 }
               }
             }
@@ -16128,7 +16150,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostCompanies200Response"
+                  "$ref": "#/components/schemas/PostCompaniesSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -16148,6 +16170,9 @@
                     "created": false,
                     "updated": true
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostCompanies200Response"
                 }
               }
             }
@@ -16157,7 +16182,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostCompanies201Response"
+                  "$ref": "#/components/schemas/PostCompaniesSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -16177,6 +16202,9 @@
                     "createdBy": "usr_ahfFktBBHUIxbVG5P",
                     "created": true
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostCompanies201Response"
                 }
               }
             }
@@ -17876,7 +17904,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostCalls201Response"
+                  "$ref": "#/components/schemas/PostCallsSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -17902,6 +17930,9 @@
                     "hasTranscript": true,
                     "createdAt": "2026-10-21T09:30:00.000Z"
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostCalls201Response"
                 }
               }
             }
@@ -17911,6 +17942,9 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/PostCallsSuccessResponse"
+                },
+                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/PostCalls200Response"
                 }
               }
@@ -19661,13 +19695,18 @@
             "content": {
               "text/csv": {
                 "schema": {
-                  "description": "Fallback media schema"
+                  "type": "string",
+                  "format": "binary"
                 },
-                "example": "_id,value,source,createdAt\nuns_ZmzP7K61EMIT9fBSj,john@example.com,user,2023-06-12T10:45:21.367Z\nuns_0X5cBxEldVyOIz0VQ,@example.org,api,2023-07-21T09:14:25.521Z"
+                "example": "_id,value,source,createdAt\nuns_ZmzP7K61EMIT9fBSj,john@example.com,user,2023-06-12T10:45:21.367Z\nuns_0X5cBxEldVyOIz0VQ,@example.org,api,2023-07-21T09:14:25.521Z",
+                "x-client-original-success-schema": {
+                  "description": "Fallback media schema"
+                }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsVariables200ResponseSchema"
+                  "type": "string",
+                  "format": "binary"
                 },
                 "example": [
                   {
@@ -19682,7 +19721,10 @@
                     "source": "api",
                     "createdAt": "2023-07-21T09:14:25.521Z"
                   }
-                ]
+                ],
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsVariables200ResponseSchema"
+                }
               }
             }
           },
@@ -19731,13 +19773,18 @@
             "content": {
               "text/csv": {
                 "schema": {
-                  "description": "Fallback media schema"
+                  "type": "string",
+                  "format": "binary"
                 },
-                "example": "_id,doNotContact\ncon_aB1cD2eF3gH4iJ5kL,true\ncon_mN6oP7qR8sT9uV0wX,false"
+                "example": "_id,doNotContact\ncon_aB1cD2eF3gH4iJ5kL,true\ncon_mN6oP7qR8sT9uV0wX,false",
+                "x-client-original-success-schema": {
+                  "description": "Fallback media schema"
+                }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsContacts200ResponseSchema"
+                  "type": "string",
+                  "format": "binary"
                 },
                 "example": [
                   {
@@ -19748,7 +19795,10 @@
                     "_id": "con_mN6oP7qR8sT9uV0wX",
                     "doNotContact": false
                   }
-                ]
+                ],
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsContacts200ResponseSchema"
+                }
               }
             }
           },
@@ -22431,7 +22481,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostFields200Response"
+                  "$ref": "#/components/schemas/PostFieldsSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -22452,6 +22502,9 @@
                       "options"
                     ]
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostFields200Response"
                 }
               }
             }
@@ -22461,7 +22514,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostFields201Response"
+                  "$ref": "#/components/schemas/PostFieldsSuccessResponse"
                 },
                 "example": {
                   "success": true,
@@ -22475,6 +22528,9 @@
                     "updated": false,
                     "changes": []
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/PostFields201Response"
                 }
               }
             }
@@ -23283,7 +23339,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix.",
+            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -23431,7 +23487,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body or filters",
+            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -23905,6 +23961,74 @@
         }
       }
     },
+    "/watchlist/linkedin-profile-views/members": {
+      "get": {
+        "tags": [
+          "Signal Agents"
+        ],
+        "summary": "List LinkedIn profile views members",
+        "description": "Lists the members of your team whose LinkedIn profile views a \u0060linkedinProfileViews\u0060 Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their \u0060_id\u0060 are the only values the \u0060linkedinProfileViewsUserIds\u0060 filter accepts; a member missing here must connect their LinkedIn account in lemlist first.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the \u0060linkedinProfileViews\u0060 beta is enabled for your team.",
+        "operationId": "ListLinkedinProfileViewsMembers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkedinProfileViewsMembersResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "usr_ExAmPlE1234567890a",
+                      "firstName": "Mia",
+                      "lastName": "Member",
+                      "email": "mia@acme.com"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "Unauthorized"
+              }
+            }
+          },
+          "403": {
+            "description": "The linkedinProfileViews beta is not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListLinkedinProfileViewsMembers403Response"
+                },
+                "example": {
+                  "error": "Beta is not enabled"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "Internal server error"
+              }
+            }
+          }
+        }
+      }
+    },
     "/watchlist/filter-values": {
       "get": {
         "tags": [
@@ -23916,7 +24040,7 @@
           {
             "name": "filterId",
             "in": "query",
-            "description": "Filter to resolve values for",
+            "description": "Filter to resolve values for. \u0060linkedinProfileViewsUserIds\u0060 takes no \u0060query\u0060 and resolves to the ids of the team members whose LinkedIn account is connected to lemlist, the only ids a \u0060linkedinProfileViews\u0060 Signal Agent accepts.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/GetWatchlistFilterValuesFilterIdParameter"
@@ -26181,6 +26305,640 @@
           "example": "default_email"
         }
       ]
+    },
+    "/domains-core/search": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Search Domains",
+        "description": "Checks whether a domain can be bought through lemlist, with its price and the providers that can register it.",
+        "operationId": "SearchDomains",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchDomainsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Availability of the requested name, then of the variants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchDomains200Response"
+                },
+                "example": {
+                  "domains": [
+                    {
+                      "domain": "getacme.com",
+                      "available": true,
+                      "price": 15,
+                      "currency": "USD",
+                      "providers": [
+                        {
+                          "name": "google",
+                          "price": 15
+                        },
+                        {
+                          "name": "m365",
+                          "price": 15
+                        },
+                        {
+                          "name": "infraforge",
+                          "price": 15
+                        }
+                      ]
+                    },
+                    {
+                      "domain": "getacme.net",
+                      "available": false,
+                      "price": 0,
+                      "providers": []
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060base\u0060 is not a domain name, or the API key has no user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Match error: Failed Match.Where validation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the Manage domains permission",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "You do not have permission to perform this action"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains-core/team-domains": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "List Domains",
+        "description": "Lists the team\u0027s domains bought or being transferred through lemlist, canceled ones excluded.",
+        "operationId": "ListDomains",
+        "responses": {
+          "200": {
+            "description": "The team\u0027s domains",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDomains200Response"
+                },
+                "example": {
+                  "domains": [
+                    {
+                      "_id": "dom_Kd8Wq2Lr5Tx9Mz3Pv",
+                      "domain": "getacme.com",
+                      "registrar": "google",
+                      "status": "active",
+                      "createdAt": "2026-01-15T10:30:00.000Z",
+                      "emailCount": 2
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains-core/purchase": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Purchase Domain",
+        "description": "Orders a domain, or a transfer of a domain you own elsewhere, and bills the team. The domain is then set up in the background.",
+        "operationId": "PurchaseDomain",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseDomainRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Domain ordered, or already ordered by the team (\u0060alreadyOwned: true\u0060, nothing billed)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PurchaseDomain200Response"
+                },
+                "example": {
+                  "domain": {
+                    "_id": "dom_Kd8Wq2Lr5Tx9Mz3Pv",
+                    "domain": "getacme.com",
+                    "registrar": "google",
+                    "status": "ordered",
+                    "createdAt": "2026-01-15T10:30:00.000Z",
+                    "emailCount": 0
+                  },
+                  "alreadyOwned": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request or contact: malformed field, missing or incomplete billing contact, address the registrar cannot verify, contact refused by the registrar, missing SIREN/SIRET for a \u0060.fr\u0060/\u0060.be\u0060 domain, registrant country not accepted by the extension, Google Workspace unavailable in the contact country, transfer without \u0060authCode\u0060 or with another provider than \u0060google\u0060, or the API key has no user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "A domain billing contact is required before purchasing. Provide the billingContact field, then retry."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the Manage domains permission, or the team cannot buy domains",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "You do not have permission to perform this action"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The domain cannot be ordered: taken, already ordered through lemlist (including a past order that failed), its extension cannot be transferred, no transfer price, or it already has a Google Workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "This domain was already purchased or is not available anymore."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains-core/{domainId}/mailboxes": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Order Mailboxes",
+        "description": "Orders mailboxes on one of the team\u0027s domains and bills the team. The mailboxes are created in the background.",
+        "operationId": "OrderDomainMailboxes",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The domain, from List Domains or Purchase Domain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "dom_Kd8Wq2Lr5Tx9Mz3Pv"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderDomainMailboxesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Mailboxes ordered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDomainMailboxes200Response"
+                },
+                "example": {
+                  "added": 2,
+                  "mailboxes": [
+                    {
+                      "_id": "dem_Rb4Nc7Fy1Hs6Jq0Wt",
+                      "email": "john@getacme.com",
+                      "assignToUser": "usr_Ye6Ta3Uo8Ic1Mn7Bh"
+                    },
+                    {
+                      "_id": "dem_Zp2Gx8Vm4Lk9Ds5Qe",
+                      "email": "jane@getacme.com",
+                      "assignToUser": "usr_Wf3Kp9Rd2Nz6Xc4Lj"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed body, unknown \u0060domainId\u0060, or the API key has no user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Match error: Expected object, got undefined"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the Manage domains permission, or the team cannot buy mailboxes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "You do not have permission to perform this action"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The order is refused, nothing billed: invalid or duplicate address, address already taken, assignee outside the team, canceled domain, nameservers not pointing to lemlist (Google), Google Workspace held elsewhere, reserved username or assignee without a last name (Microsoft 365), more than 10 SMTP mailboxes on the domain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Some emails are already taken"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The Google Workspace status could not be checked; retry later",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unable to verify your workspace status. Please try again in a moment."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains-core/mailboxes": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "List Domain Mailboxes",
+        "description": "Lists the mailboxes bought on the team\u0027s lemlist domains, newest first, canceled ones excluded.",
+        "operationId": "ListDomainMailboxes",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "Only the mailboxes of this domain",
+            "schema": {
+              "type": "string"
+            },
+            "example": "dom_Kd8Wq2Lr5Tx9Mz3Pv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The mailboxes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDomainMailboxes200Response"
+                },
+                "example": {
+                  "mailboxes": [
+                    {
+                      "_id": "dem_Rb4Nc7Fy1Hs6Jq0Wt",
+                      "email": "john@getacme.com",
+                      "domainId": "dom_Kd8Wq2Lr5Tx9Mz3Pv",
+                      "status": "active",
+                      "provider": "google",
+                      "assignedToUserId": "usr_Ye6Ta3Uo8Ic1Mn7Bh",
+                      "createdAt": "2026-01-15T10:31:00.000Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060domainId\u0060 is not a domain id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Match error: Failed Match.OneOf, Match.Maybe or Match.Optional validation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains-core/mailboxes/{mailboxId}": {
+      "patch": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Update Domain Mailbox",
+        "description": "Assigns a mailbox bought through lemlist to another team member.",
+        "operationId": "UpdateDomainMailbox",
+        "parameters": [
+          {
+            "name": "mailboxId",
+            "in": "path",
+            "description": "The mailbox, from List Domain Mailboxes or Order Mailboxes",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "dem_Rb4Nc7Fy1Hs6Jq0Wt"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDomainMailboxRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Mailbox updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDomainMailbox200Response"
+                },
+                "example": {
+                  "ok": true,
+                  "mailboxId": "dem_Rb4Nc7Fy1Hs6Jq0Wt",
+                  "applied": [
+                    "assignToUserId"
+                  ],
+                  "assignedToUserId": "usr_Wf3Kp9Rd2Nz6Xc4Lj"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No field to update, or malformed id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "At least one update field must be provided"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key user lacks the Manage domains permission, or the target user is not in the team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "User is not part of current team"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No mailbox with this id in the team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Mailbox not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Internal error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The mail provider refused the change; retry later",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorMessage"
+                },
+                "example": {
+                  "error": "Error while assigning mailbox to user. Please try again later."
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -30122,6 +30880,43 @@
           }
         }
       },
+      "LinkedinProfileViewsMember": {
+        "required": [
+          "_id"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User id, the value the \u0060linkedinProfileViewsUserIds\u0060 filter takes",
+            "example": "usr_ExAmPlE1234567890a"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Omitted when empty"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Omitted when empty"
+          },
+          "email": {
+            "type": "string",
+            "description": "Omitted when the member has no email"
+          }
+        }
+      },
+      "LinkedinProfileViewsMembersResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedinProfileViewsMember"
+            },
+            "description": "The team members whose LinkedIn account is connected to lemlist"
+          }
+        }
+      },
       "WatchListApiFilterValuesResponse": {
         "type": "object",
         "properties": {
@@ -30706,6 +31501,200 @@
           }
         },
         "description": "Error envelope returned by the enrichment waterfall endpoints."
+      },
+      "Domain": {
+        "required": [
+          "_id",
+          "domain",
+          "registrar",
+          "status",
+          "createdAt",
+          "emailCount"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique domain identifier",
+            "example": "dom_Kd8Wq2Lr5Tx9Mz3Pv"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Domain name, lowercase",
+            "example": "getacme.com"
+          },
+          "registrar": {
+            "$ref": "#/components/schemas/DomainRegistrar"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DomainStatus"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Order date",
+            "format": "date-time"
+          },
+          "emailCount": {
+            "type": "integer",
+            "description": "Number of mailboxes ordered on the domain",
+            "example": 0
+          }
+        },
+        "description": "A domain the team bought or is transferring through lemlist."
+      },
+      "DomainSearchResult": {
+        "required": [
+          "domain",
+          "available",
+          "providers"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "example": "getacme.com"
+          },
+          "available": {
+            "type": "boolean",
+            "description": "Whether the domain can be bought through lemlist"
+          },
+          "price": {
+            "type": "number",
+            "description": "Yearly price of the domain, renewal included at the same price. Mailboxes are billed separately.",
+            "example": 15
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency of the registrar quote",
+            "example": "USD"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainSearchResultProvidersItem"
+            },
+            "description": "Providers that can register the domain, with their price. Pass one of them as \u0060provider\u0060 to Purchase Domain. Empty when the domain is unavailable."
+          }
+        },
+        "description": "Availability of one domain name."
+      },
+      "DomainBillingContact": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "phone",
+          "name",
+          "line1",
+          "city",
+          "countryCode"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "Must not be an address on the domain being bought.",
+            "format": "email",
+            "example": "john@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "International format. The phone country must match a real number.",
+            "example": "\u002B15555550123"
+          },
+          "name": {
+            "type": "string",
+            "description": "Organization name",
+            "example": "Acme Inc"
+          },
+          "line1": {
+            "type": "string",
+            "description": "Street address",
+            "example": "1 Main Street"
+          },
+          "city": {
+            "type": "string",
+            "example": "Springfield"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Required for most countries",
+            "example": "12345"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country of the address",
+            "example": "US"
+          },
+          "state": {
+            "type": "string",
+            "description": "Required for US, CA, CH, IN, IT and AU: its name or ISO 3166-2 code (\u0060CA\u0060, \u0060US-CA\u0060).",
+            "example": "CA"
+          },
+          "companyIdentificationCode": {
+            "type": "string",
+            "description": "SIREN/SIRET. Required to register a \u0060.fr\u0060 or \u0060.be\u0060 domain with \u0060google\u0060 or \u0060m365\u0060."
+          },
+          "vatIdentificationCode": {
+            "type": "string",
+            "description": "VAT number, used for \u0060.fr\u0060 and \u0060.be\u0060 domains"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Registrant contact of the team, sent to the registrar. Stored on the team and reused for every later purchase; sending it again overwrites the stored one."
+      },
+      "DomainMailbox": {
+        "required": [
+          "_id",
+          "email",
+          "domainId",
+          "status",
+          "provider",
+          "assignedToUserId",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique mailbox identifier",
+            "example": "dem_Rb4Nc7Fy1Hs6Jq0Wt"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john@getacme.com"
+          },
+          "domainId": {
+            "type": "string",
+            "example": "dom_Kd8Wq2Lr5Tx9Mz3Pv"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DomainMailboxStatus"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/DomainMailboxProvider"
+          },
+          "assignedToUserId": {
+            "type": "string",
+            "description": "The team member who sends from this mailbox",
+            "nullable": true,
+            "example": "usr_Ye6Ta3Uo8Ic1Mn7Bh"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "A mailbox bought on a lemlist domain."
       },
       "StepAbTest": {
         "oneOf": [
@@ -32163,6 +33152,26 @@
             "type": "boolean",
             "description": "[warmIntros] Whether the introducer and the lead had the same function"
           },
+          "linkedinProfileViewsJobTitle": {
+            "type": "string",
+            "description": "[linkedinProfileViews] Job title of the viewer"
+          },
+          "linkedinProfileViewsHeadline": {
+            "type": "string",
+            "description": "[linkedinProfileViews] LinkedIn headline of the viewer"
+          },
+          "linkedinProfileViewsLocation": {
+            "type": "string",
+            "description": "[linkedinProfileViews] Location of the viewer"
+          },
+          "linkedinProfileViewsViewedMemberFirstName": {
+            "type": "string",
+            "description": "[linkedinProfileViews] First name of the team member whose profile was viewed"
+          },
+          "linkedinProfileViewsViewedMemberLastName": {
+            "type": "string",
+            "description": "[linkedinProfileViews] Last name of the team member whose profile was viewed"
+          },
           "acquisitionType": {
             "type": "string",
             "description": "[mergersAcquisitions] Acquisition type"
@@ -32512,6 +33521,18 @@
           }
         },
         "description": "The contact\u0027s resolved country (from its \u0060location\u0060, \u0060country\u0060 or company data), as ISO 3166-1 alpha-2 codes."
+      },
+      "DomainSearchResultProvidersItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/DomainSearchResultProvidersItemName"
+          },
+          "price": {
+            "type": "number",
+            "example": 15
+          }
+        }
       },
       "CrmIdLinkErrorEnvelopeErrorConflictingRecord": {
         "type": "object",
@@ -39770,6 +40791,14 @@
           }
         }
       },
+      "ListLinkedinProfileViewsMembers403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PostDeliverabilityAlertsRequest": {
         "required": [
           "widget",
@@ -40315,6 +41344,122 @@
             "type": "string"
           },
           "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchDomainsRequest": {
+        "required": [
+          "base"
+        ],
+        "type": "object",
+        "properties": {
+          "base": {
+            "type": "string",
+            "description": "A full domain name to check",
+            "example": "getacme.com"
+          },
+          "includeSuggestions": {
+            "type": "boolean",
+            "description": "Also check variants on \u0060.com\u0060, \u0060.net\u0060 and \u0060.ai\u0060 and with or without a \u0060get\u0060 prefix, up to 9 names in total",
+            "default": true
+          }
+        }
+      },
+      "PurchaseDomainRequest": {
+        "required": [
+          "domain"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain to buy or transfer",
+            "example": "getacme.com"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/PurchaseDomainRequestProvider"
+          },
+          "isTransfer": {
+            "type": "boolean",
+            "description": "Transfer a domain registered elsewhere instead of registering a new one",
+            "default": false
+          },
+          "authCode": {
+            "type": "string",
+            "description": "Transfer authorization code from the current registrar. Required when \u0060isTransfer\u0060 is \u0060true\u0060."
+          },
+          "dnsRecords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PurchaseDomainRequestDnsRecordsItem"
+            },
+            "description": "Transfer only: records to recreate on the zone once the transfer completes. Ignored for a registration."
+          },
+          "billingContact": {
+            "$ref": "#/components/schemas/DomainBillingContact"
+          }
+        }
+      },
+      "OrderDomainMailboxesRequest": {
+        "required": [
+          "emails"
+        ],
+        "type": "object",
+        "properties": {
+          "emails": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderDomainMailboxesRequestEmailsItem"
+            }
+          }
+        }
+      },
+      "OrderDomainMailboxes200Response": {
+        "type": "object",
+        "properties": {
+          "added": {
+            "type": "integer"
+          },
+          "mailboxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderDomainMailboxes200ResponseMailboxesItem"
+            }
+          }
+        }
+      },
+      "UpdateDomainMailboxRequest": {
+        "required": [
+          "assignToUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "assignToUserId": {
+            "type": "string",
+            "description": "Team member who will send from the mailbox",
+            "example": "usr_Wf3Kp9Rd2Nz6Xc4Lj"
+          }
+        }
+      },
+      "UpdateDomainMailbox200Response": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "mailboxId": {
+            "type": "string"
+          },
+          "applied": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Fields applied"
+          },
+          "assignedToUserId": {
             "type": "string"
           }
         }
@@ -40907,6 +42052,55 @@
           "total": {
             "type": "integer",
             "description": "Total number of alert configurations."
+          }
+        }
+      },
+      "SearchDomains200Response": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainSearchResult"
+            }
+          }
+        }
+      },
+      "ListDomains200Response": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Domain"
+            }
+          }
+        }
+      },
+      "PurchaseDomain200Response": {
+        "required": [
+          "domain",
+          "alreadyOwned"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "$ref": "#/components/schemas/Domain"
+          },
+          "alreadyOwned": {
+            "type": "boolean",
+            "description": "True when the team already had a live order for this domain: the call billed nothing and returns that order."
+          }
+        }
+      },
+      "ListDomainMailboxes200Response": {
+        "type": "object",
+        "properties": {
+          "mailboxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainMailbox"
+            }
           }
         }
       },
@@ -44445,6 +45639,76 @@
             "example": "ABS_CONTACT_SOURCING_TEAM_DAILY_CAP_REACHED"
           },
           "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PurchaseDomainRequestDnsRecordsItem": {
+        "required": [
+          "hostName",
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "hostName": {
+            "type": "string",
+            "example": "www"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PurchaseDomainRequestDnsRecordsItemType"
+          },
+          "value": {
+            "type": "string",
+            "example": "example.com"
+          },
+          "ttl": {
+            "type": "integer",
+            "example": 3600
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "OrderDomainMailboxesRequestEmailsItem": {
+        "required": [
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Local part of the address, lowercased: \u0060john\u0060 for \u0060john@getacme.com\u0060",
+            "example": "john"
+          },
+          "sendername": {
+            "type": "string",
+            "description": "Display name of an \u0060infraforge\u0060 (SMTP) mailbox. Google Workspace and Microsoft 365 mailboxes take the name of the assigned user.",
+            "example": "John Doe"
+          },
+          "assignToUser": {
+            "type": "string",
+            "description": "Team member who will send from the mailbox. Defaults to the API key user, so pass it for every mailbox when ordering for several people.",
+            "example": "usr_Ye6Ta3Uo8Ic1Mn7Bh"
+          },
+          "workspaceAdmin": {
+            "type": "boolean",
+            "description": "\u0060google\u0060 domains only: the mailbox that becomes the Google Workspace super admin. Only applies while the domain has no admin yet; without it, lemlist picks one of the ordered mailboxes."
+          }
+        }
+      },
+      "OrderDomainMailboxes200ResponseMailboxesItem": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "assignToUser": {
             "type": "string"
           }
         }
@@ -48158,7 +49422,8 @@
           "costCutting",
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
-          "githubStargazer"
+          "githubStargazer",
+          "linkedinProfileViews"
         ],
         "type": "string",
         "description": "Signal type",
@@ -48281,6 +49546,10 @@
             {
               "value": "githubStargazer",
               "name": "GithubStargazer"
+            },
+            {
+              "value": "linkedinProfileViews",
+              "name": "LinkedinProfileViews"
             }
           ]
         }
@@ -48347,7 +49616,8 @@
           "costCutting",
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
-          "githubStargazer"
+          "githubStargazer",
+          "linkedinProfileViews"
         ],
         "type": "string",
         "description": "Signal type monitored by this Signal Agent",
@@ -48470,6 +49740,10 @@
             {
               "value": "githubStargazer",
               "name": "GithubStargazer"
+            },
+            {
+              "value": "linkedinProfileViews",
+              "name": "LinkedinProfileViews"
             }
           ]
         }
@@ -48637,6 +49911,7 @@
           "fundraisingInvestors",
           "technologies",
           "detectionMode",
+          "technologyConfidence",
           "maDealTypes",
           "maMinAmount",
           "persona",
@@ -48647,7 +49922,8 @@
           "crmListIds",
           "minJobCount",
           "timeframe",
-          "githubRepoUrls"
+          "githubRepoUrls",
+          "linkedinProfileViewsUserIds"
         ],
         "type": "string",
         "description": "Filter identifier",
@@ -48768,6 +50044,10 @@
               "name": "DetectionMode"
             },
             {
+              "value": "technologyConfidence",
+              "name": "TechnologyConfidence"
+            },
+            {
               "value": "maDealTypes",
               "name": "MaDealTypes"
             },
@@ -48810,6 +50090,10 @@
             {
               "value": "githubRepoUrls",
               "name": "GithubRepoUrls"
+            },
+            {
+              "value": "linkedinProfileViewsUserIds",
+              "name": "LinkedinProfileViewsUserIds"
             }
           ]
         }
@@ -48844,7 +50128,8 @@
           "costCutting",
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
-          "githubStargazer"
+          "githubStargazer",
+          "linkedinProfileViews"
         ],
         "type": "string",
         "description": "Signal type",
@@ -48967,6 +50252,10 @@
             {
               "value": "githubStargazer",
               "name": "GithubStargazer"
+            },
+            {
+              "value": "linkedinProfileViews",
+              "name": "LinkedinProfileViews"
             }
           ]
         }
@@ -49118,7 +50407,8 @@
           "costCutting",
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
-          "githubStargazer"
+          "githubStargazer",
+          "linkedinProfileViews"
         ],
         "type": "string",
         "description": "Signal type identifier",
@@ -49237,6 +50527,10 @@
             {
               "value": "githubStargazer",
               "name": "GithubStargazer"
+            },
+            {
+              "value": "linkedinProfileViews",
+              "name": "LinkedinProfileViews"
             }
           ]
         }
@@ -49671,6 +50965,138 @@
           ]
         }
       },
+      "DomainRegistrar": {
+        "enum": [
+          "google",
+          "m365",
+          "infraforge"
+        ],
+        "type": "string",
+        "description": "Mailbox provider chosen at purchase. It is permanent: a \u0060google\u0060 domain only gets Google Workspace mailboxes, \u0060m365\u0060 only Microsoft 365, \u0060infraforge\u0060 only SMTP.",
+        "x-ms-enum": {
+          "name": "DomainRegistrar",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "m365",
+              "name": "M365"
+            },
+            {
+              "value": "infraforge",
+              "name": "Infraforge"
+            }
+          ]
+        }
+      },
+      "DomainStatus": {
+        "enum": [
+          "ordered",
+          "paid",
+          "registered",
+          "pending",
+          "automating",
+          "active"
+        ],
+        "type": "string",
+        "description": "Setup progress. \u0060ordered\u0060: waiting for payment. \u0060paid\u0060: being registered or transferred. \u0060registered\u0060: DNS being set up. \u0060pending\u0060: DNS checks and mailboxes in progress. \u0060automating\u0060: Google Workspace post-setup (DKIM, mailbox connection) running. \u0060active\u0060: ready.",
+        "x-ms-enum": {
+          "name": "DomainStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ordered",
+              "name": "Ordered"
+            },
+            {
+              "value": "paid",
+              "name": "Paid"
+            },
+            {
+              "value": "registered",
+              "name": "Registered"
+            },
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "automating",
+              "name": "Automating"
+            },
+            {
+              "value": "active",
+              "name": "Active"
+            }
+          ]
+        }
+      },
+      "DomainMailboxStatus": {
+        "enum": [
+          "ordered",
+          "paid",
+          "registered",
+          "pending",
+          "active"
+        ],
+        "type": "string",
+        "description": "Setup progress. \u0060ordered\u0060: waiting for the domain to be ready and for payment. \u0060paid\u0060 to \u0060pending\u0060: being created at the provider. \u0060active\u0060: created. See the warning on List Domain Mailboxes about connecting it.",
+        "x-ms-enum": {
+          "name": "DomainMailboxStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ordered",
+              "name": "Ordered"
+            },
+            {
+              "value": "paid",
+              "name": "Paid"
+            },
+            {
+              "value": "registered",
+              "name": "Registered"
+            },
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "active",
+              "name": "Active"
+            }
+          ]
+        }
+      },
+      "DomainMailboxProvider": {
+        "enum": [
+          "google",
+          "m365",
+          "infraforge"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "DomainMailboxProvider",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "m365",
+              "name": "M365"
+            },
+            {
+              "value": "infraforge",
+              "name": "Infraforge"
+            }
+          ]
+        }
+      },
       "StepAbTestOneOf2": {
         "enum": [
           "A",
@@ -49932,6 +51358,32 @@
             {
               "value": "company",
               "name": "Company"
+            }
+          ]
+        }
+      },
+      "DomainSearchResultProvidersItemName": {
+        "enum": [
+          "google",
+          "m365",
+          "infraforge"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "DomainSearchResultProvidersItemName",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "m365",
+              "name": "M365"
+            },
+            {
+              "value": "infraforge",
+              "name": "Infraforge"
             }
           ]
         }
@@ -52337,7 +53789,8 @@
           "costCutting",
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
-          "githubStargazer"
+          "githubStargazer",
+          "linkedinProfileViews"
         ],
         "type": "string",
         "description": "Signal type to monitor",
@@ -52456,6 +53909,10 @@
             {
               "value": "githubStargazer",
               "name": "GithubStargazer"
+            },
+            {
+              "value": "linkedinProfileViews",
+              "name": "LinkedinProfileViews"
             }
           ]
         }
@@ -52770,6 +54227,33 @@
           "B"
         ],
         "type": "string"
+      },
+      "PurchaseDomainRequestProvider": {
+        "enum": [
+          "google",
+          "m365",
+          "infraforge"
+        ],
+        "type": "string",
+        "description": "Mailbox provider of the domain, permanent: \u0060google\u0060 (Google Workspace), \u0060m365\u0060 (Microsoft 365) or \u0060infraforge\u0060 (SMTP). Pick one listed in the Search Domains \u0060providers\u0060. A transfer requires \u0060google\u0060.",
+        "x-ms-enum": {
+          "name": "PurchaseDomainRequestProvider",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "m365",
+              "name": "M365"
+            },
+            {
+              "value": "infraforge",
+              "name": "Infraforge"
+            }
+          ]
+        }
       },
       "GetCampaignsByCampaignIdSequences200ResponseAdditionalPropertiesStepsItemAbTestOneOf2": {
         "enum": [
@@ -53859,6 +55343,48 @@
             {
               "value": "reused",
               "name": "Reused"
+            }
+          ]
+        }
+      },
+      "PurchaseDomainRequestDnsRecordsItemType": {
+        "enum": [
+          "TXT",
+          "CNAME",
+          "A",
+          "AAAA",
+          "NS",
+          "MX",
+          "SRV"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PurchaseDomainRequestDnsRecordsItemType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "TXT",
+              "name": "Txt"
+            },
+            {
+              "value": "CNAME",
+              "name": "Cname"
+            },
+            {
+              "value": "AAAA",
+              "name": "Aaaa"
+            },
+            {
+              "value": "NS",
+              "name": "Ns"
+            },
+            {
+              "value": "MX",
+              "name": "Mx"
+            },
+            {
+              "value": "SRV",
+              "name": "Srv"
             }
           ]
         }
@@ -56188,7 +57714,8 @@
           "costCutting",
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
-          "githubStargazer"
+          "githubStargazer",
+          "linkedinProfileViews"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -56306,6 +57833,10 @@
             {
               "value": "githubStargazer",
               "name": "GithubStargazer"
+            },
+            {
+              "value": "linkedinProfileViews",
+              "name": "LinkedinProfileViews"
             }
           ]
         }
@@ -56340,6 +57871,7 @@
           "fundraisingInvestors",
           "technologies",
           "detectionMode",
+          "technologyConfidence",
           "maDealTypes",
           "maMinAmount",
           "persona",
@@ -56349,7 +57881,8 @@
           "seniority",
           "crmListIds",
           "minJobCount",
-          "timeframe"
+          "timeframe",
+          "linkedinProfileViewsUserIds"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -56469,6 +58002,10 @@
               "name": "DetectionMode"
             },
             {
+              "value": "technologyConfidence",
+              "name": "TechnologyConfidence"
+            },
+            {
               "value": "maDealTypes",
               "name": "MaDealTypes"
             },
@@ -56507,6 +58044,10 @@
             {
               "value": "timeframe",
               "name": "Timeframe"
+            },
+            {
+              "value": "linkedinProfileViewsUserIds",
+              "name": "LinkedinProfileViewsUserIds"
             }
           ]
         }
@@ -56602,6 +58143,46 @@
         "additionalProperties": {
           "type": "string"
         }
+      },
+      "PostContactsSuccessResponse": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PostContacts200Response"
+          },
+          {
+            "$ref": "#/components/schemas/PostContacts201Response"
+          }
+        ]
+      },
+      "PostCompaniesSuccessResponse": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PostCompanies200Response"
+          },
+          {
+            "$ref": "#/components/schemas/PostCompanies201Response"
+          }
+        ]
+      },
+      "PostCallsSuccessResponse": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PostCalls201Response"
+          },
+          {
+            "$ref": "#/components/schemas/PostCalls200Response"
+          }
+        ]
+      },
+      "PostFieldsSuccessResponse": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PostFields200Response"
+          },
+          {
+            "$ref": "#/components/schemas/PostFields201Response"
+          }
+        ]
       }
     },
     "responses": {

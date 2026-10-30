@@ -11,106 +11,166 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PatchCampaignsByCampaignIdRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("aiFeatures") is { } nullNodeAiFeatures && nullNodeAiFeatures.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiFeatures = null;
+            if (parseNode.GetChildNode("autoLeadInterest") is { } nullNodeAutoLeadInterest && nullNodeAutoLeadInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoLeadInterest = null;
+            if (parseNode.GetChildNode("autoReview") is { } nullNodeAutoReview && nullNodeAutoReview.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoReview = null;
+            if (parseNode.GetChildNode("autoReviewConditions") is { } nullNodeAutoReviewConditions && nullNodeAutoReviewConditions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoReviewConditions = null;
+            if (parseNode.GetChildNode("disableOutOfOffice") is { } nullNodeDisableOutOfOffice && nullNodeDisableOutOfOffice.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableOutOfOffice = null;
+            if (parseNode.GetChildNode("disableTrackClick") is { } nullNodeDisableTrackClick && nullNodeDisableTrackClick.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackClick = null;
+            if (parseNode.GetChildNode("disableTrackOpen") is { } nullNodeDisableTrackOpen && nullNodeDisableTrackOpen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackOpen = null;
+            if (parseNode.GetChildNode("disableTrackReply") is { } nullNodeDisableTrackReply && nullNodeDisableTrackReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackReply = null;
+            if (parseNode.GetChildNode("leadsPausedByInterest") is { } nullNodeLeadsPausedByInterest && nullNodeLeadsPausedByInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadsPausedByInterest = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("onLinkClicked") is { } nullNodeOnLinkClicked && nullNodeOnLinkClicked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OnLinkClicked = null;
+            if (parseNode.GetChildNode("onMeetingBooked") is { } nullNodeOnMeetingBooked && nullNodeOnMeetingBooked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OnMeetingBooked = null;
+            if (parseNode.GetChildNode("onReplied") is { } nullNodeOnReplied && nullNodeOnReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OnReplied = null;
+            if (parseNode.GetChildNode("opportunityClicked") is { } nullNodeOpportunityClicked && nullNodeOpportunityClicked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OpportunityClicked = null;
+            if (parseNode.GetChildNode("opportunityReplied") is { } nullNodeOpportunityReplied && nullNodeOpportunityReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OpportunityReplied = null;
+            if (parseNode.GetChildNode("sendUserIds") is { } nullNodeSendUserIds && nullNodeSendUserIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendUserIds = null;
+            if (parseNode.GetChildNode("sequenceSharing") is { } nullNodeSequenceSharing && nullNodeSequenceSharing.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SequenceSharing = null;
+            if (parseNode.GetChildNode("stopOnEmailReplied") is { } nullNodeStopOnEmailReplied && nullNodeStopOnEmailReplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnEmailReplied = null;
+            if (parseNode.GetChildNode("stopOnLinkClicked") is { } nullNodeStopOnLinkClicked && nullNodeStopOnLinkClicked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnLinkClicked = null;
+            if (parseNode.GetChildNode("stopOnLinkClickedFilter") is { } nullNodeStopOnLinkClickedFilter && nullNodeStopOnLinkClickedFilter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnLinkClickedFilter = null;
+            if (parseNode.GetChildNode("stopOnMeetingBooked") is { } nullNodeStopOnMeetingBooked && nullNodeStopOnMeetingBooked.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StopOnMeetingBooked = null;
+            if (parseNode.GetChildNode("tracking") is { } nullNodeTracking && nullNodeTracking.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tracking = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>AI reply-handling settings. Provide only the flags to change; omitted flags keep their current value.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures? AiFeatures { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures? AiFeatures { get => _explicitNullValueAiFeatures; set { _explicitNullValueAiFeatures = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("aiFeatures"); else _explicitNullProperties?.Remove("aiFeatures"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures? _explicitNullValueAiFeatures = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures AiFeatures { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures AiFeatures { get => _explicitNullValueAiFeatures; set { _explicitNullValueAiFeatures = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("aiFeatures"); else _explicitNullProperties?.Remove("aiFeatures"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures _explicitNullValueAiFeatures = default!;
 #endif
         /// <summary>Automatically detect lead interest</summary>
-        public bool? AutoLeadInterest { get; set; }
+        public bool? AutoLeadInterest { get => _explicitNullValueAutoLeadInterest; set { _explicitNullValueAutoLeadInterest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoLeadInterest"); else _explicitNullProperties?.Remove("autoLeadInterest"); } }
+        private bool? _explicitNullValueAutoLeadInterest = default!;
         /// <summary>Automatically launch (review) leads as soon as they are added to the campaign, instead of requiring manual review.</summary>
-        public bool? AutoReview { get; set; }
+        public bool? AutoReview { get => _explicitNullValueAutoReview; set { _explicitNullValueAutoReview = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoReview"); else _explicitNullProperties?.Remove("autoReview"); } }
+        private bool? _explicitNullValueAutoReview = default!;
         /// <summary>Email deliverability statuses for which a lead is auto-launched when `autoReview` is enabled. Only leads whose email verification matches one of these statuses are launched automatically. Invalid values are rejected with a `400` error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?>? AutoReviewConditions { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?>? AutoReviewConditions { get => _explicitNullValueAutoReviewConditions; set { _explicitNullValueAutoReviewConditions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoReviewConditions"); else _explicitNullProperties?.Remove("autoReviewConditions"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?>? _explicitNullValueAutoReviewConditions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?> AutoReviewConditions { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?> AutoReviewConditions { get => _explicitNullValueAutoReviewConditions; set { _explicitNullValueAutoReviewConditions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoReviewConditions"); else _explicitNullProperties?.Remove("autoReviewConditions"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?> _explicitNullValueAutoReviewConditions = default!;
 #endif
         /// <summary>Disable out-of-office detection</summary>
-        public bool? DisableOutOfOffice { get; set; }
+        public bool? DisableOutOfOffice { get => _explicitNullValueDisableOutOfOffice; set { _explicitNullValueDisableOutOfOffice = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableOutOfOffice"); else _explicitNullProperties?.Remove("disableOutOfOffice"); } }
+        private bool? _explicitNullValueDisableOutOfOffice = default!;
         /// <summary>Disable tracking of link clicks</summary>
-        public bool? DisableTrackClick { get; set; }
+        public bool? DisableTrackClick { get => _explicitNullValueDisableTrackClick; set { _explicitNullValueDisableTrackClick = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackClick"); else _explicitNullProperties?.Remove("disableTrackClick"); } }
+        private bool? _explicitNullValueDisableTrackClick = default!;
         /// <summary>Disable tracking of email opens</summary>
-        public bool? DisableTrackOpen { get; set; }
+        public bool? DisableTrackOpen { get => _explicitNullValueDisableTrackOpen; set { _explicitNullValueDisableTrackOpen = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackOpen"); else _explicitNullProperties?.Remove("disableTrackOpen"); } }
+        private bool? _explicitNullValueDisableTrackOpen = default!;
         /// <summary>Disable tracking of email replies</summary>
-        public bool? DisableTrackReply { get; set; }
+        public bool? DisableTrackReply { get => _explicitNullValueDisableTrackReply; set { _explicitNullValueDisableTrackReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackReply"); else _explicitNullProperties?.Remove("disableTrackReply"); } }
+        private bool? _explicitNullValueDisableTrackReply = default!;
         /// <summary>Pause leads based on interest</summary>
-        public bool? LeadsPausedByInterest { get; set; }
+        public bool? LeadsPausedByInterest { get => _explicitNullValueLeadsPausedByInterest; set { _explicitNullValueLeadsPausedByInterest = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadsPausedByInterest"); else _explicitNullProperties?.Remove("leadsPausedByInterest"); } }
+        private bool? _explicitNullValueLeadsPausedByInterest = default!;
         /// <summary>The campaign name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>Behavior when a lead clicks a tracked link.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked? OnLinkClicked { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked? OnLinkClicked { get => _explicitNullValueOnLinkClicked; set { _explicitNullValueOnLinkClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onLinkClicked"); else _explicitNullProperties?.Remove("onLinkClicked"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked? _explicitNullValueOnLinkClicked = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked OnLinkClicked { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked OnLinkClicked { get => _explicitNullValueOnLinkClicked; set { _explicitNullValueOnLinkClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onLinkClicked"); else _explicitNullProperties?.Remove("onLinkClicked"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked _explicitNullValueOnLinkClicked = default!;
 #endif
         /// <summary>Behavior when a meeting is booked.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked? OnMeetingBooked { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked? OnMeetingBooked { get => _explicitNullValueOnMeetingBooked; set { _explicitNullValueOnMeetingBooked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onMeetingBooked"); else _explicitNullProperties?.Remove("onMeetingBooked"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked? _explicitNullValueOnMeetingBooked = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked OnMeetingBooked { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked OnMeetingBooked { get => _explicitNullValueOnMeetingBooked; set { _explicitNullValueOnMeetingBooked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onMeetingBooked"); else _explicitNullProperties?.Remove("onMeetingBooked"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked _explicitNullValueOnMeetingBooked = default!;
 #endif
         /// <summary>Behavior when a lead replies.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied? OnReplied { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied? OnReplied { get => _explicitNullValueOnReplied; set { _explicitNullValueOnReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onReplied"); else _explicitNullProperties?.Remove("onReplied"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied? _explicitNullValueOnReplied = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied OnReplied { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied OnReplied { get => _explicitNullValueOnReplied; set { _explicitNullValueOnReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onReplied"); else _explicitNullProperties?.Remove("onReplied"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied _explicitNullValueOnReplied = default!;
 #endif
         /// <summary>Create an opportunity when a lead clicks a link</summary>
-        public bool? OpportunityClicked { get; set; }
+        public bool? OpportunityClicked { get => _explicitNullValueOpportunityClicked; set { _explicitNullValueOpportunityClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opportunityClicked"); else _explicitNullProperties?.Remove("opportunityClicked"); } }
+        private bool? _explicitNullValueOpportunityClicked = default!;
         /// <summary>Create an opportunity when a lead replies</summary>
-        public bool? OpportunityReplied { get; set; }
+        public bool? OpportunityReplied { get => _explicitNullValueOpportunityReplied; set { _explicitNullValueOpportunityReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opportunityReplied"); else _explicitNullProperties?.Remove("opportunityReplied"); } }
+        private bool? _explicitNullValueOpportunityReplied = default!;
         /// <summary>Array of user IDs (usr_xxx format) to assign as campaign senders. Cannot be used on campaigns with a dynamic sender strategy (contactOwner, leadImporter, customField). Each sender is validated against the campaign&apos;s sending channels (email, LinkedIn, SMS, WhatsApp): senders without capabilities for at least one channel are excluded, and every channel that a lead can reach in the sequence must be covered by at least one sender. Replaces the sender pool, with the first account of each channel type for each sender. To add a sender without a replacement, pick an account or an alias, use the [Senders](/api-reference/endpoints/senders/add-campaign-senders) endpoints.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? SendUserIds { get; set; }
+        public List<string>? SendUserIds { get => _explicitNullValueSendUserIds; set { _explicitNullValueSendUserIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUserIds"); else _explicitNullProperties?.Remove("sendUserIds"); } }
+        private List<string>? _explicitNullValueSendUserIds = default!;
 #nullable restore
 #else
-        public List<string> SendUserIds { get; set; }
+        public List<string> SendUserIds { get => _explicitNullValueSendUserIds; set { _explicitNullValueSendUserIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUserIds"); else _explicitNullProperties?.Remove("sendUserIds"); } }
+        private List<string> _explicitNullValueSendUserIds = default!;
 #endif
         /// <summary>Enable sequence sharing for the campaign</summary>
-        public bool? SequenceSharing { get; set; }
+        public bool? SequenceSharing { get => _explicitNullValueSequenceSharing; set { _explicitNullValueSequenceSharing = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sequenceSharing"); else _explicitNullProperties?.Remove("sequenceSharing"); } }
+        private bool? _explicitNullValueSequenceSharing = default!;
         /// <summary>Stop the campaign when a lead replies by email</summary>
-        public bool? StopOnEmailReplied { get; set; }
+        public bool? StopOnEmailReplied { get => _explicitNullValueStopOnEmailReplied; set { _explicitNullValueStopOnEmailReplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnEmailReplied"); else _explicitNullProperties?.Remove("stopOnEmailReplied"); } }
+        private bool? _explicitNullValueStopOnEmailReplied = default!;
         /// <summary>Stop the campaign when a link is clicked</summary>
-        public bool? StopOnLinkClicked { get; set; }
+        public bool? StopOnLinkClicked { get => _explicitNullValueStopOnLinkClicked; set { _explicitNullValueStopOnLinkClicked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClicked"); else _explicitNullProperties?.Remove("stopOnLinkClicked"); } }
+        private bool? _explicitNullValueStopOnLinkClicked = default!;
         /// <summary>Filter for which link clicks should stop the campaign</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StopOnLinkClickedFilter { get; set; }
+        public string? StopOnLinkClickedFilter { get => _explicitNullValueStopOnLinkClickedFilter; set { _explicitNullValueStopOnLinkClickedFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClickedFilter"); else _explicitNullProperties?.Remove("stopOnLinkClickedFilter"); } }
+        private string? _explicitNullValueStopOnLinkClickedFilter = default!;
 #nullable restore
 #else
-        public string StopOnLinkClickedFilter { get; set; }
+        public string StopOnLinkClickedFilter { get => _explicitNullValueStopOnLinkClickedFilter; set { _explicitNullValueStopOnLinkClickedFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClickedFilter"); else _explicitNullProperties?.Remove("stopOnLinkClickedFilter"); } }
+        private string _explicitNullValueStopOnLinkClickedFilter = default!;
 #endif
         /// <summary>Stop the campaign when a meeting is booked</summary>
-        public bool? StopOnMeetingBooked { get; set; }
+        public bool? StopOnMeetingBooked { get => _explicitNullValueStopOnMeetingBooked; set { _explicitNullValueStopOnMeetingBooked = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnMeetingBooked"); else _explicitNullProperties?.Remove("stopOnMeetingBooked"); } }
+        private bool? _explicitNullValueStopOnMeetingBooked = default!;
         /// <summary>Open / click / reply tracking toggles.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking? Tracking { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking? Tracking { get => _explicitNullValueTracking; set { _explicitNullValueTracking = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tracking"); else _explicitNullProperties?.Remove("tracking"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking? _explicitNullValueTracking = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking Tracking { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking Tracking { get => _explicitNullValueTracking; set { _explicitNullValueTracking = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tracking"); else _explicitNullProperties?.Remove("tracking"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking _explicitNullValueTracking = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequest"/> and sets the default values.
@@ -127,7 +187,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -190,6 +250,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("stopOnLinkClickedFilter", StopOnLinkClickedFilter);
             writer.WriteBoolValue("stopOnMeetingBooked", StopOnMeetingBooked);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking>("tracking", Tracking);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

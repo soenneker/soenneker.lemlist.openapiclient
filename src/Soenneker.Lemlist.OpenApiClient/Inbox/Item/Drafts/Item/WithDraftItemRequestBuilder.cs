@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox.Item.Drafts.Item
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxByContactIdDraftsByDraftId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxByContactIdDraftsByDraftId200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxByContactIdDraftsByDraftId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxByContactIdDraftsByDraftId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves a single draft with its full content, including attachments.
@@ -67,7 +67,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox.Item.Drafts.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDraftsByDraftId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDraftsByDraftId200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDraftsByDraftId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetInboxByContactIdDraftsByDraftId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Partially updates an existing draft. Only the provided fields will be updated.
@@ -87,7 +87,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox.Item.Drafts.Item
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchInboxByContactIdDraftsByDraftId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchInboxByContactIdDraftsByDraftId200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchInboxByContactIdDraftsByDraftId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchInboxByContactIdDraftsByDraftId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Soft-deletes a draft by setting its deletedAt timestamp.

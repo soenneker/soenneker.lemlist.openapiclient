@@ -51,7 +51,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox.Conversations.Labels.Item
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToDeleteRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxConversationsLabelsByContactId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxConversationsLabelsByContactId200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxConversationsLabelsByContactId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteInboxConversationsLabelsByContactId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Attaches one or more labels to one or more conversations.
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Inbox.Conversations.Labels.Item
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxConversationsLabelsByContactId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxConversationsLabelsByContactId200Response.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxConversationsLabelsByContactId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostInboxConversationsLabelsByContactId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Removes one or more labels from one conversation.

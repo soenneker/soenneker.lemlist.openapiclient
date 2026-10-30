@@ -57,6 +57,8 @@ namespace Soenneker.Lemlist.OpenApiClient.CallStatuses
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.GetCallStatuses401Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.GetCallStatuses405Response.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.GetCallStatuses500Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetCallStatuses200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetCallStatuses200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

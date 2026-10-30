@@ -12,17 +12,32 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("enabled") is { } nullNodeEnabled && nullNodeEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Enabled = null;
+            if (parseNode.GetChildNode("pauseAllCampaignsForCompany") is { } nullNodePauseAllCampaignsForCompany && nullNodePauseAllCampaignsForCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PauseAllCampaignsForCompany = null;
+            if (parseNode.GetChildNode("pauseAllCampaignsForLead") is { } nullNodePauseAllCampaignsForLead && nullNodePauseAllCampaignsForLead.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PauseAllCampaignsForLead = null;
+            if (parseNode.GetChildNode("pauseCampaignForCompany") is { } nullNodePauseCampaignForCompany && nullNodePauseCampaignForCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PauseCampaignForCompany = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Enable the interested-reply AI action.</summary>
-        public bool? Enabled { get; set; }
+        public bool? Enabled { get => _explicitNullValueEnabled; set { _explicitNullValueEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enabled"); else _explicitNullProperties?.Remove("enabled"); } }
+        private bool? _explicitNullValueEnabled = default!;
         /// <summary>Pause all campaigns for leads in the same company.</summary>
-        public bool? PauseAllCampaignsForCompany { get; set; }
+        public bool? PauseAllCampaignsForCompany { get => _explicitNullValuePauseAllCampaignsForCompany; set { _explicitNullValuePauseAllCampaignsForCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pauseAllCampaignsForCompany"); else _explicitNullProperties?.Remove("pauseAllCampaignsForCompany"); } }
+        private bool? _explicitNullValuePauseAllCampaignsForCompany = default!;
         /// <summary>Pause all campaigns for this lead.</summary>
-        public bool? PauseAllCampaignsForLead { get; set; }
+        public bool? PauseAllCampaignsForLead { get => _explicitNullValuePauseAllCampaignsForLead; set { _explicitNullValuePauseAllCampaignsForLead = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pauseAllCampaignsForLead"); else _explicitNullProperties?.Remove("pauseAllCampaignsForLead"); } }
+        private bool? _explicitNullValuePauseAllCampaignsForLead = default!;
         /// <summary>Pause this campaign for other leads in the same company.</summary>
-        public bool? PauseCampaignForCompany { get; set; }
+        public bool? PauseCampaignForCompany { get => _explicitNullValuePauseCampaignForCompany; set { _explicitNullValuePauseCampaignForCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pauseCampaignForCompany"); else _explicitNullProperties?.Remove("pauseCampaignForCompany"); } }
+        private bool? _explicitNullValuePauseCampaignForCompany = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply"/> and sets the default values.
         /// </summary>
@@ -38,7 +53,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeaturesOnInterestedReply(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -65,6 +80,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("pauseAllCampaignsForCompany", PauseAllCampaignsForCompany);
             writer.WriteBoolValue("pauseAllCampaignsForLead", PauseAllCampaignsForLead);
             writer.WriteBoolValue("pauseCampaignForCompany", PauseCampaignForCompany);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

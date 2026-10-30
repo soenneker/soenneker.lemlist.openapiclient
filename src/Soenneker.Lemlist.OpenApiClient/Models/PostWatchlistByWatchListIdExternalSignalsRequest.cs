@@ -11,32 +11,48 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostWatchlistByWatchListIdExternalSignalsRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("company") is { } nullNodeCompany && nullNodeCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Company = null;
+            if (parseNode.GetChildNode("contact") is { } nullNodeContact && nullNodeContact.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Contact = null;
+            if (parseNode.GetChildNode("customFields") is { } nullNodeCustomFields && nullNodeCustomFields.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomFields = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The company the signal is about. Required for externalSignalCompany agents; ignored otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany? Company { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany? Company { get => _explicitNullValueCompany; set { _explicitNullValueCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company"); else _explicitNullProperties?.Remove("company"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany? _explicitNullValueCompany = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany Company { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany Company { get => _explicitNullValueCompany; set { _explicitNullValueCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company"); else _explicitNullProperties?.Remove("company"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany _explicitNullValueCompany = default!;
 #endif
         /// <summary>The contact the signal is about. Required for externalSignalContact agents; ignored otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact? Contact { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact? Contact { get => _explicitNullValueContact; set { _explicitNullValueContact = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contact"); else _explicitNullProperties?.Remove("contact"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact? _explicitNullValueContact = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact Contact { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact Contact { get => _explicitNullValueContact; set { _explicitNullValueContact = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contact"); else _explicitNullProperties?.Remove("contact"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact _explicitNullValueContact = default!;
 #endif
         /// <summary>Optional key/value metadata stored on the signal. Max 20 keys; all values must be strings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields? CustomFields { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields? CustomFields { get => _explicitNullValueCustomFields; set { _explicitNullValueCustomFields = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customFields"); else _explicitNullProperties?.Remove("customFields"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields? _explicitNullValueCustomFields = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields CustomFields { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields CustomFields { get => _explicitNullValueCustomFields; set { _explicitNullValueCustomFields = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customFields"); else _explicitNullProperties?.Remove("customFields"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields _explicitNullValueCustomFields = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequest"/> and sets the default values.
@@ -53,7 +69,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -78,6 +94,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCompany>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestContact>("contact", Contact);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostWatchlistByWatchListIdExternalSignalsRequestCustomFields>("customFields", CustomFields);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

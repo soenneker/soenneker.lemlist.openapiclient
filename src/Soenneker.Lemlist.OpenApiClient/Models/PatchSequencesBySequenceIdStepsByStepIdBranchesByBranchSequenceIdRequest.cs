@@ -11,59 +11,91 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("callStatusFilter") is { } nullNodeCallStatusFilter && nullNodeCallStatusFilter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallStatusFilter = null;
+            if (parseNode.GetChildNode("customField") is { } nullNodeCustomField && nullNodeCustomField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomField = null;
+            if (parseNode.GetChildNode("customOperator") is { } nullNodeCustomOperator && nullNodeCustomOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomOperator = null;
+            if (parseNode.GetChildNode("customValue") is { } nullNodeCustomValue && nullNodeCustomValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomValue = null;
+            if (parseNode.GetChildNode("delay") is { } nullNodeDelay && nullNodeDelay.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delay = null;
+            if (parseNode.GetChildNode("delayType") is { } nullNodeDelayType && nullNodeDelayType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DelayType = null;
+            if (parseNode.GetChildNode("emailStatusFilter") is { } nullNodeEmailStatusFilter && nullNodeEmailStatusFilter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailStatusFilter = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("scoreComparator") is { } nullNodeScoreComparator && nullNodeScoreComparator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScoreComparator = null;
+            if (parseNode.GetChildNode("scoreThreshold") is { } nullNodeScoreThreshold && nullNodeScoreThreshold.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScoreThreshold = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>`aircallDone` only - the call-status keys this branch matches. The keys are the team&apos;s own (defaults plus custom dispositions), so any non-empty string is accepted. Required to add a branch on that condition.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? CallStatusFilter { get; set; }
+        public List<string>? CallStatusFilter { get => _explicitNullValueCallStatusFilter; set { _explicitNullValueCallStatusFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callStatusFilter"); else _explicitNullProperties?.Remove("callStatusFilter"); } }
+        private List<string>? _explicitNullValueCallStatusFilter = default!;
 #nullable restore
 #else
-        public List<string> CallStatusFilter { get; set; }
+        public List<string> CallStatusFilter { get => _explicitNullValueCallStatusFilter; set { _explicitNullValueCallStatusFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("callStatusFilter"); else _explicitNullProperties?.Remove("callStatusFilter"); } }
+        private List<string> _explicitNullValueCallStatusFilter = default!;
 #endif
         /// <summary>`customLeadInfo` only - the field to test. A bare name reads as a lead variable (`jobTitle` becomes `variables.jobTitle`); prefix with `fields.` to test a contact field. A company field is written `company.&lt;field&gt;` - `company.name`, or `company.sector` for a company custom field named `Sector` - and `companyName` or `variables.companyName` is stored as `company.name`. Every branch of a step tests the same field, so changing it here changes it on all of them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomField { get; set; }
+        public string? CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
+        private string? _explicitNullValueCustomField = default!;
 #nullable restore
 #else
-        public string CustomField { get; set; }
+        public string CustomField { get => _explicitNullValueCustomField; set { _explicitNullValueCustomField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customField"); else _explicitNullProperties?.Remove("customField"); } }
+        private string _explicitNullValueCustomField = default!;
 #endif
         /// <summary>`customLeadInfo` only - how the field is compared. `equal` and `contains` need a `customValue`; `empty` and `notEmpty` refuse one.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestCustomOperator? CustomOperator { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestCustomOperator? CustomOperator { get => _explicitNullValueCustomOperator; set { _explicitNullValueCustomOperator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customOperator"); else _explicitNullProperties?.Remove("customOperator"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestCustomOperator? _explicitNullValueCustomOperator = default!;
         /// <summary>`customLeadInfo` only - the value the field is compared to. Required for `equal` and `contains`, and refused for `empty` and `notEmpty`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomValue { get; set; }
+        public string? CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
+        private string? _explicitNullValueCustomValue = default!;
 #nullable restore
 #else
-        public string CustomValue { get; set; }
+        public string CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
+        private string _explicitNullValueCustomValue = default!;
 #endif
         /// <summary>Length of that time window, in days.</summary>
-        public int? Delay { get; set; }
+        public int? Delay { get => _explicitNullValueDelay; set { _explicitNullValueDelay = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delay"); else _explicitNullProperties?.Remove("delay"); } }
+        private int? _explicitNullValueDelay = default!;
         /// <summary>How a lead-action condition waits: `within` branches once the `delay` window is over, `waitUntil` parks the lead until the action happens, with no time bound. Ignored by the conditions that store no time window (`customLeadInfo`, `hasEmailAddress`).</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestDelayType? DelayType { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestDelayType? DelayType { get => _explicitNullValueDelayType; set { _explicitNullValueDelayType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delayType"); else _explicitNullProperties?.Remove("delayType"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestDelayType? _explicitNullValueDelayType = default!;
         /// <summary>`hasEmailAddress` only - the email statuses this branch matches. Required to add a branch on that condition.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestEmailStatusFilterItem?>? EmailStatusFilter { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestEmailStatusFilterItem?>? EmailStatusFilter { get => _explicitNullValueEmailStatusFilter; set { _explicitNullValueEmailStatusFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailStatusFilter"); else _explicitNullProperties?.Remove("emailStatusFilter"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestEmailStatusFilterItem?>? _explicitNullValueEmailStatusFilter = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestEmailStatusFilterItem?> EmailStatusFilter { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestEmailStatusFilterItem?> EmailStatusFilter { get => _explicitNullValueEmailStatusFilter; set { _explicitNullValueEmailStatusFilter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emailStatusFilter"); else _explicitNullProperties?.Remove("emailStatusFilter"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestEmailStatusFilterItem?> _explicitNullValueEmailStatusFilter = default!;
 #endif
         /// <summary>The branch&apos;s display name. An empty string clears it, and lemlist falls back to labelling the branch &quot;Branch 1&quot;, &quot;Branch 2&quot;, … by rank. The Else branch cannot be named.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>`hasScore` only - how the lead&apos;s score is compared to `scoreThreshold`.</summary>
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestScoreComparator? ScoreComparator { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestScoreComparator? ScoreComparator { get => _explicitNullValueScoreComparator; set { _explicitNullValueScoreComparator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scoreComparator"); else _explicitNullProperties?.Remove("scoreComparator"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestScoreComparator? _explicitNullValueScoreComparator = default!;
         /// <summary>`hasScore` only - the score this branch tests against.</summary>
-        public int? ScoreThreshold { get; set; }
+        public int? ScoreThreshold { get => _explicitNullValueScoreThreshold; set { _explicitNullValueScoreThreshold = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scoreThreshold"); else _explicitNullProperties?.Remove("scoreThreshold"); } }
+        private int? _explicitNullValueScoreThreshold = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequest"/> and sets the default values.
         /// </summary>
@@ -79,7 +111,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -118,6 +150,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdBranchesByBranchSequenceIdRequestScoreComparator>("scoreComparator", ScoreComparator);
             writer.WriteIntValue("scoreThreshold", ScoreThreshold);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

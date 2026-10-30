@@ -11,32 +11,48 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class PostV2EnrichmentsBulkRequestRequestBodyItem : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("enrichmentRequests") is { } nullNodeEnrichmentRequests && nullNodeEnrichmentRequests.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnrichmentRequests = null;
+            if (parseNode.GetChildNode("input") is { } nullNodeInput && nullNodeInput.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Input = null;
+            if (parseNode.GetChildNode("metadata") is { } nullNodeMetadata && nullNodeMetadata.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Metadata = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Enrichment types to perform, at least one of: find_email, find_phone, verify, linkedin_enrichment. Requesting find_email and verify together runs only one of them: verify when `input.email` is a valid email, find_email otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?>? EnrichmentRequests { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?>? EnrichmentRequests { get => _explicitNullValueEnrichmentRequests; set { _explicitNullValueEnrichmentRequests = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentRequests"); else _explicitNullProperties?.Remove("enrichmentRequests"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?>? _explicitNullValueEnrichmentRequests = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?> EnrichmentRequests { get; set; }
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?> EnrichmentRequests { get => _explicitNullValueEnrichmentRequests; set { _explicitNullValueEnrichmentRequests = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enrichmentRequests"); else _explicitNullProperties?.Remove("enrichmentRequests"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem?> _explicitNullValueEnrichmentRequests = default!;
 #endif
         /// <summary>Input data for enrichment. Required fields depend on enrichmentRequests (see Required inputs). Values must be strings of at most 400 characters without any `&lt;…&gt;` sequence; an unknown key or any other value rejects the whole call with `WRONG_INPUT_FORMAT`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput? Input { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput? Input { get => _explicitNullValueInput; set { _explicitNullValueInput = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("input"); else _explicitNullProperties?.Remove("input"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput? _explicitNullValueInput = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput Input { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput Input { get => _explicitNullValueInput; set { _explicitNullValueInput = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("input"); else _explicitNullProperties?.Remove("input"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput _explicitNullValueInput = default!;
 #endif
         /// <summary>Custom data returned in the response and in the webhooks. A string, or an object whose values are strings, each of at most 400 characters without any `&lt;…&gt;` sequence; anything else rejects the whole call with `WRONG_METADATA_FORMAT`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata? Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata? Metadata { get => _explicitNullValueMetadata; set { _explicitNullValueMetadata = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("metadata"); else _explicitNullProperties?.Remove("metadata"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata? _explicitNullValueMetadata = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata Metadata { get; set; }
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata Metadata { get => _explicitNullValueMetadata; set { _explicitNullValueMetadata = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("metadata"); else _explicitNullProperties?.Remove("metadata"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata _explicitNullValueMetadata = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem"/> and sets the default values.
@@ -53,7 +69,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public static global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItem(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -78,6 +94,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemEnrichmentRequestsItem>("enrichmentRequests", EnrichmentRequests);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestRequestBodyItemInput>("input", Input);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostV2EnrichmentsBulkRequestItemMetadata>("metadata", Metadata);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

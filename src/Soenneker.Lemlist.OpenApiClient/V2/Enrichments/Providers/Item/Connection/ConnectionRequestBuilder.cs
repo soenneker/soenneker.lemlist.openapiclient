@@ -57,6 +57,8 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Providers.Item.Connecti
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentProviderResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentProviderResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -86,6 +88,8 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Enrichments.Providers.Item.Connecti
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentWaterfallError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentProviderResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.EnrichmentProviderResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

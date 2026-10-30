@@ -55,6 +55,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Snippets.Item
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetSnippetsBySnippetId400Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetSnippetsBySnippetId404Response.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Snippet>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Snippet.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

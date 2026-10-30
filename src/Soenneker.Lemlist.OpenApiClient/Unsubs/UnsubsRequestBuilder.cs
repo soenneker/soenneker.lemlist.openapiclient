@@ -16,6 +16,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Unsubs
     public partial class UnsubsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>The export property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Unsubs.Export.ExportRequestBuilder Export
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Unsubs.Export.ExportRequestBuilder(PathParameters, RequestAdapter);
