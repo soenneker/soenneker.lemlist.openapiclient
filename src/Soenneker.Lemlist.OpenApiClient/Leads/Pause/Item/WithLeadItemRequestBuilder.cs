@@ -66,7 +66,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item
         public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Pause.Item.WithLeadItemRequestBuilder.WithLeadItemRequestBuilderPostQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.POST, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.lemlist.com/api", "/leads/pause/{leadId}", PathParameters.ContainsKey("request-raw-url")), PathParameters);
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;

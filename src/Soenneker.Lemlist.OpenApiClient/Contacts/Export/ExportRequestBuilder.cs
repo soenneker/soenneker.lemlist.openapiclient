@@ -65,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Export
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Contacts.Export.ExportRequestBuilder.ExportRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.lemlist.com/api", "/contacts/export", PathParameters.ContainsKey("request-raw-url")), PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "text/csv, text/plain;q=0.9");
             return requestInfo;
