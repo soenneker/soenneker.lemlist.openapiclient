@@ -3090,22 +3090,16 @@
           "200": {
             "description": "Leads exported successfully",
             "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "x-client-original-success-schema": {
-                  "$ref": "#/components/schemas/GetV2CampaignsByCampaignIdExportLeads200CsvResponseSchema"
-                }
-              },
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/GetV2CampaignsByCampaignIdExportLeads200ResponseSchema"
+                }
+              }
+            },
+            "x-client-original-non-json-content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetV2CampaignsByCampaignIdExportLeads200CsvResponseSchema"
                 }
               }
             }
@@ -3182,22 +3176,16 @@
           "200": {
             "description": "Leads exported successfully",
             "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "x-client-original-success-schema": {
-                  "$ref": "#/components/schemas/GetCampaignsByCampaignIdExportLeads200CsvResponseSchema"
-                }
-              },
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "x-client-original-success-schema": {
                   "$ref": "#/components/schemas/GetCampaignsByCampaignIdExportLeads200ResponseSchema"
+                }
+              }
+            },
+            "x-client-original-non-json-content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCampaignsByCampaignIdExportLeads200CsvResponseSchema"
                 }
               }
             }
@@ -4256,6 +4244,28 @@
           },
           "429": {
             "description": "Rate limit exceeded - 20 requests per 2 seconds per API key"
+          },
+          "200": {
+            "description": "The branch was added.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConditionBranch"
+                },
+                "example": {
+                  "sequenceId": "seq_Nb4vKq7Xm2Rd9Tz1L",
+                  "index": 2,
+                  "key": "customLeadInfo",
+                  "name": "Marketing",
+                  "customField": "variables.jobTitle",
+                  "customOperator": "contains",
+                  "customValues": [
+                    "CMO"
+                  ]
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       },
@@ -10575,6 +10585,22 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Persona created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonaCreateResponse"
+                },
+                "example": {
+                  "data": {
+                    "_id": "pdp_ExAmPlE1234567890a"
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -10945,6 +10971,22 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Saved search created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchCreateResponse"
+                },
+                "example": {
+                  "data": {
+                    "_id": "lss_ExAmPlE4f7Kq2Wz9x"
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -13415,6 +13457,20 @@
           },
           "405": {
             "description": "Method not allowed"
+          },
+          "200": {
+            "description": "Draft created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInboxByContactIdDrafts201Response"
+                },
+                "example": {
+                  "draftId": "drf_abc123def456789"
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -15255,6 +15311,24 @@
           },
           "405": {
             "description": "Method not allowed"
+          },
+          "200": {
+            "description": "Contact list created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostContactsLists201Response"
+                },
+                "example": {
+                  "message": "Contact list created successfully",
+                  "list": {
+                    "id": "clt_abc123def456ghi78",
+                    "name": "Nurturing"
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -16497,6 +16571,24 @@
           },
           "405": {
             "description": "Method not allowed"
+          },
+          "200": {
+            "description": "Company list created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesLists201Response"
+                },
+                "example": {
+                  "message": "Company list created successfully",
+                  "list": {
+                    "id": "clt_abc123def456ghi78",
+                    "name": "Target accounts"
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -19681,20 +19773,9 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "example": "_id,value,source,createdAt\nuns_ZmzP7K61EMIT9fBSj,john@example.com,user,2023-06-12T10:45:21.367Z\nuns_0X5cBxEldVyOIz0VQ,@example.org,api,2023-07-21T09:14:25.521Z",
-                "x-client-original-success-schema": {
-                  "description": "Fallback media schema"
-                }
-              },
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsVariables200ResponseSchema"
                 },
                 "example": [
                   {
@@ -19709,10 +19790,15 @@
                     "source": "api",
                     "createdAt": "2023-07-21T09:14:25.521Z"
                   }
-                ],
-                "x-client-original-success-schema": {
-                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsVariables200ResponseSchema"
-                }
+                ]
+              }
+            },
+            "x-client-original-non-json-content": {
+              "text/csv": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "_id,value,source,createdAt\nuns_ZmzP7K61EMIT9fBSj,john@example.com,user,2023-06-12T10:45:21.367Z\nuns_0X5cBxEldVyOIz0VQ,@example.org,api,2023-07-21T09:14:25.521Z"
               }
             }
           },
@@ -19759,20 +19845,9 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "example": "_id,doNotContact\ncon_aB1cD2eF3gH4iJ5kL,true\ncon_mN6oP7qR8sT9uV0wX,false",
-                "x-client-original-success-schema": {
-                  "description": "Fallback media schema"
-                }
-              },
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsContacts200ResponseSchema"
                 },
                 "example": [
                   {
@@ -19783,10 +19858,15 @@
                     "_id": "con_mN6oP7qR8sT9uV0wX",
                     "doNotContact": false
                   }
-                ],
-                "x-client-original-success-schema": {
-                  "$ref": "#/components/schemas/GetV2UnsubscribesExportsContacts200ResponseSchema"
-                }
+                ]
+              }
+            },
+            "x-client-original-non-json-content": {
+              "text/csv": {
+                "schema": {
+                  "description": "Fallback media schema"
+                },
+                "example": "_id,doNotContact\ncon_aB1cD2eF3gH4iJ5kL,true\ncon_mN6oP7qR8sT9uV0wX,false"
               }
             }
           },
@@ -21749,6 +21829,22 @@
           },
           "405": {
             "description": "Method not allowed"
+          },
+          "200": {
+            "description": "Email account connected successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostUserEmailAccounts201Response"
+                },
+                "example": {
+                  "id": "umx_A1B2C3D4E5F6G7H8I9",
+                  "email": "john@company.com",
+                  "provider": "custom"
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -23440,6 +23536,17 @@
                 "example": "Internal server error"
               }
             }
+          },
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListApiWatchListResponse"
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       },
@@ -24294,6 +24401,56 @@
           },
           "409": {
             "description": "An alert with the same widget, metric, severity, scope, scopeEntities, threshold, comparisonOperator, periodDays and periodMode already exists"
+          },
+          "200": {
+            "description": "Alert created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliverabilityAlert"
+                },
+                "example": {
+                  "_id": "dac_A1B2C3D4E5F6G7H8I",
+                  "teamId": "tea_ExampleAcmeTeamId",
+                  "createdBy": "usr_ExampleAcmeUserId",
+                  "createdAt": "2026-04-12T09:30:00.000Z",
+                  "updatedAt": "2026-04-12T09:30:00.000Z",
+                  "widget": "outreach",
+                  "metric": "bounceRate",
+                  "severity": "critical",
+                  "scope": "mailbox",
+                  "scopeEntities": [
+                    "usr_ExampleAcmeUserId|john@example.com|usm_ExampleMailboxId"
+                  ],
+                  "threshold": 5,
+                  "comparisonOperator": "above",
+                  "periodDays": 1,
+                  "periodMode": "rolling",
+                  "channelConfig": {
+                    "inapp": {
+                      "enabled": true
+                    },
+                    "email": {
+                      "enabled": true,
+                      "addresses": [
+                        "alerts@example.com"
+                      ]
+                    },
+                    "webhook": {
+                      "enabled": false
+                    },
+                    "slack": {
+                      "enabled": false
+                    }
+                  },
+                  "enabled": true,
+                  "lastCheckedAt": "2026-05-07T07:00:00.000Z",
+                  "lastTriggeredAt": "2026-05-06T18:42:11.000Z",
+                  "recheckDelayHours": 12
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }

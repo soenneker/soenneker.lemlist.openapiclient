@@ -7,7 +7,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum PostTasksRequestPriority
     {
-        [EnumMember(Value = "")]
+        [global::System.Runtime.Serialization.EnumMember(Value = "")]
         EmptyString,
 
         [EnumMember(Value = "0")]

@@ -36,17 +36,17 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables
         /// <summary>
         /// Exports all unsubscribed variables. The response is a CSV file by default. Set `format=json` to get a JSON array.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetV2UnsubscribesExportsVariables400Response">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable>> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables.VariablesRequestBuilder.VariablesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -56,7 +56,8 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.Exports.Variables
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UnsubscribedVariable.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return collectionResult?.AsList();
         }
         /// <summary>
         /// Exports all unsubscribed variables. The response is a CSV file by default. Set `format=json` to get a JSON array.

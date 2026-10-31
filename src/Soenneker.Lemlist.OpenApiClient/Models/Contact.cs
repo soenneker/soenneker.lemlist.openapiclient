@@ -125,6 +125,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "phonesStatuses", n => { PhonesStatuses = n.GetCollectionOfObjectValues<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "crmSync", n => { CrmSync = n.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue); } },
                 { "fieldRejections", n => { FieldRejections = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>(global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection.CreateFromDiscriminatorValue)?.AsList(); } },
+
             };
         }
         /// <summary>
