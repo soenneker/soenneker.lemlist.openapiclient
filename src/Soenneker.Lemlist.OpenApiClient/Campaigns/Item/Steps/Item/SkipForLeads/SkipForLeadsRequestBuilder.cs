@@ -41,6 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.SkipForLeads
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkipForLeads400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkipForLeads404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkipForLeads422Response">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,6 +58,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps.Item.SkipForLeads
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkipForLeads400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkipForLeads404Response.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdStepsByStepIdSkipForLeads422Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },

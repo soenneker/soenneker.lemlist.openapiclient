@@ -51,6 +51,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Leads.Item.WithEmailItemRequestBuilder.WithEmailItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -61,7 +63,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.LeadV2.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>

@@ -40,12 +40,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
         {
         }
         /// <summary>
-        /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.**Permission:** the API key&apos;s user must have the &quot;Delete companies&quot; permission, otherwise the request fails with `403 COMPANY_DELETE_NOT_ALLOWED`.
+        /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.**Permission:** the API key&apos;s user must have the &quot;Delete companies&quot; permission, otherwise the request fails with `403 COMPANY_DELETE_NOT_ALLOWED`; when that user is no longer in the team, with `403 API_USER_NOT_IN_TEAM`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -61,6 +62,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId403Response.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -75,6 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -89,6 +92,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesByCompanyId404Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -96,7 +100,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.**Permission:** the API key&apos;s user must have the &quot;Delete companies&quot; permission, otherwise the request fails with `403 COMPANY_DELETE_NOT_ALLOWED`.
+        /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.**Permission:** the API key&apos;s user must have the &quot;Delete companies&quot; permission, otherwise the request fails with `403 COMPANY_DELETE_NOT_ALLOWED`; when that user is no longer in the team, with `403 API_USER_NOT_IN_TEAM`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -143,7 +147,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies.Item
             return new global::Soenneker.Lemlist.OpenApiClient.Companies.Item.WithCompanyItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.**Permission:** the API key&apos;s user must have the &quot;Delete companies&quot; permission, otherwise the request fails with `403 COMPANY_DELETE_NOT_ALLOWED`.
+        /// Deletes a lemlist company. Refuses by default when contacts are still attached — pass `force=true` to detach them (the `companyId` field is unset on each contact) before deleting the company.**No CRM-side propagation:** only the lemlist record is removed. Designed for the contact-to-company remapping workflow: after reassigning the contacts of a duplicate company to the canonical one (via `POST /contacts/{idOrEmail}`), call this endpoint to drop the now-empty duplicate.**Permission:** the API key&apos;s user must have the &quot;Delete companies&quot; permission, otherwise the request fails with `403 COMPANY_DELETE_NOT_ALLOWED`; when that user is no longer in the team, with `403 API_USER_NOT_IN_TEAM`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithCompanyItemRequestBuilderDeleteQueryParameters 

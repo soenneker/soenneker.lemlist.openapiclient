@@ -58,6 +58,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.Campaign&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Soenneker.Lemlist.OpenApiClient.Models.Campaign>?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.CampaignsRequestBuilder.CampaignsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -68,7 +72,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Campaign>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Campaign.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Campaign>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Campaign.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
@@ -78,6 +91,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200Response?> PostAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -89,7 +106,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaigns200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Many Campaigns

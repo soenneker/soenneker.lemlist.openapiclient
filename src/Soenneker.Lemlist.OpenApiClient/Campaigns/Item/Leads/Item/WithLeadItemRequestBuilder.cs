@@ -57,6 +57,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId400PlainResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId404PlainResponseError">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.WithLeadItemRequestBuilder.WithLeadItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -67,7 +69,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId400PlainResponseError.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId404PlainResponseError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteCampaignsByCampaignIdLeadsByLeadId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Updates an existing lead and, through it, the contact and the company the lead is linked to: contact fields such as `firstName` or `jobTitle` are written on the contact, company fields such as `companyName` on the company. Only the fields in the body change. `companyName` alone renames the company the lead is linked to. When the lead has no company yet, it gets linked to a company with that name, created when needed.
@@ -76,6 +85,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response?> PatchAsync(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadIdRequest body, Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item.WithLeadItemRequestBuilder.WithLeadItemRequestBuilderPatchQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -87,7 +100,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Leads.Item
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdLeadsByLeadId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Delete or Unsubscribe LeadUnsubscribe Lead from Campaign

@@ -10,6 +10,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// <summary>
     /// Open / click / reply tracking toggles.
     /// </summary>
+    [Obsolete("")]
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestTracking : IAdditionalDataHolder, IParsable
     , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {

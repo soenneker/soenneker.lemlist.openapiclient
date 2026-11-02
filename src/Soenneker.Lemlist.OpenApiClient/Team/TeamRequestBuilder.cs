@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using Soenneker.Lemlist.OpenApiClient.Team.Credits;
 using Soenneker.Lemlist.OpenApiClient.Team.CrmUsers;
+using Soenneker.Lemlist.OpenApiClient.Team.DynamicSenderExclusions;
 using Soenneker.Lemlist.OpenApiClient.Team.Senders;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Team
         public global::Soenneker.Lemlist.OpenApiClient.Team.CrmUsers.CrmUsersRequestBuilder CrmUsers
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Team.CrmUsers.CrmUsersRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The dynamicSenderExclusions property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Team.DynamicSenderExclusions.DynamicSenderExclusionsRequestBuilder DynamicSenderExclusions
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Team.DynamicSenderExclusions.DynamicSenderExclusionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The senders property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Team.Senders.SendersRequestBuilder Senders
@@ -57,6 +63,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Team
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Team"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Lemlist.OpenApiClient.Models.Team?> GetAsync(Action<RequestConfiguration<global::Soenneker.Lemlist.OpenApiClient.Team.TeamRequestBuilder.TeamRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -67,7 +77,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Team
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Team>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Team.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.Team>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.Team.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get Team

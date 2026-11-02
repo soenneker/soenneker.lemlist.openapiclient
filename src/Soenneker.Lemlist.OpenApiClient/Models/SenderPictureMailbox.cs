@@ -70,8 +70,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private string _explicitNullValueMailboxId = default!;
 #endif
         /// <summary>Where the picture is pushed. `null` when the mailbox cannot take a picture (see `not-supported`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider? Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; AdditionalData?.Remove("provider"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider? _explicitNullValueProvider = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; AdditionalData?.Remove("provider"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider _explicitNullValueProvider = default!;
+#endif
         /// <summary>`synced`: the current picture is on the mailbox. `not-synced`: never pushed, or the picture changed since. `queued` / `syncing`: a push is in progress. `failed`: the last push failed, `lastError` says why. `not-supported`: not a Google Workspace or Microsoft 365 mailbox bought through lemlist, nothing can be pushed.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus? _explicitNullValueStatus = default!;
@@ -107,7 +114,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "hasOverride", n => { HasOverride = n.GetBoolValue(); } },
                 { "lastError", n => { LastError = n.GetStringValue(); } },
                 { "mailboxId", n => { MailboxId = n.GetStringValue(); } },
-                { "provider", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueProvider = default; _explicitNullProperties?.Remove("provider"); AdditionalData["provider"] = unknown; } else { Provider = parsed; AdditionalData.Remove("provider"); } } },
+                { "provider", n => { Provider = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider>(global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider.CreateFromDiscriminatorValue); } },
                 { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "syncedAt", n => { SyncedAt = n.GetDateTimeOffsetValue(); } },
             };
@@ -123,7 +130,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("hasOverride", HasOverride);
             writer.WriteStringValue("lastError", LastError);
             writer.WriteStringValue("mailboxId", MailboxId);
-            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider>("provider", Provider);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxProvider>("provider", Provider);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureMailboxStatus>("status", Status);
             writer.WriteDateTimeOffsetValue("syncedAt", SyncedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

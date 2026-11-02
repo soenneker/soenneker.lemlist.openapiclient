@@ -40,6 +40,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Sender
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender405Response">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender409Response">When receiving a 409 status code</exception>
@@ -56,6 +58,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Sender
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "402", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteSequencesBySequenceIdStepsByStepIdSender409Response.CreateFromDiscriminatorValue },
@@ -71,6 +75,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Sender
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdSender400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdSender404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdSender405Response">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -86,6 +92,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Sender
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdSender400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "402", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdSender404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.GetSequencesBySequenceIdStepsByStepIdSender405Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -101,6 +109,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Sender
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 402 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender404Response">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender405Response">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender409Response">When receiving a 409 status code</exception>
@@ -118,6 +128,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Sequences.Item.Steps.Item.Sender
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
+                { "402", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender404Response.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender405Response.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PutSequencesBySequenceIdStepsByStepIdSender409Response.CreateFromDiscriminatorValue },

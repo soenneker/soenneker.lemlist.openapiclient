@@ -66,6 +66,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>AI reply-handling settings. Provide only the flags to change; omitted flags keep their current value.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures? AiFeatures { get => _explicitNullValueAiFeatures; set { _explicitNullValueAiFeatures = value; AdditionalData?.Remove("aiFeatures"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("aiFeatures"); else _explicitNullProperties?.Remove("aiFeatures"); } }
@@ -76,12 +77,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAiFeatures _explicitNullValueAiFeatures = default!;
 #endif
         /// <summary>Automatically detect lead interest</summary>
+        [Obsolete("")]
         public bool? AutoLeadInterest { get => _explicitNullValueAutoLeadInterest; set { _explicitNullValueAutoLeadInterest = value; AdditionalData?.Remove("autoLeadInterest"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoLeadInterest"); else _explicitNullProperties?.Remove("autoLeadInterest"); } }
         private bool? _explicitNullValueAutoLeadInterest = default!;
         /// <summary>Automatically launch (review) leads as soon as they are added to the campaign, instead of requiring manual review.</summary>
+        [Obsolete("")]
         public bool? AutoReview { get => _explicitNullValueAutoReview; set { _explicitNullValueAutoReview = value; AdditionalData?.Remove("autoReview"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoReview"); else _explicitNullProperties?.Remove("autoReview"); } }
         private bool? _explicitNullValueAutoReview = default!;
         /// <summary>Email deliverability statuses for which a lead is auto-launched when `autoReview` is enabled. Only leads whose email verification matches one of these statuses are launched automatically. Invalid values are rejected with a `400` error.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?>? AutoReviewConditions { get => _explicitNullValueAutoReviewConditions; set { _explicitNullValueAutoReviewConditions = value; AdditionalData?.Remove("autoReviewConditions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoReviewConditions"); else _explicitNullProperties?.Remove("autoReviewConditions"); } }
@@ -92,18 +96,23 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestAutoReviewConditionsItem?> _explicitNullValueAutoReviewConditions = default!;
 #endif
         /// <summary>Disable out-of-office detection</summary>
+        [Obsolete("")]
         public bool? DisableOutOfOffice { get => _explicitNullValueDisableOutOfOffice; set { _explicitNullValueDisableOutOfOffice = value; AdditionalData?.Remove("disableOutOfOffice"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableOutOfOffice"); else _explicitNullProperties?.Remove("disableOutOfOffice"); } }
         private bool? _explicitNullValueDisableOutOfOffice = default!;
         /// <summary>Disable tracking of link clicks</summary>
+        [Obsolete("")]
         public bool? DisableTrackClick { get => _explicitNullValueDisableTrackClick; set { _explicitNullValueDisableTrackClick = value; AdditionalData?.Remove("disableTrackClick"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackClick"); else _explicitNullProperties?.Remove("disableTrackClick"); } }
         private bool? _explicitNullValueDisableTrackClick = default!;
         /// <summary>Disable tracking of email opens</summary>
+        [Obsolete("")]
         public bool? DisableTrackOpen { get => _explicitNullValueDisableTrackOpen; set { _explicitNullValueDisableTrackOpen = value; AdditionalData?.Remove("disableTrackOpen"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackOpen"); else _explicitNullProperties?.Remove("disableTrackOpen"); } }
         private bool? _explicitNullValueDisableTrackOpen = default!;
         /// <summary>Disable tracking of email replies</summary>
+        [Obsolete("")]
         public bool? DisableTrackReply { get => _explicitNullValueDisableTrackReply; set { _explicitNullValueDisableTrackReply = value; AdditionalData?.Remove("disableTrackReply"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackReply"); else _explicitNullProperties?.Remove("disableTrackReply"); } }
         private bool? _explicitNullValueDisableTrackReply = default!;
         /// <summary>Pause leads based on interest</summary>
+        [Obsolete("")]
         public bool? LeadsPausedByInterest { get => _explicitNullValueLeadsPausedByInterest; set { _explicitNullValueLeadsPausedByInterest = value; AdditionalData?.Remove("leadsPausedByInterest"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadsPausedByInterest"); else _explicitNullProperties?.Remove("leadsPausedByInterest"); } }
         private bool? _explicitNullValueLeadsPausedByInterest = default!;
         /// <summary>The campaign name</summary>
@@ -117,6 +126,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>Behavior when a lead clicks a tracked link.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked? OnLinkClicked { get => _explicitNullValueOnLinkClicked; set { _explicitNullValueOnLinkClicked = value; AdditionalData?.Remove("onLinkClicked"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onLinkClicked"); else _explicitNullProperties?.Remove("onLinkClicked"); } }
@@ -127,6 +137,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked _explicitNullValueOnLinkClicked = default!;
 #endif
         /// <summary>Behavior when a meeting is booked.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked? OnMeetingBooked { get => _explicitNullValueOnMeetingBooked; set { _explicitNullValueOnMeetingBooked = value; AdditionalData?.Remove("onMeetingBooked"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onMeetingBooked"); else _explicitNullProperties?.Remove("onMeetingBooked"); } }
@@ -137,6 +148,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnMeetingBooked _explicitNullValueOnMeetingBooked = default!;
 #endif
         /// <summary>Behavior when a lead replies.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied? OnReplied { get => _explicitNullValueOnReplied; set { _explicitNullValueOnReplied = value; AdditionalData?.Remove("onReplied"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("onReplied"); else _explicitNullProperties?.Remove("onReplied"); } }
@@ -147,9 +159,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnReplied _explicitNullValueOnReplied = default!;
 #endif
         /// <summary>Create an opportunity when a lead clicks a link</summary>
+        [Obsolete("")]
         public bool? OpportunityClicked { get => _explicitNullValueOpportunityClicked; set { _explicitNullValueOpportunityClicked = value; AdditionalData?.Remove("opportunityClicked"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opportunityClicked"); else _explicitNullProperties?.Remove("opportunityClicked"); } }
         private bool? _explicitNullValueOpportunityClicked = default!;
         /// <summary>Create an opportunity when a lead replies</summary>
+        [Obsolete("")]
         public bool? OpportunityReplied { get => _explicitNullValueOpportunityReplied; set { _explicitNullValueOpportunityReplied = value; AdditionalData?.Remove("opportunityReplied"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("opportunityReplied"); else _explicitNullProperties?.Remove("opportunityReplied"); } }
         private bool? _explicitNullValueOpportunityReplied = default!;
         /// <summary>Array of user IDs (usr_xxx format) to assign as campaign senders. Cannot be used on campaigns with a dynamic sender strategy (contactOwner, leadImporter, customField). Each sender is validated against the campaign&apos;s sending channels (email, LinkedIn, SMS, WhatsApp): senders without capabilities for at least one channel are excluded, and every channel that a lead can reach in the sequence must be covered by at least one sender. Replaces the sender pool, with the first account of each channel type for each sender. To add a sender without a replacement, pick an account or an alias, use the [Senders](/api-reference/endpoints/senders/add-campaign-senders) endpoints.</summary>
@@ -163,15 +177,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private List<string> _explicitNullValueSendUserIds = default!;
 #endif
         /// <summary>Enable sequence sharing for the campaign</summary>
+        [Obsolete("")]
         public bool? SequenceSharing { get => _explicitNullValueSequenceSharing; set { _explicitNullValueSequenceSharing = value; AdditionalData?.Remove("sequenceSharing"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sequenceSharing"); else _explicitNullProperties?.Remove("sequenceSharing"); } }
         private bool? _explicitNullValueSequenceSharing = default!;
         /// <summary>Stop the campaign when a lead replies by email</summary>
+        [Obsolete("")]
         public bool? StopOnEmailReplied { get => _explicitNullValueStopOnEmailReplied; set { _explicitNullValueStopOnEmailReplied = value; AdditionalData?.Remove("stopOnEmailReplied"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnEmailReplied"); else _explicitNullProperties?.Remove("stopOnEmailReplied"); } }
         private bool? _explicitNullValueStopOnEmailReplied = default!;
         /// <summary>Stop the campaign when a link is clicked</summary>
+        [Obsolete("")]
         public bool? StopOnLinkClicked { get => _explicitNullValueStopOnLinkClicked; set { _explicitNullValueStopOnLinkClicked = value; AdditionalData?.Remove("stopOnLinkClicked"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClicked"); else _explicitNullProperties?.Remove("stopOnLinkClicked"); } }
         private bool? _explicitNullValueStopOnLinkClicked = default!;
         /// <summary>Filter for which link clicks should stop the campaign</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? StopOnLinkClickedFilter { get => _explicitNullValueStopOnLinkClickedFilter; set { _explicitNullValueStopOnLinkClickedFilter = value; AdditionalData?.Remove("stopOnLinkClickedFilter"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnLinkClickedFilter"); else _explicitNullProperties?.Remove("stopOnLinkClickedFilter"); } }
@@ -182,9 +200,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         private string _explicitNullValueStopOnLinkClickedFilter = default!;
 #endif
         /// <summary>Stop the campaign when a meeting is booked</summary>
+        [Obsolete("")]
         public bool? StopOnMeetingBooked { get => _explicitNullValueStopOnMeetingBooked; set { _explicitNullValueStopOnMeetingBooked = value; AdditionalData?.Remove("stopOnMeetingBooked"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("stopOnMeetingBooked"); else _explicitNullProperties?.Remove("stopOnMeetingBooked"); } }
         private bool? _explicitNullValueStopOnMeetingBooked = default!;
         /// <summary>Open / click / reply tracking toggles.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestTracking? Tracking { get => _explicitNullValueTracking; set { _explicitNullValueTracking = value; AdditionalData?.Remove("tracking"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tracking"); else _explicitNullProperties?.Remove("tracking"); } }

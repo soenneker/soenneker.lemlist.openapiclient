@@ -10,6 +10,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// <summary>
     /// AI reply-handling settings. Provide only the flags to change; omitted flags keep their current value.
     /// </summary>
+    [Obsolete("")]
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestAiFeatures : IAdditionalDataHolder, IParsable
     , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {

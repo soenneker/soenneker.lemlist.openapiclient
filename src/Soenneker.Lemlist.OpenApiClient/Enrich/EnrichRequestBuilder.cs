@@ -53,6 +53,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich500Response">When receiving a 500 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich503Response">When receiving a 503 status code</exception>
@@ -69,6 +70,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Enrich
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich403Response.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich500Response.CreateFromDiscriminatorValue },
                 { "503", global::Soenneker.Lemlist.OpenApiClient.Models.PostEnrich503Response.CreateFromDiscriminatorValue },

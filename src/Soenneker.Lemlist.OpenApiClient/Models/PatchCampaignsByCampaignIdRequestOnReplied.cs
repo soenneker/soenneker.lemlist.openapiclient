@@ -10,6 +10,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// <summary>
     /// Behavior when a lead replies.
     /// </summary>
+    [Obsolete("")]
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PatchCampaignsByCampaignIdRequestOnReplied : IAdditionalDataHolder, IParsable
     , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {

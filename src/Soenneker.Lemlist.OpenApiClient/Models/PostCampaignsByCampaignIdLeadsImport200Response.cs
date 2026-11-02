@@ -17,15 +17,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("importPending") is null) { _explicitNullValueImportPending = default!; _explicitNullProperties?.Remove("importPending"); }
+            else if (parseNode.GetChildNode("importPending") is { } nullNodeImportPending && nullNodeImportPending.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImportPending = null;
             if (parseNode.GetChildNode("ok") is null) { _explicitNullValueOk = default!; _explicitNullProperties?.Remove("ok"); }
             else if (parseNode.GetChildNode("ok") is { } nullNodeOk && nullNodeOk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ok = null;
+            if (parseNode.GetChildNode("reason") is null) { _explicitNullValueReason = default!; _explicitNullProperties?.Remove("reason"); }
+            else if (parseNode.GetChildNode("reason") is { } nullNodeReason && nullNodeReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reason = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Present and `true` when no lead is imported yet: the campaign is in a state the import waits on, named by `reason`.</summary>
+        public bool? ImportPending { get => _explicitNullValueImportPending; set { _explicitNullValueImportPending = value; AdditionalData?.Remove("importPending"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("importPending"); else _explicitNullProperties?.Remove("importPending"); } }
+        private bool? _explicitNullValueImportPending = default!;
         /// <summary>The ok property</summary>
         public bool? Ok { get => _explicitNullValueOk; set { _explicitNullValueOk = value; AdditionalData?.Remove("ok"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ok"); else _explicitNullProperties?.Remove("ok"); } }
         private bool? _explicitNullValueOk = default!;
+        /// <summary>Present with `importPending`. `campaign_paused`: resume the campaign. `campaign_archived`: unarchive then resume it. `campaign_crm_sync_paused`: fix the cause shown in the campaign&apos;s import history in lemlist. The first import starts about an hour after that.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseReason? Reason { get => _explicitNullValueReason; set { _explicitNullValueReason = value; AdditionalData?.Remove("reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reason"); else _explicitNullProperties?.Remove("reason"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseReason? _explicitNullValueReason = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200Response"/> and sets the default values.
         /// </summary>
@@ -51,7 +61,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "importPending", n => { ImportPending = n.GetBoolValue(); } },
                 { "ok", n => { Ok = n.GetBoolValue(); } },
+                { "reason", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseReason>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueReason = default; _explicitNullProperties?.Remove("reason"); AdditionalData["reason"] = unknown; } else { Reason = parsed; AdditionalData.Remove("reason"); } } },
             };
         }
         /// <summary>
@@ -61,7 +73,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("importPending", ImportPending);
             writer.WriteBoolValue("ok", Ok);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeadsImport200ResponseReason>("reason", Reason);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

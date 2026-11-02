@@ -41,6 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,6 +57,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables403Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables409Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -70,6 +72,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -85,6 +88,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables403Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables409Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -99,6 +103,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables400Response">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables403Response">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables409Response">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -114,6 +119,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables400Response.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables403Response.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables409Response.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },

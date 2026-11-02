@@ -77,6 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts400ResponseError">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 504 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -92,6 +93,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts400ResponseError.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorMessage.CreateFromDiscriminatorValue },
                 { "504", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -100,13 +102,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContacts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`. Updating an existing contact does not.
+        /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`; when that user is no longer in the team, with `403 API_USER_NOT_IN_TEAM`. Updating an existing contact does not.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContactsSuccessResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts400Response">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope">When receiving a 409 status code</exception>
@@ -126,6 +129,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PostContacts400Response.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Lemlist.OpenApiClient.Models.ApiErrorEnvelope.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.CrmIdLinkErrorEnvelope.CreateFromDiscriminatorValue },
@@ -156,7 +160,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             return requestInfo;
         }
         /// <summary>
-        /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`. Updating an existing contact does not.
+        /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`; when that user is no longer in the team, with `403 API_USER_NOT_IN_TEAM`. Updating an existing contact does not.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -302,7 +306,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts
             public bool? WithPrimaryCompany { get; set; }
         }
         /// <summary>
-        /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`. Updating an existing contact does not.
+        /// Creates a new contact or updates an existing one (upsert). If a contact with the same email, LinkedIn URL, or Sales Navigator URL already exists, it is updated as the `updateStrategy` query parameter says (by default, sent values replace stored ones and empty values are ignored). You can target an existing contact directly by providing `contactId`, bypassing email/LinkedIn matching. You can optionally link the contact to a company by providing `companyId`, `companyDomain`, or `companyLinkedinUrl`.**Permission:** creating a contact requires the &quot;Create contacts&quot; permission on the API key&apos;s user, otherwise the request fails with `403 CONTACT_CREATE_NOT_ALLOWED`; when that user is no longer in the team, with `403 API_USER_NOT_IN_TEAM`. Updating an existing contact does not.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ContactsRequestBuilderPostQueryParameters 
