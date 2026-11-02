@@ -42745,7 +42745,8 @@
             "format": "date-time"
           }
         },
-        "description": "\u0060null\u0060 until the team saves its self-recovery configuration for the first time."
+        "description": "\u0060null\u0060 until the team saves its self-recovery configuration for the first time.",
+        "nullable": true
       },
       "GetTeamSenders200ResponseItem": {
         "type": "object",
