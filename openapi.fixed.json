@@ -24387,7 +24387,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060.",
+            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060: Pubrio vertical names): a value with no match is listed with reason \u0060INVALID_FILTER_VALUE\u0060.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -24490,6 +24490,21 @@
               }
             }
           },
+          "503": {
+            "description": "The taxonomy backend used to validate autocomplete filter values (\u0060companyIndustries\u0060, locations\u2026) is temporarily unavailable \u2014 \u0060WATCH_LIST_API_TAXONOMY_UNAVAILABLE\u0060. Retry shortly.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWatchlist503Response"
+                },
+                "example": {
+                  "error": "The search taxonomy backend is temporarily unavailable \u2014 retry shortly",
+                  "code": "WATCH_LIST_API_TAXONOMY_UNAVAILABLE"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -24546,7 +24561,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060.",
+            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the agent\u0027s signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060: Pubrio vertical names).",
             "content": {
               "text/plain": {
                 "schema": {
@@ -24608,6 +24623,21 @@
                   "$ref": "#/components/schemas/ResponseError"
                 },
                 "example": "Monitoring limit exceeded"
+              }
+            }
+          },
+          "503": {
+            "description": "The taxonomy backend used to validate autocomplete filter values (\u0060companyIndustries\u0060, locations\u2026) is temporarily unavailable \u2014 \u0060WATCH_LIST_API_TAXONOMY_UNAVAILABLE\u0060. Retry shortly.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchWatchlist503Response"
+                },
+                "example": {
+                  "error": "The search taxonomy backend is temporarily unavailable \u2014 retry shortly",
+                  "code": "WATCH_LIST_API_TAXONOMY_UNAVAILABLE"
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -25107,9 +25137,18 @@
             "example": "companyIndustries"
           },
           {
+            "name": "type",
+            "in": "query",
+            "description": "Signal type the filter is resolved for. Some filters change vocabulary per type: \u0060companyIndustries\u0060 with \u0060type=companyRunningAds\u0060 returns Pubrio vertical names (keyword search, \u0060query\u0060 required, at most 25 matches); without \u0060type\u0060 the filter resolves against the default taxonomy.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "companyRunningAds"
+          },
+          {
             "name": "query",
             "in": "query",
-            "description": "Search text (required for autocomplete filters). 1-100 characters.",
+            "description": "Search text, 1-100 characters. Required when [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters) returns \u0060requiresQuery: true\u0060 for the filter on that \u0060type\u0060 \u2014 \u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 included: a missing or blank \u0060query\u0060 is a \u0060400 WATCH_LIST_API_INVALID_QUERY\u0060. Static (select) filters ignore it.",
             "schema": {
               "maxLength": 100,
               "minLength": 1,
@@ -25130,13 +25169,23 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid filterId or query",
+            "description": "Validation error - invalid filterId, type or query. \u0060WATCH_LIST_API_INVALID_QUERY\u0060 also when \u0060query\u0060 is missing for a filter that requires one on the given \u0060type\u0060.",
             "content": {
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseError"
                 },
                 "example": "filterId is not a supported watch list autocomplete filter"
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWatchlistFilterValues400Response"
+                },
+                "example": {
+                  "error": "query must be a non-empty string of at most 100 characters",
+                  "code": "WATCH_LIST_API_INVALID_QUERY"
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -29682,7 +29731,10 @@
             "description": "Sales Navigator company URL. Returned by \u0060GET /companies/{companyId}\u0060 and the \u0060idsOrDomains\u0060 and \u0060crmIds\u0060 lookups; the paginated list returns it only when requested with \u0060fields\u0060."
           },
           "fields": {
-            "$ref": "#/components/schemas/CompanyFieldsProperty"
+            "$ref": "#/components/schemas/CompanyFields"
+          },
+          "accountPenetration": {
+            "$ref": "#/components/schemas/CompanyAccountPenetration"
           },
           "createdBy": {
             "type": "string",
@@ -31811,6 +31863,10 @@
           "max": {
             "type": "number",
             "description": "Maximum value (numeric filters)"
+          },
+          "requiresQuery": {
+            "type": "boolean",
+            "description": "When true, \u0060GET /watchlist/filter-values\u0060 needs a \u0060query\u0060 for this filter: it runs a keyword search and has no full-list mode. Depends on the signal \u0060type\u0060, not only on the filter \u2014 e.g. \u0060companyIndustries\u0060 is \u0060requiresQuery: true\u0060 on \u0060companyRunningAds\u0060 (Pubrio vertical names) and absent on the other company types."
           }
         },
         "description": "Describes a filter that can be set on a Signal Agent of a given type."
@@ -33658,6 +33714,31 @@
         },
         "description": "CRM sync status for the contact, resolved against the team\u0027s active CRM provider. Only present when a CRM is connected and the contact is linked to a record in it or was searched for in it. Read \u0060searching\u0060 and \u0060notFoundAt\u0060 to follow a Search \u0026 connect or Create in CRM."
       },
+      "CompanyFields": {
+        "type": "object",
+        "properties": {
+          "accountPenetration": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "number",
+            "description": "Percentage of the company\u0027s eligible contacts already contacted, computed by lemlist and refreshed as contacts are reached. Read-only: it cannot be written through the API. \u00600\u0060 with an \u0060accountPenetration.eligibleCount\u0060 above \u00600\u0060 means none has been contacted yet. A company with no eligible contact (\u0060eligibleCount\u0060 \u00600\u0060) has it absent, or \u00600\u0060 when it previously had eligible contacts. Absent with no \u0060accountPenetration\u0060 object means not computed yet, which can also be a company with no eligible contact.",
+            "readOnly": true
+          }
+        },
+        "description": "Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under \u0060fields\u0060, never at the top level of the object."
+      },
+      "CompanyAccountPenetration": {
+        "type": "object",
+        "properties": {
+          "eligibleCount": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Number of the company\u0027s contacts eligible for account penetration. \u00600\u0060 means the company has no eligible contact: \u0060fields.accountPenetration\u0060 is then absent or \u00600\u0060, and does not mean none was contacted."
+          }
+        },
+        "description": "Counts behind \u0060fields.accountPenetration\u0060. Absent until computed.",
+        "readOnly": true
+      },
       "CompanyCrmSync": {
         "type": "object",
         "properties": {
@@ -34627,6 +34708,50 @@
           "promotionStartDate": {
             "type": "string",
             "description": "[promotion] Promotion start date"
+          },
+          "adPlatform": {
+            "$ref": "#/components/schemas/SignalSchemaSignalDataAdPlatform"
+          },
+          "adHeadline": {
+            "type": "string",
+            "description": "[companyRunningAds] Ad headline (truncated to 256 characters)"
+          },
+          "adFormat": {
+            "$ref": "#/components/schemas/SignalSchemaSignalDataAdFormat"
+          },
+          "adDestinationUrl": {
+            "type": "string",
+            "description": "[companyRunningAds] Landing page the ad links to (http(s) only, absent otherwise)"
+          },
+          "adTargetCountries": {
+            "type": "string",
+            "description": "[companyRunningAds] Countries the ad targets, ISO alpha-2 codes joined by \u0060, \u0060 (e.g. \u0060FR, DE\u0060)"
+          },
+          "adImpressions": {
+            "type": "string",
+            "description": "[companyRunningAds] Impression range reported by the provider (e.g. \u006010k-20k\u0060, \u0060\u003C 1k\u0060). Often absent while the ad is still running"
+          },
+          "adStartDate": {
+            "type": "string",
+            "description": "[companyRunningAds] Ad start date (UTC midnight)",
+            "format": "date-time"
+          },
+          "adEndDate": {
+            "type": "string",
+            "description": "[companyRunningAds] Ad end date (UTC midnight). Absent while the ad is still running",
+            "format": "date-time"
+          },
+          "adUrl": {
+            "type": "string",
+            "description": "[companyRunningAds] Link to the ad in the platform\u0027s ad library (http(s) only)"
+          },
+          "adImageUrl": {
+            "type": "string",
+            "description": "[companyRunningAds] Creative preview URL. Absent for non-image ads"
+          },
+          "adsCount": {
+            "type": "integer",
+            "description": "[companyRunningAds] Number of ads delivered for the company in this signal"
           },
           "externalSignalCustomFields": {
             "$ref": "#/components/schemas/SignalSchemaSignalDataExternalSignalCustomFieldsProperty"
@@ -41983,6 +42108,17 @@
           }
         }
       },
+      "PostWatchlist503Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PatchWatchlistRequest": {
         "required": [
           "watchListId"
@@ -42018,6 +42154,17 @@
           "activate": {
             "type": "boolean",
             "description": "Toggle the agent status. false deactivates (pauses) it immediately. true activates a draft or reactivates a paused agent (triggers billing and external watcher setup). A draft cannot be paused. Omit to leave the status unchanged."
+          }
+        }
+      },
+      "PatchWatchlist503Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
           }
         }
       },
@@ -42094,6 +42241,17 @@
         "type": "object",
         "properties": {
           "error": {
+            "type": "string"
+          }
+        }
+      },
+      "GetWatchlistFilterValues400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
             "type": "string"
           }
         }
@@ -43731,10 +43889,6 @@
       "ContactFieldsProperty": {
         "type": "object",
         "description": "Contact fields, standard (\u0060firstName\u0060, \u0060lastName\u0060, \u0060phone\u0060, \u0060jobTitle\u0060...) and custom"
-      },
-      "CompanyFieldsProperty": {
-        "type": "object",
-        "description": "Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under \u0060fields\u0060, never at the top level of the object."
       },
       "CrmLogUpdatedFieldsProperty": {
         "type": "object",
@@ -49965,7 +50119,8 @@
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
           "githubStargazer",
-          "linkedinProfileViews"
+          "linkedinProfileViews",
+          "companyRunningAds"
         ],
         "type": "string",
         "description": "Signal type",
@@ -50092,6 +50247,10 @@
             {
               "value": "linkedinProfileViews",
               "name": "LinkedinProfileViews"
+            },
+            {
+              "value": "companyRunningAds",
+              "name": "CompanyRunningAds"
             }
           ]
         }
@@ -50159,7 +50318,8 @@
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
           "githubStargazer",
-          "linkedinProfileViews"
+          "linkedinProfileViews",
+          "companyRunningAds"
         ],
         "type": "string",
         "description": "Signal type monitored by this Signal Agent",
@@ -50286,6 +50446,10 @@
             {
               "value": "linkedinProfileViews",
               "name": "LinkedinProfileViews"
+            },
+            {
+              "value": "companyRunningAds",
+              "name": "CompanyRunningAds"
             }
           ]
         }
@@ -50465,7 +50629,11 @@
           "minJobCount",
           "timeframe",
           "githubRepoUrls",
-          "linkedinProfileViewsUserIds"
+          "linkedinProfileViewsUserIds",
+          "adPlatforms",
+          "adFormats",
+          "adTargetCountries",
+          "adSearchTerms"
         ],
         "type": "string",
         "description": "Filter identifier",
@@ -50636,6 +50804,22 @@
             {
               "value": "linkedinProfileViewsUserIds",
               "name": "LinkedinProfileViewsUserIds"
+            },
+            {
+              "value": "adPlatforms",
+              "name": "AdPlatforms"
+            },
+            {
+              "value": "adFormats",
+              "name": "AdFormats"
+            },
+            {
+              "value": "adTargetCountries",
+              "name": "AdTargetCountries"
+            },
+            {
+              "value": "adSearchTerms",
+              "name": "AdSearchTerms"
             }
           ]
         }
@@ -50671,7 +50855,8 @@
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
           "githubStargazer",
-          "linkedinProfileViews"
+          "linkedinProfileViews",
+          "companyRunningAds"
         ],
         "type": "string",
         "description": "Signal type",
@@ -50798,6 +50983,10 @@
             {
               "value": "linkedinProfileViews",
               "name": "LinkedinProfileViews"
+            },
+            {
+              "value": "companyRunningAds",
+              "name": "CompanyRunningAds"
             }
           ]
         }
@@ -50950,7 +51139,8 @@
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
           "githubStargazer",
-          "linkedinProfileViews"
+          "linkedinProfileViews",
+          "companyRunningAds"
         ],
         "type": "string",
         "description": "Signal type identifier",
@@ -51073,6 +51263,10 @@
             {
               "value": "linkedinProfileViews",
               "name": "LinkedinProfileViews"
+            },
+            {
+              "value": "companyRunningAds",
+              "name": "CompanyRunningAds"
             }
           ]
         }
@@ -52140,6 +52334,120 @@
             {
               "value": "ROUTE_BAD_METHOD",
               "name": "RouteBadMethod"
+            }
+          ]
+        }
+      },
+      "SignalSchemaSignalDataAdPlatform": {
+        "enum": [
+          "linkedin",
+          "facebook",
+          "google",
+          "tiktok",
+          "apple"
+        ],
+        "type": "string",
+        "description": "[companyRunningAds] Platform of the company\u0027s most recent ad",
+        "x-ms-enum": {
+          "name": "SignalSchemaSignalDataAdPlatform",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "linkedin",
+              "name": "Linkedin"
+            },
+            {
+              "value": "facebook",
+              "name": "Facebook"
+            },
+            {
+              "value": "google",
+              "name": "Google"
+            },
+            {
+              "value": "tiktok",
+              "name": "Tiktok"
+            },
+            {
+              "value": "apple",
+              "name": "Apple"
+            }
+          ]
+        }
+      },
+      "SignalSchemaSignalDataAdFormat": {
+        "enum": [
+          "image",
+          "video",
+          "text",
+          "carousel",
+          "dynamic_product",
+          "document",
+          "message",
+          "event",
+          "article",
+          "spotlight",
+          "follow",
+          "job",
+          "engagement"
+        ],
+        "type": "string",
+        "description": "[companyRunningAds] Ad format",
+        "x-ms-enum": {
+          "name": "SignalSchemaSignalDataAdFormat",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "image",
+              "name": "Image"
+            },
+            {
+              "value": "video",
+              "name": "Video"
+            },
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "carousel",
+              "name": "Carousel"
+            },
+            {
+              "value": "dynamic_product",
+              "name": "DynamicProduct"
+            },
+            {
+              "value": "document",
+              "name": "Document"
+            },
+            {
+              "value": "message",
+              "name": "Message"
+            },
+            {
+              "value": "event",
+              "name": "EventValue"
+            },
+            {
+              "value": "article",
+              "name": "Article"
+            },
+            {
+              "value": "spotlight",
+              "name": "Spotlight"
+            },
+            {
+              "value": "follow",
+              "name": "Follow"
+            },
+            {
+              "value": "job",
+              "name": "Job"
+            },
+            {
+              "value": "engagement",
+              "name": "Engagement"
             }
           ]
         }
@@ -54789,7 +55097,8 @@
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
           "githubStargazer",
-          "linkedinProfileViews"
+          "linkedinProfileViews",
+          "companyRunningAds"
         ],
         "type": "string",
         "description": "Signal type to monitor",
@@ -54912,6 +55221,10 @@
             {
               "value": "linkedinProfileViews",
               "name": "LinkedinProfileViews"
+            },
+            {
+              "value": "companyRunningAds",
+              "name": "CompanyRunningAds"
             }
           ]
         }
@@ -58683,7 +58996,8 @@
           "outagesAndSecurityBreaches",
           "lawsuitsAndLegalIssues",
           "githubStargazer",
-          "linkedinProfileViews"
+          "linkedinProfileViews",
+          "companyRunningAds"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -58805,6 +59119,10 @@
             {
               "value": "linkedinProfileViews",
               "name": "LinkedinProfileViews"
+            },
+            {
+              "value": "companyRunningAds",
+              "name": "CompanyRunningAds"
             }
           ]
         }
@@ -58850,7 +59168,11 @@
           "crmListIds",
           "minJobCount",
           "timeframe",
-          "linkedinProfileViewsUserIds"
+          "linkedinProfileViewsUserIds",
+          "adPlatforms",
+          "adFormats",
+          "adTargetCountries",
+          "adSearchTerms"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -59016,6 +59338,22 @@
             {
               "value": "linkedinProfileViewsUserIds",
               "name": "LinkedinProfileViewsUserIds"
+            },
+            {
+              "value": "adPlatforms",
+              "name": "AdPlatforms"
+            },
+            {
+              "value": "adFormats",
+              "name": "AdFormats"
+            },
+            {
+              "value": "adTargetCountries",
+              "name": "AdTargetCountries"
+            },
+            {
+              "value": "adSearchTerms",
+              "name": "AdSearchTerms"
             }
           ]
         }
@@ -59681,10 +60019,6 @@
     "ContactFields": {
       "type": "object",
       "description": "Contact fields, standard (\u0060firstName\u0060, \u0060lastName\u0060, \u0060phone\u0060, \u0060jobTitle\u0060...) and custom"
-    },
-    "CompanyFields": {
-      "type": "object",
-      "description": "Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under \u0060fields\u0060, never at the top level of the object."
     },
     "CrmLogUpdatedFields": {
       "type": "object",

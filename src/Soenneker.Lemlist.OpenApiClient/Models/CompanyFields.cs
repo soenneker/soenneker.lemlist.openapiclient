@@ -11,7 +11,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
     /// Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under `fields`, never at the top level of the object.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CompanyFieldsProperty : IAdditionalDataHolder, IParsable
+    public partial class CompanyFields : IAdditionalDataHolder, IParsable
     , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
         // Track explicitly assigned nulls separately from absent properties.
         private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
@@ -20,24 +20,26 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
         }
 
+        /// <summary>Percentage of the company&apos;s eligible contacts already contacted, computed by lemlist and refreshed as contacts are reached. Read-only: it cannot be written through the API. `0` with an `accountPenetration.eligibleCount` above `0` means none has been contacted yet. A company with no eligible contact (`eligibleCount` `0`) has it absent, or `0` when it previously had eligible contacts. Absent with no `accountPenetration` object means not computed yet, which can also be a company with no eligible contact.</summary>
+        public double? AccountPenetration { get; private set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields"/> and sets the default values.
         /// </summary>
-        public CompanyFieldsProperty()
+        public CompanyFields()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty(), parseNode);
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -47,6 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accountPenetration", n => { AccountPenetration = n.GetDoubleValue(); } },
             };
         }
         /// <summary>

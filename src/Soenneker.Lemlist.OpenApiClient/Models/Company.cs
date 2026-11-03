@@ -44,6 +44,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("teamId") is { } nullNodeTeamId && nullNodeTeamId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamId = null;
         }
 
+        /// <summary>Counts behind `fields.accountPenetration`. Absent until computed.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyAccountPenetration? AccountPenetration { get; private set; }
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyAccountPenetration AccountPenetration { get; private set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Creation timestamp</summary>
@@ -92,12 +100,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Key/value attributes of the company, standard and custom (e.g., name, picture, industry, location, size, foundedOn). These values are always under `fields`, never at the top level of the object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty? Fields { get => _explicitNullValueFields; set { _explicitNullValueFields = value; AdditionalData?.Remove("fields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fields"); else _explicitNullProperties?.Remove("fields"); } }
-        private global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty? _explicitNullValueFields = default!;
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields? Fields { get => _explicitNullValueFields; set { _explicitNullValueFields = value; AdditionalData?.Remove("fields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fields"); else _explicitNullProperties?.Remove("fields"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields? _explicitNullValueFields = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty Fields { get => _explicitNullValueFields; set { _explicitNullValueFields = value; AdditionalData?.Remove("fields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fields"); else _explicitNullProperties?.Remove("fields"); } }
-        private global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty _explicitNullValueFields = default!;
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields Fields { get => _explicitNullValueFields; set { _explicitNullValueFields = value; AdditionalData?.Remove("fields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fields"); else _explicitNullProperties?.Remove("fields"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields _explicitNullValueFields = default!;
 #endif
         /// <summary>Unique company identifier</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -184,12 +192,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accountPenetration", n => { AccountPenetration = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyAccountPenetration>(global::Soenneker.Lemlist.OpenApiClient.Models.CompanyAccountPenetration.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "createdBy", n => { CreatedBy = n.GetStringValue(); } },
                 { "crmSync", n => { CrmSync = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyCrmSync>(global::Soenneker.Lemlist.OpenApiClient.Models.CompanyCrmSync.CreateFromDiscriminatorValue); } },
                 { "domain", n => { Domain = n.GetStringValue(); } },
                 { "fieldRejections", n => { FieldRejections = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>(global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "fields", n => { Fields = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty.CreateFromDiscriminatorValue); } },
+                { "fields", n => { Fields = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields>(global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields.CreateFromDiscriminatorValue); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
                 { "linkedinUrlSalesNav", n => { LinkedinUrlSalesNav = n.GetStringValue(); } },
@@ -210,7 +219,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyCrmSync>("crmSync", CrmSync);
             writer.WriteStringValue("domain", Domain);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.FieldRejection>("fieldRejections", FieldRejections);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFieldsProperty>("fields", Fields);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompanyFields>("fields", Fields);
             writer.WriteStringValue("_id", Id);
             writer.WriteStringValue("linkedinUrl", LinkedinUrl);
             writer.WriteStringValue("linkedinUrlSalesNav", LinkedinUrlSalesNav);

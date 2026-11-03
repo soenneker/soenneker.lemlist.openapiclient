@@ -171,5 +171,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         LinkedinProfileViewsUserIds,
         #pragma warning restore CS1591
+        [EnumMember(Value = "adPlatforms")]
+        #pragma warning disable CS1591
+        AdPlatforms,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "adFormats")]
+        #pragma warning disable CS1591
+        AdFormats,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "adTargetCountries")]
+        #pragma warning disable CS1591
+        AdTargetCountries,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "adSearchTerms")]
+        #pragma warning disable CS1591
+        AdSearchTerms,
+        #pragma warning restore CS1591
     }
 }

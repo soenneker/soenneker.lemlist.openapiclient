@@ -32,6 +32,28 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("acquirerWebsite") is { } nullNodeAcquirerWebsite && nullNodeAcquirerWebsite.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AcquirerWebsite = null;
             if (parseNode.GetChildNode("acquisitionType") is null) { _explicitNullValueAcquisitionType = default!; _explicitNullProperties?.Remove("acquisitionType"); }
             else if (parseNode.GetChildNode("acquisitionType") is { } nullNodeAcquisitionType && nullNodeAcquisitionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AcquisitionType = null;
+            if (parseNode.GetChildNode("adDestinationUrl") is null) { _explicitNullValueAdDestinationUrl = default!; _explicitNullProperties?.Remove("adDestinationUrl"); }
+            else if (parseNode.GetChildNode("adDestinationUrl") is { } nullNodeAdDestinationUrl && nullNodeAdDestinationUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdDestinationUrl = null;
+            if (parseNode.GetChildNode("adEndDate") is null) { _explicitNullValueAdEndDate = default!; _explicitNullProperties?.Remove("adEndDate"); }
+            else if (parseNode.GetChildNode("adEndDate") is { } nullNodeAdEndDate && nullNodeAdEndDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdEndDate = null;
+            if (parseNode.GetChildNode("adFormat") is null) { _explicitNullValueAdFormat = default!; _explicitNullProperties?.Remove("adFormat"); }
+            else if (parseNode.GetChildNode("adFormat") is { } nullNodeAdFormat && nullNodeAdFormat.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdFormat = null;
+            if (parseNode.GetChildNode("adHeadline") is null) { _explicitNullValueAdHeadline = default!; _explicitNullProperties?.Remove("adHeadline"); }
+            else if (parseNode.GetChildNode("adHeadline") is { } nullNodeAdHeadline && nullNodeAdHeadline.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdHeadline = null;
+            if (parseNode.GetChildNode("adImageUrl") is null) { _explicitNullValueAdImageUrl = default!; _explicitNullProperties?.Remove("adImageUrl"); }
+            else if (parseNode.GetChildNode("adImageUrl") is { } nullNodeAdImageUrl && nullNodeAdImageUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdImageUrl = null;
+            if (parseNode.GetChildNode("adImpressions") is null) { _explicitNullValueAdImpressions = default!; _explicitNullProperties?.Remove("adImpressions"); }
+            else if (parseNode.GetChildNode("adImpressions") is { } nullNodeAdImpressions && nullNodeAdImpressions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdImpressions = null;
+            if (parseNode.GetChildNode("adPlatform") is null) { _explicitNullValueAdPlatform = default!; _explicitNullProperties?.Remove("adPlatform"); }
+            else if (parseNode.GetChildNode("adPlatform") is { } nullNodeAdPlatform && nullNodeAdPlatform.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdPlatform = null;
+            if (parseNode.GetChildNode("adsCount") is null) { _explicitNullValueAdsCount = default!; _explicitNullProperties?.Remove("adsCount"); }
+            else if (parseNode.GetChildNode("adsCount") is { } nullNodeAdsCount && nullNodeAdsCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdsCount = null;
+            if (parseNode.GetChildNode("adStartDate") is null) { _explicitNullValueAdStartDate = default!; _explicitNullProperties?.Remove("adStartDate"); }
+            else if (parseNode.GetChildNode("adStartDate") is { } nullNodeAdStartDate && nullNodeAdStartDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdStartDate = null;
+            if (parseNode.GetChildNode("adTargetCountries") is null) { _explicitNullValueAdTargetCountries = default!; _explicitNullProperties?.Remove("adTargetCountries"); }
+            else if (parseNode.GetChildNode("adTargetCountries") is { } nullNodeAdTargetCountries && nullNodeAdTargetCountries.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdTargetCountries = null;
+            if (parseNode.GetChildNode("adUrl") is null) { _explicitNullValueAdUrl = default!; _explicitNullProperties?.Remove("adUrl"); }
+            else if (parseNode.GetChildNode("adUrl") is { } nullNodeAdUrl && nullNodeAdUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdUrl = null;
             if (parseNode.GetChildNode("announcementDate") is null) { _explicitNullValueAnnouncementDate = default!; _explicitNullProperties?.Remove("announcementDate"); }
             else if (parseNode.GetChildNode("announcementDate") is { } nullNodeAnnouncementDate && nullNodeAnnouncementDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AnnouncementDate = null;
             if (parseNode.GetChildNode("buyingIntentTopics") is null) { _explicitNullValueBuyingIntentTopics = default!; _explicitNullProperties?.Remove("buyingIntentTopics"); }
@@ -298,8 +320,83 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string AcquisitionType { get => _explicitNullValueAcquisitionType; set { _explicitNullValueAcquisitionType = value; AdditionalData?.Remove("acquisitionType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("acquisitionType"); else _explicitNullProperties?.Remove("acquisitionType"); } }
         private string _explicitNullValueAcquisitionType = default!;
 #endif
+        /// <summary>[companyRunningAds] Landing page the ad links to (http(s) only, absent otherwise)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdDestinationUrl { get => _explicitNullValueAdDestinationUrl; set { _explicitNullValueAdDestinationUrl = value; AdditionalData?.Remove("adDestinationUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adDestinationUrl"); else _explicitNullProperties?.Remove("adDestinationUrl"); } }
+        private string? _explicitNullValueAdDestinationUrl = default!;
+#nullable restore
+#else
+        public string AdDestinationUrl { get => _explicitNullValueAdDestinationUrl; set { _explicitNullValueAdDestinationUrl = value; AdditionalData?.Remove("adDestinationUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adDestinationUrl"); else _explicitNullProperties?.Remove("adDestinationUrl"); } }
+        private string _explicitNullValueAdDestinationUrl = default!;
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>[companyRunningAds] Ad end date (UTC midnight). Absent while the ad is still running</summary>
+        public DateTimeOffset? AdEndDate { get => _explicitNullValueAdEndDate; set { _explicitNullValueAdEndDate = value; AdditionalData?.Remove("adEndDate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adEndDate"); else _explicitNullProperties?.Remove("adEndDate"); } }
+        private DateTimeOffset? _explicitNullValueAdEndDate = default!;
+        /// <summary>[companyRunningAds] Ad format</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdFormat? AdFormat { get => _explicitNullValueAdFormat; set { _explicitNullValueAdFormat = value; AdditionalData?.Remove("adFormat"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adFormat"); else _explicitNullProperties?.Remove("adFormat"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdFormat? _explicitNullValueAdFormat = default!;
+        /// <summary>[companyRunningAds] Ad headline (truncated to 256 characters)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdHeadline { get => _explicitNullValueAdHeadline; set { _explicitNullValueAdHeadline = value; AdditionalData?.Remove("adHeadline"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adHeadline"); else _explicitNullProperties?.Remove("adHeadline"); } }
+        private string? _explicitNullValueAdHeadline = default!;
+#nullable restore
+#else
+        public string AdHeadline { get => _explicitNullValueAdHeadline; set { _explicitNullValueAdHeadline = value; AdditionalData?.Remove("adHeadline"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adHeadline"); else _explicitNullProperties?.Remove("adHeadline"); } }
+        private string _explicitNullValueAdHeadline = default!;
+#endif
+        /// <summary>[companyRunningAds] Creative preview URL. Absent for non-image ads</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdImageUrl { get => _explicitNullValueAdImageUrl; set { _explicitNullValueAdImageUrl = value; AdditionalData?.Remove("adImageUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adImageUrl"); else _explicitNullProperties?.Remove("adImageUrl"); } }
+        private string? _explicitNullValueAdImageUrl = default!;
+#nullable restore
+#else
+        public string AdImageUrl { get => _explicitNullValueAdImageUrl; set { _explicitNullValueAdImageUrl = value; AdditionalData?.Remove("adImageUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adImageUrl"); else _explicitNullProperties?.Remove("adImageUrl"); } }
+        private string _explicitNullValueAdImageUrl = default!;
+#endif
+        /// <summary>[companyRunningAds] Impression range reported by the provider (e.g. `10k-20k`, `&lt; 1k`). Often absent while the ad is still running</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdImpressions { get => _explicitNullValueAdImpressions; set { _explicitNullValueAdImpressions = value; AdditionalData?.Remove("adImpressions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adImpressions"); else _explicitNullProperties?.Remove("adImpressions"); } }
+        private string? _explicitNullValueAdImpressions = default!;
+#nullable restore
+#else
+        public string AdImpressions { get => _explicitNullValueAdImpressions; set { _explicitNullValueAdImpressions = value; AdditionalData?.Remove("adImpressions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adImpressions"); else _explicitNullProperties?.Remove("adImpressions"); } }
+        private string _explicitNullValueAdImpressions = default!;
+#endif
+        /// <summary>[companyRunningAds] Platform of the company&apos;s most recent ad</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdPlatform? AdPlatform { get => _explicitNullValueAdPlatform; set { _explicitNullValueAdPlatform = value; AdditionalData?.Remove("adPlatform"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adPlatform"); else _explicitNullProperties?.Remove("adPlatform"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdPlatform? _explicitNullValueAdPlatform = default!;
+        /// <summary>[companyRunningAds] Number of ads delivered for the company in this signal</summary>
+        public int? AdsCount { get => _explicitNullValueAdsCount; set { _explicitNullValueAdsCount = value; AdditionalData?.Remove("adsCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adsCount"); else _explicitNullProperties?.Remove("adsCount"); } }
+        private int? _explicitNullValueAdsCount = default!;
+        /// <summary>[companyRunningAds] Ad start date (UTC midnight)</summary>
+        public DateTimeOffset? AdStartDate { get => _explicitNullValueAdStartDate; set { _explicitNullValueAdStartDate = value; AdditionalData?.Remove("adStartDate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adStartDate"); else _explicitNullProperties?.Remove("adStartDate"); } }
+        private DateTimeOffset? _explicitNullValueAdStartDate = default!;
+        /// <summary>[companyRunningAds] Countries the ad targets, ISO alpha-2 codes joined by `, ` (e.g. `FR, DE`)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdTargetCountries { get => _explicitNullValueAdTargetCountries; set { _explicitNullValueAdTargetCountries = value; AdditionalData?.Remove("adTargetCountries"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adTargetCountries"); else _explicitNullProperties?.Remove("adTargetCountries"); } }
+        private string? _explicitNullValueAdTargetCountries = default!;
+#nullable restore
+#else
+        public string AdTargetCountries { get => _explicitNullValueAdTargetCountries; set { _explicitNullValueAdTargetCountries = value; AdditionalData?.Remove("adTargetCountries"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adTargetCountries"); else _explicitNullProperties?.Remove("adTargetCountries"); } }
+        private string _explicitNullValueAdTargetCountries = default!;
+#endif
+        /// <summary>[companyRunningAds] Link to the ad in the platform&apos;s ad library (http(s) only)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdUrl { get => _explicitNullValueAdUrl; set { _explicitNullValueAdUrl = value; AdditionalData?.Remove("adUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adUrl"); else _explicitNullProperties?.Remove("adUrl"); } }
+        private string? _explicitNullValueAdUrl = default!;
+#nullable restore
+#else
+        public string AdUrl { get => _explicitNullValueAdUrl; set { _explicitNullValueAdUrl = value; AdditionalData?.Remove("adUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adUrl"); else _explicitNullProperties?.Remove("adUrl"); } }
+        private string _explicitNullValueAdUrl = default!;
+#endif
         /// <summary>[mergersAcquisitions] Announcement date</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -1232,6 +1329,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "acquirerName", n => { AcquirerName = n.GetStringValue(); } },
                 { "acquirerWebsite", n => { AcquirerWebsite = n.GetStringValue(); } },
                 { "acquisitionType", n => { AcquisitionType = n.GetStringValue(); } },
+                { "adDestinationUrl", n => { AdDestinationUrl = n.GetStringValue(); } },
+                { "adEndDate", n => { AdEndDate = n.GetDateTimeOffsetValue(); } },
+                { "adFormat", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdFormat>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueAdFormat = default; _explicitNullProperties?.Remove("adFormat"); AdditionalData["adFormat"] = unknown; } else { AdFormat = parsed; AdditionalData.Remove("adFormat"); } } },
+                { "adHeadline", n => { AdHeadline = n.GetStringValue(); } },
+                { "adImageUrl", n => { AdImageUrl = n.GetStringValue(); } },
+                { "adImpressions", n => { AdImpressions = n.GetStringValue(); } },
+                { "adPlatform", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdPlatform>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueAdPlatform = default; _explicitNullProperties?.Remove("adPlatform"); AdditionalData["adPlatform"] = unknown; } else { AdPlatform = parsed; AdditionalData.Remove("adPlatform"); } } },
+                { "adStartDate", n => { AdStartDate = n.GetDateTimeOffsetValue(); } },
+                { "adTargetCountries", n => { AdTargetCountries = n.GetStringValue(); } },
+                { "adUrl", n => { AdUrl = n.GetStringValue(); } },
+                { "adsCount", n => { AdsCount = n.GetIntValue(); } },
                 { "announcementDate", n => { AnnouncementDate = n.GetStringValue(); } },
                 { "buyingIntentTopTopic", n => { BuyingIntentTopTopic = n.GetStringValue(); } },
                 { "buyingIntentTopics", n => { BuyingIntentTopics = n.GetStringValue(); } },
@@ -1345,6 +1453,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("acquirerName", AcquirerName);
             writer.WriteStringValue("acquirerWebsite", AcquirerWebsite);
             writer.WriteStringValue("acquisitionType", AcquisitionType);
+            writer.WriteStringValue("adDestinationUrl", AdDestinationUrl);
+            writer.WriteDateTimeOffsetValue("adEndDate", AdEndDate);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdFormat>("adFormat", AdFormat);
+            writer.WriteStringValue("adHeadline", AdHeadline);
+            writer.WriteStringValue("adImageUrl", AdImageUrl);
+            writer.WriteStringValue("adImpressions", AdImpressions);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataAdPlatform>("adPlatform", AdPlatform);
+            writer.WriteIntValue("adsCount", AdsCount);
+            writer.WriteDateTimeOffsetValue("adStartDate", AdStartDate);
+            writer.WriteStringValue("adTargetCountries", AdTargetCountries);
+            writer.WriteStringValue("adUrl", AdUrl);
             writer.WriteStringValue("announcementDate", AnnouncementDate);
             writer.WriteStringValue("buyingIntentTopics", BuyingIntentTopics);
             writer.WriteStringValue("buyingIntentTopTopic", BuyingIntentTopTopic);

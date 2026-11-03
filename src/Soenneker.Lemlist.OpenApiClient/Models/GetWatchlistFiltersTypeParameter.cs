@@ -124,5 +124,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         LinkedinProfileViews,
         #pragma warning restore CS1591
+        [EnumMember(Value = "companyRunningAds")]
+        #pragma warning disable CS1591
+        CompanyRunningAds,
+        #pragma warning restore CS1591
     }
 }

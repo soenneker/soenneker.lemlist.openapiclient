@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public FilterValuesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/watchlist/filter-values?filterId={filterId}{&query*}", pathParameters)
+        public FilterValuesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/watchlist/filter-values?filterId={filterId}{&query*,type*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public FilterValuesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/watchlist/filter-values?filterId={filterId}{&query*}", rawUrl)
+        public FilterValuesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/watchlist/filter-values?filterId={filterId}{&query*,type*}", rawUrl)
         {
         }
         /// <summary>
@@ -101,7 +101,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
             /// <summary>Filter to resolve values for. `linkedinProfileViewsUserIds` takes no `query` and resolves to the ids of the team members whose LinkedIn account is connected to lemlist, the only ids a `linkedinProfileViews` Signal Agent accepts.</summary>
             [QueryParameter("filterId")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetWatchlistFilterValuesFilterIdParameter? FilterId { get; set; }
-            /// <summary>Search text (required for autocomplete filters). 1-100 characters.</summary>
+            /// <summary>Search text, 1-100 characters. Required when [`GET /watchlist/filters`](/api-reference/endpoints/watch-list/get-filters) returns `requiresQuery: true` for the filter on that `type` — `companyIndustries` on `companyRunningAds` included: a missing or blank `query` is a `400 WATCH_LIST_API_INVALID_QUERY`. Static (select) filters ignore it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("query")]
@@ -110,6 +110,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
 #else
             [QueryParameter("query")]
             public string Query { get; set; }
+#endif
+            /// <summary>Signal type the filter is resolved for. Some filters change vocabulary per type: `companyIndustries` with `type=companyRunningAds` returns Pubrio vertical names (keyword search, `query` required, at most 25 matches); without `type` the filter resolves against the default taxonomy.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("type")]
+            public string? Type { get; set; }
+#nullable restore
+#else
+            [QueryParameter("type")]
+            public string Type { get; set; }
 #endif
         }
     }
