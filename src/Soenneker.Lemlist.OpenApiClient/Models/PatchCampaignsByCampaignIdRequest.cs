@@ -33,6 +33,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("disableTrackOpen") is { } nullNodeDisableTrackOpen && nullNodeDisableTrackOpen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackOpen = null;
             if (parseNode.GetChildNode("disableTrackReply") is null) { _explicitNullValueDisableTrackReply = default!; _explicitNullProperties?.Remove("disableTrackReply"); }
             else if (parseNode.GetChildNode("disableTrackReply") is { } nullNodeDisableTrackReply && nullNodeDisableTrackReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DisableTrackReply = null;
+            if (parseNode.GetChildNode("emoji") is null) { _explicitNullValueEmoji = default!; _explicitNullProperties?.Remove("emoji"); }
+            else if (parseNode.GetChildNode("emoji") is { } nullNodeEmoji && nullNodeEmoji.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Emoji = null;
             if (parseNode.GetChildNode("leadsPausedByInterest") is null) { _explicitNullValueLeadsPausedByInterest = default!; _explicitNullProperties?.Remove("leadsPausedByInterest"); }
             else if (parseNode.GetChildNode("leadsPausedByInterest") is { } nullNodeLeadsPausedByInterest && nullNodeLeadsPausedByInterest.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadsPausedByInterest = null;
             if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
@@ -111,6 +113,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [Obsolete("")]
         public bool? DisableTrackReply { get => _explicitNullValueDisableTrackReply; set { _explicitNullValueDisableTrackReply = value; AdditionalData?.Remove("disableTrackReply"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("disableTrackReply"); else _explicitNullProperties?.Remove("disableTrackReply"); } }
         private bool? _explicitNullValueDisableTrackReply = default!;
+        /// <summary>Emoji shown next to the campaign name (e.g. `🚀`). It can be changed but not removed: an empty or whitespace-only string or `null` returns a `400` error, as does a value containing `&lt;` or `&gt;`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; AdditionalData?.Remove("emoji"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        private string? _explicitNullValueEmoji = default!;
+#nullable restore
+#else
+        public string Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; AdditionalData?.Remove("emoji"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        private string _explicitNullValueEmoji = default!;
+#endif
         /// <summary>Pause leads based on interest</summary>
         [Obsolete("")]
         public bool? LeadsPausedByInterest { get => _explicitNullValueLeadsPausedByInterest; set { _explicitNullValueLeadsPausedByInterest = value; AdditionalData?.Remove("leadsPausedByInterest"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadsPausedByInterest"); else _explicitNullProperties?.Remove("leadsPausedByInterest"); } }
@@ -247,6 +259,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "disableTrackClick", n => { DisableTrackClick = n.GetBoolValue(); } },
                 { "disableTrackOpen", n => { DisableTrackOpen = n.GetBoolValue(); } },
                 { "disableTrackReply", n => { DisableTrackReply = n.GetBoolValue(); } },
+                { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "leadsPausedByInterest", n => { LeadsPausedByInterest = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "onLinkClicked", n => { OnLinkClicked = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked>(global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked.CreateFromDiscriminatorValue); } },
@@ -278,6 +291,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("disableTrackClick", DisableTrackClick);
             writer.WriteBoolValue("disableTrackOpen", DisableTrackOpen);
             writer.WriteBoolValue("disableTrackReply", DisableTrackReply);
+            writer.WriteStringValue("emoji", Emoji);
             writer.WriteBoolValue("leadsPausedByInterest", LeadsPausedByInterest);
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchCampaignsByCampaignIdRequestOnLinkClicked>("onLinkClicked", OnLinkClicked);

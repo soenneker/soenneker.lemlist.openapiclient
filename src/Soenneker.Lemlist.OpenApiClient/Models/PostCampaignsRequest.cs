@@ -21,6 +21,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("autoReview") is { } nullNodeAutoReview && nullNodeAutoReview.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoReview = null;
             if (parseNode.GetChildNode("autoReviewConditions") is null) { _explicitNullValueAutoReviewConditions = default!; _explicitNullProperties?.Remove("autoReviewConditions"); }
             else if (parseNode.GetChildNode("autoReviewConditions") is { } nullNodeAutoReviewConditions && nullNodeAutoReviewConditions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoReviewConditions = null;
+            if (parseNode.GetChildNode("emoji") is null) { _explicitNullValueEmoji = default!; _explicitNullProperties?.Remove("emoji"); }
+            else if (parseNode.GetChildNode("emoji") is { } nullNodeEmoji && nullNodeEmoji.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Emoji = null;
             if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
             else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
             if (parseNode.GetChildNode("timezone") is null) { _explicitNullValueTimezone = default!; _explicitNullProperties?.Remove("timezone"); }
@@ -41,6 +43,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsRequestAutoReviewConditionsItem?> AutoReviewConditions { get => _explicitNullValueAutoReviewConditions; set { _explicitNullValueAutoReviewConditions = value; AdditionalData?.Remove("autoReviewConditions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("autoReviewConditions"); else _explicitNullProperties?.Remove("autoReviewConditions"); } }
         private List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsRequestAutoReviewConditionsItem?> _explicitNullValueAutoReviewConditions = default!;
+#endif
+        /// <summary>Emoji shown next to the campaign name (e.g. `🚀`). A random emoji is assigned when omitted. An empty or whitespace-only string, `null`, or a value containing `&lt;` or `&gt;` returns a `400` error.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; AdditionalData?.Remove("emoji"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        private string? _explicitNullValueEmoji = default!;
+#nullable restore
+#else
+        public string Emoji { get => _explicitNullValueEmoji; set { _explicitNullValueEmoji = value; AdditionalData?.Remove("emoji"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("emoji"); else _explicitNullProperties?.Remove("emoji"); } }
+        private string _explicitNullValueEmoji = default!;
 #endif
         /// <summary>The name of the campaign</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -89,6 +101,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             {
                 { "autoReview", n => { AutoReview = n.GetBoolValue(); } },
                 { "autoReviewConditions", n => { AutoReviewConditions = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsRequestAutoReviewConditionsItem>()?.AsList(); } },
+                { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "timezone", n => { Timezone = n.GetStringValue(); } },
             };
@@ -102,6 +115,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("autoReview", AutoReview);
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsRequestAutoReviewConditionsItem>("autoReviewConditions", AutoReviewConditions);
+            writer.WriteStringValue("emoji", Emoji);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("timezone", Timezone);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

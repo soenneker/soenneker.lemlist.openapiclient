@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using Soenneker.Lemlist.OpenApiClient.Users.Item.LinkedinLimits;
+using Soenneker.Lemlist.OpenApiClient.Users.Item.Signature;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Users.Item
         public global::Soenneker.Lemlist.OpenApiClient.Users.Item.LinkedinLimits.LinkedinLimitsRequestBuilder LinkedinLimits
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Users.Item.LinkedinLimits.LinkedinLimitsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The signature property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Users.Item.Signature.SignatureRequestBuilder Signature
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Users.Item.Signature.SignatureRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Users.Item.WithUserItemRequestBuilder"/> and sets the default values.

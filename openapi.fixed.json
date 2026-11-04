@@ -1841,6 +1841,7 @@
               "example": {
                 "name": "My new campaign",
                 "timezone": "America/New_York",
+                "emoji": "\uD83D\uDE80",
                 "autoReview": true,
                 "autoReviewConditions": [
                   "deliverable",
@@ -2027,6 +2028,7 @@
               },
               "example": {
                 "name": "New campaign name",
+                "emoji": "\uD83C\uDFAF",
                 "stopOnEmailReplied": true,
                 "stopOnMeetingBooked": true,
                 "stopOnLinkClicked": false,
@@ -2141,6 +2143,10 @@
                   "missingChannels": {
                     "summary": "Campaign channels not covered",
                     "value": "The provided senders do not cover the following campaign channels: linkedin, sms"
+                  },
+                  "invalidEmoji": {
+                    "summary": "Invalid emoji",
+                    "value": "emoji must be a non-empty string without \u0022\u003C\u0022 or \u0022\u003E\u0022 characters"
                   }
                 }
               }
@@ -23199,6 +23205,198 @@
         }
       }
     },
+    "/users/{userId}/signature": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get User Signature",
+        "operationId": "GetUsersByUserIdSignature",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the team member whose signatures to read (usr_xxx). Any member of your team is allowed, including yourself",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The HTML and plain-text signatures of the team member, an empty string when unset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsersByUserIdSignature200Response"
+                },
+                "example": {
+                  "data": {
+                    "userId": "usr_Tq8Wm3Zk6RbP2NxYv",
+                    "signature": "\u003Cp\u003EBest regards,\u003Cbr\u003EJohn Doe\u003Cbr\u003EAcme Inc\u003C/p\u003E",
+                    "plainTextSignature": "Best regards,\nJohn Doe\nAcme Inc"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed userId (\u0060WRONG_PARAM_USER_ID\u0060)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsersByUserIdSignature400Response"
+                },
+                "example": {
+                  "error": "Wrong param user id",
+                  "code": "WRONG_PARAM_USER_ID"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The API key does not resolve a user"
+          },
+          "404": {
+            "description": "The user is not a member of the team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsersByUserIdSignature404Response"
+                },
+                "example": {
+                  "error": "This user is not a member of your team",
+                  "code": "SIGNATURE_USER_NOT_IN_TEAM"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "405": {
+            "description": "Method other than GET"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsersByUserIdSignature500Response"
+                },
+                "example": {
+                  "error": "Internal error",
+                  "code": "INTERNAL_ERROR"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update User Signature",
+        "operationId": "PatchUsersByUserIdSignature",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the team member whose signatures to update (usr_xxx). Any member of your team is allowed, including yourself",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The signatures to change. Provide \u0060signature\u0060 and/or \u0060plainTextSignature\u0060: an omitted one keeps its stored value, and at least one is required. Unknown fields are refused, and an invalid body fails the whole update, so nothing is written. The HTML signature is sanitized on save, so link images by URL instead of embedding them; an empty string clears it.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUsersByUserIdSignatureRequest"
+              },
+              "example": {
+                "signature": "\u003Cp\u003EBest regards,\u003Cbr\u003EJohn Doe\u003Cbr\u003EAcme Inc\u003C/p\u003E",
+                "plainTextSignature": "Best regards,\nJohn Doe\nAcme Inc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Both signatures of the team member after the update, as stored: the HTML one comes back sanitized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchUsersByUserIdSignature200Response"
+                },
+                "example": {
+                  "data": {
+                    "userId": "usr_Tq8Wm3Zk6RbP2NxYv",
+                    "signature": "\u003Cp\u003EBest regards,\u003Cbr\u003EJohn Doe\u003Cbr\u003EAcme Inc\u003C/p\u003E",
+                    "plainTextSignature": "Best regards,\nJohn Doe\nAcme Inc"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body - unknown field, wrong type, \u0060signature\u0060 over 100,000 characters, a \u0060plainTextSignature\u0060 over 50,000 characters or one that passes 50,000 once its angle brackets are escaped (\u0060SIGNATURE_INVALID_INPUT\u0060, \u0060SIGNATURE_PLAIN_TEXT_TOO_LONG_ESCAPED\u0060), or neither field provided (\u0060SIGNATURE_NOTHING_TO_UPDATE\u0060); also a malformed userId (\u0060WRONG_PARAM_USER_ID\u0060)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchUsersByUserIdSignature400Response"
+                },
+                "example": {
+                  "error": "Send only signature (HTML, at most 100,000 characters) and/or plainTextSignature (at most 50,000 characters), as strings",
+                  "code": "SIGNATURE_INVALID_INPUT"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "401": {
+            "description": "The API key does not resolve a user"
+          },
+          "404": {
+            "description": "The user is not a member of the team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchUsersByUserIdSignature404Response"
+                },
+                "example": {
+                  "error": "This user is not a member of your team",
+                  "code": "SIGNATURE_USER_NOT_IN_TEAM"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "405": {
+            "description": "Method other than GET or PATCH"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchUsersByUserIdSignature500Response"
+                },
+                "example": {
+                  "error": "Internal error",
+                  "code": "INTERNAL_ERROR"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      }
+    },
     "/campaigns/{campaignId}/duplicate": {
       "post": {
         "tags": [
@@ -31575,7 +31773,7 @@
             "items": {
               "$ref": "#/components/schemas/WatchListFilterInItem"
             },
-            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted."
+            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent)."
           },
           "out": {
             "type": "array",
@@ -35796,6 +35994,10 @@
             "type": "string",
             "description": "IANA timezone for the campaign schedule (e.g. \u0060America/New_York\u0060). Defaults to \u0060Europe/Paris\u0060 if omitted."
           },
+          "emoji": {
+            "type": "string",
+            "description": "Emoji shown next to the campaign name (e.g. \u0060\uD83D\uDE80\u0060). A random emoji is assigned when omitted. An empty or whitespace-only string, \u0060null\u0060, or a value containing \u0060\u003C\u0060 or \u0060\u003E\u0060 returns a \u0060400\u0060 error."
+          },
           "autoReview": {
             "type": "boolean",
             "description": "Automatically launch (review) leads as soon as they are added to the campaign, instead of requiring manual review. Defaults to \u0060false\u0060."
@@ -35893,6 +36095,10 @@
           "name": {
             "type": "string",
             "description": "The campaign name"
+          },
+          "emoji": {
+            "type": "string",
+            "description": "Emoji shown next to the campaign name (e.g. \u0060\uD83D\uDE80\u0060). It can be changed but not removed: an empty or whitespace-only string or \u0060null\u0060 returns a \u0060400\u0060 error, as does a value containing \u0060\u003C\u0060 or \u0060\u003E\u0060."
           },
           "stopOnEmailReplied": {
             "type": "boolean",
@@ -41682,6 +41888,105 @@
           }
         }
       },
+      "GetUsersByUserIdSignature200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GetUsersByUserIdSignature200ResponseData"
+          }
+        }
+      },
+      "GetUsersByUserIdSignature400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetUsersByUserIdSignature404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "GetUsersByUserIdSignature500Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchUsersByUserIdSignatureRequest": {
+        "minProperties": 1,
+        "type": "object",
+        "properties": {
+          "signature": {
+            "maxLength": 100000,
+            "type": "string",
+            "description": "HTML signature, inserted by {{signature}} in emails sent as HTML. Sanitized on save; an empty string clears it"
+          },
+          "plainTextSignature": {
+            "maxLength": 50000,
+            "type": "string",
+            "description": "Plain-text signature, inserted by {{plainTextSignature}} in emails sent as plain text and in lemwarm. Line breaks are kept and HTML is converted to text; an empty string clears it"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatchUsersByUserIdSignature200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PatchUsersByUserIdSignature200ResponseData"
+          }
+        }
+      },
+      "PatchUsersByUserIdSignature400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchUsersByUserIdSignature404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PatchUsersByUserIdSignature500Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PostCampaignsByCampaignIdDuplicateRequest": {
         "type": "object",
         "properties": {
@@ -45956,6 +46261,40 @@
           "warning": {
             "type": "string",
             "description": "Present when a value written is above its recommended daily maximum; names each such field with its maximum. The value is stored anyway, LinkedIn may restrict the account"
+          }
+        }
+      },
+      "GetUsersByUserIdSignature200ResponseData": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ID of the team member (usr_xxx)"
+          },
+          "signature": {
+            "type": "string",
+            "description": "HTML signature, inserted by {{signature}} in emails sent as HTML; empty when unset"
+          },
+          "plainTextSignature": {
+            "type": "string",
+            "description": "Plain-text signature, inserted by {{plainTextSignature}} in emails sent as plain text and in lemwarm; empty when unset"
+          }
+        }
+      },
+      "PatchUsersByUserIdSignature200ResponseData": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ID of the team member (usr_xxx)"
+          },
+          "signature": {
+            "type": "string",
+            "description": "HTML signature as stored after sanitizing; empty when unset"
+          },
+          "plainTextSignature": {
+            "type": "string",
+            "description": "Plain-text signature as stored; empty when unset"
           }
         }
       },
@@ -50633,7 +50972,9 @@
           "adPlatforms",
           "adFormats",
           "adTargetCountries",
-          "adSearchTerms"
+          "adSearchTerms",
+          "allowUnknownIndustry",
+          "includeRelatedIndustries"
         ],
         "type": "string",
         "description": "Filter identifier",
@@ -50820,6 +51161,14 @@
             {
               "value": "adSearchTerms",
               "name": "AdSearchTerms"
+            },
+            {
+              "value": "allowUnknownIndustry",
+              "name": "AllowUnknownIndustry"
+            },
+            {
+              "value": "includeRelatedIndustries",
+              "name": "IncludeRelatedIndustries"
             }
           ]
         }

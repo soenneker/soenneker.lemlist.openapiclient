@@ -187,5 +187,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         AdSearchTerms,
         #pragma warning restore CS1591
+        [EnumMember(Value = "allowUnknownIndustry")]
+        #pragma warning disable CS1591
+        AllowUnknownIndustry,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "includeRelatedIndustries")]
+        #pragma warning disable CS1591
+        IncludeRelatedIndustries,
+        #pragma warning restore CS1591
     }
 }
