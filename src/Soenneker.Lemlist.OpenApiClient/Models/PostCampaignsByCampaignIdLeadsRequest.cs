@@ -23,6 +23,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("companyName") is { } nullNodeCompanyName && nullNodeCompanyName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyName = null;
             if (parseNode.GetChildNode("contactOwner") is null) { _explicitNullValueContactOwner = default!; _explicitNullProperties?.Remove("contactOwner"); }
             else if (parseNode.GetChildNode("contactOwner") is { } nullNodeContactOwner && nullNodeContactOwner.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContactOwner = null;
+            if (parseNode.GetChildNode("crmId") is null) { _explicitNullValueCrmId = default!; _explicitNullProperties?.Remove("crmId"); }
+            else if (parseNode.GetChildNode("crmId") is { } nullNodeCrmId && nullNodeCrmId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrmId = null;
             if (parseNode.GetChildNode("email") is null) { _explicitNullValueEmail = default!; _explicitNullProperties?.Remove("email"); }
             else if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
             if (parseNode.GetChildNode("firstName") is null) { _explicitNullValueFirstName = default!; _explicitNullProperties?.Remove("firstName"); }
@@ -74,6 +76,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string ContactOwner { get => _explicitNullValueContactOwner; set { _explicitNullValueContactOwner = value; AdditionalData?.Remove("contactOwner"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contactOwner"); else _explicitNullProperties?.Remove("contactOwner"); } }
         private string _explicitNullValueContactOwner = default!;
+#endif
+        /// <summary>Closed beta: stored as a custom variable like any other key unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the lead&apos;s contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (`003…`) or Lead (`00Q…`) id of 15 or 18 characters. Requires an admin API key. Never refuses the lead: a new contact is created already linked, a contact without a link is linked, a contact linked to another record keeps it, and an id that cannot be applied comes back in `warnings`. See the endpoint page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CrmId { get => _explicitNullValueCrmId; set { _explicitNullValueCrmId = value; AdditionalData?.Remove("crmId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmId"); else _explicitNullProperties?.Remove("crmId"); } }
+        private string? _explicitNullValueCrmId = default!;
+#nullable restore
+#else
+        public string CrmId { get => _explicitNullValueCrmId; set { _explicitNullValueCrmId = value; AdditionalData?.Remove("crmId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmId"); else _explicitNullProperties?.Remove("crmId"); } }
+        private string _explicitNullValueCrmId = default!;
 #endif
         /// <summary>Email of the lead</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -193,6 +205,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "companyDomain", n => { CompanyDomain = n.GetStringValue(); } },
                 { "companyName", n => { CompanyName = n.GetStringValue(); } },
                 { "contactOwner", n => { ContactOwner = n.GetStringValue(); } },
+                { "crmId", n => { CrmId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
                 { "icebreaker", n => { Icebreaker = n.GetStringValue(); } },
@@ -214,6 +227,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("companyDomain", CompanyDomain);
             writer.WriteStringValue("companyName", CompanyName);
             writer.WriteStringValue("contactOwner", ContactOwner);
+            writer.WriteStringValue("crmId", CrmId);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("firstName", FirstName);
             writer.WriteStringValue("icebreaker", Icebreaker);

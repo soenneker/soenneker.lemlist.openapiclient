@@ -17,6 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("attioLeadId") is null) { _explicitNullValueAttioLeadId = default!; _explicitNullProperties?.Remove("attioLeadId"); }
+            else if (parseNode.GetChildNode("attioLeadId") is { } nullNodeAttioLeadId && nullNodeAttioLeadId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttioLeadId = null;
             if (parseNode.GetChildNode("campaignId") is null) { _explicitNullValueCampaignId = default!; _explicitNullProperties?.Remove("campaignId"); }
             else if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
             if (parseNode.GetChildNode("campaignName") is null) { _explicitNullValueCampaignName = default!; _explicitNullProperties?.Remove("campaignName"); }
@@ -31,6 +33,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("email") is { } nullNodeEmail && nullNodeEmail.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Email = null;
             if (parseNode.GetChildNode("firstName") is null) { _explicitNullValueFirstName = default!; _explicitNullProperties?.Remove("firstName"); }
             else if (parseNode.GetChildNode("firstName") is { } nullNodeFirstName && nullNodeFirstName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstName = null;
+            if (parseNode.GetChildNode("hubspotLeadId") is null) { _explicitNullValueHubspotLeadId = default!; _explicitNullProperties?.Remove("hubspotLeadId"); }
+            else if (parseNode.GetChildNode("hubspotLeadId") is { } nullNodeHubspotLeadId && nullNodeHubspotLeadId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HubspotLeadId = null;
             if (parseNode.GetChildNode("_id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("_id"); }
             else if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
             if (parseNode.GetChildNode("isPaused") is null) { _explicitNullValueIsPaused = default!; _explicitNullProperties?.Remove("isPaused"); }
@@ -39,12 +43,28 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("jobTitle") is { } nullNodeJobTitle && nullNodeJobTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) JobTitle = null;
             if (parseNode.GetChildNode("lastName") is null) { _explicitNullValueLastName = default!; _explicitNullProperties?.Remove("lastName"); }
             else if (parseNode.GetChildNode("lastName") is { } nullNodeLastName && nullNodeLastName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastName = null;
+            if (parseNode.GetChildNode("pipedriveLeadId") is null) { _explicitNullValuePipedriveLeadId = default!; _explicitNullProperties?.Remove("pipedriveLeadId"); }
+            else if (parseNode.GetChildNode("pipedriveLeadId") is { } nullNodePipedriveLeadId && nullNodePipedriveLeadId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PipedriveLeadId = null;
+            if (parseNode.GetChildNode("salesforceContactId") is null) { _explicitNullValueSalesforceContactId = default!; _explicitNullProperties?.Remove("salesforceContactId"); }
+            else if (parseNode.GetChildNode("salesforceContactId") is { } nullNodeSalesforceContactId && nullNodeSalesforceContactId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SalesforceContactId = null;
+            if (parseNode.GetChildNode("salesforceLeadId") is null) { _explicitNullValueSalesforceLeadId = default!; _explicitNullProperties?.Remove("salesforceLeadId"); }
+            else if (parseNode.GetChildNode("salesforceLeadId") is { } nullNodeSalesforceLeadId && nullNodeSalesforceLeadId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SalesforceLeadId = null;
             if (parseNode.GetChildNode("warnings") is null) { _explicitNullValueWarnings = default!; _explicitNullProperties?.Remove("warnings"); }
             else if (parseNode.GetChildNode("warnings") is { } nullNodeWarnings && nullNodeWarnings.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Warnings = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The Attio person record the lead&apos;s contact is linked to. Present only when it is linked.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AttioLeadId { get => _explicitNullValueAttioLeadId; set { _explicitNullValueAttioLeadId = value; AdditionalData?.Remove("attioLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attioLeadId"); else _explicitNullProperties?.Remove("attioLeadId"); } }
+        private string? _explicitNullValueAttioLeadId = default!;
+#nullable restore
+#else
+        public string AttioLeadId { get => _explicitNullValueAttioLeadId; set { _explicitNullValueAttioLeadId = value; AdditionalData?.Remove("attioLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attioLeadId"); else _explicitNullProperties?.Remove("attioLeadId"); } }
+        private string _explicitNullValueAttioLeadId = default!;
+#endif
         /// <summary>The campaignId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -115,6 +135,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string FirstName { get => _explicitNullValueFirstName; set { _explicitNullValueFirstName = value; AdditionalData?.Remove("firstName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("firstName"); else _explicitNullProperties?.Remove("firstName"); } }
         private string _explicitNullValueFirstName = default!;
 #endif
+        /// <summary>The HubSpot contact the lead&apos;s contact is linked to. Present only when it is linked.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HubspotLeadId { get => _explicitNullValueHubspotLeadId; set { _explicitNullValueHubspotLeadId = value; AdditionalData?.Remove("hubspotLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hubspotLeadId"); else _explicitNullProperties?.Remove("hubspotLeadId"); } }
+        private string? _explicitNullValueHubspotLeadId = default!;
+#nullable restore
+#else
+        public string HubspotLeadId { get => _explicitNullValueHubspotLeadId; set { _explicitNullValueHubspotLeadId = value; AdditionalData?.Remove("hubspotLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hubspotLeadId"); else _explicitNullProperties?.Remove("hubspotLeadId"); } }
+        private string _explicitNullValueHubspotLeadId = default!;
+#endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -148,7 +178,37 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string LastName { get => _explicitNullValueLastName; set { _explicitNullValueLastName = value; AdditionalData?.Remove("lastName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lastName"); else _explicitNullProperties?.Remove("lastName"); } }
         private string _explicitNullValueLastName = default!;
 #endif
-        /// <summary>Non-blocking notices, never a failure — the request went through. They tell you why the company part was skipped, when it was, and which values the update strategy kept. See `code`.</summary>
+        /// <summary>The Pipedrive person the lead&apos;s contact is linked to. Present only when it is linked.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PipedriveLeadId { get => _explicitNullValuePipedriveLeadId; set { _explicitNullValuePipedriveLeadId = value; AdditionalData?.Remove("pipedriveLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pipedriveLeadId"); else _explicitNullProperties?.Remove("pipedriveLeadId"); } }
+        private string? _explicitNullValuePipedriveLeadId = default!;
+#nullable restore
+#else
+        public string PipedriveLeadId { get => _explicitNullValuePipedriveLeadId; set { _explicitNullValuePipedriveLeadId = value; AdditionalData?.Remove("pipedriveLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pipedriveLeadId"); else _explicitNullProperties?.Remove("pipedriveLeadId"); } }
+        private string _explicitNullValuePipedriveLeadId = default!;
+#endif
+        /// <summary>The Salesforce Contact (`003…`) the lead&apos;s contact is linked to. Present only when it is linked.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SalesforceContactId { get => _explicitNullValueSalesforceContactId; set { _explicitNullValueSalesforceContactId = value; AdditionalData?.Remove("salesforceContactId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("salesforceContactId"); else _explicitNullProperties?.Remove("salesforceContactId"); } }
+        private string? _explicitNullValueSalesforceContactId = default!;
+#nullable restore
+#else
+        public string SalesforceContactId { get => _explicitNullValueSalesforceContactId; set { _explicitNullValueSalesforceContactId = value; AdditionalData?.Remove("salesforceContactId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("salesforceContactId"); else _explicitNullProperties?.Remove("salesforceContactId"); } }
+        private string _explicitNullValueSalesforceContactId = default!;
+#endif
+        /// <summary>The Salesforce Lead (`00Q…`) the lead&apos;s contact is linked to. Present only when it is linked.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SalesforceLeadId { get => _explicitNullValueSalesforceLeadId; set { _explicitNullValueSalesforceLeadId = value; AdditionalData?.Remove("salesforceLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("salesforceLeadId"); else _explicitNullProperties?.Remove("salesforceLeadId"); } }
+        private string? _explicitNullValueSalesforceLeadId = default!;
+#nullable restore
+#else
+        public string SalesforceLeadId { get => _explicitNullValueSalesforceLeadId; set { _explicitNullValueSalesforceLeadId = value; AdditionalData?.Remove("salesforceLeadId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("salesforceLeadId"); else _explicitNullProperties?.Remove("salesforceLeadId"); } }
+        private string _explicitNullValueSalesforceLeadId = default!;
+#endif
+        /// <summary>Non-blocking notices, never a failure — the request went through. They tell you why the company part was skipped, when it was, why the `crmId` was not applied, and which values the update strategy kept. See `code`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>? Warnings { get => _explicitNullValueWarnings; set { _explicitNullValueWarnings = value; AdditionalData?.Remove("warnings"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("warnings"); else _explicitNullProperties?.Remove("warnings"); } }
@@ -183,6 +243,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "attioLeadId", n => { AttioLeadId = n.GetStringValue(); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "campaignName", n => { CampaignName = n.GetStringValue(); } },
                 { "companyDomain", n => { CompanyDomain = n.GetStringValue(); } },
@@ -190,10 +251,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "contactId", n => { ContactId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
+                { "hubspotLeadId", n => { HubspotLeadId = n.GetStringValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "isPaused", n => { IsPaused = n.GetBoolValue(); } },
                 { "jobTitle", n => { JobTitle = n.GetStringValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
+                { "pipedriveLeadId", n => { PipedriveLeadId = n.GetStringValue(); } },
+                { "salesforceContactId", n => { SalesforceContactId = n.GetStringValue(); } },
+                { "salesforceLeadId", n => { SalesforceLeadId = n.GetStringValue(); } },
                 { "warnings", n => { Warnings = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -204,6 +269,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("attioLeadId", AttioLeadId);
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteStringValue("campaignName", CampaignName);
             writer.WriteStringValue("companyDomain", CompanyDomain);
@@ -211,10 +277,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("contactId", ContactId);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("firstName", FirstName);
+            writer.WriteStringValue("hubspotLeadId", HubspotLeadId);
             writer.WriteStringValue("_id", Id);
             writer.WriteBoolValue("isPaused", IsPaused);
             writer.WriteStringValue("jobTitle", JobTitle);
             writer.WriteStringValue("lastName", LastName);
+            writer.WriteStringValue("pipedriveLeadId", PipedriveLeadId);
+            writer.WriteStringValue("salesforceContactId", SalesforceContactId);
+            writer.WriteStringValue("salesforceLeadId", SalesforceLeadId);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostCampaignsByCampaignIdLeads200ResponseWarningsItem>("warnings", Warnings);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

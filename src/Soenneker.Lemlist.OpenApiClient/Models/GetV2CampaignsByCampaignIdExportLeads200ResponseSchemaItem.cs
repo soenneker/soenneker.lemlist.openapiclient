@@ -17,6 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("attioId") is null) { _explicitNullValueAttioId = default!; _explicitNullProperties?.Remove("attioId"); }
+            else if (parseNode.GetChildNode("attioId") is { } nullNodeAttioId && nullNodeAttioId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttioId = null;
             if (parseNode.GetChildNode("companyDomain") is null) { _explicitNullValueCompanyDomain = default!; _explicitNullProperties?.Remove("companyDomain"); }
             else if (parseNode.GetChildNode("companyDomain") is { } nullNodeCompanyDomain && nullNodeCompanyDomain.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyDomain = null;
             if (parseNode.GetChildNode("companyName") is null) { _explicitNullValueCompanyName = default!; _explicitNullProperties?.Remove("companyName"); }
@@ -27,6 +29,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("emailStatus") is { } nullNodeEmailStatus && nullNodeEmailStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailStatus = null;
             if (parseNode.GetChildNode("firstName") is null) { _explicitNullValueFirstName = default!; _explicitNullProperties?.Remove("firstName"); }
             else if (parseNode.GetChildNode("firstName") is { } nullNodeFirstName && nullNodeFirstName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstName = null;
+            if (parseNode.GetChildNode("hubspotId") is null) { _explicitNullValueHubspotId = default!; _explicitNullProperties?.Remove("hubspotId"); }
+            else if (parseNode.GetChildNode("hubspotId") is { } nullNodeHubspotId && nullNodeHubspotId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HubspotId = null;
             if (parseNode.GetChildNode("icebreaker") is null) { _explicitNullValueIcebreaker = default!; _explicitNullProperties?.Remove("icebreaker"); }
             else if (parseNode.GetChildNode("icebreaker") is { } nullNodeIcebreaker && nullNodeIcebreaker.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Icebreaker = null;
             if (parseNode.GetChildNode("_id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("_id"); }
@@ -43,6 +47,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("phone") is { } nullNodePhone && nullNodePhone.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Phone = null;
             if (parseNode.GetChildNode("picture") is null) { _explicitNullValuePicture = default!; _explicitNullProperties?.Remove("picture"); }
             else if (parseNode.GetChildNode("picture") is { } nullNodePicture && nullNodePicture.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Picture = null;
+            if (parseNode.GetChildNode("pipedriveId") is null) { _explicitNullValuePipedriveId = default!; _explicitNullProperties?.Remove("pipedriveId"); }
+            else if (parseNode.GetChildNode("pipedriveId") is { } nullNodePipedriveId && nullNodePipedriveId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PipedriveId = null;
+            if (parseNode.GetChildNode("salesforceId") is null) { _explicitNullValueSalesforceId = default!; _explicitNullProperties?.Remove("salesforceId"); }
+            else if (parseNode.GetChildNode("salesforceId") is { } nullNodeSalesforceId && nullNodeSalesforceId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SalesforceId = null;
             if (parseNode.GetChildNode("status") is null) { _explicitNullValueStatus = default!; _explicitNullProperties?.Remove("status"); }
             else if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
             if (parseNode.GetChildNode("timezone") is null) { _explicitNullValueTimezone = default!; _explicitNullProperties?.Remove("timezone"); }
@@ -51,6 +59,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Attio id of the lead. Only on leads synced with Attio.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AttioId { get => _explicitNullValueAttioId; set { _explicitNullValueAttioId = value; AdditionalData?.Remove("attioId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attioId"); else _explicitNullProperties?.Remove("attioId"); } }
+        private string? _explicitNullValueAttioId = default!;
+#nullable restore
+#else
+        public string AttioId { get => _explicitNullValueAttioId; set { _explicitNullValueAttioId = value; AdditionalData?.Remove("attioId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attioId"); else _explicitNullProperties?.Remove("attioId"); } }
+        private string _explicitNullValueAttioId = default!;
+#endif
         /// <summary>The companyDomain property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -93,6 +111,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string FirstName { get => _explicitNullValueFirstName; set { _explicitNullValueFirstName = value; AdditionalData?.Remove("firstName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("firstName"); else _explicitNullProperties?.Remove("firstName"); } }
         private string _explicitNullValueFirstName = default!;
+#endif
+        /// <summary>HubSpot id of the lead. Only on leads synced with HubSpot.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HubspotId { get => _explicitNullValueHubspotId; set { _explicitNullValueHubspotId = value; AdditionalData?.Remove("hubspotId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hubspotId"); else _explicitNullProperties?.Remove("hubspotId"); } }
+        private string? _explicitNullValueHubspotId = default!;
+#nullable restore
+#else
+        public string HubspotId { get => _explicitNullValueHubspotId; set { _explicitNullValueHubspotId = value; AdditionalData?.Remove("hubspotId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hubspotId"); else _explicitNullProperties?.Remove("hubspotId"); } }
+        private string _explicitNullValueHubspotId = default!;
 #endif
         /// <summary>The icebreaker property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -174,6 +202,26 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Picture { get => _explicitNullValuePicture; set { _explicitNullValuePicture = value; AdditionalData?.Remove("picture"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("picture"); else _explicitNullProperties?.Remove("picture"); } }
         private string _explicitNullValuePicture = default!;
 #endif
+        /// <summary>Pipedrive id of the lead. Only on leads synced with Pipedrive.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PipedriveId { get => _explicitNullValuePipedriveId; set { _explicitNullValuePipedriveId = value; AdditionalData?.Remove("pipedriveId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pipedriveId"); else _explicitNullProperties?.Remove("pipedriveId"); } }
+        private string? _explicitNullValuePipedriveId = default!;
+#nullable restore
+#else
+        public string PipedriveId { get => _explicitNullValuePipedriveId; set { _explicitNullValuePipedriveId = value; AdditionalData?.Remove("pipedriveId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pipedriveId"); else _explicitNullProperties?.Remove("pipedriveId"); } }
+        private string _explicitNullValuePipedriveId = default!;
+#endif
+        /// <summary>Salesforce id of the lead: its Lead id, or its Contact id when synced as a Contact. Only on leads synced with Salesforce.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SalesforceId { get => _explicitNullValueSalesforceId; set { _explicitNullValueSalesforceId = value; AdditionalData?.Remove("salesforceId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("salesforceId"); else _explicitNullProperties?.Remove("salesforceId"); } }
+        private string? _explicitNullValueSalesforceId = default!;
+#nullable restore
+#else
+        public string SalesforceId { get => _explicitNullValueSalesforceId; set { _explicitNullValueSalesforceId = value; AdditionalData?.Remove("salesforceId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("salesforceId"); else _explicitNullProperties?.Remove("salesforceId"); } }
+        private string _explicitNullValueSalesforceId = default!;
+#endif
         /// <summary>The status property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -219,11 +267,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "attioId", n => { AttioId = n.GetStringValue(); } },
                 { "companyDomain", n => { CompanyDomain = n.GetStringValue(); } },
                 { "companyName", n => { CompanyName = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "emailStatus", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseItemEmailStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueEmailStatus = default; _explicitNullProperties?.Remove("emailStatus"); AdditionalData["emailStatus"] = unknown; } else { EmailStatus = parsed; AdditionalData.Remove("emailStatus"); } } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
+                { "hubspotId", n => { HubspotId = n.GetStringValue(); } },
                 { "icebreaker", n => { Icebreaker = n.GetStringValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "jobTitle", n => { JobTitle = n.GetStringValue(); } },
@@ -232,6 +282,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "linkedinUrl", n => { LinkedinUrl = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "picture", n => { Picture = n.GetStringValue(); } },
+                { "pipedriveId", n => { PipedriveId = n.GetStringValue(); } },
+                { "salesforceId", n => { SalesforceId = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "timezone", n => { Timezone = n.GetStringValue(); } },
             };
@@ -243,11 +295,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("attioId", AttioId);
             writer.WriteStringValue("companyDomain", CompanyDomain);
             writer.WriteStringValue("companyName", CompanyName);
             writer.WriteStringValue("email", Email);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.GetV2CampaignsByCampaignIdExportLeads200ResponseItemEmailStatus>("emailStatus", EmailStatus);
             writer.WriteStringValue("firstName", FirstName);
+            writer.WriteStringValue("hubspotId", HubspotId);
             writer.WriteStringValue("icebreaker", Icebreaker);
             writer.WriteStringValue("_id", Id);
             writer.WriteStringValue("jobTitle", JobTitle);
@@ -256,6 +310,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("linkedinUrl", LinkedinUrl);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("picture", Picture);
+            writer.WriteStringValue("pipedriveId", PipedriveId);
+            writer.WriteStringValue("salesforceId", SalesforceId);
             writer.WriteStringValue("status", Status);
             writer.WriteStringValue("timezone", Timezone);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

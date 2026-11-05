@@ -31773,7 +31773,7 @@
             "items": {
               "$ref": "#/components/schemas/WatchListFilterInItem"
             },
-            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent)."
+            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060."
           },
           "out": {
             "type": "array",
@@ -34953,6 +34953,30 @@
           },
           "externalSignalCustomFields": {
             "$ref": "#/components/schemas/SignalSchemaSignalDataExternalSignalCustomFieldsProperty"
+          },
+          "githubActionType": {
+            "$ref": "#/components/schemas/SignalSchemaSignalDataGithubActionType"
+          },
+          "githubActionTitle": {
+            "type": "string",
+            "description": "[githubStargazer] Title of the issue or pull request (for a comment, the title of the issue it was posted on; absent for a star or a fork)"
+          },
+          "githubActionUrl": {
+            "type": "string",
+            "description": "[githubStargazer] URL of the fork, issue, pull request or comment (absent for a star)"
+          },
+          "githubEventAt": {
+            "type": "string",
+            "description": "[githubStargazer] When the action happened on GitHub (the latest one when the same person repeats the same action on the same repository)",
+            "format": "date-time"
+          },
+          "githubRepoUrl": {
+            "type": "string",
+            "description": "[githubStargazer] Monitored repository the action happened on"
+          },
+          "githubProfileUrl": {
+            "type": "string",
+            "description": "[githubStargazer] GitHub profile URL of the person who acted"
           }
         },
         "description": "Signal-specific data that varies by signal type. Each field is prefixed with the signal type(s) that populate it."
@@ -38100,6 +38124,11 @@
           "contactOwner": {
             "type": "string",
             "description": "Contact owner (user ID or user login email)"
+          },
+          "crmId": {
+            "type": "string",
+            "description": "Closed beta: stored as a custom variable like any other key unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the lead\u0027s contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (\u0060003\u2026\u0060) or Lead (\u006000Q\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. Never refuses the lead: a new contact is created already linked, a contact without a link is linked, a contact linked to another record keeps it, and an id that cannot be applied comes back in \u0060warnings\u0060. See the endpoint page.",
+            "example": "123456789"
           }
         },
         "additionalProperties": {
@@ -38145,12 +38174,32 @@
             "type": "string",
             "description": "Associated contact ID"
           },
+          "hubspotLeadId": {
+            "type": "string",
+            "description": "The HubSpot contact the lead\u0027s contact is linked to. Present only when it is linked."
+          },
+          "salesforceContactId": {
+            "type": "string",
+            "description": "The Salesforce Contact (\u0060003\u2026\u0060) the lead\u0027s contact is linked to. Present only when it is linked."
+          },
+          "salesforceLeadId": {
+            "type": "string",
+            "description": "The Salesforce Lead (\u006000Q\u2026\u0060) the lead\u0027s contact is linked to. Present only when it is linked."
+          },
+          "pipedriveLeadId": {
+            "type": "string",
+            "description": "The Pipedrive person the lead\u0027s contact is linked to. Present only when it is linked."
+          },
+          "attioLeadId": {
+            "type": "string",
+            "description": "The Attio person record the lead\u0027s contact is linked to. Present only when it is linked."
+          },
           "warnings": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PostCampaignsByCampaignIdLeads200ResponseWarningsItem"
             },
-            "description": "Non-blocking notices, never a failure \u2014 the request went through. They tell you why the company part was skipped, when it was, and which values the update strategy kept. See \u0060code\u0060."
+            "description": "Non-blocking notices, never a failure \u2014 the request went through. They tell you why the company part was skipped, when it was, why the \u0060crmId\u0060 was not applied, and which values the update strategy kept. See \u0060code\u0060."
           }
         }
       },
@@ -44762,7 +44811,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "**The company was NOT written**: \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: \u0060COMPANY_DOMAIN_IGNORED\u0060, \u0060companyDomain\u0060 is a personal email provider or a platform host shared by many companies (\u0060gmail.com\u0060, a \u0060facebook.com\u0060 page, a bare \u0060wordpress.com\u0060). The lead and its company went through without it; \u0060params.companyDomain\u0060 names it.\n\n**Values left unchanged**: \u0060FIELDS_KEPT\u0060, what the update strategy kept, named in \u0060params.fields\u0060 (company fields prefixed with \u0060company\u0060)."
+            "description": "**The company was NOT written**: \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: \u0060COMPANY_DOMAIN_IGNORED\u0060, \u0060companyDomain\u0060 is a personal email provider or a platform host shared by many companies (\u0060gmail.com\u0060, a \u0060facebook.com\u0060 page, a bare \u0060wordpress.com\u0060). The lead and its company went through without it; \u0060params.companyDomain\u0060 names it.\n\n**The \u0060crmId\u0060 was NOT applied** (closed beta): the lead went through, its contact not linked to that record. \u0060CRM_ID_NOT_APPLIED\u0060: the contact is linked to another record of your CRM and keeps it (\u0060params.crmId\u0060). \u0060CRM_ID_ALREADY_LINKED\u0060: another lemlist contact holds that record (\u0060params.conflictingContactId\u0060). \u0060CRM_ID_UPDATE_NOT_ALLOWED\u0060: the API key is not an admin\u0027s. \u0060INVALID_CRM_ID\u0060: not an id of your CRM. \u0060NO_CRM_CONNECTED\u0060. \u0060CRM_ID_LEADS_NOT_SYNCED\u0060: a Salesforce Lead id while your team does not sync Leads. \u0060CRM_RECORD_NOT_FOUND\u0060, \u0060CRM_RECORD_MERGED\u0060 (\u0060params.survivorId\u0060), \u0060CRM_RECORD_CONVERTED\u0060 (a converted Salesforce Lead, \u0060params.convertedContactId\u0060), \u0060CRM_RECORD_UNREACHABLE\u0060 (the CRM did not answer).\n\n**Values left unchanged**: \u0060FIELDS_KEPT\u0060, what the update strategy kept, named in \u0060params.fields\u0060 (company fields prefixed with \u0060company\u0060)."
           },
           "message": {
             "type": "string"
@@ -46906,6 +46955,22 @@
           },
           "_id": {
             "type": "string"
+          },
+          "salesforceId": {
+            "type": "string",
+            "description": "Salesforce id of the lead: its Lead id, or its Contact id when synced as a Contact. Only on leads synced with Salesforce."
+          },
+          "pipedriveId": {
+            "type": "string",
+            "description": "Pipedrive id of the lead. Only on leads synced with Pipedrive."
+          },
+          "hubspotId": {
+            "type": "string",
+            "description": "HubSpot id of the lead. Only on leads synced with HubSpot."
+          },
+          "attioId": {
+            "type": "string",
+            "description": "Attio id of the lead. Only on leads synced with Attio."
           }
         }
       },
@@ -47652,7 +47717,7 @@
         "additionalProperties": {
           "$ref": "#/components/schemas/DeleteLeadsByEmailVariables200ResponseWarningsItemParamsAdditionalProperties"
         },
-        "description": "Details: the input echoed back, or \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060."
+        "description": "Details: the input echoed back, \u0060fields\u0060 for \u0060FIELDS_KEPT\u0060, or the ids a \u0060crmId\u0060 warning names."
       },
       "PatchCampaignsByCampaignIdLeadsByLeadId200ResponseWarningsItemParams": {
         "type": "object",
@@ -50968,6 +51033,7 @@
           "minJobCount",
           "timeframe",
           "githubRepoUrls",
+          "githubEventTypes",
           "linkedinProfileViewsUserIds",
           "adPlatforms",
           "adFormats",
@@ -51141,6 +51207,10 @@
             {
               "value": "githubRepoUrls",
               "name": "GithubRepoUrls"
+            },
+            {
+              "value": "githubEventTypes",
+              "name": "GithubEventTypes"
             },
             {
               "value": "linkedinProfileViewsUserIds",
@@ -52797,6 +52867,43 @@
             {
               "value": "engagement",
               "name": "Engagement"
+            }
+          ]
+        }
+      },
+      "SignalSchemaSignalDataGithubActionType": {
+        "enum": [
+          "star",
+          "fork",
+          "issue",
+          "pull_request",
+          "comment"
+        ],
+        "type": "string",
+        "description": "[githubStargazer] GitHub action that produced the signal",
+        "x-ms-enum": {
+          "name": "SignalSchemaSignalDataGithubActionType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "star",
+              "name": "Star"
+            },
+            {
+              "value": "fork",
+              "name": "Fork"
+            },
+            {
+              "value": "issue",
+              "name": "Issue"
+            },
+            {
+              "value": "pull_request",
+              "name": "PullRequest"
+            },
+            {
+              "value": "comment",
+              "name": "Comment"
             }
           ]
         }
@@ -60492,7 +60599,7 @@
     },
     "GetV2CampaignsByCampaignIdExportLeads200CsvResponse": {
       "type": "string",
-      "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk"
+      "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id,hubspotId\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX,12345678901\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln,\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk,11111111111"
     },
     "GetV2CampaignsByCampaignIdExportLeads200Response": {
       "type": "array",
@@ -60697,7 +60804,7 @@
     },
     "GetV2CampaignsByCampaignIdExportLeads200CsvResponseSchema": {
       "type": "string",
-      "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk"
+      "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id,hubspotId\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX,12345678901\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln,\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk,11111111111"
     },
     "GetCampaignsByCampaignIdExportLeads200CsvResponseSchema": {
       "type": "string",
@@ -60885,6 +60992,22 @@
         },
         "_id": {
           "type": "string"
+        },
+        "salesforceId": {
+          "type": "string",
+          "description": "Salesforce id of the lead: its Lead id, or its Contact id when synced as a Contact. Only on leads synced with Salesforce."
+        },
+        "pipedriveId": {
+          "type": "string",
+          "description": "Pipedrive id of the lead. Only on leads synced with Pipedrive."
+        },
+        "hubspotId": {
+          "type": "string",
+          "description": "HubSpot id of the lead. Only on leads synced with HubSpot."
+        },
+        "attioId": {
+          "type": "string",
+          "description": "Attio id of the lead. Only on leads synced with Attio."
         }
       }
     },

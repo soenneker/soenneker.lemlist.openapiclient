@@ -6206,6 +6206,32 @@
                 "additionalProperties": {
                   "type": "string"
                 }
+              },
+              "githubActionType": {
+                "type": "string",
+                "description": "[githubStargazer] GitHub action that produced the signal",
+                "enum": ["star", "fork", "issue", "pull_request", "comment"]
+              },
+              "githubActionTitle": {
+                "type": "string",
+                "description": "[githubStargazer] Title of the issue or pull request (for a comment, the title of the issue it was posted on; absent for a star or a fork)"
+              },
+              "githubActionUrl": {
+                "type": "string",
+                "description": "[githubStargazer] URL of the fork, issue, pull request or comment (absent for a star)"
+              },
+              "githubEventAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "[githubStargazer] When the action happened on GitHub (the latest one when the same person repeats the same action on the same repository)"
+              },
+              "githubRepoUrl": {
+                "type": "string",
+                "description": "[githubStargazer] Monitored repository the action happened on"
+              },
+              "githubProfileUrl": {
+                "type": "string",
+                "description": "[githubStargazer] GitHub profile URL of the person who acted"
               }
             }
           }
@@ -6440,6 +6466,7 @@
               "minJobCount",
               "timeframe",
               "githubRepoUrls",
+              "githubEventTypes",
               "linkedinProfileViewsUserIds",
               "adPlatforms",
               "adFormats",
@@ -6451,7 +6478,7 @@
           },
           "in": {
             "type": "array",
-            "description": "Values to include. For `externalSignalFieldMapping` and `externalSignalCustomFieldMapping`, an array of mapping objects (see `WatchListExternalSignalMapping`); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when `companyIndustries` includes an industry: `allowUnknownIndustry` takes `true` to also match companies whose industry is not published (skipped when absent); `includeRelatedIndustries` takes `false` to match only the selected industries (broader or narrower related LinkedIn industries also match when absent).",
+            "description": "Values to include. For `externalSignalFieldMapping` and `externalSignalCustomFieldMapping`, an array of mapping objects (see `WatchListExternalSignalMapping`); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when `companyIndustries` includes an industry: `allowUnknownIndustry` takes `true` to also match companies whose industry is not published (skipped when absent); `includeRelatedIndustries` takes `false` to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For `githubEventTypes` (required on `githubStargazer` agents), one or more of `star`, `fork`, `issue`, `pull_request`, `comment`.",
             "items": {
               "oneOf": [
                 {
@@ -12837,7 +12864,7 @@
               "text/csv": {
                 "schema": {
                   "type": "string",
-                  "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk"
+                  "example": "emailStatus,email,firstName,lastName,picture,phone,linkedinUrl,timezone,companyName,companyDomain,icebreaker,customField,lastState,status,_id,hubspotId\ndeliverable,john@example.com,John,Doe,,,https://www.linkedin.com/in/johndoe,Europe/Paris,Acme Inc,acme.com,Saw your post on outbound,value one,emailsReplied,done,lea_6xvnr7DQXKOZ78obX,12345678901\nrisky,jane@example.com,Jane,Smith,,,https://www.linkedin.com/in/janesmith,America/New_York,Example Corp,example.com,Congrats on the new role,value two,emailsInterested,interested,lea_Z5FryxKh6L8IfW7Ln,\ndeliverable,alex@example.com,Alex,Johnson,,,https://www.linkedin.com/in/alexjohnson,Europe/London,Acme Inc,acme.com,Loved your talk,value three,emailsSent,done,lea_0KRgNBYxpRqsT9UQk,11111111111"
                 }
               },
               "application/json": {
@@ -12896,6 +12923,22 @@
                       },
                       "_id": {
                         "type": "string"
+                      },
+                      "salesforceId": {
+                        "type": "string",
+                        "description": "Salesforce id of the lead: its Lead id, or its Contact id when synced as a Contact. Only on leads synced with Salesforce."
+                      },
+                      "pipedriveId": {
+                        "type": "string",
+                        "description": "Pipedrive id of the lead. Only on leads synced with Pipedrive."
+                      },
+                      "hubspotId": {
+                        "type": "string",
+                        "description": "HubSpot id of the lead. Only on leads synced with HubSpot."
+                      },
+                      "attioId": {
+                        "type": "string",
+                        "description": "Attio id of the lead. Only on leads synced with Attio."
                       }
                     }
                   }
@@ -18620,6 +18663,11 @@
                   "contactOwner": {
                     "type": "string",
                     "description": "Contact owner (user ID or user login email)"
+                  },
+                  "crmId": {
+                    "type": "string",
+                    "description": "Closed beta: stored as a custom variable like any other key unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the lead's contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (`003…`) or Lead (`00Q…`) id of 15 or 18 characters. Requires an admin API key. Never refuses the lead: a new contact is created already linked, a contact without a link is linked, a contact linked to another record keeps it, and an id that cannot be applied comes back in `warnings`. See the endpoint page.",
+                    "example": "123456789"
                   }
                 },
                 "additionalProperties": {
@@ -18686,15 +18734,35 @@
                       "type": "string",
                       "description": "Associated contact ID"
                     },
+                    "hubspotLeadId": {
+                      "type": "string",
+                      "description": "The HubSpot contact the lead's contact is linked to. Present only when it is linked."
+                    },
+                    "salesforceContactId": {
+                      "type": "string",
+                      "description": "The Salesforce Contact (`003…`) the lead's contact is linked to. Present only when it is linked."
+                    },
+                    "salesforceLeadId": {
+                      "type": "string",
+                      "description": "The Salesforce Lead (`00Q…`) the lead's contact is linked to. Present only when it is linked."
+                    },
+                    "pipedriveLeadId": {
+                      "type": "string",
+                      "description": "The Pipedrive person the lead's contact is linked to. Present only when it is linked."
+                    },
+                    "attioLeadId": {
+                      "type": "string",
+                      "description": "The Attio person record the lead's contact is linked to. Present only when it is linked."
+                    },
                     "warnings": {
                       "type": "array",
-                      "description": "Non-blocking notices, never a failure — the request went through. They tell you why the company part was skipped, when it was, and which values the update strategy kept. See `code`.",
+                      "description": "Non-blocking notices, never a failure — the request went through. They tell you why the company part was skipped, when it was, why the `crmId` was not applied, and which values the update strategy kept. See `code`.",
                       "items": {
                         "type": "object",
                         "properties": {
                           "code": {
                             "type": "string",
-                            "description": "**The company was NOT written**: `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: `COMPANY_DOMAIN_IGNORED`, `companyDomain` is a personal email provider or a platform host shared by many companies (`gmail.com`, a `facebook.com` page, a bare `wordpress.com`). The lead and its company went through without it; `params.companyDomain` names it.\n\n**Values left unchanged**: `FIELDS_KEPT`, what the update strategy kept, named in `params.fields` (company fields prefixed with `company`)."
+                            "description": "**The company was NOT written**: `invalid-company-domain`, `invalid-company-linkedin-url`, `company-linkedin-url-not-company` (malformed identifier, or a personal profile URL), `company-duplicate-forbidden` (an identifier already belongs to another company), `company-update-failed` (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: `COMPANY_DOMAIN_IGNORED`, `companyDomain` is a personal email provider or a platform host shared by many companies (`gmail.com`, a `facebook.com` page, a bare `wordpress.com`). The lead and its company went through without it; `params.companyDomain` names it.\n\n**The `crmId` was NOT applied** (closed beta): the lead went through, its contact not linked to that record. `CRM_ID_NOT_APPLIED`: the contact is linked to another record of your CRM and keeps it (`params.crmId`). `CRM_ID_ALREADY_LINKED`: another lemlist contact holds that record (`params.conflictingContactId`). `CRM_ID_UPDATE_NOT_ALLOWED`: the API key is not an admin's. `INVALID_CRM_ID`: not an id of your CRM. `NO_CRM_CONNECTED`. `CRM_ID_LEADS_NOT_SYNCED`: a Salesforce Lead id while your team does not sync Leads. `CRM_RECORD_NOT_FOUND`, `CRM_RECORD_MERGED` (`params.survivorId`), `CRM_RECORD_CONVERTED` (a converted Salesforce Lead, `params.convertedContactId`), `CRM_RECORD_UNREACHABLE` (the CRM did not answer).\n\n**Values left unchanged**: `FIELDS_KEPT`, what the update strategy kept, named in `params.fields` (company fields prefixed with `company`)."
                           },
                           "message": {
                             "type": "string"
@@ -18714,7 +18782,7 @@
                                 }
                               ]
                             },
-                            "description": "Details: the input echoed back, or `fields` for `FIELDS_KEPT`."
+                            "description": "Details: the input echoed back, `fields` for `FIELDS_KEPT`, or the ids a `crmId` warning names."
                           }
                         }
                       }

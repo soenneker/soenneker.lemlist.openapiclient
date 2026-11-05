@@ -108,6 +108,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("fundingStage") is { } nullNodeFundingStage && nullNodeFundingStage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FundingStage = null;
             if (parseNode.GetChildNode("fundingType") is null) { _explicitNullValueFundingType = default!; _explicitNullProperties?.Remove("fundingType"); }
             else if (parseNode.GetChildNode("fundingType") is { } nullNodeFundingType && nullNodeFundingType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FundingType = null;
+            if (parseNode.GetChildNode("githubActionTitle") is null) { _explicitNullValueGithubActionTitle = default!; _explicitNullProperties?.Remove("githubActionTitle"); }
+            else if (parseNode.GetChildNode("githubActionTitle") is { } nullNodeGithubActionTitle && nullNodeGithubActionTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) GithubActionTitle = null;
+            if (parseNode.GetChildNode("githubActionType") is null) { _explicitNullValueGithubActionType = default!; _explicitNullProperties?.Remove("githubActionType"); }
+            else if (parseNode.GetChildNode("githubActionType") is { } nullNodeGithubActionType && nullNodeGithubActionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) GithubActionType = null;
+            if (parseNode.GetChildNode("githubActionUrl") is null) { _explicitNullValueGithubActionUrl = default!; _explicitNullProperties?.Remove("githubActionUrl"); }
+            else if (parseNode.GetChildNode("githubActionUrl") is { } nullNodeGithubActionUrl && nullNodeGithubActionUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) GithubActionUrl = null;
+            if (parseNode.GetChildNode("githubEventAt") is null) { _explicitNullValueGithubEventAt = default!; _explicitNullProperties?.Remove("githubEventAt"); }
+            else if (parseNode.GetChildNode("githubEventAt") is { } nullNodeGithubEventAt && nullNodeGithubEventAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) GithubEventAt = null;
+            if (parseNode.GetChildNode("githubProfileUrl") is null) { _explicitNullValueGithubProfileUrl = default!; _explicitNullProperties?.Remove("githubProfileUrl"); }
+            else if (parseNode.GetChildNode("githubProfileUrl") is { } nullNodeGithubProfileUrl && nullNodeGithubProfileUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) GithubProfileUrl = null;
+            if (parseNode.GetChildNode("githubRepoUrl") is null) { _explicitNullValueGithubRepoUrl = default!; _explicitNullProperties?.Remove("githubRepoUrl"); }
+            else if (parseNode.GetChildNode("githubRepoUrl") is { } nullNodeGithubRepoUrl && nullNodeGithubRepoUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) GithubRepoUrl = null;
             if (parseNode.GetChildNode("jobDescription") is null) { _explicitNullValueJobDescription = default!; _explicitNullProperties?.Remove("jobDescription"); }
             else if (parseNode.GetChildNode("jobDescription") is { } nullNodeJobDescription && nullNodeJobDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) JobDescription = null;
             if (parseNode.GetChildNode("jobLocation") is null) { _explicitNullValueJobLocation = default!; _explicitNullProperties?.Remove("jobLocation"); }
@@ -638,6 +650,52 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string FundingType { get => _explicitNullValueFundingType; set { _explicitNullValueFundingType = value; AdditionalData?.Remove("fundingType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fundingType"); else _explicitNullProperties?.Remove("fundingType"); } }
         private string _explicitNullValueFundingType = default!;
+#endif
+        /// <summary>[githubStargazer] Title of the issue or pull request (for a comment, the title of the issue it was posted on; absent for a star or a fork)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GithubActionTitle { get => _explicitNullValueGithubActionTitle; set { _explicitNullValueGithubActionTitle = value; AdditionalData?.Remove("githubActionTitle"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubActionTitle"); else _explicitNullProperties?.Remove("githubActionTitle"); } }
+        private string? _explicitNullValueGithubActionTitle = default!;
+#nullable restore
+#else
+        public string GithubActionTitle { get => _explicitNullValueGithubActionTitle; set { _explicitNullValueGithubActionTitle = value; AdditionalData?.Remove("githubActionTitle"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubActionTitle"); else _explicitNullProperties?.Remove("githubActionTitle"); } }
+        private string _explicitNullValueGithubActionTitle = default!;
+#endif
+        /// <summary>[githubStargazer] GitHub action that produced the signal</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataGithubActionType? GithubActionType { get => _explicitNullValueGithubActionType; set { _explicitNullValueGithubActionType = value; AdditionalData?.Remove("githubActionType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubActionType"); else _explicitNullProperties?.Remove("githubActionType"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataGithubActionType? _explicitNullValueGithubActionType = default!;
+        /// <summary>[githubStargazer] URL of the fork, issue, pull request or comment (absent for a star)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GithubActionUrl { get => _explicitNullValueGithubActionUrl; set { _explicitNullValueGithubActionUrl = value; AdditionalData?.Remove("githubActionUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubActionUrl"); else _explicitNullProperties?.Remove("githubActionUrl"); } }
+        private string? _explicitNullValueGithubActionUrl = default!;
+#nullable restore
+#else
+        public string GithubActionUrl { get => _explicitNullValueGithubActionUrl; set { _explicitNullValueGithubActionUrl = value; AdditionalData?.Remove("githubActionUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubActionUrl"); else _explicitNullProperties?.Remove("githubActionUrl"); } }
+        private string _explicitNullValueGithubActionUrl = default!;
+#endif
+        /// <summary>[githubStargazer] When the action happened on GitHub (the latest one when the same person repeats the same action on the same repository)</summary>
+        public DateTimeOffset? GithubEventAt { get => _explicitNullValueGithubEventAt; set { _explicitNullValueGithubEventAt = value; AdditionalData?.Remove("githubEventAt"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubEventAt"); else _explicitNullProperties?.Remove("githubEventAt"); } }
+        private DateTimeOffset? _explicitNullValueGithubEventAt = default!;
+        /// <summary>[githubStargazer] GitHub profile URL of the person who acted</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GithubProfileUrl { get => _explicitNullValueGithubProfileUrl; set { _explicitNullValueGithubProfileUrl = value; AdditionalData?.Remove("githubProfileUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubProfileUrl"); else _explicitNullProperties?.Remove("githubProfileUrl"); } }
+        private string? _explicitNullValueGithubProfileUrl = default!;
+#nullable restore
+#else
+        public string GithubProfileUrl { get => _explicitNullValueGithubProfileUrl; set { _explicitNullValueGithubProfileUrl = value; AdditionalData?.Remove("githubProfileUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubProfileUrl"); else _explicitNullProperties?.Remove("githubProfileUrl"); } }
+        private string _explicitNullValueGithubProfileUrl = default!;
+#endif
+        /// <summary>[githubStargazer] Monitored repository the action happened on</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GithubRepoUrl { get => _explicitNullValueGithubRepoUrl; set { _explicitNullValueGithubRepoUrl = value; AdditionalData?.Remove("githubRepoUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubRepoUrl"); else _explicitNullProperties?.Remove("githubRepoUrl"); } }
+        private string? _explicitNullValueGithubRepoUrl = default!;
+#nullable restore
+#else
+        public string GithubRepoUrl { get => _explicitNullValueGithubRepoUrl; set { _explicitNullValueGithubRepoUrl = value; AdditionalData?.Remove("githubRepoUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("githubRepoUrl"); else _explicitNullProperties?.Remove("githubRepoUrl"); } }
+        private string _explicitNullValueGithubRepoUrl = default!;
 #endif
         /// <summary>[companyIsHiring] Job posting description</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -1367,6 +1425,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "fundingSourceUrl", n => { FundingSourceUrl = n.GetStringValue(); } },
                 { "fundingStage", n => { FundingStage = n.GetStringValue(); } },
                 { "fundingType", n => { FundingType = n.GetStringValue(); } },
+                { "githubActionTitle", n => { GithubActionTitle = n.GetStringValue(); } },
+                { "githubActionType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataGithubActionType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueGithubActionType = default; _explicitNullProperties?.Remove("githubActionType"); AdditionalData["githubActionType"] = unknown; } else { GithubActionType = parsed; AdditionalData.Remove("githubActionType"); } } },
+                { "githubActionUrl", n => { GithubActionUrl = n.GetStringValue(); } },
+                { "githubEventAt", n => { GithubEventAt = n.GetDateTimeOffsetValue(); } },
+                { "githubProfileUrl", n => { GithubProfileUrl = n.GetStringValue(); } },
+                { "githubRepoUrl", n => { GithubRepoUrl = n.GetStringValue(); } },
                 { "jobDescription", n => { JobDescription = n.GetStringValue(); } },
                 { "jobLocation", n => { JobLocation = n.GetStringValue(); } },
                 { "jobStatus", n => { JobStatus = n.GetStringValue(); } },
@@ -1491,6 +1555,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("fundingSourceUrl", FundingSourceUrl);
             writer.WriteStringValue("fundingStage", FundingStage);
             writer.WriteStringValue("fundingType", FundingType);
+            writer.WriteStringValue("githubActionTitle", GithubActionTitle);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataGithubActionType>("githubActionType", GithubActionType);
+            writer.WriteStringValue("githubActionUrl", GithubActionUrl);
+            writer.WriteDateTimeOffsetValue("githubEventAt", GithubEventAt);
+            writer.WriteStringValue("githubProfileUrl", GithubProfileUrl);
+            writer.WriteStringValue("githubRepoUrl", GithubRepoUrl);
             writer.WriteStringValue("jobDescription", JobDescription);
             writer.WriteStringValue("jobLocation", JobLocation);
             writer.WriteStringValue("jobStatus", JobStatus);

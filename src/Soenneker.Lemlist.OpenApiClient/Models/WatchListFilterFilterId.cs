@@ -167,6 +167,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         GithubRepoUrls,
         #pragma warning restore CS1591
+        [EnumMember(Value = "githubEventTypes")]
+        #pragma warning disable CS1591
+        GithubEventTypes,
+        #pragma warning restore CS1591
         [EnumMember(Value = "linkedinProfileViewsUserIds")]
         #pragma warning disable CS1591
         LinkedinProfileViewsUserIds,

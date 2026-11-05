@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Details: the input echoed back, or `fields` for `FIELDS_KEPT`.
+    /// Details: the input echoed back, `fields` for `FIELDS_KEPT`, or the ids a `crmId` warning names.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PostCampaignsByCampaignIdLeads200ResponseWarningsItemParams : IAdditionalDataHolder, IParsable
