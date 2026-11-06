@@ -155,6 +155,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmListIds,
         #pragma warning restore CS1591
+        [EnumMember(Value = "targetCrmListIds")]
+        #pragma warning disable CS1591
+        TargetCrmListIds,
+        #pragma warning restore CS1591
         [EnumMember(Value = "minJobCount")]
         #pragma warning disable CS1591
         MinJobCount,
@@ -198,6 +202,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         [EnumMember(Value = "includeRelatedIndustries")]
         #pragma warning disable CS1591
         IncludeRelatedIndustries,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "minOverlapMonths")]
+        #pragma warning disable CS1591
+        MinOverlapMonths,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "includeCurrentCompanies")]
+        #pragma warning disable CS1591
+        IncludeCurrentCompanies,
         #pragma warning restore CS1591
     }
 }

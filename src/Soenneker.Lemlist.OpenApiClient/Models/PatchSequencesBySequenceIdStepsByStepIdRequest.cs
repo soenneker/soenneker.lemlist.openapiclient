@@ -43,10 +43,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("images") is { } nullNodeImages && nullNodeImages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Images = null;
             if (parseNode.GetChildNode("leadAction") is null) { _explicitNullValueLeadAction = default!; _explicitNullProperties?.Remove("leadAction"); }
             else if (parseNode.GetChildNode("leadAction") is { } nullNodeLeadAction && nullNodeLeadAction.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LeadAction = null;
+            if (parseNode.GetChildNode("manual") is null) { _explicitNullValueManual = default!; _explicitNullProperties?.Remove("manual"); }
+            else if (parseNode.GetChildNode("manual") is { } nullNodeManual && nullNodeManual.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Manual = null;
             if (parseNode.GetChildNode("message") is null) { _explicitNullValueMessage = default!; _explicitNullProperties?.Remove("message"); }
             else if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
             if (parseNode.GetChildNode("method") is null) { _explicitNullValueMethod = default!; _explicitNullProperties?.Remove("method"); }
             else if (parseNode.GetChildNode("method") is { } nullNodeMethod && nullNodeMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Method = null;
+            if (parseNode.GetChildNode("priority") is null) { _explicitNullValuePriority = default!; _explicitNullProperties?.Remove("priority"); }
+            else if (parseNode.GetChildNode("priority") is { } nullNodePriority && nullNodePriority.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Priority = null;
             if (parseNode.GetChildNode("recordMode") is null) { _explicitNullValueRecordMode = default!; _explicitNullProperties?.Remove("recordMode"); }
             else if (parseNode.GetChildNode("recordMode") is { } nullNodeRecordMode && nullNodeRecordMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecordMode = null;
             if (parseNode.GetChildNode("skillName") is null) { _explicitNullValueSkillName = default!; _explicitNullProperties?.Remove("skillName"); }
@@ -153,6 +157,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Applies to `sendToAnotherCampaign` steps only. What happens to the lead in the SOURCE campaign once it has been moved to the target one. `continue` keeps it running the remaining steps, `pause` pauses it, `stop` ends the source campaign for it. Omitted leaves the step without a value, which behaves as `continue`; a step added from the lemlist UI defaults to `stop`. A transfer that fails always pauses the lead, whatever this says.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction? LeadAction { get => _explicitNullValueLeadAction; set { _explicitNullValueLeadAction = value; AdditionalData?.Remove("leadAction"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("leadAction"); else _explicitNullProperties?.Remove("leadAction"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction? _explicitNullValueLeadAction = default!;
+        /// <summary>`true` holds a channel step behind a task: the campaign sends the step once the task is marked done. A `linkedinVoiceNote` step also needs its recording, see [Manual steps](/api-reference/endpoints/sequences/add-step-to-sequence#manual-steps). `false` switches it back to automatic sending. The switch applies to the tasks created afterwards. Accepted on `email`, `linkedinInvite`, `linkedinSend`, `linkedinInMail`, `linkedinVoiceNote`, `whatsappMessage` and `sms` steps. Rejected with `400` on every other type, `manual` and `phone` steps included: they are always tasks</summary>
+        public bool? Manual { get => _explicitNullValueManual; set { _explicitNullValueManual = value; AdditionalData?.Remove("manual"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("manual"); else _explicitNullProperties?.Remove("manual"); } }
+        private bool? _explicitNullValueManual = default!;
         /// <summary>Content of the email or message (for email, linkedinInvite, linkedinSend, linkedinInMail, manual, phone, whatsappMessage, sms steps, and as the AI script of a linkedinVoiceNote step in `ai` record mode). Pass an empty string to clear it (ignored on manual and phone steps). On a linkedinInMail step it is sent as plain text (LinkedIn does not render HTML), and a blank one is saved but blocks the campaign launch</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -166,6 +173,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>HTTP method for API steps</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod? Method { get => _explicitNullValueMethod; set { _explicitNullValueMethod = value; AdditionalData?.Remove("method"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("method"); else _explicitNullProperties?.Remove("method"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod? _explicitNullValueMethod = default!;
+        /// <summary>Priority of the task the step creates: `0` low, `1` medium, `2` high. Omitted, the task has no priority. Accepted on `manual` and `phone` steps and on the channel steps that take `manual`, where it applies once the step is manual. A priority cannot be removed once set: `null` is rejected with `400`</summary>
+        public int? Priority { get => _explicitNullValuePriority; set { _explicitNullValuePriority = value; AdditionalData?.Remove("priority"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("priority"); else _explicitNullProperties?.Remove("priority"); } }
+        private int? _explicitNullValuePriority = default!;
         /// <summary>Applies to `linkedinVoiceNote` steps only. Determines how the audio is sourced. `manual` (default) means the user records the audio themselves from the lemlist UI after step creation; `ai` means lemlist generates the audio from a text template provided in the lemlist UI.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode? RecordMode { get => _explicitNullValueRecordMode; set { _explicitNullValueRecordMode = value; AdditionalData?.Remove("recordMode"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recordMode"); else _explicitNullProperties?.Remove("recordMode"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode? _explicitNullValueRecordMode = default!;
@@ -189,7 +199,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; AdditionalData?.Remove("subject"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
         private string _explicitNullValueSubject = default!;
 #endif
-        /// <summary>Title or label for manual steps</summary>
+        /// <summary>Title of the task the step creates, on `manual` and `phone` steps and on a channel step with `manual: true`. Maximum 100 characters</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
@@ -260,8 +270,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "endorseAnyFallback", n => { EndorseAnyFallback = n.GetBoolValue(); } },
                 { "images", n => { Images = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "leadAction", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLeadAction = default; _explicitNullProperties?.Remove("leadAction"); AdditionalData["leadAction"] = unknown; } else { LeadAction = parsed; AdditionalData.Remove("leadAction"); } } },
+                { "manual", n => { Manual = n.GetBoolValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "method", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMethod = default; _explicitNullProperties?.Remove("method"); AdditionalData["method"] = unknown; } else { Method = parsed; AdditionalData.Remove("method"); } } },
+                { "priority", n => { Priority = n.GetIntValue(); } },
                 { "recordMode", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueRecordMode = default; _explicitNullProperties?.Remove("recordMode"); AdditionalData["recordMode"] = unknown; } else { RecordMode = parsed; AdditionalData.Remove("recordMode"); } } },
                 { "skillName", n => { SkillName = n.GetStringValue(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
@@ -291,8 +303,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("endorseAnyFallback", EndorseAnyFallback);
             writer.WriteCollectionOfPrimitiveValues<string>("images", Images);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>("leadAction", LeadAction);
+            writer.WriteBoolValue("manual", Manual);
             writer.WriteStringValue("message", Message);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestMethod>("method", Method);
+            writer.WriteIntValue("priority", Priority);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestRecordMode>("recordMode", RecordMode);
             writer.WriteStringValue("skillName", SkillName);
             writer.WriteStringValue("subject", Subject);

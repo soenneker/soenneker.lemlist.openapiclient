@@ -79,5 +79,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Sms,
         #pragma warning restore CS1591
+        [EnumMember(Value = "enrichment")]
+        #pragma warning disable CS1591
+        Enrichment,
+        #pragma warning restore CS1591
     }
 }

@@ -35,6 +35,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         ExcludedCrmListsTooLarge,
         #pragma warning restore CS1591
+        [EnumMember(Value = "target_crm_lists_too_large")]
+        #pragma warning disable CS1591
+        TargetCrmListsTooLarge,
+        #pragma warning restore CS1591
         [EnumMember(Value = "error")]
         #pragma warning disable CS1591
         Error,

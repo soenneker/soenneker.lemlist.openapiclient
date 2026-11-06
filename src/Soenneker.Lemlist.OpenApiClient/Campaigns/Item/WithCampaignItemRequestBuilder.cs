@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.AbmLeads;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Archive;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Duplicate;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.DynamicSenderExclusions;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Export;
@@ -17,6 +18,7 @@ using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Start;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Statutes;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Steps;
 using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers;
+using Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Unarchive;
 using Soenneker.Lemlist.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -35,6 +37,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.AbmLeads.AbmLeadsRequestBuilder AbmLeads
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.AbmLeads.AbmLeadsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The archive property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Archive.ArchiveRequestBuilder Archive
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Archive.ArchiveRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The duplicate property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Duplicate.DuplicateRequestBuilder Duplicate
@@ -100,6 +107,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns.Item
         public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.TriggersRequestBuilder Triggers
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Triggers.TriggersRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The unarchive property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Unarchive.UnarchiveRequestBuilder Unarchive
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.Unarchive.UnarchiveRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Campaigns.Item.WithCampaignItemRequestBuilder"/> and sets the default values.

@@ -50,7 +50,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string AssignedTo { get => _explicitNullValueAssignedTo; set { _explicitNullValueAssignedTo = value; AdditionalData?.Remove("assignedTo"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignedTo"); else _explicitNullProperties?.Remove("assignedTo"); } }
         private string _explicitNullValueAssignedTo = default!;
 #endif
-        /// <summary>Mark task as completed</summary>
+        /// <summary>Mark task as completed. On a campaign step with `manual: true`, the campaign then sends the step. To close the task without sending, use [Ignore Tasks](/api-reference/endpoints/tasks/ignore-tasks)</summary>
         public bool? Done { get => _explicitNullValueDone; set { _explicitNullValueDone = value; AdditionalData?.Remove("done"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("done"); else _explicitNullProperties?.Remove("done"); } }
         private bool? _explicitNullValueDone = default!;
         /// <summary>Updated due date in ISO 8601 format</summary>
