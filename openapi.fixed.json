@@ -8318,13 +8318,30 @@
             }
           },
           "400": {
-            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign / No valid fields to add / Invalid updateStrategy value",
+            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign (409 from December 1, 2026) / No valid fields to add / Invalid updateStrategy value",
             "content": {
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseError"
                 },
-                "example": "No API key provided"
+                "examples": {
+                  "lead-already-in-campaign": {
+                    "summary": "Lead already in the campaign (409 from December 1, 2026)",
+                    "value": "Lead already in the campaign"
+                  },
+                  "invalid-email": {
+                    "value": "Invalid email address"
+                  },
+                  "email-in-graveyard": {
+                    "value": "Email address is in the graveyard"
+                  },
+                  "body-not-object": {
+                    "value": "Body of your request must be an object"
+                  },
+                  "no-api-key": {
+                    "value": "No API key provided"
+                  }
+                }
               }
             }
           },
@@ -11541,7 +11558,7 @@
           "People Database"
         ],
         "summary": "List Personas",
-        "description": "Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the \u0060persona\u0060 filter of a Signal Agent.\n\nPersonas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "description": "Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the \u0060persona\u0060 filter of a Signal Agent.\n\nPersonas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.",
         "operationId": "ListPersonas",
         "parameters": [
           {
@@ -11617,20 +11634,6 @@
               }
             }
           },
-          "403": {
-            "description": "The personas beta is not enabled for your team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PersonaError"
-                },
-                "example": {
-                  "error": "Beta is not enabled",
-                  "code": "BETA_NOT_ENABLED"
-                }
-              }
-            }
-          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -11652,7 +11655,7 @@
           "People Database"
         ],
         "summary": "Create Persona",
-        "description": "Creates a persona for your team from a name and a set of People Database filters.\n\nUse [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) to discover the valid \u0060filterId\u0060 values. Filters carry no \u0060type\u0060 property: it is derived from \u0060filterId\u0060 server-side. Filters that require a plan your team does not have are dropped silently, so the persona is stored with the subset your plan allows.\n\nA \u0060slider\u0060 filter (such as \u0060currentCompanyFounded\u0060) takes one or more \u0060min|max\u0060 ranges in \u0060in\u0060, and its \u0060out\u0060 must stay empty. An \u0060out\u0060 value or a range in another format answers \u0060400\u0060 with the code \u0060PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER\u0060.\n\nOnly the created id is returned. The stored \u0060name\u0060 and \u0060filters\u0060 are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [List Personas](/api-reference/endpoints/people-database/list-personas) to read the stored persona.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "description": "Creates a persona for your team from a name and a set of People Database filters.\n\nUse [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) to discover the valid \u0060filterId\u0060 values. Filters carry no \u0060type\u0060 property: it is derived from \u0060filterId\u0060 server-side. Filters that require a plan your team does not have are dropped silently, so the persona is stored with the subset your plan allows.\n\nA \u0060slider\u0060 filter (such as \u0060currentCompanyFounded\u0060) takes one or more \u0060min|max\u0060 ranges in \u0060in\u0060, and its \u0060out\u0060 must stay empty. An \u0060out\u0060 value or a range in another format answers \u0060400\u0060 with the code \u0060PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER\u0060.\n\nOnly the created id is returned. The stored \u0060name\u0060 and \u0060filters\u0060 are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [List Personas](/api-reference/endpoints/people-database/list-personas) to read the stored persona.",
         "operationId": "CreatePersona",
         "requestBody": {
           "content": {
@@ -11753,20 +11756,6 @@
               }
             }
           },
-          "403": {
-            "description": "The personas beta is not enabled for your team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PersonaError"
-                },
-                "example": {
-                  "error": "Beta is not enabled",
-                  "code": "BETA_NOT_ENABLED"
-                }
-              }
-            }
-          },
           "409": {
             "description": "A persona with this name already exists for your team",
             "content": {
@@ -11820,7 +11809,7 @@
           "People Database"
         ],
         "summary": "Delete Persona",
-        "description": "Permanently deletes one of your team\u0027s personas. There is no undo.\n\nAn unknown id, a persona belonging to another team, and the persona lemlist auto-generates from your AI business context all answer the same \u0060404\u0060: they are indistinguishable by design.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "description": "Permanently deletes one of your team\u0027s personas. There is no undo.\n\nAn unknown id, a persona belonging to another team, and the persona lemlist auto-generates from your AI business context all answer the same \u0060404\u0060: they are indistinguishable by design.",
         "operationId": "DeletePersona",
         "parameters": [
           {
@@ -11874,20 +11863,6 @@
                   "$ref": "#/components/schemas/ResponseError"
                 },
                 "example": "The authentication you supplied is incorrect"
-              }
-            }
-          },
-          "403": {
-            "description": "The personas beta is not enabled for your team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PersonaError"
-                },
-                "example": {
-                  "error": "Beta is not enabled",
-                  "code": "BETA_NOT_ENABLED"
-                }
               }
             }
           },
@@ -20348,137 +20323,6 @@
         }
       }
     },
-    "/unsubscribes": {
-      "get": {
-        "tags": [
-          "Unsubscribes"
-        ],
-        "summary": "Get Many Unsubscribes",
-        "operationId": "GetUnsubscribes",
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Offset for pagination",
-            "schema": {
-              "type": "integer"
-            },
-            "example": "0"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Number of unsubscribes to retrieve. Default: 100",
-            "schema": {
-              "type": "integer"
-            },
-            "example": "5"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUnsubscribes200ResponseSchema"
-                },
-                "example": [
-                  {
-                    "_id": "uns_ZmzP7K61EMIT9fBSj",
-                    "createdAt": "2023-06-12T10:45:21.367Z",
-                    "value": "john.doe@example.com",
-                    "source": "user"
-                  }
-                ]
-              }
-            }
-          },
-          "400": {
-            "description": "No API key provided",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "No API key provided"
-              }
-            }
-          },
-          "401": {
-            "description": "The authentication you supplied is incorrect",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "The authentication you supplied is incorrect"
-              }
-            }
-          },
-          "403": {
-            "description": "User linked to this API key is blocked",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "User linked to this API key is blocked"
-              }
-            }
-          },
-          "404": {
-            "description": "No user found for this API key",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "No user found for this API key"
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/unsubs/export": {
-      "get": {
-        "tags": [
-          "Unsubscribes"
-        ],
-        "summary": "Export Unsubscribes",
-        "operationId": "GetUnsubsExport",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "description": "Fallback media schema"
-                },
-                "example": "value,source,createdAt\nwilliam.davis@fake.org,lead,2019-12-19T21:56:34.672Z\nemma.johnson@sample.com,abuse,2020-09-30T08:34:17.298Z\nmichael.brown@domain.net,api,2021-03-12T14:12:56.534Z\njane.smith@example.org,bounce,2022-11-23T18:23:45.890Z\njohn.doe@example.com,user,2023-06-15T10:45:21.367Z\nalice.brown@domainexample.com,lead,2023-07-21T09:14:25.521Z\nbob.smith@example.net,user,2023-08-01T17:34:43.679Z\ncharlie.doe@mockmail.com,api,2023-09-12T11:05:37.874Z\ndavid.jones@sampledomain.org,abuse,2023-10-05T15:23:54.129Z\neve.wilson@fakemail.com,bounce,2024-01-07T08:19:45.213Z"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad team",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "Bad team"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "deprecated": true
-      }
-    },
     "/v2/unsubscribes/variables": {
       "get": {
         "tags": [
@@ -21105,219 +20949,6 @@
             "description": "Unauthorized"
           }
         }
-      }
-    },
-    "/unsubscribes/{email}": {
-      "get": {
-        "tags": [
-          "Unsubscribes"
-        ],
-        "summary": "Get Unsubscribe by Email",
-        "operationId": "GetUnsubscribesByEmail",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "description": "Email address to check unsubscribe status",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-client-original-format": "email"
-            },
-            "example": "john.doe@domain.com"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUnsubscribesByEmail200Response"
-                },
-                "example": {
-                  "_id": "uns_ZmzP7K61EMIT9fBSj",
-                  "createdAt": "2023-06-12T10:45:21.367Z",
-                  "value": "john.doe@example.com",
-                  "source": "user"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "No API key provided",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "No API key provided"
-              }
-            }
-          },
-          "401": {
-            "description": "The authentication you supplied is incorrect",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "The authentication you supplied is incorrect"
-              }
-            }
-          },
-          "403": {
-            "description": "User linked to this API key is blocked",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "User linked to this API key is blocked"
-              }
-            }
-          },
-          "404": {
-            "description": "Possible errors: No user found for this API key / Unsubscriber not found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "No user found for this API key"
-              }
-            }
-          },
-          "500": {
-            "description": "Possible errors: Invalid value / Invalid email address or domain / Invalid email address or domain. Domains must start with @"
-          }
-        },
-        "deprecated": true
-      },
-      "post": {
-        "tags": [
-          "Unsubscribes"
-        ],
-        "summary": "Add Unsubscribe Email or Domain",
-        "operationId": "PostUnsubscribesByEmail",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "description": "Email address to add to the unsubscribes",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-client-original-format": "email"
-            },
-            "example": "john.doe@domain.com"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostUnsubscribesByEmail200Response"
-                },
-                "example": {
-                  "_id": "uns_0X5cBxEldVyOIz0VQ",
-                  "value": "user@domain.com",
-                  "email": "user@domain.com"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad team",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "Bad team"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Unsubscribe not found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "Unsubscribe not found"
-              }
-            }
-          }
-        },
-        "deprecated": true
-      },
-      "delete": {
-        "tags": [
-          "Unsubscribes"
-        ],
-        "summary": "Delete Unsubscribe Email",
-        "operationId": "DeleteUnsubscribesByEmail",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "description": "Email address to remove from the unsubscribes",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-client-original-format": "email"
-            },
-            "example": "john.doe@domain.com"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteUnsubscribesByEmail200Response"
-                },
-                "example": {
-                  "_id": "uns_QCXCLzEfEuEOlCVIu",
-                  "value": "john.doe@example.com"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad team",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "Bad team"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Unsubscribe not found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
-                },
-                "example": "Unsubscribe not found"
-              }
-            }
-          }
-        },
-        "deprecated": true
       }
     },
     "/hooks": {
@@ -29789,37 +29420,6 @@
           }
         },
         "description": "A recorded action or event in a campaign sequence (email sent, opened, clicked, etc.)."
-      },
-      "Unsubscribe": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique unsubscribe identifier"
-          },
-          "email": {
-            "type": "string",
-            "description": "Unsubscribed email address",
-            "x-client-original-format": "email"
-          },
-          "campaignId": {
-            "type": "string",
-            "description": "Campaign ID from which the person unsubscribed"
-          },
-          "campaignName": {
-            "type": "string",
-            "description": "Campaign name from which the person unsubscribed"
-          },
-          "unsubscribedAt": {
-            "type": "string",
-            "description": "Unsubscribe timestamp",
-            "format": "date-time"
-          },
-          "scope": {
-            "$ref": "#/components/schemas/UnsubscribeScope"
-          }
-        },
-        "description": "A record of someone opting out of receiving emails."
       },
       "UnsubscribedVariable": {
         "type": "object",
@@ -41719,69 +41319,6 @@
           }
         }
       },
-      "GetUnsubscribesByEmail200Response": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique identifier for the unsubscribe entry"
-          },
-          "createdAt": {
-            "type": "string",
-            "description": "Timestamp when the unsubscribe entry was created",
-            "format": "date-time"
-          },
-          "value": {
-            "type": "string",
-            "description": "The unsubscribed email address"
-          },
-          "source": {
-            "type": "string",
-            "description": "Source of the unsubscribe (e.g., user, lead, abuse, bounce, api)"
-          }
-        }
-      },
-      "PostUnsubscribesByEmail200Response": {
-        "required": [
-          "_id",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique identifier for the unsubscribe entry"
-          },
-          "value": {
-            "type": "string",
-            "description": "The unsubscribed email address or domain",
-            "x-client-original-format": "email"
-          },
-          "email": {
-            "type": "string",
-            "description": "The unsubscribed email address",
-            "x-client-original-format": "email"
-          }
-        }
-      },
-      "DeleteUnsubscribesByEmail200Response": {
-        "required": [
-          "_id",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique identifier for the unsubscribe entry"
-          },
-          "value": {
-            "type": "string",
-            "description": "The unsubscribed email address",
-            "x-client-original-format": "email"
-          }
-        }
-      },
       "PostHooksRequest": {
         "required": [
           "targetUrl"
@@ -44230,12 +43767,6 @@
             },
             "description": "Detailed metrics for each step in the campaign"
           }
-        }
-      },
-      "GetUnsubscribes200ResponseSchema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Unsubscribe"
         }
       },
       "GetV2UnsubscribesVariables200ResponseSchema": {
@@ -49038,33 +48569,6 @@
             {
               "value": "errors",
               "name": "Errors"
-            }
-          ]
-        }
-      },
-      "UnsubscribeScope": {
-        "enum": [
-          "campaign",
-          "team",
-          "global"
-        ],
-        "type": "string",
-        "description": "Unsubscribe scope",
-        "x-ms-enum": {
-          "name": "UnsubscribeScope",
-          "modelAsString": false,
-          "values": [
-            {
-              "value": "campaign",
-              "name": "Campaign"
-            },
-            {
-              "value": "team",
-              "name": "Team"
-            },
-            {
-              "value": "global",
-              "name": "Global"
             }
           ]
         }
@@ -61392,12 +60896,6 @@
       "type": "array",
       "items": {
         "$ref": "#/components/schemas/Activity"
-      }
-    },
-    "GetUnsubscribes200Response": {
-      "type": "array",
-      "items": {
-        "$ref": "#/components/schemas/Unsubscribe"
       }
     },
     "GetV2UnsubscribesVariables200Response": {

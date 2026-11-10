@@ -47,14 +47,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
         {
         }
         /// <summary>
-        /// Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.Personas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.Personas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -70,7 +69,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -78,7 +76,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PersonaListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Creates a persona for your team from a name and a set of People Database filters.Use [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) to discover the valid `filterId` values. Filters carry no `type` property: it is derived from `filterId` server-side. Filters that require a plan your team does not have are dropped silently, so the persona is stored with the subset your plan allows.A `slider` filter (such as `currentCompanyFounded`) takes one or more `min|max` ranges in `in`, and its `out` must stay empty. An `out` value or a range in another format answers `400` with the code `PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER`.Only the created id is returned. The stored `name` and `filters` are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [List Personas](/api-reference/endpoints/people-database/list-personas) to read the stored persona.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Creates a persona for your team from a name and a set of People Database filters.Use [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) to discover the valid `filterId` values. Filters carry no `type` property: it is derived from `filterId` server-side. Filters that require a plan your team does not have are dropped silently, so the persona is stored with the subset your plan allows.A `slider` filter (such as `currentCompanyFounded`) takes one or more `min|max` ranges in `in`, and its `out` must stay empty. An `out` value or a range in another format answers `400` with the code `PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER`.Only the created id is returned. The stored `name` and `filters` are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [List Personas](/api-reference/endpoints/people-database/list-personas) to read the stored persona.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaCreateResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -86,7 +84,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 409 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -104,7 +101,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.PersonaError.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -113,7 +109,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaCreateResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PersonaCreateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.Personas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.Personas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -132,7 +128,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
             return requestInfo;
         }
         /// <summary>
-        /// Creates a persona for your team from a name and a set of People Database filters.Use [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) to discover the valid `filterId` values. Filters carry no `type` property: it is derived from `filterId` server-side. Filters that require a plan your team does not have are dropped silently, so the persona is stored with the subset your plan allows.A `slider` filter (such as `currentCompanyFounded`) takes one or more `min|max` ranges in `in`, and its `out` must stay empty. An `out` value or a range in another format answers `400` with the code `PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER`.Only the created id is returned. The stored `name` and `filters` are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [List Personas](/api-reference/endpoints/people-database/list-personas) to read the stored persona.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Creates a persona for your team from a name and a set of People Database filters.Use [Get Database Filters](/api-reference/endpoints/people-database/get-database-filters) to discover the valid `filterId` values. Filters carry no `type` property: it is derived from `filterId` server-side. Filters that require a plan your team does not have are dropped silently, so the persona is stored with the subset your plan allows.A `slider` filter (such as `currentCompanyFounded`) takes one or more `min|max` ranges in `in`, and its `out` must stay empty. An `out` value or a range in another format answers `400` with the code `PEOPLE_DATABASE_PERSONA_API_INVALID_SLIDER`.Only the created id is returned. The stored `name` and `filters` are sanitized and plan-gated server-side, so echoing the request payload back would misreport what was persisted; call [List Personas](/api-reference/endpoints/people-database/list-personas) to read the stored persona.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -163,7 +159,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Database.Personas
             return new global::Soenneker.Lemlist.OpenApiClient.Database.Personas.PersonasRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.Personas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists the personas saved by your team. A persona is a named, reusable set of People Database filters; its id can then be referenced elsewhere in the API, for example through the `persona` filter of a Signal Agent.Personas are team-shared: every member sees the same list. Results are sorted by creation date, most recent first, and capped at 200. The auto-generated persona lemlist derives from your AI business context is never returned; only the personas your team created are.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PersonasRequestBuilderGetQueryParameters 
