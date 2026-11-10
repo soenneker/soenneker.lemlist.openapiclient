@@ -42,6 +42,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("label") is { } nullNodeLabel && nullNodeLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Label = null;
             if (parseNode.GetChildNode("method") is null) { _explicitNullValueMethod = default!; _explicitNullProperties?.Remove("method"); }
             else if (parseNode.GetChildNode("method") is { } nullNodeMethod && nullNodeMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Method = null;
+            if (parseNode.GetChildNode("skippedFields") is null) { _explicitNullValueSkippedFields = default!; _explicitNullProperties?.Remove("skippedFields"); }
+            else if (parseNode.GetChildNode("skippedFields") is { } nullNodeSkippedFields && nullNodeSkippedFields.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkippedFields = null;
             if (parseNode.GetChildNode("state") is null) { _explicitNullValueState = default!; _explicitNullProperties?.Remove("state"); }
             else if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
             if (parseNode.GetChildNode("updatedFields") is null) { _explicitNullValueUpdatedFields = default!; _explicitNullProperties?.Remove("updatedFields"); }
@@ -132,7 +134,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Label { get => _explicitNullValueLabel; set { _explicitNullValueLabel = value; AdditionalData?.Remove("label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("label"); else _explicitNullProperties?.Remove("label"); } }
         private string _explicitNullValueLabel = default!;
 #endif
-        /// <summary>Name of the operation, e.g. `contact_update`. `direction` tells a lemlist write from the CRM change it mirrors. Known values: `activity_create`, `activity_import`, `association_from_company`, `association_from_contact`, `association_remove`, `association_update`, `call_create`, `call_update`, `company_create`, `company_delete`, `company_merge`, `company_owner_update`, `company_restore`, `company_update`, `contact_create`, `contact_delete`, `contact_merge`, `contact_owner_update`, `contact_restore`, `contact_update`, `custom_activity_create`, `deal_create`, `email_message_create`, `event_create`, `experience_update`, `lead_status_update`, `linkedin_message_create`, `note_create`, `note_import`, `note_update`, `sms_message_create`, `task_complete`, `task_create`, `task_delete`, `task_import`, `task_update`, `whatsapp_message_create`. An operation lemlist has not named yet keeps its own identifier: filter with `category` rather than on this value.</summary>
+        /// <summary>Name of the operation, e.g. `contact_update`. `direction` tells a lemlist write from the CRM change it mirrors. Known values: `activity_create`, `activity_import`, `association_from_company`, `association_from_contact`, `association_remove`, `association_update`, `call_create`, `call_update`, `company_create`, `company_delete`, `company_merge`, `company_owner_update`, `company_restore`, `company_update`, `contact_create`, `contact_delete`, `contact_merge`, `contact_owner_update`, `contact_restore`, `contact_update`, `custom_activity_create`, `deal_create`, `email_message_create`, `event_create`, `experience_update`, `lead_status_update`, `linkedin_message_create`, `note_create`, `note_import`, `note_update`, `sms_message_create`, `task_complete`, `task_create`, `task_delete`, `task_import`, `task_update`, `whatsapp_message_create`. An operation lemlist has not named yet keeps its own identifier: filter with `category` rather than on this value. `contact_owner_update` and `company_owner_update` name the older owner changes: lemlist now pushes an owner change as `contact_update` / `company_update`. To list them all, filter with `field=ownerId&amp;category=contact,company`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Method { get => _explicitNullValueMethod; set { _explicitNullValueMethod = value; AdditionalData?.Remove("method"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("method"); else _explicitNullProperties?.Remove("method"); } }
@@ -142,10 +144,20 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Method { get => _explicitNullValueMethod; set { _explicitNullValueMethod = value; AdditionalData?.Remove("method"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("method"); else _explicitNullProperties?.Remove("method"); } }
         private string _explicitNullValueMethod = default!;
 #endif
+        /// <summary>Fields lemlist left out of a write to the CRM, each with its reason. A field the CRM refuses, or an owner no CRM user matches, shows here rather than in `updatedFields`. Absent when no field was skipped.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem>? SkippedFields { get => _explicitNullValueSkippedFields; set { _explicitNullValueSkippedFields = value; AdditionalData?.Remove("skippedFields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skippedFields"); else _explicitNullProperties?.Remove("skippedFields"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem>? _explicitNullValueSkippedFields = default!;
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem> SkippedFields { get => _explicitNullValueSkippedFields; set { _explicitNullValueSkippedFields = value; AdditionalData?.Remove("skippedFields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skippedFields"); else _explicitNullProperties?.Remove("skippedFields"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem> _explicitNullValueSkippedFields = default!;
+#endif
         /// <summary>`pending`: queued, not run yet. `done`: the CRM accepted it. `error`: the CRM refused it, see `error`. `aborted`: lemlist skipped it, `error.code` gives the reason.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; AdditionalData?.Remove("state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogState? _explicitNullValueState = default!;
-        /// <summary>Fields sent to or received from the CRM, with their values</summary>
+        /// <summary>Fields sent to or received from the CRM, with their values. A field is keyed by its CRM API name (e.g. `hubspot_owner_id`, `OwnerId`) or by its CRM label (e.g. `Contact owner`), as the operation recorded it. An owner is the CRM user ID of the new owner.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogUpdatedFieldsProperty? UpdatedFields { get => _explicitNullValueUpdatedFields; set { _explicitNullValueUpdatedFields = value; AdditionalData?.Remove("updatedFields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updatedFields"); else _explicitNullProperties?.Remove("updatedFields"); } }
@@ -192,6 +204,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "method", n => { Method = n.GetStringValue(); } },
+                { "skippedFields", n => { SkippedFields = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "updatedFields", n => { UpdatedFields = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogUpdatedFieldsProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogUpdatedFieldsProperty.CreateFromDiscriminatorValue); } },
             };
@@ -215,6 +228,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("_id", Id);
             writer.WriteStringValue("label", Label);
             writer.WriteStringValue("method", Method);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogSkippedFieldsItem>("skippedFields", SkippedFields);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogState>("state", State);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CrmLogUpdatedFieldsProperty>("updatedFields", UpdatedFields);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

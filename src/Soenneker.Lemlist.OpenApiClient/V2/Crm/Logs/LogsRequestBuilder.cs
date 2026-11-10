@@ -22,7 +22,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Crm.Logs
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LogsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/crm/logs{?category*,companyId*,contactId*,from*,limit*,method*,page*,state*,to*}", pathParameters)
+        public LogsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/crm/logs{?category*,companyId*,contactId*,field*,from*,limit*,method*,page*,state*,to*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Crm.Logs
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public LogsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/crm/logs{?category*,companyId*,contactId*,from*,limit*,method*,page*,state*,to*}", rawUrl)
+        public LogsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/crm/logs{?category*,companyId*,contactId*,field*,from*,limit*,method*,page*,state*,to*}", rawUrl)
         {
         }
         /// <summary>
@@ -127,6 +127,16 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Crm.Logs
 #else
             [QueryParameter("contactId")]
             public string ContactId { get; set; }
+#endif
+            /// <summary>Only the logs that wrote or skipped one of these fields, comma-separated: at most 10 names of 100 characters each (`INVALID_PARAMETER`). A name is a lemlist field (`ownerId`, `email`, a custom field), matched through your CRM field mapping, or the CRM field as `updatedFields` and `skippedFields` show it: its API name (`hubspot_owner_id`) or its label (`Contact owner`), matched exactly. `field=ownerId` lists every owner change, whatever the `method`. It also keeps the activities that carry an owner (a call or a meeting logged on HubSpot): add `category=contact,company` to keep the owner changes of contacts and companies only. A log keeps the label the CRM field had when it was written: after a rename in your CRM, pass the old label to find the older logs. On a team period dense with logs, a rare field can answer `READ_TOO_SLOW`: narrow `from` / `to`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("field")]
+            public string? Field { get; set; }
+#nullable restore
+#else
+            [QueryParameter("field")]
+            public string Field { get; set; }
 #endif
             /// <summary>Only the logs created at or after this date (ISO 8601, read in UTC: a time without offset is UTC, a date without time starts at 00:00). For a record, no default: its whole history. For the team, 31 days before `to` by default, and `from` and `to` may span 31 days at most (`INVALID_DATE_RANGE`): with dates without time, `from=2026-08-01&amp;to=2026-08-31` is the widest window.</summary>
             [QueryParameter("from")]

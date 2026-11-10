@@ -64,6 +64,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmSyncUnsubStateProtected,
         #pragma warning restore CS1591
+        [EnumMember(Value = "crm_sync_unsub_channel_empty")]
+        #pragma warning disable CS1591
+        CrmSyncUnsubChannelEmpty,
+        #pragma warning restore CS1591
         [EnumMember(Value = "crm_sync_value_oscillating")]
         #pragma warning disable CS1591
         CrmSyncValueOscillating,

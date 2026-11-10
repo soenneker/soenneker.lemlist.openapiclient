@@ -10301,6 +10301,15 @@
             "example": "contact_update,task_complete"
           },
           {
+            "name": "field",
+            "in": "query",
+            "description": "Only the logs that wrote or skipped one of these fields, comma-separated: at most 10 names of 100 characters each (\u0060INVALID_PARAMETER\u0060). A name is a lemlist field (\u0060ownerId\u0060, \u0060email\u0060, a custom field), matched through your CRM field mapping, or the CRM field as \u0060updatedFields\u0060 and \u0060skippedFields\u0060 show it: its API name (\u0060hubspot_owner_id\u0060) or its label (\u0060Contact owner\u0060), matched exactly. \u0060field=ownerId\u0060 lists every owner change, whatever the \u0060method\u0060. It also keeps the activities that carry an owner (a call or a meeting logged on HubSpot): add \u0060category=contact,company\u0060 to keep the owner changes of contacts and companies only. A log keeps the label the CRM field had when it was written: after a rename in your CRM, pass the old label to find the older logs. On a team period dense with logs, a rare field can answer \u0060READ_TOO_SLOW\u0060: narrow \u0060from\u0060 / \u0060to\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ownerId"
+          },
+          {
             "name": "from",
             "in": "query",
             "description": "Only the logs created at or after this date (ISO 8601, read in UTC: a time without offset is UTC, a date without time starts at 00:00). For a record, no default: its whole history. For the team, 31 days before \u0060to\u0060 by default, and \u0060from\u0060 and \u0060to\u0060 may span 31 days at most (\u0060INVALID_DATE_RANGE\u0060): with dates without time, \u0060from=2026-08-01\u0026to=2026-08-31\u0060 is the widest window.",
@@ -23182,7 +23191,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "ID of the team member whose signatures to update (usr_xxx). Any member of your team is allowed, including yourself",
+            "description": "ID of the team member whose signatures to update (usr_xxx): yourself, or any other member of your team when the user the API key acts as is a team admin",
             "required": true,
             "schema": {
               "type": "string"
@@ -23238,6 +23247,21 @@
           },
           "401": {
             "description": "The API key does not resolve a user"
+          },
+          "403": {
+            "description": "The user is another member of your team and the user the API key acts as is not a team admin (\u0060SIGNATURE_NOT_ALLOWED\u0060)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchUsersByUserIdSignature403Response"
+                },
+                "example": {
+                  "error": "Only admins can edit a teammate\u0027s signature",
+                  "code": "SIGNATURE_NOT_ALLOWED"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
           },
           "404": {
             "description": "The user is not a member of the team",
@@ -30074,7 +30098,7 @@
           },
           "method": {
             "type": "string",
-            "description": "Name of the operation, e.g. \u0060contact_update\u0060. \u0060direction\u0060 tells a lemlist write from the CRM change it mirrors. Known values: \u0060activity_create\u0060, \u0060activity_import\u0060, \u0060association_from_company\u0060, \u0060association_from_contact\u0060, \u0060association_remove\u0060, \u0060association_update\u0060, \u0060call_create\u0060, \u0060call_update\u0060, \u0060company_create\u0060, \u0060company_delete\u0060, \u0060company_merge\u0060, \u0060company_owner_update\u0060, \u0060company_restore\u0060, \u0060company_update\u0060, \u0060contact_create\u0060, \u0060contact_delete\u0060, \u0060contact_merge\u0060, \u0060contact_owner_update\u0060, \u0060contact_restore\u0060, \u0060contact_update\u0060, \u0060custom_activity_create\u0060, \u0060deal_create\u0060, \u0060email_message_create\u0060, \u0060event_create\u0060, \u0060experience_update\u0060, \u0060lead_status_update\u0060, \u0060linkedin_message_create\u0060, \u0060note_create\u0060, \u0060note_import\u0060, \u0060note_update\u0060, \u0060sms_message_create\u0060, \u0060task_complete\u0060, \u0060task_create\u0060, \u0060task_delete\u0060, \u0060task_import\u0060, \u0060task_update\u0060, \u0060whatsapp_message_create\u0060. An operation lemlist has not named yet keeps its own identifier: filter with \u0060category\u0060 rather than on this value."
+            "description": "Name of the operation, e.g. \u0060contact_update\u0060. \u0060direction\u0060 tells a lemlist write from the CRM change it mirrors. Known values: \u0060activity_create\u0060, \u0060activity_import\u0060, \u0060association_from_company\u0060, \u0060association_from_contact\u0060, \u0060association_remove\u0060, \u0060association_update\u0060, \u0060call_create\u0060, \u0060call_update\u0060, \u0060company_create\u0060, \u0060company_delete\u0060, \u0060company_merge\u0060, \u0060company_owner_update\u0060, \u0060company_restore\u0060, \u0060company_update\u0060, \u0060contact_create\u0060, \u0060contact_delete\u0060, \u0060contact_merge\u0060, \u0060contact_owner_update\u0060, \u0060contact_restore\u0060, \u0060contact_update\u0060, \u0060custom_activity_create\u0060, \u0060deal_create\u0060, \u0060email_message_create\u0060, \u0060event_create\u0060, \u0060experience_update\u0060, \u0060lead_status_update\u0060, \u0060linkedin_message_create\u0060, \u0060note_create\u0060, \u0060note_import\u0060, \u0060note_update\u0060, \u0060sms_message_create\u0060, \u0060task_complete\u0060, \u0060task_create\u0060, \u0060task_delete\u0060, \u0060task_import\u0060, \u0060task_update\u0060, \u0060whatsapp_message_create\u0060. An operation lemlist has not named yet keeps its own identifier: filter with \u0060category\u0060 rather than on this value. \u0060contact_owner_update\u0060 and \u0060company_owner_update\u0060 name the older owner changes: lemlist now pushes an owner change as \u0060contact_update\u0060 / \u0060company_update\u0060. To list them all, filter with \u0060field=ownerId\u0026category=contact,company\u0060."
           },
           "label": {
             "type": "string",
@@ -30100,6 +30124,13 @@
           },
           "updatedFields": {
             "$ref": "#/components/schemas/CrmLogUpdatedFieldsProperty"
+          },
+          "skippedFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrmLogSkippedFieldsItem"
+            },
+            "description": "Fields lemlist left out of a write to the CRM, each with its reason. A field the CRM refuses, or an owner no CRM user matches, shows here rather than in \u0060updatedFields\u0060. Absent when no field was skipped."
           },
           "error": {
             "$ref": "#/components/schemas/CrmLogError"
@@ -33819,6 +33850,31 @@
         },
         "description": "CRM sync status for the company, resolved against the team\u0027s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via \u0060GET /companies?crmSyncStatus=unique_index_error_company\u0060).",
         "nullable": true
+      },
+      "CrmLogSkippedFieldsItem": {
+        "required": [
+          "field",
+          "crmField",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "The lemlist field, e.g. \u0060ownerId\u0060"
+          },
+          "crmField": {
+            "type": "string",
+            "description": "The CRM field it is mapped to, by its API name"
+          },
+          "crmFieldLabel": {
+            "type": "string",
+            "description": "The CRM field\u0027s label, when it differs from its API name"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/CrmLogSkippedFieldsItemReason"
+          }
+        }
       },
       "CrmLogError": {
         "type": "object",
@@ -41967,6 +42023,17 @@
           }
         }
       },
+      "PatchUsersByUserIdSignature403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PatchUsersByUserIdSignature404Response": {
         "type": "object",
         "properties": {
@@ -44193,7 +44260,7 @@
       },
       "CrmLogUpdatedFieldsProperty": {
         "type": "object",
-        "description": "Fields sent to or received from the CRM, with their values"
+        "description": "Fields sent to or received from the CRM, with their values. A field is keyed by its CRM API name (e.g. \u0060hubspot_owner_id\u0060, \u0060OwnerId\u0060) or by its CRM label (e.g. \u0060Contact owner\u0060), as the operation recorded it. An owner is the CRM user ID of the new owner."
       },
       "TaskV2ContactProperty": {
         "type": "object",
@@ -52648,6 +52715,48 @@
           ]
         }
       },
+      "CrmLogSkippedFieldsItemReason": {
+        "enum": [
+          "read_only_crm_field",
+          "missing_crm_field_type",
+          "invalid_value",
+          "cleaner_rejection",
+          "unmapped_user",
+          "no_crm_owner"
+        ],
+        "type": "string",
+        "description": "\u0060read_only_crm_field\u0060: read-only in the CRM for the connected user. \u0060missing_crm_field_type\u0060: field not found in the CRM. \u0060invalid_value\u0060: value not accepted by the CRM field. \u0060cleaner_rejection\u0060: value rejected by the field format. \u0060unmapped_user\u0060: lemlist user not mapped to a CRM user. \u0060no_crm_owner\u0060: no CRM owner to assign, map the user or set a default owner.",
+        "x-ms-enum": {
+          "name": "CrmLogSkippedFieldsItemReason",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "read_only_crm_field",
+              "name": "ReadOnlyCrmField"
+            },
+            {
+              "value": "missing_crm_field_type",
+              "name": "MissingCrmFieldType"
+            },
+            {
+              "value": "invalid_value",
+              "name": "InvalidValue"
+            },
+            {
+              "value": "cleaner_rejection",
+              "name": "CleanerRejection"
+            },
+            {
+              "value": "unmapped_user",
+              "name": "UnmappedUser"
+            },
+            {
+              "value": "no_crm_owner",
+              "name": "NoCrmOwner"
+            }
+          ]
+        }
+      },
       "TaskV2ErrorErrorCode": {
         "enum": [
           "INVALID_PARAMETER",
@@ -58895,6 +59004,7 @@
           "crm_sync_duplicate_company_blocked",
           "crm_sync_company_data_rejected",
           "crm_sync_unsub_state_protected",
+          "crm_sync_unsub_channel_empty",
           "crm_sync_value_oscillating",
           "crm_sync_owner_sync_loop",
           "crm_sync_unmapped_user",
@@ -58961,6 +59071,10 @@
             {
               "value": "crm_sync_unsub_state_protected",
               "name": "CrmSyncUnsubStateProtected"
+            },
+            {
+              "value": "crm_sync_unsub_channel_empty",
+              "name": "CrmSyncUnsubChannelEmpty"
             },
             {
               "value": "crm_sync_value_oscillating",
@@ -60633,7 +60747,7 @@
     },
     "CrmLogUpdatedFields": {
       "type": "object",
-      "description": "Fields sent to or received from the CRM, with their values"
+      "description": "Fields sent to or received from the CRM, with their values. A field is keyed by its CRM API name (e.g. \u0060hubspot_owner_id\u0060, \u0060OwnerId\u0060) or by its CRM label (e.g. \u0060Contact owner\u0060), as the operation recorded it. An owner is the CRM user ID of the new owner."
     },
     "ReportStats": {
       "type": "object",

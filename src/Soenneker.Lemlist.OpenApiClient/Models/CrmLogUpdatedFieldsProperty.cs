@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Fields sent to or received from the CRM, with their values
+    /// Fields sent to or received from the CRM, with their values. A field is keyed by its CRM API name (e.g. `hubspot_owner_id`, `OwnerId`) or by its CRM label (e.g. `Contact owner`), as the operation recorded it. An owner is the CRM user ID of the new owner.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CrmLogUpdatedFieldsProperty : IAdditionalDataHolder, IParsable

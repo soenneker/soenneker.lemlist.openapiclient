@@ -2929,7 +2929,7 @@
           },
           "method": {
             "type": "string",
-            "description": "Name of the operation, e.g. `contact_update`. `direction` tells a lemlist write from the CRM change it mirrors. Known values: `activity_create`, `activity_import`, `association_from_company`, `association_from_contact`, `association_remove`, `association_update`, `call_create`, `call_update`, `company_create`, `company_delete`, `company_merge`, `company_owner_update`, `company_restore`, `company_update`, `contact_create`, `contact_delete`, `contact_merge`, `contact_owner_update`, `contact_restore`, `contact_update`, `custom_activity_create`, `deal_create`, `email_message_create`, `event_create`, `experience_update`, `lead_status_update`, `linkedin_message_create`, `note_create`, `note_import`, `note_update`, `sms_message_create`, `task_complete`, `task_create`, `task_delete`, `task_import`, `task_update`, `whatsapp_message_create`. An operation lemlist has not named yet keeps its own identifier: filter with `category` rather than on this value."
+            "description": "Name of the operation, e.g. `contact_update`. `direction` tells a lemlist write from the CRM change it mirrors. Known values: `activity_create`, `activity_import`, `association_from_company`, `association_from_contact`, `association_remove`, `association_update`, `call_create`, `call_update`, `company_create`, `company_delete`, `company_merge`, `company_owner_update`, `company_restore`, `company_update`, `contact_create`, `contact_delete`, `contact_merge`, `contact_owner_update`, `contact_restore`, `contact_update`, `custom_activity_create`, `deal_create`, `email_message_create`, `event_create`, `experience_update`, `lead_status_update`, `linkedin_message_create`, `note_create`, `note_import`, `note_update`, `sms_message_create`, `task_complete`, `task_create`, `task_delete`, `task_import`, `task_update`, `whatsapp_message_create`. An operation lemlist has not named yet keeps its own identifier: filter with `category` rather than on this value. `contact_owner_update` and `company_owner_update` name the older owner changes: lemlist now pushes an owner change as `contact_update` / `company_update`. To list them all, filter with `field=ownerId&category=contact,company`."
           },
           "label": {
             "type": "string",
@@ -2979,7 +2979,45 @@
           "updatedFields": {
             "type": "object",
             "additionalProperties": true,
-            "description": "Fields sent to or received from the CRM, with their values"
+            "description": "Fields sent to or received from the CRM, with their values. A field is keyed by its CRM API name (e.g. `hubspot_owner_id`, `OwnerId`) or by its CRM label (e.g. `Contact owner`), as the operation recorded it. An owner is the CRM user ID of the new owner."
+          },
+          "skippedFields": {
+            "type": "array",
+            "description": "Fields lemlist left out of a write to the CRM, each with its reason. A field the CRM refuses, or an owner no CRM user matches, shows here rather than in `updatedFields`. Absent when no field was skipped.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "The lemlist field, e.g. `ownerId`"
+                },
+                "crmField": {
+                  "type": "string",
+                  "description": "The CRM field it is mapped to, by its API name"
+                },
+                "crmFieldLabel": {
+                  "type": "string",
+                  "description": "The CRM field's label, when it differs from its API name"
+                },
+                "reason": {
+                  "type": "string",
+                  "enum": [
+                    "read_only_crm_field",
+                    "missing_crm_field_type",
+                    "invalid_value",
+                    "cleaner_rejection",
+                    "unmapped_user",
+                    "no_crm_owner"
+                  ],
+                  "description": "`read_only_crm_field`: read-only in the CRM for the connected user. `missing_crm_field_type`: field not found in the CRM. `invalid_value`: value not accepted by the CRM field. `cleaner_rejection`: value rejected by the field format. `unmapped_user`: lemlist user not mapped to a CRM user. `no_crm_owner`: no CRM owner to assign, map the user or set a default owner."
+                }
+              },
+              "required": [
+                "field",
+                "crmField",
+                "reason"
+              ]
+            }
           },
           "error": {
             "type": "object",
@@ -21754,6 +21792,16 @@
             }
           },
           {
+            "name": "field",
+            "in": "query",
+            "required": false,
+            "description": "Only the logs that wrote or skipped one of these fields, comma-separated: at most 10 names of 100 characters each (`INVALID_PARAMETER`). A name is a lemlist field (`ownerId`, `email`, a custom field), matched through your CRM field mapping, or the CRM field as `updatedFields` and `skippedFields` show it: its API name (`hubspot_owner_id`) or its label (`Contact owner`), matched exactly. `field=ownerId` lists every owner change, whatever the `method`. It also keeps the activities that carry an owner (a call or a meeting logged on HubSpot): add `category=contact,company` to keep the owner changes of contacts and companies only. A log keeps the label the CRM field had when it was written: after a rename in your CRM, pass the old label to find the older logs. On a team period dense with logs, a rare field can answer `READ_TOO_SLOW`: narrow `from` / `to`.",
+            "example": "ownerId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "from",
             "in": "query",
             "required": false,
@@ -27679,6 +27727,7 @@
                 "crm_sync_duplicate_company_blocked",
                 "crm_sync_company_data_rejected",
                 "crm_sync_unsub_state_protected",
+                "crm_sync_unsub_channel_empty",
                 "crm_sync_value_oscillating",
                 "crm_sync_owner_sync_loop",
                 "crm_sync_unmapped_user",
@@ -38340,7 +38389,7 @@
             "name": "userId",
             "in": "path",
             "required": true,
-            "description": "ID of the team member whose signatures to update (usr_xxx). Any member of your team is allowed, including yourself",
+            "description": "ID of the team member whose signatures to update (usr_xxx): yourself, or any other member of your team when the user the API key acts as is a team admin",
             "schema": {
               "type": "string"
             }
@@ -38424,6 +38473,17 @@
           },
           "401": {
             "description": "The API key does not resolve a user"
+          },
+          "403": {
+            "description": "The user is another member of your team and the user the API key acts as is not a team admin (`SIGNATURE_NOT_ALLOWED`)",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Only admins can edit a teammate's signature",
+                  "code": "SIGNATURE_NOT_ALLOWED"
+                }
+              }
+            }
           },
           "404": {
             "description": "The user is not a member of the team",
