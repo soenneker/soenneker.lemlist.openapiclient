@@ -92,6 +92,22 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("dealCurrency") is { } nullNodeDealCurrency && nullNodeDealCurrency.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DealCurrency = null;
             if (parseNode.GetChildNode("dealPriceUsd") is null) { _explicitNullValueDealPriceUsd = default!; _explicitNullProperties?.Remove("dealPriceUsd"); }
             else if (parseNode.GetChildNode("dealPriceUsd") is { } nullNodeDealPriceUsd && nullNodeDealPriceUsd.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DealPriceUsd = null;
+            if (parseNode.GetChildNode("expansionDirection") is null) { _explicitNullValueExpansionDirection = default!; _explicitNullProperties?.Remove("expansionDirection"); }
+            else if (parseNode.GetChildNode("expansionDirection") is { } nullNodeExpansionDirection && nullNodeExpansionDirection.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionDirection = null;
+            if (parseNode.GetChildNode("expansionFreshness") is null) { _explicitNullValueExpansionFreshness = default!; _explicitNullProperties?.Remove("expansionFreshness"); }
+            else if (parseNode.GetChildNode("expansionFreshness") is { } nullNodeExpansionFreshness && nullNodeExpansionFreshness.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionFreshness = null;
+            if (parseNode.GetChildNode("expansionLastTransitionAt") is null) { _explicitNullValueExpansionLastTransitionAt = default!; _explicitNullProperties?.Remove("expansionLastTransitionAt"); }
+            else if (parseNode.GetChildNode("expansionLastTransitionAt") is { } nullNodeExpansionLastTransitionAt && nullNodeExpansionLastTransitionAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionLastTransitionAt = null;
+            if (parseNode.GetChildNode("expansionOriginMarket") is null) { _explicitNullValueExpansionOriginMarket = default!; _explicitNullProperties?.Remove("expansionOriginMarket"); }
+            else if (parseNode.GetChildNode("expansionOriginMarket") is { } nullNodeExpansionOriginMarket && nullNodeExpansionOriginMarket.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionOriginMarket = null;
+            if (parseNode.GetChildNode("expansionScore") is null) { _explicitNullValueExpansionScore = default!; _explicitNullProperties?.Remove("expansionScore"); }
+            else if (parseNode.GetChildNode("expansionScore") is { } nullNodeExpansionScore && nullNodeExpansionScore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionScore = null;
+            if (parseNode.GetChildNode("expansionSignalCount") is null) { _explicitNullValueExpansionSignalCount = default!; _explicitNullProperties?.Remove("expansionSignalCount"); }
+            else if (parseNode.GetChildNode("expansionSignalCount") is { } nullNodeExpansionSignalCount && nullNodeExpansionSignalCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionSignalCount = null;
+            if (parseNode.GetChildNode("expansionStage") is null) { _explicitNullValueExpansionStage = default!; _explicitNullProperties?.Remove("expansionStage"); }
+            else if (parseNode.GetChildNode("expansionStage") is { } nullNodeExpansionStage && nullNodeExpansionStage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionStage = null;
+            if (parseNode.GetChildNode("expansionTargetMarket") is null) { _explicitNullValueExpansionTargetMarket = default!; _explicitNullProperties?.Remove("expansionTargetMarket"); }
+            else if (parseNode.GetChildNode("expansionTargetMarket") is { } nullNodeExpansionTargetMarket && nullNodeExpansionTargetMarket.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExpansionTargetMarket = null;
             if (parseNode.GetChildNode("externalSignalCustomFields") is null) { _explicitNullValueExternalSignalCustomFields = default!; _explicitNullProperties?.Remove("externalSignalCustomFields"); }
             else if (parseNode.GetChildNode("externalSignalCustomFields") is { } nullNodeExternalSignalCustomFields && nullNodeExternalSignalCustomFields.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExternalSignalCustomFields = null;
             if (parseNode.GetChildNode("fundingAmountNative") is null) { _explicitNullValueFundingAmountNative = default!; _explicitNullProperties?.Remove("fundingAmountNative"); }
@@ -585,6 +601,58 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>[mergersAcquisitions] Deal price (USD)</summary>
         public double? DealPriceUsd { get => _explicitNullValueDealPriceUsd; set { _explicitNullValueDealPriceUsd = value; AdditionalData?.Remove("dealPriceUsd"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dealPriceUsd"); else _explicitNullProperties?.Remove("dealPriceUsd"); } }
         private double? _explicitNullValueDealPriceUsd = default!;
+        /// <summary>[marketExpansion] Trajectory on the target market: `new`, `advancing`, `steady` or `retreating`. Absent when the provider reports no known value</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExpansionDirection { get => _explicitNullValueExpansionDirection; set { _explicitNullValueExpansionDirection = value; AdditionalData?.Remove("expansionDirection"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionDirection"); else _explicitNullProperties?.Remove("expansionDirection"); } }
+        private string? _explicitNullValueExpansionDirection = default!;
+#nullable restore
+#else
+        public string ExpansionDirection { get => _explicitNullValueExpansionDirection; set { _explicitNullValueExpansionDirection = value; AdditionalData?.Remove("expansionDirection"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionDirection"); else _explicitNullProperties?.Remove("expansionDirection"); } }
+        private string _explicitNullValueExpansionDirection = default!;
+#endif
+        /// <summary>[marketExpansion] Recency of the evidence: `fresh`, `cooling`, `stale` or `cold`. Absent when the provider reports no known value</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExpansionFreshness { get => _explicitNullValueExpansionFreshness; set { _explicitNullValueExpansionFreshness = value; AdditionalData?.Remove("expansionFreshness"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionFreshness"); else _explicitNullProperties?.Remove("expansionFreshness"); } }
+        private string? _explicitNullValueExpansionFreshness = default!;
+#nullable restore
+#else
+        public string ExpansionFreshness { get => _explicitNullValueExpansionFreshness; set { _explicitNullValueExpansionFreshness = value; AdditionalData?.Remove("expansionFreshness"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionFreshness"); else _explicitNullProperties?.Remove("expansionFreshness"); } }
+        private string _explicitNullValueExpansionFreshness = default!;
+#endif
+        /// <summary>[marketExpansion] Date of the last stage change</summary>
+        public DateTimeOffset? ExpansionLastTransitionAt { get => _explicitNullValueExpansionLastTransitionAt; set { _explicitNullValueExpansionLastTransitionAt = value; AdditionalData?.Remove("expansionLastTransitionAt"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionLastTransitionAt"); else _explicitNullProperties?.Remove("expansionLastTransitionAt"); } }
+        private DateTimeOffset? _explicitNullValueExpansionLastTransitionAt = default!;
+        /// <summary>[marketExpansion] Company&apos;s home market, ISO alpha-2 country code. Absent when unknown</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExpansionOriginMarket { get => _explicitNullValueExpansionOriginMarket; set { _explicitNullValueExpansionOriginMarket = value; AdditionalData?.Remove("expansionOriginMarket"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionOriginMarket"); else _explicitNullProperties?.Remove("expansionOriginMarket"); } }
+        private string? _explicitNullValueExpansionOriginMarket = default!;
+#nullable restore
+#else
+        public string ExpansionOriginMarket { get => _explicitNullValueExpansionOriginMarket; set { _explicitNullValueExpansionOriginMarket = value; AdditionalData?.Remove("expansionOriginMarket"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionOriginMarket"); else _explicitNullProperties?.Remove("expansionOriginMarket"); } }
+        private string _explicitNullValueExpansionOriginMarket = default!;
+#endif
+        /// <summary>[marketExpansion] Expansion score, 0-100</summary>
+        public int? ExpansionScore { get => _explicitNullValueExpansionScore; set { _explicitNullValueExpansionScore = value; AdditionalData?.Remove("expansionScore"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionScore"); else _explicitNullProperties?.Remove("expansionScore"); } }
+        private int? _explicitNullValueExpansionScore = default!;
+        /// <summary>[marketExpansion] Number of expansion signals behind the stage</summary>
+        public int? ExpansionSignalCount { get => _explicitNullValueExpansionSignalCount; set { _explicitNullValueExpansionSignalCount = value; AdditionalData?.Remove("expansionSignalCount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionSignalCount"); else _explicitNullProperties?.Remove("expansionSignalCount"); } }
+        private int? _explicitNullValueExpansionSignalCount = default!;
+        /// <summary>[marketExpansion] Expansion stage on the target market</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExpansionStage? ExpansionStage { get => _explicitNullValueExpansionStage; set { _explicitNullValueExpansionStage = value; AdditionalData?.Remove("expansionStage"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionStage"); else _explicitNullProperties?.Remove("expansionStage"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExpansionStage? _explicitNullValueExpansionStage = default!;
+        /// <summary>[marketExpansion] Market the company is entering, ISO alpha-2 country code (e.g. `DE`)</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExpansionTargetMarket { get => _explicitNullValueExpansionTargetMarket; set { _explicitNullValueExpansionTargetMarket = value; AdditionalData?.Remove("expansionTargetMarket"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionTargetMarket"); else _explicitNullProperties?.Remove("expansionTargetMarket"); } }
+        private string? _explicitNullValueExpansionTargetMarket = default!;
+#nullable restore
+#else
+        public string ExpansionTargetMarket { get => _explicitNullValueExpansionTargetMarket; set { _explicitNullValueExpansionTargetMarket = value; AdditionalData?.Remove("expansionTargetMarket"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("expansionTargetMarket"); else _explicitNullProperties?.Remove("expansionTargetMarket"); } }
+        private string _explicitNullValueExpansionTargetMarket = default!;
+#endif
         /// <summary>[externalSignalContact/externalSignalCompany] Custom fields map</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -1417,6 +1485,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "customSignalTitle", n => { CustomSignalTitle = n.GetStringValue(); } },
                 { "dealCurrency", n => { DealCurrency = n.GetStringValue(); } },
                 { "dealPriceUsd", n => { DealPriceUsd = n.GetDoubleValue(); } },
+                { "expansionDirection", n => { ExpansionDirection = n.GetStringValue(); } },
+                { "expansionFreshness", n => { ExpansionFreshness = n.GetStringValue(); } },
+                { "expansionLastTransitionAt", n => { ExpansionLastTransitionAt = n.GetDateTimeOffsetValue(); } },
+                { "expansionOriginMarket", n => { ExpansionOriginMarket = n.GetStringValue(); } },
+                { "expansionScore", n => { ExpansionScore = n.GetIntValue(); } },
+                { "expansionSignalCount", n => { ExpansionSignalCount = n.GetIntValue(); } },
+                { "expansionStage", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExpansionStage>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueExpansionStage = default; _explicitNullProperties?.Remove("expansionStage"); AdditionalData["expansionStage"] = unknown; } else { ExpansionStage = parsed; AdditionalData.Remove("expansionStage"); } } },
+                { "expansionTargetMarket", n => { ExpansionTargetMarket = n.GetStringValue(); } },
                 { "externalSignalCustomFields", n => { ExternalSignalCustomFields = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExternalSignalCustomFieldsProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExternalSignalCustomFieldsProperty.CreateFromDiscriminatorValue); } },
                 { "fundingAmountNative", n => { FundingAmountNative = n.GetDoubleValue(); } },
                 { "fundingAmountUsd", n => { FundingAmountUsd = n.GetDoubleValue(); } },
@@ -1547,6 +1623,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("customSignalTitle", CustomSignalTitle);
             writer.WriteStringValue("dealCurrency", DealCurrency);
             writer.WriteDoubleValue("dealPriceUsd", DealPriceUsd);
+            writer.WriteStringValue("expansionDirection", ExpansionDirection);
+            writer.WriteStringValue("expansionFreshness", ExpansionFreshness);
+            writer.WriteDateTimeOffsetValue("expansionLastTransitionAt", ExpansionLastTransitionAt);
+            writer.WriteStringValue("expansionOriginMarket", ExpansionOriginMarket);
+            writer.WriteIntValue("expansionScore", ExpansionScore);
+            writer.WriteIntValue("expansionSignalCount", ExpansionSignalCount);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExpansionStage>("expansionStage", ExpansionStage);
+            writer.WriteStringValue("expansionTargetMarket", ExpansionTargetMarket);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaSignalDataExternalSignalCustomFieldsProperty>("externalSignalCustomFields", ExternalSignalCustomFields);
             writer.WriteDoubleValue("fundingAmountNative", FundingAmountNative);
             writer.WriteDoubleValue("fundingAmountUsd", FundingAmountUsd);

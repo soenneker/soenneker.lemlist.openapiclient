@@ -20042,6 +20042,7 @@
                       "sequenceStep": 0,
                       "taskType": "linkedinSend",
                       "invited": 0,
+                      "invitationAccepted": 0,
                       "sent": 32,
                       "delivered": 32,
                       "opened": 15,
@@ -20056,6 +20057,7 @@
                       "sequenceId": "seq_rH5RD3fMkkt2gM3YC",
                       "sequenceStep": 1,
                       "invited": 0,
+                      "invitationAccepted": 0,
                       "sent": 20,
                       "delivered": 20,
                       "opened": 17,
@@ -20070,6 +20072,7 @@
                       "sequenceId": "seq_rH5RD3fMkkt2gM3YC",
                       "sequenceStep": 2,
                       "invited": 0,
+                      "invitationAccepted": 0,
                       "sent": 20,
                       "delivered": 20,
                       "opened": 15,
@@ -20258,6 +20261,7 @@
                           "sequenceStep": 0,
                           "taskType": "linkedinSend",
                           "invited": 0,
+                          "invitationAccepted": 0,
                           "sent": 32,
                           "delivered": 32,
                           "opened": 15,
@@ -24487,7 +24491,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060: Pubrio vertical names): a value with no match is listed with reason \u0060INVALID_FILTER_VALUE\u0060.",
+            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060: Pubrio vertical names): a value with no match is listed with reason \u0060INVALID_FILTER_VALUE\u0060. On a \u0060marketExpansion\u0060 agent, a missing \u0060targetMarkets\u0060 is listed with reason \u0060MISSING_REQUIRED_PROPERTY\u0060, and \u0060WATCH_LIST_PUBRIO_UNRESOLVABLE_LOCATION\u0060 is returned when the agent is activated while none of its \u0060targetMarkets\u0060 (or none of its \u0060originMarkets\u0060) resolves to a country.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -24661,7 +24665,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the agent\u0027s signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060: Pubrio vertical names).",
+            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the agent\u0027s signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060: Pubrio vertical names). On a \u0060marketExpansion\u0060 agent, a missing \u0060targetMarkets\u0060 is listed with reason \u0060MISSING_REQUIRED_PROPERTY\u0060, and \u0060WATCH_LIST_PUBRIO_UNRESOLVABLE_LOCATION\u0060 is returned when the agent is active (or activated) while none of its \u0060targetMarkets\u0060 (or none of its \u0060originMarkets\u0060) resolves to a country.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -25156,7 +25160,7 @@
           "Signal Agents"
         ],
         "summary": "List LinkedIn profile views members",
-        "description": "Lists the members of your team whose LinkedIn profile views a \u0060linkedinProfileViews\u0060 Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their \u0060_id\u0060 are the only values the \u0060linkedinProfileViewsUserIds\u0060 filter accepts; a member missing here must connect their LinkedIn account in lemlist first.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the \u0060linkedinProfileViews\u0060 beta is enabled for your team.",
+        "description": "Lists the members of your team whose LinkedIn profile views a \u0060linkedinProfileViews\u0060 Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their \u0060_id\u0060 are the only values the \u0060linkedinProfileViewsUserIds\u0060 filter accepts; a member missing here must connect their LinkedIn account in lemlist first.",
         "operationId": "ListLinkedinProfileViewsMembers",
         "responses": {
           "200": {
@@ -25187,20 +25191,6 @@
                   "$ref": "#/components/schemas/ResponseError"
                 },
                 "example": "Unauthorized"
-              }
-            }
-          },
-          "403": {
-            "description": "The linkedinProfileViews beta is not enabled for your team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListLinkedinProfileViewsMembers403Response"
-                },
-                "example": {
-                  "error": "Beta is not enabled"
-                },
-                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -25239,7 +25229,7 @@
           {
             "name": "type",
             "in": "query",
-            "description": "Signal type the filter is resolved for. Some filters change vocabulary per type: \u0060companyIndustries\u0060 with \u0060type=companyRunningAds\u0060 returns Pubrio vertical names (keyword search, \u0060query\u0060 required, at most 25 matches); without \u0060type\u0060 the filter resolves against the default taxonomy.",
+            "description": "Signal type the filter is resolved for. Some filters change vocabulary per type: \u0060companyIndustries\u0060 with \u0060type=companyRunningAds\u0060 or \u0060type=marketExpansion\u0060 returns Pubrio vertical names (keyword search, \u0060query\u0060 required, at most 25 matches); without \u0060type\u0060 the filter resolves against the default taxonomy.",
             "schema": {
               "type": "string"
             },
@@ -25248,7 +25238,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "Search text, 1-100 characters. Required when [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters) returns \u0060requiresQuery: true\u0060 for the filter on that \u0060type\u0060 \u2014 \u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 included: a missing or blank \u0060query\u0060 is a \u0060400 WATCH_LIST_API_INVALID_QUERY\u0060. Static (select) filters ignore it.",
+            "description": "Search text, 1-100 characters. Required when [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters) returns \u0060requiresQuery: true\u0060 for the filter on that \u0060type\u0060 \u2014 \u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060 included: a missing or blank \u0060query\u0060 is a \u0060400 WATCH_LIST_API_INVALID_QUERY\u0060. Static (select) filters ignore it.",
             "schema": {
               "maxLength": 100,
               "minLength": 1,
@@ -31942,7 +31932,7 @@
           },
           "requiresQuery": {
             "type": "boolean",
-            "description": "When true, \u0060GET /watchlist/filter-values\u0060 needs a \u0060query\u0060 for this filter: it runs a keyword search and has no full-list mode. Depends on the signal \u0060type\u0060, not only on the filter \u2014 e.g. \u0060companyIndustries\u0060 is \u0060requiresQuery: true\u0060 on \u0060companyRunningAds\u0060 (Pubrio vertical names) and absent on the other company types."
+            "description": "When true, \u0060GET /watchlist/filter-values\u0060 needs a \u0060query\u0060 for this filter: it runs a keyword search and has no full-list mode. Depends on the signal \u0060type\u0060, not only on the filter \u2014 e.g. \u0060companyIndustries\u0060 is \u0060requiresQuery: true\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060 (Pubrio vertical names) and absent on the other company types."
           }
         },
         "description": "Describes a filter that can be set on a Signal Agent of a given type."
@@ -34853,6 +34843,40 @@
           "adsCount": {
             "type": "integer",
             "description": "[companyRunningAds] Number of ads delivered for the company in this signal"
+          },
+          "expansionTargetMarket": {
+            "type": "string",
+            "description": "[marketExpansion] Market the company is entering, ISO alpha-2 country code (e.g. \u0060DE\u0060)"
+          },
+          "expansionOriginMarket": {
+            "type": "string",
+            "description": "[marketExpansion] Company\u0027s home market, ISO alpha-2 country code. Absent when unknown"
+          },
+          "expansionStage": {
+            "$ref": "#/components/schemas/SignalSchemaSignalDataExpansionStage"
+          },
+          "expansionScore": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer",
+            "description": "[marketExpansion] Expansion score, 0-100"
+          },
+          "expansionDirection": {
+            "type": "string",
+            "description": "[marketExpansion] Trajectory on the target market: \u0060new\u0060, \u0060advancing\u0060, \u0060steady\u0060 or \u0060retreating\u0060. Absent when the provider reports no known value"
+          },
+          "expansionFreshness": {
+            "type": "string",
+            "description": "[marketExpansion] Recency of the evidence: \u0060fresh\u0060, \u0060cooling\u0060, \u0060stale\u0060 or \u0060cold\u0060. Absent when the provider reports no known value"
+          },
+          "expansionSignalCount": {
+            "type": "integer",
+            "description": "[marketExpansion] Number of expansion signals behind the stage"
+          },
+          "expansionLastTransitionAt": {
+            "type": "string",
+            "description": "[marketExpansion] Date of the last stage change",
+            "format": "date-time"
           },
           "externalSignalCustomFields": {
             "$ref": "#/components/schemas/SignalSchemaSignalDataExternalSignalCustomFieldsProperty"
@@ -42611,14 +42635,6 @@
           }
         }
       },
-      "ListLinkedinProfileViewsMembers403Response": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          }
-        }
-      },
       "GetWatchlistFilterValues400Response": {
         "type": "object",
         "properties": {
@@ -47493,6 +47509,10 @@
             "type": "integer",
             "description": "Number of LinkedIn invitations sent"
           },
+          "invitationAccepted": {
+            "type": "integer",
+            "description": "Number of LinkedIn invitations accepted, counted on the step and variant that sent them"
+          },
           "sent": {
             "type": "integer",
             "description": "Number of messages sent"
@@ -47945,6 +47965,10 @@
           "invited": {
             "type": "integer",
             "description": "Number of LinkedIn invitations sent"
+          },
+          "invitationAccepted": {
+            "type": "integer",
+            "description": "Number of LinkedIn invitations accepted, counted on the step and variant that sent them"
           },
           "sent": {
             "type": "integer",
@@ -50529,7 +50553,8 @@
           "lawsuitsAndLegalIssues",
           "githubStargazer",
           "linkedinProfileViews",
-          "companyRunningAds"
+          "companyRunningAds",
+          "marketExpansion"
         ],
         "type": "string",
         "description": "Signal type",
@@ -50660,6 +50685,10 @@
             {
               "value": "companyRunningAds",
               "name": "CompanyRunningAds"
+            },
+            {
+              "value": "marketExpansion",
+              "name": "MarketExpansion"
             }
           ]
         }
@@ -50728,7 +50757,8 @@
           "lawsuitsAndLegalIssues",
           "githubStargazer",
           "linkedinProfileViews",
-          "companyRunningAds"
+          "companyRunningAds",
+          "marketExpansion"
         ],
         "type": "string",
         "description": "Signal type monitored by this Signal Agent",
@@ -50859,6 +50889,10 @@
             {
               "value": "companyRunningAds",
               "name": "CompanyRunningAds"
+            },
+            {
+              "value": "marketExpansion",
+              "name": "MarketExpansion"
             }
           ]
         }
@@ -51050,6 +51084,10 @@
           "adFormats",
           "adTargetCountries",
           "adSearchTerms",
+          "targetMarkets",
+          "originMarkets",
+          "expansionStages",
+          "expansionSignalStrengths",
           "allowUnknownIndustry",
           "includeRelatedIndustries",
           "minOverlapMonths",
@@ -51250,6 +51288,22 @@
               "name": "AdSearchTerms"
             },
             {
+              "value": "targetMarkets",
+              "name": "TargetMarkets"
+            },
+            {
+              "value": "originMarkets",
+              "name": "OriginMarkets"
+            },
+            {
+              "value": "expansionStages",
+              "name": "ExpansionStages"
+            },
+            {
+              "value": "expansionSignalStrengths",
+              "name": "ExpansionSignalStrengths"
+            },
+            {
               "value": "allowUnknownIndustry",
               "name": "AllowUnknownIndustry"
             },
@@ -51300,7 +51354,8 @@
           "lawsuitsAndLegalIssues",
           "githubStargazer",
           "linkedinProfileViews",
-          "companyRunningAds"
+          "companyRunningAds",
+          "marketExpansion"
         ],
         "type": "string",
         "description": "Signal type",
@@ -51431,6 +51486,10 @@
             {
               "value": "companyRunningAds",
               "name": "CompanyRunningAds"
+            },
+            {
+              "value": "marketExpansion",
+              "name": "MarketExpansion"
             }
           ]
         }
@@ -51584,7 +51643,8 @@
           "lawsuitsAndLegalIssues",
           "githubStargazer",
           "linkedinProfileViews",
-          "companyRunningAds"
+          "companyRunningAds",
+          "marketExpansion"
         ],
         "type": "string",
         "description": "Signal type identifier",
@@ -51711,6 +51771,10 @@
             {
               "value": "companyRunningAds",
               "name": "CompanyRunningAds"
+            },
+            {
+              "value": "marketExpansion",
+              "name": "MarketExpansion"
             }
           ]
         }
@@ -52934,6 +52998,38 @@
             {
               "value": "engagement",
               "name": "Engagement"
+            }
+          ]
+        }
+      },
+      "SignalSchemaSignalDataExpansionStage": {
+        "enum": [
+          "exploring",
+          "committing",
+          "expanding",
+          "scaling"
+        ],
+        "type": "string",
+        "description": "[marketExpansion] Expansion stage on the target market",
+        "x-ms-enum": {
+          "name": "SignalSchemaSignalDataExpansionStage",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "exploring",
+              "name": "Exploring"
+            },
+            {
+              "value": "committing",
+              "name": "Committing"
+            },
+            {
+              "value": "expanding",
+              "name": "Expanding"
+            },
+            {
+              "value": "scaling",
+              "name": "Scaling"
             }
           ]
         }
@@ -55760,7 +55856,8 @@
           "lawsuitsAndLegalIssues",
           "githubStargazer",
           "linkedinProfileViews",
-          "companyRunningAds"
+          "companyRunningAds",
+          "marketExpansion"
         ],
         "type": "string",
         "description": "Signal type to monitor",
@@ -55887,6 +55984,10 @@
             {
               "value": "companyRunningAds",
               "name": "CompanyRunningAds"
+            },
+            {
+              "value": "marketExpansion",
+              "name": "MarketExpansion"
             }
           ]
         }
@@ -59704,7 +59805,8 @@
           "lawsuitsAndLegalIssues",
           "githubStargazer",
           "linkedinProfileViews",
-          "companyRunningAds"
+          "companyRunningAds",
+          "marketExpansion"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -59830,6 +59932,10 @@
             {
               "value": "companyRunningAds",
               "name": "CompanyRunningAds"
+            },
+            {
+              "value": "marketExpansion",
+              "name": "MarketExpansion"
             }
           ]
         }
@@ -59879,7 +59985,11 @@
           "adPlatforms",
           "adFormats",
           "adTargetCountries",
-          "adSearchTerms"
+          "adSearchTerms",
+          "targetMarkets",
+          "originMarkets",
+          "expansionStages",
+          "expansionSignalStrengths"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -60061,6 +60171,22 @@
             {
               "value": "adSearchTerms",
               "name": "AdSearchTerms"
+            },
+            {
+              "value": "targetMarkets",
+              "name": "TargetMarkets"
+            },
+            {
+              "value": "originMarkets",
+              "name": "OriginMarkets"
+            },
+            {
+              "value": "expansionStages",
+              "name": "ExpansionStages"
+            },
+            {
+              "value": "expansionSignalStrengths",
+              "name": "ExpansionSignalStrengths"
             }
           ]
         }

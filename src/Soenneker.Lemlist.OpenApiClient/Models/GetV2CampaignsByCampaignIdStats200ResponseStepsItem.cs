@@ -29,6 +29,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("delivered") is { } nullNodeDelivered && nullNodeDelivered.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delivered = null;
             if (parseNode.GetChildNode("index") is null) { _explicitNullValueIndex = default!; _explicitNullProperties?.Remove("index"); }
             else if (parseNode.GetChildNode("index") is { } nullNodeIndex && nullNodeIndex.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Index = null;
+            if (parseNode.GetChildNode("invitationAccepted") is null) { _explicitNullValueInvitationAccepted = default!; _explicitNullProperties?.Remove("invitationAccepted"); }
+            else if (parseNode.GetChildNode("invitationAccepted") is { } nullNodeInvitationAccepted && nullNodeInvitationAccepted.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InvitationAccepted = null;
             if (parseNode.GetChildNode("invited") is null) { _explicitNullValueInvited = default!; _explicitNullProperties?.Remove("invited"); }
             else if (parseNode.GetChildNode("invited") is { } nullNodeInvited && nullNodeInvited.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Invited = null;
             if (parseNode.GetChildNode("notDelivered") is null) { _explicitNullValueNotDelivered = default!; _explicitNullProperties?.Remove("notDelivered"); }
@@ -83,6 +85,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Step index in the sequence</summary>
         public int? Index { get => _explicitNullValueIndex; set { _explicitNullValueIndex = value; AdditionalData?.Remove("index"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("index"); else _explicitNullProperties?.Remove("index"); } }
         private int? _explicitNullValueIndex = default!;
+        /// <summary>Number of LinkedIn invitations accepted, counted on the step and variant that sent them</summary>
+        public int? InvitationAccepted { get => _explicitNullValueInvitationAccepted; set { _explicitNullValueInvitationAccepted = value; AdditionalData?.Remove("invitationAccepted"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("invitationAccepted"); else _explicitNullProperties?.Remove("invitationAccepted"); } }
+        private int? _explicitNullValueInvitationAccepted = default!;
         /// <summary>Number of LinkedIn invitations sent</summary>
         public int? Invited { get => _explicitNullValueInvited; set { _explicitNullValueInvited = value; AdditionalData?.Remove("invited"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("invited"); else _explicitNullProperties?.Remove("invited"); } }
         private int? _explicitNullValueInvited = default!;
@@ -148,6 +153,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "conditionLabel", n => { ConditionLabel = n.GetStringValue(); } },
                 { "delivered", n => { Delivered = n.GetIntValue(); } },
                 { "index", n => { Index = n.GetIntValue(); } },
+                { "invitationAccepted", n => { InvitationAccepted = n.GetIntValue(); } },
                 { "invited", n => { Invited = n.GetIntValue(); } },
                 { "notDelivered", n => { NotDelivered = n.GetIntValue(); } },
                 { "opened", n => { Opened = n.GetIntValue(); } },
@@ -172,6 +178,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("conditionLabel", ConditionLabel);
             writer.WriteIntValue("delivered", Delivered);
             writer.WriteIntValue("index", Index);
+            writer.WriteIntValue("invitationAccepted", InvitationAccepted);
             writer.WriteIntValue("invited", Invited);
             writer.WriteIntValue("notDelivered", NotDelivered);
             writer.WriteIntValue("opened", Opened);

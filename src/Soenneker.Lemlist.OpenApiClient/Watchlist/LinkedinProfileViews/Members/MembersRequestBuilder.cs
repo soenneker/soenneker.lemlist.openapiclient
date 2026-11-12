@@ -34,13 +34,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.LinkedinProfileViews.Members
         {
         }
         /// <summary>
-        /// Lists the members of your team whose LinkedIn profile views a `linkedinProfileViews` Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their `_id` are the only values the `linkedinProfileViewsUserIds` filter accepts; a member missing here must connect their LinkedIn account in lemlist first.This endpoint is in closed beta and answers `403` unless the `linkedinProfileViews` beta is enabled for your team.
+        /// Lists the members of your team whose LinkedIn profile views a `linkedinProfileViews` Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their `_id` are the only values the `linkedinProfileViewsUserIds` filter accepts; a member missing here must connect their LinkedIn account in lemlist first.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinProfileViewsMembersResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ListLinkedinProfileViewsMembers403Response">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -55,7 +54,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.LinkedinProfileViews.Members
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.ListLinkedinProfileViewsMembers403Response.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.ResponseError.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -63,7 +61,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.LinkedinProfileViews.Members
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinProfileViewsMembersResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.LinkedinProfileViewsMembersResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Lists the members of your team whose LinkedIn profile views a `linkedinProfileViews` Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their `_id` are the only values the `linkedinProfileViewsUserIds` filter accepts; a member missing here must connect their LinkedIn account in lemlist first.This endpoint is in closed beta and answers `403` unless the `linkedinProfileViews` beta is enabled for your team.
+        /// Lists the members of your team whose LinkedIn profile views a `linkedinProfileViews` Signal Agent can track: the members whose LinkedIn account is connected to lemlist. Their `_id` are the only values the `linkedinProfileViewsUserIds` filter accepts; a member missing here must connect their LinkedIn account in lemlist first.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

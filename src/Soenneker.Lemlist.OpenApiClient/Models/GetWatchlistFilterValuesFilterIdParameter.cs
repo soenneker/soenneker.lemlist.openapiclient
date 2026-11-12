@@ -184,5 +184,21 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         AdSearchTerms,
         #pragma warning restore CS1591
+        [EnumMember(Value = "targetMarkets")]
+        #pragma warning disable CS1591
+        TargetMarkets,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "originMarkets")]
+        #pragma warning disable CS1591
+        OriginMarkets,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "expansionStages")]
+        #pragma warning disable CS1591
+        ExpansionStages,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "expansionSignalStrengths")]
+        #pragma warning disable CS1591
+        ExpansionSignalStrengths,
+        #pragma warning restore CS1591
     }
 }

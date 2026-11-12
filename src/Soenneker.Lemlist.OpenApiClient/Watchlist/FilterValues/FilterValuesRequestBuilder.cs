@@ -101,7 +101,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
             /// <summary>Filter to resolve values for. `linkedinProfileViewsUserIds` takes no `query` and resolves to the ids of the team members whose LinkedIn account is connected to lemlist, the only ids a `linkedinProfileViews` Signal Agent accepts.</summary>
             [QueryParameter("filterId")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetWatchlistFilterValuesFilterIdParameter? FilterId { get; set; }
-            /// <summary>Search text, 1-100 characters. Required when [`GET /watchlist/filters`](/api-reference/endpoints/watch-list/get-filters) returns `requiresQuery: true` for the filter on that `type` — `companyIndustries` on `companyRunningAds` included: a missing or blank `query` is a `400 WATCH_LIST_API_INVALID_QUERY`. Static (select) filters ignore it.</summary>
+            /// <summary>Search text, 1-100 characters. Required when [`GET /watchlist/filters`](/api-reference/endpoints/watch-list/get-filters) returns `requiresQuery: true` for the filter on that `type` — `companyIndustries` on `companyRunningAds` and `marketExpansion` included: a missing or blank `query` is a `400 WATCH_LIST_API_INVALID_QUERY`. Static (select) filters ignore it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("query")]
@@ -111,7 +111,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Watchlist.FilterValues
             [QueryParameter("query")]
             public string Query { get; set; }
 #endif
-            /// <summary>Signal type the filter is resolved for. Some filters change vocabulary per type: `companyIndustries` with `type=companyRunningAds` returns Pubrio vertical names (keyword search, `query` required, at most 25 matches); without `type` the filter resolves against the default taxonomy.</summary>
+            /// <summary>Signal type the filter is resolved for. Some filters change vocabulary per type: `companyIndustries` with `type=companyRunningAds` or `type=marketExpansion` returns Pubrio vertical names (keyword search, `query` required, at most 25 matches); without `type` the filter resolves against the default taxonomy.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("type")]

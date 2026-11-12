@@ -127,5 +127,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CompanyRunningAds,
         #pragma warning restore CS1591
+        [EnumMember(Value = "marketExpansion")]
+        #pragma warning disable CS1591
+        MarketExpansion,
+        #pragma warning restore CS1591
     }
 }
