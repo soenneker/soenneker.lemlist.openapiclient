@@ -131,5 +131,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         MarketExpansion,
         #pragma warning restore CS1591
+        [EnumMember(Value = "personBuyingIntent")]
+        #pragma warning disable CS1591
+        PersonBuyingIntent,
+        #pragma warning restore CS1591
     }
 }

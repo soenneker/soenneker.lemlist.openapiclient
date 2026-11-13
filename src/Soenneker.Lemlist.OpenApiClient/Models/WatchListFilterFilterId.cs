@@ -227,5 +227,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         IncludeCurrentCompanies,
         #pragma warning restore CS1591
+        [EnumMember(Value = "personIntentTopics")]
+        #pragma warning disable CS1591
+        PersonIntentTopics,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "lookbackDays")]
+        #pragma warning disable CS1591
+        LookbackDays,
+        #pragma warning restore CS1591
     }
 }

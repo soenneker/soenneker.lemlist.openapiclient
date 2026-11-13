@@ -204,6 +204,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("linkedinProfileViewsViewedMemberFirstName") is { } nullNodeLinkedinProfileViewsViewedMemberFirstName && nullNodeLinkedinProfileViewsViewedMemberFirstName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LinkedinProfileViewsViewedMemberFirstName = null;
             if (parseNode.GetChildNode("linkedinProfileViewsViewedMemberLastName") is null) { _explicitNullValueLinkedinProfileViewsViewedMemberLastName = default!; _explicitNullProperties?.Remove("linkedinProfileViewsViewedMemberLastName"); }
             else if (parseNode.GetChildNode("linkedinProfileViewsViewedMemberLastName") is { } nullNodeLinkedinProfileViewsViewedMemberLastName && nullNodeLinkedinProfileViewsViewedMemberLastName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LinkedinProfileViewsViewedMemberLastName = null;
+            if (parseNode.GetChildNode("personBuyingIntentActivityDate") is null) { _explicitNullValuePersonBuyingIntentActivityDate = default!; _explicitNullProperties?.Remove("personBuyingIntentActivityDate"); }
+            else if (parseNode.GetChildNode("personBuyingIntentActivityDate") is { } nullNodePersonBuyingIntentActivityDate && nullNodePersonBuyingIntentActivityDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonBuyingIntentActivityDate = null;
+            if (parseNode.GetChildNode("personBuyingIntentActivitySummary") is null) { _explicitNullValuePersonBuyingIntentActivitySummary = default!; _explicitNullProperties?.Remove("personBuyingIntentActivitySummary"); }
+            else if (parseNode.GetChildNode("personBuyingIntentActivitySummary") is { } nullNodePersonBuyingIntentActivitySummary && nullNodePersonBuyingIntentActivitySummary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonBuyingIntentActivitySummary = null;
+            if (parseNode.GetChildNode("personBuyingIntentActivityType") is null) { _explicitNullValuePersonBuyingIntentActivityType = default!; _explicitNullProperties?.Remove("personBuyingIntentActivityType"); }
+            else if (parseNode.GetChildNode("personBuyingIntentActivityType") is { } nullNodePersonBuyingIntentActivityType && nullNodePersonBuyingIntentActivityType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonBuyingIntentActivityType = null;
+            if (parseNode.GetChildNode("personBuyingIntentBuyingStage") is null) { _explicitNullValuePersonBuyingIntentBuyingStage = default!; _explicitNullProperties?.Remove("personBuyingIntentBuyingStage"); }
+            else if (parseNode.GetChildNode("personBuyingIntentBuyingStage") is { } nullNodePersonBuyingIntentBuyingStage && nullNodePersonBuyingIntentBuyingStage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonBuyingIntentBuyingStage = null;
+            if (parseNode.GetChildNode("personBuyingIntentSeniority") is null) { _explicitNullValuePersonBuyingIntentSeniority = default!; _explicitNullProperties?.Remove("personBuyingIntentSeniority"); }
+            else if (parseNode.GetChildNode("personBuyingIntentSeniority") is { } nullNodePersonBuyingIntentSeniority && nullNodePersonBuyingIntentSeniority.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonBuyingIntentSeniority = null;
+            if (parseNode.GetChildNode("personBuyingIntentTopic") is null) { _explicitNullValuePersonBuyingIntentTopic = default!; _explicitNullProperties?.Remove("personBuyingIntentTopic"); }
+            else if (parseNode.GetChildNode("personBuyingIntentTopic") is { } nullNodePersonBuyingIntentTopic && nullNodePersonBuyingIntentTopic.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PersonBuyingIntentTopic = null;
             if (parseNode.GetChildNode("previousCompany") is null) { _explicitNullValuePreviousCompany = default!; _explicitNullProperties?.Remove("previousCompany"); }
             else if (parseNode.GetChildNode("previousCompany") is { } nullNodePreviousCompany && nullNodePreviousCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PreviousCompany = null;
             if (parseNode.GetChildNode("previousCompanyLinkedinUrl") is null) { _explicitNullValuePreviousCompanyLinkedinUrl = default!; _explicitNullProperties?.Remove("previousCompanyLinkedinUrl"); }
@@ -1105,6 +1117,59 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string LinkedinProfileViewsViewedMemberLastName { get => _explicitNullValueLinkedinProfileViewsViewedMemberLastName; set { _explicitNullValueLinkedinProfileViewsViewedMemberLastName = value; AdditionalData?.Remove("linkedinProfileViewsViewedMemberLastName"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linkedinProfileViewsViewedMemberLastName"); else _explicitNullProperties?.Remove("linkedinProfileViewsViewedMemberLastName"); } }
         private string _explicitNullValueLinkedinProfileViewsViewedMemberLastName = default!;
 #endif
+        /// <summary>[personBuyingIntent] Date of the activity, the signal&apos;s `receivedAt`</summary>
+        public DateTimeOffset? PersonBuyingIntentActivityDate { get => _explicitNullValuePersonBuyingIntentActivityDate; set { _explicitNullValuePersonBuyingIntentActivityDate = value; AdditionalData?.Remove("personBuyingIntentActivityDate"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentActivityDate"); else _explicitNullProperties?.Remove("personBuyingIntentActivityDate"); } }
+        private DateTimeOffset? _explicitNullValuePersonBuyingIntentActivityDate = default!;
+        /// <summary>[personBuyingIntent] Summary of the activity that revealed the interest</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PersonBuyingIntentActivitySummary { get => _explicitNullValuePersonBuyingIntentActivitySummary; set { _explicitNullValuePersonBuyingIntentActivitySummary = value; AdditionalData?.Remove("personBuyingIntentActivitySummary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentActivitySummary"); else _explicitNullProperties?.Remove("personBuyingIntentActivitySummary"); } }
+        private string? _explicitNullValuePersonBuyingIntentActivitySummary = default!;
+#nullable restore
+#else
+        public string PersonBuyingIntentActivitySummary { get => _explicitNullValuePersonBuyingIntentActivitySummary; set { _explicitNullValuePersonBuyingIntentActivitySummary = value; AdditionalData?.Remove("personBuyingIntentActivitySummary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentActivitySummary"); else _explicitNullProperties?.Remove("personBuyingIntentActivitySummary"); } }
+        private string _explicitNullValuePersonBuyingIntentActivitySummary = default!;
+#endif
+        /// <summary>[personBuyingIntent] Kind of intent the activity shows, such as `software_demand` or `evaluation`, when assessed</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PersonBuyingIntentActivityType { get => _explicitNullValuePersonBuyingIntentActivityType; set { _explicitNullValuePersonBuyingIntentActivityType = value; AdditionalData?.Remove("personBuyingIntentActivityType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentActivityType"); else _explicitNullProperties?.Remove("personBuyingIntentActivityType"); } }
+        private string? _explicitNullValuePersonBuyingIntentActivityType = default!;
+#nullable restore
+#else
+        public string PersonBuyingIntentActivityType { get => _explicitNullValuePersonBuyingIntentActivityType; set { _explicitNullValuePersonBuyingIntentActivityType = value; AdditionalData?.Remove("personBuyingIntentActivityType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentActivityType"); else _explicitNullProperties?.Remove("personBuyingIntentActivityType"); } }
+        private string _explicitNullValuePersonBuyingIntentActivityType = default!;
+#endif
+        /// <summary>[personBuyingIntent] Buying stage of the person, such as `awareness` or `consideration`, when assessed</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PersonBuyingIntentBuyingStage { get => _explicitNullValuePersonBuyingIntentBuyingStage; set { _explicitNullValuePersonBuyingIntentBuyingStage = value; AdditionalData?.Remove("personBuyingIntentBuyingStage"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentBuyingStage"); else _explicitNullProperties?.Remove("personBuyingIntentBuyingStage"); } }
+        private string? _explicitNullValuePersonBuyingIntentBuyingStage = default!;
+#nullable restore
+#else
+        public string PersonBuyingIntentBuyingStage { get => _explicitNullValuePersonBuyingIntentBuyingStage; set { _explicitNullValuePersonBuyingIntentBuyingStage = value; AdditionalData?.Remove("personBuyingIntentBuyingStage"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentBuyingStage"); else _explicitNullProperties?.Remove("personBuyingIntentBuyingStage"); } }
+        private string _explicitNullValuePersonBuyingIntentBuyingStage = default!;
+#endif
+        /// <summary>[personBuyingIntent] Seniority of the person</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PersonBuyingIntentSeniority { get => _explicitNullValuePersonBuyingIntentSeniority; set { _explicitNullValuePersonBuyingIntentSeniority = value; AdditionalData?.Remove("personBuyingIntentSeniority"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentSeniority"); else _explicitNullProperties?.Remove("personBuyingIntentSeniority"); } }
+        private string? _explicitNullValuePersonBuyingIntentSeniority = default!;
+#nullable restore
+#else
+        public string PersonBuyingIntentSeniority { get => _explicitNullValuePersonBuyingIntentSeniority; set { _explicitNullValuePersonBuyingIntentSeniority = value; AdditionalData?.Remove("personBuyingIntentSeniority"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentSeniority"); else _explicitNullProperties?.Remove("personBuyingIntentSeniority"); } }
+        private string _explicitNullValuePersonBuyingIntentSeniority = default!;
+#endif
+        /// <summary>[personBuyingIntent] Topic the person showed interest in</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PersonBuyingIntentTopic { get => _explicitNullValuePersonBuyingIntentTopic; set { _explicitNullValuePersonBuyingIntentTopic = value; AdditionalData?.Remove("personBuyingIntentTopic"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentTopic"); else _explicitNullProperties?.Remove("personBuyingIntentTopic"); } }
+        private string? _explicitNullValuePersonBuyingIntentTopic = default!;
+#nullable restore
+#else
+        public string PersonBuyingIntentTopic { get => _explicitNullValuePersonBuyingIntentTopic; set { _explicitNullValuePersonBuyingIntentTopic = value; AdditionalData?.Remove("personBuyingIntentTopic"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("personBuyingIntentTopic"); else _explicitNullProperties?.Remove("personBuyingIntentTopic"); } }
+        private string _explicitNullValuePersonBuyingIntentTopic = default!;
+#endif
         /// <summary>[jobChange] Previous company name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -1541,6 +1606,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "linkedinProfileViewsLocation", n => { LinkedinProfileViewsLocation = n.GetStringValue(); } },
                 { "linkedinProfileViewsViewedMemberFirstName", n => { LinkedinProfileViewsViewedMemberFirstName = n.GetStringValue(); } },
                 { "linkedinProfileViewsViewedMemberLastName", n => { LinkedinProfileViewsViewedMemberLastName = n.GetStringValue(); } },
+                { "personBuyingIntentActivityDate", n => { PersonBuyingIntentActivityDate = n.GetDateTimeOffsetValue(); } },
+                { "personBuyingIntentActivitySummary", n => { PersonBuyingIntentActivitySummary = n.GetStringValue(); } },
+                { "personBuyingIntentActivityType", n => { PersonBuyingIntentActivityType = n.GetStringValue(); } },
+                { "personBuyingIntentBuyingStage", n => { PersonBuyingIntentBuyingStage = n.GetStringValue(); } },
+                { "personBuyingIntentSeniority", n => { PersonBuyingIntentSeniority = n.GetStringValue(); } },
+                { "personBuyingIntentTopic", n => { PersonBuyingIntentTopic = n.GetStringValue(); } },
                 { "previousCompany", n => { PreviousCompany = n.GetStringValue(); } },
                 { "previousCompanyLinkedinUrl", n => { PreviousCompanyLinkedinUrl = n.GetStringValue(); } },
                 { "promotionFormerJobTitle", n => { PromotionFormerJobTitle = n.GetStringValue(); } },
@@ -1679,6 +1750,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("linkedinProfileViewsLocation", LinkedinProfileViewsLocation);
             writer.WriteStringValue("linkedinProfileViewsViewedMemberFirstName", LinkedinProfileViewsViewedMemberFirstName);
             writer.WriteStringValue("linkedinProfileViewsViewedMemberLastName", LinkedinProfileViewsViewedMemberLastName);
+            writer.WriteDateTimeOffsetValue("personBuyingIntentActivityDate", PersonBuyingIntentActivityDate);
+            writer.WriteStringValue("personBuyingIntentActivitySummary", PersonBuyingIntentActivitySummary);
+            writer.WriteStringValue("personBuyingIntentActivityType", PersonBuyingIntentActivityType);
+            writer.WriteStringValue("personBuyingIntentBuyingStage", PersonBuyingIntentBuyingStage);
+            writer.WriteStringValue("personBuyingIntentSeniority", PersonBuyingIntentSeniority);
+            writer.WriteStringValue("personBuyingIntentTopic", PersonBuyingIntentTopic);
             writer.WriteStringValue("previousCompany", PreviousCompany);
             writer.WriteStringValue("previousCompanyLinkedinUrl", PreviousCompanyLinkedinUrl);
             writer.WriteStringValue("promotionFormerJobTitle", PromotionFormerJobTitle);

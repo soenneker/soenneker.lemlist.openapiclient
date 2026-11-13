@@ -25219,7 +25219,7 @@
           {
             "name": "filterId",
             "in": "query",
-            "description": "Filter to resolve values for. \u0060linkedinProfileViewsUserIds\u0060 takes no \u0060query\u0060 and resolves to the ids of the team members whose LinkedIn account is connected to lemlist, the only ids a \u0060linkedinProfileViews\u0060 Signal Agent accepts.",
+            "description": "Filter to resolve values for. \u0060linkedinProfileViewsUserIds\u0060 takes no \u0060query\u0060 and resolves to the ids of the team members whose LinkedIn account is connected to lemlist, the only ids a \u0060linkedinProfileViews\u0060 Signal Agent accepts. \u0060personIntentTopics\u0060 requires a \u0060query\u0060 and returns up to 50 names of the B2B topic taxonomy, those starting with the query first: the only names a \u0060personBuyingIntent\u0060 Signal Agent accepts, stored as returned.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/GetWatchlistFilterValuesFilterIdParameter"
@@ -25229,7 +25229,7 @@
           {
             "name": "type",
             "in": "query",
-            "description": "Signal type the filter is resolved for. Some filters change vocabulary per type: \u0060companyIndustries\u0060 with \u0060type=companyRunningAds\u0060 or \u0060type=marketExpansion\u0060 returns Pubrio vertical names (keyword search, \u0060query\u0060 required, at most 25 matches); without \u0060type\u0060 the filter resolves against the default taxonomy.",
+            "description": "Signal type the filter is resolved for. Some filters change vocabulary per type: \u0060companyIndustries\u0060 with \u0060type=companyRunningAds\u0060 or \u0060type=marketExpansion\u0060 returns Pubrio vertical names (keyword search, \u0060query\u0060 required, at most 25 matches); \u0060companySizes\u0060 with \u0060type=personBuyingIntent\u0060 returns the six employee ranges that type accepts (\u00601-10\u0060, \u006011-50\u0060, \u006051-200\u0060, \u0060201-1000\u0060, \u00601001-5000\u0060, \u00605001\u002B\u0060); without \u0060type\u0060 the filter resolves against the default taxonomy.",
             "schema": {
               "type": "string"
             },
@@ -25238,10 +25238,10 @@
           {
             "name": "query",
             "in": "query",
-            "description": "Search text, 1-100 characters. Required when [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters) returns \u0060requiresQuery: true\u0060 for the filter on that \u0060type\u0060 \u2014 \u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060 included: a missing or blank \u0060query\u0060 is a \u0060400 WATCH_LIST_API_INVALID_QUERY\u0060. Static (select) filters ignore it.",
+            "description": "Search text, 3-100 characters. Required when [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters) returns \u0060requiresQuery: true\u0060 for the filter on that \u0060type\u0060 \u2014 \u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060 included: a missing or blank \u0060query\u0060 is a \u0060400 WATCH_LIST_API_INVALID_QUERY\u0060. Static (select) filters ignore it.",
             "schema": {
               "maxLength": 100,
-              "minLength": 1,
+              "minLength": 3,
               "type": "string"
             },
             "example": "software"
@@ -25272,7 +25272,7 @@
                   "$ref": "#/components/schemas/GetWatchlistFilterValues400Response"
                 },
                 "example": {
-                  "error": "query must be a non-empty string of at most 100 characters",
+                  "error": "query must be a non-blank string of 3 to 100 characters",
                   "code": "WATCH_LIST_API_INVALID_QUERY"
                 },
                 "x-schema-inferred-from-examples": true
@@ -26808,6 +26808,9 @@
           },
           "422": {
             "description": "The team has no AI Context set up, so there is nothing to judge fit against. In the lemlist app, open Settings \u003E AI Context Center. Per-account problems \u2014 no website or LinkedIn URL, no credits, daily limit reached \u2014 are not this: they come back inside \u0060errors\u0060."
+          },
+          "503": {
+            "description": "The daily run limits could not be checked (a temporary internal outage), so no account was started and nothing was charged. Retry in a few minutes."
           }
         }
       },
@@ -31641,7 +31644,7 @@
             "items": {
               "$ref": "#/components/schemas/WatchListFilterInItem"
             },
-            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060. For the Warm Intros filters: \u0060targetCrmListIds\u0060 takes the ids of company CRM lists of the workspace (from \u0060GET /companies/lists\u0060, up to 50 lists and 10,000 companies in total, any other id is rejected with \u0060INVALID_FILTER_VALUE\u0060) and the agent then delivers only people working at the companies of those lists, the other filters still applying; send it again on every update, as \u0060filters\u0060 replaces the whole set; \u0060minOverlapMonths\u0060 takes one integer between 3 and 120, as a string (6 when absent); \u0060includeCurrentCompanies\u0060 takes \u0060true\u0060 to also include the current colleagues of the introducers (only past colleagues when absent)."
+            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060. For the Warm Intros filters: \u0060targetCrmListIds\u0060 takes the ids of company CRM lists of the workspace (from \u0060GET /companies/lists\u0060, up to 50 lists and 10,000 companies in total, any other id is rejected with \u0060INVALID_FILTER_VALUE\u0060) and the agent then delivers only people working at the companies of those lists, the other filters still applying; send it again on every update, as \u0060filters\u0060 replaces the whole set; \u0060minOverlapMonths\u0060 takes one integer between 3 and 120, as a string (6 when absent); \u0060includeCurrentCompanies\u0060 takes \u0060true\u0060 to also include the current colleagues of the introducers (only past colleagues when absent). For \u0060personBuyingIntent\u0060 agents: \u0060personIntentTopics\u0060 (required, up to 25) takes topic names returned by \u0060GET /watchlist/filter-values?filterId=personIntentTopics\u0060, any other name is rejected with \u0060INVALID_FILTER_VALUE\u0060; \u0060companySizes\u0060 takes the six ranges \u0060GET /watchlist/filter-values\u0060 returns with \u0060type=personBuyingIntent\u0060; \u0060companyLocation\u0060 and \u0060location\u0060 take country names; every filter of this type is an inclusion, and \u0060personIntentTopics\u0060, \u0060title\u0060, \u0060companyLocation\u0060, \u0060location\u0060, \u0060companyIndustries\u0060 and \u0060companySizes\u0060 take up to 25 values each; \u0060maxIdentificationsPerDay\u0060 (required, 20 when absent) takes one integer; \u0060lookbackDays\u0060 takes one integer between 1 and 30, as a string (30 when absent), the days of past activity delivered once, at the first activation, and a change made afterwards does not reach the running monitoring; send it again on every update, as \u0060filters\u0060 replaces the whole set."
           },
           "out": {
             "type": "array",
@@ -31929,6 +31932,29 @@
           "max": {
             "type": "number",
             "description": "Maximum value (numeric filters)"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed values of a select filter, its full list"
+          },
+          "description": {
+            "type": "string",
+            "description": "How to fill the filter, when its values cannot be guessed from its name"
+          },
+          "maxValues": {
+            "type": "number",
+            "description": "Most values a side (\u0060in\u0060 or \u0060out\u0060) takes, when the signal type bounds it; more are rejected with \u0060INVALID_FILTER_VALUE\u0060"
+          },
+          "maxValueLength": {
+            "type": "number",
+            "description": "Longest value accepted, in characters, when the signal type bounds it; a longer one is rejected with \u0060INVALID_FILTER_VALUE\u0060"
+          },
+          "integer": {
+            "type": "boolean",
+            "description": "When true, the signal type takes whole numbers only for this numeric filter; a decimal is rejected with \u0060INVALID_FILTER_VALUE\u0060"
           },
           "requiresQuery": {
             "type": "boolean",
@@ -34723,6 +34749,31 @@
           "linkedinProfileViewsViewedMemberLastName": {
             "type": "string",
             "description": "[linkedinProfileViews] Last name of the team member whose profile was viewed"
+          },
+          "personBuyingIntentTopic": {
+            "type": "string",
+            "description": "[personBuyingIntent] Topic the person showed interest in"
+          },
+          "personBuyingIntentActivitySummary": {
+            "type": "string",
+            "description": "[personBuyingIntent] Summary of the activity that revealed the interest"
+          },
+          "personBuyingIntentActivityType": {
+            "type": "string",
+            "description": "[personBuyingIntent] Kind of intent the activity shows, such as \u0060software_demand\u0060 or \u0060evaluation\u0060, when assessed"
+          },
+          "personBuyingIntentActivityDate": {
+            "type": "string",
+            "description": "[personBuyingIntent] Date of the activity, the signal\u0027s \u0060receivedAt\u0060",
+            "format": "date-time"
+          },
+          "personBuyingIntentBuyingStage": {
+            "type": "string",
+            "description": "[personBuyingIntent] Buying stage of the person, such as \u0060awareness\u0060 or \u0060consideration\u0060, when assessed"
+          },
+          "personBuyingIntentSeniority": {
+            "type": "string",
+            "description": "[personBuyingIntent] Seniority of the person"
           },
           "acquisitionType": {
             "type": "string",
@@ -50554,7 +50605,8 @@
           "githubStargazer",
           "linkedinProfileViews",
           "companyRunningAds",
-          "marketExpansion"
+          "marketExpansion",
+          "personBuyingIntent"
         ],
         "type": "string",
         "description": "Signal type",
@@ -50689,6 +50741,10 @@
             {
               "value": "marketExpansion",
               "name": "MarketExpansion"
+            },
+            {
+              "value": "personBuyingIntent",
+              "name": "PersonBuyingIntent"
             }
           ]
         }
@@ -50758,7 +50814,8 @@
           "githubStargazer",
           "linkedinProfileViews",
           "companyRunningAds",
-          "marketExpansion"
+          "marketExpansion",
+          "personBuyingIntent"
         ],
         "type": "string",
         "description": "Signal type monitored by this Signal Agent",
@@ -50893,6 +50950,10 @@
             {
               "value": "marketExpansion",
               "name": "MarketExpansion"
+            },
+            {
+              "value": "personBuyingIntent",
+              "name": "PersonBuyingIntent"
             }
           ]
         }
@@ -51091,7 +51152,9 @@
           "allowUnknownIndustry",
           "includeRelatedIndustries",
           "minOverlapMonths",
-          "includeCurrentCompanies"
+          "includeCurrentCompanies",
+          "personIntentTopics",
+          "lookbackDays"
         ],
         "type": "string",
         "description": "Filter identifier",
@@ -51318,6 +51381,14 @@
             {
               "value": "includeCurrentCompanies",
               "name": "IncludeCurrentCompanies"
+            },
+            {
+              "value": "personIntentTopics",
+              "name": "PersonIntentTopics"
+            },
+            {
+              "value": "lookbackDays",
+              "name": "LookbackDays"
             }
           ]
         }
@@ -51355,7 +51426,8 @@
           "githubStargazer",
           "linkedinProfileViews",
           "companyRunningAds",
-          "marketExpansion"
+          "marketExpansion",
+          "personBuyingIntent"
         ],
         "type": "string",
         "description": "Signal type",
@@ -51490,6 +51562,10 @@
             {
               "value": "marketExpansion",
               "name": "MarketExpansion"
+            },
+            {
+              "value": "personBuyingIntent",
+              "name": "PersonBuyingIntent"
             }
           ]
         }
@@ -51644,7 +51720,8 @@
           "githubStargazer",
           "linkedinProfileViews",
           "companyRunningAds",
-          "marketExpansion"
+          "marketExpansion",
+          "personBuyingIntent"
         ],
         "type": "string",
         "description": "Signal type identifier",
@@ -51775,6 +51852,10 @@
             {
               "value": "marketExpansion",
               "name": "MarketExpansion"
+            },
+            {
+              "value": "personBuyingIntent",
+              "name": "PersonBuyingIntent"
             }
           ]
         }
@@ -55857,7 +55938,8 @@
           "githubStargazer",
           "linkedinProfileViews",
           "companyRunningAds",
-          "marketExpansion"
+          "marketExpansion",
+          "personBuyingIntent"
         ],
         "type": "string",
         "description": "Signal type to monitor",
@@ -55988,6 +56070,10 @@
             {
               "value": "marketExpansion",
               "name": "MarketExpansion"
+            },
+            {
+              "value": "personBuyingIntent",
+              "name": "PersonBuyingIntent"
             }
           ]
         }
@@ -59806,7 +59892,8 @@
           "githubStargazer",
           "linkedinProfileViews",
           "companyRunningAds",
-          "marketExpansion"
+          "marketExpansion",
+          "personBuyingIntent"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -59936,6 +60023,10 @@
             {
               "value": "marketExpansion",
               "name": "MarketExpansion"
+            },
+            {
+              "value": "personBuyingIntent",
+              "name": "PersonBuyingIntent"
             }
           ]
         }
@@ -59989,7 +60080,9 @@
           "targetMarkets",
           "originMarkets",
           "expansionStages",
-          "expansionSignalStrengths"
+          "expansionSignalStrengths",
+          "personIntentTopics",
+          "lookbackDays"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -60187,6 +60280,14 @@
             {
               "value": "expansionSignalStrengths",
               "name": "ExpansionSignalStrengths"
+            },
+            {
+              "value": "personIntentTopics",
+              "name": "PersonIntentTopics"
+            },
+            {
+              "value": "lookbackDays",
+              "name": "LookbackDays"
             }
           ]
         }
