@@ -28,6 +28,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("emoji") is { } nullNodeEmoji && nullNodeEmoji.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Emoji = null;
             if (parseNode.GetChildNode("errors") is null) { _explicitNullValueErrors = default!; _explicitNullProperties?.Remove("errors"); }
             else if (parseNode.GetChildNode("errors") is { } nullNodeErrors && nullNodeErrors.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Errors = null;
+            if (parseNode.GetChildNode("folderId") is null) { _explicitNullValueFolderId = default!; _explicitNullProperties?.Remove("folderId"); }
+            else if (parseNode.GetChildNode("folderId") is { } nullNodeFolderId && nullNodeFolderId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FolderId = null;
             if (parseNode.GetChildNode("hasError") is null) { _explicitNullValueHasError = default!; _explicitNullProperties?.Remove("hasError"); }
             else if (parseNode.GetChildNode("hasError") is { } nullNodeHasError && nullNodeHasError.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HasError = null;
             if (parseNode.GetChildNode("_id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("_id"); }
@@ -94,6 +96,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public List<string> Errors { get => _explicitNullValueErrors; set { _explicitNullValueErrors = value; AdditionalData?.Remove("errors"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("errors"); else _explicitNullProperties?.Remove("errors"); } }
         private List<string> _explicitNullValueErrors = default!;
+#endif
+        /// <summary>Campaign folder ID (`cfo_xxx`), or `root` when the campaign sits in no folder.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FolderId { get => _explicitNullValueFolderId; set { _explicitNullValueFolderId = value; AdditionalData?.Remove("folderId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folderId"); else _explicitNullProperties?.Remove("folderId"); } }
+        private string? _explicitNullValueFolderId = default!;
+#nullable restore
+#else
+        public string FolderId { get => _explicitNullValueFolderId; set { _explicitNullValueFolderId = value; AdditionalData?.Remove("folderId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folderId"); else _explicitNullProperties?.Remove("folderId"); } }
+        private string _explicitNullValueFolderId = default!;
 #endif
         /// <summary>Whether the campaign has errors</summary>
         public bool? HasError { get => _explicitNullValueHasError; set { _explicitNullValueHasError = value; AdditionalData?.Remove("hasError"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hasError"); else _explicitNullProperties?.Remove("hasError"); } }
@@ -211,6 +223,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "creator", n => { Creator = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignCreator>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignCreator.CreateFromDiscriminatorValue); } },
                 { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "errors", n => { Errors = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "folderId", n => { FolderId = n.GetStringValue(); } },
                 { "hasError", n => { HasError = n.GetBoolValue(); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "labels", n => { Labels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
@@ -235,6 +248,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignCreator>("creator", Creator);
             writer.WriteStringValue("emoji", Emoji);
             writer.WriteCollectionOfPrimitiveValues<string>("errors", Errors);
+            writer.WriteStringValue("folderId", FolderId);
             writer.WriteBoolValue("hasError", HasError);
             writer.WriteStringValue("_id", Id);
             writer.WriteCollectionOfPrimitiveValues<string>("labels", Labels);

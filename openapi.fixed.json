@@ -1707,6 +1707,15 @@
               "type": "string"
             },
             "example": "usr_QG9E94KvTmC7KWqzs"
+          },
+          {
+            "name": "folderId",
+            "in": "query",
+            "description": "Filter campaigns by campaign folder. Pass a \u0060cfo_\u0060 folder ID to list that folder, or \u0060root\u0060 to list the campaigns that sit in no folder. Applies to version=v2; a call without version ignores the parameter.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "cfo_QG9E94KvTmC7KWqzs"
           }
         ],
         "responses": {
@@ -1732,6 +1741,7 @@
                     "emoji": "\uD83D\uDE80",
                     "timezone": "Europe/Paris",
                     "labels": [],
+                    "folderId": "cfo_QG9E94KvTmC7KWqzs",
                     "createdAt": "2025-02-20T14:45:54.230Z",
                     "createdBy": "usr_zdTCrNFyXblc4mrYK",
                     "status": "running",
@@ -1744,6 +1754,7 @@
                     "_id": "cam_k3gu2sa4KIfhRK34M",
                     "name": "Sales Outreach 2025",
                     "labels": [],
+                    "folderId": "root",
                     "createdAt": "2025-02-05T09:00:07.541Z",
                     "createdBy": "usr_UEvrOEP0CTAYEoFR4",
                     "status": "running",
@@ -1759,6 +1770,7 @@
                     "labels": [
                       "CRM"
                     ],
+                    "folderId": "root",
                     "createdAt": "2023-01-27T14:58:52.482Z",
                     "createdBy": "usr_i52PiQtbq8SucjVTM",
                     "status": "running",
@@ -1772,6 +1784,7 @@
                     "_id": "cam_yZXeC6q3SXs3ha1FI",
                     "name": "Customer Onboarding",
                     "labels": [],
+                    "folderId": "root",
                     "createdAt": "2022-06-14T13:32:57.880Z",
                     "createdBy": "usr_i52PiQtbq8SucjVTM",
                     "status": "running"
@@ -1972,6 +1985,7 @@
                   "name": "Product Launch Campaign",
                   "createdAt": "2025-10-27T07:01:04.058Z",
                   "status": "draft",
+                  "folderId": "cfo_7fdQ2Xb1LmNpR4sT",
                   "creator": {
                     "userId": "usr_ahfFktBBHUIxbVG5P",
                     "userEmail": "support@lemlist.com"
@@ -4473,6 +4487,12 @@
                     ],
                     "delay": 0
                   }
+                },
+                "End Sequence Step": {
+                  "value": {
+                    "type": "endSequence",
+                    "endLeadStatus": "notInterested"
+                  }
                 }
               }
             }
@@ -4505,7 +4525,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / \u0060Invalid request body\u0060 - a field the step type does not take, such as \u0060manual\u0060 on a \u0060linkedinVisit\u0060 step, or an invalid value, such as an unknown \u0060workflowIds\u0060 entry / \u0060workflowIds is required\u0060 - a required field is missing / \u0060invalid-parameters\u0060 - a \u0060title\u0060 over 100 characters / other errors from createStep",
+            "description": "Possible errors: Bad team / \u0060Invalid request body\u0060 - a field the step type does not take, such as \u0060manual\u0060 on a \u0060linkedinVisit\u0060 step, or an invalid value, such as an unknown \u0060workflowIds\u0060 entry or a \u0060delay\u0060 other than 0 on an \u0060endSequence\u0060 step / \u0060workflowIds is required\u0060 - a required field is missing / \u0060invalid-parameters\u0060 - a \u0060title\u0060 over 100 characters / \u0060end-sequence-first-step\u0060 - an \u0060endSequence\u0060 step as the first step of the campaign / \u0060end-sequence-not-last\u0060 - an \u0060endSequence\u0060 step with a step after it, on a campaign no lead has entered yet / other errors from createStep",
             "content": {
               "application/json": {
                 "schema": {
@@ -4557,6 +4577,21 @@
                 "example": {
                   "error": "A step is still being added for the leads of this campaign. Retry in a minute.",
                   "code": "campaign-reroute-in-progress"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "403": {
+            "description": "\u0060end-sequence-not-allowed\u0060 - the \u0060endSequence\u0060 step is in beta and the team does not have access to it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostSequencesBySequenceIdSteps403Response"
+                },
+                "example": {
+                  "error": "The End sequence step is not available yet",
+                  "code": "end-sequence-not-allowed"
                 },
                 "x-schema-inferred-from-examples": true
               }
@@ -4733,7 +4768,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / \u0060Invalid request body\u0060 - a field the step type does not take, such as \u0060manual\u0060 on a \u0060linkedinVisit\u0060 step / \u0060invalid-parameters\u0060 - a \u0060title\u0060 over 100 characters / other errors from updateStep",
+            "description": "Possible errors: Bad team / \u0060Invalid request body\u0060 - a field the step type does not take, such as \u0060manual\u0060 on a \u0060linkedinVisit\u0060 step, or an invalid value, such as a \u0060delay\u0060 other than 0 or an unknown \u0060endLeadStatus\u0060 on an \u0060endSequence\u0060 step / \u0060invalid-parameters\u0060 - a \u0060title\u0060 over 100 characters / other errors from updateStep",
             "content": {
               "application/json": {
                 "schema": {
@@ -4821,7 +4856,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / You cannot delete this step because the campaign is running",
+            "description": "Possible errors: Bad team / You cannot delete this step because the campaign is running / \u0060end-sequence-first-step\u0060 - deleting the first step of the campaign would make an \u0060endSequence\u0060 step its first step",
             "content": {
               "text/plain": {
                 "schema": {
@@ -23343,6 +23378,7 @@
                   "name": "My duplicated campaign",
                   "sequenceId": "seq_A1B2C3D4E5F6G7H8I9",
                   "labels": [],
+                  "folderId": "cfo_QG9E94KvTmC7KWqzs",
                   "createdAt": "2024-01-15T10:30:00.000Z",
                   "createdBy": "usr_A1B2C3D4E5F6G7H8I9",
                   "status": "draft",
@@ -24501,7 +24537,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060: Pubrio vertical names): a value with no match is listed with reason \u0060INVALID_FILTER_VALUE\u0060. On a \u0060marketExpansion\u0060 agent, a missing \u0060targetMarkets\u0060 is listed with reason \u0060MISSING_REQUIRED_PROPERTY\u0060, and \u0060WATCH_LIST_PUBRIO_UNRESOLVABLE_LOCATION\u0060 is returned when the agent is activated while none of its \u0060targetMarkets\u0060 (or none of its \u0060originMarkets\u0060) resolves to a country.",
+            "description": "Validation error - invalid body, filters, or activate prerequisites. \u0060WATCH_LIST_API_INVALID_CAMPAIGN_ID\u0060 when \u0060campaignId\u0060 is malformed or sent without signalProcessingType = push_to_campaign. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 when a filter is rejected: \u0060details.invalidFilters\u0060 lists each one, and a refused external-signal mapping (\u0060externalSignalFieldMapping\u0060, \u0060externalSignalCustomFieldMapping\u0060) carries a \u0060message\u0060 saying what to fix. A \u0060linkedinProfileViewsUserIds\u0060 value that is not a team member with a connected LinkedIn account is rejected there too, as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060: Pubrio vertical names): a value with no match is listed with reason \u0060INVALID_FILTER_VALUE\u0060. On a \u0060marketExpansion\u0060 agent, a missing \u0060targetMarkets\u0060 is listed with reason \u0060MISSING_REQUIRED_PROPERTY\u0060, and \u0060WATCH_LIST_PUBRIO_UNRESOLVABLE_LOCATION\u0060 is returned when the agent is activated while none of its \u0060targetMarkets\u0060 (or none of its \u0060originMarkets\u0060) resolves to a country. On a signal type that accepts \u0060crmListIds.in\u0060, a non-empty \u0060crmListIds.in\u0060 is rejected as \u0060INVALID_FILTER_VALUE\u0060: the CRM lists an agent monitors are set by \u0060POST /watchlist/crm-lists\u0060. On a signal type that accepts \u0060crmListIds.out\u0060, a value that is not a company list of the team is rejected the same way. A side the signal type does not accept (\u0060properties\u0060 in [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters)) is ignored, and a signal type without \u0060crmListIds\u0060 refuses the filter as \u0060UNKNOWN_FILTER_ID\u0060.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -24675,7 +24711,7 @@
             }
           },
           "400": {
-            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the agent\u0027s signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060: Pubrio vertical names). On a \u0060marketExpansion\u0060 agent, a missing \u0060targetMarkets\u0060 is listed with reason \u0060MISSING_REQUIRED_PROPERTY\u0060, and \u0060WATCH_LIST_PUBRIO_UNRESOLVABLE_LOCATION\u0060 is returned when the agent is active (or activated) while none of its \u0060targetMarkets\u0060 (or none of its \u0060originMarkets\u0060) resolves to a country.",
+            "description": "Validation error - invalid body or filters. \u0060WATCH_LIST_API_INVALID_FILTERS\u0060 lists each rejected filter in \u0060details.invalidFilters\u0060; on a \u0060linkedinProfileViews\u0060 agent, a \u0060linkedinProfileViewsUserIds\u0060 value added that is not a team member with a connected LinkedIn account is rejected there as \u0060INVALID_FILTER_VALUE\u0060. Autocomplete values are validated against the taxonomy of the agent\u0027s signal type (\u0060companyIndustries\u0060 on \u0060companyRunningAds\u0060 and \u0060marketExpansion\u0060: Pubrio vertical names). On a \u0060marketExpansion\u0060 agent, a missing \u0060targetMarkets\u0060 is listed with reason \u0060MISSING_REQUIRED_PROPERTY\u0060, and \u0060WATCH_LIST_PUBRIO_UNRESOLVABLE_LOCATION\u0060 is returned when the agent is active (or activated) while none of its \u0060targetMarkets\u0060 (or none of its \u0060originMarkets\u0060) resolves to a country. On a signal type that accepts \u0060crmListIds.in\u0060, a \u0060crmListIds.in\u0060 that differs from the stored one is rejected as \u0060INVALID_FILTER_VALUE\u0060: send it back as read, since the CRM lists an agent monitors change through \u0060POST /watchlist/crm-lists\u0060 only. On a signal type that accepts \u0060crmListIds.out\u0060, a value added that is not a company list of the team is rejected the same way. A side the signal type does not accept (\u0060properties\u0060 in [\u0060GET /watchlist/filters\u0060](/api-reference/endpoints/watch-list/get-filters)) is ignored.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -28420,7 +28456,7 @@
             "$ref": "#/components/schemas/CrmIdLinkErrorEnvelopeError"
           }
         },
-        "description": "Error envelope of a refused \u0060crmId\u0060 (closed beta) on the contact and company upserts. The extra fields name what to send instead."
+        "description": "Error envelope of a refused \u0060crmId\u0060 on the contact and company upserts. The extra fields name what to send instead."
       },
       "ApiErrorEnvelope": {
         "required": [
@@ -29204,6 +29240,10 @@
               "type": "string"
             },
             "description": "Categorization labels"
+          },
+          "folderId": {
+            "type": "string",
+            "description": "Campaign folder ID (\u0060cfo_xxx\u0060), or \u0060root\u0060 when the campaign sits in no folder."
           },
           "createdAt": {
             "type": "string",
@@ -36798,7 +36838,7 @@
           },
           "delay": {
             "type": "integer",
-            "description": "Delay in days before executing this step. Defaults to 0 for the first step and 1 for subsequent steps"
+            "description": "Delay in days before executing this step. Defaults to 0 for the first step and 1 for subsequent steps. An \u0060endSequence\u0060 step runs as soon as the lead reaches it: it takes \u00600\u0060 only, and defaults to it"
           },
           "subject": {
             "type": "string",
@@ -36862,6 +36902,9 @@
           },
           "leadAction": {
             "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsRequestLeadAction"
+          },
+          "endLeadStatus": {
+            "$ref": "#/components/schemas/PostSequencesBySequenceIdStepsRequestEndLeadStatus"
           },
           "images": {
             "type": "array",
@@ -36972,6 +37015,17 @@
           }
         }
       },
+      "PostSequencesBySequenceIdSteps403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "PatchSequencesBySequenceIdStepsByStepIdRequest": {
         "required": [
           "type"
@@ -36983,7 +37037,7 @@
           },
           "delay": {
             "type": "integer",
-            "description": "Delay in days before executing this step"
+            "description": "Delay in days before executing this step. An \u0060endSequence\u0060 step takes \u00600\u0060 only, and keeps it: it runs as soon as the lead reaches it"
           },
           "subject": {
             "type": "string",
@@ -37047,6 +37101,9 @@
           },
           "leadAction": {
             "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction"
+          },
+          "endLeadStatus": {
+            "$ref": "#/components/schemas/PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus"
           },
           "images": {
             "type": "array",
@@ -38284,7 +38341,7 @@
           },
           "crmId": {
             "type": "string",
-            "description": "Closed beta: stored as a custom variable like any other key unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the lead\u0027s contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (\u0060003\u2026\u0060) or Lead (\u006000Q\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. Never refuses the lead: a new contact is created already linked, a contact without a link is linked, a contact linked to another record keeps it, and an id that cannot be applied comes back in \u0060warnings\u0060. See the endpoint page.",
+            "description": "Reserved for this link, never stored as a custom variable. Id of the record of the connected CRM to link the lead\u0027s contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (\u0060003\u2026\u0060) or Lead (\u006000Q\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. Never refuses the lead: a new contact is created already linked, a contact without a link is linked, a contact linked to another record keeps it, and an id that cannot be applied comes back in \u0060warnings\u0060. See the endpoint page.",
             "example": "123456789"
           }
         },
@@ -39969,7 +40026,7 @@
           },
           "crmId": {
             "type": "string",
-            "description": "Closed beta: refused as an unknown field (\u0060400 INVALID_FIELD\u0060) unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (\u0060003\u2026\u0060) or Lead (\u006000Q\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. A new contact is created already linked; an existing one has its link moved to this record. An id another contact holds updates that contact when the body carries its email or LinkedIn URL, and is refused otherwise. See the endpoint page for the refusals.",
+            "description": "Reserved for this link, never written to a custom field. Id of the record of the connected CRM to link the contact to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Contact (\u0060003\u2026\u0060) or Lead (\u006000Q\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. A new contact is created already linked; an existing one has its link moved to this record. An id another contact holds updates that contact when the body carries its email or LinkedIn URL, and is refused otherwise. See the endpoint page for the refusals.",
             "example": "123456789"
           }
         },
@@ -40541,7 +40598,7 @@
           },
           "crmId": {
             "type": "string",
-            "description": "Closed beta: refused as an unknown field (\u0060400 INVALID_FIELD\u0060) unless the CRM ID remap beta is enabled for your team. Id of the record of the connected CRM to link the company to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Account (\u0060001\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. A new company is created already linked; an existing one has its link moved to this record, and its contacts\u2019 associations follow. An id another company holds updates that company when the body carries its domain, LinkedIn URL or Sales Navigator URL, and is refused otherwise. See the endpoint page for the refusals.",
+            "description": "Reserved for this link, never written to a custom field. Id of the record of the connected CRM to link the company to: a HubSpot, Pipedrive or Zoho numeric id (send a Zoho id as a string: its 19 digits are too long for a JSON number), an Attio record id, or a Salesforce Account (\u0060001\u2026\u0060) id of 15 or 18 characters. Requires an admin API key. A new company is created already linked; an existing one has its link moved to this record, and its contacts\u2019 associations follow. An id another company holds updates that company when the body carries its domain, LinkedIn URL or Sales Navigator URL, and is refused otherwise. See the endpoint page for the refusals.",
             "example": "123456789"
           }
         },
@@ -42170,6 +42227,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "folderId": {
+            "type": "string",
+            "description": "Campaign folder ID (\u0060cfo_xxx\u0060), or \u0060root\u0060 when the campaign sits in no folder."
           },
           "createdAt": {
             "type": "string",
@@ -44902,7 +44963,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "**The company was NOT written**: \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: \u0060COMPANY_DOMAIN_IGNORED\u0060, \u0060companyDomain\u0060 is a personal email provider or a platform host shared by many companies (\u0060gmail.com\u0060, a \u0060facebook.com\u0060 page, a bare \u0060wordpress.com\u0060). The lead and its company went through without it; \u0060params.companyDomain\u0060 names it.\n\n**The \u0060crmId\u0060 was NOT applied** (closed beta): the lead went through, its contact not linked to that record. \u0060CRM_ID_NOT_APPLIED\u0060: the contact is linked to another record of your CRM and keeps it (\u0060params.crmId\u0060). \u0060CRM_ID_ALREADY_LINKED\u0060: another lemlist contact holds that record (\u0060params.conflictingContactId\u0060). \u0060CRM_ID_UPDATE_NOT_ALLOWED\u0060: the API key is not an admin\u0027s. \u0060INVALID_CRM_ID\u0060: not an id of your CRM. \u0060NO_CRM_CONNECTED\u0060. \u0060CRM_ID_LEADS_NOT_SYNCED\u0060: a Salesforce Lead id while your team does not sync Leads. \u0060CRM_RECORD_NOT_FOUND\u0060, \u0060CRM_RECORD_MERGED\u0060 (\u0060params.survivorId\u0060), \u0060CRM_RECORD_CONVERTED\u0060 (a converted Salesforce Lead, \u0060params.convertedContactId\u0060), \u0060CRM_RECORD_UNREACHABLE\u0060 (the CRM did not answer).\n\n**Values left unchanged**: \u0060FIELDS_KEPT\u0060, what the update strategy kept, named in \u0060params.fields\u0060 (company fields prefixed with \u0060company\u0060)."
+            "description": "**The company was NOT written**: \u0060invalid-company-domain\u0060, \u0060invalid-company-linkedin-url\u0060, \u0060company-linkedin-url-not-company\u0060 (malformed identifier, or a personal profile URL), \u0060company-duplicate-forbidden\u0060 (an identifier already belongs to another company), \u0060company-update-failed\u0060 (the write failed). The lead itself went through in every case.\n\n**The company domain was dropped**: \u0060COMPANY_DOMAIN_IGNORED\u0060, \u0060companyDomain\u0060 is a personal email provider or a platform host shared by many companies (\u0060gmail.com\u0060, a \u0060facebook.com\u0060 page, a bare \u0060wordpress.com\u0060). The lead and its company went through without it; \u0060params.companyDomain\u0060 names it.\n\n**The \u0060crmId\u0060 was NOT applied**: the lead went through, its contact not linked to that record. \u0060CRM_ID_NOT_APPLIED\u0060: the contact is linked to another record of your CRM and keeps it (\u0060params.crmId\u0060). \u0060CRM_ID_ALREADY_LINKED\u0060: another lemlist contact holds that record (\u0060params.conflictingContactId\u0060). \u0060CRM_ID_UPDATE_NOT_ALLOWED\u0060: the API key is not an admin\u0027s. \u0060INVALID_CRM_ID\u0060: not an id of your CRM. \u0060NO_CRM_CONNECTED\u0060. \u0060CRM_ID_LEADS_NOT_SYNCED\u0060: a Salesforce Lead id while your team does not sync Leads. \u0060CRM_RECORD_NOT_FOUND\u0060, \u0060CRM_RECORD_MERGED\u0060 (\u0060params.survivorId\u0060), \u0060CRM_RECORD_CONVERTED\u0060 (a converted Salesforce Lead, \u0060params.convertedContactId\u0060), \u0060CRM_RECORD_UNREACHABLE\u0060 (the CRM did not answer).\n\n**Values left unchanged**: \u0060FIELDS_KEPT\u0060, what the update strategy kept, named in \u0060params.fields\u0060 (company fields prefixed with \u0060company\u0060)."
           },
           "message": {
             "type": "string"
@@ -53744,7 +53805,8 @@
           "conditional",
           "whatsappMessage",
           "sms",
-          "enrichment"
+          "enrichment",
+          "endSequence"
         ],
         "type": "string",
         "description": "The type of step to create",
@@ -53827,6 +53889,10 @@
             {
               "value": "enrichment",
               "name": "Enrichment"
+            },
+            {
+              "value": "endSequence",
+              "name": "EndSequence"
             }
           ]
         }
@@ -54040,6 +54106,33 @@
           ]
         }
       },
+      "PostSequencesBySequenceIdStepsRequestEndLeadStatus": {
+        "enum": [
+          "completed",
+          "interested",
+          "notInterested"
+        ],
+        "type": "string",
+        "description": "Applies to \u0060endSequence\u0060 steps only. The status the lead shows once the step ends it. \u0060completed\u0060 ends the lead; \u0060interested\u0060 and \u0060notInterested\u0060 end it and mark its interest, as marking it from lemlist does. Omitted stores \u0060completed\u0060.",
+        "x-ms-enum": {
+          "name": "PostSequencesBySequenceIdStepsRequestEndLeadStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "completed",
+              "name": "Completed"
+            },
+            {
+              "value": "interested",
+              "name": "Interested"
+            },
+            {
+              "value": "notInterested",
+              "name": "NotInterested"
+            }
+          ]
+        }
+      },
       "PostSequencesBySequenceIdStepsRequestRecordMode": {
         "enum": [
           "manual",
@@ -54153,7 +54246,8 @@
           "conditional",
           "whatsappMessage",
           "sms",
-          "enrichment"
+          "enrichment",
+          "endSequence"
         ],
         "type": "string",
         "description": "The type of step (required but cannot be changed - must match the existing step type)",
@@ -54236,6 +54330,10 @@
             {
               "value": "enrichment",
               "name": "Enrichment"
+            },
+            {
+              "value": "endSequence",
+              "name": "EndSequence"
             }
           ]
         }
@@ -54445,6 +54543,33 @@
             {
               "value": "stop",
               "name": "Stop"
+            }
+          ]
+        }
+      },
+      "PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus": {
+        "enum": [
+          "completed",
+          "interested",
+          "notInterested"
+        ],
+        "type": "string",
+        "description": "Applies to \u0060endSequence\u0060 steps only. The status the lead shows once the step ends it: \u0060completed\u0060, \u0060interested\u0060 or \u0060notInterested\u0060. Read when a lead reaches the step: the change applies to every lead that reaches it afterwards, including a paused lead waiting on it.",
+        "x-ms-enum": {
+          "name": "PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "completed",
+              "name": "Completed"
+            },
+            {
+              "value": "interested",
+              "name": "Interested"
+            },
+            {
+              "value": "notInterested",
+              "name": "NotInterested"
             }
           ]
         }
@@ -60809,6 +60934,9 @@
         "leadAction": {
           "$ref": "#/components/schemas/StepLeadAction"
         },
+        "endLeadStatus": {
+          "$ref": "#/components/schemas/StepEndLeadStatus"
+        },
         "title": {
           "type": "string",
           "description": "Title of the task the step creates. On \u0060manual\u0060 and \u0060phone\u0060 steps, and on a channel step when one was set"
@@ -62082,7 +62210,8 @@
         "delay",
         "task",
         "api",
-        "enrichment"
+        "enrichment",
+        "endSequence"
       ],
       "type": "string",
       "description": "Action type",
@@ -62121,6 +62250,10 @@
           {
             "value": "enrichment",
             "name": "Enrichment"
+          },
+          {
+            "value": "endSequence",
+            "name": "EndSequence"
           }
         ]
       }
@@ -62148,6 +62281,33 @@
           {
             "value": "stop",
             "name": "Stop"
+          }
+        ]
+      }
+    },
+    "StepEndLeadStatus": {
+      "enum": [
+        "completed",
+        "interested",
+        "notInterested"
+      ],
+      "type": "string",
+      "description": "Applies to \u0060endSequence\u0060 steps only. The status the lead shows once the step ends it: \u0060completed\u0060 ends it, \u0060interested\u0060 and \u0060notInterested\u0060 end it and mark its interest. Absent on a step stored without a value, which behaves as \u0060completed\u0060.",
+      "x-ms-enum": {
+        "name": "StepEndLeadStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "completed",
+            "name": "Completed"
+          },
+          {
+            "value": "interested",
+            "name": "Interested"
+          },
+          {
+            "value": "notInterested",
+            "name": "NotInterested"
           }
         ]
       }

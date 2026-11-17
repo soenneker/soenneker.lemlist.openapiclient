@@ -83,5 +83,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Enrichment,
         #pragma warning restore CS1591
+        [EnumMember(Value = "endSequence")]
+        #pragma warning disable CS1591
+        EndSequence,
+        #pragma warning restore CS1591
     }
 }

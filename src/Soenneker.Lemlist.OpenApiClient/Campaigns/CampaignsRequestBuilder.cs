@@ -41,7 +41,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CampaignsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns{?createdBy*,limit*,offset*,page*,sortBy*,sortOrder*,status*,version*}", pathParameters)
+        public CampaignsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns{?createdBy*,folderId*,limit*,offset*,page*,sortBy*,sortOrder*,status*,version*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CampaignsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns{?createdBy*,limit*,offset*,page*,sortBy*,sortOrder*,status*,version*}", rawUrl)
+        public CampaignsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/campaigns{?createdBy*,folderId*,limit*,offset*,page*,sortBy*,sortOrder*,status*,version*}", rawUrl)
         {
         }
         /// <summary>
@@ -182,6 +182,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Campaigns
 #else
             [QueryParameter("createdBy")]
             public string CreatedBy { get; set; }
+#endif
+            /// <summary>Filter campaigns by campaign folder. Pass a `cfo_` folder ID to list that folder, or `root` to list the campaigns that sit in no folder. Applies to version=v2; a call without version ignores the parameter.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("folderId")]
+            public string? FolderId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("folderId")]
+            public string FolderId { get; set; }
 #endif
             /// <summary>Number of campaigns to retrieve. Default: 100. Maximum: 100.</summary>
             [QueryParameter("limit")]

@@ -37,6 +37,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("delay") is { } nullNodeDelay && nullNodeDelay.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Delay = null;
             if (parseNode.GetChildNode("delayType") is null) { _explicitNullValueDelayType = default!; _explicitNullProperties?.Remove("delayType"); }
             else if (parseNode.GetChildNode("delayType") is { } nullNodeDelayType && nullNodeDelayType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DelayType = null;
+            if (parseNode.GetChildNode("endLeadStatus") is null) { _explicitNullValueEndLeadStatus = default!; _explicitNullProperties?.Remove("endLeadStatus"); }
+            else if (parseNode.GetChildNode("endLeadStatus") is { } nullNodeEndLeadStatus && nullNodeEndLeadStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndLeadStatus = null;
             if (parseNode.GetChildNode("endorseAnyFallback") is null) { _explicitNullValueEndorseAnyFallback = default!; _explicitNullProperties?.Remove("endorseAnyFallback"); }
             else if (parseNode.GetChildNode("endorseAnyFallback") is { } nullNodeEndorseAnyFallback && nullNodeEndorseAnyFallback.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndorseAnyFallback = null;
             if (parseNode.GetChildNode("images") is null) { _explicitNullValueImages = default!; _explicitNullProperties?.Remove("images"); }
@@ -135,12 +137,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string CustomValue { get => _explicitNullValueCustomValue; set { _explicitNullValueCustomValue = value; AdditionalData?.Remove("customValue"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customValue"); else _explicitNullProperties?.Remove("customValue"); } }
         private string _explicitNullValueCustomValue = default!;
 #endif
-        /// <summary>Delay in days before executing this step</summary>
+        /// <summary>Delay in days before executing this step. An `endSequence` step takes `0` only, and keeps it: it runs as soon as the lead reaches it</summary>
         public int? Delay { get => _explicitNullValueDelay; set { _explicitNullValueDelay = value; AdditionalData?.Remove("delay"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delay"); else _explicitNullProperties?.Remove("delay"); } }
         private int? _explicitNullValueDelay = default!;
         /// <summary>Delay type for conditional steps</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType? DelayType { get => _explicitNullValueDelayType; set { _explicitNullValueDelayType = value; AdditionalData?.Remove("delayType"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("delayType"); else _explicitNullProperties?.Remove("delayType"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType? _explicitNullValueDelayType = default!;
+        /// <summary>Applies to `endSequence` steps only. The status the lead shows once the step ends it: `completed`, `interested` or `notInterested`. Read when a lead reaches the step: the change applies to every lead that reaches it afterwards, including a paused lead waiting on it.</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus? EndLeadStatus { get => _explicitNullValueEndLeadStatus; set { _explicitNullValueEndLeadStatus = value; AdditionalData?.Remove("endLeadStatus"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endLeadStatus"); else _explicitNullProperties?.Remove("endLeadStatus"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus? _explicitNullValueEndLeadStatus = default!;
         /// <summary>Applies to `linkedinEndorse` steps only. When `true` and the named skill is not on the lead&apos;s profile, lemlist falls back to endorsing any available skill.</summary>
         public bool? EndorseAnyFallback { get => _explicitNullValueEndorseAnyFallback; set { _explicitNullValueEndorseAnyFallback = value; AdditionalData?.Remove("endorseAnyFallback"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endorseAnyFallback"); else _explicitNullProperties?.Remove("endorseAnyFallback"); } }
         private bool? _explicitNullValueEndorseAnyFallback = default!;
@@ -267,6 +272,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "customValue", n => { CustomValue = n.GetStringValue(); } },
                 { "delay", n => { Delay = n.GetIntValue(); } },
                 { "delayType", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDelayType = default; _explicitNullProperties?.Remove("delayType"); AdditionalData["delayType"] = unknown; } else { DelayType = parsed; AdditionalData.Remove("delayType"); } } },
+                { "endLeadStatus", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueEndLeadStatus = default; _explicitNullProperties?.Remove("endLeadStatus"); AdditionalData["endLeadStatus"] = unknown; } else { EndLeadStatus = parsed; AdditionalData.Remove("endLeadStatus"); } } },
                 { "endorseAnyFallback", n => { EndorseAnyFallback = n.GetBoolValue(); } },
                 { "images", n => { Images = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "leadAction", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLeadAction = default; _explicitNullProperties?.Remove("leadAction"); AdditionalData["leadAction"] = unknown; } else { LeadAction = parsed; AdditionalData.Remove("leadAction"); } } },
@@ -300,6 +306,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("customValue", CustomValue);
             writer.WriteIntValue("delay", Delay);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestDelayType>("delayType", DelayType);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestEndLeadStatus>("endLeadStatus", EndLeadStatus);
             writer.WriteBoolValue("endorseAnyFallback", EndorseAnyFallback);
             writer.WriteCollectionOfPrimitiveValues<string>("images", Images);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PatchSequencesBySequenceIdStepsByStepIdRequestLeadAction>("leadAction", LeadAction);

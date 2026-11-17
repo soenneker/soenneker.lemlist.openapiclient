@@ -9,7 +9,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Error envelope of a refused `crmId` (closed beta) on the contact and company upserts. The extra fields name what to send instead.
+    /// Error envelope of a refused `crmId` on the contact and company upserts. The extra fields name what to send instead.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CrmIdLinkErrorEnvelope : ApiException, IAdditionalDataHolder, IParsable
