@@ -23745,6 +23745,16 @@
                       }
                     }
                   },
+                  "options-key-not-writable": {
+                    "summary": "\u0060options\u0060 sent: the key the listing returns, not an operation",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "OPTIONS_KEY_NOT_WRITABLE",
+                        "message": "options is read-only: write a select field\u0027s options with upsertOptions (add), renameOptions or removeOptions"
+                      }
+                    }
+                  },
                   "invalid-options": {
                     "summary": "option operations malformed, or no option left",
                     "value": {
@@ -46599,7 +46609,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Error code: \u0060INVALID_ENTITY_PARAM\u0060, \u0060INVALID_TYPE_PARAM\u0060, \u0060INVALID_LABEL\u0060, \u0060INVALID_NAME\u0060, \u0060OPTIONS_NOT_ALLOWED\u0060, \u0060INVALID_OPTIONS\u0060, \u0060OPTION_NOT_FOUND\u0060, \u0060OPTION_ALREADY_EXISTS\u0060, \u0060FIELD_NAME_RESERVED\u0060, \u0060CONTACT_FIELD_COMPANY_PREFIXED\u0060, \u0060TYPE_CHANGE_NOT_ALLOWED\u0060, \u0060INVALID_CRM_PICKLIST\u0060; with \u0060crmPicklist\u0060, \u0060CRM_SYNC_PICKLIST_OBJECT_TYPE_INVALID\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_FOUND\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_SINGLE_SELECT\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_MAPPABLE\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_READ_ONLY\u0060."
+            "description": "Error code: \u0060INVALID_ENTITY_PARAM\u0060, \u0060INVALID_TYPE_PARAM\u0060, \u0060INVALID_LABEL\u0060, \u0060INVALID_NAME\u0060, \u0060OPTIONS_KEY_NOT_WRITABLE\u0060, \u0060OPTIONS_NOT_ALLOWED\u0060, \u0060INVALID_OPTIONS\u0060, \u0060OPTION_NOT_FOUND\u0060, \u0060OPTION_ALREADY_EXISTS\u0060, \u0060FIELD_NAME_RESERVED\u0060, \u0060CONTACT_FIELD_COMPANY_PREFIXED\u0060, \u0060TYPE_CHANGE_NOT_ALLOWED\u0060, \u0060INVALID_CRM_PICKLIST\u0060; with \u0060crmPicklist\u0060, \u0060CRM_SYNC_PICKLIST_OBJECT_TYPE_INVALID\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_FOUND\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_SINGLE_SELECT\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_NOT_MAPPABLE\u0060, \u0060CRM_SYNC_PICKLIST_CRM_PROPERTY_READ_ONLY\u0060."
           },
           "message": {
             "type": "string"
@@ -48113,7 +48123,7 @@
           },
           "crmField": {
             "type": "string",
-            "description": "Corresponding CRM field name (crm_synced fields only)"
+            "description": "Name of the CRM field this field is mapped to, on any field the CRM field mapping includes"
           },
           "options": {
             "type": "array",
@@ -48152,7 +48162,7 @@
           },
           "crmField": {
             "type": "string",
-            "description": "Corresponding CRM field name (crm_synced fields only)"
+            "description": "Name of the CRM field this field is mapped to, on any field the CRM field mapping includes"
           },
           "options": {
             "type": "array",
