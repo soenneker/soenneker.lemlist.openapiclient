@@ -29,6 +29,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("manual") is { } nullNodeManual && nullNodeManual.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Manual = null;
             if (parseNode.GetChildNode("message") is null) { _explicitNullValueMessage = default!; _explicitNullProperties?.Remove("message"); }
             else if (parseNode.GetChildNode("message") is { } nullNodeMessage && nullNodeMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Message = null;
+            if (parseNode.GetChildNode("plainText") is null) { _explicitNullValuePlainText = default!; _explicitNullProperties?.Remove("plainText"); }
+            else if (parseNode.GetChildNode("plainText") is { } nullNodePlainText && nullNodePlainText.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PlainText = null;
             if (parseNode.GetChildNode("priority") is null) { _explicitNullValuePriority = default!; _explicitNullProperties?.Remove("priority"); }
             else if (parseNode.GetChildNode("priority") is { } nullNodePriority && nullNodePriority.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Priority = null;
             if (parseNode.GetChildNode("title") is null) { _explicitNullValueTitle = default!; _explicitNullProperties?.Remove("title"); }
@@ -87,6 +89,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Message { get => _explicitNullValueMessage; set { _explicitNullValueMessage = value; AdditionalData?.Remove("message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message"); else _explicitNullProperties?.Remove("message"); } }
         private string _explicitNullValueMessage = default!;
 #endif
+        /// <summary>Present and true when the email step is sent as plain text: `message` then holds raw text with line breaks, not HTML. Absent on an HTML step. Read-only: the step body does not accept it.</summary>
+        public bool? PlainText { get => _explicitNullValuePlainText; set { _explicitNullValuePlainText = value; AdditionalData?.Remove("plainText"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("plainText"); else _explicitNullProperties?.Remove("plainText"); } }
+        private bool? _explicitNullValuePlainText = default!;
         /// <summary>Priority of the task the step creates: `0` low, `1` medium, `2` high. Absent when none was set</summary>
         public int? Priority { get => _explicitNullValuePriority; set { _explicitNullValuePriority = value; AdditionalData?.Remove("priority"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("priority"); else _explicitNullProperties?.Remove("priority"); } }
         private int? _explicitNullValuePriority = default!;
@@ -143,7 +148,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(11)
             {
                 { "customName", n => { CustomName = n.GetStringValue(); } },
                 { "delay", n => { Delay = n.GetIntValue(); } },
@@ -151,6 +156,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "_id", n => { Id = n.GetStringValue(); } },
                 { "manual", n => { Manual = n.GetBoolValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
+                { "plainText", n => { PlainText = n.GetBoolValue(); } },
                 { "priority", n => { Priority = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -170,6 +176,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("_id", Id);
             writer.WriteBoolValue("manual", Manual);
             writer.WriteStringValue("message", Message);
+            writer.WriteBoolValue("plainText", PlainText);
             writer.WriteIntValue("priority", Priority);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("type", Type);

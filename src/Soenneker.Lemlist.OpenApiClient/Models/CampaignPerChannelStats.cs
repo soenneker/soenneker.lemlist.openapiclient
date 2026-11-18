@@ -105,7 +105,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "email", n => { Email = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsEmail.CreateFromDiscriminatorValue); } },
                 { "linkedin", n => { Linkedin = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignPerChannelStatsLinkedin.CreateFromDiscriminatorValue); } },

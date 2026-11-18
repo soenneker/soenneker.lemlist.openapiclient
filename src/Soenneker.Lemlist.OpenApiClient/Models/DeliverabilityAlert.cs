@@ -175,7 +175,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(19)
             {
                 { "channelConfig", n => { ChannelConfig = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig>(global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertChannelConfig.CreateFromDiscriminatorValue); } },
                 { "comparisonOperator", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityAlertComparisonOperator>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueComparisonOperator = default; _explicitNullProperties?.Remove("comparisonOperator"); AdditionalData["comparisonOperator"] = unknown; } else { ComparisonOperator = parsed; AdditionalData.Remove("comparisonOperator"); } } },

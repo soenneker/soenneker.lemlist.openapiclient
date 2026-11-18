@@ -110,7 +110,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(6)
             {
                 { "altMessage", n => { AltMessage = n.GetStringValue(); } },
                 { "altMessagePremium", n => { AltMessagePremium = n.GetStringValue(); } },

@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(4)
             {
                 { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.GetUserChannels200ResponseWhatsappAccountsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.GetUserChannels200ResponseWhatsappAccountsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "addonActive", n => { AddonActive = n.GetBoolValue(); } },

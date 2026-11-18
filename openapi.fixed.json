@@ -8353,7 +8353,7 @@
             }
           },
           "400": {
-            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign (409 from December 1, 2026) / No valid fields to add / Invalid updateStrategy value",
+            "description": "Possible errors: No API key provided / Bad team / Body of your request must be an object / Invalid email address / Invalid LinkedIn URL / LinkedIn URL is not a personal profile / Email address is in the graveyard / Lead already in the campaign (409 from December 1, 2026) / No valid fields to add / Invalid updateStrategy value / The lead\u0027s contact doesn\u0027t belong to the ABM campaign\u0027s company (ABM campaign, contact of another company or of none) / You can\u0027t add more than 199 leads to an ABM campaign (JSON body \u0060{\u0022error\u0022: ...}\u0060)",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8363,6 +8363,10 @@
                   "lead-already-in-campaign": {
                     "summary": "Lead already in the campaign (409 from December 1, 2026)",
                     "value": "Lead already in the campaign"
+                  },
+                  "lead-not-in-abm-company": {
+                    "summary": "ABM campaign: the contact belongs to another company, or to none",
+                    "value": "The lead\u0027s contact doesn\u0027t belong to the ABM campaign\u0027s company"
                   },
                   "invalid-email": {
                     "value": "Invalid email address"
@@ -9719,7 +9723,7 @@
           "Leads"
         ],
         "summary": "Add Custom Variables on Leads",
-        "description": "Add custom variables to a lead and sets values for that specific lead.",
+        "description": "Add custom variables to a lead and sets values for that specific lead.\n\nValues may contain line breaks (\u0060\\n\u0060) \u2014 for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a \u0060\\n\u0060 is rendered as \u0060\u003Cbr\u003E\u0060 (kept native in LinkedIn/SMS).",
         "operationId": "PostLeadsByEmailVariables",
         "parameters": [
           {
@@ -9842,7 +9846,7 @@
           "Leads"
         ],
         "summary": "Update Values of Custom Variables of a Lead",
-        "description": "Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead\u0027s contact and company as well, and \u0060companyName\u0060 alone renames the company the lead is linked to.",
+        "description": "Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead\u0027s contact and company as well, and \u0060companyName\u0060 alone renames the company the lead is linked to.\n\nValues may contain line breaks (\u0060\\n\u0060) \u2014 for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a \u0060\\n\u0060 is rendered as \u0060\u003Cbr\u003E\u0060 (kept native in LinkedIn/SMS).",
         "operationId": "PatchLeadsByEmailVariables",
         "parameters": [
           {
@@ -16093,7 +16097,7 @@
           "Contacts"
         ],
         "summary": "Get Contact",
-        "description": "Retrieves a contact by its lemlist id (\u0060ctc_xxx\u0060) or email address. The path does not take a CRM record id: use \u0060GET /contacts?crmIds=\u0060 for that.",
+        "description": "Retrieves a contact by its lemlist id (\u0060ctc_xxx\u0060) or email address. The path does not take a CRM record id: use \u0060GET /contacts?crmIds=\u0060 for that.\n\nThe \u0060fields\u0060 object may contain multi-line values with line breaks (\u0060\\n\u0060) for multi-line text custom fields.",
         "operationId": "GetContactsByIdOrEmail",
         "responses": {
           "200": {
@@ -18736,6 +18740,108 @@
             "type": "string"
           },
           "example": "cmp_ABC123"
+        }
+      ]
+    },
+    "/companies/{companyId}/engage": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Engage Company",
+        "description": "**Beta**: requires the ABM beta on your team, otherwise the call answers \u0060403 BETA_NOT_ENABLED\u0060.\n\nOpens the account-based (ABM) campaign of a company, like the Engage button: reopens its most recent live ABM campaign, or creates a draft named after the company and adds the company\u0027s contacts as leads. A company has one live ABM campaign at a time, so calling again returns the same campaign until it is archived or ended. No request body.",
+        "operationId": "PostCompaniesByCompanyIdEngage",
+        "responses": {
+          "200": {
+            "description": "The company\u0027s ABM campaign. \u0060created\u0060 is true when this call created it; \u0060shouldReviewLeads\u0060 is true when its leads were just added, so they are worth reviewing before writing the sequence.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesByCompanyIdEngage200Response"
+                },
+                "example": {
+                  "data": {
+                    "campaignId": "cam_A1B2C3D4E5F6G7H8I9",
+                    "created": true,
+                    "shouldReviewLeads": true
+                  }
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060companyId\u0060 is malformed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesByCompanyIdEngage400Response"
+                },
+                "example": {
+                  "error": "Wrong param company id",
+                  "code": "WRONG_PARAM_COMPANY_ID"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "403": {
+            "description": "The ABM beta is not enabled for your team. Nothing is written.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesByCompanyIdEngage403Response"
+                },
+                "example": {
+                  "error": "Beta is not enabled",
+                  "code": "BETA_NOT_ENABLED"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "404": {
+            "description": "The company does not exist in your team.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesByCompanyIdEngage404Response"
+                },
+                "example": {
+                  "error": "This company no longer exists",
+                  "code": "ABS_ENGAGE_COMPANY_NOT_FOUND"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          },
+          "409": {
+            "description": "Another engage of the same company is still running. Retry in a moment: it returns the campaign that engage opened.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCompaniesByCompanyIdEngage409Response"
+                },
+                "example": {
+                  "error": "This company is already being engaged, try again in a moment",
+                  "code": "ABS_ENGAGE_COMPANY_IN_PROGRESS"
+                },
+                "x-schema-inferred-from-examples": true
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "companyId",
+          "in": "path",
+          "description": "The company to engage",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "cpn_A1B2C3D4E5F6G7H8I9"
         }
       ]
     },
@@ -22985,6 +23091,170 @@
         }
       }
     },
+    "/user/sending-settings": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get Sending Settings",
+        "description": "Returns the daily email limit of email accounts, plus the BCC address of the authenticated user.\n\nWithout \u0060scope\u0060, only the email accounts of the authenticated user are returned. With \u0060scope=team\u0060, every email account of the current team members is returned, each with its owner \u0060userId\u0060.",
+        "operationId": "GetUserSendingSettings",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Set to \u0060team\u0060 to list the email accounts of every current team member instead of the authenticated user\u0027s only.",
+            "schema": {
+              "$ref": "#/components/schemas/TeamScope"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email accounts with their daily email limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserSendingSettings200Response"
+                },
+                "example": {
+                  "emailAccounts": [
+                    {
+                      "id": "usm_A1B2C3D4E5F6G7H8I9",
+                      "email": "john@company.com",
+                      "dailyEmailLimit": 80,
+                      "userId": "usr_A1B2C3D4E5F6G7H8I9"
+                    }
+                  ],
+                  "bcc": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: No user found for this api key / scope must be \u0022team\u0022 when provided",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "scope must be \u0022team\u0022 when provided"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and PATCH methods are supported",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "Bad method"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update Sending Settings",
+        "description": "Sets the daily email limit of up to 100 team email accounts in one call. Each account is processed independently: one failure does not abort the others, and the response reports every account\u0027s outcome.\n\n**Permission:** requires the right to edit the team\u0027s sending limits. On a free trial, a limit above the trial maximum is capped to it.",
+        "operationId": "PatchUserSendingSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUserSendingSettingsRequest"
+              },
+              "example": {
+                "emailAccounts": [
+                  {
+                    "id": "usm_A1B2C3D4E5F6G7H8I9",
+                    "dailyEmailLimit": 50
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Outcome of every email account update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchUserSendingSettings200Response"
+                },
+                "example": {
+                  "total": 2,
+                  "succeeded": 1,
+                  "failed": 1,
+                  "emailAccounts": [
+                    {
+                      "id": "usm_A1B2C3D4E5F6G7H8I9",
+                      "success": true,
+                      "dailyEmailLimit": 50
+                    },
+                    {
+                      "id": "usm_Z9Y8X7W6V5U4T3S2R1",
+                      "success": false,
+                      "error": "Mailbox not found in this team"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: No user found for this api key / emailAccounts must be a non-empty array / emailAccounts is limited to 100 items per call",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "emailAccounts must be a non-empty array"
+              }
+            }
+          },
+          "402": {
+            "description": "The team has no lemlist plan",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "You cannot change the limit. Choose a plan first."
+              }
+            }
+          },
+          "403": {
+            "description": "The user cannot edit the team\u0027s sending limits",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "You cannot edit sending limits for this team"
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET and PATCH methods are supported",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "Bad method"
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/linkedin-limits": {
       "patch": {
         "tags": [
@@ -26011,7 +26281,7 @@
           "Sender picture"
         ],
         "summary": "Get Sender Picture Status",
-        "description": "Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.\n\nOnly active mailboxes assigned to the user are returned. Omit \u0060userId\u0060 to read your own mailboxes; a teammate\u0027s \u0060userId\u0060 must belong to your team.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "description": "Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.\n\nOnly active mailboxes assigned to the user are returned. Omit \u0060userId\u0060 to read your own mailboxes; a teammate\u0027s \u0060userId\u0060 must belong to your team.",
         "operationId": "GetSenderPictureStatus",
         "parameters": [
           {
@@ -26099,25 +26369,15 @@
             }
           },
           "403": {
-            "description": "The beta is not enabled for your team, or \u0060userId\u0060 is not a member of your team",
+            "description": "\u0060userId\u0060 is not a member of your team",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SenderPictureError"
                 },
-                "examples": {
-                  "betaNotEnabled": {
-                    "value": {
-                      "error": "Beta is not enabled",
-                      "code": "BETA_NOT_ENABLED"
-                    }
-                  },
-                  "userNotInTeam": {
-                    "value": {
-                      "error": "This user is not a member of your team.",
-                      "code": "SENDER_PICTURE_USER_NOT_IN_TEAM"
-                    }
-                  }
+                "example": {
+                  "error": "This user is not a member of your team.",
+                  "code": "SENDER_PICTURE_USER_NOT_IN_TEAM"
                 }
               }
             }
@@ -26145,7 +26405,7 @@
           "Sender picture"
         ],
         "summary": "Sync Sender Picture",
-        "description": "Queues a push of a user\u0027s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.\n\nThe push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).\n\nThere is no confirmation step: the mailboxes are queued as soon as the call succeeds.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "description": "Queues a push of a user\u0027s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.\n\nThe push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).\n\nThere is no confirmation step: the mailboxes are queued as soon as the call succeeds.",
         "operationId": "SyncSenderPicture",
         "requestBody": {
           "content": {
@@ -26221,25 +26481,15 @@
             }
           },
           "403": {
-            "description": "The beta is not enabled for your team, or \u0060userId\u0060 is not a member of your team",
+            "description": "\u0060userId\u0060 is not a member of your team",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SenderPictureError"
                 },
-                "examples": {
-                  "betaNotEnabled": {
-                    "value": {
-                      "error": "Beta is not enabled",
-                      "code": "BETA_NOT_ENABLED"
-                    }
-                  },
-                  "userNotInTeam": {
-                    "value": {
-                      "error": "This user is not a member of your team.",
-                      "code": "SENDER_PICTURE_USER_NOT_IN_TEAM"
-                    }
-                  }
+                "example": {
+                  "error": "This user is not a member of your team.",
+                  "code": "SENDER_PICTURE_USER_NOT_IN_TEAM"
                 }
               }
             }
@@ -28236,6 +28486,941 @@
           }
         }
       }
+    },
+    "/views": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "List Views",
+        "description": "Lists the views of one list (the Contacts, Companies or Tasks page) as the API key\u0027s user sees them, in tab order: the lemlist default views, the views shared with the team and the user\u0027s private views. \u0060pinned\u0060 flags the ones shown as tabs.\n\nEach view carries its filters as the page saved them, plus a \u0060url\u0060 that opens the page on that view.",
+        "operationId": "ListViews",
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "query",
+            "description": "The list: \u0060contact\u0060 (Contacts page), \u0060company\u0060 (Companies page) or \u0060task\u0060 (Tasks page)",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ViewEntity"
+            },
+            "example": "contact"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViews200Response"
+                },
+                "example": {
+                  "data": {
+                    "views": [
+                      {
+                        "id": "evw_contact_my_contacts",
+                        "name": "My contacts",
+                        "icon": "far fa-folder",
+                        "visibility": "everyone",
+                        "isDefault": true,
+                        "canEdit": false,
+                        "pinned": true,
+                        "filterState": {
+                          "basicFilters": [
+                            {
+                              "type": "condition",
+                              "id": "ownerId",
+                              "property": "ownerId",
+                              "operator": "is_any_of",
+                              "value": [
+                                "__me__"
+                              ]
+                            }
+                          ],
+                          "advancedFilters": [],
+                          "rootConnector": "and"
+                        },
+                        "sort": {
+                          "field": "createdAt",
+                          "order": -1
+                        },
+                        "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_contact_my_contacts"
+                      },
+                      {
+                        "id": "evw_A1B2C3ExAmPlE9xYz",
+                        "name": "Hot leads in Paris",
+                        "icon": "far fa-fire",
+                        "visibility": "me",
+                        "isDefault": false,
+                        "canEdit": true,
+                        "pinned": true,
+                        "filterState": {
+                          "basicFilters": [
+                            {
+                              "type": "condition",
+                              "id": "ExAmPlE1A2B3C4D5E",
+                              "property": "ownerId",
+                              "operator": "is_any_of",
+                              "value": [
+                                "__me__"
+                              ]
+                            },
+                            {
+                              "type": "condition",
+                              "id": "FakeA1B2C3D4E5F6G",
+                              "property": "location",
+                              "operator": "contains",
+                              "value": "Paris"
+                            }
+                          ],
+                          "advancedFilters": []
+                        },
+                        "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_A1B2C3ExAmPlE9xYz"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or unknown \u0060entity\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "That list\u0027s views are not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Views of this list are not enabled for this team",
+                  "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "Create View",
+        "description": "Creates a view on one list for the API key\u0027s user and pins it on their tabs.\n\nEach condition is checked against [Get View Fields](/api-reference/endpoints/views/get-view-fields): an unknown field, an operator the field does not offer or a value it does not accept answers \u0060400\u0060 with \u0060ENTITY_VIEW_INVALID_FILTER\u0060, and the message names the field and what it takes. Without \u0060filters\u0060, the view shows every record.\n\n\u0060visibility: \u0022everyone\u0022\u0060 shares the view with the team and needs the \u0022Create views for the team\u0022 permission. A scope (the user\u0027s private views, the team\u0027s shared views) holds up to 200 views.\n\nThe API does not set the sort or the columns: the view opens with the page\u0027s default sort and the user\u0027s columns, both editable in lemlist.",
+        "operationId": "CreateView",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateViewRequest"
+              },
+              "example": {
+                "entity": "contact",
+                "name": "Hot leads in Paris",
+                "icon": "far fa-fire",
+                "visibility": "me",
+                "filters": {
+                  "connector": "and",
+                  "conditions": [
+                    {
+                      "property": "ownerId",
+                      "operator": "is_any_of",
+                      "value": [
+                        "__me__"
+                      ]
+                    },
+                    {
+                      "property": "contactScore",
+                      "operator": "gte",
+                      "value": 5
+                    },
+                    {
+                      "property": "createdAt",
+                      "operator": "is_relative",
+                      "value": {
+                        "mode": "last",
+                        "amount": 30,
+                        "unit": "day"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "View created and pinned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewRefResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "evw_A1B2C3ExAmPlE9xYz",
+                    "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_A1B2C3ExAmPlE9xYz"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body: an unknown key, a value out of bounds, an unsafe or empty name, or an invalid filter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "examples": {
+                  "VALIDATION_ERROR": {
+                    "value": {
+                      "error": "Validation error",
+                      "code": "VALIDATION_ERROR"
+                    }
+                  },
+                  "WRONG_PARAM_SAFE_STRING": {
+                    "value": {
+                      "error": "Parameter is not a safe string",
+                      "code": "WRONG_PARAM_SAFE_STRING"
+                    }
+                  },
+                  "ENTITY_VIEW_NAME_REQUIRED": {
+                    "value": {
+                      "error": "View name is required",
+                      "code": "ENTITY_VIEW_NAME_REQUIRED"
+                    }
+                  },
+                  "ENTITY_VIEW_INVALID_FILTER": {
+                    "value": {
+                      "error": "Invalid filter on \u0022contactScore\u0022: operator must be one of eq, neq, gt, lt, gte, lte, is_between, is_empty, is_not_empty",
+                      "code": "ENTITY_VIEW_INVALID_FILTER"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "That list\u0027s views are not enabled for your team, or \u0060visibility: \u0022everyone\u0022\u0060 without the \u0022Create views for the team\u0022 permission",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "examples": {
+                  "ENTITY_VIEW_ENTITY_UNAVAILABLE": {
+                    "value": {
+                      "error": "Views of this list are not enabled for this team",
+                      "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                    }
+                  },
+                  "ENTITY_VIEW_TEAM_NOT_ALLOWED": {
+                    "value": {
+                      "error": "You do not have the permission to edit views shared with the team",
+                      "code": "ENTITY_VIEW_TEAM_NOT_ALLOWED"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The scope already holds 200 views",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Maximum number of views reached",
+                  "code": "ENTITY_VIEW_LIMIT_REACHED"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "View created and pinned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewRefResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "evw_A1B2C3ExAmPlE9xYz",
+                    "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_A1B2C3ExAmPlE9xYz"
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
+          }
+        }
+      }
+    },
+    "/views/fields": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "Get View Fields",
+        "description": "Lists the fields a view of that list can filter on: the filters the page offers, the team\u0027s custom fields included, each with its type and operators. Fields the page only offers with a connected CRM are left out when the team has none.\n\n\u0060options\u0060 lists the values a field accepts when the page lists them (statuses, picklist values): send an option\u0027s \u0060value\u0060, not its \u0060label\u0060. On a user, list or campaign field, \u0060options\u0060 holds only the special values (such as \u0060__me__\u0060, the user viewing the list) and the field also takes record ids.",
+        "operationId": "GetViewFields",
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "query",
+            "description": "The list: \u0060contact\u0060 (Contacts page), \u0060company\u0060 (Companies page) or \u0060task\u0060 (Tasks page)",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ViewEntity"
+            },
+            "example": "contact"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetViewFields200Response"
+                },
+                "example": {
+                  "data": {
+                    "fields": [
+                      {
+                        "id": "ownerId",
+                        "label": "Contact owner",
+                        "type": "enum",
+                        "operators": [
+                          "is",
+                          "is_not",
+                          "is_any_of",
+                          "is_none_of",
+                          "is_empty",
+                          "is_not_empty"
+                        ],
+                        "options": [
+                          {
+                            "value": "__me__",
+                            "label": "My contacts"
+                          },
+                          {
+                            "value": "__teammates__",
+                            "label": "Teammates\u0027 contacts"
+                          },
+                          {
+                            "value": "__unassigned__",
+                            "label": "Unassigned"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "contactScore",
+                        "label": "Contact score",
+                        "type": "number",
+                        "operators": [
+                          "eq",
+                          "neq",
+                          "gt",
+                          "lt",
+                          "gte",
+                          "lte",
+                          "is_between",
+                          "is_empty",
+                          "is_not_empty"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or unknown \u0060entity\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "That list\u0027s views are not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Views of this list are not enabled for this team",
+                  "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/views/tabs": {
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "Set View Tabs",
+        "description": "Sets the API key user\u0027s tabs on one list: the views in \u0060pinned\u0060 show as tabs, in that order. Every other view is hidden from the tabs, not deleted, and stays in the views panel. Tabs are personal: other members keep theirs.\n\nEvery id must be one of the views the user sees on that list, default views included; a repeated id counts once.",
+        "operationId": "SetViewTabs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetViewTabsRequest"
+              },
+              "example": {
+                "entity": "contact",
+                "pinned": [
+                  "evw_A1B2C3ExAmPlE9xYz",
+                  "evw_contact_my_contacts"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Tabs saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetViewTabs200Response"
+                },
+                "example": {
+                  "data": {
+                    "pinned": [
+                      "evw_A1B2C3ExAmPlE9xYz",
+                      "evw_contact_my_contacts"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "That list\u0027s views are not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Views of this list are not enabled for this team",
+                  "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An id is not one of the views the user sees on that list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "View not found",
+                  "code": "ENTITY_VIEW_NOT_FOUND"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/views/{viewId}": {
+      "patch": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "Update View",
+        "description": "Renames a view, changes its icon or its visibility, or replaces its filters. Omitted fields keep their value.\n\n\u0060filters\u0060 replace all the current filters, checked as on create; the sort and the columns saved in lemlist are kept.\n\nDefault views (\u0060isDefault: true\u0060) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the \u0022Create views for the team\u0022 permission.",
+        "operationId": "UpdateView",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateViewRequest"
+              },
+              "example": {
+                "entity": "contact",
+                "name": "Hot leads in Lyon",
+                "filters": {
+                  "conditions": [
+                    {
+                      "property": "location",
+                      "operator": "contains",
+                      "value": "Lyon"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "View updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewRefResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "evw_A1B2C3ExAmPlE9xYz",
+                    "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_A1B2C3ExAmPlE9xYz"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body: an unknown key, a value out of bounds, an unsafe or empty name, or an invalid filter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "examples": {
+                  "VALIDATION_ERROR": {
+                    "value": {
+                      "error": "Validation error",
+                      "code": "VALIDATION_ERROR"
+                    }
+                  },
+                  "WRONG_PARAM_SAFE_STRING": {
+                    "value": {
+                      "error": "Parameter is not a safe string",
+                      "code": "WRONG_PARAM_SAFE_STRING"
+                    }
+                  },
+                  "ENTITY_VIEW_NAME_REQUIRED": {
+                    "value": {
+                      "error": "View name is required",
+                      "code": "ENTITY_VIEW_NAME_REQUIRED"
+                    }
+                  },
+                  "ENTITY_VIEW_INVALID_FILTER": {
+                    "value": {
+                      "error": "Invalid filter on \u0022contactScore\u0022: operator must be one of eq, neq, gt, lt, gte, lte, is_between, is_empty, is_not_empty",
+                      "code": "ENTITY_VIEW_INVALID_FILTER"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "A default view, a team view without the \u0022Create views for the team\u0022 permission, or that list\u0027s views are not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "examples": {
+                  "ENTITY_VIEW_FORBIDDEN": {
+                    "value": {
+                      "error": "You are not allowed to edit this view",
+                      "code": "ENTITY_VIEW_FORBIDDEN"
+                    }
+                  },
+                  "ENTITY_VIEW_TEAM_NOT_ALLOWED": {
+                    "value": {
+                      "error": "You do not have the permission to edit views shared with the team",
+                      "code": "ENTITY_VIEW_TEAM_NOT_ALLOWED"
+                    }
+                  },
+                  "ENTITY_VIEW_ENTITY_UNAVAILABLE": {
+                    "value": {
+                      "error": "Views of this list are not enabled for this team",
+                      "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such view among the ones the API key user sees on that list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "View not found",
+                  "code": "ENTITY_VIEW_NOT_FOUND"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "Delete View",
+        "description": "Permanently deletes a view for everyone who sees it: a view shared with the team leaves every member\u0027s tabs. There is no undo.\n\nDefault views cannot be deleted: hide one from the tabs with [Set View Tabs](/api-reference/endpoints/views/set-view-tabs) instead. Deleting a view shared with the team needs the \u0022Create views for the team\u0022 permission.",
+        "operationId": "DeleteView",
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "query",
+            "description": "The list: \u0060contact\u0060 (Contacts page), \u0060company\u0060 (Companies page) or \u0060task\u0060 (Tasks page)",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ViewEntity"
+            },
+            "example": "contact"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "View deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteView200Response"
+                },
+                "example": {
+                  "data": {
+                    "id": "evw_A1B2C3ExAmPlE9xYz",
+                    "deleted": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or unknown \u0060entity\u0060",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "A default view, a team view without the \u0022Create views for the team\u0022 permission, or that list\u0027s views are not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "examples": {
+                  "ENTITY_VIEW_FORBIDDEN": {
+                    "value": {
+                      "error": "You are not allowed to edit this view",
+                      "code": "ENTITY_VIEW_FORBIDDEN"
+                    }
+                  },
+                  "ENTITY_VIEW_TEAM_NOT_ALLOWED": {
+                    "value": {
+                      "error": "You do not have the permission to edit views shared with the team",
+                      "code": "ENTITY_VIEW_TEAM_NOT_ALLOWED"
+                    }
+                  },
+                  "ENTITY_VIEW_ENTITY_UNAVAILABLE": {
+                    "value": {
+                      "error": "Views of this list are not enabled for this team",
+                      "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such view among the ones the API key user sees on that list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "View not found",
+                  "code": "ENTITY_VIEW_NOT_FOUND"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "viewId",
+          "in": "path",
+          "description": "Id of the view, from [List Views](/api-reference/endpoints/views/list-views)",
+          "required": true,
+          "schema": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string"
+          },
+          "example": "evw_A1B2C3ExAmPlE9xYz"
+        }
+      ]
+    },
+    "/views/{viewId}/duplicate": {
+      "post": {
+        "tags": [
+          "Views"
+        ],
+        "summary": "Duplicate View",
+        "description": "Copies a view into a private view of the API key\u0027s user, named after the source with \u0060 copy\u0060 appended, pinned on their tabs. The copy keeps the filters, the sort and the columns. Default views can be copied, which is how to change one.",
+        "operationId": "DuplicateView",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateViewRequest"
+              },
+              "example": {
+                "entity": "contact"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Copy created and pinned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateView201Response"
+                },
+                "example": {
+                  "data": {
+                    "id": "evw_Fake7Kq2Wz9xA1B2C",
+                    "name": "My contacts copy",
+                    "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_Fake7Kq2Wz9xA1B2C"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Validation error",
+                  "code": "VALIDATION_ERROR"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key. An API key with no user attached answers \u0060{ \u0022error\u0022: \u0022Route unauthorized\u0022, \u0022code\u0022: \u0022ROUTE_UNAUTHORIZED\u0022 }\u0060 in JSON instead.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "403": {
+            "description": "That list\u0027s views are not enabled for your team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Views of this list are not enabled for this team",
+                  "code": "ENTITY_VIEW_ENTITY_UNAVAILABLE"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such view among the ones the API key user sees on that list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "View not found",
+                  "code": "ENTITY_VIEW_NOT_FOUND"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The user\u0027s private views already number 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewError"
+                },
+                "example": {
+                  "error": "Maximum number of views reached",
+                  "code": "ENTITY_VIEW_LIMIT_REACHED"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Copy created and pinned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateView201Response"
+                },
+                "example": {
+                  "data": {
+                    "id": "evw_Fake7Kq2Wz9xA1B2C",
+                    "name": "My contacts copy",
+                    "url": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_Fake7Kq2Wz9xA1B2C"
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "viewId",
+          "in": "path",
+          "description": "Id of the view, from [List Views](/api-reference/endpoints/views/list-views)",
+          "required": true,
+          "schema": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string"
+          },
+          "example": "evw_A1B2C3ExAmPlE9xYz"
+        }
+      ]
     }
   },
   "components": {
@@ -32930,6 +34115,335 @@
         },
         "description": "A mailbox bought on a lemlist domain."
       },
+      "ViewEntity": {
+        "enum": [
+          "contact",
+          "company",
+          "task"
+        ],
+        "type": "string",
+        "description": "The list a view belongs to: \u0060contact\u0060 (Contacts page), \u0060company\u0060 (Companies page) or \u0060task\u0060 (Tasks page)",
+        "example": "contact",
+        "x-ms-enum": {
+          "name": "ViewEntity",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            },
+            {
+              "value": "task",
+              "name": "Task"
+            }
+          ]
+        }
+      },
+      "ViewIcon": {
+        "enum": [
+          "far fa-folder",
+          "far fa-list-check",
+          "far fa-star",
+          "far fa-flag",
+          "far fa-bolt",
+          "far fa-bullseye",
+          "far fa-calendar",
+          "far fa-user",
+          "far fa-phone",
+          "far fa-fire",
+          "far fa-reply",
+          "far fa-plane-departure",
+          "far fa-triangle-exclamation",
+          "far fa-circle-check"
+        ],
+        "type": "string",
+        "description": "Font Awesome icon shown on the tab. Defaults to \u0060far fa-folder\u0060 on create.",
+        "example": "far fa-fire",
+        "x-ms-enum": {
+          "name": "ViewIcon",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "far fa-folder",
+              "name": "FarFaFolder"
+            },
+            {
+              "value": "far fa-list-check",
+              "name": "FarFaListCheck"
+            },
+            {
+              "value": "far fa-star",
+              "name": "FarFaStar"
+            },
+            {
+              "value": "far fa-flag",
+              "name": "FarFaFlag"
+            },
+            {
+              "value": "far fa-bolt",
+              "name": "FarFaBolt"
+            },
+            {
+              "value": "far fa-bullseye",
+              "name": "FarFaBullseye"
+            },
+            {
+              "value": "far fa-calendar",
+              "name": "FarFaCalendar"
+            },
+            {
+              "value": "far fa-user",
+              "name": "FarFaUser"
+            },
+            {
+              "value": "far fa-phone",
+              "name": "FarFaPhone"
+            },
+            {
+              "value": "far fa-fire",
+              "name": "FarFaFire"
+            },
+            {
+              "value": "far fa-reply",
+              "name": "FarFaReply"
+            },
+            {
+              "value": "far fa-plane-departure",
+              "name": "FarFaPlaneDeparture"
+            },
+            {
+              "value": "far fa-triangle-exclamation",
+              "name": "FarFaTriangleExclamation"
+            },
+            {
+              "value": "far fa-circle-check",
+              "name": "FarFaCircleCheck"
+            }
+          ]
+        }
+      },
+      "ViewVisibility": {
+        "enum": [
+          "me",
+          "everyone"
+        ],
+        "type": "string",
+        "description": "\u0060me\u0060: private to its owner. \u0060everyone\u0060: shared with the team, which needs the \u0022Create views for the team\u0022 permission. Defaults to \u0060me\u0060 on create.",
+        "example": "me",
+        "x-ms-enum": {
+          "name": "ViewVisibility",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "me",
+              "name": "Me"
+            },
+            {
+              "value": "everyone",
+              "name": "Everyone"
+            }
+          ]
+        }
+      },
+      "ViewCondition": {
+        "required": [
+          "property",
+          "operator"
+        ],
+        "type": "object",
+        "properties": {
+          "property": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string",
+            "description": "Field id, from [Get View Fields](/api-reference/endpoints/views/get-view-fields) (\u0060fields[].id\u0060)",
+            "example": "contactScore"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/ViewConditionOperator"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ViewConditionValue"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One filter condition of a view."
+      },
+      "ViewFiltersInput": {
+        "required": [
+          "conditions"
+        ],
+        "type": "object",
+        "properties": {
+          "connector": {
+            "$ref": "#/components/schemas/ViewFiltersInputConnector"
+          },
+          "conditions": {
+            "maxItems": 30,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewCondition"
+            },
+            "description": "Up to 30 conditions; an empty list shows every record"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A view\u0027s filters. On update, they replace all the current filters.",
+        "example": {
+          "connector": "and",
+          "conditions": [
+            {
+              "property": "ownerId",
+              "operator": "is_any_of",
+              "value": [
+                "__me__"
+              ]
+            },
+            {
+              "property": "contactScore",
+              "operator": "gte",
+              "value": 5
+            },
+            {
+              "property": "createdAt",
+              "operator": "is_relative",
+              "value": {
+                "mode": "last",
+                "amount": 30,
+                "unit": "day"
+              }
+            }
+          ]
+        }
+      },
+      "View": {
+        "required": [
+          "id",
+          "name",
+          "visibility",
+          "isDefault",
+          "canEdit",
+          "pinned",
+          "filterState",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "View id",
+            "example": "evw_A1B2C3ExAmPlE9xYz"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name shown on the tab",
+            "example": "Hot leads in Paris"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Font Awesome icon shown on the tab",
+            "example": "far fa-fire"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/ViewVisibility"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "A lemlist default view, read-only: it can be pinned, hidden or duplicated"
+          },
+          "canEdit": {
+            "type": "boolean",
+            "description": "Whether the API key\u0027s user may edit or delete it"
+          },
+          "pinned": {
+            "type": "boolean",
+            "description": "Shown as one of the user\u0027s tabs"
+          },
+          "filterState": {
+            "$ref": "#/components/schemas/ViewFilterState"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/ViewSort"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewColumnsItem"
+            },
+            "description": "The visible columns saved in lemlist, in order; absent when the view follows the user\u0027s columns"
+          },
+          "url": {
+            "type": "string",
+            "description": "Opens the list on that view in lemlist",
+            "example": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_A1B2C3ExAmPlE9xYz"
+          }
+        },
+        "description": "A saved view of the Contacts, Companies or Tasks list: a named set of filters, shown as a tab."
+      },
+      "ViewField": {
+        "required": [
+          "id",
+          "label",
+          "type",
+          "operators"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Field id, sent as \u0060property\u0060 in a condition",
+            "example": "contactScore"
+          },
+          "label": {
+            "type": "string",
+            "description": "Label shown in the filter picker",
+            "example": "Contact score"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ViewFieldType"
+          },
+          "operators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewFieldOperatorsItem"
+            }
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewFieldOptionsItem"
+            },
+            "description": "Accepted values, when the page lists them"
+          }
+        },
+        "description": "A field a view can filter on."
+      },
+      "ViewRefResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ViewRefResponseData"
+          }
+        }
+      },
+      "ViewError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable explanation of the failure"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases"
+          }
+        },
+        "description": "Error envelope returned by the views endpoints."
+      },
       "WatchListFilterInItem": {
         "oneOf": [
           {
@@ -32949,6 +34463,90 @@
         },
         "additionalProperties": false,
         "description": "Only on custom waterfalls; a default waterfall applies to every contact not matched by a custom one."
+      },
+      "ViewConditionValue": {
+        "oneOf": [
+          {
+            "maxLength": 400,
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "maxItems": 50,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewConditionValueOneOf3Item"
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ViewConditionValueRange"
+          },
+          {
+            "$ref": "#/components/schemas/ViewConditionValueRelativeDate"
+          }
+        ],
+        "description": "Shaped by the operator and the field type:\n\n- no value for \u0060is_empty\u0060, \u0060is_not_empty\u0060, \u0060is_true\u0060, \u0060is_false\u0060, \u0060is_not_true\u0060, \u0060is_not_false\u0060;\n- a list of 1 to 50 values for \u0060is_any_of\u0060, \u0060is_none_of\u0060, \u0060contains_any_of\u0060, \u0060contains_all_of\u0060, also accepted on a text field for \u0060contains\u0060, \u0060does_not_contain\u0060, \u0060starts_with\u0060, \u0060ends_with\u0060 (matching any of them);\n- \u0060{ \u0022from\u0022, \u0022to\u0022 }\u0060 for \u0060is_between\u0060, one side may be omitted;\n- \u0060{ \u0022mode\u0022, \u0022amount\u0022, \u0022unit\u0022 }\u0060 for \u0060is_relative\u0060, with \u0060mode\u0060 among \u0060this\u0060, \u0060last\u0060, \u0060next\u0060, \u0060past\u0060 and \u0060unit\u0060 among \u0060day\u0060, \u0060week\u0060, \u0060month\u0060, \u0060quarter\u0060, \u0060year\u0060;\n- one value otherwise: a number on a number field, an ISO 8601 date (\u0060YYYY-MM-DD\u0060) or date-time with offset on a date field, a string on the others.\n\nA field listing \u0060options\u0060 takes their \u0060value\u0060. A user, list or campaign field takes record ids: user ids from [Get Team](/api-reference/endpoints/team/get-team), list ids from [Get Contact Lists](/api-reference/endpoints/contacts/get-contact-lists) or [Get Company Lists](/api-reference/endpoints/companies/get-company-lists), campaign ids from [Get Many Campaigns](/api-reference/endpoints/campaigns/get-many-campaigns).",
+        "example": 5
+      },
+      "ViewConditionValueOneOf3Item": {
+        "oneOf": [
+          {
+            "maxLength": 400,
+            "type": "string"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "ViewConditionValueRange": {
+        "title": "Range",
+        "type": "object",
+        "properties": {
+          "from": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      "ViewConditionValueRelativeDate": {
+        "title": "Relative date",
+        "required": [
+          "mode",
+          "unit"
+        ],
+        "type": "object",
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/ViewConditionValueRelativeDateMode"
+          },
+          "amount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/ViewConditionValueRelativeDateUnit"
+          }
+        }
       },
       "LeadV2Enrichment": {
         "type": "object",
@@ -35279,6 +36877,82 @@
           }
         }
       },
+      "ViewFilterState": {
+        "type": "object",
+        "properties": {
+          "basicFilters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilterStateBasicFiltersItem"
+            }
+          },
+          "advancedFilters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilterStateAdvancedFiltersItem"
+            }
+          },
+          "rootConnector": {
+            "$ref": "#/components/schemas/ViewFilterStateRootConnector"
+          }
+        },
+        "description": "The filters as the page saved them. \u0060basicFilters\u0060 are AND-ed conditions; \u0060advancedFilters\u0060 is a tree of conditions and groups combined by \u0060rootConnector\u0060."
+      },
+      "ViewSort": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "example": "createdAt"
+          },
+          "order": {
+            "$ref": "#/components/schemas/ViewSortOrder"
+          }
+        },
+        "description": "The sort saved in lemlist, absent when the view uses the page default"
+      },
+      "ViewColumnsItem": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Pinned to the left of the table"
+          }
+        }
+      },
+      "ViewFieldOptionsItem": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "ViewRefResponseData": {
+        "required": [
+          "id",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the view",
+            "example": "evw_A1B2C3ExAmPlE9xYz"
+          },
+          "url": {
+            "type": "string",
+            "description": "Opens the list on that view",
+            "example": "https://app.lemlist.com/teams/tea_ExAmPlE4f7Kq2Wz9x/lemcrm/contacts?view=evw_A1B2C3ExAmPlE9xYz"
+          }
+        }
+      },
       "CrmIdLinkErrorEnvelopeErrorConflictingRecord": {
         "type": "object",
         "properties": {
@@ -35839,6 +37513,70 @@
           },
           "provider": {
             "$ref": "#/components/schemas/SenderPictureSyncResponseDataMailboxesItemProvider"
+          }
+        }
+      },
+      "ViewFilterStateBasicFiltersItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ViewFilterStateBasicFiltersItemType"
+          },
+          "id": {
+            "type": "string",
+            "description": "Node id, unique within the view"
+          },
+          "property": {
+            "type": "string",
+            "description": "Condition only: the field id, see \u0060ViewField.id\u0060"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/ViewFilterStateBasicFiltersItemOperator"
+          },
+          "value": {
+            "description": "Condition only: the value, shaped as in \u0060ViewCondition.value\u0060"
+          },
+          "connector": {
+            "$ref": "#/components/schemas/ViewFilterStateBasicFiltersItemConnector"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilterStateBasicFiltersItemChildrenItemProperty"
+            },
+            "description": "Group only: its nodes, of this same shape"
+          }
+        }
+      },
+      "ViewFilterStateAdvancedFiltersItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ViewFilterStateAdvancedFiltersItemType"
+          },
+          "id": {
+            "type": "string",
+            "description": "Node id, unique within the view"
+          },
+          "property": {
+            "type": "string",
+            "description": "Condition only: the field id, see \u0060ViewField.id\u0060"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/ViewFilterStateAdvancedFiltersItemOperator"
+          },
+          "value": {
+            "description": "Condition only: the value, shaped as in \u0060ViewCondition.value\u0060"
+          },
+          "connector": {
+            "$ref": "#/components/schemas/ViewFilterStateAdvancedFiltersItemConnector"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilterStateAdvancedFiltersItemChildrenItemProperty"
+            },
+            "description": "Group only: its nodes, of this same shape"
           }
         }
       },
@@ -37155,6 +38893,10 @@
           },
           "message": {
             "type": "string"
+          },
+          "plainText": {
+            "type": "boolean",
+            "description": "Present and true when the email step is sent as plain text: \u0060message\u0060 then holds raw text with line breaks, not HTML. Absent on an HTML step. Read-only: the step body does not accept it."
           },
           "title": {
             "type": "string",
@@ -41039,6 +42781,58 @@
           }
         }
       },
+      "PostCompaniesByCompanyIdEngage200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PostCompaniesByCompanyIdEngage200ResponseData"
+          }
+        }
+      },
+      "PostCompaniesByCompanyIdEngage400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesByCompanyIdEngage403Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesByCompanyIdEngage404Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "PostCompaniesByCompanyIdEngage409Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
       "DeleteActivitiesByActivityIdRecordingTranscript200Response": {
         "type": "object",
         "properties": {
@@ -41954,6 +43748,61 @@
           },
           "whatsapp": {
             "$ref": "#/components/schemas/GetUserChannels200ResponseWhatsapp"
+          }
+        }
+      },
+      "GetUserSendingSettings200Response": {
+        "type": "object",
+        "properties": {
+          "emailAccounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUserSendingSettings200ResponseEmailAccountsItem"
+            }
+          },
+          "bcc": {
+            "type": "string",
+            "description": "BCC address of the authenticated user, \u0060null\u0060 when not set",
+            "nullable": true
+          }
+        }
+      },
+      "PatchUserSendingSettingsRequest": {
+        "required": [
+          "emailAccounts"
+        ],
+        "type": "object",
+        "properties": {
+          "emailAccounts": {
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatchUserSendingSettingsRequestEmailAccountsItem"
+            }
+          }
+        }
+      },
+      "PatchUserSendingSettings200Response": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Number of email accounts processed"
+          },
+          "succeeded": {
+            "type": "integer",
+            "description": "Number of email accounts updated"
+          },
+          "failed": {
+            "type": "integer",
+            "description": "Number of email accounts not updated"
+          },
+          "emailAccounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatchUserSendingSettings200ResponseEmailAccountsItem"
+            }
           }
         }
       },
@@ -43433,6 +45282,138 @@
           }
         }
       },
+      "ListViews200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ListViews200ResponseData"
+          }
+        }
+      },
+      "CreateViewRequest": {
+        "required": [
+          "entity",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/ViewEntity"
+          },
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name shown on the tab, 1 to 80 characters after trimming.",
+            "example": "Hot leads in Paris"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/ViewIcon"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/ViewVisibility"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/ViewFiltersInput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetViewFields200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GetViewFields200ResponseData"
+          }
+        }
+      },
+      "SetViewTabsRequest": {
+        "required": [
+          "entity",
+          "pinned"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/ViewEntity"
+          },
+          "pinned": {
+            "maxItems": 200,
+            "type": "array",
+            "items": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string"
+            },
+            "description": "Ids of the views to show as tabs, in tab order"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetViewTabs200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SetViewTabs200ResponseData"
+          }
+        }
+      },
+      "UpdateViewRequest": {
+        "required": [
+          "entity"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/ViewEntity"
+          },
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name shown on the tab, 1 to 80 characters after trimming.",
+            "example": "Hot leads in Paris"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/ViewIcon"
+          },
+          "visibility": {
+            "$ref": "#/components/schemas/ViewVisibility"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/ViewFiltersInput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteView200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DeleteView200ResponseData"
+          }
+        }
+      },
+      "DuplicateViewRequest": {
+        "required": [
+          "entity"
+        ],
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/ViewEntity"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DuplicateView201Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DuplicateView201ResponseData"
+          }
+        }
+      },
       "PatchSelfRecoveryConfig200Response": {
         "type": "object",
         "properties": {
@@ -44462,6 +46443,12 @@
           "other": "0",
           "sales": "1"
         }
+      },
+      "ViewFilterStateBasicFiltersItemChildrenItemProperty": {
+        "type": "object"
+      },
+      "ViewFilterStateAdvancedFiltersItemChildrenItemProperty": {
+        "type": "object"
       },
       "GetSelfRecoveryConfig200ResponseConfig": {
         "type": "object",
@@ -46087,6 +48074,20 @@
           }
         }
       },
+      "PostCompaniesByCompanyIdEngage200ResponseData": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string"
+          },
+          "created": {
+            "type": "boolean"
+          },
+          "shouldReviewLeads": {
+            "type": "boolean"
+          }
+        }
+      },
       "PostCalls400ResponseError": {
         "type": "object",
         "properties": {
@@ -46400,6 +48401,66 @@
             "items": {
               "$ref": "#/components/schemas/GetUserChannels200ResponseWhatsappAccountsItem"
             }
+          }
+        }
+      },
+      "GetUserSendingSettings200ResponseEmailAccountsItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Email account identifier"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address"
+          },
+          "dailyEmailLimit": {
+            "type": "integer",
+            "description": "Maximum number of emails sent per day from this account"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Owner of the email account. Only returned with \u0060scope=team\u0060."
+          }
+        }
+      },
+      "PatchUserSendingSettingsRequestEmailAccountsItem": {
+        "required": [
+          "id",
+          "dailyEmailLimit"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Email account identifier, from \u0060GET /user/sending-settings\u0060"
+          },
+          "dailyEmailLimit": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Maximum number of emails sent per day from this account. \u00600\u0060 pauses sending."
+          }
+        }
+      },
+      "PatchUserSendingSettings200ResponseEmailAccountsItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Email account identifier"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Whether the limit was applied"
+          },
+          "dailyEmailLimit": {
+            "type": "integer",
+            "description": "Limit actually applied, after the trial cap. Only on success."
+          },
+          "error": {
+            "type": "string",
+            "description": "Why the limit was not applied. Only on failure."
           }
         }
       },
@@ -47029,6 +49090,87 @@
           },
           "assignToUser": {
             "type": "string"
+          }
+        }
+      },
+      "ListViews200ResponseData": {
+        "required": [
+          "views"
+        ],
+        "type": "object",
+        "properties": {
+          "views": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/View"
+            }
+          }
+        }
+      },
+      "GetViewFields200ResponseData": {
+        "required": [
+          "fields"
+        ],
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewField"
+            }
+          }
+        }
+      },
+      "SetViewTabs200ResponseData": {
+        "required": [
+          "pinned"
+        ],
+        "type": "object",
+        "properties": {
+          "pinned": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The tabs, in order"
+          }
+        }
+      },
+      "DeleteView200ResponseData": {
+        "required": [
+          "id",
+          "deleted"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the deleted view"
+          },
+          "deleted": {
+            "$ref": "#/components/schemas/DeleteView200ResponseDataDeleted"
+          }
+        }
+      },
+      "DuplicateView201ResponseData": {
+        "required": [
+          "id",
+          "name",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the copy"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the copy"
+          },
+          "url": {
+            "type": "string",
+            "description": "Opens the list on the copy"
           }
         }
       },
@@ -47839,6 +49981,10 @@
           "message": {
             "type": "string",
             "description": "The message content for the step (plain text for LinkedIn, HTML for email)"
+          },
+          "plainText": {
+            "type": "boolean",
+            "description": "Present and true when the email step is sent as plain text: \u0060message\u0060 then holds raw text with line breaks, not HTML. Absent on an HTML step. Read-only: the step body does not accept it."
           },
           "subject": {
             "type": "string",
@@ -52499,6 +54645,446 @@
           ]
         }
       },
+      "ViewConditionOperator": {
+        "enum": [
+          "contains",
+          "does_not_contain",
+          "is",
+          "is_not",
+          "starts_with",
+          "ends_with",
+          "is_empty",
+          "is_not_empty",
+          "eq",
+          "neq",
+          "gt",
+          "lt",
+          "gte",
+          "lte",
+          "is_between",
+          "is_before",
+          "is_after",
+          "is_on_or_before",
+          "is_on_or_after",
+          "is_relative",
+          "is_any_of",
+          "is_none_of",
+          "contains_any_of",
+          "contains_all_of",
+          "is_true",
+          "is_false",
+          "is_not_true",
+          "is_not_false"
+        ],
+        "type": "string",
+        "description": "One of the operators that field offers (\u0060fields[].operators\u0060)",
+        "example": "gte",
+        "x-ms-enum": {
+          "name": "ViewConditionOperator",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contains",
+              "name": "Contains"
+            },
+            {
+              "value": "does_not_contain",
+              "name": "DoesNotContain"
+            },
+            {
+              "value": "is",
+              "name": "IsValue"
+            },
+            {
+              "value": "is_not",
+              "name": "IsNot"
+            },
+            {
+              "value": "starts_with",
+              "name": "StartsWith"
+            },
+            {
+              "value": "ends_with",
+              "name": "EndsWith"
+            },
+            {
+              "value": "is_empty",
+              "name": "IsEmpty"
+            },
+            {
+              "value": "is_not_empty",
+              "name": "IsNotEmpty"
+            },
+            {
+              "value": "eq",
+              "name": "Eq"
+            },
+            {
+              "value": "neq",
+              "name": "Neq"
+            },
+            {
+              "value": "gt",
+              "name": "Gt"
+            },
+            {
+              "value": "lt",
+              "name": "Lt"
+            },
+            {
+              "value": "gte",
+              "name": "Gte"
+            },
+            {
+              "value": "lte",
+              "name": "Lte"
+            },
+            {
+              "value": "is_between",
+              "name": "IsBetween"
+            },
+            {
+              "value": "is_before",
+              "name": "IsBefore"
+            },
+            {
+              "value": "is_after",
+              "name": "IsAfter"
+            },
+            {
+              "value": "is_on_or_before",
+              "name": "IsOnOrBefore"
+            },
+            {
+              "value": "is_on_or_after",
+              "name": "IsOnOrAfter"
+            },
+            {
+              "value": "is_relative",
+              "name": "IsRelative"
+            },
+            {
+              "value": "is_any_of",
+              "name": "IsAnyOf"
+            },
+            {
+              "value": "is_none_of",
+              "name": "IsNoneOf"
+            },
+            {
+              "value": "contains_any_of",
+              "name": "ContainsAnyOf"
+            },
+            {
+              "value": "contains_all_of",
+              "name": "ContainsAllOf"
+            },
+            {
+              "value": "is_true",
+              "name": "IsTrue"
+            },
+            {
+              "value": "is_false",
+              "name": "IsFalse"
+            },
+            {
+              "value": "is_not_true",
+              "name": "IsNotTrue"
+            },
+            {
+              "value": "is_not_false",
+              "name": "IsNotFalse"
+            }
+          ]
+        }
+      },
+      "ViewFiltersInputConnector": {
+        "enum": [
+          "and",
+          "or"
+        ],
+        "type": "string",
+        "description": "How the conditions combine",
+        "x-ms-enum": {
+          "name": "ViewFiltersInputConnector",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "and",
+              "name": "And"
+            },
+            {
+              "value": "or",
+              "name": "Or"
+            }
+          ]
+        }
+      },
+      "ViewFieldType": {
+        "enum": [
+          "text",
+          "number",
+          "date",
+          "enum",
+          "tags",
+          "boolean",
+          "relation"
+        ],
+        "type": "string",
+        "description": "Shapes the condition value",
+        "x-ms-enum": {
+          "name": "ViewFieldType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "number",
+              "name": "Number"
+            },
+            {
+              "value": "date",
+              "name": "Date"
+            },
+            {
+              "value": "enum",
+              "name": "EnumValue"
+            },
+            {
+              "value": "tags",
+              "name": "Tags"
+            },
+            {
+              "value": "boolean",
+              "name": "Boolean"
+            },
+            {
+              "value": "relation",
+              "name": "Relation"
+            }
+          ]
+        }
+      },
+      "ViewFieldOperatorsItem": {
+        "enum": [
+          "contains",
+          "does_not_contain",
+          "is",
+          "is_not",
+          "starts_with",
+          "ends_with",
+          "is_empty",
+          "is_not_empty",
+          "eq",
+          "neq",
+          "gt",
+          "lt",
+          "gte",
+          "lte",
+          "is_between",
+          "is_before",
+          "is_after",
+          "is_on_or_before",
+          "is_on_or_after",
+          "is_relative",
+          "is_any_of",
+          "is_none_of",
+          "contains_any_of",
+          "contains_all_of",
+          "is_true",
+          "is_false",
+          "is_not_true",
+          "is_not_false"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ViewFieldOperatorsItem",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contains",
+              "name": "Contains"
+            },
+            {
+              "value": "does_not_contain",
+              "name": "DoesNotContain"
+            },
+            {
+              "value": "is",
+              "name": "IsValue"
+            },
+            {
+              "value": "is_not",
+              "name": "IsNot"
+            },
+            {
+              "value": "starts_with",
+              "name": "StartsWith"
+            },
+            {
+              "value": "ends_with",
+              "name": "EndsWith"
+            },
+            {
+              "value": "is_empty",
+              "name": "IsEmpty"
+            },
+            {
+              "value": "is_not_empty",
+              "name": "IsNotEmpty"
+            },
+            {
+              "value": "eq",
+              "name": "Eq"
+            },
+            {
+              "value": "neq",
+              "name": "Neq"
+            },
+            {
+              "value": "gt",
+              "name": "Gt"
+            },
+            {
+              "value": "lt",
+              "name": "Lt"
+            },
+            {
+              "value": "gte",
+              "name": "Gte"
+            },
+            {
+              "value": "lte",
+              "name": "Lte"
+            },
+            {
+              "value": "is_between",
+              "name": "IsBetween"
+            },
+            {
+              "value": "is_before",
+              "name": "IsBefore"
+            },
+            {
+              "value": "is_after",
+              "name": "IsAfter"
+            },
+            {
+              "value": "is_on_or_before",
+              "name": "IsOnOrBefore"
+            },
+            {
+              "value": "is_on_or_after",
+              "name": "IsOnOrAfter"
+            },
+            {
+              "value": "is_relative",
+              "name": "IsRelative"
+            },
+            {
+              "value": "is_any_of",
+              "name": "IsAnyOf"
+            },
+            {
+              "value": "is_none_of",
+              "name": "IsNoneOf"
+            },
+            {
+              "value": "contains_any_of",
+              "name": "ContainsAnyOf"
+            },
+            {
+              "value": "contains_all_of",
+              "name": "ContainsAllOf"
+            },
+            {
+              "value": "is_true",
+              "name": "IsTrue"
+            },
+            {
+              "value": "is_false",
+              "name": "IsFalse"
+            },
+            {
+              "value": "is_not_true",
+              "name": "IsNotTrue"
+            },
+            {
+              "value": "is_not_false",
+              "name": "IsNotFalse"
+            }
+          ]
+        }
+      },
+      "ViewConditionValueRelativeDateMode": {
+        "enum": [
+          "this",
+          "last",
+          "next",
+          "past"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ViewConditionValueRelativeDateMode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "this",
+              "name": "ThisValue"
+            },
+            {
+              "value": "last",
+              "name": "Last"
+            },
+            {
+              "value": "next",
+              "name": "Next"
+            },
+            {
+              "value": "past",
+              "name": "Past"
+            }
+          ]
+        }
+      },
+      "ViewConditionValueRelativeDateUnit": {
+        "enum": [
+          "day",
+          "week",
+          "month",
+          "quarter",
+          "year"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ViewConditionValueRelativeDateUnit",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "day",
+              "name": "Day"
+            },
+            {
+              "value": "week",
+              "name": "Week"
+            },
+            {
+              "value": "month",
+              "name": "Month"
+            },
+            {
+              "value": "quarter",
+              "name": "Quarter"
+            },
+            {
+              "value": "year",
+              "name": "Year"
+            }
+          ]
+        }
+      },
       "CampaignSettingsGeneralUnsubscribeMode": {
         "enum": [
           "variable",
@@ -53338,6 +55924,35 @@
           ]
         }
       },
+      "ViewFilterStateRootConnector": {
+        "enum": [
+          "and",
+          "or"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ViewFilterStateRootConnector",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "and",
+              "name": "And"
+            },
+            {
+              "value": "or",
+              "name": "Or"
+            }
+          ]
+        }
+      },
+      "ViewSortOrder": {
+        "enum": [
+          1,
+          -1
+        ],
+        "type": "integer",
+        "description": "\u00601\u0060 ascending, \u0060-1\u0060 descending"
+      },
       "CampaignSettingsSendersEspRoutingGmail": {
         "enum": [
           "any",
@@ -53623,6 +56238,398 @@
             {
               "value": "m365",
               "name": "M365"
+            }
+          ]
+        }
+      },
+      "ViewFilterStateBasicFiltersItemType": {
+        "enum": [
+          "condition",
+          "group"
+        ],
+        "type": "string",
+        "description": "A condition or a group of nodes",
+        "x-ms-enum": {
+          "name": "ViewFilterStateBasicFiltersItemType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "condition",
+              "name": "Condition"
+            },
+            {
+              "value": "group",
+              "name": "Group"
+            }
+          ]
+        }
+      },
+      "ViewFilterStateBasicFiltersItemOperator": {
+        "enum": [
+          "contains",
+          "does_not_contain",
+          "is",
+          "is_not",
+          "starts_with",
+          "ends_with",
+          "is_empty",
+          "is_not_empty",
+          "eq",
+          "neq",
+          "gt",
+          "lt",
+          "gte",
+          "lte",
+          "is_between",
+          "is_before",
+          "is_after",
+          "is_on_or_before",
+          "is_on_or_after",
+          "is_relative",
+          "is_any_of",
+          "is_none_of",
+          "contains_any_of",
+          "contains_all_of",
+          "is_true",
+          "is_false",
+          "is_not_true",
+          "is_not_false"
+        ],
+        "type": "string",
+        "description": "Condition only",
+        "x-ms-enum": {
+          "name": "ViewFilterStateBasicFiltersItemOperator",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contains",
+              "name": "Contains"
+            },
+            {
+              "value": "does_not_contain",
+              "name": "DoesNotContain"
+            },
+            {
+              "value": "is",
+              "name": "IsValue"
+            },
+            {
+              "value": "is_not",
+              "name": "IsNot"
+            },
+            {
+              "value": "starts_with",
+              "name": "StartsWith"
+            },
+            {
+              "value": "ends_with",
+              "name": "EndsWith"
+            },
+            {
+              "value": "is_empty",
+              "name": "IsEmpty"
+            },
+            {
+              "value": "is_not_empty",
+              "name": "IsNotEmpty"
+            },
+            {
+              "value": "eq",
+              "name": "Eq"
+            },
+            {
+              "value": "neq",
+              "name": "Neq"
+            },
+            {
+              "value": "gt",
+              "name": "Gt"
+            },
+            {
+              "value": "lt",
+              "name": "Lt"
+            },
+            {
+              "value": "gte",
+              "name": "Gte"
+            },
+            {
+              "value": "lte",
+              "name": "Lte"
+            },
+            {
+              "value": "is_between",
+              "name": "IsBetween"
+            },
+            {
+              "value": "is_before",
+              "name": "IsBefore"
+            },
+            {
+              "value": "is_after",
+              "name": "IsAfter"
+            },
+            {
+              "value": "is_on_or_before",
+              "name": "IsOnOrBefore"
+            },
+            {
+              "value": "is_on_or_after",
+              "name": "IsOnOrAfter"
+            },
+            {
+              "value": "is_relative",
+              "name": "IsRelative"
+            },
+            {
+              "value": "is_any_of",
+              "name": "IsAnyOf"
+            },
+            {
+              "value": "is_none_of",
+              "name": "IsNoneOf"
+            },
+            {
+              "value": "contains_any_of",
+              "name": "ContainsAnyOf"
+            },
+            {
+              "value": "contains_all_of",
+              "name": "ContainsAllOf"
+            },
+            {
+              "value": "is_true",
+              "name": "IsTrue"
+            },
+            {
+              "value": "is_false",
+              "name": "IsFalse"
+            },
+            {
+              "value": "is_not_true",
+              "name": "IsNotTrue"
+            },
+            {
+              "value": "is_not_false",
+              "name": "IsNotFalse"
+            }
+          ]
+        }
+      },
+      "ViewFilterStateBasicFiltersItemConnector": {
+        "enum": [
+          "and",
+          "or"
+        ],
+        "type": "string",
+        "description": "Group only: how its children combine",
+        "x-ms-enum": {
+          "name": "ViewFilterStateBasicFiltersItemConnector",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "and",
+              "name": "And"
+            },
+            {
+              "value": "or",
+              "name": "Or"
+            }
+          ]
+        }
+      },
+      "ViewFilterStateAdvancedFiltersItemType": {
+        "enum": [
+          "condition",
+          "group"
+        ],
+        "type": "string",
+        "description": "A condition or a group of nodes",
+        "x-ms-enum": {
+          "name": "ViewFilterStateAdvancedFiltersItemType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "condition",
+              "name": "Condition"
+            },
+            {
+              "value": "group",
+              "name": "Group"
+            }
+          ]
+        }
+      },
+      "ViewFilterStateAdvancedFiltersItemOperator": {
+        "enum": [
+          "contains",
+          "does_not_contain",
+          "is",
+          "is_not",
+          "starts_with",
+          "ends_with",
+          "is_empty",
+          "is_not_empty",
+          "eq",
+          "neq",
+          "gt",
+          "lt",
+          "gte",
+          "lte",
+          "is_between",
+          "is_before",
+          "is_after",
+          "is_on_or_before",
+          "is_on_or_after",
+          "is_relative",
+          "is_any_of",
+          "is_none_of",
+          "contains_any_of",
+          "contains_all_of",
+          "is_true",
+          "is_false",
+          "is_not_true",
+          "is_not_false"
+        ],
+        "type": "string",
+        "description": "Condition only",
+        "x-ms-enum": {
+          "name": "ViewFilterStateAdvancedFiltersItemOperator",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contains",
+              "name": "Contains"
+            },
+            {
+              "value": "does_not_contain",
+              "name": "DoesNotContain"
+            },
+            {
+              "value": "is",
+              "name": "IsValue"
+            },
+            {
+              "value": "is_not",
+              "name": "IsNot"
+            },
+            {
+              "value": "starts_with",
+              "name": "StartsWith"
+            },
+            {
+              "value": "ends_with",
+              "name": "EndsWith"
+            },
+            {
+              "value": "is_empty",
+              "name": "IsEmpty"
+            },
+            {
+              "value": "is_not_empty",
+              "name": "IsNotEmpty"
+            },
+            {
+              "value": "eq",
+              "name": "Eq"
+            },
+            {
+              "value": "neq",
+              "name": "Neq"
+            },
+            {
+              "value": "gt",
+              "name": "Gt"
+            },
+            {
+              "value": "lt",
+              "name": "Lt"
+            },
+            {
+              "value": "gte",
+              "name": "Gte"
+            },
+            {
+              "value": "lte",
+              "name": "Lte"
+            },
+            {
+              "value": "is_between",
+              "name": "IsBetween"
+            },
+            {
+              "value": "is_before",
+              "name": "IsBefore"
+            },
+            {
+              "value": "is_after",
+              "name": "IsAfter"
+            },
+            {
+              "value": "is_on_or_before",
+              "name": "IsOnOrBefore"
+            },
+            {
+              "value": "is_on_or_after",
+              "name": "IsOnOrAfter"
+            },
+            {
+              "value": "is_relative",
+              "name": "IsRelative"
+            },
+            {
+              "value": "is_any_of",
+              "name": "IsAnyOf"
+            },
+            {
+              "value": "is_none_of",
+              "name": "IsNoneOf"
+            },
+            {
+              "value": "contains_any_of",
+              "name": "ContainsAnyOf"
+            },
+            {
+              "value": "contains_all_of",
+              "name": "ContainsAllOf"
+            },
+            {
+              "value": "is_true",
+              "name": "IsTrue"
+            },
+            {
+              "value": "is_false",
+              "name": "IsFalse"
+            },
+            {
+              "value": "is_not_true",
+              "name": "IsNotTrue"
+            },
+            {
+              "value": "is_not_false",
+              "name": "IsNotFalse"
+            }
+          ]
+        }
+      },
+      "ViewFilterStateAdvancedFiltersItemConnector": {
+        "enum": [
+          "and",
+          "or"
+        ],
+        "type": "string",
+        "description": "Group only: how its children combine",
+        "x-ms-enum": {
+          "name": "ViewFilterStateAdvancedFiltersItemConnector",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "and",
+              "name": "And"
+            },
+            {
+              "value": "or",
+              "name": "Or"
             }
           ]
         }
@@ -57654,6 +60661,12 @@
           ]
         }
       },
+      "DeleteView200ResponseDataDeleted": {
+        "enum": [
+          true
+        ],
+        "type": "boolean"
+      },
       "GetV2CampaignsByCampaignIdStats200ResponseStepsItemTaskType": {
         "enum": [
           "email",
@@ -59927,6 +62940,22 @@
           ]
         }
       },
+      "TeamScope": {
+        "enum": [
+          "team"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TeamScope",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "team",
+              "name": "Team"
+            }
+          ]
+        }
+      },
       "GetFieldsEntityParameter": {
         "enum": [
           "contact",
@@ -60911,6 +63940,10 @@
           "type": "string",
           "description": "Message content"
         },
+        "plainText": {
+          "type": "boolean",
+          "description": "Present and true when the email step is sent as plain text: \u0060body\u0060 then holds raw text with line breaks, not HTML. Absent on an HTML step. Read-only: the create and update requests do not accept it."
+        },
         "createdAt": {
           "type": "string",
           "description": "Creation timestamp",
@@ -61209,6 +64242,12 @@
         "other": "0",
         "sales": "1"
       }
+    },
+    "ViewFilterStateBasicFiltersItemChildrenItem": {
+      "type": "object"
+    },
+    "ViewFilterStateAdvancedFiltersItemChildrenItem": {
+      "type": "object"
     },
     "GetTeamSenders200Response": {
       "type": "array",

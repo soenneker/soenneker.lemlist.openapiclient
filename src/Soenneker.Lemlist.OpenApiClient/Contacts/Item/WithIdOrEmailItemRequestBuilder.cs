@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteContactsByIdOrEmail200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.
+        /// Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.The `fields` object may contain multi-line values with line breaks (`\n`) for multi-line text custom fields.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.Contact"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -119,7 +119,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item
             return requestInfo;
         }
         /// <summary>
-        /// Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.
+        /// Retrieves a contact by its lemlist id (`ctc_xxx`) or email address. The path does not take a CRM record id: use `GET /contacts?crmIds=` for that.The `fields` object may contain multi-line values with line breaks (`\n`) for multi-line text custom fields.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

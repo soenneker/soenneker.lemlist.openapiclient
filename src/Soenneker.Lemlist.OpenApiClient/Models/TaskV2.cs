@@ -289,7 +289,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(25)
             {
                 { "assignedTo", n => { AssignedTo = n.GetStringValue(); } },
                 { "campaign", n => { Campaign = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.TaskV2Campaign>(global::Soenneker.Lemlist.OpenApiClient.Models.TaskV2Campaign.CreateFromDiscriminatorValue); } },

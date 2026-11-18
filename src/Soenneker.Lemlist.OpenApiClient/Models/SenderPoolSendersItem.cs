@@ -104,7 +104,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolSendersItemChannelsItem>(global::Soenneker.Lemlist.OpenApiClient.Models.SenderPoolSendersItemChannelsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "diagnostics", n => { Diagnostics = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SenderDiagnostic>(global::Soenneker.Lemlist.OpenApiClient.Models.SenderDiagnostic.CreateFromDiscriminatorValue)?.AsList(); } },

@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Lemlist.OpenApiClient.User.Channels;
 using Soenneker.Lemlist.OpenApiClient.User.EmailAccounts;
+using Soenneker.Lemlist.OpenApiClient.User.SendingSettings;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace Soenneker.Lemlist.OpenApiClient.User
         public global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.EmailAccountsRequestBuilder EmailAccounts
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.User.EmailAccounts.EmailAccountsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The sendingSettings property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.User.SendingSettings.SendingSettingsRequestBuilder SendingSettings
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.User.SendingSettings.SendingSettingsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.User.UserRequestBuilder"/> and sets the default values.

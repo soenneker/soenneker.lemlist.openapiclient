@@ -189,7 +189,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(12)
             {
                 { "aiFeatures", n => { AiFeatures = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsAiFeatures>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsAiFeatures.CreateFromDiscriminatorValue); } },
                 { "automation", n => { Automation = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsAutomation>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsAutomation.CreateFromDiscriminatorValue); } },

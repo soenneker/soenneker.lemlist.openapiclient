@@ -65,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteLeadsByEmailVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.
+        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.Values may contain line breaks (`\n`) — for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a `\n` is rendered as `&lt;br&gt;` (kept native in LinkedIn/SMS).
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -96,7 +96,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PatchLeadsByEmailVariables200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Add custom variables to a lead and sets values for that specific lead.
+        /// Add custom variables to a lead and sets values for that specific lead.Values may contain line breaks (`\n`) — for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a `\n` is rendered as `&lt;br&gt;` (kept native in LinkedIn/SMS).
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsByEmailVariables200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -146,7 +146,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             return requestInfo;
         }
         /// <summary>
-        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.
+        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.Values may contain line breaks (`\n`) — for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a `\n` is rendered as `&lt;br&gt;` (kept native in LinkedIn/SMS).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -165,7 +165,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
             return requestInfo;
         }
         /// <summary>
-        /// Add custom variables to a lead and sets values for that specific lead.
+        /// Add custom variables to a lead and sets values for that specific lead.Values may contain line breaks (`\n`) — for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a `\n` is rendered as `&lt;br&gt;` (kept native in LinkedIn/SMS).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -230,7 +230,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
 #endif
         }
         /// <summary>
-        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.
+        /// Update values of custom variables for a lead. Default variables follow the Update Lead rules: they are written on the lead&apos;s contact and company as well, and `companyName` alone renames the company the lead is linked to.Values may contain line breaks (`\n`) — for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a `\n` is rendered as `&lt;br&gt;` (kept native in LinkedIn/SMS).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VariablesRequestBuilderPatchQueryParameters 
@@ -267,7 +267,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Item.Variables
 #endif
         }
         /// <summary>
-        /// Add custom variables to a lead and sets values for that specific lead.
+        /// Add custom variables to a lead and sets values for that specific lead.Values may contain line breaks (`\n`) — for example for multi-line text custom fields. They are stored and returned as-is; in HTML emails a `\n` is rendered as `&lt;br&gt;` (kept native in LinkedIn/SMS).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VariablesRequestBuilderPostQueryParameters 

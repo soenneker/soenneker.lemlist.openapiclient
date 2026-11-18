@@ -372,7 +372,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(29)
             {
                 { "business_business_customer", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaBusinessBusinessCustomer>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueBusinessBusinessCustomer = default; _explicitNullProperties?.Remove("business_business_customer"); AdditionalData["business_business_customer"] = unknown; } else { BusinessBusinessCustomer = parsed; AdditionalData.Remove("business_business_customer"); } } },
                 { "company_description", n => { CompanyDescription = n.GetStringValue(); } },

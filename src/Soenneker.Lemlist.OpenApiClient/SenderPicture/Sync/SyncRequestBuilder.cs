@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.SenderPicture.Sync
         {
         }
         /// <summary>
-        /// Queues a push of a user&apos;s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.The push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).There is no confirmation step: the mailboxes are queued as soon as the call succeeds.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Queues a push of a user&apos;s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.The push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).There is no confirmation step: the mailboxes are queued as soon as the call succeeds.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.SenderPicture.Sync
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureSyncResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Queues a push of a user&apos;s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.The push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).There is no confirmation step: the mailboxes are queued as soon as the call succeeds.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Queues a push of a user&apos;s lemlist profile picture onto the Google Workspace and Microsoft 365 mailboxes they bought through lemlist, so recipients see it next to their emails.The push is asynchronous: the call only queues it. A background job processes the queue about every minute, and a Google Workspace mailbox takes a few tens of seconds more. Follow the progress with [Get Sender Picture Status](/api-reference/endpoints/sender-picture/get-sender-picture-status).There is no confirmation step: the mailboxes are queued as soon as the call succeeds.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

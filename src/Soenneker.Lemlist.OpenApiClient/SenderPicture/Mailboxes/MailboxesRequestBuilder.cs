@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.SenderPicture.Mailboxes
         {
         }
         /// <summary>
-        /// Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.Only active mailboxes assigned to the user are returned. Omit `userId` to read your own mailboxes; a teammate&apos;s `userId` must belong to your team.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.Only active mailboxes assigned to the user are returned. Omit `userId` to read your own mailboxes; a teammate&apos;s `userId` must belong to your team.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureStatusResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.SenderPicture.Mailboxes
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureStatusResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.SenderPictureStatusResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.Only active mailboxes assigned to the user are returned. Omit `userId` to read your own mailboxes; a teammate&apos;s `userId` must belong to your team.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.Only active mailboxes assigned to the user are returned. Omit `userId` to read your own mailboxes; a teammate&apos;s `userId` must belong to your team.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -93,7 +93,7 @@ namespace Soenneker.Lemlist.OpenApiClient.SenderPicture.Mailboxes
             return new global::Soenneker.Lemlist.OpenApiClient.SenderPicture.Mailboxes.MailboxesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.Only active mailboxes assigned to the user are returned. Omit `userId` to read your own mailboxes; a teammate&apos;s `userId` must belong to your team.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists the mailboxes a user bought through lemlist in your team, with whether their lemlist profile picture has been pushed to each one.Only active mailboxes assigned to the user are returned. Omit `userId` to read your own mailboxes; a teammate&apos;s `userId` must belong to your team.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class MailboxesRequestBuilderGetQueryParameters 
