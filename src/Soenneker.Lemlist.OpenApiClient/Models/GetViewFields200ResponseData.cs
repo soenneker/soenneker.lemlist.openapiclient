@@ -17,12 +17,24 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("columns") is null) { _explicitNullValueColumns = default!; _explicitNullProperties?.Remove("columns"); }
+            else if (parseNode.GetChildNode("columns") is { } nullNodeColumns && nullNodeColumns.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Columns = null;
             if (parseNode.GetChildNode("fields") is null) { _explicitNullValueFields = default!; _explicitNullProperties?.Remove("fields"); }
             else if (parseNode.GetChildNode("fields") is { } nullNodeFields && nullNodeFields.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Fields = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The columns property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn>? Columns { get => _explicitNullValueColumns; set { _explicitNullValueColumns = value; AdditionalData?.Remove("columns"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("columns"); else _explicitNullProperties?.Remove("columns"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn>? _explicitNullValueColumns = default!;
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn> Columns { get => _explicitNullValueColumns; set { _explicitNullValueColumns = value; AdditionalData?.Remove("columns"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("columns"); else _explicitNullProperties?.Remove("columns"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn> _explicitNullValueColumns = default!;
+#endif
         /// <summary>The fields property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -58,6 +70,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "columns", n => { Columns = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "fields", n => { Fields = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ViewField>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewField.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -68,6 +81,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumn>("columns", Columns);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ViewField>("fields", Fields);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

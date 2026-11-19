@@ -103,15 +103,15 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Shown as one of the user&apos;s tabs</summary>
         public bool? Pinned { get => _explicitNullValuePinned; set { _explicitNullValuePinned = value; AdditionalData?.Remove("pinned"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pinned"); else _explicitNullProperties?.Remove("pinned"); } }
         private bool? _explicitNullValuePinned = default!;
-        /// <summary>The sort saved in lemlist, absent when the view uses the page default</summary>
+        /// <summary>The sort saved in lemlist, absent when the view uses the page default. A sort saved from the lemlist extension may name a field that is not a column.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort? Sort { get => _explicitNullValueSort; set { _explicitNullValueSort = value; AdditionalData?.Remove("sort"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sort"); else _explicitNullProperties?.Remove("sort"); } }
-        private global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort? _explicitNullValueSort = default!;
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty? Sort { get => _explicitNullValueSort; set { _explicitNullValueSort = value; AdditionalData?.Remove("sort"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sort"); else _explicitNullProperties?.Remove("sort"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty? _explicitNullValueSort = default!;
 #nullable restore
 #else
-        public global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort Sort { get => _explicitNullValueSort; set { _explicitNullValueSort = value; AdditionalData?.Remove("sort"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sort"); else _explicitNullProperties?.Remove("sort"); } }
-        private global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort _explicitNullValueSort = default!;
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty Sort { get => _explicitNullValueSort; set { _explicitNullValueSort = value; AdditionalData?.Remove("sort"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sort"); else _explicitNullProperties?.Remove("sort"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty _explicitNullValueSort = default!;
 #endif
         /// <summary>Opens the list on that view in lemlist</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -159,7 +159,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "isDefault", n => { IsDefault = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "pinned", n => { Pinned = n.GetBoolValue(); } },
-                { "sort", n => { Sort = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort.CreateFromDiscriminatorValue); } },
+                { "sort", n => { Sort = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty.CreateFromDiscriminatorValue); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "visibility", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewVisibility>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueVisibility = default; _explicitNullProperties?.Remove("visibility"); AdditionalData["visibility"] = unknown; } else { Visibility = parsed; AdditionalData.Remove("visibility"); } } },
             };
@@ -179,7 +179,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteBoolValue("isDefault", IsDefault);
             writer.WriteStringValue("name", Name);
             writer.WriteBoolValue("pinned", Pinned);
-            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort>("sort", Sort);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewSortProperty>("sort", Sort);
             writer.WriteStringValue("url", Url);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewVisibility>("visibility", Visibility);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

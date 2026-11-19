@@ -17,6 +17,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm
     public partial class LemwarmRequestBuilder : BaseRequestBuilder
     {
         /// <summary>The errors property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Errors.ErrorsRequestBuilder Errors
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Errors.ErrorsRequestBuilder(PathParameters, RequestAdapter);

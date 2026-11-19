@@ -75,7 +75,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>The catalogued cause. Absent when the stored code is not catalogued yet; `code` then holds the raw value.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.WarmupErrorKey? Key { get => _explicitNullValueKey; set { _explicitNullValueKey = value; AdditionalData?.Remove("key"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("key"); else _explicitNullProperties?.Remove("key"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.WarmupErrorKey? _explicitNullValueKey = default!;
-        /// <summary>The user mailbox id. Use it as `userMailboxId` to resume warmup with [Start lemwarm](/api-reference/endpoints/lemwarm/start-lemwarm).</summary>
+        /// <summary>The user mailbox id. Use it as `userMailboxId` to resume warmup with [Start lemwarm](/api-reference/endpoints/warmup/start-warmup).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MailboxId { get => _explicitNullValueMailboxId; set { _explicitNullValueMailboxId = value; AdditionalData?.Remove("mailboxId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mailboxId"); else _explicitNullProperties?.Remove("mailboxId"); } }

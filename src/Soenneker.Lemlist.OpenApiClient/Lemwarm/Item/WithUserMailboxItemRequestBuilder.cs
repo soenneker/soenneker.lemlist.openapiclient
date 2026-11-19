@@ -18,16 +18,19 @@ namespace Soenneker.Lemlist.OpenApiClient.Lemwarm.Item
     public partial class WithUserMailboxItemRequestBuilder : BaseRequestBuilder
     {
         /// <summary>The pause property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Pause.PauseRequestBuilder Pause
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Pause.PauseRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The settings property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.SettingsRequestBuilder Settings
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Settings.SettingsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The start property</summary>
+        [Obsolete("")]
         public global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start.StartRequestBuilder Start
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Lemwarm.Item.Start.StartRequestBuilder(PathParameters, RequestAdapter);

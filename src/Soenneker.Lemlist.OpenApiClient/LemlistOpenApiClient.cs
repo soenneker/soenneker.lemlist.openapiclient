@@ -36,6 +36,7 @@ using Soenneker.Lemlist.OpenApiClient.User;
 using Soenneker.Lemlist.OpenApiClient.Users;
 using Soenneker.Lemlist.OpenApiClient.V2;
 using Soenneker.Lemlist.OpenApiClient.Views;
+using Soenneker.Lemlist.OpenApiClient.Warmup;
 using Soenneker.Lemlist.OpenApiClient.Watchlist;
 using System.Collections.Generic;
 using System.IO;
@@ -198,6 +199,11 @@ namespace Soenneker.Lemlist.OpenApiClient
         public global::Soenneker.Lemlist.OpenApiClient.Views.ViewsRequestBuilder Views
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.Views.ViewsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The warmup property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Warmup.WarmupRequestBuilder Warmup
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.Warmup.WarmupRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The watchlist property</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Watchlist.WatchlistRequestBuilder Watchlist

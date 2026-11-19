@@ -50,12 +50,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("phoneProvider") is { } nullNodePhoneProvider && nullNodePhoneProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PhoneProvider = null;
             if (parseNode.GetChildNode("provider") is null) { _explicitNullValueProvider = default!; _explicitNullProperties?.Remove("provider"); }
             else if (parseNode.GetChildNode("provider") is { } nullNodeProvider && nullNodeProvider.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Provider = null;
+            if (parseNode.GetChildNode("recordingUrl") is null) { _explicitNullValueRecordingUrl = default!; _explicitNullProperties?.Remove("recordingUrl"); }
+            else if (parseNode.GetChildNode("recordingUrl") is { } nullNodeRecordingUrl && nullNodeRecordingUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecordingUrl = null;
             if (parseNode.GetChildNode("startedAt") is null) { _explicitNullValueStartedAt = default!; _explicitNullProperties?.Remove("startedAt"); }
             else if (parseNode.GetChildNode("startedAt") is { } nullNodeStartedAt && nullNodeStartedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartedAt = null;
             if (parseNode.GetChildNode("taskId") is null) { _explicitNullValueTaskId = default!; _explicitNullProperties?.Remove("taskId"); }
             else if (parseNode.GetChildNode("taskId") is { } nullNodeTaskId && nullNodeTaskId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TaskId = null;
             if (parseNode.GetChildNode("to") is null) { _explicitNullValueTo = default!; _explicitNullProperties?.Remove("to"); }
             else if (parseNode.GetChildNode("to") is { } nullNodeTo && nullNodeTo.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) To = null;
+            if (parseNode.GetChildNode("transcriptUrl") is null) { _explicitNullValueTranscriptUrl = default!; _explicitNullProperties?.Remove("transcriptUrl"); }
+            else if (parseNode.GetChildNode("transcriptUrl") is { } nullNodeTranscriptUrl && nullNodeTranscriptUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TranscriptUrl = null;
             if (parseNode.GetChildNode("userId") is null) { _explicitNullValueUserId = default!; _explicitNullProperties?.Remove("userId"); }
             else if (parseNode.GetChildNode("userId") is { } nullNodeUserId && nullNodeUserId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserId = null;
         }
@@ -180,6 +184,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Provider { get => _explicitNullValueProvider; set { _explicitNullValueProvider = value; AdditionalData?.Remove("provider"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("provider"); else _explicitNullProperties?.Remove("provider"); } }
         private string _explicitNullValueProvider = default!;
 #endif
+        /// <summary>A signed link to download the recording (MP3), valid 24 hours: read the call again for a fresh one. `null` until the recording is stored in lemlist.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RecordingUrl { get => _explicitNullValueRecordingUrl; set { _explicitNullValueRecordingUrl = value; AdditionalData?.Remove("recordingUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recordingUrl"); else _explicitNullProperties?.Remove("recordingUrl"); } }
+        private string? _explicitNullValueRecordingUrl = default!;
+#nullable restore
+#else
+        public string RecordingUrl { get => _explicitNullValueRecordingUrl; set { _explicitNullValueRecordingUrl = value; AdditionalData?.Remove("recordingUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recordingUrl"); else _explicitNullProperties?.Remove("recordingUrl"); } }
+        private string _explicitNullValueRecordingUrl = default!;
+#endif
         /// <summary>The startedAt property</summary>
         public DateTimeOffset? StartedAt { get => _explicitNullValueStartedAt; set { _explicitNullValueStartedAt = value; AdditionalData?.Remove("startedAt"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("startedAt"); else _explicitNullProperties?.Remove("startedAt"); } }
         private DateTimeOffset? _explicitNullValueStartedAt = default!;
@@ -202,6 +216,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string To { get => _explicitNullValueTo; set { _explicitNullValueTo = value; AdditionalData?.Remove("to"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("to"); else _explicitNullProperties?.Remove("to"); } }
         private string _explicitNullValueTo = default!;
+#endif
+        /// <summary>A signed link to download the transcript, valid 24 hours: a JSON `{ text, utterances }`. `null` without a transcript.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TranscriptUrl { get => _explicitNullValueTranscriptUrl; set { _explicitNullValueTranscriptUrl = value; AdditionalData?.Remove("transcriptUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("transcriptUrl"); else _explicitNullProperties?.Remove("transcriptUrl"); } }
+        private string? _explicitNullValueTranscriptUrl = default!;
+#nullable restore
+#else
+        public string TranscriptUrl { get => _explicitNullValueTranscriptUrl; set { _explicitNullValueTranscriptUrl = value; AdditionalData?.Remove("transcriptUrl"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("transcriptUrl"); else _explicitNullProperties?.Remove("transcriptUrl"); } }
+        private string _explicitNullValueTranscriptUrl = default!;
 #endif
         /// <summary>The rep the call is attributed to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -236,7 +260,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(20)
+            return new Dictionary<string, Action<IParseNode>>(22)
             {
                 { "callStatus", n => { CallStatus = n.GetStringValue(); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
@@ -254,9 +278,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "note", n => { Note = n.GetStringValue(); } },
                 { "phoneProvider", n => { PhoneProvider = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
+                { "recordingUrl", n => { RecordingUrl = n.GetStringValue(); } },
                 { "startedAt", n => { StartedAt = n.GetDateTimeOffsetValue(); } },
                 { "taskId", n => { TaskId = n.GetStringValue(); } },
                 { "to", n => { To = n.GetStringValue(); } },
+                { "transcriptUrl", n => { TranscriptUrl = n.GetStringValue(); } },
                 { "userId", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -283,9 +309,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("note", Note);
             writer.WriteStringValue("phoneProvider", PhoneProvider);
             writer.WriteStringValue("provider", Provider);
+            writer.WriteStringValue("recordingUrl", RecordingUrl);
             writer.WriteDateTimeOffsetValue("startedAt", StartedAt);
             writer.WriteStringValue("taskId", TaskId);
             writer.WriteStringValue("to", To);
+            writer.WriteStringValue("transcriptUrl", TranscriptUrl);
             writer.WriteStringValue("userId", UserId);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

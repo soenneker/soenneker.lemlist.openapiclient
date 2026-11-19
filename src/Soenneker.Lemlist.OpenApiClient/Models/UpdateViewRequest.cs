@@ -17,6 +17,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("columns") is null) { _explicitNullValueColumns = default!; _explicitNullProperties?.Remove("columns"); }
+            else if (parseNode.GetChildNode("columns") is { } nullNodeColumns && nullNodeColumns.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Columns = null;
             if (parseNode.GetChildNode("entity") is null) { _explicitNullValueEntity = default!; _explicitNullProperties?.Remove("entity"); }
             else if (parseNode.GetChildNode("entity") is { } nullNodeEntity && nullNodeEntity.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Entity = null;
             if (parseNode.GetChildNode("filters") is null) { _explicitNullValueFilters = default!; _explicitNullProperties?.Remove("filters"); }
@@ -25,10 +27,22 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("icon") is { } nullNodeIcon && nullNodeIcon.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Icon = null;
             if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
             else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("sort") is null) { _explicitNullValueSort = default!; _explicitNullProperties?.Remove("sort"); }
+            else if (parseNode.GetChildNode("sort") is { } nullNodeSort && nullNodeSort.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sort = null;
             if (parseNode.GetChildNode("visibility") is null) { _explicitNullValueVisibility = default!; _explicitNullProperties?.Remove("visibility"); }
             else if (parseNode.GetChildNode("visibility") is { } nullNodeVisibility && nullNodeVisibility.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Visibility = null;
         }
 
+        /// <summary>Task views only: the visible columns, in order. A column left out is hidden, except the two the Tasks page always shows (task type and title, associated record).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput>? Columns { get => _explicitNullValueColumns; set { _explicitNullValueColumns = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("columns"); else _explicitNullProperties?.Remove("columns"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput>? _explicitNullValueColumns = default!;
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput> Columns { get => _explicitNullValueColumns; set { _explicitNullValueColumns = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("columns"); else _explicitNullProperties?.Remove("columns"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput> _explicitNullValueColumns = default!;
+#endif
         /// <summary>The list a view belongs to: `contact` (Contacts page), `company` (Companies page) or `task` (Tasks page)</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.ViewEntity? Entity { get => _explicitNullValueEntity; set { _explicitNullValueEntity = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("entity"); else _explicitNullProperties?.Remove("entity"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.ViewEntity? _explicitNullValueEntity = default!;
@@ -55,6 +69,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
+        /// <summary>Task views only: the sort, on one column. Without it, the view uses the page default sort (due date).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort? Sort { get => _explicitNullValueSort; set { _explicitNullValueSort = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sort"); else _explicitNullProperties?.Remove("sort"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort? _explicitNullValueSort = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort Sort { get => _explicitNullValueSort; set { _explicitNullValueSort = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sort"); else _explicitNullProperties?.Remove("sort"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort _explicitNullValueSort = default!;
+#endif
         /// <summary>`me`: private to its owner. `everyone`: shared with the team, which needs the &quot;Create views for the team&quot; permission. Defaults to `me` on create.</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.ViewVisibility? Visibility { get => _explicitNullValueVisibility; set { _explicitNullValueVisibility = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("visibility"); else _explicitNullProperties?.Remove("visibility"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.ViewVisibility? _explicitNullValueVisibility = default!;
@@ -74,12 +98,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(5)
+            return new Dictionary<string, Action<IParseNode>>(7)
             {
+                { "columns", n => { Columns = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "entity", n => { Entity = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewEntity>(); } },
                 { "filters", n => { Filters = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewFiltersInput>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewFiltersInput.CreateFromDiscriminatorValue); } },
                 { "icon", n => { Icon = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewIcon>(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "sort", n => { Sort = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort>(global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort.CreateFromDiscriminatorValue); } },
                 { "visibility", n => { Visibility = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewVisibility>(); } },
             };
         }
@@ -90,10 +116,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.ViewColumnInput>("columns", Columns);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewEntity>("entity", Entity);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewFiltersInput>("filters", Filters);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewIcon>("icon", Icon);
             writer.WriteStringValue("name", Name);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewSort>("sort", Sort);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.ViewVisibility>("visibility", Visibility);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             
         }

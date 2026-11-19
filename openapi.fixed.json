@@ -4581,21 +4581,6 @@
                 "x-schema-inferred-from-examples": true
               }
             }
-          },
-          "403": {
-            "description": "\u0060end-sequence-not-allowed\u0060 - the \u0060endSequence\u0060 step is in beta and the team does not have access to it.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostSequencesBySequenceIdSteps403Response"
-                },
-                "example": {
-                  "error": "The End sequence step is not available yet",
-                  "code": "end-sequence-not-allowed"
-                },
-                "x-schema-inferred-from-examples": true
-              }
-            }
           }
         }
       },
@@ -16760,6 +16745,313 @@
         }
       }
     },
+    "/warmup/errors": {
+      "get": {
+        "tags": [
+          "warmup"
+        ],
+        "summary": "Get warmup errors",
+        "description": "Lists the mailboxes of your team that lemwarm keeps out of warmup, with the cause and the fix for each one. Paused mailboxes come first, then warnings (temporary locks), newest first. Healthy or manually paused mailboxes are not returned.",
+        "operationId": "GetWarmupErrors",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWarmupErrors200Response"
+                },
+                "example": {
+                  "data": {
+                    "errors": [
+                      {
+                        "mailboxId": "usm_e3nWbHTjBRBthLk19",
+                        "userId": "usr_8bQDChdW5vNy5XtIx",
+                        "email": "john@example.com",
+                        "state": "paused",
+                        "since": "2025-04-09T13:34:43.998Z",
+                        "key": "ERR_REP_10001",
+                        "code": "ERR_REP_10001",
+                        "family": "reputation",
+                        "action": "resume",
+                        "title": "Low sender reputation on john@example.com",
+                        "whatHappened": "Several warmup emails bounced because recipient email providers rated the reputation of this mailbox too low. lemwarm paused warmup to protect your domain.",
+                        "whatToCheck": "Your recent sending volume, bounce rate and content on this mailbox. Lower the warmup volume before resuming."
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "\u0060ROUTE_BAD_METHOD\u0060 - only GET is allowed"
+          }
+        }
+      }
+    },
+    "/warmup/{userMailboxId}/start": {
+      "post": {
+        "tags": [
+          "warmup"
+        ],
+        "summary": "Start warmup",
+        "operationId": "PostWarmupByUserMailboxIdStart",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWarmupByUserMailboxIdStart200Response"
+                },
+                "example": {
+                  "ok": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / Error from warmupToggle (invalid-usermailbox, invalid-sender, mailbox-deleted, emailWarmedByAnotherAccount, billing-error, etc.)",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "Bad team"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userMailboxId",
+          "in": "path",
+          "description": "The unique identifier of the user mailbox",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "usm_lKTsGYwbCoEhsp1Iz"
+        }
+      ]
+    },
+    "/warmup/{userMailboxId}/pause": {
+      "post": {
+        "tags": [
+          "warmup"
+        ],
+        "summary": "Pause warmup",
+        "operationId": "PostWarmupByUserMailboxIdPause",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWarmupByUserMailboxIdPause200Response"
+                },
+                "example": {
+                  "ok": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / Error from warmupToggle",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "Bad team"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userMailboxId",
+          "in": "path",
+          "description": "The unique identifier of the user mailbox",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "usm_lKTsGYwbCoEhsp1Iz"
+        }
+      ]
+    },
+    "/warmup/{userMailboxId}/settings": {
+      "get": {
+        "tags": [
+          "warmup"
+        ],
+        "summary": "Get warmup settings",
+        "operationId": "GetWarmupByUserMailboxIdSettings",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LemwarmSettings"
+                },
+                "example": {
+                  "warmEmailRampup": 5,
+                  "warmEmailMax": 5,
+                  "activeAt": "2025-04-10T07:38:31.530Z",
+                  "deliverability": {
+                    "score": 70,
+                    "lastAt": "2025-04-09T13:34:43.998Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / Error retrieving settings",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "Bad team"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "warmup"
+        ],
+        "summary": "Update warmup settings",
+        "operationId": "PatchWarmupByUserMailboxIdSettings",
+        "requestBody": {
+          "description": "Provide only the fields you want to change; omitted fields keep their current value. At least one field is required.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchWarmupByUserMailboxIdSettingsRequest"
+              },
+              "example": {
+                "warmEmailMax": 30,
+                "warmEmailRampup": 5,
+                "warmDailyVarianceEnabled": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatchWarmupByUserMailboxIdSettings200Response"
+                },
+                "example": {
+                  "ok": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Possible errors: Bad team / A provided field has the wrong type / Error updating settings",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "Bad team"
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                },
+                "example": "The authentication you supplied is incorrect"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userMailboxId",
+          "in": "path",
+          "description": "The unique identifier of the user mailbox",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "usm_lKTsGYwbCoEhsp1Iz"
+        }
+      ]
+    },
     "/lemwarm/errors": {
       "get": {
         "tags": [
@@ -16810,28 +17102,11 @@
               }
             }
           },
-          "403": {
-            "description": "\u0060BETA_NOT_ENABLED\u0060 - the warmup error guidance beta is not enabled for this team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetLemwarmErrors403Response"
-                },
-                "examples": {
-                  "betaNotEnabled": {
-                    "value": {
-                      "error": "Beta is not enabled",
-                      "code": "BETA_NOT_ENABLED"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "405": {
             "description": "\u0060ROUTE_BAD_METHOD\u0060 - only GET is allowed"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/lemwarm/{userMailboxId}/start": {
@@ -16880,7 +17155,8 @@
           "405": {
             "description": "Method not allowed"
           }
-        }
+        },
+        "deprecated": true
       },
       "parameters": [
         {
@@ -16941,7 +17217,8 @@
           "405": {
             "description": "Method not allowed"
           }
-        }
+        },
+        "deprecated": true
       },
       "parameters": [
         {
@@ -17008,7 +17285,8 @@
           "405": {
             "description": "Method not allowed"
           }
-        }
+        },
+        "deprecated": true
       },
       "patch": {
         "tags": [
@@ -17070,7 +17348,8 @@
           "405": {
             "description": "Method not allowed"
           }
-        }
+        },
+        "deprecated": true
       },
       "parameters": [
         {
@@ -19350,6 +19629,8 @@
                     "provider": "trellus",
                     "hasRecording": false,
                     "hasTranscript": true,
+                    "recordingUrl": null,
+                    "transcriptUrl": "https://storage.example.com/api-tea_1-trellus-123/transcription.json?X-Amz-Expires=86400\u0026X-Amz-Signature=\u2026",
                     "createdAt": "2026-10-21T09:30:00.000Z"
                   }
                 },
@@ -19629,6 +19910,8 @@
                     "provider": "trellus",
                     "hasRecording": true,
                     "hasTranscript": true,
+                    "recordingUrl": "https://storage.example.com/api-tea_1-trellus-123/recording.mp3?X-Amz-Expires=86400\u0026X-Amz-Signature=\u2026",
+                    "transcriptUrl": "https://storage.example.com/api-tea_1-trellus-123/transcription.json?X-Amz-Expires=86400\u0026X-Amz-Signature=\u2026",
                     "createdAt": "2026-10-21T09:30:00.000Z"
                   }
                 }
@@ -19789,6 +20072,8 @@
                     "provider": "trellus",
                     "hasRecording": false,
                     "hasTranscript": true,
+                    "recordingUrl": null,
+                    "transcriptUrl": "https://storage.example.com/api-tea_1-trellus-123/transcription.json?X-Amz-Expires=86400\u0026X-Amz-Signature=\u2026",
                     "createdAt": "2026-10-21T09:30:00.000Z"
                   }
                 }
@@ -26104,7 +26389,7 @@
           "Deliverability alerts"
         ],
         "summary": "List Deliverability Incidents",
-        "description": "Lists your team\u0027s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.\n\nAn incident stays \u0060active\u0060 until the issue clears, then becomes \u0060resolved\u0060 with a \u0060resolvedAt\u0060 date. Alert types turned off in your team\u0027s Notifications settings (Deliverability \u003E Alerts) are never returned. Resolved incidents are kept 90 days.\n\nThis endpoint is in closed beta and answers \u0060403\u0060 unless the beta is enabled for your team.",
+        "description": "Lists your team\u0027s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.\n\nAn incident stays \u0060active\u0060 until the issue clears, then becomes \u0060resolved\u0060 with a \u0060resolvedAt\u0060 date. Alert types turned off in your team\u0027s Notifications settings (Deliverability \u003E Alerts) are never returned. Resolved incidents are kept 90 days.",
         "operationId": "ListDeliverabilityIncidents",
         "parameters": [
           {
@@ -26226,20 +26511,6 @@
                 "example": {
                   "error": "Route unauthorized",
                   "code": "ROUTE_UNAUTHORIZED"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The beta is not enabled for your team",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeliverabilityIncidentError"
-                },
-                "example": {
-                  "error": "Beta is not enabled",
-                  "code": "BETA_NOT_ENABLED"
                 }
               }
             }
@@ -28630,7 +28901,7 @@
           "Views"
         ],
         "summary": "Create View",
-        "description": "Creates a view on one list for the API key\u0027s user and pins it on their tabs.\n\nEach condition is checked against [Get View Fields](/api-reference/endpoints/views/get-view-fields): an unknown field, an operator the field does not offer or a value it does not accept answers \u0060400\u0060 with \u0060ENTITY_VIEW_INVALID_FILTER\u0060, and the message names the field and what it takes. Without \u0060filters\u0060, the view shows every record.\n\n\u0060visibility: \u0022everyone\u0022\u0060 shares the view with the team and needs the \u0022Create views for the team\u0022 permission. A scope (the user\u0027s private views, the team\u0027s shared views) holds up to 200 views.\n\nThe API does not set the sort or the columns: the view opens with the page\u0027s default sort and the user\u0027s columns, both editable in lemlist.",
+        "description": "Creates a view on one list for the API key\u0027s user and pins it on their tabs.\n\nEach condition is checked against [Get View Fields](/api-reference/endpoints/views/get-view-fields): an unknown field, an operator the field does not offer or a value it does not accept answers \u0060400\u0060 with \u0060ENTITY_VIEW_INVALID_FILTER\u0060, and the message names the field and what it takes. Without \u0060filters\u0060, the view shows every record.\n\n\u0060visibility: \u0022everyone\u0022\u0060 shares the view with the team and needs the \u0022Create views for the team\u0022 permission. A scope (the user\u0027s private views, the team\u0027s shared views) holds up to 200 views.\n\nOn a task view, \u0060sort\u0060 and \u0060columns\u0060 take the columns [Get View Fields](/api-reference/endpoints/views/get-view-fields) lists: a sort on a column that is not \u0060sortable\u0060, or a column the Tasks page does not offer, answers \u0060400\u0060 with \u0060ENTITY_VIEW_INVALID_SORT\u0060 or \u0060ENTITY_VIEW_INVALID_COLUMNS\u0060, and the message names the column and why. Contact and company views do not take them yet. Without them, the view uses the page\u0027s default sort (due date) and the user\u0027s own columns.",
         "operationId": "CreateView",
         "requestBody": {
           "content": {
@@ -28638,36 +28909,85 @@
               "schema": {
                 "$ref": "#/components/schemas/CreateViewRequest"
               },
-              "example": {
-                "entity": "contact",
-                "name": "Hot leads in Paris",
-                "icon": "far fa-fire",
-                "visibility": "me",
-                "filters": {
-                  "connector": "and",
-                  "conditions": [
-                    {
-                      "property": "ownerId",
-                      "operator": "is_any_of",
-                      "value": [
-                        "__me__"
+              "examples": {
+                "contact": {
+                  "summary": "A contact view",
+                  "value": {
+                    "entity": "contact",
+                    "name": "Hot leads in Paris",
+                    "icon": "far fa-fire",
+                    "visibility": "me",
+                    "filters": {
+                      "connector": "and",
+                      "conditions": [
+                        {
+                          "property": "ownerId",
+                          "operator": "is_any_of",
+                          "value": [
+                            "__me__"
+                          ]
+                        },
+                        {
+                          "property": "contactScore",
+                          "operator": "gte",
+                          "value": 5
+                        },
+                        {
+                          "property": "createdAt",
+                          "operator": "is_relative",
+                          "value": {
+                            "mode": "last",
+                            "amount": 30,
+                            "unit": "day"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "task": {
+                  "summary": "A task view with its sort and columns",
+                  "value": {
+                    "entity": "task",
+                    "name": "My calls",
+                    "filters": {
+                      "conditions": [
+                        {
+                          "property": "owner",
+                          "operator": "is_any_of",
+                          "value": [
+                            "__me__"
+                          ]
+                        },
+                        {
+                          "property": "type",
+                          "operator": "is_any_of",
+                          "value": [
+                            "aircall"
+                          ]
+                        }
                       ]
                     },
-                    {
-                      "property": "contactScore",
-                      "operator": "gte",
-                      "value": 5
+                    "sort": {
+                      "field": "createdAt",
+                      "order": 1
                     },
-                    {
-                      "property": "createdAt",
-                      "operator": "is_relative",
-                      "value": {
-                        "mode": "last",
-                        "amount": 30,
-                        "unit": "day"
+                    "columns": [
+                      {
+                        "field": "typeAndTitle",
+                        "locked": true
+                      },
+                      {
+                        "field": "createdAt"
+                      },
+                      {
+                        "field": "associatedRecord"
+                      },
+                      {
+                        "field": "contact.fields.industry"
                       }
-                    }
-                  ]
+                    ]
+                  }
                 }
               }
             }
@@ -28692,7 +29012,7 @@
             }
           },
           "400": {
-            "description": "Invalid body: an unknown key, a value out of bounds, an unsafe or empty name, or an invalid filter",
+            "description": "Invalid body: an unknown key, a value out of bounds, an unsafe or empty name, an invalid filter, sort or column",
             "content": {
               "application/json": {
                 "schema": {
@@ -28721,6 +29041,18 @@
                     "value": {
                       "error": "Invalid filter on \u0022contactScore\u0022: operator must be one of eq, neq, gt, lt, gte, lte, is_between, is_empty, is_not_empty",
                       "code": "ENTITY_VIEW_INVALID_FILTER"
+                    }
+                  },
+                  "ENTITY_VIEW_INVALID_SORT": {
+                    "value": {
+                      "error": "Invalid sort on \u0022dueDate\u0022: unknown column, see get_view_fields",
+                      "code": "ENTITY_VIEW_INVALID_SORT"
+                    }
+                  },
+                  "ENTITY_VIEW_INVALID_COLUMNS": {
+                    "value": {
+                      "error": "Invalid column \u0022contact.fields.title\u0022: unknown column, see get_view_fields",
+                      "code": "ENTITY_VIEW_INVALID_COLUMNS"
                     }
                   }
                 }
@@ -28802,7 +29134,7 @@
           "Views"
         ],
         "summary": "Get View Fields",
-        "description": "Lists the fields a view of that list can filter on: the filters the page offers, the team\u0027s custom fields included, each with its type and operators. Fields the page only offers with a connected CRM are left out when the team has none.\n\n\u0060options\u0060 lists the values a field accepts when the page lists them (statuses, picklist values): send an option\u0027s \u0060value\u0060, not its \u0060label\u0060. On a user, list or campaign field, \u0060options\u0060 holds only the special values (such as \u0060__me__\u0060, the user viewing the list) and the field also takes record ids.",
+        "description": "Lists the fields a view of that list can filter on: the filters the page offers, the team\u0027s custom fields included, each with its type and operators. Fields the page only offers with a connected CRM are left out when the team has none.\n\n\u0060options\u0060 lists the values a field accepts when the page lists them (statuses, picklist values): send an option\u0027s \u0060value\u0060, not its \u0060label\u0060. On a user, list or campaign field, \u0060options\u0060 holds only the special values (such as \u0060__me__\u0060, the user viewing the list) and the field also takes record ids.\n\n\u0060columns\u0060 lists the columns a task view can show, in the order of the Tasks page column picker: the base columns, then the contact, company and custom field columns. \u0060sortable\u0060 flags the ones a \u0060sort\u0060 can take. It is empty for contacts and companies, whose views do not take sort or columns yet.",
         "operationId": "GetViewFields",
         "parameters": [
           {
@@ -28824,53 +29156,122 @@
                 "schema": {
                   "$ref": "#/components/schemas/GetViewFields200Response"
                 },
-                "example": {
-                  "data": {
-                    "fields": [
-                      {
-                        "id": "ownerId",
-                        "label": "Contact owner",
-                        "type": "enum",
-                        "operators": [
-                          "is",
-                          "is_not",
-                          "is_any_of",
-                          "is_none_of",
-                          "is_empty",
-                          "is_not_empty"
+                "examples": {
+                  "contact": {
+                    "summary": "Contacts list",
+                    "value": {
+                      "data": {
+                        "fields": [
+                          {
+                            "id": "ownerId",
+                            "label": "Contact owner",
+                            "type": "enum",
+                            "operators": [
+                              "is",
+                              "is_not",
+                              "is_any_of",
+                              "is_none_of",
+                              "is_empty",
+                              "is_not_empty"
+                            ],
+                            "options": [
+                              {
+                                "value": "__me__",
+                                "label": "My contacts"
+                              },
+                              {
+                                "value": "__teammates__",
+                                "label": "Teammates\u0027 contacts"
+                              },
+                              {
+                                "value": "__unassigned__",
+                                "label": "Unassigned"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "contactScore",
+                            "label": "Contact score",
+                            "type": "number",
+                            "operators": [
+                              "eq",
+                              "neq",
+                              "gt",
+                              "lt",
+                              "gte",
+                              "lte",
+                              "is_between",
+                              "is_empty",
+                              "is_not_empty"
+                            ]
+                          }
                         ],
-                        "options": [
+                        "columns": []
+                      }
+                    }
+                  },
+                  "task": {
+                    "summary": "Tasks list",
+                    "value": {
+                      "data": {
+                        "fields": [
                           {
-                            "value": "__me__",
-                            "label": "My contacts"
+                            "id": "type",
+                            "label": "Task type",
+                            "type": "enum",
+                            "operators": [
+                              "is",
+                              "is_not",
+                              "is_any_of",
+                              "is_none_of",
+                              "is_empty",
+                              "is_not_empty"
+                            ],
+                            "options": [
+                              {
+                                "value": "aircall",
+                                "label": "Call"
+                              },
+                              {
+                                "value": "email",
+                                "label": "Email"
+                              },
+                              {
+                                "value": "linkedin",
+                                "label": "LinkedIn"
+                              }
+                            ]
+                          }
+                        ],
+                        "columns": [
+                          {
+                            "field": "typeAndTitle",
+                            "label": "Task type and title",
+                            "sortable": false
                           },
                           {
-                            "value": "__teammates__",
-                            "label": "Teammates\u0027 contacts"
+                            "field": "createdAt",
+                            "label": "Due date",
+                            "sortable": true
                           },
                           {
-                            "value": "__unassigned__",
-                            "label": "Unassigned"
+                            "field": "assignedTo",
+                            "label": "Owner",
+                            "sortable": true
+                          },
+                          {
+                            "field": "readBy",
+                            "label": "Read status",
+                            "sortable": false
+                          },
+                          {
+                            "field": "contact.fields.industry",
+                            "label": "Industry",
+                            "sortable": false
                           }
                         ]
-                      },
-                      {
-                        "id": "contactScore",
-                        "label": "Contact score",
-                        "type": "number",
-                        "operators": [
-                          "eq",
-                          "neq",
-                          "gt",
-                          "lt",
-                          "gte",
-                          "lte",
-                          "is_between",
-                          "is_empty",
-                          "is_not_empty"
-                        ]
                       }
-                    ]
+                    }
                   }
                 }
               }
@@ -29024,7 +29425,7 @@
           "Views"
         ],
         "summary": "Update View",
-        "description": "Renames a view, changes its icon or its visibility, or replaces its filters. Omitted fields keep their value.\n\n\u0060filters\u0060 replace all the current filters, checked as on create; the sort and the columns saved in lemlist are kept.\n\nDefault views (\u0060isDefault: true\u0060) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the \u0022Create views for the team\u0022 permission.",
+        "description": "Renames a view, changes its icon or its visibility, or replaces its filters, sort or columns. Omitted fields keep their value.\n\n\u0060filters\u0060, \u0060sort\u0060 and \u0060columns\u0060 each replace the current ones when sent, checked as on create. A sort saved from the lemlist extension may name a field that is not a column: [List Views](/api-reference/endpoints/views/list-views) returns it as is, \u0060sort\u0060 left out keeps it, and sending it back answers \u0060400\u0060.\n\nDefault views (\u0060isDefault: true\u0060) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the \u0022Create views for the team\u0022 permission.",
         "operationId": "UpdateView",
         "requestBody": {
           "content": {
@@ -29067,7 +29468,7 @@
             }
           },
           "400": {
-            "description": "Invalid body: an unknown key, a value out of bounds, an unsafe or empty name, or an invalid filter",
+            "description": "Invalid body: an unknown key, a value out of bounds, an unsafe or empty name, an invalid filter, sort or column",
             "content": {
               "application/json": {
                 "schema": {
@@ -29096,6 +29497,18 @@
                     "value": {
                       "error": "Invalid filter on \u0022contactScore\u0022: operator must be one of eq, neq, gt, lt, gte, lte, is_between, is_empty, is_not_empty",
                       "code": "ENTITY_VIEW_INVALID_FILTER"
+                    }
+                  },
+                  "ENTITY_VIEW_INVALID_SORT": {
+                    "value": {
+                      "error": "Invalid sort on \u0022dueDate\u0022: unknown column, see get_view_fields",
+                      "code": "ENTITY_VIEW_INVALID_SORT"
+                    }
+                  },
+                  "ENTITY_VIEW_INVALID_COLUMNS": {
+                    "value": {
+                      "error": "Invalid column \u0022contact.fields.title\u0022: unknown column, see get_view_fields",
+                      "code": "ENTITY_VIEW_INVALID_COLUMNS"
                     }
                   }
                 }
@@ -31171,6 +31584,20 @@
             "type": "boolean",
             "example": true
           },
+          "recordingUrl": {
+            "type": "string",
+            "description": "A signed link to download the recording (MP3), valid 24 hours: read the call again for a fresh one. \u0060null\u0060 until the recording is stored in lemlist.",
+            "nullable": true,
+            "example": "https://storage.example.com/CA1234/recording.mp3?X-Amz-Expires=86400\u0026X-Amz-Signature=\u2026",
+            "x-client-original-format": "uri"
+          },
+          "transcriptUrl": {
+            "type": "string",
+            "description": "A signed link to download the transcript, valid 24 hours: a JSON \u0060{ text, utterances }\u0060. \u0060null\u0060 without a transcript.",
+            "nullable": true,
+            "example": "https://storage.example.com/CA1234/transcription.json?X-Amz-Expires=86400\u0026X-Amz-Signature=\u2026",
+            "x-client-original-format": "uri"
+          },
           "createdAt": {
             "type": "string",
             "description": "The call\u0027s time in lemlist: \u0060startedAt\u0060.",
@@ -32678,7 +33105,7 @@
         "properties": {
           "mailboxId": {
             "type": "string",
-            "description": "The user mailbox id. Use it as \u0060userMailboxId\u0060 to resume warmup with [Start lemwarm](/api-reference/endpoints/lemwarm/start-lemwarm).",
+            "description": "The user mailbox id. Use it as \u0060userMailboxId\u0060 to resume warmup with [Start lemwarm](/api-reference/endpoints/warmup/start-warmup).",
             "example": "usm_ssaV1cwVs8iEW9IYO"
           },
           "userId": {
@@ -34367,7 +34794,7 @@
             "$ref": "#/components/schemas/ViewFilterState"
           },
           "sort": {
-            "$ref": "#/components/schemas/ViewSort"
+            "$ref": "#/components/schemas/ViewSortProperty"
           },
           "columns": {
             "type": "array",
@@ -34443,6 +34870,73 @@
           }
         },
         "description": "Error envelope returned by the views endpoints."
+      },
+      "ViewSort": {
+        "required": [
+          "field",
+          "order"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "maxLength": 400,
+            "minLength": 1,
+            "type": "string",
+            "description": "A column [Get View Fields](/api-reference/endpoints/views/get-view-fields) lists with \u0060sortable: true\u0060 (\u0060columns[].field\u0060)",
+            "example": "createdAt"
+          },
+          "order": {
+            "$ref": "#/components/schemas/ViewSortOrder"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Task views only: the sort, on one column. Without it, the view uses the page default sort (due date)."
+      },
+      "ViewColumnInput": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "maxLength": 400,
+            "minLength": 1,
+            "type": "string",
+            "description": "A column from [Get View Fields](/api-reference/endpoints/views/get-view-fields) (\u0060columns[].field\u0060)",
+            "example": "contact.fields.industry"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Pinned to the left of the table"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One visible column of a view."
+      },
+      "ViewColumn": {
+        "required": [
+          "field",
+          "label",
+          "sortable"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Column id, sent as \u0060sort.field\u0060 and \u0060columns[].field\u0060",
+            "example": "createdAt"
+          },
+          "label": {
+            "type": "string",
+            "description": "Column header",
+            "example": "Due date"
+          },
+          "sortable": {
+            "type": "boolean",
+            "description": "Whether a \u0060sort\u0060 can take this column"
+          }
+        },
+        "description": "A column a view of the list can show."
       },
       "WatchListFilterInItem": {
         "oneOf": [
@@ -36898,7 +37392,7 @@
         },
         "description": "The filters as the page saved them. \u0060basicFilters\u0060 are AND-ed conditions; \u0060advancedFilters\u0060 is a tree of conditions and groups combined by \u0060rootConnector\u0060."
       },
-      "ViewSort": {
+      "ViewSortProperty": {
         "type": "object",
         "properties": {
           "field": {
@@ -36906,10 +37400,10 @@
             "example": "createdAt"
           },
           "order": {
-            "$ref": "#/components/schemas/ViewSortOrder"
+            "$ref": "#/components/schemas/ViewSortPropertyOrder"
           }
         },
-        "description": "The sort saved in lemlist, absent when the view uses the page default"
+        "description": "The sort saved in lemlist, absent when the view uses the page default. A sort saved from the lemlist extension may name a field that is not a column."
       },
       "ViewColumnsItem": {
         "type": "object",
@@ -38743,17 +39237,6 @@
         }
       },
       "PostSequencesBySequenceIdSteps409Response": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
-          }
-        }
-      },
-      "PostSequencesBySequenceIdSteps403Response": {
         "type": "object",
         "properties": {
           "error": {
@@ -42201,14 +42684,57 @@
           }
         }
       },
-      "GetLemwarmErrors403Response": {
+      "PostWarmupByUserMailboxIdStart200Response": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "string"
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PostWarmupByUserMailboxIdPause200Response": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatchWarmupByUserMailboxIdSettingsRequest": {
+        "minProperties": 1,
+        "type": "object",
+        "properties": {
+          "warmEmailMax": {
+            "type": "integer",
+            "description": "Maximum number of warmup emails per day (0-40; the server enforces 1-40 unless the team has the lemwarm0limit beta)"
           },
-          "code": {
-            "type": "string"
+          "warmEmailRampup": {
+            "type": "integer",
+            "description": "Daily increase in the warmup email count (0-40; the server enforces 1-40 unless the team has the lemwarm0limit beta)"
+          },
+          "internalCommunicationPercent": {
+            "type": "integer",
+            "description": "Percentage of warmup emails sent to internal participants (0-100)"
+          },
+          "answerPercentage": {
+            "type": "integer",
+            "description": "Percentage of warmup emails that should be answered (0-100)"
+          },
+          "warmUsePlaintext": {
+            "type": "boolean",
+            "description": "Whether warmup emails are sent as plain text"
+          },
+          "warmDailyVarianceEnabled": {
+            "type": "boolean",
+            "description": "Whether to apply a random daily variance to the warmup email target (spreads volume day-to-day instead of a flat number)"
+          }
+        }
+      },
+      "PatchWarmupByUserMailboxIdSettings200Response": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
           }
         }
       },
@@ -45315,6 +45841,18 @@
           },
           "filters": {
             "$ref": "#/components/schemas/ViewFiltersInput"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/ViewSort"
+          },
+          "columns": {
+            "maxItems": 200,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewColumnInput"
+            },
+            "description": "Task views only: the visible columns, in order. A column left out is hidden, except the two the Tasks page always shows (task type and title, associated record)."
           }
         },
         "additionalProperties": false
@@ -45382,6 +45920,18 @@
           },
           "filters": {
             "$ref": "#/components/schemas/ViewFiltersInput"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/ViewSort"
+          },
+          "columns": {
+            "maxItems": 200,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewColumnInput"
+            },
+            "description": "Task views only: the visible columns, in order. A column left out is hidden, except the two the Tasks page always shows (task type and title, associated record)."
           }
         },
         "additionalProperties": false
@@ -45735,6 +46285,14 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/GetContactsLists200ResponseSchemaItem"
+        }
+      },
+      "GetWarmupErrors200Response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WarmupErrorsResponse"
+          }
         }
       },
       "GetLemwarmErrors200Response": {
@@ -49109,7 +49667,8 @@
       },
       "GetViewFields200ResponseData": {
         "required": [
-          "fields"
+          "fields",
+          "columns"
         ],
         "type": "object",
         "properties": {
@@ -49117,6 +49676,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ViewField"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewColumn"
             }
           }
         }
@@ -55018,6 +55583,15 @@
           ]
         }
       },
+      "ViewSortOrder": {
+        "enum": [
+          1,
+          -1
+        ],
+        "type": "integer",
+        "description": "\u00601\u0060 ascending, \u0060-1\u0060 descending",
+        "example": 1
+      },
       "ViewConditionValueRelativeDateMode": {
         "enum": [
           "this",
@@ -55945,7 +56519,7 @@
           ]
         }
       },
-      "ViewSortOrder": {
+      "ViewSortPropertyOrder": {
         "enum": [
           1,
           -1

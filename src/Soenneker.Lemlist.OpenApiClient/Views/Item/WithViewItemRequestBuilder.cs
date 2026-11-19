@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Views.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.DeleteView200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.DeleteView200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Renames a view, changes its icon or its visibility, or replaces its filters. Omitted fields keep their value.`filters` replace all the current filters, checked as on create; the sort and the columns saved in lemlist are kept.Default views (`isDefault: true`) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the &quot;Create views for the team&quot; permission.
+        /// Renames a view, changes its icon or its visibility, or replaces its filters, sort or columns. Omitted fields keep their value.`filters`, `sort` and `columns` each replace the current ones when sent, checked as on create. A sort saved from the lemlist extension may name a field that is not a column: [List Views](/api-reference/endpoints/views/list-views) returns it as is, `sort` left out keeps it, and sending it back answers `400`.Default views (`isDefault: true`) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the &quot;Create views for the team&quot; permission.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ViewRefResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -123,7 +123,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Views.Item
             return requestInfo;
         }
         /// <summary>
-        /// Renames a view, changes its icon or its visibility, or replaces its filters. Omitted fields keep their value.`filters` replace all the current filters, checked as on create; the sort and the columns saved in lemlist are kept.Default views (`isDefault: true`) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the &quot;Create views for the team&quot; permission.
+        /// Renames a view, changes its icon or its visibility, or replaces its filters, sort or columns. Omitted fields keep their value.`filters`, `sort` and `columns` each replace the current ones when sent, checked as on create. A sort saved from the lemlist extension may name a field that is not a column: [List Views](/api-reference/endpoints/views/list-views) returns it as is, `sort` left out keeps it, and sending it back answers `400`.Default views (`isDefault: true`) are read-only: copy one with [Duplicate View](/api-reference/endpoints/views/duplicate-view) to change it. Editing a view shared with the team, or sharing one, needs the &quot;Create views for the team&quot; permission.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

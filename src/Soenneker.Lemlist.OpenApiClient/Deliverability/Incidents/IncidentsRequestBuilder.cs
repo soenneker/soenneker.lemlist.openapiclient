@@ -34,14 +34,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents
         {
         }
         /// <summary>
-        /// Lists your team&apos;s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.An incident stays `active` until the issue clears, then becomes `resolved` with a `resolvedAt` date. Alert types turned off in your team&apos;s Notifications settings (Deliverability &gt; Alerts) are never returned. Resolved incidents are kept 90 days.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists your team&apos;s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.An incident stays `active` until the issue clears, then becomes `resolved` with a `resolvedAt` date. Alert types turned off in your team&apos;s Notifications settings (Deliverability &gt; Alerts) are never returned. Resolved incidents are kept 90 days.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ListDeliverabilityIncidents200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError">When receiving a 405 status code</exception>
         /// <exception cref="global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -58,7 +57,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents
             {
                 { "400", global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Lemlist.OpenApiClient.Models.DeliverabilityIncidentError.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -67,7 +65,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.ListDeliverabilityIncidents200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.ListDeliverabilityIncidents200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Lists your team&apos;s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.An incident stays `active` until the issue clears, then becomes `resolved` with a `resolvedAt` date. Alert types turned off in your team&apos;s Notifications settings (Deliverability &gt; Alerts) are never returned. Resolved incidents are kept 90 days.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists your team&apos;s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.An incident stays `active` until the issue clears, then becomes `resolved` with a `resolvedAt` date. Alert types turned off in your team&apos;s Notifications settings (Deliverability &gt; Alerts) are never returned. Resolved incidents are kept 90 days.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -95,7 +93,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents
             return new global::Soenneker.Lemlist.OpenApiClient.Deliverability.Incidents.IncidentsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Lists your team&apos;s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.An incident stays `active` until the issue clears, then becomes `resolved` with a `resolvedAt` date. Alert types turned off in your team&apos;s Notifications settings (Deliverability &gt; Alerts) are never returned. Resolved incidents are kept 90 days.This endpoint is in closed beta and answers `403` unless the beta is enabled for your team.
+        /// Lists your team&apos;s deliverability incidents, newest first: DNS issues that lock sending, mailboxes disconnected from lemlist, mailboxes disconnected while warming up, and warm-ups paused by lemwarm.An incident stays `active` until the issue clears, then becomes `resolved` with a `resolvedAt` date. Alert types turned off in your team&apos;s Notifications settings (Deliverability &gt; Alerts) are never returned. Resolved incidents are kept 90 days.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class IncidentsRequestBuilderGetQueryParameters 
