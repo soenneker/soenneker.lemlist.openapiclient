@@ -7,6 +7,7 @@ using Soenneker.Lemlist.OpenApiClient.V2.Crm;
 using Soenneker.Lemlist.OpenApiClient.V2.Enrichments;
 using Soenneker.Lemlist.OpenApiClient.V2.Tasks;
 using Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes;
+using Soenneker.Lemlist.OpenApiClient.V2.UserGroups;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -43,6 +44,11 @@ namespace Soenneker.Lemlist.OpenApiClient.V2
         public global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.UnsubscribesRequestBuilder Unsubscribes
         {
             get => new global::Soenneker.Lemlist.OpenApiClient.V2.Unsubscribes.UnsubscribesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The userGroups property</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.V2.UserGroups.UserGroupsRequestBuilder UserGroups
+        {
+            get => new global::Soenneker.Lemlist.OpenApiClient.V2.UserGroups.UserGroupsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.V2.V2RequestBuilder"/> and sets the default values.

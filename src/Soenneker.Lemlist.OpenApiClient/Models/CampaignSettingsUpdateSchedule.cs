@@ -18,6 +18,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("endDate") is null) { _explicitNullValueEndDate = default!; _explicitNullProperties?.Remove("endDate"); }
+            else if (parseNode.GetChildNode("endDate") is { } nullNodeEndDate && nullNodeEndDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndDate = null;
             if (parseNode.GetChildNode("holidayCountries") is null) { _explicitNullValueHolidayCountries = default!; _explicitNullProperties?.Remove("holidayCountries"); }
             else if (parseNode.GetChildNode("holidayCountries") is { } nullNodeHolidayCountries && nullNodeHolidayCountries.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HolidayCountries = null;
             if (parseNode.GetChildNode("isTimezoneBasedSchedule") is null) { _explicitNullValueIsTimezoneBasedSchedule = default!; _explicitNullProperties?.Remove("isTimezoneBasedSchedule"); }
@@ -26,6 +28,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("sendingPattern") is { } nullNodeSendingPattern && nullNodeSendingPattern.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendingPattern = null;
         }
 
+        /// <summary>When the campaign stops sending. The date must be in the future unless unchanged. `null` removes it.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate? EndDate { get => _explicitNullValueEndDate; set { _explicitNullValueEndDate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endDate"); else _explicitNullProperties?.Remove("endDate"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate? _explicitNullValueEndDate = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate EndDate { get => _explicitNullValueEndDate; set { _explicitNullValueEndDate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("endDate"); else _explicitNullProperties?.Remove("endDate"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate _explicitNullValueEndDate = default!;
+#endif
         /// <summary>Countries whose public holidays pause the sending.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -65,8 +77,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(4)
             {
+                { "endDate", n => { EndDate = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate.CreateFromDiscriminatorValue); } },
                 { "holidayCountries", n => { HolidayCountries = n.GetCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleHolidayCountriesItem>()?.AsList(); } },
                 { "isTimezoneBasedSchedule", n => { IsTimezoneBasedSchedule = n.GetBoolValue(); } },
                 { "sendingPattern", n => { SendingPattern = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleSendingPattern>(global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleSendingPattern.CreateFromDiscriminatorValue); } },
@@ -79,6 +92,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleEndDate>("endDate", EndDate);
             writer.WriteCollectionOfEnumValues<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleHolidayCountriesItem>("holidayCountries", HolidayCountries);
             writer.WriteBoolValue("isTimezoneBasedSchedule", IsTimezoneBasedSchedule);
             writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CampaignSettingsUpdateScheduleSendingPattern>("sendingPattern", SendingPattern);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

@@ -2297,6 +2297,13 @@
                     ],
                     "sendingPattern": {
                       "newLeadsPriorityRatio": 0.5
+                    },
+                    "endDate": {
+                      "date": "2025-12-31",
+                      "time": "18:00",
+                      "timezone": "Europe/Paris",
+                      "action": "complete",
+                      "at": "2025-12-31T17:00:00.000Z"
                     }
                   }
                 }
@@ -2495,6 +2502,13 @@
                     ],
                     "sendingPattern": {
                       "newLeadsPriorityRatio": 0.5
+                    },
+                    "endDate": {
+                      "date": "2025-12-31",
+                      "time": "18:00",
+                      "timezone": "Europe/Paris",
+                      "action": "complete",
+                      "at": "2025-12-31T17:00:00.000Z"
                     }
                   }
                 }
@@ -2502,7 +2516,7 @@
             }
           },
           "400": {
-            "description": "The body is not valid: an unknown field, a read-only field, a wrong value or an empty body. \u0060details.issues\u0060 lists every refused field. Also \u0060CAMPAIGN_INVALID_SENDER_STRATEGY\u0060 and \u0060WRONG_PARAM_CAMPAIGN_ID\u0060.",
+            "description": "The body is not valid: an unknown field, a read-only field, a wrong value or an empty body. \u0060details.issues\u0060 lists every refused field. Also \u0060CAMPAIGN_INVALID_SENDER_STRATEGY\u0060, \u0060WRONG_PARAM_CAMPAIGN_ID\u0060 and \u0060CAMPAIGN_SETTINGS_END_DATE_IN_PAST\u0060 (the end date must be in the future, unless left unchanged).",
             "content": {
               "application/json": {
                 "schema": {
@@ -8804,6 +8818,7 @@
           "Leads"
         ],
         "summary": "Resume Paused Lead",
+        "description": "Resumes the lead. When the campaign has reached its end date, the lead is not resumed: it is returned with \u0060isPaused: true\u0060 and no error.",
         "operationId": "PostLeadsStartByLeadId",
         "responses": {
           "200": {
@@ -8984,6 +8999,20 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "409": {
+            "description": "\u0060CAMPAIGN_LEAD_REVIEW_CAMPAIGN_END_DATE_PASSED\u0060: the campaign has reached its end date.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostLeadsReviewByLeadId409Response"
+                },
+                "example": {
+                  "error": "CAMPAIGN_LEAD_REVIEW_CAMPAIGN_END_DATE_PASSED",
+                  "message": "This campaign ended on Dec 31, 2025 at 6:00 PM GMT\u002B1. Remove the end date or move it later to launch leads."
+                }
+              }
+            }
           },
           "404": {
             "description": "Lead or campaign not found. Possible \u0060error\u0060 codes: \u0060CAMPAIGN_LEAD_REVIEW_LEAD_NOT_FOUND\u0060, \u0060CAMPAIGN_LEAD_REVIEW_CAMPAIGN_NOT_FOUND\u0060.",
@@ -28124,6 +28153,419 @@
         }
       ]
     },
+    "/v2/user-groups": {
+      "get": {
+        "tags": [
+          "User Groups"
+        ],
+        "summary": "List User Groups",
+        "description": "**Beta**: to use this endpoint now, contact your lemlist account manager.\n\nReturns every group of your team, sorted by name. Any member of the team can call it.\n\nThe list is not paginated: a team holds at most 100 groups.",
+        "operationId": "ListUserGroups",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": "ugr_ExAmPlE987654321b",
+                      "name": "FR",
+                      "userIds": [
+                        "usr_ExAmPlE123456789c"
+                      ]
+                    },
+                    {
+                      "id": "ugr_ExAmPlE123456789a",
+                      "name": "UK",
+                      "userIds": [
+                        "usr_ExAmPlE123456789a",
+                        "usr_ExAmPlE123456789b"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UserGroupUnauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/UserGroupPlanRequired"
+          },
+          "500": {
+            "$ref": "#/components/responses/UserGroupInternalError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User Groups"
+        ],
+        "summary": "Create User Group",
+        "description": "**Beta**: to use this endpoint now, contact your lemlist account manager.\n\nCreates a group. Admins only.\n\nThe name is trimmed and its inner spaces collapsed, and a user listed twice is kept once. The group is returned as stored, with a \u0060200\u0060 status.",
+        "operationId": "CreateUserGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupCreateRequest"
+              },
+              "example": {
+                "name": "UK",
+                "userIds": [
+                  "usr_ExAmPlE123456789a",
+                  "usr_ExAmPlE123456789b"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ugr_ExAmPlE123456789a",
+                    "name": "UK",
+                    "userIds": [
+                      "usr_ExAmPlE123456789a",
+                      "usr_ExAmPlE123456789b"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. \u0060code\u0060 is one of \u0060USER_GROUPS_INVALID_REQUEST\u0060, \u0060USER_NOT_IN_TEAM\u0060 (a user id is not a member of the team).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupError"
+                },
+                "example": {
+                  "error": "Invalid request: name holds 1 to 60 characters once trimmed, userIds is an array of at most 1,000 user ids, a PATCH sends name or userIds, and no user is both added and removed",
+                  "code": "USER_GROUPS_INVALID_REQUEST"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UserGroupUnauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/UserGroupForbidden"
+          },
+          "409": {
+            "description": "Conflict. \u0060code\u0060 is \u0060USER_GROUPS_NAME_TAKEN\u0060 when the team already holds this name, whatever its case, \u0060USER_GROUPS_LIMIT_REACHED\u0060 when the team already holds 100 groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupError"
+                },
+                "example": {
+                  "error": "A user group already has this name",
+                  "code": "USER_GROUPS_NAME_TAKEN"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/UserGroupInternalError"
+          }
+        }
+      }
+    },
+    "/v2/user-groups/{userGroupId}": {
+      "get": {
+        "tags": [
+          "User Groups"
+        ],
+        "summary": "Get User Group",
+        "description": "**Beta**: to use this endpoint now, contact your lemlist account manager.\n\nReturns one group of your team. Any member of the team can call it.",
+        "operationId": "GetUserGroup",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ugr_ExAmPlE123456789a",
+                    "name": "UK",
+                    "userIds": [
+                      "usr_ExAmPlE123456789a",
+                      "usr_ExAmPlE123456789b"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UserGroupUnauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/UserGroupPlanRequired"
+          },
+          "404": {
+            "$ref": "#/components/responses/UserGroupNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/UserGroupInternalError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User Groups"
+        ],
+        "summary": "Update User Group",
+        "description": "**Beta**: to use this endpoint now, contact your lemlist account manager.\n\nRenames a group, replaces its whole member list, or both. Admins only.\n\nA field left out keeps its value; send at least one. To add or remove a few members without sending the whole list, use the members endpoint. The group is returned as stored.",
+        "operationId": "UpdateUserGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupUpdateRequest"
+              },
+              "example": {
+                "name": "United Kingdom"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ugr_ExAmPlE123456789a",
+                    "name": "United Kingdom",
+                    "userIds": [
+                      "usr_ExAmPlE123456789a",
+                      "usr_ExAmPlE123456789b"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. \u0060code\u0060 is one of \u0060USER_GROUPS_INVALID_REQUEST\u0060, \u0060USER_NOT_IN_TEAM\u0060 (a user id is not a member of the team).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupError"
+                },
+                "example": {
+                  "error": "Invalid request: name holds 1 to 60 characters once trimmed, userIds is an array of at most 1,000 user ids, a PATCH sends name or userIds, and no user is both added and removed",
+                  "code": "USER_GROUPS_INVALID_REQUEST"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UserGroupUnauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/UserGroupForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/UserGroupNotFound"
+          },
+          "409": {
+            "description": "Another group of the team holds this name, whatever its case. \u0060code\u0060 is \u0060USER_GROUPS_NAME_TAKEN\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupError"
+                },
+                "example": {
+                  "error": "A user group already has this name",
+                  "code": "USER_GROUPS_NAME_TAKEN"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/UserGroupInternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User Groups"
+        ],
+        "summary": "Delete User Group",
+        "description": "**Beta**: to use this endpoint now, contact your lemlist account manager.\n\nDeletes a group for good. Admins only.\n\nThe group is also removed from the Reports, Tasks and Campaigns filters saved on it.",
+        "operationId": "DeleteUserGroup",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupDeleteResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ugr_ExAmPlE123456789a",
+                    "deleted": true
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UserGroupUnauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/UserGroupForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/UserGroupNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/UserGroupInternalError"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userGroupId",
+          "in": "path",
+          "description": "Id of the group, as returned by the list endpoint. A malformed id answers \u0060404\u0060.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "ugr_ExAmPlE123456789a"
+        }
+      ]
+    },
+    "/v2/user-groups/{userGroupId}/members": {
+      "post": {
+        "tags": [
+          "User Groups"
+        ],
+        "summary": "Edit User Group Members",
+        "description": "**Beta**: to use this endpoint now, contact your lemlist account manager.\n\nAdds and removes members without sending the whole list. Admins only.\n\nA user already in the group is not added twice, and a user not in it is ignored on removal. A user cannot be both added and removed. The group is returned as stored.",
+        "operationId": "EditUserGroupMembers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupMembersRequest"
+              },
+              "example": {
+                "addUserIds": [
+                  "usr_ExAmPlE123456789c"
+                ],
+                "removeUserIds": [
+                  "usr_ExAmPlE123456789b"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupResponse"
+                },
+                "example": {
+                  "data": {
+                    "id": "ugr_ExAmPlE123456789a",
+                    "name": "UK",
+                    "userIds": [
+                      "usr_ExAmPlE123456789a",
+                      "usr_ExAmPlE123456789c"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error. \u0060code\u0060 is one of \u0060USER_GROUPS_INVALID_REQUEST\u0060, \u0060USER_NOT_IN_TEAM\u0060 (an added user is not a member of the team).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupError"
+                },
+                "example": {
+                  "error": "This user is not a member of this team",
+                  "code": "USER_NOT_IN_TEAM"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UserGroupUnauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/UserGroupForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/UserGroupNotFound"
+          },
+          "409": {
+            "description": "The group would hold more than 1,000 members. \u0060code\u0060 is \u0060USER_GROUPS_USERS_LIMIT_REACHED\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupError"
+                },
+                "example": {
+                  "error": "This user group has reached the maximum number of members",
+                  "code": "USER_GROUPS_USERS_LIMIT_REACHED"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/UserGroupInternalError"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userGroupId",
+          "in": "path",
+          "description": "Id of the group, as returned by the list endpoint. A malformed id answers \u0060404\u0060.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "ugr_ExAmPlE123456789a"
+        }
+      ]
+    },
     "/domains-core/search": {
       "post": {
         "tags": [
@@ -33306,7 +33748,7 @@
             "items": {
               "$ref": "#/components/schemas/WatchListFilterInItem"
             },
-            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060. For the Warm Intros filters: \u0060targetCrmListIds\u0060 takes the ids of company CRM lists of the workspace (from \u0060GET /companies/lists\u0060, up to 50 lists and 10,000 companies in total, any other id is rejected with \u0060INVALID_FILTER_VALUE\u0060) and the agent then delivers only people working at the companies of those lists, the other filters still applying; send it again on every update, as \u0060filters\u0060 replaces the whole set; \u0060minOverlapMonths\u0060 takes one integer between 3 and 120, as a string (6 when absent); \u0060includeCurrentCompanies\u0060 takes \u0060true\u0060 to also include the current colleagues of the introducers (only past colleagues when absent). For \u0060personBuyingIntent\u0060 agents: \u0060personIntentTopics\u0060 (required, up to 25) takes topic names returned by \u0060GET /watchlist/filter-values?filterId=personIntentTopics\u0060, any other name is rejected with \u0060INVALID_FILTER_VALUE\u0060; \u0060companySizes\u0060 takes the six ranges \u0060GET /watchlist/filter-values\u0060 returns with \u0060type=personBuyingIntent\u0060; \u0060companyLocation\u0060 and \u0060location\u0060 take country names; every filter of this type is an inclusion, and \u0060personIntentTopics\u0060, \u0060title\u0060, \u0060companyLocation\u0060, \u0060location\u0060, \u0060companyIndustries\u0060 and \u0060companySizes\u0060 take up to 25 values each; \u0060maxIdentificationsPerDay\u0060 (required, 20 when absent) takes one integer; \u0060lookbackDays\u0060 takes one integer between 1 and 30, as a string (30 when absent), the days of past activity delivered once, at the first activation, and a change made afterwards does not reach the running monitoring; send it again on every update, as \u0060filters\u0060 replaces the whole set."
+            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060. For the Warm Intros filters: \u0060targetCrmListIds\u0060 takes the ids of company CRM lists of the workspace (from \u0060GET /companies/lists\u0060, up to 50 lists and 10,000 companies in total, any other id is rejected with \u0060INVALID_FILTER_VALUE\u0060) and the agent then delivers only people working at the companies of those lists, the other filters still applying; send it again on every update, as \u0060filters\u0060 replaces the whole set; \u0060minOverlapMonths\u0060 takes one integer between 3 and 120, as a string (6 when absent); \u0060includeCurrentCompanies\u0060 takes \u0060true\u0060 to also include the current colleagues of the introducers (only past colleagues when absent). For \u0060personBuyingIntent\u0060 agents: \u0060personIntentTopics\u0060 (required, up to 25) takes topic names returned by \u0060GET /watchlist/filter-values?filterId=personIntentTopics\u0060, any other name is rejected with \u0060INVALID_FILTER_VALUE\u0060; \u0060companySizes\u0060 takes the six ranges \u0060GET /watchlist/filter-values\u0060 returns with \u0060type=personBuyingIntent\u0060; \u0060companyLocation\u0060 and \u0060location\u0060 take country names; every filter of this type is an inclusion, and \u0060personIntentTopics\u0060, \u0060title\u0060, \u0060companyLocation\u0060, \u0060location\u0060, \u0060companyIndustries\u0060 and \u0060companySizes\u0060 take up to 25 values each; \u0060maxIdentificationsPerDay\u0060 (required, 20 when absent) takes one integer; \u0060lookbackDays\u0060 takes one integer between 1 and 30, as a string (30 when absent), the days of past activity delivered once, at the first activation, and a change made afterwards does not reach the running monitoring; send it again on every update, as \u0060filters\u0060 replaces the whole set. For \u0060competitorConnections\u0060 agents: \u0060linkedinProfileUrls\u0060 takes LinkedIn profile URLs (\u0060https://www.linkedin.com/in/\u003Cslug\u003E\u0060, up to 500) of people whose connections are followed, in addition to the competitor company pages of \u0060linkedinUrls\u0060; a company page is rejected with \u0060INVALID_FILTER_VALUE\u0060, and a Sales Navigator URL is accepted and stored as \u0060https://www.linkedin.com/in/\u003Cid\u003E\u0060. \u0060trackedRoles\u0060 takes the roles to follow in each competitor\u0027s team, among \u0060sdr\u0060, \u0060bdr\u0060, \u0060account_executive\u0060, \u0060sales_engineer\u0060, \u0060leadership\u0060, \u0060customer_success\u0060, \u0060account_manager\u0060 and \u0060support\u0060 (inclusion only, up to 8 values, any other value or a longer list is rejected with \u0060INVALID_FILTER_VALUE\u0060); when absent or empty, the default sales and business development team is followed, which does not cover all eight roles, and people whose role cannot be identified are still tracked, as are the profiles of \u0060linkedinProfileUrls\u0060 whatever their role. The price per lead does not change. Send both again on every update, as \u0060filters\u0060 replaces the whole set."
           },
           "out": {
             "type": "array",
@@ -34348,6 +34790,145 @@
         },
         "description": "Error envelope returned by the enrichment waterfall endpoints."
       },
+      "UserGroup": {
+        "required": [
+          "id",
+          "name",
+          "userIds"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the group, starting with \u0060ugr_\u0060.",
+            "example": "ugr_ExAmPlE123456789a"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the group, unique in the team whatever its case.",
+            "example": "UK"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ids of the team members in the group, each once.",
+            "example": [
+              "usr_ExAmPlE123456789a",
+              "usr_ExAmPlE123456789b"
+            ]
+          }
+        },
+        "description": "A group of team members."
+      },
+      "UserGroupResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserGroup"
+          }
+        }
+      },
+      "UserGroupListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            }
+          }
+        }
+      },
+      "UserGroupDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserGroupDeleteResponseData"
+          }
+        }
+      },
+      "UserGroupCreateRequest": {
+        "required": [
+          "name",
+          "userIds"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique in the team, whatever its case. Trimmed, with its inner spaces collapsed."
+          },
+          "userIds": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ids of team members; \u0060[]\u0060 for an empty group. A user listed twice is kept once."
+          }
+        }
+      },
+      "UserGroupUpdateRequest": {
+        "minProperties": 1,
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique in the team, whatever its case. Trimmed, with its inner spaces collapsed."
+          },
+          "userIds": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The whole member list, replacing the previous one; \u0060[]\u0060 empties the group."
+          }
+        },
+        "description": "At least one of \u0060name\u0060 and \u0060userIds\u0060. A field left out keeps its value."
+      },
+      "UserGroupMembersRequest": {
+        "type": "object",
+        "properties": {
+          "addUserIds": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team members added to the group; one already in it stays once."
+          },
+          "removeUserIds": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Users removed from the group; one not in it is ignored."
+          }
+        },
+        "description": "Each list is optional. A user cannot be in both."
+      },
+      "UserGroupError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable explanation of the failure"
+          },
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code, stable across releases"
+          }
+        },
+        "description": "Error envelope returned by the user group endpoints."
+      },
       "Domain": {
         "required": [
           "_id",
@@ -34982,7 +35563,7 @@
             "$ref": "#/components/schemas/ViewConditionValueRelativeDate"
           }
         ],
-        "description": "Shaped by the operator and the field type:\n\n- no value for \u0060is_empty\u0060, \u0060is_not_empty\u0060, \u0060is_true\u0060, \u0060is_false\u0060, \u0060is_not_true\u0060, \u0060is_not_false\u0060;\n- a list of 1 to 50 values for \u0060is_any_of\u0060, \u0060is_none_of\u0060, \u0060contains_any_of\u0060, \u0060contains_all_of\u0060, also accepted on a text field for \u0060contains\u0060, \u0060does_not_contain\u0060, \u0060starts_with\u0060, \u0060ends_with\u0060 (matching any of them);\n- \u0060{ \u0022from\u0022, \u0022to\u0022 }\u0060 for \u0060is_between\u0060, one side may be omitted;\n- \u0060{ \u0022mode\u0022, \u0022amount\u0022, \u0022unit\u0022 }\u0060 for \u0060is_relative\u0060, with \u0060mode\u0060 among \u0060this\u0060, \u0060last\u0060, \u0060next\u0060, \u0060past\u0060 and \u0060unit\u0060 among \u0060day\u0060, \u0060week\u0060, \u0060month\u0060, \u0060quarter\u0060, \u0060year\u0060;\n- one value otherwise: a number on a number field, an ISO 8601 date (\u0060YYYY-MM-DD\u0060) or date-time with offset on a date field, a string on the others.\n\nA field listing \u0060options\u0060 takes their \u0060value\u0060. A user, list or campaign field takes record ids: user ids from [Get Team](/api-reference/endpoints/team/get-team), list ids from [Get Contact Lists](/api-reference/endpoints/contacts/get-contact-lists) or [Get Company Lists](/api-reference/endpoints/companies/get-company-lists), campaign ids from [Get Many Campaigns](/api-reference/endpoints/campaigns/get-many-campaigns).",
+        "description": "Shaped by the operator and the field type:\n\n- no value for \u0060is_empty\u0060, \u0060is_not_empty\u0060, \u0060is_true\u0060, \u0060is_false\u0060, \u0060is_not_true\u0060, \u0060is_not_false\u0060;\n- a list of 1 to 50 values for \u0060is_any_of\u0060, \u0060is_none_of\u0060, \u0060contains_any_of\u0060, \u0060contains_all_of\u0060, also accepted on a text field for \u0060contains\u0060, \u0060does_not_contain\u0060, \u0060starts_with\u0060, \u0060ends_with\u0060 (matching any of them);\n- \u0060{ \u0022from\u0022, \u0022to\u0022 }\u0060 for \u0060is_between\u0060, one side may be omitted;\n- \u0060{ \u0022mode\u0022, \u0022amount\u0022, \u0022unit\u0022 }\u0060 for \u0060is_relative\u0060, with \u0060mode\u0060 among \u0060this\u0060, \u0060last\u0060, \u0060next\u0060, \u0060past\u0060, \u0060more_ago\u0060, \u0060more_ahead\u0060 and \u0060unit\u0060 among \u0060day\u0060, \u0060week\u0060, \u0060month\u0060, \u0060quarter\u0060, \u0060year\u0060: \u0060more_ago\u0060 matches the dates more than \u0060amount\u0060 units ago and \u0060more_ahead\u0060 the dates more than \u0060amount\u0060 units from now, the limit day excluded, a missing date never matching;\n- one value otherwise: a number on a number field, an ISO 8601 date (\u0060YYYY-MM-DD\u0060) or date-time with offset on a date field, a string on the others.\n\nA field listing \u0060options\u0060 takes their \u0060value\u0060. A user, list or campaign field takes record ids: user ids from [Get Team](/api-reference/endpoints/team/get-team), list ids from [Get Contact Lists](/api-reference/endpoints/contacts/get-contact-lists) or [Get Company Lists](/api-reference/endpoints/companies/get-company-lists), campaign ids from [Get Many Campaigns](/api-reference/endpoints/campaigns/get-many-campaigns).",
         "example": 5
       },
       "ViewConditionValueOneOf3Item": {
@@ -35644,6 +36225,9 @@
           },
           "sendingPattern": {
             "$ref": "#/components/schemas/CampaignSettingsScheduleSendingPattern"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/CampaignSettingsScheduleEndDate"
           }
         },
         "description": "Sending schedule options. Read and change the schedules themselves with the [Schedules](/api-reference/endpoints/schedules/get-campaign-schedules) endpoints."
@@ -35815,6 +36399,9 @@
           },
           "sendingPattern": {
             "$ref": "#/components/schemas/CampaignSettingsUpdateScheduleSendingPattern"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/CampaignSettingsUpdateScheduleEndDate"
           }
         },
         "additionalProperties": false,
@@ -37359,6 +37946,18 @@
         },
         "description": "The contact\u0027s resolved country (from its \u0060location\u0060, \u0060country\u0060 or company data), as ISO 3166-1 alpha-2 codes."
       },
+      "UserGroupDeleteResponseData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the deleted group"
+          },
+          "deleted": {
+            "$ref": "#/components/schemas/UserGroupDeleteResponseDataDeleted"
+          }
+        }
+      },
       "DomainSearchResultProvidersItem": {
         "type": "object",
         "properties": {
@@ -37610,6 +38209,42 @@
         },
         "description": "How the daily sending splits between new leads and leads already in the sequence."
       },
+      "CampaignSettingsScheduleEndDate": {
+        "required": [
+          "date",
+          "time",
+          "timezone",
+          "action",
+          "at"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Day of the end date, YYYY-MM-DD.",
+            "format": "date"
+          },
+          "time": {
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+            "type": "string",
+            "description": "Time of the end date, HH:mm."
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone the date and time are read in, e.g. Europe/Paris."
+          },
+          "action": {
+            "$ref": "#/components/schemas/CampaignSettingsScheduleEndDateAction"
+          },
+          "at": {
+            "type": "string",
+            "description": "The cut-off instant, ISO 8601 UTC. Read-only.",
+            "format": "date-time"
+          }
+        },
+        "description": "When the campaign stops sending, \u0060null\u0060 when not set. At the date, \u0060complete\u0060 ends the leads still in the sequence, \u0060pause\u0060 pauses them. Remove it by sending \u0060null\u0060 with \u0060PATCH\u0060.",
+        "nullable": true
+      },
       "CampaignSettingsUpdateAiFeaturesOnInterestedReply": {
         "type": "object",
         "properties": {
@@ -37668,6 +38303,37 @@
         },
         "additionalProperties": false,
         "description": "How the daily sending splits between new leads and leads already in the sequence."
+      },
+      "CampaignSettingsUpdateScheduleEndDate": {
+        "required": [
+          "date",
+          "time",
+          "timezone",
+          "action"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Day of the end date, YYYY-MM-DD.",
+            "format": "date"
+          },
+          "time": {
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+            "type": "string",
+            "description": "Time of the end date, HH:mm."
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone the date and time are read in, e.g. Europe/Paris."
+          },
+          "action": {
+            "$ref": "#/components/schemas/CampaignSettingsUpdateScheduleEndDateAction"
+          }
+        },
+        "additionalProperties": false,
+        "description": "When the campaign stops sending. The date must be in the future unless unchanged. \u0060null\u0060 removes it.",
+        "nullable": true
       },
       "CampaignSettingsErrorDetailsIssuesItem": {
         "type": "object",
@@ -40787,6 +41453,17 @@
         }
       },
       "PostLeadsReviewByLeadId400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PostLeadsReviewByLeadId409Response": {
         "type": "object",
         "properties": {
           "error": {
@@ -47635,7 +48312,7 @@
             "items": {
               "type": "string"
             },
-            "description": "LinkedIn slugs of the engagers, post author excluded and deduplicated"
+            "description": "LinkedIn slugs of the engagers, post author excluded and deduplicated. Empty when \u0060peopleSearchFailed\u0060 is \u0060true\u0060."
           },
           "totals": {
             "$ref": "#/components/schemas/SearchLinkedInPostEngagers200ResponseDataTotals"
@@ -47649,7 +48326,7 @@
             "items": {
               "$ref": "#/components/schemas/PersonaFilter"
             },
-            "description": "Exact filters of the People Database search: \u0060leadLinkedInSlug\u0060 plus the filters you passed. Empty when nobody engaged with the post."
+            "description": "Exact filters of the People Database search: \u0060leadLinkedInSlug\u0060 plus the filters you passed. Empty when nobody engaged with the post or when \u0060peopleSearchFailed\u0060 is \u0060true\u0060."
           },
           "search": {
             "type": "string",
@@ -52302,6 +52979,7 @@
           "resumed",
           "stopped",
           "campaignComplete",
+          "campaignEndDateReached",
           "customDomainErrors",
           "connectionIssue",
           "sendLimitReached",
@@ -52582,6 +53260,10 @@
             {
               "value": "campaignComplete",
               "name": "CampaignComplete"
+            },
+            {
+              "value": "campaignEndDateReached",
+              "name": "CampaignEndDateReached"
             },
             {
               "value": "customDomainErrors",
@@ -53890,6 +54572,8 @@
           "minPageViewed",
           "internalTraffic",
           "linkedinUrls",
+          "linkedinProfileUrls",
+          "trackedRoles",
           "companyLinkedinUrls",
           "companyNames",
           "companyLocation",
@@ -53983,6 +54667,14 @@
             {
               "value": "linkedinUrls",
               "name": "LinkedinUrls"
+            },
+            {
+              "value": "linkedinProfileUrls",
+              "name": "LinkedinProfileUrls"
+            },
+            {
+              "value": "trackedRoles",
+              "name": "TrackedRoles"
             },
             {
               "value": "companyLinkedinUrls",
@@ -55597,7 +56289,9 @@
           "this",
           "last",
           "next",
-          "past"
+          "past",
+          "more_ago",
+          "more_ahead"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -55619,6 +56313,14 @@
             {
               "value": "past",
               "name": "Past"
+            },
+            {
+              "value": "more_ago",
+              "name": "MoreAgo"
+            },
+            {
+              "value": "more_ahead",
+              "name": "MoreAhead"
             }
           ]
         }
@@ -56472,6 +57174,12 @@
           ]
         }
       },
+      "UserGroupDeleteResponseDataDeleted": {
+        "enum": [
+          true
+        ],
+        "type": "boolean"
+      },
       "DomainSearchResultProvidersItemName": {
         "enum": [
           "google",
@@ -56616,6 +57324,50 @@
             {
               "value": "other",
               "name": "Other"
+            }
+          ]
+        }
+      },
+      "CampaignSettingsScheduleEndDateAction": {
+        "enum": [
+          "complete",
+          "pause"
+        ],
+        "type": "string",
+        "description": "What happens to the leads still in the sequence: \u0060complete\u0060 ends them, \u0060pause\u0060 pauses them.",
+        "x-ms-enum": {
+          "name": "CampaignSettingsScheduleEndDateAction",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "complete",
+              "name": "Complete"
+            },
+            {
+              "value": "pause",
+              "name": "Pause"
+            }
+          ]
+        }
+      },
+      "CampaignSettingsUpdateScheduleEndDateAction": {
+        "enum": [
+          "complete",
+          "pause"
+        ],
+        "type": "string",
+        "description": "What happens to the leads still in the sequence: \u0060complete\u0060 ends them, \u0060pause\u0060 pauses them.",
+        "x-ms-enum": {
+          "name": "CampaignSettingsUpdateScheduleEndDateAction",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "complete",
+              "name": "Complete"
+            },
+            {
+              "value": "pause",
+              "name": "Pause"
             }
           ]
         }
@@ -58920,6 +59672,7 @@
           "resumed",
           "stopped",
           "campaignComplete",
+          "campaignEndDateReached",
           "customDomainErrors",
           "connectionIssue",
           "sendLimitReached",
@@ -59200,6 +59953,10 @@
             {
               "value": "campaignComplete",
               "name": "CampaignComplete"
+            },
+            {
+              "value": "campaignEndDateReached",
+              "name": "CampaignEndDateReached"
             },
             {
               "value": "customDomainErrors",
@@ -60510,7 +61267,7 @@
           true
         ],
         "type": "boolean",
-        "description": "Present and \u0060true\u0060 when the People Database search failed after the post was read: the 50 credits were refunded, \u0060slugs\u0060 and \u0060filters\u0060 are valid, \u0060search\u0060 and \u0060people\u0060 are absent. Run \u0060POST /database/people\u0060 yourself with \u0060filters\u0060 (no credits, but it counts in the 24-hour quota), or call this endpoint again, which is a new paid call."
+        "description": "Present and \u0060true\u0060 when the People Database search failed after the post was read: the 50 credits were refunded, \u0060slugs\u0060 and \u0060filters\u0060 are empty, \u0060search\u0060 and \u0060people\u0060 are absent. Call this endpoint again later: it is a new paid call."
       },
       "GetInboxByContactIdDrafts200ResponseDraftsItemChannel": {
         "enum": [
@@ -64342,6 +65099,76 @@
             }
           }
         }
+      },
+      "UserGroupUnauthorized": {
+        "description": "Unauthorized - invalid or missing API key",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGroupError"
+            },
+            "example": {
+              "error": "Route unauthorized",
+              "code": "ROUTE_UNAUTHORIZED"
+            }
+          }
+        }
+      },
+      "UserGroupPlanRequired": {
+        "description": "The team is not on the Enterprise plan, or the user groups beta is not enabled for it. \u0060code\u0060 is \u0060USER_GROUPS_PLAN_REQUIRED\u0060.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGroupError"
+            },
+            "example": {
+              "error": "User groups are available on the Enterprise plan",
+              "code": "USER_GROUPS_PLAN_REQUIRED"
+            }
+          }
+        }
+      },
+      "UserGroupForbidden": {
+        "description": "Forbidden. \u0060code\u0060 is \u0060USER_GROUPS_PLAN_REQUIRED\u0060 when the team is not on the Enterprise plan or the user groups beta is not enabled for it, \u0060USER_NOT_AUTHORIZED\u0060 when the API key was created by a team member who is not an admin.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGroupError"
+            },
+            "example": {
+              "error": "User not authorized",
+              "code": "USER_NOT_AUTHORIZED"
+            }
+          }
+        }
+      },
+      "UserGroupNotFound": {
+        "description": "No group with this id in your team. \u0060code\u0060 is \u0060USER_GROUPS_NOT_FOUND\u0060.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGroupError"
+            },
+            "example": {
+              "error": "This user group no longer exists",
+              "code": "USER_GROUPS_NOT_FOUND"
+            }
+          }
+        }
+      },
+      "UserGroupInternalError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGroupError"
+            },
+            "example": {
+              "error": "Internal error",
+              "code": "INTERNAL_ERROR"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -64364,6 +65191,10 @@
     {
       "name": "Enrichment Waterfalls",
       "description": "Control which data providers lemlist calls when enriching a contact, and in which order.\n\nA waterfall is an ordered list of providers for one enrichment \u0060type\u0060 (\u0060email\u0060 or \u0060phone\u0060). Providers are tried one after the other until one returns a result.\n\nEvery team has exactly one default waterfall per type (\u0060isDefault: true\u0060). While its \u0060editor\u0060 is \u0060lemlist\u0060 it follows the lemlist behaviour: providers you connected with your own API key are tried first, then internal providers in a random order. Once a team member edits its provider list, \u0060editor\u0060 becomes that user\u0027s id and the list is followed as is; resetting it hands it back to \u0060lemlist\u0060.\n\nCustom waterfalls (\u0060isDefault: false\u0060) carry \u0060conditions\u0060 on the contact being enriched, keyed by contact property; every key present must match. When a contact is enriched, lemlist runs a single waterfall: the custom waterfall of the requested type whose conditions match the contact, or the default waterfall when none does. If several match, the one with the most condition keys wins, then the most recently updated. Only that waterfall runs; when it finds nothing, the enrichment ends without falling back to another one."
+    },
+    {
+      "name": "User Groups",
+      "description": "Gather your team\u0027s users into groups (UK, FR, US\u2026), so a manager filters Reports, Tasks and Campaigns by group in one click. Available on the Enterprise plan.\n\nAny member of the team reads the groups; only an admin creates, edits and deletes them. An API key acts on behalf of the team member who created it, so the write endpoints need a key created by an admin.\n\nA group name is unique in the team, whatever its case, and holds 1 to 60 characters. A group holds at most 1,000 members and a team at most 100 groups. A user can belong to several groups, and a user removed from the team leaves every group. Deleting a group also removes it from the Reports, Tasks and Campaigns filters saved on it."
     }
   ],
   "x-client-unused-schemas": {

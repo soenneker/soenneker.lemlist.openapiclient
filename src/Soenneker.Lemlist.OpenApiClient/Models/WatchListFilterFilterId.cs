@@ -47,6 +47,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         LinkedinUrls,
         #pragma warning restore CS1591
+        [EnumMember(Value = "linkedinProfileUrls")]
+        #pragma warning disable CS1591
+        LinkedinProfileUrls,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "trackedRoles")]
+        #pragma warning disable CS1591
+        TrackedRoles,
+        #pragma warning restore CS1591
         [EnumMember(Value = "companyLinkedinUrls")]
         #pragma warning disable CS1591
         CompanyLinkedinUrls,

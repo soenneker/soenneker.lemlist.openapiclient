@@ -267,6 +267,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CampaignComplete,
         #pragma warning restore CS1591
+        [EnumMember(Value = "campaignEndDateReached")]
+        #pragma warning disable CS1591
+        CampaignEndDateReached,
+        #pragma warning restore CS1591
         [EnumMember(Value = "customDomainErrors")]
         #pragma warning disable CS1591
         CustomDomainErrors,

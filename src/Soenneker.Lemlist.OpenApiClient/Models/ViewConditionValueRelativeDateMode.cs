@@ -24,5 +24,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Past,
         #pragma warning restore CS1591
+        [EnumMember(Value = "more_ago")]
+        #pragma warning disable CS1591
+        MoreAgo,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "more_ahead")]
+        #pragma warning disable CS1591
+        MoreAhead,
+        #pragma warning restore CS1591
     }
 }

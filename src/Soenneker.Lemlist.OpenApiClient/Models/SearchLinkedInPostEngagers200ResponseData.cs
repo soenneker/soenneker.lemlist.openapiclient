@@ -35,7 +35,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Exact filters of the People Database search: `leadLinkedInSlug` plus the filters you passed. Empty when nobody engaged with the post.</summary>
+        /// <summary>Exact filters of the People Database search: `leadLinkedInSlug` plus the filters you passed. Empty when nobody engaged with the post or when `peopleSearchFailed` is `true`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Lemlist.OpenApiClient.Models.PersonaFilter>? Filters { get => _explicitNullValueFilters; set { _explicitNullValueFilters = value; AdditionalData?.Remove("filters"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("filters"); else _explicitNullProperties?.Remove("filters"); } }
@@ -58,7 +58,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople People { get => _explicitNullValuePeople; set { _explicitNullValuePeople = value; AdditionalData?.Remove("people"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("people"); else _explicitNullProperties?.Remove("people"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SearchLinkedInPostEngagers200ResponseDataPeople _explicitNullValuePeople = default!;
 #endif
-        /// <summary>Present and `true` when the People Database search failed after the post was read: the 50 credits were refunded, `slugs` and `filters` are valid, `search` and `people` are absent. Run `POST /database/people` yourself with `filters` (no credits, but it counts in the 24-hour quota), or call this endpoint again, which is a new paid call.</summary>
+        /// <summary>Present and `true` when the People Database search failed after the post was read: the 50 credits were refunded, `slugs` and `filters` are empty, `search` and `people` are absent. Call this endpoint again later: it is a new paid call.</summary>
         public bool? PeopleSearchFailed { get => _explicitNullValuePeopleSearchFailed; set { _explicitNullValuePeopleSearchFailed = value; AdditionalData?.Remove("peopleSearchFailed"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("peopleSearchFailed"); else _explicitNullProperties?.Remove("peopleSearchFailed"); } }
         private bool? _explicitNullValuePeopleSearchFailed = default!;
         /// <summary>Id of the People Database search. Send it as `fromSearchId` to `POST /database/people` to get the next pages or refine the filters. This debits no credits, but it counts in the 24-hour People Database search quota, like any search. Absent when nobody engaged with the post or when the People Database search failed.</summary>
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Search { get => _explicitNullValueSearch; set { _explicitNullValueSearch = value; AdditionalData?.Remove("search"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("search"); else _explicitNullProperties?.Remove("search"); } }
         private string _explicitNullValueSearch = default!;
 #endif
-        /// <summary>LinkedIn slugs of the engagers, post author excluded and deduplicated</summary>
+        /// <summary>LinkedIn slugs of the engagers, post author excluded and deduplicated. Empty when `peopleSearchFailed` is `true`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Slugs { get => _explicitNullValueSlugs; set { _explicitNullValueSlugs = value; AdditionalData?.Remove("slugs"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("slugs"); else _explicitNullProperties?.Remove("slugs"); } }

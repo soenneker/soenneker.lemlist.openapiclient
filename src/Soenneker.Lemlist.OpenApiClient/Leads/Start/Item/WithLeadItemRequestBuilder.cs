@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Start.Item
         {
         }
         /// <summary>
-        /// Resume Paused Lead
+        /// Resumes the lead. When the campaign has reached its end date, the lead is not resumed: it is returned with `isPaused: true` and no error.
         /// </summary>
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.PostLeadsStartByLeadId200ResponseSchemaItem&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -60,7 +60,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Leads.Start.Item
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Resume Paused Lead
+        /// Resumes the lead. When the campaign has reached its end date, the lead is not resumed: it is returned with `isPaused: true` and no error.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
