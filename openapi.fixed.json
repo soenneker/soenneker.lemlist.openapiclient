@@ -37108,7 +37108,7 @@
             "description": "Contact profile picture URL"
           }
         },
-        "description": "Contact associated with this signal (if entity type is \u0027contact\u0027)"
+        "description": "Contact associated with this signal: the tracked contact, or on a company signal the person the signal is about (for example Warm Intros or Competitor Connections). Absent when the signal has no contact."
       },
       "SignalSchemaCompany": {
         "type": "object",

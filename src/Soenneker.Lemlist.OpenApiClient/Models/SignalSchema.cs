@@ -54,7 +54,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaCompany Company { get => _explicitNullValueCompany; set { _explicitNullValueCompany = value; AdditionalData?.Remove("company"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company"); else _explicitNullProperties?.Remove("company"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaCompany _explicitNullValueCompany = default!;
 #endif
-        /// <summary>Contact associated with this signal (if entity type is &apos;contact&apos;)</summary>
+        /// <summary>Contact associated with this signal: the tracked contact, or on a company signal the person the signal is about (for example Warm Intros or Competitor Connections). Absent when the signal has no contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.SignalSchemaContact? Contact { get => _explicitNullValueContact; set { _explicitNullValueContact = value; AdditionalData?.Remove("contact"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contact"); else _explicitNullProperties?.Remove("contact"); } }

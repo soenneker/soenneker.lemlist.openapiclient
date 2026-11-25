@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// Contact associated with this signal (if entity type is &apos;contact&apos;)
+    /// Contact associated with this signal: the tracked contact, or on a company signal the person the signal is about (for example Warm Intros or Competitor Connections). Absent when the signal has no contact.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SignalSchemaContact : IAdditionalDataHolder, IParsable
