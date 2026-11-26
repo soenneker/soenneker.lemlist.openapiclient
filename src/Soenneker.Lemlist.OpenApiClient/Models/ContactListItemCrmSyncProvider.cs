@@ -19,5 +19,13 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Pipedrive,
         #pragma warning restore CS1591
+        [EnumMember(Value = "attio")]
+        #pragma warning disable CS1591
+        Attio,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "zoho")]
+        #pragma warning disable CS1591
+        Zoho,
+        #pragma warning restore CS1591
     }
 }

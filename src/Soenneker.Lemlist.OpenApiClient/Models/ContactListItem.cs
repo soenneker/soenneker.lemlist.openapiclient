@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// A contact as the list (`GET /contacts` with filters or no parameter) returns it, with the main fields flattened. Properties with no value are omitted.
+    /// A contact as the list of `GET /contacts` and `GET /v2/contacts` returns it, with the main fields flattened. Properties with no value are omitted.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContactListItem : IAdditionalDataHolder, IParsable
@@ -50,6 +50,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("ownerId") is { } nullNodeOwnerId && nullNodeOwnerId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OwnerId = null;
             if (parseNode.GetChildNode("phone") is null) { _explicitNullValuePhone = default!; _explicitNullProperties?.Remove("phone"); }
             else if (parseNode.GetChildNode("phone") is { } nullNodePhone && nullNodePhone.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Phone = null;
+            if (parseNode.GetChildNode("statusId") is null) { _explicitNullValueStatusId = default!; _explicitNullProperties?.Remove("statusId"); }
+            else if (parseNode.GetChildNode("statusId") is { } nullNodeStatusId && nullNodeStatusId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StatusId = null;
             if (parseNode.GetChildNode("teamId") is null) { _explicitNullValueTeamId = default!; _explicitNullProperties?.Remove("teamId"); }
             else if (parseNode.GetChildNode("teamId") is { } nullNodeTeamId && nullNodeTeamId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamId = null;
             if (parseNode.GetChildNode("unsubscribed") is null) { _explicitNullValueUnsubscribed = default!; _explicitNullProperties?.Remove("unsubscribed"); }
@@ -204,6 +206,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Phone { get => _explicitNullValuePhone; set { _explicitNullValuePhone = value; AdditionalData?.Remove("phone"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phone"); else _explicitNullProperties?.Remove("phone"); } }
         private string _explicitNullValuePhone = default!;
 #endif
+        /// <summary>ID of the contact&apos;s status, one of the team&apos;s contact statuses</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? StatusId { get => _explicitNullValueStatusId; set { _explicitNullValueStatusId = value; AdditionalData?.Remove("statusId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("statusId"); else _explicitNullProperties?.Remove("statusId"); } }
+        private string? _explicitNullValueStatusId = default!;
+#nullable restore
+#else
+        public string StatusId { get => _explicitNullValueStatusId; set { _explicitNullValueStatusId = value; AdditionalData?.Remove("statusId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("statusId"); else _explicitNullProperties?.Remove("statusId"); } }
+        private string _explicitNullValueStatusId = default!;
+#endif
         /// <summary>Team identifier the contact belongs to</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -240,7 +252,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(18)
+            return new Dictionary<string, Action<IParseNode>>(19)
             {
                 { "campaignCount", n => { CampaignCount = n.GetIntValue(); } },
                 { "companyId", n => { CompanyId = n.GetStringValue(); } },
@@ -258,6 +270,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "linkedinUrlSalesNav", n => { LinkedinUrlSalesNav = n.GetStringValue(); } },
                 { "ownerId", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "statusId", n => { StatusId = n.GetStringValue(); } },
                 { "teamId", n => { TeamId = n.GetStringValue(); } },
                 { "unsubscribed", n => { Unsubscribed = n.GetBoolValue(); } },
             };
@@ -285,6 +298,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("linkedinUrlSalesNav", LinkedinUrlSalesNav);
             writer.WriteStringValue("ownerId", OwnerId);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteStringValue("statusId", StatusId);
             writer.WriteStringValue("teamId", TeamId);
             writer.WriteBoolValue("unsubscribed", Unsubscribed);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

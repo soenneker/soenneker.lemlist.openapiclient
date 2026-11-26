@@ -89,7 +89,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string ReplyToActivityId { get => _explicitNullValueReplyToActivityId; set { _explicitNullValueReplyToActivityId = value; AdditionalData?.Remove("replyToActivityId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("replyToActivityId"); else _explicitNullProperties?.Remove("replyToActivityId"); } }
         private string _explicitNullValueReplyToActivityId = default!;
 #endif
-        /// <summary>Sender email address</summary>
+        /// <summary>Sender (From) email address. Must be an address of the sendUserMailboxId mailbox: one of its aliases or the address of its connected account (Google, Microsoft, or SMTP/IMAP login). The comparison ignores case. Any other address is refused with 400 &quot;Alias not found&quot;: when a mailbox&apos;s domain or aliases change, update the address your integration sends.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SendUserEmail { get => _explicitNullValueSendUserEmail; set { _explicitNullValueSendUserEmail = value; AdditionalData?.Remove("sendUserEmail"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUserEmail"); else _explicitNullProperties?.Remove("sendUserEmail"); } }
@@ -109,7 +109,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string SendUserId { get => _explicitNullValueSendUserId; set { _explicitNullValueSendUserId = value; AdditionalData?.Remove("sendUserId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUserId"); else _explicitNullProperties?.Remove("sendUserId"); } }
         private string _explicitNullValueSendUserId = default!;
 #endif
-        /// <summary>Sender mailbox ID</summary>
+        /// <summary>Sender mailbox ID. Must be a mailbox of sendUserId in your team.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SendUserMailboxId { get => _explicitNullValueSendUserMailboxId; set { _explicitNullValueSendUserMailboxId = value; AdditionalData?.Remove("sendUserMailboxId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sendUserMailboxId"); else _explicitNullProperties?.Remove("sendUserMailboxId"); } }

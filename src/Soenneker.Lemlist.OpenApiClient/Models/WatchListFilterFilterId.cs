@@ -163,10 +163,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         CrmListIds,
         #pragma warning restore CS1591
-        [EnumMember(Value = "targetCrmListIds")]
-        #pragma warning disable CS1591
-        TargetCrmListIds,
-        #pragma warning restore CS1591
         [EnumMember(Value = "minJobCount")]
         #pragma warning disable CS1591
         MinJobCount,

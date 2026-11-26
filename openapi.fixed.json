@@ -13934,13 +13934,16 @@
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / Invalid sendUserId / Invalid sendUserEmail / Invalid sendUserMailboxId / contactId or leadId is required / Invalid leadId / Lead not found / Failed to send email",
+            "description": "Possible errors: Invalid sendUserId / Invalid sendUserEmail / Invalid sendUserMailboxId / contactId or leadId is required / Invalid leadId / Lead not found / Invalid contactId / Bad mailbox (sendUserMailboxId is not a mailbox of sendUserId in your team) / Invalid replyToActivityId / Alias not found (sendUserEmail is not an address of the sendUserMailboxId mailbox) / Failed to send email",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
+                  "$ref": "#/components/schemas/PostInboxEmail400Response"
                 },
-                "example": "Bad team"
+                "example": {
+                  "error": "Alias not found"
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -15391,7 +15394,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       },
       "post": {
         "tags": [
@@ -17136,6 +17140,366 @@
           }
         },
         "deprecated": true
+      }
+    },
+    "/v2/contacts": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Search Contacts",
+        "description": "Searches your team\u0027s contacts in the index the Contacts page reads: the v1 search parameters for the common filters, an \u0060advancedFilters\u0060 tree for everything else, and a sort. Answers \u0060{ data, total, limit, offset }\u0060, with the same row keys as the list of \u0060GET /contacts\u0060.",
+        "operationId": "GetV2Contacts",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Free-text search across the contact: name, email, phone, job title, location, industry, languages, skills, summary, LinkedIn URLs and the AI buying role. At least 2 characters, case-insensitive.",
+            "schema": {
+              "maxLength": 200,
+              "minLength": 2,
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Exact email address, matched among all the contact\u0027s emails. Takes precedence over \u0060search\u0060.",
+            "schema": {
+              "type": "string",
+              "x-client-original-format": "email"
+            }
+          },
+          {
+            "name": "listId",
+            "in": "query",
+            "description": "Filter contacts by contact list ID (\u0060clt_xxx\u0060 format). Can be combined with \u0060search\u0060 or \u0060email\u0060, or used alone to list all contacts in a list. Get valid IDs from \u0060GET /contacts/lists\u0060.",
+            "schema": {
+              "pattern": "^clt_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "example": "clt_abc123def456ghi78"
+          },
+          {
+            "name": "notInAnyCampaign",
+            "in": "query",
+            "description": "When set to \u0060true\u0060, only returns contacts that are not part of any campaign (orphan contacts). Can be used alone or combined with other filters such as \u0060search\u0060, \u0060email\u0060, or \u0060listId\u0060.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "description": "Filter contacts by attached company ID (\u0060cpn_xxx\u0060 format). Mutually exclusive with \u0060companyDomain\u0060, \u0060companyLinkedinUrl\u0060, \u0060companySalesnavUrl\u0060 and \u0060withPrimaryCompany\u0060.",
+            "schema": {
+              "pattern": "^cpn_[a-zA-Z0-9]\u002B$",
+              "type": "string"
+            },
+            "example": "cpn_A1B2C3D4E5F6G7H8I"
+          },
+          {
+            "name": "companyDomain",
+            "in": "query",
+            "description": "Filter contacts by their company\u0027s website domain, resolved to a \u0060companyId\u0060. If no company matches, the response is an empty page (\u0060total: 0\u0060). Mutually exclusive with the other \u0060company*\u0060 filters.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "acme.com"
+          },
+          {
+            "name": "companyLinkedinUrl",
+            "in": "query",
+            "description": "Filter contacts by their company\u0027s LinkedIn URL, resolved to a \u0060companyId\u0060. If no company matches, the response is an empty page (\u0060total: 0\u0060). Mutually exclusive with the other \u0060company*\u0060 filters.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://www.linkedin.com/company/acme"
+          },
+          {
+            "name": "companySalesnavUrl",
+            "in": "query",
+            "description": "Filter contacts by their company\u0027s LinkedIn Sales Navigator URL, resolved to a \u0060companyId\u0060. If no company matches, the response is an empty page (\u0060total: 0\u0060). Mutually exclusive with the other \u0060company*\u0060 filters.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://www.linkedin.com/sales/company/12345678"
+          },
+          {
+            "name": "withPrimaryCompany",
+            "in": "query",
+            "description": "When set to \u0060true\u0060, only returns contacts linked to a company; when set to \u0060false\u0060, only returns contacts without a company. Omit for no filter. Mutually exclusive with the \u0060company*\u0060 filters.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "fieldRejectionReason",
+            "in": "query",
+            "description": "Filter contacts to those carrying a field rejection with this reason \u2014 a value lemlist refused to write, prefixed by its origin (\u0060enrichment_*\u0060 while enriching, \u0060crm_sync_*\u0060 during CRM sync). Returns an empty page (\u0060total: 0\u0060) when no contact matches. Each row exposes the full detail under \u0060fieldRejections[]\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/GetV2ContactsFieldRejectionReasonParameter"
+            },
+            "example": "enrichment_duplicate_linkedin_url"
+          },
+          {
+            "name": "crmSyncStatus",
+            "in": "query",
+            "description": "Filter contacts by their CRM sync state against the team\u0027s active CRM provider. Requires a CRM (Hubspot, Salesforce, Pipedrive or Attio) to be connected \u2014 otherwise the request answers \u0060400 NO_CRM_CONNECTED\u0060. Values:\n- \u0060synced\u0060 \u2014 the contact has a CRM record on the active CRM and no sync error.\n- \u0060not_synced\u0060 \u2014 the contact has no CRM record on the active CRM.\n- \u0060searching\u0060 \u2014 a CRM search (Search \u0026 connect, Create in CRM) is queued or running for the contact.\n- \u0060not_found\u0060 \u2014 the last CRM search found no record for the contact.\n- \u0060error\u0060 \u2014 at least one sync error is currently raised, whatever its reason.\n- A specific error reason (lowercase form), to filter by root cause, e.g. \u0060invalid_email\u0060 or \u0060contact_blocked_by_company\u0060.\nThe \u0060error\u0060, \u0060searching\u0060, \u0060not_found\u0060 and reason states read every CRM the contact was synced with, so an error left by a previous CRM counts as \u0060error\u0060 and keeps the contact out of \u0060synced\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/GetV2ContactsCrmSyncStatusParameter"
+            },
+            "example": "error"
+          },
+          {
+            "name": "crmIds",
+            "in": "query",
+            "description": "Record ids of contacts in the team\u0027s active CRM (HubSpot, Salesforce, Pipedrive or Attio), 1 to 100 values; for Salesforce, the 18-character Contact or Lead id; for Attio, the record UUID. Each contact found carries the matched id under \u0060crmSync.crmRecordId\u0060; an id that matches no contact is left out. Cannot be combined with the other filters, \u0060search\u0060 and the company filters included.",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123456789,987654321"
+          },
+          {
+            "name": "advancedFilters",
+            "in": "query",
+            "description": "A filter tree encoded as JSON, addressing any field returned by \u0060GET /v2/contacts/filters\u0060. A node is either a group (\u0060connector\u0060 \u0060and\u0060 / \u0060or\u0060, plus \u0060children\u0060) or a condition (\u0060property\u0060, \u0060operator\u0060, \u0060value\u0060). Max depth 5, max 50 conditions. An unknown property or an operator the field does not allow answers \u0060400 INVALID_FILTER\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{\u0022type\u0022:\u0022group\u0022,\u0022id\u0022:\u0022root\u0022,\u0022connector\u0022:\u0022and\u0022,\u0022children\u0022:[{\u0022type\u0022:\u0022condition\u0022,\u0022id\u0022:\u0022c1\u0022,\u0022property\u0022:\u0022jobTitle\u0022,\u0022operator\u0022:\u0022contains\u0022,\u0022value\u0022:\u0022engineer\u0022}]}"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field the page is ordered by. Ties are broken by the contact id.",
+            "schema": {
+              "$ref": "#/components/schemas/GetV2ContactsSortByParameter"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort direction.",
+            "schema": {
+              "$ref": "#/components/schemas/GetV2ContactsSortOrderParameter"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of contacts to return (1\u2013500). Defaults to 100. \u0060limit \u002B offset\u0060 must not exceed 10000.",
+            "schema": {
+              "maximum": 500,
+              "minimum": 1,
+              "type": "integer",
+              "default": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of contacts to skip for pagination. Defaults to 0. \u0060limit \u002B offset\u0060 must not exceed 10000: narrow the filters or the search instead of walking deeper.",
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactV2ListResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "_id": "ctc_A1B2C3D4E5F6G7H8I",
+                      "teamId": "tea_A1B2C3D4E5F6G7H8I",
+                      "fullName": "John Doe",
+                      "email": "john@example.com",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "jobTitle": "Growth Engineer",
+                      "ownerId": "usr_A1B2C3D4E5F6G7H8I",
+                      "statusId": "nExampleStatus",
+                      "companyId": "cpn_A1B2C3D4E5F6G7H8I",
+                      "createdAt": "2026-01-12T09:00:00.000Z",
+                      "createdBy": "usr_A1B2C3D4E5F6G7H8I",
+                      "unsubscribed": false,
+                      "campaignCount": 2,
+                      "crmSync": {
+                        "provider": "hubspot",
+                        "crmRecordId": "123456789",
+                        "syncDisabled": false,
+                        "searching": false,
+                        "notFoundAt": null,
+                        "errors": []
+                      },
+                      "fieldRejections": []
+                    }
+                  ],
+                  "total": 1,
+                  "limit": 100,
+                  "offset": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter \u2014 a value of the wrong type, an unknown \u0060sortBy\u0060, a filter tree over 5 levels or 50 conditions, \u0060crmIds\u0060 sent with another filter, an unknown filter property or operator (\u0060INVALID_FILTER\u0060), two company filters (\u0060MULTIPLE_COMPANY_FILTERS\u0060), a bad company id (\u0060INVALID_COMPANY_ID\u0060), an unknown field-rejection reason (\u0060INVALID_FIELD_REJECTION_REASON\u0060), an unknown CRM sync status (\u0060INVALID_CRM_SYNC_STATUS\u0060), \u0060crmSyncStatus\u0060 with no CRM connected (\u0060NO_CRM_CONNECTED\u0060), or \u0060limit \u002B offset\u0060 past 10000 (\u0060PAGE_WINDOW_TOO_LARGE\u0060).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "examples": {
+                  "invalid-parameter": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "INVALID_PARAMETER",
+                        "message": "sortBy: invalid value"
+                      }
+                    }
+                  },
+                  "window-too-large": {
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "code": "PAGE_WINDOW_TOO_LARGE",
+                        "message": "limit \u002B offset must be at most 10000"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect."
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "500": {
+            "description": "The search failed, with any other error code. It is alerted on our side, not answered as a client error."
+          }
+        }
+      }
+    },
+    "/v2/contacts/filters": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "List Contact Filters",
+        "description": "Lists every field addressable by \u0060advancedFilters\u0060 on \u0060GET /v2/contacts\u0060, with its type, its allowed operators and the flat query parameter that addresses it, when there is one. The team\u0027s custom fields are included.",
+        "operationId": "GetV2ContactsFilters",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Restricts the response to the contact fields or to the company fields.",
+            "schema": {
+              "$ref": "#/components/schemas/GetV2ContactsFiltersScopeParameter"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Keeps the fields whose id or label contains this text, case-insensitive.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactV2FiltersResponse"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "field": "jobTitle",
+                      "label": "Job title",
+                      "scope": "contact",
+                      "type": "text",
+                      "custom": false,
+                      "operators": [
+                        "contains",
+                        "does_not_contain",
+                        "is",
+                        "is_not",
+                        "starts_with",
+                        "ends_with",
+                        "is_empty",
+                        "is_not_empty"
+                      ],
+                      "queryParam": null,
+                      "values": null
+                    },
+                    {
+                      "field": "company.domain",
+                      "label": "Company domain",
+                      "scope": "company",
+                      "type": "text",
+                      "custom": false,
+                      "operators": [
+                        "contains",
+                        "does_not_contain",
+                        "is",
+                        "is_not",
+                        "starts_with",
+                        "ends_with",
+                        "is_empty",
+                        "is_not_empty"
+                      ],
+                      "queryParam": "companyDomain",
+                      "values": null
+                    }
+                  ],
+                  "total": 42
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter \u2014 an unknown \u0060scope\u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorEnvelope"
+                },
+                "example": {
+                  "success": false,
+                  "error": {
+                    "code": "INVALID_PARAMETER",
+                    "message": "scope: invalid value"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authentication you supplied is incorrect."
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "500": {
+            "description": "The filter list failed, with any other error code. It is alerted on our side, not answered as a client error."
+          }
+        }
       }
     },
     "/lemwarm/{userMailboxId}/start": {
@@ -21549,7 +21913,7 @@
           {
             "name": "campaignId",
             "in": "query",
-            "description": "Webhook for specific campaign",
+            "description": "Webhook for specific campaign. It must be a live campaign the API key\u0027s user can see: an id that is not a campaign id answers 400, and a campaign that does not exist or was deleted answers 404 with its code.",
             "schema": {
               "type": "string"
             },
@@ -21606,13 +21970,21 @@
             }
           },
           "400": {
-            "description": "Bad team",
+            "description": "Bad team, or a \u0060campaignId\u0060 that is not a campaign id. Told apart by the media type of the body.",
             "content": {
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseError"
                 },
                 "example": "Bad team"
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostHooks400Response"
+                },
+                "example": {
+                  "error": "Invalid campaign id"
+                }
               }
             }
           },
@@ -21633,13 +22005,28 @@
             }
           },
           "404": {
-            "description": "Webhook not found",
+            "description": "The \u0060campaignId\u0060 names a campaign that does not exist in the workspace, or that was deleted. Every workspace answers this, whether or not it is on the \u0060permissionsV2ViewAllCampaigns\u0060 beta. The \u0060code\u0060 tells the two apart.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
+                  "$ref": "#/components/schemas/PostHooks404Response"
                 },
-                "example": "Webhook not found"
+                "examples": {
+                  "campaignDeleted": {
+                    "summary": "The campaign was deleted",
+                    "value": {
+                      "error": "This campaign was deleted",
+                      "code": "CAMPAIGN_DELETED"
+                    }
+                  },
+                  "campaignUnknown": {
+                    "summary": "No campaign has this id",
+                    "value": {
+                      "error": "Campaign not found",
+                      "code": "CAMPAIGN_UNKNOWN"
+                    }
+                  }
+                }
               }
             }
           },
@@ -31825,6 +32212,10 @@
             "type": "string",
             "description": "ID of the user who owns this contact"
           },
+          "statusId": {
+            "type": "string",
+            "description": "ID of the contact\u0027s status, one of the team\u0027s contact statuses"
+          },
           "companyId": {
             "type": "string",
             "description": "ID of the company the contact is attached to (\u0060cpn_xxx\u0060)"
@@ -31857,7 +32248,106 @@
             "description": "Values lemlist refused to write on this contact, each with its reason. Empty when none. Filter the list endpoint to only flagged contacts via \u0060GET /contacts?fieldRejectionReason=...\u0060."
           }
         },
-        "description": "A contact as the list (\u0060GET /contacts\u0060 with filters or no parameter) returns it, with the main fields flattened. Properties with no value are omitted."
+        "description": "A contact as the list of \u0060GET /contacts\u0060 and \u0060GET /v2/contacts\u0060 returns it, with the main fields flattened. Properties with no value are omitted."
+      },
+      "ContactV2ListResponse": {
+        "required": [
+          "data",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactListItem"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of matching contacts"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Page size used"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Rows skipped"
+          }
+        },
+        "description": "Paginated response of \u0060GET /v2/contacts\u0060."
+      },
+      "ContactV2FiltersResponse": {
+        "required": [
+          "data",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactV2FilterDescriptor"
+            }
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "description": "Response of \u0060GET /v2/contacts/filters\u0060."
+      },
+      "ContactV2FilterDescriptor": {
+        "required": [
+          "field",
+          "label",
+          "scope",
+          "type",
+          "custom",
+          "operators",
+          "queryParam",
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Property id to put in a condition\u0027s \u0060property\u0060, e.g. \u0060jobTitle\u0060 or \u0060cf_contact_budget\u0060."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable field name."
+          },
+          "scope": {
+            "$ref": "#/components/schemas/ContactV2FilterDescriptorScope"
+          },
+          "type": {
+            "type": "string",
+            "description": "Data type that decides the allowed \u0060operators\u0060: \u0060text\u0060, \u0060number\u0060, \u0060date\u0060, \u0060enum\u0060, \u0060tags\u0060, \u0060boolean\u0060 or \u0060relation\u0060."
+          },
+          "custom": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 for one of your team\u0027s custom fields."
+          },
+          "operators": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Every \u0060operator\u0060 this field accepts."
+          },
+          "queryParam": {
+            "type": "string",
+            "description": "The flat query parameter of \u0060GET /v2/contacts\u0060 that addresses this field, \u0060null\u0060 when only \u0060advancedFilters\u0060 reaches it.",
+            "nullable": true
+          },
+          "values": {
+            "$ref": "#/components/schemas/ContactV2FilterDescriptorValuesProperty"
+          }
+        },
+        "description": "One field a contact search can filter on, from the same catalogue the search validates against."
       },
       "Company": {
         "type": "object",
@@ -32659,7 +33149,11 @@
           },
           "campaignId": {
             "type": "string",
-            "description": "The ID of the campaign the webhook is associated with (if any)"
+            "description": "The ID of the campaign the webhook is associated with. Absent when the webhook fires on every campaign, or when \u0060campaignHidden\u0060 is \u0060true\u0060."
+          },
+          "campaignHidden": {
+            "type": "boolean",
+            "description": "\u0060true\u0060 when the webhook is bound to a campaign the API key\u0027s user cannot see (they lack the \u0022View all campaigns\u0022 permission). Its \u0060campaignId\u0060 is then left out."
           },
           "createdAt": {
             "type": "string",
@@ -33748,7 +34242,7 @@
             "items": {
               "$ref": "#/components/schemas/WatchListFilterInItem"
             },
-            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060. For the Warm Intros filters: \u0060targetCrmListIds\u0060 takes the ids of company CRM lists of the workspace (from \u0060GET /companies/lists\u0060, up to 50 lists and 10,000 companies in total, any other id is rejected with \u0060INVALID_FILTER_VALUE\u0060) and the agent then delivers only people working at the companies of those lists, the other filters still applying; send it again on every update, as \u0060filters\u0060 replaces the whole set; \u0060minOverlapMonths\u0060 takes one integer between 3 and 120, as a string (6 when absent); \u0060includeCurrentCompanies\u0060 takes \u0060true\u0060 to also include the current colleagues of the introducers (only past colleagues when absent). For \u0060personBuyingIntent\u0060 agents: \u0060personIntentTopics\u0060 (required, up to 25) takes topic names returned by \u0060GET /watchlist/filter-values?filterId=personIntentTopics\u0060, any other name is rejected with \u0060INVALID_FILTER_VALUE\u0060; \u0060companySizes\u0060 takes the six ranges \u0060GET /watchlist/filter-values\u0060 returns with \u0060type=personBuyingIntent\u0060; \u0060companyLocation\u0060 and \u0060location\u0060 take country names; every filter of this type is an inclusion, and \u0060personIntentTopics\u0060, \u0060title\u0060, \u0060companyLocation\u0060, \u0060location\u0060, \u0060companyIndustries\u0060 and \u0060companySizes\u0060 take up to 25 values each; \u0060maxIdentificationsPerDay\u0060 (required, 20 when absent) takes one integer; \u0060lookbackDays\u0060 takes one integer between 1 and 30, as a string (30 when absent), the days of past activity delivered once, at the first activation, and a change made afterwards does not reach the running monitoring; send it again on every update, as \u0060filters\u0060 replaces the whole set. For \u0060competitorConnections\u0060 agents: \u0060linkedinProfileUrls\u0060 takes LinkedIn profile URLs (\u0060https://www.linkedin.com/in/\u003Cslug\u003E\u0060, up to 500) of people whose connections are followed, in addition to the competitor company pages of \u0060linkedinUrls\u0060; a company page is rejected with \u0060INVALID_FILTER_VALUE\u0060, and a Sales Navigator URL is accepted and stored as \u0060https://www.linkedin.com/in/\u003Cid\u003E\u0060. \u0060trackedRoles\u0060 takes the roles to follow in each competitor\u0027s team, among \u0060sdr\u0060, \u0060bdr\u0060, \u0060account_executive\u0060, \u0060sales_engineer\u0060, \u0060leadership\u0060, \u0060customer_success\u0060, \u0060account_manager\u0060 and \u0060support\u0060 (inclusion only, up to 8 values, any other value or a longer list is rejected with \u0060INVALID_FILTER_VALUE\u0060); when absent or empty, the default sales and business development team is followed, which does not cover all eight roles, and people whose role cannot be identified are still tracked, as are the profiles of \u0060linkedinProfileUrls\u0060 whatever their role. The price per lead does not change. Send both again on every update, as \u0060filters\u0060 replaces the whole set."
+            "description": "Values to include. For \u0060externalSignalFieldMapping\u0060 and \u0060externalSignalCustomFieldMapping\u0060, an array of mapping objects (see \u0060WatchListExternalSignalMapping\u0060); the JSON-serialized form returned when reading an agent is also accepted. For the industry match settings of the Rodz signal agents, which apply only when \u0060companyIndustries\u0060 includes an industry: \u0060allowUnknownIndustry\u0060 takes \u0060true\u0060 to also match companies whose industry is not published (skipped when absent); \u0060includeRelatedIndustries\u0060 takes \u0060false\u0060 to match only the selected industries (broader or narrower related LinkedIn industries also match when absent). For \u0060githubEventTypes\u0060 (required on \u0060githubStargazer\u0060 agents), one or more of \u0060star\u0060, \u0060fork\u0060, \u0060issue\u0060, \u0060pull_request\u0060, \u0060comment\u0060. For the Warm Intros filters: \u0060minOverlapMonths\u0060 takes one integer between 3 and 120, as a string (6 when absent); \u0060includeCurrentCompanies\u0060 takes \u0060true\u0060 to also include the current colleagues of the introducers (only past colleagues when absent). A Warm Intros agent monitors the whole market, or up to 10,000 companies of CRM lists through \u0060POST /watchlist/crm-lists\u0060. That call removes its company criteria (\u0060companyIndustries\u0060, \u0060allowUnknownIndustry\u0060, \u0060includeRelatedIndustries\u0060, \u0060companySizes\u0060 and the \u0060out\u0060 of \u0060companyLinkedinUrls\u0060) and its excluded CRM lists; its person criteria keep applying. For \u0060personBuyingIntent\u0060 agents: \u0060personIntentTopics\u0060 (required, up to 25) takes topic names returned by \u0060GET /watchlist/filter-values?filterId=personIntentTopics\u0060, any other name is rejected with \u0060INVALID_FILTER_VALUE\u0060; \u0060companySizes\u0060 takes the six ranges \u0060GET /watchlist/filter-values\u0060 returns with \u0060type=personBuyingIntent\u0060; \u0060companyLocation\u0060 and \u0060location\u0060 take country names; every filter of this type is an inclusion, and \u0060personIntentTopics\u0060, \u0060title\u0060, \u0060companyLocation\u0060, \u0060location\u0060, \u0060companyIndustries\u0060 and \u0060companySizes\u0060 take up to 25 values each; \u0060maxIdentificationsPerDay\u0060 (required, 20 when absent) takes one integer; \u0060lookbackDays\u0060 takes one integer between 1 and 30, as a string (30 when absent), the days of past activity delivered once, at the first activation, and a change made afterwards does not reach the running monitoring; send it again on every update, as \u0060filters\u0060 replaces the whole set. For \u0060competitorConnections\u0060 agents: \u0060linkedinProfileUrls\u0060 takes LinkedIn profile URLs (\u0060https://www.linkedin.com/in/\u003Cslug\u003E\u0060, up to 500) of people whose connections are followed, in addition to the competitor company pages of \u0060linkedinUrls\u0060; a company page is rejected with \u0060INVALID_FILTER_VALUE\u0060, and a Sales Navigator URL is accepted and stored as \u0060https://www.linkedin.com/in/\u003Cid\u003E\u0060. \u0060trackedRoles\u0060 takes the roles to follow in each competitor\u0027s team, among \u0060sdr\u0060, \u0060bdr\u0060, \u0060account_executive\u0060, \u0060sales_engineer\u0060, \u0060leadership\u0060, \u0060customer_success\u0060, \u0060account_manager\u0060 and \u0060support\u0060 (inclusion only, up to 8 values, any other value or a longer list is rejected with \u0060INVALID_FILTER_VALUE\u0060); when absent or empty, the default sales and business development team is followed, which does not cover all eight roles, and people whose role cannot be identified are still tracked, as are the profiles of \u0060linkedinProfileUrls\u0060 whatever their role. The price per lead does not change. Send both again on every update, as \u0060filters\u0060 replaces the whole set."
           },
           "out": {
             "type": "array",
@@ -34126,6 +34620,13 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/WatchListSchema"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WatchListApiWatchListResponseWarningsItem"
+            },
+            "description": "Non-blocking notices on the configuration, never a failure: the Signal Agent was written. Returned by [Create Signal Agent](/api-reference/endpoints/watch-list/create-watch-list) and [Update Signal Agent](/api-reference/endpoints/watch-list/update-watch-list), absent when there is none; [Monitor CRM Lists with a Signal Agent](/api-reference/endpoints/watch-list/associate-crm-lists) never returns it."
           }
         }
       },
@@ -37786,6 +38287,23 @@
           }
         },
         "description": "The matched entity. Present when status is processed."
+      },
+      "WatchListApiWatchListResponseWarningsItem": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "\u0060CLOSED_WON_LOOKALIKE_CRM_NOT_CONNECTED\u0060: a \u0060closedWonLookalike\u0060 agent on a team without a connected CRM. It stays on hold until a CRM is connected in Settings \u003E Integrations, then resumes on its own."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable explanation of the notice, to relay to the user."
+          }
+        }
       },
       "WatchListApiDeleteWatchListResponseData": {
         "type": "object",
@@ -42448,11 +42966,11 @@
           },
           "sendUserEmail": {
             "type": "string",
-            "description": "Sender email address"
+            "description": "Sender (From) email address. Must be an address of the sendUserMailboxId mailbox: one of its aliases or the address of its connected account (Google, Microsoft, or SMTP/IMAP login). The comparison ignores case. Any other address is refused with 400 \u0022Alias not found\u0022: when a mailbox\u0027s domain or aliases change, update the address your integration sends."
           },
           "sendUserMailboxId": {
             "type": "string",
-            "description": "Sender mailbox ID"
+            "description": "Sender mailbox ID. Must be a mailbox of sendUserId in your team."
           },
           "contactId": {
             "type": "string",
@@ -42493,6 +43011,14 @@
           "contactId": {
             "type": "string",
             "description": "The contact the email was sent to (resolved from leadId when only a lead was provided)."
+          }
+        }
+      },
+      "PostInboxEmail400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -44556,11 +45082,35 @@
           }
         }
       },
+      "PostHooks400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
       "PostHooks403Response": {
         "type": "object",
         "properties": {
           "error": {
             "type": "string"
+          }
+        }
+      },
+      "PostHooks404Response": {
+        "required": [
+          "error",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable message."
+          },
+          "code": {
+            "$ref": "#/components/schemas/PostHooks404ResponseCode"
           }
         }
       },
@@ -47611,6 +48161,11 @@
       "ContactFieldsProperty": {
         "type": "object",
         "description": "Contact fields, standard (\u0060firstName\u0060, \u0060lastName\u0060, \u0060phone\u0060, \u0060jobTitle\u0060...) and custom"
+      },
+      "ContactV2FilterDescriptorValuesProperty": {
+        "type": "object",
+        "description": "Always \u0060null\u0060: the values of owners, lists, statuses and campaigns come from their own endpoints.",
+        "nullable": true
       },
       "CrmLogUpdatedFieldsProperty": {
         "type": "object",
@@ -52315,6 +52870,28 @@
         "type": "integer",
         "description": "\u00600\u0060 low, \u00601\u0060 medium, \u00602\u0060 high. Absent when the task has no priority."
       },
+      "ContactV2FilterDescriptorScope": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "description": "Whether the field belongs to the contact or to its company.",
+        "x-ms-enum": {
+          "name": "ContactV2FilterDescriptorScope",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
       "CallDirection": {
         "enum": [
           "inbound",
@@ -54601,7 +55178,6 @@
           "externalSignalCustomFieldMapping",
           "seniority",
           "crmListIds",
-          "targetCrmListIds",
           "minJobCount",
           "timeframe",
           "githubRepoUrls",
@@ -54783,10 +55359,6 @@
             {
               "value": "crmListIds",
               "name": "CrmListIds"
-            },
-            {
-              "value": "targetCrmListIds",
-              "name": "TargetCrmListIds"
             },
             {
               "value": "minJobCount",
@@ -56743,7 +57315,9 @@
         "enum": [
           "hubspot",
           "salesforce",
-          "pipedrive"
+          "pipedrive",
+          "attio",
+          "zoho"
         ],
         "type": "string",
         "description": "Active CRM provider for the team.",
@@ -56762,6 +57336,14 @@
             {
               "value": "pipedrive",
               "name": "Pipedrive"
+            },
+            {
+              "value": "attio",
+              "name": "Attio"
+            },
+            {
+              "value": "zoho",
+              "name": "Zoho"
             }
           ]
         }
@@ -60013,6 +60595,28 @@
             {
               "value": "contactSourcingFailed",
               "name": "ContactSourcingFailed"
+            }
+          ]
+        }
+      },
+      "PostHooks404ResponseCode": {
+        "enum": [
+          "CAMPAIGN_DELETED",
+          "CAMPAIGN_UNKNOWN"
+        ],
+        "type": "string",
+        "description": "\u0060CAMPAIGN_DELETED\u0060 or \u0060CAMPAIGN_UNKNOWN\u0060.",
+        "x-ms-enum": {
+          "name": "PostHooks404ResponseCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "CAMPAIGN_DELETED",
+              "name": "CampaignDeleted"
+            },
+            {
+              "value": "CAMPAIGN_UNKNOWN",
+              "name": "CampaignUnknown"
             }
           ]
         }
@@ -63945,6 +64549,286 @@
           ]
         }
       },
+      "GetV2ContactsFieldRejectionReasonParameter": {
+        "enum": [
+          "enrichment_duplicate_linkedin_url",
+          "enrichment_duplicate_linkedin_url_sales_nav",
+          "enrichment_duplicate_email",
+          "crm_sync_duplicate_linkedin_url",
+          "crm_sync_duplicate_linkedin_url_sales_nav",
+          "crm_sync_invalid_linkedin_url",
+          "crm_sync_invalid_url",
+          "crm_sync_invalid_email",
+          "crm_sync_invalid_phone",
+          "crm_sync_linkedin_url_not_contact",
+          "crm_sync_duplicate_contact_blocked",
+          "crm_sync_duplicate_company_blocked",
+          "crm_sync_company_data_rejected",
+          "crm_sync_unsub_state_protected",
+          "crm_sync_unsub_channel_empty",
+          "crm_sync_value_oscillating",
+          "crm_sync_owner_sync_loop",
+          "crm_sync_unmapped_user",
+          "crm_sync_value_incompatible",
+          "crm_sync_unknown_error"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "GetV2ContactsFieldRejectionReasonParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "enrichment_duplicate_linkedin_url",
+              "name": "EnrichmentDuplicateLinkedinUrl"
+            },
+            {
+              "value": "enrichment_duplicate_linkedin_url_sales_nav",
+              "name": "EnrichmentDuplicateLinkedinUrlSalesNav"
+            },
+            {
+              "value": "enrichment_duplicate_email",
+              "name": "EnrichmentDuplicateEmail"
+            },
+            {
+              "value": "crm_sync_duplicate_linkedin_url",
+              "name": "CrmSyncDuplicateLinkedinUrl"
+            },
+            {
+              "value": "crm_sync_duplicate_linkedin_url_sales_nav",
+              "name": "CrmSyncDuplicateLinkedinUrlSalesNav"
+            },
+            {
+              "value": "crm_sync_invalid_linkedin_url",
+              "name": "CrmSyncInvalidLinkedinUrl"
+            },
+            {
+              "value": "crm_sync_invalid_url",
+              "name": "CrmSyncInvalidUrl"
+            },
+            {
+              "value": "crm_sync_invalid_email",
+              "name": "CrmSyncInvalidEmail"
+            },
+            {
+              "value": "crm_sync_invalid_phone",
+              "name": "CrmSyncInvalidPhone"
+            },
+            {
+              "value": "crm_sync_linkedin_url_not_contact",
+              "name": "CrmSyncLinkedinUrlNotContact"
+            },
+            {
+              "value": "crm_sync_duplicate_contact_blocked",
+              "name": "CrmSyncDuplicateContactBlocked"
+            },
+            {
+              "value": "crm_sync_duplicate_company_blocked",
+              "name": "CrmSyncDuplicateCompanyBlocked"
+            },
+            {
+              "value": "crm_sync_company_data_rejected",
+              "name": "CrmSyncCompanyDataRejected"
+            },
+            {
+              "value": "crm_sync_unsub_state_protected",
+              "name": "CrmSyncUnsubStateProtected"
+            },
+            {
+              "value": "crm_sync_unsub_channel_empty",
+              "name": "CrmSyncUnsubChannelEmpty"
+            },
+            {
+              "value": "crm_sync_value_oscillating",
+              "name": "CrmSyncValueOscillating"
+            },
+            {
+              "value": "crm_sync_owner_sync_loop",
+              "name": "CrmSyncOwnerSyncLoop"
+            },
+            {
+              "value": "crm_sync_unmapped_user",
+              "name": "CrmSyncUnmappedUser"
+            },
+            {
+              "value": "crm_sync_value_incompatible",
+              "name": "CrmSyncValueIncompatible"
+            },
+            {
+              "value": "crm_sync_unknown_error",
+              "name": "CrmSyncUnknownError"
+            }
+          ]
+        }
+      },
+      "GetV2ContactsCrmSyncStatusParameter": {
+        "enum": [
+          "synced",
+          "not_synced",
+          "error",
+          "searching",
+          "not_found",
+          "invalid_email",
+          "property_doesnt_exist",
+          "required_field_missing",
+          "unique_index_error_contact",
+          "contact_already_exists_with_name",
+          "contact_already_exists_with_linkedin_url",
+          "contact_already_exists_with_email",
+          "contact_blocked_by_company",
+          "contact_blocked_by_company_search",
+          "contact_blocked_by_company_without_name",
+          "contact_blocked_by_company_without_key",
+          "contact_blocked_by_company_already_synced"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "GetV2ContactsCrmSyncStatusParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "synced",
+              "name": "Synced"
+            },
+            {
+              "value": "not_synced",
+              "name": "NotSynced"
+            },
+            {
+              "value": "error",
+              "name": "Error"
+            },
+            {
+              "value": "searching",
+              "name": "Searching"
+            },
+            {
+              "value": "not_found",
+              "name": "NotFound"
+            },
+            {
+              "value": "invalid_email",
+              "name": "InvalidEmail"
+            },
+            {
+              "value": "property_doesnt_exist",
+              "name": "PropertyDoesntExist"
+            },
+            {
+              "value": "required_field_missing",
+              "name": "RequiredFieldMissing"
+            },
+            {
+              "value": "unique_index_error_contact",
+              "name": "UniqueIndexErrorContact"
+            },
+            {
+              "value": "contact_already_exists_with_name",
+              "name": "ContactAlreadyExistsWithName"
+            },
+            {
+              "value": "contact_already_exists_with_linkedin_url",
+              "name": "ContactAlreadyExistsWithLinkedinUrl"
+            },
+            {
+              "value": "contact_already_exists_with_email",
+              "name": "ContactAlreadyExistsWithEmail"
+            },
+            {
+              "value": "contact_blocked_by_company",
+              "name": "ContactBlockedByCompany"
+            },
+            {
+              "value": "contact_blocked_by_company_search",
+              "name": "ContactBlockedByCompanySearch"
+            },
+            {
+              "value": "contact_blocked_by_company_without_name",
+              "name": "ContactBlockedByCompanyWithoutName"
+            },
+            {
+              "value": "contact_blocked_by_company_without_key",
+              "name": "ContactBlockedByCompanyWithoutKey"
+            },
+            {
+              "value": "contact_blocked_by_company_already_synced",
+              "name": "ContactBlockedByCompanyAlreadySynced"
+            }
+          ]
+        }
+      },
+      "GetV2ContactsSortByParameter": {
+        "enum": [
+          "createdAt",
+          "fullName",
+          "lastContactedDate",
+          "company.name"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "GetV2ContactsSortByParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "createdAt",
+              "name": "CreatedAt"
+            },
+            {
+              "value": "fullName",
+              "name": "FullName"
+            },
+            {
+              "value": "lastContactedDate",
+              "name": "LastContactedDate"
+            },
+            {
+              "value": "company.name",
+              "name": "CompanyName"
+            }
+          ]
+        }
+      },
+      "GetV2ContactsSortOrderParameter": {
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "GetV2ContactsSortOrderParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "asc",
+              "name": "Asc"
+            },
+            {
+              "value": "desc",
+              "name": "Desc"
+            }
+          ]
+        }
+      },
+      "GetV2ContactsFiltersScopeParameter": {
+        "enum": [
+          "contact",
+          "company"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "GetV2ContactsFiltersScopeParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact",
+              "name": "Contact"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
       "GetCompaniesSortOrderParameter": {
         "enum": [
           "asc",
@@ -65547,6 +66431,11 @@
     "ContactFields": {
       "type": "object",
       "description": "Contact fields, standard (\u0060firstName\u0060, \u0060lastName\u0060, \u0060phone\u0060, \u0060jobTitle\u0060...) and custom"
+    },
+    "ContactV2FilterDescriptorValues": {
+      "type": "object",
+      "description": "Always \u0060null\u0060: the values of owners, lists, statuses and campaigns come from their own endpoints.",
+      "nullable": true
     },
     "CrmLogUpdatedFields": {
       "type": "object",

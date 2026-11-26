@@ -18,6 +18,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("campaignHidden") is null) { _explicitNullValueCampaignHidden = default!; _explicitNullProperties?.Remove("campaignHidden"); }
+            else if (parseNode.GetChildNode("campaignHidden") is { } nullNodeCampaignHidden && nullNodeCampaignHidden.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignHidden = null;
             if (parseNode.GetChildNode("campaignId") is null) { _explicitNullValueCampaignId = default!; _explicitNullProperties?.Remove("campaignId"); }
             else if (parseNode.GetChildNode("campaignId") is { } nullNodeCampaignId && nullNodeCampaignId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CampaignId = null;
             if (parseNode.GetChildNode("createdAt") is null) { _explicitNullValueCreatedAt = default!; _explicitNullProperties?.Remove("createdAt"); }
@@ -42,7 +44,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The ID of the campaign the webhook is associated with (if any)</summary>
+        /// <summary>`true` when the webhook is bound to a campaign the API key&apos;s user cannot see (they lack the &quot;View all campaigns&quot; permission). Its `campaignId` is then left out.</summary>
+        public bool? CampaignHidden { get => _explicitNullValueCampaignHidden; set { _explicitNullValueCampaignHidden = value; AdditionalData?.Remove("campaignHidden"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignHidden"); else _explicitNullProperties?.Remove("campaignHidden"); } }
+        private bool? _explicitNullValueCampaignHidden = default!;
+        /// <summary>The ID of the campaign the webhook is associated with. Absent when the webhook fires on every campaign, or when `campaignHidden` is `true`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CampaignId { get => _explicitNullValueCampaignId; set { _explicitNullValueCampaignId = value; AdditionalData?.Remove("campaignId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("campaignId"); else _explicitNullProperties?.Remove("campaignId"); } }
@@ -123,8 +128,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(10)
+            return new Dictionary<string, Action<IParseNode>>(11)
             {
+                { "campaignHidden", n => { CampaignHidden = n.GetBoolValue(); } },
                 { "campaignId", n => { CampaignId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "disabled", n => { Disabled = n.GetBoolValue(); } },
@@ -144,6 +150,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("campaignHidden", CampaignHidden);
             writer.WriteStringValue("campaignId", CampaignId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteBoolValue("disabled", Disabled);
