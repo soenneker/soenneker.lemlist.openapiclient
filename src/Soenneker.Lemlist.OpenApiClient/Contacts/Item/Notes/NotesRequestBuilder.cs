@@ -63,7 +63,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsByIdOrEmailNotes200Response>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.GetContactsByIdOrEmailNotes200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Writes a note on a contact resolved by its id (`ctc_xxx`) or email, exactly as a note written in the lemlist app: it is stored as a note of the contact, **pushed to your connected CRM** (HubSpot, Salesforce, Pipedrive) like an in-app note, and logged in the team activity feed. The author is the user of the API key. The note is plain text, stored as sent, at most 10000 characters, and cannot contain a `&lt;` followed by a `&gt;` (the app&apos;s guard against markup). A lone `&lt;` is stored HTML-escaped as `&amp;lt;`, as in the app. A missing, empty or non-text `note` creates an empty note, as on `POST /companies/{companyId}/notes`.
+        /// Writes a note on a contact resolved by its id (`ctc_xxx`) or email, exactly as a note written in the lemlist app: it is stored as a note of the contact, **pushed to your connected CRM** (HubSpot, Salesforce, Pipedrive, Attio) like an in-app note, and logged in the team activity feed. The author is the user of the API key. The note is plain text, stored as sent, at most 10000 characters, and cannot contain a `&lt;` followed by a `&gt;` (the app&apos;s guard against markup). A lone `&lt;` is stored HTML-escaped as `&amp;lt;`, as in the app. A missing, empty or non-text `note` creates an empty note, as on `POST /companies/{companyId}/notes`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.ContactNote"/></returns>
         /// <param name="body">The request body</param>
@@ -113,7 +113,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Contacts.Item.Notes
             return requestInfo;
         }
         /// <summary>
-        /// Writes a note on a contact resolved by its id (`ctc_xxx`) or email, exactly as a note written in the lemlist app: it is stored as a note of the contact, **pushed to your connected CRM** (HubSpot, Salesforce, Pipedrive) like an in-app note, and logged in the team activity feed. The author is the user of the API key. The note is plain text, stored as sent, at most 10000 characters, and cannot contain a `&lt;` followed by a `&gt;` (the app&apos;s guard against markup). A lone `&lt;` is stored HTML-escaped as `&amp;lt;`, as in the app. A missing, empty or non-text `note` creates an empty note, as on `POST /companies/{companyId}/notes`.
+        /// Writes a note on a contact resolved by its id (`ctc_xxx`) or email, exactly as a note written in the lemlist app: it is stored as a note of the contact, **pushed to your connected CRM** (HubSpot, Salesforce, Pipedrive, Attio) like an in-app note, and logged in the team activity feed. The author is the user of the API key. The note is plain text, stored as sent, at most 10000 characters, and cannot contain a `&lt;` followed by a `&gt;` (the app&apos;s guard against markup). A lone `&lt;` is stored HTML-escaped as `&amp;lt;`, as in the app. A missing, empty or non-text `note` creates an empty note, as on `POST /companies/{companyId}/notes`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

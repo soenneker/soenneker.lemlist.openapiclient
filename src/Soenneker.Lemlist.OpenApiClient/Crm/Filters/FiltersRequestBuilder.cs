@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
         {
         }
         /// <summary>
-        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
+        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters, Attio People views. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
         /// </summary>
         /// <returns>A List&lt;global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFilters200ResponseSchemaItem&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -62,7 +62,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
+        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters, Attio People views. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -90,12 +90,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Crm.Filters
             return new global::Soenneker.Lemlist.OpenApiClient.Crm.Filters.FiltersRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
+        /// Lists the filters leads can be imported from, in the CRM your team is connected to: HubSpot contact lists, Salesforce list views or reports, Pipedrive filters, Attio People views. Pass the returned `id` to [Import Leads from CRM](/api-reference/endpoints/leads/import-leads-from-crm).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class FiltersRequestBuilderGetQueryParameters 
         {
-            /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot and Pipedrive. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
+            /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot, Pipedrive and Attio. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
             [QueryParameter("type")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCrmFiltersTypeParameter? Type { get; set; }
         }

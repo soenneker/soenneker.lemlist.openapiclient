@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
-    /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot and Pipedrive. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
+    /// <summary>Salesforce only: `lead` or `contact` list views, or `report`. Ignored by HubSpot, Pipedrive and Attio. Defaults to `lead` when your Salesforce connection allows Leads, `contact` otherwise.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum PostCampaignsByCampaignIdLeadsImportRequestFilterType
     {

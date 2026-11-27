@@ -40,7 +40,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item
         {
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Deletes a group for good. Admins only.The group is also removed from the Reports, Tasks and Campaigns filters saved on it.
+        /// Deletes a group for good. Admins only. Requires the Enterprise plan.The group is also removed from the Reports, Tasks and Campaigns filters saved on it.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupDeleteResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Returns one group of your team. Any member of the team can call it.
+        /// Returns one group of your team. Any member of the team can call it. Requires the Enterprise plan.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -102,7 +102,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Renames a group, replaces its whole member list, or both. Admins only.A field left out keeps its value; send at least one. To add or remove a few members without sending the whole list, use the members endpoint. The group is returned as stored.
+        /// Renames a group, replaces its whole member list, or both. Admins only. Requires the Enterprise plan.A field left out keeps its value; send at least one. To add or remove a few members without sending the whole list, use the members endpoint. The group is returned as stored.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse"/></returns>
         /// <param name="body">At least one of `name` and `userIds`. A field left out keeps its value.</param>
@@ -139,7 +139,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Deletes a group for good. Admins only.The group is also removed from the Reports, Tasks and Campaigns filters saved on it.
+        /// Deletes a group for good. Admins only. Requires the Enterprise plan.The group is also removed from the Reports, Tasks and Campaigns filters saved on it.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -158,7 +158,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item
             return requestInfo;
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Returns one group of your team. Any member of the team can call it.
+        /// Returns one group of your team. Any member of the team can call it. Requires the Enterprise plan.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -177,7 +177,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item
             return requestInfo;
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Renames a group, replaces its whole member list, or both. Admins only.A field left out keeps its value; send at least one. To add or remove a few members without sending the whole list, use the members endpoint. The group is returned as stored.
+        /// Renames a group, replaces its whole member list, or both. Admins only. Requires the Enterprise plan.A field left out keeps its value; send at least one. To add or remove a few members without sending the whole list, use the members endpoint. The group is returned as stored.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">At least one of `name` and `userIds`. A field left out keeps its value.</param>

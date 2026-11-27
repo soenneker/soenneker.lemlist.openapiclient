@@ -28,7 +28,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Contacts
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/contacts{?advancedFilters*,companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,crmSyncStatus*,email*,fieldRejectionReason*,limit*,listId*,notInAnyCampaign*,offset*,search*,sortBy*,sortOrder*,withPrimaryCompany*}", pathParameters)
+        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/contacts{?advancedFilters*,companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,crmSyncStatus*,email*,fieldRejectionReason*,limit*,linkedinUrl*,linkedinUrlSalesNav*,listId*,notInAnyCampaign*,offset*,search*,sortBy*,sortOrder*,withPrimaryCompany*}", pathParameters)
         {
         }
         /// <summary>
@@ -36,7 +36,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Contacts
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/contacts{?advancedFilters*,companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,crmSyncStatus*,email*,fieldRejectionReason*,limit*,listId*,notInAnyCampaign*,offset*,search*,sortBy*,sortOrder*,withPrimaryCompany*}", rawUrl)
+        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v2/contacts{?advancedFilters*,companyDomain*,companyId*,companyLinkedinUrl*,companySalesnavUrl*,crmIds,crmSyncStatus*,email*,fieldRejectionReason*,limit*,linkedinUrl*,linkedinUrlSalesNav*,listId*,notInAnyCampaign*,offset*,search*,sortBy*,sortOrder*,withPrimaryCompany*}", rawUrl)
         {
         }
         /// <summary>
@@ -177,6 +177,26 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.Contacts
             /// <summary>Maximum number of contacts to return (1–500). Defaults to 100. `limit + offset` must not exceed 10000.</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>Find the contact holding this LinkedIn profile URL, in any form copied from LinkedIn (protocol, `www.`, country subdomain, trailing slash and query string ignored), normalized the way `POST /contacts` stores it; a Sales Navigator URL sent here is matched against `linkedinUrlSalesNav`. A company page URL or an empty value is refused. No match returns an empty page (`total: 0`). Combines with the other filters with AND.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("linkedinUrl")]
+            public string? LinkedinUrl { get; set; }
+#nullable restore
+#else
+            [QueryParameter("linkedinUrl")]
+            public string LinkedinUrl { get; set; }
+#endif
+            /// <summary>Find the contact holding this LinkedIn Sales Navigator URL, in any form copied from Sales Navigator (`/sales/lead/`, `/sales/people/` or `/sales/profile/`, with or without its `,NAME_SEARCH,…` suffix and query string), normalized the way `POST /contacts` stores it. A public profile URL or an empty value is refused. No match returns an empty page (`total: 0`). Combines with the other filters with AND.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("linkedinUrlSalesNav")]
+            public string? LinkedinUrlSalesNav { get; set; }
+#nullable restore
+#else
+            [QueryParameter("linkedinUrlSalesNav")]
+            public string LinkedinUrlSalesNav { get; set; }
+#endif
             /// <summary>Filter contacts by contact list ID (`clt_xxx` format). Can be combined with `search` or `email`, or used alone to list all contacts in a list. Get valid IDs from `GET /contacts/lists`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

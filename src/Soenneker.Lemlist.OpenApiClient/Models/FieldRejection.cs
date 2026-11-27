@@ -77,7 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string RejectedValue { get => _explicitNullValueRejectedValue; set { _explicitNullValueRejectedValue = value; AdditionalData?.Remove("rejectedValue"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rejectedValue"); else _explicitNullProperties?.Remove("rejectedValue"); } }
         private string _explicitNullValueRejectedValue = default!;
 #endif
-        /// <summary>Where the rejection came from — an enrichment source (`lemrich`) or a CRM provider (`hubspot`, `salesforce`, `pipedrive`).</summary>
+        /// <summary>Where the rejection came from — an enrichment source (`lemrich`) or a CRM provider (`hubspot`, `salesforce`, `pipedrive`, `attio`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; AdditionalData?.Remove("source"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }

@@ -263,6 +263,18 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         #pragma warning disable CS1591
         Stopped,
         #pragma warning restore CS1591
+        [EnumMember(Value = "leadAdded")]
+        #pragma warning disable CS1591
+        LeadAdded,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "leadLaunched")]
+        #pragma warning disable CS1591
+        LeadLaunched,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "leadEnded")]
+        #pragma warning disable CS1591
+        LeadEnded,
+        #pragma warning restore CS1591
         [EnumMember(Value = "campaignComplete")]
         #pragma warning disable CS1591
         CampaignComplete,

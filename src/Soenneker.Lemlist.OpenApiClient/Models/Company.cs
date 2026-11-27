@@ -67,7 +67,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string CreatedBy { get => _explicitNullValueCreatedBy; set { _explicitNullValueCreatedBy = value; AdditionalData?.Remove("createdBy"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("createdBy"); else _explicitNullProperties?.Remove("createdBy"); } }
         private string _explicitNullValueCreatedBy = default!;
 #endif
-        /// <summary>CRM sync status for the company, resolved against the team&apos;s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via `GET /companies?crmSyncStatus=unique_index_error_company`).</summary>
+        /// <summary>CRM sync status for the company, resolved against the team&apos;s active CRM provider (Hubspot, Salesforce, Pipedrive, or Attio). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via `GET /companies?crmSyncStatus=unique_index_error_company`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Lemlist.OpenApiClient.Models.CompanyCrmSync? CrmSync { get => _explicitNullValueCrmSync; set { _explicitNullValueCrmSync = value; AdditionalData?.Remove("crmSync"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crmSync"); else _explicitNullProperties?.Remove("crmSync"); } }

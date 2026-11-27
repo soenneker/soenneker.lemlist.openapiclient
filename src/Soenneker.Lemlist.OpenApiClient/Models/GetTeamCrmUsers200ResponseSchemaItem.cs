@@ -25,7 +25,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The CRM integrated with lemlist (hubspot, salesforce or pipedrive)</summary>
+        /// <summary>The CRM integrated with lemlist (hubspot, salesforce, pipedrive or attio)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Crm { get => _explicitNullValueCrm; set { _explicitNullValueCrm = value; AdditionalData?.Remove("crm"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("crm"); else _explicitNullProperties?.Remove("crm"); } }

@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Lemlist.OpenApiClient.Models
 {
     /// <summary>
-    /// CRM sync status for the company, resolved against the team&apos;s active CRM provider (Hubspot, Salesforce, or Pipedrive). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via `GET /companies?crmSyncStatus=unique_index_error_company`).
+    /// CRM sync status for the company, resolved against the team&apos;s active CRM provider (Hubspot, Salesforce, Pipedrive, or Attio). Only present when a CRM is connected. Use this block to monitor sync state and resolve duplicates (e.g. via `GET /companies?crmSyncStatus=unique_index_error_company`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompanyCrmSync : IAdditionalDataHolder, IParsable

@@ -34,7 +34,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item.Members
         {
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Adds and removes members without sending the whole list. Admins only.A user already in the group is not added twice, and a user not in it is ignored on removal. A user cannot be both added and removed. The group is returned as stored.
+        /// Adds and removes members without sending the whole list. Admins only. Requires the Enterprise plan.A user already in the group is not added twice, and a user not in it is ignored on removal. A user cannot be both added and removed. The group is returned as stored.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse"/></returns>
         /// <param name="body">Each list is optional. A user cannot be in both.</param>
@@ -71,7 +71,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups.Item.Members
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Adds and removes members without sending the whole list. Admins only.A user already in the group is not added twice, and a user not in it is ignored on removal. A user cannot be both added and removed. The group is returned as stored.
+        /// Adds and removes members without sending the whole list. Admins only. Requires the Enterprise plan.A user already in the group is not added twice, and a user not in it is ignored on removal. A user cannot be both added and removed. The group is returned as stored.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Each list is optional. A user cannot be in both.</param>

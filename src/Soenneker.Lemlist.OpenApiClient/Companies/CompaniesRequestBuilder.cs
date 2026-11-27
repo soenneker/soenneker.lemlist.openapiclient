@@ -53,7 +53,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmIds,crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,listId*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", pathParameters)
+        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmIds,crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,linkedinUrl*,linkedinUrlSalesNav*,listId*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", pathParameters)
         {
         }
         /// <summary>
@@ -61,11 +61,11 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmIds,crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,listId*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", rawUrl)
+        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?crmIds,crmSyncStatus*,fieldRejectionReason*,fields*,idsOrDomains*,limit*,linkedinUrl*,linkedinUrlSalesNav*,listId*,offset*,search*,sortBy*,sortOrder*,updateStrategy*}", rawUrl)
         {
         }
         /// <summary>
-        /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.
+        /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, Pipedrive, or Attio) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.GetCompanies200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -135,7 +135,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.PostCompaniesSuccessResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.
+        /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, Pipedrive, or Attio) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -185,12 +185,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             return new global::Soenneker.Lemlist.OpenApiClient.Companies.CompaniesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, or Pipedrive) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.
+        /// Retrieves companies by IDs/domains or by CRM record ids, or lists them with filters.When using `idsOrDomains`, returns the matching companies in `data`, with `total` and no pagination.When using `crmIds`, looks the companies up by their record id in the connected CRM (HubSpot, Salesforce, Pipedrive, or Attio) and returns them like `idsOrDomains` does, each with the matched id under `crmSync.crmRecordId`.Otherwise, returns a paginated response with `data`, `total`, `limit`, and `offset`.`idsOrDomains` takes precedence over `crmIds`; a lookup ignores the list filters and the pagination.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class CompaniesRequestBuilderGetQueryParameters 
         {
-            /// <summary>Comma-separated record ids of companies in the CRM connected to the team (HubSpot, Salesforce, or Pipedrive); for Salesforce, the 18-character Account id. Returns the companies found in `data`, with `total` and no pagination, each with the matched id under `crmSync.crmRecordId`; ids that match nothing are skipped, and `data` is empty when no CRM is connected. Duplicates are removed; an empty value is ignored. Maximum 100 values (`TOO_MANY_CRM_IDS`); a value over 25 characters answers `INVALID_CRM_ID`. Ignored when `idsOrDomains` is provided.</summary>
+            /// <summary>Comma-separated record ids of companies in the CRM connected to the team (HubSpot, Salesforce, Pipedrive, or Attio); for Salesforce, the 18-character Account id. Returns the companies found in `data`, with `total` and no pagination, each with the matched id under `crmSync.crmRecordId`; ids that match nothing are skipped, and `data` is empty when no CRM is connected. Duplicates are removed; an empty value is ignored. Maximum 100 values (`TOO_MANY_CRM_IDS`); a value over 36 characters answers `INVALID_CRM_ID`. Ignored when `idsOrDomains` is provided.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("crmIds")]
@@ -200,7 +200,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             [QueryParameter("crmIds")]
             public string CrmIds { get; set; }
 #endif
-            /// <summary>Filter companies by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, or Pipedrive) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Common values:- `synced` — the company has a CRM record and no sync errors.- `not_synced` — the company has no CRM record yet.- `searching` — a CRM search (Search &amp; connect, Create in CRM) is queued or running for the company.- `not_found` — the last CRM search found no record for the company.- `error` — at least one sync error is currently raised.- A specific error reason (lowercase form), to filter by root cause: `unique_index_error_company`, `property_doesnt_exist`, `required_field_missing`, `company_already_exists_with_name`, `company_already_exists_with_linkedin_url`.For each returned company, see `crmSync.errors[].metadata.alreadyExistingCompanyId` to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).</summary>
+            /// <summary>Filter companies by their CRM sync state against the team&apos;s active CRM provider. Requires a CRM (Hubspot, Salesforce, Pipedrive, or Attio) to be connected — otherwise the request returns `400 NO_CRM_CONNECTED`. Common values:- `synced` — the company has a CRM record and no sync errors.- `not_synced` — the company has no CRM record yet.- `searching` — a CRM search (Search &amp; connect, Create in CRM) is queued or running for the company.- `not_found` — the last CRM search found no record for the company.- `error` — at least one sync error is currently raised.- A specific error reason (lowercase form), to filter by root cause: `unique_index_error_company`, `property_doesnt_exist`, `required_field_missing`, `company_already_exists_with_name`, `company_already_exists_with_linkedin_url`.For each returned company, see `crmSync.errors[].metadata.alreadyExistingCompanyId` to identify the lemlist company that already occupies the conflicting CRM record (useful to remap contacts before deleting the duplicate).</summary>
             [QueryParameter("crmSyncStatus")]
             public global::Soenneker.Lemlist.OpenApiClient.Models.GetCompaniesCrmSyncStatusParameter? CrmSyncStatus { get; set; }
             /// <summary>Filter companies to those carrying a field rejection with this reason — a value lemlist refused to write, raised during CRM sync (`crm_sync_*`). Returns an empty list (`total: 0`) when no company matches. Each returned company exposes the full detail under `fieldRejections[]` (which field, why, and `conflictingRecordId` for duplicates). Independent of `crmSyncStatus` (which keys off the live provider errors); this filter reads the stored field rejections. Only applies to the paginated list — ignored when `idsOrDomains` is provided (that path returns the exact companies requested, unfiltered).</summary>
@@ -229,6 +229,26 @@ namespace Soenneker.Lemlist.OpenApiClient.Companies
             /// <summary>Number of companies to retrieve. Default: 100. Maximum: 500</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>Find the company holding this LinkedIn company URL. Any form copied from LinkedIn is accepted and normalized the way `POST /companies` stores it (sub-pages such as `/about/`, country subdomain, trailing slash and query string ignored); a Sales Navigator company URL sent here is matched against `linkedinUrlSalesNav`. A personal profile URL or an empty value is refused. No match returns an empty list (`total: 0`). Combines with the other filters with AND: sent with `linkedinUrlSalesNav`, a company must hold both URLs.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("linkedinUrl")]
+            public string? LinkedinUrl { get; set; }
+#nullable restore
+#else
+            [QueryParameter("linkedinUrl")]
+            public string LinkedinUrl { get; set; }
+#endif
+            /// <summary>Find the company holding this LinkedIn Sales Navigator company URL, normalized the way `POST /companies` stores it (query string ignored). A public company page URL or an empty value is refused. No match returns an empty list (`total: 0`). Combines with the other filters with AND.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("linkedinUrlSalesNav")]
+            public string? LinkedinUrlSalesNav { get; set; }
+#nullable restore
+#else
+            [QueryParameter("linkedinUrlSalesNav")]
+            public string LinkedinUrlSalesNav { get; set; }
+#endif
             /// <summary>Filter companies to the members of a CRM company list (`clt_xxx` format): a static list, or a dynamic list kept in sync with its filters. A legacy dynamic list, evaluated from its saved filters each time it is read, is rejected with `CRM_LIST_DYNAMIC`; both kinds of dynamic list show `dynamic: true` in `GET /companies/lists`. Combines with every other filter. Ignored when `idsOrDomains` is provided.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

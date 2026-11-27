@@ -47,7 +47,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups
         {
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Returns every group of your team, sorted by name. Any member of the team can call it.The list is not paginated: a team holds at most 100 groups.
+        /// Returns every group of your team, sorted by name. Any member of the team can call it. Requires the Enterprise plan.The list is not paginated: a team holds at most 100 groups.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -76,7 +76,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupListResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Creates a group. Admins only.The name is trimmed and its inner spaces collapsed, and a user listed twice is kept once. The group is returned as stored, with a `200` status.
+        /// Creates a group. Admins only. Requires the Enterprise plan.The name is trimmed and its inner spaces collapsed, and a user listed twice is kept once. The group is returned as stored, with a `200` status.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -111,7 +111,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups
             return await RequestAdapter.SendAsync<global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse>(requestInfo, global::Soenneker.Lemlist.OpenApiClient.Models.UserGroupResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Returns every group of your team, sorted by name. Any member of the team can call it.The list is not paginated: a team holds at most 100 groups.
+        /// Returns every group of your team, sorted by name. Any member of the team can call it. Requires the Enterprise plan.The list is not paginated: a team holds at most 100 groups.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -130,7 +130,7 @@ namespace Soenneker.Lemlist.OpenApiClient.V2.UserGroups
             return requestInfo;
         }
         /// <summary>
-        /// **Beta**: to use this endpoint now, contact your lemlist account manager.Creates a group. Admins only.The name is trimmed and its inner spaces collapsed, and a user listed twice is kept once. The group is returned as stored, with a `200` status.
+        /// Creates a group. Admins only. Requires the Enterprise plan.The name is trimmed and its inner spaces collapsed, and a user listed twice is kept once. The group is returned as stored, with a `200` status.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
