@@ -36,12 +36,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Results array</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema>? Results { get => _explicitNullValueResults; set { _explicitNullValueResults = value; AdditionalData?.Remove("results"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("results"); else _explicitNullProperties?.Remove("results"); } }
-        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema>? _explicitNullValueResults = default!;
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema>? Results { get => _explicitNullValueResults; set { _explicitNullValueResults = value; AdditionalData?.Remove("results"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("results"); else _explicitNullProperties?.Remove("results"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema>? _explicitNullValueResults = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema> Results { get => _explicitNullValueResults; set { _explicitNullValueResults = value; AdditionalData?.Remove("results"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("results"); else _explicitNullProperties?.Remove("results"); } }
-        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema> _explicitNullValueResults = default!;
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema> Results { get => _explicitNullValueResults; set { _explicitNullValueResults = value; AdditionalData?.Remove("results"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("results"); else _explicitNullProperties?.Remove("results"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema> _explicitNullValueResults = default!;
 #endif
         /// <summary>Size of the results</summary>
         public int? Size { get => _explicitNullValueSize; set { _explicitNullValueSize = value; AdditionalData?.Remove("size"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("size"); else _explicitNullProperties?.Remove("size"); } }
@@ -75,7 +75,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>(4)
             {
                 { "page", n => { Page = n.GetIntValue(); } },
-                { "results", n => { Results = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema>(global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "results", n => { Results = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema>(global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
                 { "total", n => { Total = n.GetIntValue(); } },
             };
@@ -88,7 +88,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("page", Page);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchema>("results", Results);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleEngagementSchema>("results", Results);
             writer.WriteIntValue("size", Size);
             writer.WriteIntValue("total", Total);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

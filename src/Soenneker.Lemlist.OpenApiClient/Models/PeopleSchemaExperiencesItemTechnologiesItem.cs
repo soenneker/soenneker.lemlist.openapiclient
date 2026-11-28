@@ -19,10 +19,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if (parseNode.GetChildNode("first_seen_at") is null) { _explicitNullValueFirstSeenAt = default!; _explicitNullProperties?.Remove("first_seen_at"); }
             else if (parseNode.GetChildNode("first_seen_at") is { } nullNodeFirstSeenAt && nullNodeFirstSeenAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstSeenAt = null;
-            if (parseNode.GetChildNode("first_seen_at_anniversary") is null) { _explicitNullValueFirstSeenAtAnniversary = default!; _explicitNullProperties?.Remove("first_seen_at_anniversary"); }
-            else if (parseNode.GetChildNode("first_seen_at_anniversary") is { } nullNodeFirstSeenAtAnniversary && nullNodeFirstSeenAtAnniversary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstSeenAtAnniversary = null;
             if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
             else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("scoring") is null) { _explicitNullValueScoring = default!; _explicitNullProperties?.Remove("scoring"); }
+            else if (parseNode.GetChildNode("scoring") is { } nullNodeScoring && nullNodeScoring.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Scoring = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -30,9 +30,6 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>When the technology was first detected at the company</summary>
         public DateTimeOffset? FirstSeenAt { get => _explicitNullValueFirstSeenAt; set { _explicitNullValueFirstSeenAt = value; AdditionalData?.Remove("first_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_seen_at"); else _explicitNullProperties?.Remove("first_seen_at"); } }
         private DateTimeOffset? _explicitNullValueFirstSeenAt = default!;
-        /// <summary>Next anniversary of `first_seen_at`</summary>
-        public DateTimeOffset? FirstSeenAtAnniversary { get => _explicitNullValueFirstSeenAtAnniversary; set { _explicitNullValueFirstSeenAtAnniversary = value; AdditionalData?.Remove("first_seen_at_anniversary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_seen_at_anniversary"); else _explicitNullProperties?.Remove("first_seen_at_anniversary"); } }
-        private DateTimeOffset? _explicitNullValueFirstSeenAtAnniversary = default!;
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -43,6 +40,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
+        /// <summary>Detection confidence: `CONFIRMED`, `LIKELY` or `POTENTIAL`. Absent while the technology is not classified</summary>
+        public global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItemScoring? Scoring { get => _explicitNullValueScoring; set { _explicitNullValueScoring = value; AdditionalData?.Remove("scoring"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scoring"); else _explicitNullProperties?.Remove("scoring"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItemScoring? _explicitNullValueScoring = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItem"/> and sets the default values.
         /// </summary>
@@ -69,8 +69,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "first_seen_at", n => { FirstSeenAt = n.GetDateTimeOffsetValue(); } },
-                { "first_seen_at_anniversary", n => { FirstSeenAtAnniversary = n.GetDateTimeOffsetValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "scoring", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItemScoring>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueScoring = default; _explicitNullProperties?.Remove("scoring"); AdditionalData["scoring"] = unknown; } else { Scoring = parsed; AdditionalData.Remove("scoring"); } } },
             };
         }
         /// <summary>
@@ -81,8 +81,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("first_seen_at", FirstSeenAt);
-            writer.WriteDateTimeOffsetValue("first_seen_at_anniversary", FirstSeenAtAnniversary);
             writer.WriteStringValue("name", Name);
+            writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaExperiencesItemTechnologiesItemScoring>("scoring", Scoring);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

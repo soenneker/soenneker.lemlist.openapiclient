@@ -21,29 +21,51 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("activities_and_societies") is { } nullNodeActivitiesAndSocieties && nullNodeActivitiesAndSocieties.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ActivitiesAndSocieties = null;
             if (parseNode.GetChildNode("created") is null) { _explicitNullValueCreated = default!; _explicitNullProperties?.Remove("created"); }
             else if (parseNode.GetChildNode("created") is { } nullNodeCreated && nullNodeCreated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Created = null;
+            if (parseNode.GetChildNode("created_at") is null) { _explicitNullValueCreatedAt = default!; _explicitNullProperties?.Remove("created_at"); }
+            else if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
             if (parseNode.GetChildNode("date_from") is null) { _explicitNullValueDateFrom = default!; _explicitNullProperties?.Remove("date_from"); }
             else if (parseNode.GetChildNode("date_from") is { } nullNodeDateFrom && nullNodeDateFrom.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DateFrom = null;
+            if (parseNode.GetChildNode("date_from_year") is null) { _explicitNullValueDateFromYear = default!; _explicitNullProperties?.Remove("date_from_year"); }
+            else if (parseNode.GetChildNode("date_from_year") is { } nullNodeDateFromYear && nullNodeDateFromYear.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DateFromYear = null;
             if (parseNode.GetChildNode("date_to") is null) { _explicitNullValueDateTo = default!; _explicitNullProperties?.Remove("date_to"); }
             else if (parseNode.GetChildNode("date_to") is { } nullNodeDateTo && nullNodeDateTo.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DateTo = null;
+            if (parseNode.GetChildNode("date_to_year") is null) { _explicitNullValueDateToYear = default!; _explicitNullProperties?.Remove("date_to_year"); }
+            else if (parseNode.GetChildNode("date_to_year") is { } nullNodeDateToYear && nullNodeDateToYear.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DateToYear = null;
             if (parseNode.GetChildNode("deleted") is null) { _explicitNullValueDeleted = default!; _explicitNullProperties?.Remove("deleted"); }
             else if (parseNode.GetChildNode("deleted") is { } nullNodeDeleted && nullNodeDeleted.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Deleted = null;
             if (parseNode.GetChildNode("description") is null) { _explicitNullValueDescription = default!; _explicitNullProperties?.Remove("description"); }
             else if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
             if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
             else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("institution") is null) { _explicitNullValueInstitution = default!; _explicitNullProperties?.Remove("institution"); }
+            else if (parseNode.GetChildNode("institution") is { } nullNodeInstitution && nullNodeInstitution.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Institution = null;
+            if (parseNode.GetChildNode("institution_id") is null) { _explicitNullValueInstitutionId = default!; _explicitNullProperties?.Remove("institution_id"); }
+            else if (parseNode.GetChildNode("institution_id") is { } nullNodeInstitutionId && nullNodeInstitutionId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InstitutionId = null;
+            if (parseNode.GetChildNode("institution_shorthand_name") is null) { _explicitNullValueInstitutionShorthandName = default!; _explicitNullProperties?.Remove("institution_shorthand_name"); }
+            else if (parseNode.GetChildNode("institution_shorthand_name") is { } nullNodeInstitutionShorthandName && nullNodeInstitutionShorthandName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InstitutionShorthandName = null;
+            if (parseNode.GetChildNode("institution_source_id") is null) { _explicitNullValueInstitutionSourceId = default!; _explicitNullProperties?.Remove("institution_source_id"); }
+            else if (parseNode.GetChildNode("institution_source_id") is { } nullNodeInstitutionSourceId && nullNodeInstitutionSourceId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InstitutionSourceId = null;
+            if (parseNode.GetChildNode("institution_url") is null) { _explicitNullValueInstitutionUrl = default!; _explicitNullProperties?.Remove("institution_url"); }
+            else if (parseNode.GetChildNode("institution_url") is { } nullNodeInstitutionUrl && nullNodeInstitutionUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InstitutionUrl = null;
             if (parseNode.GetChildNode("last_updated") is null) { _explicitNullValueLastUpdated = default!; _explicitNullProperties?.Remove("last_updated"); }
             else if (parseNode.GetChildNode("last_updated") is { } nullNodeLastUpdated && nullNodeLastUpdated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastUpdated = null;
             if (parseNode.GetChildNode("member_id") is null) { _explicitNullValueMemberId = default!; _explicitNullProperties?.Remove("member_id"); }
             else if (parseNode.GetChildNode("member_id") is { } nullNodeMemberId && nullNodeMemberId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MemberId = null;
+            if (parseNode.GetChildNode("order_in_profile") is null) { _explicitNullValueOrderInProfile = default!; _explicitNullProperties?.Remove("order_in_profile"); }
+            else if (parseNode.GetChildNode("order_in_profile") is { } nullNodeOrderInProfile && nullNodeOrderInProfile.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OrderInProfile = null;
+            if (parseNode.GetChildNode("program") is null) { _explicitNullValueProgram = default!; _explicitNullProperties?.Remove("program"); }
+            else if (parseNode.GetChildNode("program") is { } nullNodeProgram && nullNodeProgram.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Program = null;
             if (parseNode.GetChildNode("school_url") is null) { _explicitNullValueSchoolUrl = default!; _explicitNullProperties?.Remove("school_url"); }
             else if (parseNode.GetChildNode("school_url") is { } nullNodeSchoolUrl && nullNodeSchoolUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SchoolUrl = null;
             if (parseNode.GetChildNode("subtitle") is null) { _explicitNullValueSubtitle = default!; _explicitNullProperties?.Remove("subtitle"); }
             else if (parseNode.GetChildNode("subtitle") is { } nullNodeSubtitle && nullNodeSubtitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subtitle = null;
             if (parseNode.GetChildNode("title") is null) { _explicitNullValueTitle = default!; _explicitNullProperties?.Remove("title"); }
             else if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("updated_at") is null) { _explicitNullValueUpdatedAt = default!; _explicitNullProperties?.Remove("updated_at"); }
+            else if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
         }
 
-        /// <summary>The activities_and_societies property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ActivitiesAndSocieties { get => _explicitNullValueActivitiesAndSocieties; set { _explicitNullValueActivitiesAndSocieties = value; AdditionalData?.Remove("activities_and_societies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("activities_and_societies"); else _explicitNullProperties?.Remove("activities_and_societies"); } }
@@ -55,7 +77,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The created property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Created { get => _explicitNullValueCreated; set { _explicitNullValueCreated = value; AdditionalData?.Remove("created"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created"); else _explicitNullProperties?.Remove("created"); } }
@@ -65,7 +87,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Created { get => _explicitNullValueCreated; set { _explicitNullValueCreated = value; AdditionalData?.Remove("created"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created"); else _explicitNullProperties?.Remove("created"); } }
         private string _explicitNullValueCreated = default!;
 #endif
-        /// <summary>The date_from property</summary>
+        /// <summary>Record creation date. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private string? _explicitNullValueCreatedAt = default!;
+#nullable restore
+#else
+        public string CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private string _explicitNullValueCreatedAt = default!;
+#endif
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DateFrom { get => _explicitNullValueDateFrom; set { _explicitNullValueDateFrom = value; AdditionalData?.Remove("date_from"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_from"); else _explicitNullProperties?.Remove("date_from"); } }
@@ -75,7 +107,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string DateFrom { get => _explicitNullValueDateFrom; set { _explicitNullValueDateFrom = value; AdditionalData?.Remove("date_from"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_from"); else _explicitNullProperties?.Remove("date_from"); } }
         private string _explicitNullValueDateFrom = default!;
 #endif
-        /// <summary>The date_to property</summary>
+        /// <summary>Start year. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DateFromYear { get => _explicitNullValueDateFromYear; set { _explicitNullValueDateFromYear = value; AdditionalData?.Remove("date_from_year"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_from_year"); else _explicitNullProperties?.Remove("date_from_year"); } }
+        private string? _explicitNullValueDateFromYear = default!;
+#nullable restore
+#else
+        public string DateFromYear { get => _explicitNullValueDateFromYear; set { _explicitNullValueDateFromYear = value; AdditionalData?.Remove("date_from_year"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_from_year"); else _explicitNullProperties?.Remove("date_from_year"); } }
+        private string _explicitNullValueDateFromYear = default!;
+#endif
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DateTo { get => _explicitNullValueDateTo; set { _explicitNullValueDateTo = value; AdditionalData?.Remove("date_to"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_to"); else _explicitNullProperties?.Remove("date_to"); } }
@@ -85,7 +127,17 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string DateTo { get => _explicitNullValueDateTo; set { _explicitNullValueDateTo = value; AdditionalData?.Remove("date_to"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_to"); else _explicitNullProperties?.Remove("date_to"); } }
         private string _explicitNullValueDateTo = default!;
 #endif
-        /// <summary>The deleted property</summary>
+        /// <summary>End year. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DateToYear { get => _explicitNullValueDateToYear; set { _explicitNullValueDateToYear = value; AdditionalData?.Remove("date_to_year"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_to_year"); else _explicitNullProperties?.Remove("date_to_year"); } }
+        private string? _explicitNullValueDateToYear = default!;
+#nullable restore
+#else
+        public string DateToYear { get => _explicitNullValueDateToYear; set { _explicitNullValueDateToYear = value; AdditionalData?.Remove("date_to_year"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("date_to_year"); else _explicitNullProperties?.Remove("date_to_year"); } }
+        private string _explicitNullValueDateToYear = default!;
+#endif
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Deleted { get => _explicitNullValueDeleted; set { _explicitNullValueDeleted = value; AdditionalData?.Remove("deleted"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deleted"); else _explicitNullProperties?.Remove("deleted"); } }
@@ -95,7 +147,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Deleted { get => _explicitNullValueDeleted; set { _explicitNullValueDeleted = value; AdditionalData?.Remove("deleted"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deleted"); else _explicitNullProperties?.Remove("deleted"); } }
         private string _explicitNullValueDeleted = default!;
 #endif
-        /// <summary>The description property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
@@ -105,7 +157,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string _explicitNullValueDescription = default!;
 #endif
-        /// <summary>The id property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
@@ -115,7 +167,57 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string _explicitNullValueId = default!;
 #endif
-        /// <summary>The last_updated property</summary>
+        /// <summary>School name. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Institution { get => _explicitNullValueInstitution; set { _explicitNullValueInstitution = value; AdditionalData?.Remove("institution"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution"); else _explicitNullProperties?.Remove("institution"); } }
+        private string? _explicitNullValueInstitution = default!;
+#nullable restore
+#else
+        public string Institution { get => _explicitNullValueInstitution; set { _explicitNullValueInstitution = value; AdditionalData?.Remove("institution"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution"); else _explicitNullProperties?.Remove("institution"); } }
+        private string _explicitNullValueInstitution = default!;
+#endif
+        /// <summary>School id. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InstitutionId { get => _explicitNullValueInstitutionId; set { _explicitNullValueInstitutionId = value; AdditionalData?.Remove("institution_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_id"); else _explicitNullProperties?.Remove("institution_id"); } }
+        private string? _explicitNullValueInstitutionId = default!;
+#nullable restore
+#else
+        public string InstitutionId { get => _explicitNullValueInstitutionId; set { _explicitNullValueInstitutionId = value; AdditionalData?.Remove("institution_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_id"); else _explicitNullProperties?.Remove("institution_id"); } }
+        private string _explicitNullValueInstitutionId = default!;
+#endif
+        /// <summary>School LinkedIn URL slug. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InstitutionShorthandName { get => _explicitNullValueInstitutionShorthandName; set { _explicitNullValueInstitutionShorthandName = value; AdditionalData?.Remove("institution_shorthand_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_shorthand_name"); else _explicitNullProperties?.Remove("institution_shorthand_name"); } }
+        private string? _explicitNullValueInstitutionShorthandName = default!;
+#nullable restore
+#else
+        public string InstitutionShorthandName { get => _explicitNullValueInstitutionShorthandName; set { _explicitNullValueInstitutionShorthandName = value; AdditionalData?.Remove("institution_shorthand_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_shorthand_name"); else _explicitNullProperties?.Remove("institution_shorthand_name"); } }
+        private string _explicitNullValueInstitutionShorthandName = default!;
+#endif
+        /// <summary>School id at the data provider. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InstitutionSourceId { get => _explicitNullValueInstitutionSourceId; set { _explicitNullValueInstitutionSourceId = value; AdditionalData?.Remove("institution_source_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_source_id"); else _explicitNullProperties?.Remove("institution_source_id"); } }
+        private string? _explicitNullValueInstitutionSourceId = default!;
+#nullable restore
+#else
+        public string InstitutionSourceId { get => _explicitNullValueInstitutionSourceId; set { _explicitNullValueInstitutionSourceId = value; AdditionalData?.Remove("institution_source_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_source_id"); else _explicitNullProperties?.Remove("institution_source_id"); } }
+        private string _explicitNullValueInstitutionSourceId = default!;
+#endif
+        /// <summary>School URL. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InstitutionUrl { get => _explicitNullValueInstitutionUrl; set { _explicitNullValueInstitutionUrl = value; AdditionalData?.Remove("institution_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_url"); else _explicitNullProperties?.Remove("institution_url"); } }
+        private string? _explicitNullValueInstitutionUrl = default!;
+#nullable restore
+#else
+        public string InstitutionUrl { get => _explicitNullValueInstitutionUrl; set { _explicitNullValueInstitutionUrl = value; AdditionalData?.Remove("institution_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("institution_url"); else _explicitNullProperties?.Remove("institution_url"); } }
+        private string _explicitNullValueInstitutionUrl = default!;
+#endif
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? LastUpdated { get => _explicitNullValueLastUpdated; set { _explicitNullValueLastUpdated = value; AdditionalData?.Remove("last_updated"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_updated"); else _explicitNullProperties?.Remove("last_updated"); } }
@@ -125,7 +227,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string LastUpdated { get => _explicitNullValueLastUpdated; set { _explicitNullValueLastUpdated = value; AdditionalData?.Remove("last_updated"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_updated"); else _explicitNullProperties?.Remove("last_updated"); } }
         private string _explicitNullValueLastUpdated = default!;
 #endif
-        /// <summary>The member_id property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MemberId { get => _explicitNullValueMemberId; set { _explicitNullValueMemberId = value; AdditionalData?.Remove("member_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("member_id"); else _explicitNullProperties?.Remove("member_id"); } }
@@ -135,7 +237,27 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string MemberId { get => _explicitNullValueMemberId; set { _explicitNullValueMemberId = value; AdditionalData?.Remove("member_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("member_id"); else _explicitNullProperties?.Remove("member_id"); } }
         private string _explicitNullValueMemberId = default!;
 #endif
-        /// <summary>The school_url property</summary>
+        /// <summary>Rank in the profile. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OrderInProfile { get => _explicitNullValueOrderInProfile; set { _explicitNullValueOrderInProfile = value; AdditionalData?.Remove("order_in_profile"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order_in_profile"); else _explicitNullProperties?.Remove("order_in_profile"); } }
+        private string? _explicitNullValueOrderInProfile = default!;
+#nullable restore
+#else
+        public string OrderInProfile { get => _explicitNullValueOrderInProfile; set { _explicitNullValueOrderInProfile = value; AdditionalData?.Remove("order_in_profile"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order_in_profile"); else _explicitNullProperties?.Remove("order_in_profile"); } }
+        private string _explicitNullValueOrderInProfile = default!;
+#endif
+        /// <summary>Degree or field of study. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Program { get => _explicitNullValueProgram; set { _explicitNullValueProgram = value; AdditionalData?.Remove("program"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("program"); else _explicitNullProperties?.Remove("program"); } }
+        private string? _explicitNullValueProgram = default!;
+#nullable restore
+#else
+        public string Program { get => _explicitNullValueProgram; set { _explicitNullValueProgram = value; AdditionalData?.Remove("program"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("program"); else _explicitNullProperties?.Remove("program"); } }
+        private string _explicitNullValueProgram = default!;
+#endif
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SchoolUrl { get => _explicitNullValueSchoolUrl; set { _explicitNullValueSchoolUrl = value; AdditionalData?.Remove("school_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("school_url"); else _explicitNullProperties?.Remove("school_url"); } }
@@ -145,7 +267,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string SchoolUrl { get => _explicitNullValueSchoolUrl; set { _explicitNullValueSchoolUrl = value; AdditionalData?.Remove("school_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("school_url"); else _explicitNullProperties?.Remove("school_url"); } }
         private string _explicitNullValueSchoolUrl = default!;
 #endif
-        /// <summary>The subtitle property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subtitle { get => _explicitNullValueSubtitle; set { _explicitNullValueSubtitle = value; AdditionalData?.Remove("subtitle"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subtitle"); else _explicitNullProperties?.Remove("subtitle"); } }
@@ -155,7 +277,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string Subtitle { get => _explicitNullValueSubtitle; set { _explicitNullValueSubtitle = value; AdditionalData?.Remove("subtitle"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subtitle"); else _explicitNullProperties?.Remove("subtitle"); } }
         private string _explicitNullValueSubtitle = default!;
 #endif
-        /// <summary>The title property</summary>
+        /// <summary>On request: comes back only when `includes` names `education` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
@@ -164,6 +286,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string _explicitNullValueTitle = default!;
+#endif
+        /// <summary>Record update date. On request: comes back only when `includes` names `education` or a path under it</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private string? _explicitNullValueUpdatedAt = default!;
+#nullable restore
+#else
+        public string UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private string _explicitNullValueUpdatedAt = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.PeopleSchemaEducationItem"/> and sets the default values.
@@ -188,20 +320,31 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(12)
+            return new Dictionary<string, Action<IParseNode>>(23)
             {
                 { "activities_and_societies", n => { ActivitiesAndSocieties = n.GetStringValue(); } },
                 { "created", n => { Created = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetStringValue(); } },
                 { "date_from", n => { DateFrom = n.GetStringValue(); } },
+                { "date_from_year", n => { DateFromYear = n.GetStringValue(); } },
                 { "date_to", n => { DateTo = n.GetStringValue(); } },
+                { "date_to_year", n => { DateToYear = n.GetStringValue(); } },
                 { "deleted", n => { Deleted = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "institution", n => { Institution = n.GetStringValue(); } },
+                { "institution_id", n => { InstitutionId = n.GetStringValue(); } },
+                { "institution_shorthand_name", n => { InstitutionShorthandName = n.GetStringValue(); } },
+                { "institution_source_id", n => { InstitutionSourceId = n.GetStringValue(); } },
+                { "institution_url", n => { InstitutionUrl = n.GetStringValue(); } },
                 { "last_updated", n => { LastUpdated = n.GetStringValue(); } },
                 { "member_id", n => { MemberId = n.GetStringValue(); } },
+                { "order_in_profile", n => { OrderInProfile = n.GetStringValue(); } },
+                { "program", n => { Program = n.GetStringValue(); } },
                 { "school_url", n => { SchoolUrl = n.GetStringValue(); } },
                 { "subtitle", n => { Subtitle = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -213,16 +356,27 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("activities_and_societies", ActivitiesAndSocieties);
             writer.WriteStringValue("created", Created);
+            writer.WriteStringValue("created_at", CreatedAt);
             writer.WriteStringValue("date_from", DateFrom);
+            writer.WriteStringValue("date_from_year", DateFromYear);
             writer.WriteStringValue("date_to", DateTo);
+            writer.WriteStringValue("date_to_year", DateToYear);
             writer.WriteStringValue("deleted", Deleted);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("institution", Institution);
+            writer.WriteStringValue("institution_id", InstitutionId);
+            writer.WriteStringValue("institution_shorthand_name", InstitutionShorthandName);
+            writer.WriteStringValue("institution_source_id", InstitutionSourceId);
+            writer.WriteStringValue("institution_url", InstitutionUrl);
             writer.WriteStringValue("last_updated", LastUpdated);
             writer.WriteStringValue("member_id", MemberId);
+            writer.WriteStringValue("order_in_profile", OrderInProfile);
+            writer.WriteStringValue("program", Program);
             writer.WriteStringValue("school_url", SchoolUrl);
             writer.WriteStringValue("subtitle", Subtitle);
             writer.WriteStringValue("title", Title);
+            writer.WriteStringValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

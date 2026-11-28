@@ -17,10 +17,14 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("excludes") is null) { _explicitNullValueExcludes = default!; _explicitNullProperties?.Remove("excludes"); }
+            else if (parseNode.GetChildNode("excludes") is { } nullNodeExcludes && nullNodeExcludes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Excludes = null;
             if (parseNode.GetChildNode("filters") is null) { _explicitNullValueFilters = default!; _explicitNullProperties?.Remove("filters"); }
             else if (parseNode.GetChildNode("filters") is { } nullNodeFilters && nullNodeFilters.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Filters = null;
             if (parseNode.GetChildNode("fromSearchId") is null) { _explicitNullValueFromSearchId = default!; _explicitNullProperties?.Remove("fromSearchId"); }
             else if (parseNode.GetChildNode("fromSearchId") is { } nullNodeFromSearchId && nullNodeFromSearchId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FromSearchId = null;
+            if (parseNode.GetChildNode("includes") is null) { _explicitNullValueIncludes = default!; _explicitNullProperties?.Remove("includes"); }
+            else if (parseNode.GetChildNode("includes") is { } nullNodeIncludes && nullNodeIncludes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Includes = null;
             if (parseNode.GetChildNode("page") is null) { _explicitNullValuePage = default!; _explicitNullProperties?.Remove("page"); }
             else if (parseNode.GetChildNode("page") is { } nullNodePage && nullNodePage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Page = null;
             if (parseNode.GetChildNode("size") is null) { _explicitNullValueSize = default!; _explicitNullProperties?.Remove("size"); }
@@ -29,6 +33,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Field paths to remove from each row (optional). A dotted path reaches a nested field, through arrays: `technologies.first_seen_at` is the `first_seen_at` of every technology. Only the first 100 names are read. A value that is not an array of strings answers `400` `Parameter includes or excludes is invalid`, and the search does not run.A name is ignored unless its full path is a field of the row. `excludes` wins over `includes`. Excluding a field also removes the paths under it: `includes: [&quot;technologies.name&quot;]` with `excludes: [&quot;technologies&quot;]` returns no `technologies`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Excludes { get => _explicitNullValueExcludes; set { _explicitNullValueExcludes = value; AdditionalData?.Remove("excludes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("excludes"); else _explicitNullProperties?.Remove("excludes"); } }
+        private List<string>? _explicitNullValueExcludes = default!;
+#nullable restore
+#else
+        public List<string> Excludes { get => _explicitNullValueExcludes; set { _explicitNullValueExcludes = value; AdditionalData?.Remove("excludes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("excludes"); else _explicitNullProperties?.Remove("excludes"); } }
+        private List<string> _explicitNullValueExcludes = default!;
+#endif
         /// <summary>Array of filter objects to narrow down search results. Each filter has a filterId and inclusion/exclusion criteria. Optional when `fromSearchId` is provided: each filter then replaces the saved filter with the same `filterId`, the other saved filters are kept, and an empty or absent `filters` replays the search as is.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,6 +62,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string FromSearchId { get => _explicitNullValueFromSearchId; set { _explicitNullValueFromSearchId = value; AdditionalData?.Remove("fromSearchId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fromSearchId"); else _explicitNullProperties?.Remove("fromSearchId"); } }
         private string _explicitNullValueFromSearchId = default!;
+#endif
+        /// <summary>Field paths to return in each row (optional). A dotted path reaches a nested field, through arrays: `technologies.name` is the `name` of every technology. Only the first 100 names are read. A value that is not an array of strings answers `400` `Parameter includes or excludes is invalid`, and the search does not run.Without `includes`, a row holds every field except the on-request fields. With `includes`, a row holds only the listed paths. `_id` and `_score` come back only when `includes` names them: add `_id` when you need the row id. An array keeps one entry per item: with `technologies.scoring`, a technology not classified yet comes back as `{}`.The on-request fields are `company_description` and `job_post_last_6m_array.job_description`. Each one comes back only when `includes` names it or a path under it. `job_post_last_6m_array` alone returns job posts without `job_description`: `[&quot;job_post_last_6m_array&quot;, &quot;job_post_last_6m_array.job_description&quot;]` returns job posts with `job_description`.A name that is not a field of the row is ignored. A path known in part counts as its known part: `technologies.foo` counts as `technologies`. If no name is valid, the row is the default row. `excludes` wins over `includes`. Excluding a field also removes the paths under it: `includes: [&quot;technologies.name&quot;]` with `excludes: [&quot;technologies&quot;]` returns no `technologies`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Includes { get => _explicitNullValueIncludes; set { _explicitNullValueIncludes = value; AdditionalData?.Remove("includes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("includes"); else _explicitNullProperties?.Remove("includes"); } }
+        private List<string>? _explicitNullValueIncludes = default!;
+#nullable restore
+#else
+        public List<string> Includes { get => _explicitNullValueIncludes; set { _explicitNullValueIncludes = value; AdditionalData?.Remove("includes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("includes"); else _explicitNullProperties?.Remove("includes"); } }
+        private List<string> _explicitNullValueIncludes = default!;
 #endif
         /// <summary>Page number for pagination (default: 1)</summary>
         public int? Page { get => _explicitNullValuePage; set { _explicitNullValuePage = value; AdditionalData?.Remove("page"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("page"); else _explicitNullProperties?.Remove("page"); } }
@@ -78,10 +102,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(4)
+            return new Dictionary<string, Action<IParseNode>>(6)
             {
+                { "excludes", n => { Excludes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "fromSearchId", n => { FromSearchId = n.GetStringValue(); } },
+                { "includes", n => { Includes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
             };
@@ -93,8 +119,10 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfPrimitiveValues<string>("excludes", Excludes);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.PostDatabaseCompaniesRequestFiltersItem>("filters", Filters);
             writer.WriteStringValue("fromSearchId", FromSearchId);
+            writer.WriteCollectionOfPrimitiveValues<string>("includes", Includes);
             writer.WriteIntValue("page", Page);
             writer.WriteIntValue("size", Size);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

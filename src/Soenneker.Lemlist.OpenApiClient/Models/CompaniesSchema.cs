@@ -18,6 +18,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("active_job_post") is null) { _explicitNullValueActiveJobPost = default!; _explicitNullProperties?.Remove("active_job_post"); }
+            else if (parseNode.GetChildNode("active_job_post") is { } nullNodeActiveJobPost && nullNodeActiveJobPost.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ActiveJobPost = null;
             if (parseNode.GetChildNode("business_business_customer") is null) { _explicitNullValueBusinessBusinessCustomer = default!; _explicitNullProperties?.Remove("business_business_customer"); }
             else if (parseNode.GetChildNode("business_business_customer") is { } nullNodeBusinessBusinessCustomer && nullNodeBusinessBusinessCustomer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BusinessBusinessCustomer = null;
             if (parseNode.GetChildNode("company_description") is null) { _explicitNullValueCompanyDescription = default!; _explicitNullProperties?.Remove("company_description"); }
@@ -58,32 +60,56 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("company_subindustry") is { } nullNodeCompanySubindustry && nullNodeCompanySubindustry.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanySubindustry = null;
             if (parseNode.GetChildNode("company_subsubindustry") is null) { _explicitNullValueCompanySubsubindustry = default!; _explicitNullProperties?.Remove("company_subsubindustry"); }
             else if (parseNode.GetChildNode("company_subsubindustry") is { } nullNodeCompanySubsubindustry && nullNodeCompanySubsubindustry.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanySubsubindustry = null;
+            if (parseNode.GetChildNode("company_subsubsubindustry") is null) { _explicitNullValueCompanySubsubsubindustry = default!; _explicitNullProperties?.Remove("company_subsubsubindustry"); }
+            else if (parseNode.GetChildNode("company_subsubsubindustry") is { } nullNodeCompanySubsubsubindustry && nullNodeCompanySubsubsubindustry.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanySubsubsubindustry = null;
             if (parseNode.GetChildNode("company_type") is null) { _explicitNullValueCompanyType = default!; _explicitNullProperties?.Remove("company_type"); }
             else if (parseNode.GetChildNode("company_type") is { } nullNodeCompanyType && nullNodeCompanyType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyType = null;
             if (parseNode.GetChildNode("company_website_url") is null) { _explicitNullValueCompanyWebsiteUrl = default!; _explicitNullProperties?.Remove("company_website_url"); }
             else if (parseNode.GetChildNode("company_website_url") is { } nullNodeCompanyWebsiteUrl && nullNodeCompanyWebsiteUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyWebsiteUrl = null;
+            if (parseNode.GetChildNode("decision_makers_new_hires_last_6m") is null) { _explicitNullValueDecisionMakersNewHiresLast6m = default!; _explicitNullProperties?.Remove("decision_makers_new_hires_last_6m"); }
+            else if (parseNode.GetChildNode("decision_makers_new_hires_last_6m") is { } nullNodeDecisionMakersNewHiresLast6m && nullNodeDecisionMakersNewHiresLast6m.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DecisionMakersNewHiresLast6m = null;
             if (parseNode.GetChildNode("employees_count_growth") is null) { _explicitNullValueEmployeesCountGrowth = default!; _explicitNullProperties?.Remove("employees_count_growth"); }
             else if (parseNode.GetChildNode("employees_count_growth") is { } nullNodeEmployeesCountGrowth && nullNodeEmployeesCountGrowth.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmployeesCountGrowth = null;
+            if (parseNode.GetChildNode("headcount") is null) { _explicitNullValueHeadcount = default!; _explicitNullProperties?.Remove("headcount"); }
+            else if (parseNode.GetChildNode("headcount") is { } nullNodeHeadcount && nullNodeHeadcount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Headcount = null;
             if (parseNode.GetChildNode("_id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("_id"); }
             else if (parseNode.GetChildNode("_id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("job_post_last_6m") is null) { _explicitNullValueJobPostLast6m = default!; _explicitNullProperties?.Remove("job_post_last_6m"); }
+            else if (parseNode.GetChildNode("job_post_last_6m") is { } nullNodeJobPostLast6m && nullNodeJobPostLast6m.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) JobPostLast6m = null;
+            if (parseNode.GetChildNode("job_post_last_6m_array") is null) { _explicitNullValueJobPostLast6mArray = default!; _explicitNullProperties?.Remove("job_post_last_6m_array"); }
+            else if (parseNode.GetChildNode("job_post_last_6m_array") is { } nullNodeJobPostLast6mArray && nullNodeJobPostLast6mArray.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) JobPostLast6mArray = null;
             if (parseNode.GetChildNode("last_funding_round_at") is null) { _explicitNullValueLastFundingRoundAt = default!; _explicitNullProperties?.Remove("last_funding_round_at"); }
             else if (parseNode.GetChildNode("last_funding_round_at") is { } nullNodeLastFundingRoundAt && nullNodeLastFundingRoundAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastFundingRoundAt = null;
             if (parseNode.GetChildNode("last_updated") is null) { _explicitNullValueLastUpdated = default!; _explicitNullProperties?.Remove("last_updated"); }
             else if (parseNode.GetChildNode("last_updated") is { } nullNodeLastUpdated && nullNodeLastUpdated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastUpdated = null;
+            if (parseNode.GetChildNode("new_hires_last_6m") is null) { _explicitNullValueNewHiresLast6m = default!; _explicitNullProperties?.Remove("new_hires_last_6m"); }
+            else if (parseNode.GetChildNode("new_hires_last_6m") is { } nullNodeNewHiresLast6m && nullNodeNewHiresLast6m.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NewHiresLast6m = null;
             if (parseNode.GetChildNode("revenue_bucket") is null) { _explicitNullValueRevenueBucket = default!; _explicitNullProperties?.Remove("revenue_bucket"); }
             else if (parseNode.GetChildNode("revenue_bucket") is { } nullNodeRevenueBucket && nullNodeRevenueBucket.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RevenueBucket = null;
             if (parseNode.GetChildNode("_score") is null) { _explicitNullValueScore = default!; _explicitNullProperties?.Remove("_score"); }
             else if (parseNode.GetChildNode("_score") is { } nullNodeScore && nullNodeScore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Score = null;
-            if (parseNode.GetChildNode("techno_used_array") is null) { _explicitNullValueTechnoUsedArray = default!; _explicitNullProperties?.Remove("techno_used_array"); }
-            else if (parseNode.GetChildNode("techno_used_array") is { } nullNodeTechnoUsedArray && nullNodeTechnoUsedArray.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TechnoUsedArray = null;
+            if (parseNode.GetChildNode("technologies") is null) { _explicitNullValueTechnologies = default!; _explicitNullProperties?.Remove("technologies"); }
+            else if (parseNode.GetChildNode("technologies") is { } nullNodeTechnologies && nullNodeTechnologies.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Technologies = null;
+            if (parseNode.GetChildNode("workforce_growth_last_6m") is null) { _explicitNullValueWorkforceGrowthLast6m = default!; _explicitNullProperties?.Remove("workforce_growth_last_6m"); }
+            else if (parseNode.GetChildNode("workforce_growth_last_6m") is { } nullNodeWorkforceGrowthLast6m && nullNodeWorkforceGrowthLast6m.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WorkforceGrowthLast6m = null;
         }
 
+        /// <summary>Open job posts of the company, by department. Counts are integers sent as strings</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost? ActiveJobPost { get => _explicitNullValueActiveJobPost; set { _explicitNullValueActiveJobPost = value; AdditionalData?.Remove("active_job_post"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("active_job_post"); else _explicitNullProperties?.Remove("active_job_post"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost? _explicitNullValueActiveJobPost = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost ActiveJobPost { get => _explicitNullValueActiveJobPost; set { _explicitNullValueActiveJobPost = value; AdditionalData?.Remove("active_job_post"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("active_job_post"); else _explicitNullProperties?.Remove("active_job_post"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost _explicitNullValueActiveJobPost = default!;
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Customer type</summary>
         public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaBusinessBusinessCustomer? BusinessBusinessCustomer { get => _explicitNullValueBusinessBusinessCustomer; set { _explicitNullValueBusinessBusinessCustomer = value; AdditionalData?.Remove("business_business_customer"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("business_business_customer"); else _explicitNullProperties?.Remove("business_business_customer"); } }
         private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaBusinessBusinessCustomer? _explicitNullValueBusinessBusinessCustomer = default!;
-        /// <summary>Long company description</summary>
+        /// <summary>Long company description. On request: comes back only when `includes` names `company_description` or a path under it</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CompanyDescription { get => _explicitNullValueCompanyDescription; set { _explicitNullValueCompanyDescription = value; AdditionalData?.Remove("company_description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_description"); else _explicitNullProperties?.Remove("company_description"); } }
@@ -273,6 +299,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string CompanySubsubindustry { get => _explicitNullValueCompanySubsubindustry; set { _explicitNullValueCompanySubsubindustry = value; AdditionalData?.Remove("company_subsubindustry"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_subsubindustry"); else _explicitNullProperties?.Remove("company_subsubindustry"); } }
         private string _explicitNullValueCompanySubsubindustry = default!;
 #endif
+        /// <summary>4th-level industry</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CompanySubsubsubindustry { get => _explicitNullValueCompanySubsubsubindustry; set { _explicitNullValueCompanySubsubsubindustry = value; AdditionalData?.Remove("company_subsubsubindustry"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_subsubsubindustry"); else _explicitNullProperties?.Remove("company_subsubsubindustry"); } }
+        private string? _explicitNullValueCompanySubsubsubindustry = default!;
+#nullable restore
+#else
+        public string CompanySubsubsubindustry { get => _explicitNullValueCompanySubsubsubindustry; set { _explicitNullValueCompanySubsubsubindustry = value; AdditionalData?.Remove("company_subsubsubindustry"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_subsubsubindustry"); else _explicitNullProperties?.Remove("company_subsubsubindustry"); } }
+        private string _explicitNullValueCompanySubsubsubindustry = default!;
+#endif
         /// <summary>Company type (e.g., Privately Held, Public Company)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -293,9 +329,29 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string CompanyWebsiteUrl { get => _explicitNullValueCompanyWebsiteUrl; set { _explicitNullValueCompanyWebsiteUrl = value; AdditionalData?.Remove("company_website_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_website_url"); else _explicitNullProperties?.Remove("company_website_url"); } }
         private string _explicitNullValueCompanyWebsiteUrl = default!;
 #endif
+        /// <summary>Company new decision-maker hires in the last 6 months, by department. Counts are integers sent as strings</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M? DecisionMakersNewHiresLast6m { get => _explicitNullValueDecisionMakersNewHiresLast6m; set { _explicitNullValueDecisionMakersNewHiresLast6m = value; AdditionalData?.Remove("decision_makers_new_hires_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("decision_makers_new_hires_last_6m"); else _explicitNullProperties?.Remove("decision_makers_new_hires_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M? _explicitNullValueDecisionMakersNewHiresLast6m = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M DecisionMakersNewHiresLast6m { get => _explicitNullValueDecisionMakersNewHiresLast6m; set { _explicitNullValueDecisionMakersNewHiresLast6m = value; AdditionalData?.Remove("decision_makers_new_hires_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("decision_makers_new_hires_last_6m"); else _explicitNullProperties?.Remove("decision_makers_new_hires_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M _explicitNullValueDecisionMakersNewHiresLast6m = default!;
+#endif
         /// <summary>Employee count growth number</summary>
         public int? EmployeesCountGrowth { get => _explicitNullValueEmployeesCountGrowth; set { _explicitNullValueEmployeesCountGrowth = value; AdditionalData?.Remove("employees_count_growth"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("employees_count_growth"); else _explicitNullProperties?.Remove("employees_count_growth"); } }
         private int? _explicitNullValueEmployeesCountGrowth = default!;
+        /// <summary>Company headcount, by department. Counts are integers sent as strings</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount? Headcount { get => _explicitNullValueHeadcount; set { _explicitNullValueHeadcount = value; AdditionalData?.Remove("headcount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headcount"); else _explicitNullProperties?.Remove("headcount"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount? _explicitNullValueHeadcount = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount Headcount { get => _explicitNullValueHeadcount; set { _explicitNullValueHeadcount = value; AdditionalData?.Remove("headcount"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headcount"); else _explicitNullProperties?.Remove("headcount"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount _explicitNullValueHeadcount = default!;
+#endif
         /// <summary>Internal document ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -305,6 +361,26 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_id"); else _explicitNullProperties?.Remove("_id"); } }
         private string _explicitNullValueId = default!;
+#endif
+        /// <summary>Job posts of the last 6 months, counted by department. Counts are integers sent as strings</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M? JobPostLast6m { get => _explicitNullValueJobPostLast6m; set { _explicitNullValueJobPostLast6m = value; AdditionalData?.Remove("job_post_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_post_last_6m"); else _explicitNullProperties?.Remove("job_post_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M? _explicitNullValueJobPostLast6m = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M JobPostLast6m { get => _explicitNullValueJobPostLast6m; set { _explicitNullValueJobPostLast6m = value; AdditionalData?.Remove("job_post_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_post_last_6m"); else _explicitNullProperties?.Remove("job_post_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M _explicitNullValueJobPostLast6m = default!;
+#endif
+        /// <summary>Job posts of the last 6 months</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem>? JobPostLast6mArray { get => _explicitNullValueJobPostLast6mArray; set { _explicitNullValueJobPostLast6mArray = value; AdditionalData?.Remove("job_post_last_6m_array"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_post_last_6m_array"); else _explicitNullProperties?.Remove("job_post_last_6m_array"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem>? _explicitNullValueJobPostLast6mArray = default!;
+#nullable restore
+#else
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem> JobPostLast6mArray { get => _explicitNullValueJobPostLast6mArray; set { _explicitNullValueJobPostLast6mArray = value; AdditionalData?.Remove("job_post_last_6m_array"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_post_last_6m_array"); else _explicitNullProperties?.Remove("job_post_last_6m_array"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem> _explicitNullValueJobPostLast6mArray = default!;
 #endif
         /// <summary>Date of last funding round</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -326,6 +402,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public string LastUpdated { get => _explicitNullValueLastUpdated; set { _explicitNullValueLastUpdated = value; AdditionalData?.Remove("last_updated"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_updated"); else _explicitNullProperties?.Remove("last_updated"); } }
         private string _explicitNullValueLastUpdated = default!;
 #endif
+        /// <summary>Company new hires in the last 6 months, by department. Counts are integers sent as strings</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M? NewHiresLast6m { get => _explicitNullValueNewHiresLast6m; set { _explicitNullValueNewHiresLast6m = value; AdditionalData?.Remove("new_hires_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("new_hires_last_6m"); else _explicitNullProperties?.Remove("new_hires_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M? _explicitNullValueNewHiresLast6m = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M NewHiresLast6m { get => _explicitNullValueNewHiresLast6m; set { _explicitNullValueNewHiresLast6m = value; AdditionalData?.Remove("new_hires_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("new_hires_last_6m"); else _explicitNullProperties?.Remove("new_hires_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M _explicitNullValueNewHiresLast6m = default!;
+#endif
         /// <summary>Revenue range bucket</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -339,15 +425,25 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <summary>Search relevance score</summary>
         public double? Score { get => _explicitNullValueScore; set { _explicitNullValueScore = value; AdditionalData?.Remove("_score"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("_score"); else _explicitNullProperties?.Remove("_score"); } }
         private double? _explicitNullValueScore = default!;
-        /// <summary>Array of technologies used by the company</summary>
+        /// <summary>Technologies detected at the company, with no cap</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? TechnoUsedArray { get => _explicitNullValueTechnoUsedArray; set { _explicitNullValueTechnoUsedArray = value; AdditionalData?.Remove("techno_used_array"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("techno_used_array"); else _explicitNullProperties?.Remove("techno_used_array"); } }
-        private List<string>? _explicitNullValueTechnoUsedArray = default!;
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem>? Technologies { get => _explicitNullValueTechnologies; set { _explicitNullValueTechnologies = value; AdditionalData?.Remove("technologies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("technologies"); else _explicitNullProperties?.Remove("technologies"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem>? _explicitNullValueTechnologies = default!;
 #nullable restore
 #else
-        public List<string> TechnoUsedArray { get => _explicitNullValueTechnoUsedArray; set { _explicitNullValueTechnoUsedArray = value; AdditionalData?.Remove("techno_used_array"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("techno_used_array"); else _explicitNullProperties?.Remove("techno_used_array"); } }
-        private List<string> _explicitNullValueTechnoUsedArray = default!;
+        public List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem> Technologies { get => _explicitNullValueTechnologies; set { _explicitNullValueTechnologies = value; AdditionalData?.Remove("technologies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("technologies"); else _explicitNullProperties?.Remove("technologies"); } }
+        private List<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem> _explicitNullValueTechnologies = default!;
+#endif
+        /// <summary>Company headcount growth in the last 6 months, by department, in people and in percent</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M? WorkforceGrowthLast6m { get => _explicitNullValueWorkforceGrowthLast6m; set { _explicitNullValueWorkforceGrowthLast6m = value; AdditionalData?.Remove("workforce_growth_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("workforce_growth_last_6m"); else _explicitNullProperties?.Remove("workforce_growth_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M? _explicitNullValueWorkforceGrowthLast6m = default!;
+#nullable restore
+#else
+        public global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M WorkforceGrowthLast6m { get => _explicitNullValueWorkforceGrowthLast6m; set { _explicitNullValueWorkforceGrowthLast6m = value; AdditionalData?.Remove("workforce_growth_last_6m"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("workforce_growth_last_6m"); else _explicitNullProperties?.Remove("workforce_growth_last_6m"); } }
+        private global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M _explicitNullValueWorkforceGrowthLast6m = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchema"/> and sets the default values.
@@ -372,8 +468,9 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(29)
+            return new Dictionary<string, Action<IParseNode>>(37)
             {
+                { "active_job_post", n => { ActiveJobPost = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost.CreateFromDiscriminatorValue); } },
                 { "business_business_customer", n => { var parsed = n.GetEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaBusinessBusinessCustomer>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueBusinessBusinessCustomer = default; _explicitNullProperties?.Remove("business_business_customer"); AdditionalData["business_business_customer"] = unknown; } else { BusinessBusinessCustomer = parsed; AdditionalData.Remove("business_business_customer"); } } },
                 { "company_description", n => { CompanyDescription = n.GetStringValue(); } },
                 { "company_domain", n => { CompanyDomain = n.GetStringValue(); } },
@@ -394,15 +491,22 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
                 { "company_size", n => { CompanySize = n.GetStringValue(); } },
                 { "company_subindustry", n => { CompanySubindustry = n.GetStringValue(); } },
                 { "company_subsubindustry", n => { CompanySubsubindustry = n.GetStringValue(); } },
+                { "company_subsubsubindustry", n => { CompanySubsubsubindustry = n.GetStringValue(); } },
                 { "company_type", n => { CompanyType = n.GetStringValue(); } },
                 { "company_website_url", n => { CompanyWebsiteUrl = n.GetStringValue(); } },
+                { "decision_makers_new_hires_last_6m", n => { DecisionMakersNewHiresLast6m = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M.CreateFromDiscriminatorValue); } },
                 { "employees_count_growth", n => { EmployeesCountGrowth = n.GetIntValue(); } },
+                { "headcount", n => { Headcount = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount.CreateFromDiscriminatorValue); } },
                 { "_id", n => { Id = n.GetStringValue(); } },
+                { "job_post_last_6m", n => { JobPostLast6m = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M.CreateFromDiscriminatorValue); } },
+                { "job_post_last_6m_array", n => { JobPostLast6mArray = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "last_funding_round_at", n => { LastFundingRoundAt = n.GetStringValue(); } },
                 { "last_updated", n => { LastUpdated = n.GetStringValue(); } },
+                { "new_hires_last_6m", n => { NewHiresLast6m = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M.CreateFromDiscriminatorValue); } },
                 { "revenue_bucket", n => { RevenueBucket = n.GetStringValue(); } },
                 { "_score", n => { Score = n.GetDoubleValue(); } },
-                { "techno_used_array", n => { TechnoUsedArray = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "technologies", n => { Technologies = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "workforce_growth_last_6m", n => { WorkforceGrowthLast6m = n.GetObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M>(global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -412,6 +516,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaActiveJobPost>("active_job_post", ActiveJobPost);
             writer.WriteEnumValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaBusinessBusinessCustomer>("business_business_customer", BusinessBusinessCustomer);
             writer.WriteStringValue("company_description", CompanyDescription);
             writer.WriteStringValue("company_domain", CompanyDomain);
@@ -432,15 +537,22 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteStringValue("company_size", CompanySize);
             writer.WriteStringValue("company_subindustry", CompanySubindustry);
             writer.WriteStringValue("company_subsubindustry", CompanySubsubindustry);
+            writer.WriteStringValue("company_subsubsubindustry", CompanySubsubsubindustry);
             writer.WriteStringValue("company_type", CompanyType);
             writer.WriteStringValue("company_website_url", CompanyWebsiteUrl);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaDecisionMakersNewHiresLast6M>("decision_makers_new_hires_last_6m", DecisionMakersNewHiresLast6m);
             writer.WriteIntValue("employees_count_growth", EmployeesCountGrowth);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaHeadcount>("headcount", Headcount);
             writer.WriteStringValue("_id", Id);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6M>("job_post_last_6m", JobPostLast6m);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaJobPostLast6MArrayItem>("job_post_last_6m_array", JobPostLast6mArray);
             writer.WriteStringValue("last_funding_round_at", LastFundingRoundAt);
             writer.WriteStringValue("last_updated", LastUpdated);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaNewHiresLast6M>("new_hires_last_6m", NewHiresLast6m);
             writer.WriteStringValue("revenue_bucket", RevenueBucket);
             writer.WriteDoubleValue("_score", Score);
-            writer.WriteCollectionOfPrimitiveValues<string>("techno_used_array", TechnoUsedArray);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaTechnologiesItem>("technologies", Technologies);
+            writer.WriteObjectValue<global::Soenneker.Lemlist.OpenApiClient.Models.CompaniesSchemaWorkforceGrowthLast6M>("workforce_growth_last_6m", WorkforceGrowthLast6m);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -10784,7 +10784,7 @@
           "People Database"
         ],
         "summary": "Search People Database",
-        "description": "This endpoint allows you to query our People database. To do so, you may use the following parameters: filters (required, unless \u0060fromSearchId\u0060 is provided), fromSearchId (optional), page (optional), size (optional), and excludes (optional). Each filter should have the following properties: filterId (filter identifier), in (list of the values you want to include), and out (list of the values you want to exclude). Filters of type \u0060slider\u0060 (such as \u0060currentCompanyFounded\u0060) take one or more \u0060min|max\u0060 ranges in \u0060in\u0060: two numbers joined by \u0060|\u0060, such as \u00602015|2024\u0060. Their \u0060out\u0060 must be an empty array. An \u0060out\u0060 value, or a range in another format (such as \u00602015-2024\u0060), is refused with a 400 \u0060Parameter filters is invalid\u0060. To exclude a range, send the ranges around it in \u0060in\u0060. To know which filters you are able to use, refer to the GET Filters section. To run a previous search again, pass the \u0060search\u0060 id it returned as \u0060fromSearchId\u0060.\n\nThe \u0060department\u0060 filter accepts the following values: \u0060Sales\u0060, \u0060Customer service\u0060, \u0060Engineering\u0060, \u0060Marketing\u0060, \u0060Operations\u0060, \u0060Human Resources\u0060, \u0060Finance / Legal / Admin\u0060, \u0060Other\u0060.",
+        "description": "This endpoint allows you to query our People database. To do so, you may use the following parameters: filters (required, unless \u0060fromSearchId\u0060 is provided), fromSearchId (optional), page (optional), size (optional), includes (optional), and excludes (optional). Each filter should have the following properties: filterId (filter identifier), in (list of the values you want to include), and out (list of the values you want to exclude). Filters of type \u0060slider\u0060 (such as \u0060currentCompanyFounded\u0060) take one or more \u0060min|max\u0060 ranges in \u0060in\u0060: two numbers joined by \u0060|\u0060, such as \u00602015|2024\u0060. Their \u0060out\u0060 must be an empty array. An \u0060out\u0060 value, or a range in another format (such as \u00602015-2024\u0060), is refused with a 400 \u0060Parameter filters is invalid\u0060. To exclude a range, send the ranges around it in \u0060in\u0060. To know which filters you are able to use, refer to the GET Filters section. To run a previous search again, pass the \u0060search\u0060 id it returned as \u0060fromSearchId\u0060.\n\nThe \u0060department\u0060 filter accepts the following values: \u0060Sales\u0060, \u0060Customer service\u0060, \u0060Engineering\u0060, \u0060Marketing\u0060, \u0060Operations\u0060, \u0060Human Resources\u0060, \u0060Finance / Legal / Admin\u0060, \u0060Other\u0060.",
         "operationId": "SearchPeopleDatabase",
         "requestBody": {
           "description": "Search criteria. Provide one or more filters and optionally control pagination with page/size",
@@ -10793,20 +10793,52 @@
               "schema": {
                 "$ref": "#/components/schemas/SearchPeopleDatabaseRequest"
               },
-              "example": {
-                "filters": [
-                  {
-                    "filterId": "country",
-                    "in": [
-                      "France"
+              "examples": {
+                "default": {
+                  "summary": "Default fields",
+                  "value": {
+                    "filters": [
+                      {
+                        "filterId": "country",
+                        "in": [
+                          "France"
+                        ],
+                        "out": [
+                          "India"
+                        ]
+                      }
                     ],
-                    "out": [
-                      "India"
+                    "page": 1,
+                    "size": 25
+                  }
+                },
+                "includes": {
+                  "summary": "Fields chosen with includes",
+                  "value": {
+                    "filters": [
+                      {
+                        "filterId": "country",
+                        "in": [
+                          "France"
+                        ],
+                        "out": [
+                          "India"
+                        ]
+                      }
+                    ],
+                    "page": 1,
+                    "size": 1,
+                    "includes": [
+                      "_id",
+                      "full_name",
+                      "headline",
+                      "experiences.title",
+                      "experiences.company_name",
+                      "experiences.description",
+                      "education.institution"
                     ]
                   }
-                ],
-                "page": 1,
-                "size": 25
+                }
               }
             }
           }
@@ -10819,81 +10851,128 @@
                 "schema": {
                   "$ref": "#/components/schemas/SearchPeopleDatabase200Response"
                 },
-                "example": {
-                  "results": [
-                    {
-                      "lead_id": 434482354,
-                      "canonical_shorthand_name": "alexdoe",
-                      "connections_count": 500,
-                      "country": "France",
-                      "full_name": "Alex Doe",
-                      "education": [],
-                      "experience_count": 3,
-                      "experiences": [
+                "examples": {
+                  "default": {
+                    "summary": "Default fields",
+                    "value": {
+                      "results": [
                         {
-                          "company_shorthand_name": "lemlist",
-                          "company_id": 11750398,
-                          "company_name": "lemlist",
-                          "company_website_url": "https://www.lemlist.com",
-                          "company_linkedin_url": "https://www.linkedin.com/company/lemlist",
-                          "company_employee_count": 151,
-                          "company_size": "51-200",
-                          "company_domain": "lemlist.com",
-                          "company_industry": "Technology, Information and Media",
-                          "title": "Account Executive",
-                          "title_normalized": "Account Executive",
-                          "date_from": "September 2025",
-                          "duration": "1 month",
-                          "location": "Ville de Paris, \u00CEle-de-France, France",
-                          "current_exp_bucket": "Less than 6 months"
+                          "lead_id": 123456789,
+                          "canonical_shorthand_name": "alexdoe",
+                          "connections_count": 500,
+                          "country": "France",
+                          "full_name": "Alex Doe",
+                          "experience_count": 3,
+                          "experiences": [
+                            {
+                              "company_id": 987654321,
+                              "company_name": "Acme Inc",
+                              "company_website_url": "https://www.acme.com",
+                              "company_linkedin_url": "https://www.linkedin.com/company/acme-inc",
+                              "company_employee_count": 120,
+                              "company_size": "51-200",
+                              "company_domain": "acme.com",
+                              "company_industry": "Technology, Information and Media",
+                              "title": "Account Executive",
+                              "title_normalized": "Account Executive",
+                              "date_from": "September 2025",
+                              "duration": "1 month",
+                              "location": "Ville de Paris, \u00CEle-de-France, France",
+                              "current_exp_bucket": "Less than 6 months"
+                            }
+                          ],
+                          "interests": [],
+                          "languages": [
+                            {
+                              "language": "Fran\u00E7ais",
+                              "proficiency": "Native or bilingual proficiency"
+                            },
+                            {
+                              "language": "Anglais",
+                              "proficiency": "Professional working proficiency"
+                            }
+                          ],
+                          "lead_linkedin_url": "https://www.linkedin.com/in/alex-doe",
+                          "linkedin_short": "alex-doe",
+                          "skills": [],
+                          "summary": "Passionate about helping sales teams book more meetings",
+                          "headline": "Account Executive at Acme Inc",
+                          "lead_quality_score": 3,
+                          "department": "Sales",
+                          "connections_count_bucket": "500\u002B",
+                          "years_of_exp_bucket": "2 to 5 years",
+                          "location": "Paris, Ile-de-France, France",
+                          "state": "Ile-de-France",
+                          "current_exp_company_name": "Acme Inc",
+                          "_score": 21.294434,
+                          "_id": "123456789"
                         }
                       ],
-                      "interests": [],
-                      "languages": [
-                        {
-                          "language": "Fran\u00E7ais",
-                          "proficiency": "Native or bilingual proficiency"
-                        },
-                        {
-                          "language": "Anglais",
-                          "proficiency": "Professional working proficiency"
-                        }
-                      ],
-                      "lead_linkedin_url": "https://www.linkedin.com/in/alex-doe",
-                      "linkedin_short": "alex-doe",
-                      "skills": [],
-                      "summary": "Passionate about helping sales teams book more meetings @lemlist",
-                      "headline": "Helping RevOps scale outbound @lemlist",
-                      "lead_quality_score": 3,
-                      "department": "Sales",
-                      "connections_count_bucket": "500\u002B",
-                      "years_of_exp_bucket": "2 to 5 years",
-                      "location": "Paris, Ile-de-France, France",
-                      "state": "Ile-de-France",
-                      "current_exp_company_name": "lemlist",
-                      "_score": 21.294434,
-                      "_id": "434482354"
+                      "total": 91,
+                      "took": 24,
+                      "page": 1,
+                      "size": 1,
+                      "search": "lsh_ExAmPlEXtVzpdwzqw",
+                      "limitation": 1999,
+                      "team": "tea_ExAmPlE31pFS5QP6c"
                     }
-                  ],
-                  "total": 91,
-                  "took": 24,
-                  "page": 1,
-                  "size": 1,
-                  "search": "lsh_Lra0u9F7WXn3XKzB9",
-                  "limitation": 1999,
-                  "team": "tea_8QvkOiBfPdb2ZRhHi"
+                  },
+                  "includes": {
+                    "summary": "Fields chosen with includes",
+                    "value": {
+                      "results": [
+                        {
+                          "_id": "123456789",
+                          "full_name": "Alex Doe",
+                          "headline": "Account Executive at Acme Inc",
+                          "experiences": [
+                            {
+                              "title": "Account Executive",
+                              "company_name": "Acme Inc",
+                              "description": "Sells the Acme Inc platform to mid-market teams in France."
+                            }
+                          ],
+                          "education": [
+                            {
+                              "institution": "Example University"
+                            }
+                          ]
+                        }
+                      ],
+                      "total": 91,
+                      "took": 18,
+                      "page": 1,
+                      "size": 1,
+                      "search": "lsh_ExAmPlE2jh5JtTCAQ",
+                      "limitation": 1998,
+                      "team": "tea_ExAmPlE31pFS5QP6c"
+                    }
+                  }
                 }
               }
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / Parameter filters is invalid. \u0060Parameter filters is invalid\u0060 answers any refused filter, including an \u0060out\u0060 value on a \u0060slider\u0060 filter or a slider range not written \u0060min|max\u0060.",
+            "description": "Possible errors: Parameter filters is invalid / Parameter includes or excludes is invalid. \u0060Parameter filters is invalid\u0060 answers any refused filter, including an \u0060out\u0060 value on a \u0060slider\u0060 filter or a slider range not written \u0060min|max\u0060. \u0060Parameter includes or excludes is invalid\u0060 answers an \u0060includes\u0060 or \u0060excludes\u0060 that is not an array of strings: the search does not run.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
+                  "$ref": "#/components/schemas/SearchPeopleDatabase400Response"
                 },
-                "example": "Bad team"
+                "examples": {
+                  "invalidFilters": {
+                    "summary": "Parameter filters is invalid",
+                    "value": {
+                      "error": "Parameter filters is invalid"
+                    }
+                  },
+                  "invalidFields": {
+                    "summary": "Parameter includes or excludes is invalid",
+                    "value": {
+                      "error": "Parameter includes or excludes is invalid"
+                    }
+                  }
+                }
               }
             }
           },
@@ -11173,20 +11252,51 @@
               "schema": {
                 "$ref": "#/components/schemas/PostDatabaseCompaniesRequest"
               },
-              "example": {
-                "filters": [
-                  {
-                    "filterId": "currentCompanyTechnologies",
-                    "in": [
-                      "Postman"
+              "examples": {
+                "default": {
+                  "summary": "Default fields",
+                  "value": {
+                    "filters": [
+                      {
+                        "filterId": "currentCompanyTechnologies",
+                        "in": [
+                          "Postman"
+                        ],
+                        "out": [
+                          "Haskell"
+                        ]
+                      }
                     ],
-                    "out": [
-                      "Haskell"
+                    "page": 1,
+                    "size": 2
+                  }
+                },
+                "includes": {
+                  "summary": "Fields chosen with includes",
+                  "value": {
+                    "filters": [
+                      {
+                        "filterId": "currentCompanyTechnologies",
+                        "in": [
+                          "Postman"
+                        ],
+                        "out": [
+                          "Haskell"
+                        ]
+                      }
+                    ],
+                    "page": 1,
+                    "size": 1,
+                    "includes": [
+                      "_id",
+                      "company_name",
+                      "company_description",
+                      "technologies.name",
+                      "job_post_last_6m_array.job_title",
+                      "job_post_last_6m_array.job_description"
                     ]
                   }
-                ],
-                "page": 1,
-                "size": 2
+                }
               }
             }
           }
@@ -11199,236 +11309,165 @@
                 "schema": {
                   "$ref": "#/components/schemas/PostDatabaseCompanies200Response"
                 },
-                "example": {
-                  "results": [
-                    {
-                      "company_id": "88945664",
-                      "company_website_url": "http://acme-tech.example.com",
-                      "company_name": "Acme Technologies",
-                      "company_linkedin_url": "https://www.linkedin.com/company/acme-technologies",
-                      "last_updated": "2025-09-07 02:11:32 UTC",
-                      "company_headquarters_city": "Example City",
-                      "company_headquarters_country": "India",
-                      "company_logo_url": "https://example.com/logo1.png",
-                      "company_description": "Acme, established on Aug-2015 with the idea \u0022Make Your Imagination Come True\u0022. Which means anyone who came up with their idea, we will give a closely realistic solutions to them. \nAcme Technologies is a new Generation Software Company, with young people with creative mind and immersive energy. We are a team of dedicated and highly skilled software professionals focused on providing world class IT solutions. We offer a variety of services in the area of:\nWebsite Designing \u0026 Development, Web Maintenance, E-Business Solutions, Android \u0026 iOS app, Blockchain Development, Software Development, Hosting Services.",
-                      "company_employee_count": "31",
-                      "company_type": "Public Company",
-                      "company_founded": "2015",
-                      "company_followers_count": "3958",
-                      "company_size": "11-50",
-                      "company_domain": "acme-tech.example.com",
-                      "employees_count_growth": -3,
-                      "techno_used_array": [
-                        "Apache HTTP Server",
-                        "Lightbox",
-                        "LinkedIn Sales Navigator",
-                        "Atlassian Jira",
-                        "LiteSpeed Cache",
-                        "Underscore.js",
-                        "Remix",
-                        "jsDelivr",
-                        "jQuery",
-                        "Google Fonts API",
-                        "Google Tag Manager",
-                        "X-Content-Type-Options",
-                        "Facebook",
-                        "PWA",
-                        "jQuery CDN",
-                        "ZURB Foundation",
-                        "HSTS",
-                        "WhatsApp Business",
-                        "X-XSS-Protection",
-                        "Google Analytics",
-                        "Flickity",
-                        "HTML",
-                        "LiteSpeed",
-                        "Ethereum",
-                        "Cloudinary",
-                        "OceanWP",
-                        "Goober",
-                        "jQuery Migrate",
-                        "Tailwind CSS",
-                        "Postman",
-                        "LinkedIn",
-                        "Webpack",
-                        "GSAP",
-                        "Essential Addons for Elementor",
-                        "Font Awesome",
-                        "Android",
-                        "PixelYourSite",
-                        "jQuery UI",
-                        "MUI",
-                        "IPFS",
-                        "Upwork",
-                        "cdnjs",
-                        "FlexSlider",
-                        "Elementor",
-                        "ZoomInfo",
-                        "Swiper",
-                        "Microsoft IIS",
-                        "Node.js",
-                        "Ethers",
-                        "Solidity",
-                        "React",
-                        "Priority Hints",
-                        "iOS",
-                        "OWL Carousel",
-                        "MySQL",
-                        "Facebook Pixel",
-                        "Open Graph",
-                        "Laravel",
-                        "Emotion",
-                        "Lucide",
-                        "PHP",
-                        "Blockchain",
-                        "Next.js",
-                        "RSS",
-                        "Google Maps",
-                        "Windows Server",
-                        "WordPress",
-                        "WPForms",
-                        "JavaScript",
-                        "Chainlink",
-                        "Apache",
-                        "Bootstrap"
+                "examples": {
+                  "default": {
+                    "summary": "Default fields",
+                    "value": {
+                      "results": [
+                        {
+                          "company_id": "111111111",
+                          "company_website_url": "http://acme-tech.example.com",
+                          "company_name": "Acme Technologies",
+                          "company_linkedin_url": "https://www.linkedin.com/company/acme-technologies",
+                          "last_updated": "2025-09-07 02:11:32 UTC",
+                          "company_headquarters_city": "Example City",
+                          "company_headquarters_country": "India",
+                          "company_logo_url": "https://example.com/logo1.png",
+                          "company_employee_count": "31",
+                          "company_type": "Public Company",
+                          "company_founded": "2015",
+                          "company_followers_count": "3958",
+                          "company_size": "11-50",
+                          "company_domain": "acme-tech.example.com",
+                          "employees_count_growth": -3,
+                          "technologies": [
+                            {
+                              "name": "Postman",
+                              "first_seen_at": "2024-03-12T00:00:00.000Z",
+                              "scoring": "CONFIRMED"
+                            },
+                            {
+                              "name": "React",
+                              "first_seen_at": "2023-11-02T00:00:00.000Z",
+                              "scoring": "LIKELY"
+                            }
+                          ],
+                          "business_business_customer": "B2B",
+                          "company_quality_score": "3",
+                          "company_industry": "Technology, Information and Media",
+                          "company_subindustry": "Technology, Information and Internet",
+                          "company_subsubindustry": "Software Development",
+                          "company_location": "123 Example Street, Suite 100, Example City, Example Country",
+                          "company_location_geopoint_array": [
+                            73.92,
+                            18.64
+                          ],
+                          "company_occ_lead": "60",
+                          "_score": 10.002095,
+                          "_id": "111111111"
+                        },
+                        {
+                          "company_id": "222222222",
+                          "company_website_url": "http://www.acme-care.example.com",
+                          "company_name": "Acme Care",
+                          "company_linkedin_url": "https://www.linkedin.com/company/acme-care",
+                          "last_updated": "2025-09-04 14:24:45 UTC",
+                          "company_headquarters_city": "San Francisco, California",
+                          "company_headquarters_country": "United States",
+                          "company_logo_url": "https://example.com/logo2.png",
+                          "company_employee_count": "33",
+                          "company_type": "Privately Held",
+                          "company_founded": "2013",
+                          "company_followers_count": "2651",
+                          "company_size": "11-50",
+                          "revenue_bucket": "$5M - $10M",
+                          "company_domain": "acme-care.example.com",
+                          "employees_count_growth": 6,
+                          "last_funding_round_at": "More than 6 months",
+                          "technologies": [
+                            {
+                              "name": "Postman",
+                              "first_seen_at": "2025-01-15T00:00:00.000Z",
+                              "scoring": "CONFIRMED"
+                            },
+                            {
+                              "name": "Python",
+                              "first_seen_at": "2022-06-20T00:00:00.000Z",
+                              "scoring": "POTENTIAL"
+                            }
+                          ],
+                          "business_business_customer": "B2B",
+                          "company_quality_score": "3",
+                          "company_industry": "Technology, Information and Media",
+                          "company_subindustry": "Technology, Information and Internet",
+                          "company_subsubindustry": "Software Development",
+                          "company_location": "San Francisco, California, US",
+                          "company_location_geopoint_array": [
+                            -122.42,
+                            37.78
+                          ],
+                          "company_occ_lead": "117",
+                          "_score": 9.972561,
+                          "_id": "222222222"
+                        }
                       ],
-                      "business_business_customer": "B2B",
-                      "company_quality_score": "3",
-                      "company_industry": "Technology, Information and Media",
-                      "company_subindustry": "Technology, Information and Internet",
-                      "company_subsubindustry": "Software Development",
-                      "company_location": "123 Example Street, Suite 100, Example City, Example Country",
-                      "company_location_geopoint_array": [
-                        73.92,
-                        18.64
-                      ],
-                      "company_occ_lead": "60",
-                      "_score": 10.002095,
-                      "_id": "88945664"
-                    },
-                    {
-                      "company_id": "9903838",
-                      "company_website_url": "http://www.acme-care.example.com",
-                      "company_name": "Acme Care",
-                      "company_linkedin_url": "https://www.linkedin.com/company/acme-care",
-                      "last_updated": "2025-09-04 14:24:45 UTC",
-                      "company_headquarters_city": "San Francisco, California",
-                      "company_headquarters_country": "United States",
-                      "company_logo_url": "https://example.com/logo2.png",
-                      "company_description": "Acme Care provides an automated platform for team-based care management. To learn more, write us at contact@acme-care.example.com.",
-                      "company_employee_count": "33",
-                      "company_type": "Privately Held",
-                      "company_founded": "2013",
-                      "company_followers_count": "2651",
-                      "company_size": "11-50",
-                      "revenue_bucket": "$5M - $10M",
-                      "company_domain": "acme-care.example.com",
-                      "employees_count_growth": 6,
-                      "last_funding_round_at": "More than 6 months",
-                      "techno_used_array": [
-                        "Google Cloud",
-                        "Heap",
-                        "Envoy",
-                        "Google Cloud CDN",
-                        "X-Content-Type-Options",
-                        "Piwik",
-                        "WP Engine",
-                        "React",
-                        "cdnjs",
-                        "Fullstory",
-                        "Cloudflare Bot Management",
-                        "Twitter",
-                        "JSON-LD",
-                        "C3.js",
-                        "Python",
-                        "Google Analytics",
-                        "MediaElement.js",
-                        "SafeBase",
-                        "Emotion",
-                        "Nginx",
-                        "Atlassian Jira",
-                        "PayPal",
-                        "MUI",
-                        "Gravity Forms",
-                        "Zendesk",
-                        "MySQL",
-                        "Webpack",
-                        "PHP",
-                        "Facebook Pixel",
-                        "Google Fonts API",
-                        "OneTrust",
-                        "jQuery",
-                        "Gravatar",
-                        "Google Hosted Libraries",
-                        "Yoast SEO",
-                        "Jamf",
-                        "Cloudflare CDN",
-                        "Angular",
-                        "Postman",
-                        "Cloudflare",
-                        "HubSpot",
-                        "Java",
-                        "HTTP/3",
-                        "Moment.js",
-                        "X-XSS-Protection",
-                        "Open Graph",
-                        "JazzHR",
-                        "Workramp",
-                        "Algolia",
-                        "SSL.com",
-                        "Autoptimize",
-                        "Font Awesome",
-                        "oEmbed",
-                        "Bootstrap",
-                        "Facebook",
-                        "HSTS",
-                        "Ruby",
-                        "Twemoji",
-                        "WordPress",
-                        "Lightbox",
-                        "Adobe Fonts",
-                        "RequireJS",
-                        "Ruby on Rails",
-                        "Lodash",
-                        "reCAPTCHA",
-                        "LinkedIn Ads",
-                        "Hotjar",
-                        "Google Tag Manager"
-                      ],
-                      "business_business_customer": "B2B",
-                      "company_quality_score": "3",
-                      "company_industry": "Technology, Information and Media",
-                      "company_subindustry": "Technology, Information and Internet",
-                      "company_subsubindustry": "Software Development",
-                      "company_location": "San Francisco, California, US",
-                      "company_location_geopoint_array": [
-                        -122.42,
-                        37.78
-                      ],
-                      "company_occ_lead": "117",
-                      "_score": 9.972561,
-                      "_id": "9903838"
+                      "total": 12102,
+                      "took": 17,
+                      "page": 1,
+                      "size": 2,
+                      "search": "lsh_ExAmPlEzq8WRy9FNu",
+                      "limitation": 1998,
+                      "team": "tea_ExAmPlE31pFS5QP6c"
                     }
-                  ],
-                  "total": 12102,
-                  "took": 17,
-                  "page": 1,
-                  "size": 2,
-                  "search": "lsh_8LBpZPgGpxGswp5G7",
-                  "limitation": 1998,
-                  "team": "tea_8QvkOiBfPdb2ZRhHi"
+                  },
+                  "includes": {
+                    "summary": "Fields chosen with includes",
+                    "value": {
+                      "results": [
+                        {
+                          "_id": "111111111",
+                          "company_name": "Acme Technologies",
+                          "company_description": "Acme Technologies builds web and mobile apps for small businesses.",
+                          "technologies": [
+                            {
+                              "name": "Postman"
+                            },
+                            {
+                              "name": "React"
+                            }
+                          ],
+                          "job_post_last_6m_array": [
+                            {
+                              "job_title": "Account Executive",
+                              "job_description": "Acme Technologies is hiring an Account Executive to grow its customer base."
+                            }
+                          ]
+                        }
+                      ],
+                      "total": 12102,
+                      "took": 15,
+                      "page": 1,
+                      "size": 1,
+                      "search": "lsh_ExAmPlEksddoNrQY7",
+                      "limitation": 1997,
+                      "team": "tea_ExAmPlE31pFS5QP6c"
+                    }
+                  }
                 }
               }
             }
           },
           "400": {
-            "description": "Possible errors: Bad team / Parameter filters is invalid. \u0060Parameter filters is invalid\u0060 answers any refused filter, including an \u0060out\u0060 value on a \u0060slider\u0060 filter or a slider range not written \u0060min|max\u0060.",
+            "description": "Possible errors: Parameter filters is invalid / Parameter includes or excludes is invalid. \u0060Parameter filters is invalid\u0060 answers any refused filter, including an \u0060out\u0060 value on a \u0060slider\u0060 filter or a slider range not written \u0060min|max\u0060. \u0060Parameter includes or excludes is invalid\u0060 answers an \u0060includes\u0060 or \u0060excludes\u0060 that is not an array of strings: the search does not run.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseError"
+                  "$ref": "#/components/schemas/PostDatabaseCompanies400Response"
                 },
-                "example": "Bad team"
+                "examples": {
+                  "invalidFilters": {
+                    "summary": "Parameter filters is invalid",
+                    "value": {
+                      "error": "Parameter filters is invalid"
+                    }
+                  },
+                  "invalidFields": {
+                    "summary": "Parameter includes or excludes is invalid",
+                    "value": {
+                      "error": "Parameter includes or excludes is invalid"
+                    }
+                  }
+                }
               }
             }
           },
@@ -33636,20 +33675,40 @@
           "canonical_shorthand_name": {
             "type": "string"
           },
+          "shorthand_name_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Every known LinkedIn URL slug of the person"
+          },
           "connections_count": {
             "type": "integer"
           },
           "country": {
             "type": "string"
           },
+          "state": {
+            "type": "string",
+            "description": "Region of the person\u0027s location"
+          },
+          "county": {
+            "type": "string",
+            "description": "County of the person\u0027s location"
+          },
           "full_name": {
             "type": "string"
+          },
+          "headline": {
+            "type": "string",
+            "description": "LinkedIn headline"
           },
           "education": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PeopleSchemaEducationItem"
-            }
+            },
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
           },
           "experience_count": {
             "type": "integer"
@@ -33675,6 +33734,10 @@
           "last_updated": {
             "type": "string"
           },
+          "updated_at": {
+            "type": "string",
+            "description": "Last data update"
+          },
           "lead_industry": {
             "type": "string"
           },
@@ -33696,6 +33759,143 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PeopleSchemaSkillsItem"
+            }
+          },
+          "inferred_skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Skills inferred from the profile by a model. On request: comes back only when \u0060includes\u0060 names \u0060inferred_skills\u0060 or a path under it"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "lead_quality_score": {
+            "type": "integer"
+          },
+          "seniority": {
+            "type": "string"
+          },
+          "department": {
+            "type": "string"
+          },
+          "connections_count_bucket": {
+            "type": "string"
+          },
+          "years_of_exp_bucket": {
+            "type": "string"
+          },
+          "current_exp_company_name": {
+            "type": "string"
+          },
+          "current_exp_company_industry": {
+            "type": "string",
+            "description": "Industry of the current company"
+          },
+          "current_exp_company_subindustry": {
+            "type": "string",
+            "description": "Sub-industry of the current company"
+          },
+          "geopoint": {
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "lead_location_geopoint_array": {
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Location coordinates, \u0060[longitude, latitude]\u0060"
+          },
+          "_score": {
+            "type": "number"
+          },
+          "_id": {
+            "type": "string"
+          }
+        },
+        "description": "A person record from lemlist\u0027s People database."
+      },
+      "PeopleEngagementSchema": {
+        "type": "object",
+        "properties": {
+          "lead_id": {
+            "type": "integer",
+            "description": "Numeric identifier for the person in the People database"
+          },
+          "canonical_shorthand_name": {
+            "type": "string"
+          },
+          "connections_count": {
+            "type": "integer"
+          },
+          "country": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "education": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleEngagementSchemaEducationItem"
+            }
+          },
+          "experience_count": {
+            "type": "integer"
+          },
+          "experiences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleEngagementSchemaExperiencesItem"
+            }
+          },
+          "interests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleEngagementSchemaInterestsItem"
+            }
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleEngagementSchemaLanguagesItem"
+            }
+          },
+          "last_updated": {
+            "type": "string"
+          },
+          "lead_industry": {
+            "type": "string"
+          },
+          "lead_linkedin_url": {
+            "type": "string",
+            "x-client-original-format": "uri"
+          },
+          "lead_logo_url": {
+            "type": "string",
+            "x-client-original-format": "uri"
+          },
+          "linkedin_short": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleEngagementSchemaSkillsItem"
             }
           },
           "summary": {
@@ -33779,7 +33979,7 @@
           },
           "company_description": {
             "type": "string",
-            "description": "Long company description"
+            "description": "Long company description. On request: comes back only when \u0060includes\u0060 names \u0060company_description\u0060 or a path under it"
           },
           "company_employee_count": {
             "type": "string",
@@ -33813,16 +34013,41 @@
             "type": "integer",
             "description": "Employee count growth number"
           },
+          "headcount": {
+            "$ref": "#/components/schemas/CompaniesSchemaHeadcount"
+          },
+          "new_hires_last_6m": {
+            "$ref": "#/components/schemas/CompaniesSchemaNewHiresLast6M"
+          },
+          "decision_makers_new_hires_last_6m": {
+            "$ref": "#/components/schemas/CompaniesSchemaDecisionMakersNewHiresLast6M"
+          },
+          "workforce_growth_last_6m": {
+            "$ref": "#/components/schemas/CompaniesSchemaWorkforceGrowthLast6M"
+          },
           "last_funding_round_at": {
             "type": "string",
             "description": "Date of last funding round"
           },
-          "techno_used_array": {
+          "technologies": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/CompaniesSchemaTechnologiesItem"
             },
-            "description": "Array of technologies used by the company"
+            "description": "Technologies detected at the company, with no cap"
+          },
+          "active_job_post": {
+            "$ref": "#/components/schemas/CompaniesSchemaActiveJobPost"
+          },
+          "job_post_last_6m": {
+            "$ref": "#/components/schemas/CompaniesSchemaJobPostLast6M"
+          },
+          "job_post_last_6m_array": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompaniesSchemaJobPostLast6MArrayItem"
+            },
+            "description": "Job posts of the last 6 months"
           },
           "business_business_customer": {
             "$ref": "#/components/schemas/CompaniesSchemaBusinessBusinessCustomer"
@@ -33842,6 +34067,10 @@
           "company_subsubindustry": {
             "type": "string",
             "description": "Sub-sub-industry"
+          },
+          "company_subsubsubindustry": {
+            "type": "string",
+            "description": "4th-level industry"
           },
           "company_location": {
             "type": "string",
@@ -37369,6 +37598,291 @@
         "type": "object",
         "properties": {
           "activities_and_societies": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "created": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "date_from": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "date_to": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "deleted": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "description": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "id": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "last_updated": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "member_id": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "school_url": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it",
+            "x-client-original-format": "uri"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "title": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "institution": {
+            "type": "string",
+            "description": "School name. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "program": {
+            "type": "string",
+            "description": "Degree or field of study. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "institution_url": {
+            "type": "string",
+            "description": "School URL. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "institution_id": {
+            "type": "string",
+            "description": "School id. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "institution_shorthand_name": {
+            "type": "string",
+            "description": "School LinkedIn URL slug. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "institution_source_id": {
+            "type": "string",
+            "description": "School id at the data provider. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "date_from_year": {
+            "type": "string",
+            "description": "Start year. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "date_to_year": {
+            "type": "string",
+            "description": "End year. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "order_in_profile": {
+            "type": "string",
+            "description": "Rank in the profile. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Record creation date. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "Record update date. On request: comes back only when \u0060includes\u0060 names \u0060education\u0060 or a path under it"
+          }
+        }
+      },
+      "PeopleSchemaExperiencesItem": {
+        "type": "object",
+        "properties": {
+          "company_id": {
+            "type": "integer"
+          },
+          "company_description": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060experiences.company_description\u0060 or a path under it"
+          },
+          "company_employee_count": {
+            "type": "integer"
+          },
+          "company_followers_count": {
+            "type": "integer"
+          },
+          "company_founded": {
+            "type": "integer"
+          },
+          "company_headquarters_city": {
+            "type": "string"
+          },
+          "company_headquarters_country": {
+            "type": "string"
+          },
+          "company_industry": {
+            "type": "string"
+          },
+          "company_subindustry": {
+            "type": "string",
+            "description": "Company sub-industry"
+          },
+          "company_subsubindustry": {
+            "type": "string",
+            "description": "Company 3rd-level industry"
+          },
+          "company_subsubsubindustry": {
+            "type": "string",
+            "description": "Company 4th-level industry"
+          },
+          "company_linkedin_url": {
+            "type": "string",
+            "x-client-original-format": "uri"
+          },
+          "company_logo_url": {
+            "type": "string",
+            "x-client-original-format": "uri"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "company_size": {
+            "type": "string"
+          },
+          "company_type": {
+            "type": "string"
+          },
+          "company_url": {
+            "type": "string"
+          },
+          "company_website_url": {
+            "type": "string",
+            "x-client-original-format": "uri"
+          },
+          "revenue_bucket": {
+            "type": "string"
+          },
+          "company_revenue_bucket": {
+            "type": "string",
+            "description": "Company revenue range"
+          },
+          "company_domain": {
+            "type": "string"
+          },
+          "employees_count_growth": {
+            "type": "integer"
+          },
+          "headcount": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemHeadcount"
+          },
+          "new_hires_last_6m": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemNewHiresLast6M"
+          },
+          "decision_makers_new_hires_last_6m": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemDecisionMakersNewHiresLast6M"
+          },
+          "workforce_growth_last_6m": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemWorkforceGrowthLast6M"
+          },
+          "last_funding_round_at": {
+            "type": "string"
+          },
+          "business_business_customer": {
+            "type": "string"
+          },
+          "current_exp_bucket": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string"
+          },
+          "date_from": {
+            "type": "string"
+          },
+          "date_to": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "On request: comes back only when \u0060includes\u0060 names \u0060experiences.description\u0060 or a path under it"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "last_updated": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "member_id": {
+            "type": "string"
+          },
+          "order_in_profile": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "title_normalized": {
+            "type": "string"
+          },
+          "main_in_profile": {
+            "type": "boolean"
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeopleSchemaExperiencesItemTechnologiesItem"
+            },
+            "description": "Technologies used by the company, on current experiences only (no \u0060date_to\u0060). Capped at the 100 most recently detected; \u0060technologies_total\u0060 gives the full count"
+          },
+          "technologies_total": {
+            "type": "integer",
+            "description": "Number of technologies the company uses, before the cap on \u0060technologies\u0060. Current experiences only"
+          },
+          "active_job_post": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemActiveJobPost"
+          }
+        }
+      },
+      "PeopleSchemaInterestsItem": {
+        "type": "object",
+        "properties": {
+          "interest": {
+            "type": "string"
+          },
+          "interest_id": {
+            "type": "string"
+          }
+        }
+      },
+      "PeopleSchemaLanguagesItem": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "proficiency": {
+            "type": "string"
+          }
+        }
+      },
+      "PeopleSchemaSkillsItem": {
+        "type": "object",
+        "properties": {
+          "skill": {
+            "type": "string"
+          },
+          "skill_id": {
+            "type": "string"
+          }
+        }
+      },
+      "PeopleEngagementSchemaEducationItem": {
+        "type": "object",
+        "properties": {
+          "activities_and_societies": {
             "type": "string"
           },
           "created": {
@@ -37407,7 +37921,7 @@
           }
         }
       },
-      "PeopleSchemaExperiencesItem": {
+      "PeopleEngagementSchemaExperiencesItem": {
         "type": "object",
         "properties": {
           "company_id": {
@@ -37518,7 +38032,7 @@
           "technologies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PeopleSchemaExperiencesItemTechnologiesItem"
+              "$ref": "#/components/schemas/PeopleEngagementSchemaExperiencesItemTechnologiesItem"
             },
             "description": "Technologies used by the company, on current experiences only (no \u0060date_to\u0060). Capped at the 100 most recently detected; \u0060technologies_total\u0060 gives the full count"
           },
@@ -37527,11 +38041,11 @@
             "description": "Number of technologies the company uses, before the cap on \u0060technologies\u0060. Current experiences only"
           },
           "active_job_post": {
-            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemActiveJobPost"
+            "$ref": "#/components/schemas/PeopleEngagementSchemaExperiencesItemActiveJobPost"
           }
         }
       },
-      "PeopleSchemaInterestsItem": {
+      "PeopleEngagementSchemaInterestsItem": {
         "type": "object",
         "properties": {
           "interest": {
@@ -37542,7 +38056,7 @@
           }
         }
       },
-      "PeopleSchemaLanguagesItem": {
+      "PeopleEngagementSchemaLanguagesItem": {
         "type": "object",
         "properties": {
           "language": {
@@ -37553,7 +38067,7 @@
           }
         }
       },
-      "PeopleSchemaSkillsItem": {
+      "PeopleEngagementSchemaSkillsItem": {
         "type": "object",
         "properties": {
           "skill": {
@@ -37561,6 +38075,125 @@
           },
           "skill_id": {
             "type": "string"
+          }
+        }
+      },
+      "CompaniesSchemaHeadcount": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "120"
+          },
+          "by_department": {
+            "$ref": "#/components/schemas/CompaniesSchemaHeadcountByDepartmentProperty"
+          }
+        },
+        "description": "Company headcount, by department. Counts are integers sent as strings"
+      },
+      "CompaniesSchemaNewHiresLast6M": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "12"
+          },
+          "by_department": {
+            "$ref": "#/components/schemas/CompaniesSchemaNewHiresLast6MByDepartmentProperty"
+          }
+        },
+        "description": "Company new hires in the last 6 months, by department. Counts are integers sent as strings"
+      },
+      "CompaniesSchemaDecisionMakersNewHiresLast6M": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "2"
+          },
+          "by_department": {
+            "$ref": "#/components/schemas/CompaniesSchemaDecisionMakersNewHiresLast6MByDepartmentProperty"
+          }
+        },
+        "description": "Company new decision-maker hires in the last 6 months, by department. Counts are integers sent as strings"
+      },
+      "CompaniesSchemaWorkforceGrowthLast6M": {
+        "type": "object",
+        "properties": {
+          "growth_by_department_numeric": {
+            "$ref": "#/components/schemas/CompaniesSchemaWorkforceGrowthLast6MGrowthByDepartmentNumericProperty"
+          },
+          "growth_by_department_percentage": {
+            "$ref": "#/components/schemas/CompaniesSchemaWorkforceGrowthLast6MGrowthByDepartmentPercentageProperty"
+          }
+        },
+        "description": "Company headcount growth in the last 6 months, by department, in people and in percent"
+      },
+      "CompaniesSchemaTechnologiesItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Technology name"
+          },
+          "first_seen_at": {
+            "type": "string",
+            "description": "When the technology was first detected at the company",
+            "format": "date-time"
+          },
+          "scoring": {
+            "$ref": "#/components/schemas/CompaniesSchemaTechnologiesItemScoring"
+          }
+        }
+      },
+      "CompaniesSchemaActiveJobPost": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "3"
+          },
+          "count_by_department": {
+            "$ref": "#/components/schemas/CompaniesSchemaActiveJobPostCountByDepartmentProperty"
+          }
+        },
+        "description": "Open job posts of the company, by department. Counts are integers sent as strings"
+      },
+      "CompaniesSchemaJobPostLast6M": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "8"
+          },
+          "count_by_department": {
+            "$ref": "#/components/schemas/CompaniesSchemaJobPostLast6MCountByDepartmentProperty"
+          }
+        },
+        "description": "Job posts of the last 6 months, counted by department. Counts are integers sent as strings"
+      },
+      "CompaniesSchemaJobPostLast6MArrayItem": {
+        "type": "object",
+        "properties": {
+          "job_title": {
+            "type": "string",
+            "description": "Job title"
+          },
+          "job_url": {
+            "type": "string",
+            "description": "Job post URL"
+          },
+          "job_posted_at": {
+            "type": "string",
+            "description": "Date the job was posted"
+          },
+          "job_location_city_country": {
+            "type": "string",
+            "description": "Job location: city and country"
+          },
+          "job_description": {
+            "type": "string",
+            "description": "Full text of the job post. On request: comes back only when \u0060includes\u0060 names \u0060job_post_last_6m_array.job_description\u0060 or a path under it"
           }
         }
       },
@@ -39111,7 +39744,87 @@
           }
         }
       },
+      "PeopleSchemaExperiencesItemHeadcount": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "120"
+          },
+          "by_department": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemHeadcountByDepartmentProperty"
+          }
+        },
+        "description": "Company headcount, by department. Counts are integers sent as strings"
+      },
+      "PeopleSchemaExperiencesItemNewHiresLast6M": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "12"
+          },
+          "by_department": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemNewHiresLast6MByDepartmentProperty"
+          }
+        },
+        "description": "Company new hires in the last 6 months, by department. Counts are integers sent as strings"
+      },
+      "PeopleSchemaExperiencesItemDecisionMakersNewHiresLast6M": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "2"
+          },
+          "by_department": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemDecisionMakersNewHiresLast6MByDepartmentProperty"
+          }
+        },
+        "description": "Company new decision-maker hires in the last 6 months, by department. Counts are integers sent as strings"
+      },
+      "PeopleSchemaExperiencesItemWorkforceGrowthLast6M": {
+        "type": "object",
+        "properties": {
+          "growth_by_department_numeric": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemWorkforceGrowthLast6MGrowthByDepartmentNumericProperty"
+          },
+          "growth_by_department_percentage": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemWorkforceGrowthLast6MGrowthByDepartmentPercentageProperty"
+          }
+        },
+        "description": "Company headcount growth in the last 6 months, by department, in people and in percent"
+      },
       "PeopleSchemaExperiencesItemTechnologiesItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "first_seen_at": {
+            "type": "string",
+            "description": "When the technology was first detected at the company",
+            "format": "date-time"
+          },
+          "scoring": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemTechnologiesItemScoring"
+          }
+        }
+      },
+      "PeopleSchemaExperiencesItemActiveJobPost": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string",
+            "example": "3"
+          },
+          "count_by_department": {
+            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty"
+          }
+        },
+        "description": "Job postings the company currently publishes, on current experiences only. Counts are integers sent as strings"
+      },
+      "PeopleEngagementSchemaExperiencesItemTechnologiesItem": {
         "type": "object",
         "properties": {
           "name": {
@@ -39129,7 +39842,7 @@
           }
         }
       },
-      "PeopleSchemaExperiencesItemActiveJobPost": {
+      "PeopleEngagementSchemaExperiencesItemActiveJobPost": {
         "type": "object",
         "properties": {
           "total": {
@@ -39137,7 +39850,7 @@
             "example": "3"
           },
           "count_by_department": {
-            "$ref": "#/components/schemas/PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty"
+            "$ref": "#/components/schemas/PeopleEngagementSchemaExperiencesItemActiveJobPostCountByDepartmentProperty"
           }
         },
         "description": "Job postings the company currently publishes, on current experiences only. Counts are integers sent as strings"
@@ -42591,16 +43304,31 @@
             "type": "integer",
             "description": "Size of the results, number between 1 and 100 (optional)"
           },
+          "includes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Field paths to return in each row (optional). A dotted path reaches a nested field, through arrays: \u0060experiences.title\u0060 is the \u0060title\u0060 of every role. Only the first 100 names are read. A value that is not an array of strings answers \u0060400\u0060 \u0060Parameter includes or excludes is invalid\u0060, and the search does not run.\n\nWithout \u0060includes\u0060, a row holds every field except the on-request fields. With \u0060includes\u0060, a row holds only the listed paths. \u0060_id\u0060 and \u0060_score\u0060 come back only when \u0060includes\u0060 names them: add \u0060_id\u0060 when you need the row id. An array keeps one entry per item: with \u0060education.institution\u0060, a school without \u0060institution\u0060 comes back as \u0060{}\u0060.\n\nThe on-request fields are \u0060education\u0060, \u0060inferred_skills\u0060, \u0060experiences.description\u0060 and \u0060experiences.company_description\u0060. Each one comes back only when \u0060includes\u0060 names it or a path under it, such as \u0060education.institution\u0060. \u0060experiences\u0060 alone returns roles without \u0060description\u0060 and \u0060company_description\u0060: \u0060[\u0022experiences\u0022, \u0022experiences.description\u0022]\u0060 returns roles with \u0060description\u0060.\n\nWith \u0060includes\u0060, \u0060experiences\u0060 holds the current roles only. Past roles do not come back: to get them, send no \u0060includes\u0060 and trim the rows with \u0060excludes\u0060.\n\nA name that is not a field of the row is ignored. A path known in part counts as its known part: \u0060experiences.foo\u0060 counts as \u0060experiences\u0060. If no name is valid, the row is the default row. \u0060excludes\u0060 wins over \u0060includes\u0060. Excluding a field also removes the paths under it: \u0060includes: [\u0022experiences.title\u0022]\u0060 with \u0060excludes: [\u0022experiences\u0022]\u0060 returns no \u0060experiences\u0060."
+          },
           "excludes": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Array of properties to exclude from the results (optional)"
+            "description": "Field paths to remove from each row (optional). A dotted path reaches a nested field, through arrays: \u0060experiences.technologies\u0060 is the \u0060technologies\u0060 of every role. Only the first 100 names are read. A value that is not an array of strings answers \u0060400\u0060 \u0060Parameter includes or excludes is invalid\u0060, and the search does not run.\n\nA name is ignored unless its full path is a field of the row. \u0060excludes\u0060 wins over \u0060includes\u0060. Excluding a field also removes the paths under it: \u0060includes: [\u0022experiences.title\u0022]\u0060 with \u0060excludes: [\u0022experiences\u0022]\u0060 returns no \u0060experiences\u0060."
           },
           "search": {
             "type": "string",
             "description": "Free-text query across common people fields (e.g., name, title, company, location)"
+          }
+        }
+      },
+      "SearchPeopleDatabase400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -42671,6 +43399,28 @@
           "size": {
             "type": "integer",
             "description": "Number of results per page (default: 100, max: 500)"
+          },
+          "includes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Field paths to return in each row (optional). A dotted path reaches a nested field, through arrays: \u0060technologies.name\u0060 is the \u0060name\u0060 of every technology. Only the first 100 names are read. A value that is not an array of strings answers \u0060400\u0060 \u0060Parameter includes or excludes is invalid\u0060, and the search does not run.\n\nWithout \u0060includes\u0060, a row holds every field except the on-request fields. With \u0060includes\u0060, a row holds only the listed paths. \u0060_id\u0060 and \u0060_score\u0060 come back only when \u0060includes\u0060 names them: add \u0060_id\u0060 when you need the row id. An array keeps one entry per item: with \u0060technologies.scoring\u0060, a technology not classified yet comes back as \u0060{}\u0060.\n\nThe on-request fields are \u0060company_description\u0060 and \u0060job_post_last_6m_array.job_description\u0060. Each one comes back only when \u0060includes\u0060 names it or a path under it. \u0060job_post_last_6m_array\u0060 alone returns job posts without \u0060job_description\u0060: \u0060[\u0022job_post_last_6m_array\u0022, \u0022job_post_last_6m_array.job_description\u0022]\u0060 returns job posts with \u0060job_description\u0060.\n\nA name that is not a field of the row is ignored. A path known in part counts as its known part: \u0060technologies.foo\u0060 counts as \u0060technologies\u0060. If no name is valid, the row is the default row. \u0060excludes\u0060 wins over \u0060includes\u0060. Excluding a field also removes the paths under it: \u0060includes: [\u0022technologies.name\u0022]\u0060 with \u0060excludes: [\u0022technologies\u0022]\u0060 returns no \u0060technologies\u0060."
+          },
+          "excludes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Field paths to remove from each row (optional). A dotted path reaches a nested field, through arrays: \u0060technologies.first_seen_at\u0060 is the \u0060first_seen_at\u0060 of every technology. Only the first 100 names are read. A value that is not an array of strings answers \u0060400\u0060 \u0060Parameter includes or excludes is invalid\u0060, and the search does not run.\n\nA name is ignored unless its full path is a field of the row. \u0060excludes\u0060 wins over \u0060includes\u0060. Excluding a field also removes the paths under it: \u0060includes: [\u0022technologies.name\u0022]\u0060 with \u0060excludes: [\u0022technologies\u0022]\u0060 returns no \u0060technologies\u0060."
+          }
+        }
+      },
+      "PostDatabaseCompanies400Response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       },
@@ -48249,6 +48999,125 @@
         "type": "object",
         "description": "Result of \u0060linkedin_enrichment\u0060: the LinkedIn profile as returned by the data source (identity, current company, \u0060positionGroups\u0060, \u2026). Present only when it was requested and produced a result."
       },
+      "CompaniesSchemaHeadcountByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "10",
+          "engineering": "40",
+          "finance_legal_admin": "5",
+          "human_resources": "5",
+          "marketing": "15",
+          "operations": "10",
+          "other": "5",
+          "sales": "30"
+        }
+      },
+      "CompaniesSchemaNewHiresLast6MByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "1",
+          "engineering": "5",
+          "finance_legal_admin": "0",
+          "human_resources": "1",
+          "marketing": "1",
+          "operations": "1",
+          "other": "0",
+          "sales": "3"
+        }
+      },
+      "CompaniesSchemaDecisionMakersNewHiresLast6MByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "0",
+          "engineering": "1",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "0",
+          "operations": "0",
+          "other": "0",
+          "sales": "1"
+        }
+      },
+      "CompaniesSchemaWorkforceGrowthLast6MGrowthByDepartmentNumericProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Growth in people per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060). Integers sent as strings",
+        "example": {
+          "customer_service": "1",
+          "engineering": "4",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "-1",
+          "operations": "1",
+          "other": "0",
+          "sales": "2"
+        }
+      },
+      "CompaniesSchemaWorkforceGrowthLast6MGrowthByDepartmentPercentageProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "description": "Growth in percent per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": 11,
+          "engineering": 11,
+          "finance_legal_admin": 0,
+          "human_resources": 0,
+          "marketing": -6,
+          "operations": 11,
+          "other": 0,
+          "sales": 7
+        }
+      },
+      "CompaniesSchemaActiveJobPostCountByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "0",
+          "engineering": "2",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "0",
+          "operations": "0",
+          "other": "0",
+          "sales": "1"
+        }
+      },
+      "CompaniesSchemaJobPostLast6MCountByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "0",
+          "engineering": "4",
+          "finance_legal_admin": "0",
+          "human_resources": "1",
+          "marketing": "1",
+          "operations": "0",
+          "other": "0",
+          "sales": "2"
+        }
+      },
       "SignalSchemaSignalDataExternalSignalCustomFieldsProperty": {
         "type": "object",
         "additionalProperties": {
@@ -48271,7 +49140,109 @@
         "type": "object",
         "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
       },
+      "PeopleSchemaExperiencesItemHeadcountByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "10",
+          "engineering": "40",
+          "finance_legal_admin": "5",
+          "human_resources": "5",
+          "marketing": "15",
+          "operations": "10",
+          "other": "5",
+          "sales": "30"
+        }
+      },
+      "PeopleSchemaExperiencesItemNewHiresLast6MByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "1",
+          "engineering": "5",
+          "finance_legal_admin": "0",
+          "human_resources": "1",
+          "marketing": "1",
+          "operations": "1",
+          "other": "0",
+          "sales": "3"
+        }
+      },
+      "PeopleSchemaExperiencesItemDecisionMakersNewHiresLast6MByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "0",
+          "engineering": "1",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "0",
+          "operations": "0",
+          "other": "0",
+          "sales": "1"
+        }
+      },
+      "PeopleSchemaExperiencesItemWorkforceGrowthLast6MGrowthByDepartmentNumericProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Growth in people per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060). Integers sent as strings",
+        "example": {
+          "customer_service": "1",
+          "engineering": "4",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "-1",
+          "operations": "1",
+          "other": "0",
+          "sales": "2"
+        }
+      },
+      "PeopleSchemaExperiencesItemWorkforceGrowthLast6MGrowthByDepartmentPercentageProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "description": "Growth in percent per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": 11,
+          "engineering": 11,
+          "finance_legal_admin": 0,
+          "human_resources": 0,
+          "marketing": -6,
+          "operations": 11,
+          "other": 0,
+          "sales": 7
+        }
+      },
       "PeopleSchemaExperiencesItemActiveJobPostCountByDepartmentProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+        "example": {
+          "customer_service": "0",
+          "engineering": "2",
+          "finance_legal_admin": "0",
+          "human_resources": "0",
+          "marketing": "0",
+          "operations": "0",
+          "other": "0",
+          "sales": "1"
+        }
+      },
+      "PeopleEngagementSchemaExperiencesItemActiveJobPostCountByDepartmentProperty": {
         "type": "object",
         "additionalProperties": {
           "type": "string"
@@ -51938,7 +52909,7 @@
           "results": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PeopleSchema"
+              "$ref": "#/components/schemas/PeopleEngagementSchema"
             },
             "description": "Results array"
           },
@@ -57563,6 +58534,33 @@
           ]
         }
       },
+      "CompaniesSchemaTechnologiesItemScoring": {
+        "enum": [
+          "CONFIRMED",
+          "LIKELY",
+          "POTENTIAL"
+        ],
+        "type": "string",
+        "description": "Detection confidence: \u0060CONFIRMED\u0060, \u0060LIKELY\u0060 or \u0060POTENTIAL\u0060. Absent while the technology is not classified",
+        "x-ms-enum": {
+          "name": "CompaniesSchemaTechnologiesItemScoring",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "CONFIRMED",
+              "name": "Confirmed"
+            },
+            {
+              "value": "LIKELY",
+              "name": "Likely"
+            },
+            {
+              "value": "POTENTIAL",
+              "name": "Potential"
+            }
+          ]
+        }
+      },
       "SignalSchemaSignalDataAdPlatform": {
         "enum": [
           "linkedin",
@@ -58204,6 +59202,33 @@
             {
               "value": "smtp",
               "name": "Smtp"
+            }
+          ]
+        }
+      },
+      "PeopleSchemaExperiencesItemTechnologiesItemScoring": {
+        "enum": [
+          "CONFIRMED",
+          "LIKELY",
+          "POTENTIAL"
+        ],
+        "type": "string",
+        "description": "Detection confidence: \u0060CONFIRMED\u0060, \u0060LIKELY\u0060 or \u0060POTENTIAL\u0060. Absent while the technology is not classified",
+        "x-ms-enum": {
+          "name": "PeopleSchemaExperiencesItemTechnologiesItemScoring",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "CONFIRMED",
+              "name": "Confirmed"
+            },
+            {
+              "value": "LIKELY",
+              "name": "Likely"
+            },
+            {
+              "value": "POTENTIAL",
+              "name": "Potential"
             }
           ]
         }
@@ -66612,6 +67637,125 @@
       "type": "object",
       "description": "Result of \u0060linkedin_enrichment\u0060: the LinkedIn profile as returned by the data source (identity, current company, \u0060positionGroups\u0060, \u2026). Present only when it was requested and produced a result."
     },
+    "CompaniesSchemaHeadcountByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "10",
+        "engineering": "40",
+        "finance_legal_admin": "5",
+        "human_resources": "5",
+        "marketing": "15",
+        "operations": "10",
+        "other": "5",
+        "sales": "30"
+      }
+    },
+    "CompaniesSchemaNewHiresLast6MByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "1",
+        "engineering": "5",
+        "finance_legal_admin": "0",
+        "human_resources": "1",
+        "marketing": "1",
+        "operations": "1",
+        "other": "0",
+        "sales": "3"
+      }
+    },
+    "CompaniesSchemaDecisionMakersNewHiresLast6MByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "0",
+        "engineering": "1",
+        "finance_legal_admin": "0",
+        "human_resources": "0",
+        "marketing": "0",
+        "operations": "0",
+        "other": "0",
+        "sales": "1"
+      }
+    },
+    "CompaniesSchemaWorkforceGrowthLast6MGrowthByDepartmentNumeric": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Growth in people per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060). Integers sent as strings",
+      "example": {
+        "customer_service": "1",
+        "engineering": "4",
+        "finance_legal_admin": "0",
+        "human_resources": "0",
+        "marketing": "-1",
+        "operations": "1",
+        "other": "0",
+        "sales": "2"
+      }
+    },
+    "CompaniesSchemaWorkforceGrowthLast6MGrowthByDepartmentPercentage": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Growth in percent per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": 11,
+        "engineering": 11,
+        "finance_legal_admin": 0,
+        "human_resources": 0,
+        "marketing": -6,
+        "operations": 11,
+        "other": 0,
+        "sales": 7
+      }
+    },
+    "CompaniesSchemaActiveJobPostCountByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "0",
+        "engineering": "2",
+        "finance_legal_admin": "0",
+        "human_resources": "0",
+        "marketing": "0",
+        "operations": "0",
+        "other": "0",
+        "sales": "1"
+      }
+    },
+    "CompaniesSchemaJobPostLast6MCountByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "0",
+        "engineering": "4",
+        "finance_legal_admin": "0",
+        "human_resources": "1",
+        "marketing": "1",
+        "operations": "0",
+        "other": "0",
+        "sales": "2"
+      }
+    },
     "SignalSchemaSignalDataExternalSignalCustomFields": {
       "type": "object",
       "additionalProperties": {
@@ -66634,7 +67778,109 @@
       "type": "object",
       "description": "Extra context. For \u0060UNIQUE_INDEX_ERROR_COMPANY\u0060, contains \u0060alreadyExistingCompanyId\u0060 \u2014 the lemlist company that already occupies the conflicting CRM record. Use it to remap contacts onto the right lemlist company before deleting the duplicate."
     },
+    "PeopleSchemaExperiencesItemHeadcountByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "10",
+        "engineering": "40",
+        "finance_legal_admin": "5",
+        "human_resources": "5",
+        "marketing": "15",
+        "operations": "10",
+        "other": "5",
+        "sales": "30"
+      }
+    },
+    "PeopleSchemaExperiencesItemNewHiresLast6MByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "1",
+        "engineering": "5",
+        "finance_legal_admin": "0",
+        "human_resources": "1",
+        "marketing": "1",
+        "operations": "1",
+        "other": "0",
+        "sales": "3"
+      }
+    },
+    "PeopleSchemaExperiencesItemDecisionMakersNewHiresLast6MByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "0",
+        "engineering": "1",
+        "finance_legal_admin": "0",
+        "human_resources": "0",
+        "marketing": "0",
+        "operations": "0",
+        "other": "0",
+        "sales": "1"
+      }
+    },
+    "PeopleSchemaExperiencesItemWorkforceGrowthLast6MGrowthByDepartmentNumeric": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Growth in people per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060). Integers sent as strings",
+      "example": {
+        "customer_service": "1",
+        "engineering": "4",
+        "finance_legal_admin": "0",
+        "human_resources": "0",
+        "marketing": "-1",
+        "operations": "1",
+        "other": "0",
+        "sales": "2"
+      }
+    },
+    "PeopleSchemaExperiencesItemWorkforceGrowthLast6MGrowthByDepartmentPercentage": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Growth in percent per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": 11,
+        "engineering": 11,
+        "finance_legal_admin": 0,
+        "human_resources": 0,
+        "marketing": -6,
+        "operations": 11,
+        "other": 0,
+        "sales": 7
+      }
+    },
     "PeopleSchemaExperiencesItemActiveJobPostCountByDepartment": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Count per department (\u0060customer_service\u0060, \u0060engineering\u0060, \u0060finance_legal_admin\u0060, \u0060human_resources\u0060, \u0060marketing\u0060, \u0060operations\u0060, \u0060other\u0060, \u0060sales\u0060)",
+      "example": {
+        "customer_service": "0",
+        "engineering": "2",
+        "finance_legal_admin": "0",
+        "human_resources": "0",
+        "marketing": "0",
+        "operations": "0",
+        "other": "0",
+        "sales": "1"
+      }
+    },
+    "PeopleEngagementSchemaExperiencesItemActiveJobPostCountByDepartment": {
       "type": "object",
       "additionalProperties": {
         "type": "string"

@@ -23,6 +23,8 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             else if (parseNode.GetChildNode("filters") is { } nullNodeFilters && nullNodeFilters.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Filters = null;
             if (parseNode.GetChildNode("fromSearchId") is null) { _explicitNullValueFromSearchId = default!; _explicitNullProperties?.Remove("fromSearchId"); }
             else if (parseNode.GetChildNode("fromSearchId") is { } nullNodeFromSearchId && nullNodeFromSearchId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FromSearchId = null;
+            if (parseNode.GetChildNode("includes") is null) { _explicitNullValueIncludes = default!; _explicitNullProperties?.Remove("includes"); }
+            else if (parseNode.GetChildNode("includes") is { } nullNodeIncludes && nullNodeIncludes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Includes = null;
             if (parseNode.GetChildNode("page") is null) { _explicitNullValuePage = default!; _explicitNullProperties?.Remove("page"); }
             else if (parseNode.GetChildNode("page") is { } nullNodePage && nullNodePage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Page = null;
             if (parseNode.GetChildNode("search") is null) { _explicitNullValueSearch = default!; _explicitNullProperties?.Remove("search"); }
@@ -33,7 +35,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Array of properties to exclude from the results (optional)</summary>
+        /// <summary>Field paths to remove from each row (optional). A dotted path reaches a nested field, through arrays: `experiences.technologies` is the `technologies` of every role. Only the first 100 names are read. A value that is not an array of strings answers `400` `Parameter includes or excludes is invalid`, and the search does not run.A name is ignored unless its full path is a field of the row. `excludes` wins over `includes`. Excluding a field also removes the paths under it: `includes: [&quot;experiences.title&quot;]` with `excludes: [&quot;experiences&quot;]` returns no `experiences`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Excludes { get => _explicitNullValueExcludes; set { _explicitNullValueExcludes = value; AdditionalData?.Remove("excludes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("excludes"); else _explicitNullProperties?.Remove("excludes"); } }
@@ -62,6 +64,16 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
 #else
         public string FromSearchId { get => _explicitNullValueFromSearchId; set { _explicitNullValueFromSearchId = value; AdditionalData?.Remove("fromSearchId"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fromSearchId"); else _explicitNullProperties?.Remove("fromSearchId"); } }
         private string _explicitNullValueFromSearchId = default!;
+#endif
+        /// <summary>Field paths to return in each row (optional). A dotted path reaches a nested field, through arrays: `experiences.title` is the `title` of every role. Only the first 100 names are read. A value that is not an array of strings answers `400` `Parameter includes or excludes is invalid`, and the search does not run.Without `includes`, a row holds every field except the on-request fields. With `includes`, a row holds only the listed paths. `_id` and `_score` come back only when `includes` names them: add `_id` when you need the row id. An array keeps one entry per item: with `education.institution`, a school without `institution` comes back as `{}`.The on-request fields are `education`, `inferred_skills`, `experiences.description` and `experiences.company_description`. Each one comes back only when `includes` names it or a path under it, such as `education.institution`. `experiences` alone returns roles without `description` and `company_description`: `[&quot;experiences&quot;, &quot;experiences.description&quot;]` returns roles with `description`.With `includes`, `experiences` holds the current roles only. Past roles do not come back: to get them, send no `includes` and trim the rows with `excludes`.A name that is not a field of the row is ignored. A path known in part counts as its known part: `experiences.foo` counts as `experiences`. If no name is valid, the row is the default row. `excludes` wins over `includes`. Excluding a field also removes the paths under it: `includes: [&quot;experiences.title&quot;]` with `excludes: [&quot;experiences&quot;]` returns no `experiences`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Includes { get => _explicitNullValueIncludes; set { _explicitNullValueIncludes = value; AdditionalData?.Remove("includes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("includes"); else _explicitNullProperties?.Remove("includes"); } }
+        private List<string>? _explicitNullValueIncludes = default!;
+#nullable restore
+#else
+        public List<string> Includes { get => _explicitNullValueIncludes; set { _explicitNullValueIncludes = value; AdditionalData?.Remove("includes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("includes"); else _explicitNullProperties?.Remove("includes"); } }
+        private List<string> _explicitNullValueIncludes = default!;
 #endif
         /// <summary>Page (optional)</summary>
         public int? Page { get => _explicitNullValuePage; set { _explicitNullValuePage = value; AdditionalData?.Remove("page"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("page"); else _explicitNullProperties?.Remove("page"); } }
@@ -102,11 +114,12 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(6)
+            return new Dictionary<string, Action<IParseNode>>(7)
             {
                 { "excludes", n => { Excludes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "filters", n => { Filters = n.GetCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem>(global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "fromSearchId", n => { FromSearchId = n.GetStringValue(); } },
+                { "includes", n => { Includes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "search", n => { Search = n.GetStringValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
@@ -122,6 +135,7 @@ namespace Soenneker.Lemlist.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<string>("excludes", Excludes);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Lemlist.OpenApiClient.Models.SearchPeopleDatabaseRequestFiltersItem>("filters", Filters);
             writer.WriteStringValue("fromSearchId", FromSearchId);
+            writer.WriteCollectionOfPrimitiveValues<string>("includes", Includes);
             writer.WriteIntValue("page", Page);
             writer.WriteStringValue("search", Search);
             writer.WriteIntValue("size", Size);
